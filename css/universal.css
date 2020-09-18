@@ -352,7 +352,7 @@ div#wpt_table_wrapper,div#wpt_table_wrapper *{
 }
 a.remove.remove_from_cart_button.wpt_remove_cart_link {
     display: inline-block;
-    float: left;
+    /*float: left;*/
 }
 .wpt_live_cart_box .cart-dropdown .wpt_dropdown {
     padding:  0;
