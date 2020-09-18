@@ -880,11 +880,11 @@ msgid "How to use Woo Product Table Pro - Basic to Advance"
 msgstr ""
 
 #: admin/menu_plugin_setting_link.php:12
-msgid "Add new Shortcode"
+msgid "Add new Product Table"
 msgstr ""
 
 #: admin/menu_plugin_setting_link.php:12
-msgid "Create Table"
+msgid "Add New"
 msgstr ""
 
 #: admin/menu_plugin_setting_link.php:13
@@ -921,7 +921,7 @@ msgid "Basics"
 msgstr ""
 
 #: admin/post_metabox_form.php:18
-msgid "Style Design"
+msgid "Design"
 msgstr ""
 
 #: admin/post_metabox_form.php:19
@@ -929,7 +929,7 @@ msgid "Conditions"
 msgstr ""
 
 #: admin/post_metabox_form.php:20
-msgid "Search Box & Filter"
+msgid "Search Box And Filter"
 msgstr ""
 
 #: admin/post_metabox_form.php:21 admin/tabs/table_style.php:352
@@ -1271,7 +1271,7 @@ msgid "eg: Product Color"
 msgstr ""
 
 #: admin/tabs/column_settings.php:69
-msgid "Add as Column"
+msgid "Add as Column)"
 msgstr ""
 
 #: admin/tabs/column_settings.php:74

@@ -338,6 +338,7 @@ class WOO_Product_Table{
         }else{
            require_once $this->path('BASE_DIR','includes/no_woocommerce.php');
         }
+        
     }
     
     /**

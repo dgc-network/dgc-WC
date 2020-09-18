@@ -671,11 +671,11 @@ msgid "Video Tutorial Coming Soon ..."
 msgstr ""
 
 #: admin/menu_plugin_setting_link.php:12
-msgid "Add new Shortcode"
+msgid "Add new Product Table"
 msgstr ""
 
 #: admin/menu_plugin_setting_link.php:12
-msgid "Create Table"
+msgid "Add New"
 msgstr ""
 
 #: admin/menu_plugin_setting_link.php:13
@@ -770,7 +770,7 @@ msgid "All Shortcodes"
 msgstr ""
 
 #: admin/wpt_product_table_post.php:22 admin/wpt_product_table_post.php:23
-msgid "Add New Shortcode"
+msgid "Add new Product Table"
 msgstr ""
 
 #: admin/wpt_product_table_post.php:24

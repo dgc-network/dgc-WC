@@ -300,7 +300,8 @@ function wpt_shortcode_generator( $atts = false ) {
      * @version V1.0.4 
      * @date 2/5/2018
      */
-    $html_check = $html_check_footer = false; $filter_identy_class = 'fullter_full';
+    $html_check = $html_check_footer = false; 
+    $filter_identy_class = 'fullter_full';
     if( isset( $wpt_permitted_td['check'] ) ){
         $filter_identy_class = 'fulter_half';
         
@@ -341,9 +342,16 @@ function wpt_shortcode_generator( $atts = false ) {
 
     $html .= apply_filters('wpt_before_table_wrapper', ''); //Apply Filter Just Before Table Wrapper div tag
 
-    $html .= "<div data-checkout_url='" . esc_attr( wc_get_checkout_url() ) . "' data-add_to_cart='" . esc_attr( $add_to_cart_text ) . "' data-add_to_cart='{$add_to_cart_text}' data-site_url='" . site_url() . "' id='table_id_" . $temp_number . "' class='{$table_type}_wrapper wpt_temporary_wrapper_" . $temp_number . " wpt_product_table_wrapper " . $template . "_wrapper woocommerce'>"; //Table Wrapper Div start here with class. //Added woocommerce class at wrapper div in V1.0.4
+    //$html .= "<div data-checkout_url='" . esc_attr( wc_get_checkout_url() ) . "' data-add_to_cart='" . esc_attr( $add_to_cart_text ) . "' data-add_to_cart='{$add_to_cart_text}' data-site_url='" . site_url() . "' id='table_id_" . $temp_number . "' class='{$table_type}_wrapper wpt_temporary_wrapper_" . $temp_number . " wpt_product_table_wrapper " . $template . "_wrapper woocommerce'>"; //Table Wrapper Div start here with class. //Added woocommerce class at wrapper div in V1.0.4
+    $html .= "<div data-checkout_url='" . esc_attr( wc_get_checkout_url() );
+    $html .= "' data-add_to_cart='" . esc_attr( $add_to_cart_text );
+    $html .= "' data-add_to_cart='{$add_to_cart_text}' data-site_url='" . site_url();
+    $html .= "' id='table_id_" . $temp_number . "' class='{$table_type}_wrapper wpt_temporary_wrapper_" . $temp_number;
+    $html .= " wpt_product_table_wrapper " . $template . "_wrapper woocommerce'>"; 
+    //Table Wrapper Div start here with class. //Added woocommerce class at wrapper div in V1.0.4
     
-    $html .= ($minicart_position == 'top' ? $table_minicart_message_box : false);//$minicart_position //"<div class='tables_cart_message_box_{$temp_number}'></div>";
+    $html .= ($minicart_position == 'top' ? $table_minicart_message_box : false);//$minicart_position 
+    //"<div class='tables_cart_message_box_{$temp_number}'></div>";
     
     //Search Box Hander Here
     if( $search_box ){
@@ -393,7 +401,13 @@ function wpt_shortcode_generator( $atts = false ) {
         'table_type'                => $table_type,
     );
     $page_number_1plugs = $args['paged'] + 1;
-    $html .= "<table data-page_number='{$page_number_1plugs}' data-config_json='" . esc_attr( wp_json_encode( $config_value ) ) . "' data-data_json='" . esc_attr( wp_json_encode( $table_row_generator_array ) ) . "' id='" . apply_filters('wpt_change_table_id', 'wpt_table') . "' class='{$mobile_responsive} {$table_type} wpt_temporary_table_" . $temp_number . " wpt_product_table " . $template . "_table $table_class " . $config_value['custom_add_to_cart'] . "'>"; //Table Tag start here.
+    //$html .= "<table data-page_number='{$page_number_1plugs}' data-config_json='" . esc_attr( wp_json_encode( $config_value ) ) . "' data-data_json='" . esc_attr( wp_json_encode( $table_row_generator_array ) ) . "' id='" . apply_filters('wpt_change_table_id', 'wpt_table') . "' class='{$mobile_responsive} {$table_type} wpt_temporary_table_" . $temp_number . " wpt_product_table " . $template . "_table $table_class " . $config_value['custom_add_to_cart'] . "'>"; //Table Tag start here.
+    $html .= "<table data-page_number='{$page_number_1plugs}' data-config_json='" . esc_attr( wp_json_encode( $config_value ) );
+    $html .= "' data-data_json='" . esc_attr( wp_json_encode( $table_row_generator_array ) );
+    $html .= "' id='" . apply_filters('wpt_change_table_id', 'wpt_table');
+    $html .= "' class='{$mobile_responsive} {$table_type} wpt_temporary_table_" . $temp_number;
+    $html .= " wpt_product_table " . $template . "_table $table_class " . $config_value['custom_add_to_cart'] . "'>"; 
+    //Table Tag start here.
 
     /**
      * this $responsive_table will use for responsive table css Selector.
@@ -588,7 +602,7 @@ table tr.wpt_row td.wpt_quoterequest.addedd{
                 var totalWeight =  parseFloat(targetWeightAttr) * parseFloat(target_Qty_Val);
                 totalWeight = totalWeight.toFixed(2);
                 if(totalWeight === 'NaN'){
-                totalWeight = '';
+                    totalWeight = '';
                 }
                 targetWeightSelector.html(totalWeight);
                 
@@ -606,7 +620,6 @@ table tr.wpt_row td.wpt_quoterequest.addedd{
                 $('.wpt_temporary_table_{$temp_number} .wpt_row_product_id_' + target_product_id + ' .wpt_total.total_general strong').html(targetCurrency + totalPrice.replace(".",targetPriceDecimalSeparator));
                 //$(target_row_id + ' a.add_to_cart_button').attr('data-quantity', target_Qty_Val); //wpt_total total_general
             });
-            
         });
     })(jQuery);
 </script>
@@ -694,7 +707,11 @@ function wpt_table_row_generator( $table_row_generator_array ){
              * Based on Query
              */
             $wpt_each_row = false;
-            $html .= "<tr role='row' data-title='" . esc_attr( $data['name'] ) . "' data-product_id='" . $data['id'] . "' id='product_id_" . $data['id'] . "' class='visible_row wpt_row wpt_row_serial_$wpt_table_row_serial wpt_row_product_id_" . get_the_ID() . ' ' . $taxonomy_class . "' {$data_tax}>";
+            //$html .= "<tr role='row' data-title='" . esc_attr( $data['name'] ) . "' data-product_id='" . $data['id'] . "' id='product_id_" . $data['id'] . "' class='visible_row wpt_row wpt_row_serial_$wpt_table_row_serial wpt_row_product_id_" . get_the_ID() . ' ' . $taxonomy_class . "' {$data_tax}>";
+            $html .= "<tr role='row' data-title='" . esc_attr( $data['name'] );
+            $html .= "' data-product_id='" . $data['id'] . "' id='product_id_" . $data['id'];
+            $html .= "' class='visible_row wpt_row wpt_row_serial_$wpt_table_row_serial wpt_row_product_id_" . get_the_ID();
+            $html .= ' ' . $taxonomy_class . "' {$data_tax}>";
             
             /**
              * Texonomy Handaler
@@ -743,7 +760,7 @@ function wpt_table_row_generator( $table_row_generator_array ){
             }
             
             /**
-             * Define Serial Number for Each Row
+             * Define Product ID for Each Row
              * 
              * @since 1.0
              */
@@ -793,7 +810,7 @@ function wpt_table_row_generator( $table_row_generator_array ){
             }
                 
             /**
-             * Define width for Each Row
+             * Define Width for Each Row
              * 
              * @since 1.0.4
              * @date: 5/5/2018
@@ -942,16 +959,16 @@ function wpt_table_row_generator( $table_row_generator_array ){
                 $wpt_single_quantity .= "<td class='wpt_for_product_action wpt_quantity' data-product_id='" . $data['id'] . "'> ";
                 $wpt_single_quantity .= woocommerce_quantity_input( array( 
                                                                     'input_value'   => apply_filters( 'woocommerce_quantity_input_min', 1, $product ),
-                                                                    'max_value'   => apply_filters( 'woocommerce_quantity_input_max', -1, $product ),
-                                                                    'min_value'   => apply_filters( 'woocommerce_quantity_input_min', 0, $product ),
-                                                                    'step'        => apply_filters( 'woocommerce_quantity_input_step', 1, $product ),
+                                                                    'max_value'     => apply_filters( 'woocommerce_quantity_input_max', -1, $product ),
+                                                                    'min_value'     => apply_filters( 'woocommerce_quantity_input_min', 0, $product ),
+                                                                    'step'          => apply_filters( 'woocommerce_quantity_input_step', 1, $product ),
                                                                 ) , $product, false ); //Here was only woocommerce_quantity_input() at version 1.0
                 $wpt_single_quantity .= " </td>";
                 $wpt_each_row['quantity'] = $wpt_single_quantity; 
             }
 
             /**
-             * Display Quantity for WooCommerce Product Loop
+             * Display Check
              */
             if ( isset( $wpt_permitted_td['check'] ) ) {
                 $wpt_single_check = false;
@@ -985,8 +1002,6 @@ function wpt_table_row_generator( $table_row_generator_array ){
                 $default_attributes = $variable->get_default_attributes(); //Added at 3.9.0
                 $variation_html = wpt_variations_attribute_to_select( $attributes, $data['id'], $default_attributes, $temp_number );                 
             }
-            
-            
             
             /**
              * It should Place here, Because here will be use $variable_for_total
@@ -1077,6 +1092,7 @@ function wpt_table_row_generator( $table_row_generator_array ){
                 $wpt_attribute .= "</td> ";
                 $wpt_each_row['attribute'] = $wpt_attribute;
             }
+
             if ( isset( $wpt_permitted_td['variations'] ) ) {
                 $wpt_variations = false;$wpt_varitions_col = true;
                 $wpt_variations .= "<td data-temp_number='{$temp_number}' class='{$row_class} wpt_variations wpt_variation_" . $data['id'] . "' data-quantity='1' data-product_id='" . $data['id'] . "' data-product_variations = '" . esc_attr( $data_product_variations ) . "'> ";
@@ -1090,13 +1106,16 @@ function wpt_table_row_generator( $table_row_generator_array ){
              */
             if ( isset( $wpt_permitted_td['action'] ) ) {
                 $wpt_single_action = false;
-                $wpt_single_action .= "<td data-temp_number='{$temp_number}' class='{$row_class} wpt_action wpt_variation_" . $data['id'] . "' data-quantity='1' data-product_id='" . $data['id'] . "' data-product_variations = '" . esc_attr( $data_product_variations ) . "'> ";
+                //$wpt_single_action .= "<td data-temp_number='{$temp_number}' class='{$row_class} wpt_action wpt_variation_" . $data['id'] . "' data-quantity='1' data-product_id='" . $data['id'] . "' data-product_variations = '" . esc_attr( $data_product_variations ) . "'> ";
+                $wpt_single_action .= "<td data-temp_number='{$temp_number}' class='{$row_class} wpt_action wpt_variation_" . $data['id'];
+                $wpt_single_action .= "' data-quantity='1' data-product_id='" . $data['id'];
+                $wpt_single_action .= "' data-product_variations = '" . esc_attr( $data_product_variations ) . "'> ";
                 /***************/
                 if( $table_type == 'advance_table'){
                     ob_start();
                     woocommerce_template_single_add_to_cart();
-
                     $wpt_single_action .= ob_get_clean();
+
                 }else{
                     if( !$wpt_varitions_col ){
                         $wpt_single_action .= $variation_html;
@@ -1111,15 +1130,16 @@ function wpt_table_row_generator( $table_row_generator_array ){
 
                     $add_to_cart_text_final = ( $product_type == 'grouped' || $product_type == 'external' || $add_to_cart_text == ' ' ? $product->add_to_cart_text() : $add_to_cart_text );//'?add-to-cart=' .  $data['id']; //home_url() . 
                     $wpt_single_action .= apply_filters('woocommerce_loop_add_to_cart_link', 
-                            sprintf('<a rel="nofollow" data-add_to_cart_url="%s" href="%s" data-quantity="%s" data-product_id="%s" data-product_sku="%s" class="%s">%s</a>', 
-                                    esc_attr( $add_to_cart_url ),
-                                    esc_url( $add_to_cart_url ), 
-                                    esc_attr( $default_quantity ), //1 here was 1 before 2.8
-                                    esc_attr($product->get_id()), 
-                                    esc_attr($product->get_sku()), 
-                                    esc_attr( $ajax_action_final . ( $row_class ? 'wpt_variation_product single_add_to_cart_button button alt disabled wc-variation-selection-needed wpt_woo_add_cart_button' : 'button wpt_woo_add_cart_button ' . $stock_status_class ) ), //ajax_add_to_cart  //|| !$data['price']
-                                    esc_html( $add_to_cart_text_final )
-                            ), $product);
+                        sprintf('<a rel="nofollow" data-add_to_cart_url="%s" href="%s" data-quantity="%s" data-product_id="%s" data-product_sku="%s" class="%s">%s</a>', 
+                            esc_attr( $add_to_cart_url ),
+                            esc_url( $add_to_cart_url ), 
+                            esc_attr( $default_quantity ), //1 here was 1 before 2.8
+                            esc_attr($product->get_id()), 
+                            esc_attr($product->get_sku()), 
+                            esc_attr( $ajax_action_final . ( $row_class ? 'wpt_variation_product single_add_to_cart_button button alt disabled wc-variation-selection-needed wpt_woo_add_cart_button' : 'button wpt_woo_add_cart_button ' . $stock_status_class ) ), //ajax_add_to_cart  //|| !$data['price']
+                            esc_html( $add_to_cart_text_final )
+                        ), 
+                    $product);
                 }
 
                 $wpt_single_action .= " </td>";
@@ -1204,14 +1224,7 @@ function wpt_texonomy_search_generator( $texonomy_keyword, $temp_number , $searc
         }
     }
     $html .= "</select>";
-
-        
-        
-        
-        
-        
     $html .= "</div>"; //End of .search_single
-    
     
     return $html;
 }
@@ -1336,8 +1349,6 @@ function wpt_search_box($temp_number, $search_box_texonomiy_keyword = array( 'pr
         $html .= '</select>';
 
         $html .= "</div>";// End of .search_single_column
-        
-        
         
     $html .= "</div>"; //end of .search_single
     
