@@ -30,7 +30,6 @@ function wpt_shortcode_generator( $atts = false ) {
         //Used meta_key column_array, enabled_column_array, basics, conditions, mobile, search_n_filter, 
         $column_array = get_post_meta( $ID, 'column_array', true );
         $enabled_column_array = get_post_meta( $ID, 'enabled_column_array', true );
-        
 
         if( !isset( $enabled_column_array['product_title'] ) ){
             $temp_product_title['product_title'] = $column_array['product_title'];
@@ -48,7 +47,6 @@ function wpt_shortcode_generator( $atts = false ) {
         $config_value = wpt_get_config_value( $table_ID ); //Added at V5.0
         array_unshift( $config_value, get_the_title( $ID ) ); //Added at V5.0
         
-        
         //For Advance and normal Version
         $table_type = isset( $conditions['table_type'] ) ? $conditions['table_type'] : 'normal_table';//"advance_table"; //table_type
         if($table_type != 'normal_table'){
@@ -60,11 +58,9 @@ function wpt_shortcode_generator( $atts = false ) {
         //Collumn Setting part
         $table_column_title = !isset( $column_settings['table_head'] ) ? array_values( $enabled_column_array ) : false; //Table head availabe or not
         
-        
         $table_column_keywords = array_keys( $enabled_column_array );
         
-        $description_on = isset( $column_settings['description_off'] ) && $column_settings['description_off'] ? 'no' : 'yes';
-        
+        $description_on = isset( $column_settings['description_off'] ) && $column_settings['description_off'] ? 'no' : 'yes';        
         
         //Basics Part
         $product_cat_id_single = ( isset($atts['product_cat_ids']) && !empty( $atts['product_cat_ids'] ) ? $atts['product_cat_ids'] : false );
@@ -78,9 +74,6 @@ function wpt_shortcode_generator( $atts = false ) {
         $table_class = $basics['table_class'];//isset( $basics['ajax_action'] ) ? $basics['ajax_action'] : false;
         $temp_number = $basics['temp_number'];// + $ID; //$ID has removed from temp_number
         $add_to_cart_text = $basics['add_to_cart_text'];
-        
-
-        
         $add_to_cart_selected_text = $basics['add_to_cart_selected_text'];
         $check_uncheck_text = $basics['check_uncheck_text'];
         $author = !empty( $basics['author'] ) ? $basics['author'] : false;
@@ -118,8 +111,6 @@ function wpt_shortcode_generator( $atts = false ) {
         $only_stock = $conditions['only_stock'] == 'yes' ? true : false;
         $posts_per_page = (int) $conditions['posts_per_page'];
         
-        
-        
         //Mobile tab part
         $mobile_responsive = $mobile['mobile_responsive'];
         $table_mobileHide_keywords = isset( $mobile['disable'] ) ? $mobile['disable'] : false;
@@ -154,10 +145,10 @@ function wpt_shortcode_generator( $atts = false ) {
      * Args for wp_query()
      */
     $args = array(
-        'posts_per_page' => $posts_per_page,
-        'post_type' => array('product'), //, 'product_variation','product'
-        'post_status'   =>  'publish',
-        'meta_query' => array(),
+        'posts_per_page'=> $posts_per_page,
+        'post_type'     => array('product'), //, 'product_variation','product'
+        'post_status'   => 'publish',
+        'meta_query'    => array(),
     );
     
     /**
@@ -171,9 +162,9 @@ function wpt_shortcode_generator( $atts = false ) {
     //Final Sku Start
     if($meta_value_sort && ( $sort_order_by == 'meta_value' || $sort_order_by == 'meta_value_num' ) ){
         $args['meta_query'][] = array(
-                'key'     => $meta_value_sort, //Default value is _sku : '_sku'
-                'compare' => 'EXISTS',
-            );
+            'key'     => $meta_value_sort, //Default value is _sku : '_sku'
+            'compare' => 'EXISTS',
+        );
     }
     //Final Sku end
     //Author or Vendor with Condition added 3.4
@@ -187,10 +178,11 @@ function wpt_shortcode_generator( $atts = false ) {
 
     if($only_stock){
         $args['meta_query'][] = array(//For Available product online
-                'key' => '_stock_status',
-                'value' => 'instock'
-            );
+            'key'   => '_stock_status',
+            'value' => 'instock'
+        );
     }
+
     /**
      * Modernize Shorting Option
      * Actually Default Value  will be RANDOM, So If not set ASC or DESC, Than Sorting 
@@ -203,16 +195,15 @@ function wpt_shortcode_generator( $atts = false ) {
         $args['order'] = $sort;
     }
 
-
     /**
      * Set Minimum Price for
      */
     if ($min_price) {
         $args['meta_query'][] = array(
-            'key' => '_price',
-            'value' => $min_price,
-            'compare' => '>=',
-            'type' => 'NUMERIC'
+            'key'       => '_price',
+            'value'     => $min_price,
+            'compare'   => '>=',
+            'type'      => 'NUMERIC'
         );
     }
 
@@ -221,10 +212,10 @@ function wpt_shortcode_generator( $atts = false ) {
      */
     if ($max_price) {
         $args['meta_query'][] = array(
-            'key' => '_price',
-            'value' => $max_price,
-            'compare' => '<=',
-            'type' => 'NUMERIC'
+            'key'       => '_price',
+            'value'     => $max_price,
+            'compare'   => '<=',
+            'type'      => 'NUMERIC'
         );
     }
     
@@ -235,12 +226,11 @@ function wpt_shortcode_generator( $atts = false ) {
      */
     if ($product_cat_ids) {
         $args['tax_query'][] = array(
-                'taxonomy' => 'product_cat',
-                'field' => 'id',
-                'terms' => $product_cat_ids,
-                'operator' => 'IN'
-            );
-
+            'taxonomy'  => 'product_cat',
+            'field'     => 'id',
+            'terms'     => $product_cat_ids,
+            'operator'  => 'IN'
+        );
     }
     
     /**
@@ -250,12 +240,11 @@ function wpt_shortcode_generator( $atts = false ) {
      */
     if ($product_tag_ids) {
         $args['tax_query'][] = array(
-                'taxonomy' => 'product_tag',
-                'field' => 'id',
-                'terms' => $product_tag_ids,
-                'operator' => 'IN'
-            );
-
+            'taxonomy'  => 'product_tag',
+            'field'     => 'id',
+            'terms'     => $product_tag_ids,
+            'operator'  => 'IN'
+        );
     }
     $args['tax_query']['relation'] = 'AND';
 
@@ -267,11 +256,11 @@ function wpt_shortcode_generator( $atts = false ) {
      */
     if($cat_explude){
         $args['tax_query'][] = array(
-                'taxonomy' => 'product_cat',
-                'field' => 'id',
-                'terms' => $cat_explude,
-                'operator' => 'NOT IN'
-            );
+            'taxonomy'  => 'product_cat',
+            'field'     => 'id',
+            'terms'     => $cat_explude,
+            'operator'  => 'NOT IN'
+        );
     }
     
     /**
@@ -284,7 +273,6 @@ function wpt_shortcode_generator( $atts = false ) {
         $args['post__in'] = $post_include;
         $args['orderby'] = 'post__in';
     }
-    
     
     /**
      * Post Exlucde
@@ -305,6 +293,7 @@ function wpt_shortcode_generator( $atts = false ) {
     $page_number = ( get_query_var( 'page' ) ) ? get_query_var( 'page' ) : 1;
     $args['paged'] =( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : $page_number;
     $html .= '<br class="wpt_clear">';
+
     /**
      * Add to cart Check Select /check/un-check Section
      * 
@@ -314,7 +303,7 @@ function wpt_shortcode_generator( $atts = false ) {
     $html_check = $html_check_footer = false; $filter_identy_class = 'fullter_full';
     if( isset( $wpt_permitted_td['check'] ) ){
         $filter_identy_class = 'fulter_half';
-        //
+        
         $add_to_cart_selected_text = $add_to_cart_selected_text;//'Add to Cart [Selected]';
         
         $html_check .= "<div class='all_check_header_footer all_check_header check_header_{$temp_number}'>";
@@ -341,6 +330,7 @@ function wpt_shortcode_generator( $atts = false ) {
         $filter_html .= "</div>";
         $filter_html .= "</div>"; //End of ./wpt_filter
     }
+
     /**
      * Tables Minicart Message div tag
      * By this feature, we able to display minicart at top or bottom of Table
@@ -400,7 +390,7 @@ function wpt_shortcode_generator( $atts = false ) {
         'description_type'          => $description_type,
         'description_on'            => $description_on,
         'ajax_action'               => $ajax_action,
-        'table_type'               => $table_type,
+        'table_type'                => $table_type,
     );
     $page_number_1plugs = $args['paged'] + 1;
     $html .= "<table data-page_number='{$page_number_1plugs}' data-config_json='" . esc_attr( wp_json_encode( $config_value ) ) . "' data-data_json='" . esc_attr( wp_json_encode( $table_row_generator_array ) ) . "' id='" . apply_filters('wpt_change_table_id', 'wpt_table') . "' class='{$mobile_responsive} {$table_type} wpt_temporary_table_" . $temp_number . " wpt_product_table " . $template . "_table $table_class " . $config_value['custom_add_to_cart'] . "'>"; //Table Tag start here.
@@ -525,7 +515,6 @@ function wpt_table_css_n_js_generator( $table_css_n_js_array  ){
 @media 
 only screen and (max-width: 767px) {
     $mobile_hide_css_code        
-    
 
     $responsive_table tr { border: 1px solid #ddd; margin-bottom: 5px;}
 
@@ -622,7 +611,7 @@ table tr.wpt_row td.wpt_quoterequest.addedd{
     })(jQuery);
 </script>
 EOF;
-                return $html;
+    return $html;
 }
 
 /**
@@ -639,28 +628,29 @@ function wpt_table_row_generator( $table_row_generator_array ){
     $html = false;
     //Getting WooProductTable Pro
     
-    $table_ID = $table_row_generator_array['args']['table_ID'];
-    $config_value = wpt_get_config_value( $table_ID );
+    $table_ID               = $table_row_generator_array['args']['table_ID'];
+    $config_value           = wpt_get_config_value( $table_ID );
     
     $args                   = $table_row_generator_array['args'];
-    $table_column_keywords = $table_row_generator_array['wpt_table_column_keywords'];
-    $sort      = $table_row_generator_array['wpt_product_short'];
+    $table_column_keywords  = $table_row_generator_array['wpt_table_column_keywords'];
+    $sort                   = $table_row_generator_array['wpt_product_short'];
     $wpt_permitted_td       = $table_row_generator_array['wpt_permitted_td'];
-    $add_to_cart_text   = $table_row_generator_array['wpt_add_to_cart_text'];
+    $add_to_cart_text       = $table_row_generator_array['wpt_add_to_cart_text'];
     $temp_number            = $table_row_generator_array['temp_number'];
     $texonomy_key           = $table_row_generator_array['texonomy_key'];//texonomy_key
     $customfield_key        = $table_row_generator_array['customfield_key'];//texonomy_key
     $filter_key             = $table_row_generator_array['filter_key'];//texonomy_key
     $filter_box             = $table_row_generator_array['filter_box'];//Taxonomy Yes, or No
-    $description_type = $table_row_generator_array['description_type'];
-    $description_on = $table_row_generator_array['description_on'];
+    $description_type       = $table_row_generator_array['description_type'];
+    $description_on         = $table_row_generator_array['description_on'];
     $ajax_action            = $table_row_generator_array['ajax_action'];
-    $table_type           = $table_row_generator_array['table_type'];
+    $table_type             = $table_row_generator_array['table_type'];
 
     if( $args == false || $table_column_keywords == false ){
         return false;
     }
     $product_loop = new WP_Query($args);
+
     /**
      * If not set any Shorting (ASC/DESC) than Post loop will Random by Shuffle()
      * @since 1.0.0 -9
@@ -714,12 +704,12 @@ function wpt_table_row_generator( $table_row_generator_array ){
              */
             if(is_array( $texonomy_key ) && count( $texonomy_key ) > 0 ){
                 foreach( $texonomy_key as $keyword ){
-                   $generated_keyword = substr( $keyword, 4 );
+                    $generated_keyword = substr( $keyword, 4 );
                     $texonomy_content = '';
                     if(is_string( get_the_term_list($data['id'],$generated_keyword) ) ){
                         $texonomy_content = get_the_term_list($data['id'],$generated_keyword,'',', ');
                     }
-                   $wpt_each_row[$keyword] = "<td class='wpt_custom_cf_tax wpt_custom_cf wpt_{$keyword}'>" . $texonomy_content . "</td>";  
+                    $wpt_each_row[$keyword] = "<td class='wpt_custom_cf_tax wpt_custom_cf wpt_{$keyword}'>" . $texonomy_content . "</td>";  
                 }
             }
 
@@ -731,7 +721,7 @@ function wpt_table_row_generator( $table_row_generator_array ){
              */
             if(is_array( $customfield_key ) && count( $customfield_key ) > 0 ){
                 foreach( $customfield_key as $keyword ){
-                   $generated_keyword = substr( $keyword, 3 );
+                    $generated_keyword = substr( $keyword, 3 );
                     $customfield_content = false;
                     $custom_meta = get_post_meta( $data['id'],$generated_keyword );
                     if( function_exists( 'get_field' ) ){
@@ -748,7 +738,7 @@ function wpt_table_row_generator( $table_row_generator_array ){
                     }else{
                         $customfield_content = "";
                     }
-                   $wpt_each_row[$keyword] = "<td class='wpt_custom_cf_tax wpt_custom_tax wpt_{$keyword}'>" . $customfield_content . "</td>";  
+                    $wpt_each_row[$keyword] = "<td class='wpt_custom_cf_tax wpt_custom_tax wpt_{$keyword}'>" . $customfield_content . "</td>";  
                 }
             }
             
@@ -769,7 +759,6 @@ function wpt_table_row_generator( $table_row_generator_array ){
             if ( isset( $wpt_permitted_td['serial_number'] ) ) {
                 $wpt_each_row['serial_number'] = "<td class='wpt_serial_number'> $wpt_table_row_serial </td>";
             }
-            
             $variable_class = $product_type.'_product';//$product->get_type();
 
             /**
@@ -779,8 +768,8 @@ function wpt_table_row_generator( $table_row_generator_array ){
              * @date: 7/6/2018 d/m/y
              */
             if ( isset( $wpt_permitted_td['Message'] ) ) {
-                $wpt_each_row['Message'] = "<td  class='wpt_Message'><input type='text' class='message message_{$temp_number}' id='message' placeholder='" . $config_value['type_your_message'] . "'></td>";
-                //$wpt_each_row['Message'] = "<td  class='wpt_Message'><input type='text' class='message message_{$temp_number}' id='message' placeholder='" . __('Type your Message.') . "'></td>";
+                $wpt_each_row['Message'] = "<td class='wpt_Message'><input type='text' class='message message_{$temp_number}' id='message' placeholder='" . $config_value['type_your_message'] . "'></td>";
+                //$wpt_each_row['Message'] = "<td class='wpt_Message'><input type='text' class='message message_{$temp_number}' id='message' placeholder='" . __('Type your Message.') . "'></td>";
             }
              
             /**
@@ -875,13 +864,11 @@ function wpt_table_row_generator( $table_row_generator_array ){
                 }else{
                     $wpt_single_product_title .= "<span class='wpt_product_title_in_td'>" . get_the_title() . "</span>";
                 }
-                
-                
+                                
                 $desc = $data[$description_type];
                 //var_dump($description_on);
                 //$desc_attr = strip_tags($desc);
                 $wpt_single_product_title .= $description_on && $description_on == 'yes' && $desc ? "<div class='product_description'>" .  do_shortcode( $desc ) . "</div>" : '';
-                
                 
                 $wpt_single_product_title .= "</td>";
                 $wpt_each_row['product_title'] = $wpt_single_product_title;
@@ -925,9 +912,9 @@ function wpt_table_row_generator( $table_row_generator_array ){
              * Product Rating Dispaly
              */
             if ( isset( $wpt_permitted_td['rating'] ) ) {
-            //Add here @version 1.0.4
-            $wpt_average = $data['average_rating'];
-            $wpt_product_rating = '<div class="star-rating" title="' . sprintf(__('Rated %s out of 5', 'woocommerce'), $wpt_average) . '"><span style="width:' . ( ( $wpt_average / 5 ) * 100 ) . '%"><strong itemprop="ratingValue" class="rating">' . $wpt_average . '</strong> ' . __('out of 5', 'woocommerce') . '</span></div>';
+                //Add here @version 1.0.4
+                $wpt_average = $data['average_rating'];
+                $wpt_product_rating = '<div class="star-rating" title="' . sprintf(__('Rated %s out of 5', 'woocommerce'), $wpt_average) . '"><span style="width:' . ( ( $wpt_average / 5 ) * 100 ) . '%"><strong itemprop="ratingValue" class="rating">' . $wpt_average . '</strong> ' . __('out of 5', 'woocommerce') . '</span></div>';
                 $wpt_each_row['rating'] = "<td class='wpt_for_product_desc wpt_rating woocommerce'><p class='wpt_rating_p'>" . $wpt_product_rating . "</p></td>";
             }
 

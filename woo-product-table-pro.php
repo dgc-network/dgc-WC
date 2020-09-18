@@ -80,6 +80,9 @@ WOO_Product_Table::$columns_array =  array(
     'action'        => __( 'Action', 'wpt_pro' ),
     'check'         => __( 'Check', 'wpt_pro' ),
     'quoterequest'  => __( 'Quote Request', 'wpt_pro' ),
+    // Special for Ring Taiwan
+    'start_point'   => __( 'Start Point', 'wpt_pro' ),
+    'start_date'    => __( 'Start Date', 'wpt_pro' ),
 );
 
 /**
@@ -129,65 +132,64 @@ WOO_Product_Table::$shortCode = $shortCodeText;
  * @since 1.9
  */
 WOO_Product_Table::$default = array(
-    'custom_message_on_single_page'=>  true, //Set true to get form in Single Product page for Custom Message
-    'plugin_name'               =>  WOO_Product_Table::getName(),
-    'plugin_version'            =>  WOO_Product_Table::getVersion(),
-    'footer_cart'               =>  'always_show', //hide_for_zerro
-    'footer_cart_size'          =>  '74',
-    'footer_bg_color'           =>  '#0a7f9c',
-    'footer_possition'          =>  'footer_possition',
-    'sku_search'                =>  '0',
-    'sort_mini_filter'          =>  'ASC',
-    'sort_searchbox_filter'     =>  'ASC',
-    'custom_add_to_cart'        =>  'add_cart_left_icon',
-    'thumbs_image_size'         =>  60,
-    'thumbs_lightbox'           => '1',
-    'popup_notice'              => '1',
-    'disable_product_link'      =>  '0',
-    'disable_cat_tag_link'      =>  '0',
-    'product_link_target'       =>  '_blank',
-    'product_not_founded'       =>  __( 'Products Not founded!', 'wpt_pro' ),
-    'load_more_text'            =>  __( 'Load more', 'wpt_pro' ),
-    'quick_view_btn_text'       =>  __( 'Quick View', 'wpt_pro' ), 
-    'loading_more_text'         =>  __( 'Loading..', 'wpt_pro' ),
-    'search_button_text'        =>  __( 'Search', 'wpt_pro' ),
-    'search_keyword_text'       =>  __( 'Search Keyword', 'wpt_pro' ),
-    'disable_loading_more'      =>  'load_more_hidden',//'normal',//Load More
-    'instant_search_filter'     =>  '0',
-    'filter_text'               =>  __( 'Filter:', 'wpt_pro' ),
-    'filter_reset_button'       =>  __( 'Reset', 'wpt_pro' ),
-    'instant_search_text'       =>  __( 'Instant Search..', 'wpt_pro' ),
-    'yith_browse_list'          =>  __( 'Browse the list', 'wpt_pro' ),
-    'yith_add_to_quote_text'    =>  __( 'Add to Quote', 'wpt_pro' ),
-    'yith_add_to_quote_adding'  =>  __( 'Adding..', 'wpt_pro' ),
-    'yith_add_to_quote_added'   =>  __( 'Quoted', 'wpt_pro' ),
-    'item'                      =>  __( 'Item', 'wpt_pro' ), //It will use at custom.js file for Chinging
-    'items'                     =>  __( 'Items', 'wpt_pro' ), //It will use at custom.js file for Chinging
-    'add2cart_all_added_text'   =>  __( 'Added', 'wpt_pro' ), //It will use at custom.js file for Chinging
-    'right_combination_message' => __( 'Not available', 'wpt_pro' ),
+    'custom_message_on_single_page' =>  true, //Set true to get form in Single Product page for Custom Message
+    'plugin_name'                   => WOO_Product_Table::getName(),
+    'plugin_version'                => WOO_Product_Table::getVersion(),
+    'footer_cart'                   => 'always_show', //hide_for_zerro
+    'footer_cart_size'              => '74',
+    'footer_bg_color'               => '#0a7f9c',
+    'footer_possition'              => 'footer_possition',
+    'sku_search'                    => '0',
+    'sort_mini_filter'              => 'ASC',
+    'sort_searchbox_filter'         => 'ASC',
+    'custom_add_to_cart'            => 'add_cart_left_icon',
+    'thumbs_image_size'             => 60,
+    'thumbs_lightbox'               => '1',
+    'popup_notice'                  => '1',
+    'disable_product_link'          => '0',
+    'disable_cat_tag_link'          => '0',
+    'product_link_target'           => '_blank',
+    'product_not_founded'           => __( 'Products Not founded!', 'wpt_pro' ),
+    'load_more_text'                => __( 'Load more', 'wpt_pro' ),
+    'quick_view_btn_text'           => __( 'Quick View', 'wpt_pro' ), 
+    'loading_more_text'             => __( 'Loading..', 'wpt_pro' ),
+    'search_button_text'            => __( 'Search', 'wpt_pro' ),
+    'search_keyword_text'           => __( 'Search Keyword', 'wpt_pro' ),
+    'disable_loading_more'          => 'load_more_hidden',//'normal',//Load More
+    'instant_search_filter'         => '0',
+    'filter_text'                   => __( 'Filter:', 'wpt_pro' ),
+    'filter_reset_button'           => __( 'Reset', 'wpt_pro' ),
+    'instant_search_text'           => __( 'Instant Search..', 'wpt_pro' ),
+    'yith_browse_list'              => __( 'Browse the list', 'wpt_pro' ),
+    'yith_add_to_quote_text'        => __( 'Add to Quote', 'wpt_pro' ),
+    'yith_add_to_quote_adding'      => __( 'Adding..', 'wpt_pro' ),
+    'yith_add_to_quote_added'       => __( 'Quoted', 'wpt_pro' ),
+    'item'                          => __( 'Item', 'wpt_pro' ), //It will use at custom.js file for Chinging
+    'items'                         => __( 'Items', 'wpt_pro' ), //It will use at custom.js file for Chinging
+    'add2cart_all_added_text'       => __( 'Added', 'wpt_pro' ), //It will use at custom.js file for Chinging
+    'right_combination_message'     => __( 'Not available', 'wpt_pro' ),
     'right_combination_message_alt' => __( 'Product variations is not set Properly. May be: price is not inputted. may be: Out of Stock.', 'wpt_pro' ),
-    'no_more_query_message'     => __( 'There is no more products based on current Query.', 'wpt_pro' ),
-    'select_all_items_message'  => __( 'Please select all items.', 'wpt_pro' ),
-    'out_of_stock_message'      => __( 'Out of Stock', 'wpt_pro' ),
-    'adding_in_progress'        =>  __( 'Adding in Progress', 'wpt_pro' ),
-    'no_right_combination'      =>  __( 'No Right Combination', 'wpt_pro' ),
-    'sorry_out_of_stock'        =>  __( 'Sorry! Out of Stock!', 'wpt_pro' ),
-    'type_your_message'         =>  __( 'Type your Message.', 'wpt_pro' ),
-    'sorry_plz_right_combination' =>    __( 'Sorry, Please choose right combination.', 'wpt_pro' ),
+    'no_more_query_message'         => __( 'There is no more products based on current Query.', 'wpt_pro' ),
+    'select_all_items_message'      => __( 'Please select all items.', 'wpt_pro' ),
+    'out_of_stock_message'          => __( 'Out of Stock', 'wpt_pro' ),
+    'adding_in_progress'            => __( 'Adding in Progress', 'wpt_pro' ),
+    'no_right_combination'          => __( 'No Right Combination', 'wpt_pro' ),
+    'sorry_out_of_stock'            => __( 'Sorry! Out of Stock!', 'wpt_pro' ),
+    'type_your_message'             => __( 'Type your Message.', 'wpt_pro' ),
+    'sorry_plz_right_combination'   => __( 'Sorry, Please choose right combination.', 'wpt_pro' ),
     
-    'all_selected_direct_checkout' => 'no',
-    'product_direct_checkout'   => 'no',
+    'all_selected_direct_checkout'  => 'no',
+    'product_direct_checkout'       => 'no',
     
     //Added Search Box Features @Since 3.3
-    'search_box_title'          => sprintf( __( 'Search Box (%sAll Fields Optional%s)', 'wpt_pro' ),'<small>', '</small>'),
-    'search_box_searchkeyword'  => __( 'Search Keyword', 'wpt_pro' ),
-    'search_box_orderby'        => __( 'Order By', 'wpt_pro' ),
-    'search_box_order'          => __( 'Order', 'wpt_pro' ),
+    'search_box_title'              => sprintf( __( 'Search Box (%sAll Fields Optional%s)', 'wpt_pro' ),'<small>', '</small>'),
+    'search_box_searchkeyword'      => __( 'Search Keyword', 'wpt_pro' ),
+    'search_box_orderby'            => __( 'Order By', 'wpt_pro' ),
+    'search_box_order'              => __( 'Order', 'wpt_pro' ),
     //For Default Table's Content
-    'table_in_stock'            => __( 'In Stock', 'wpt_pro' ),//'In Stock',
-    'table_out_of_stock'        => __( 'Out of Stock', 'wpt_pro' ),//'Out of Stock',
-    'table_on_back_order'       => __( 'On Back Order', 'wpt_pro' ),//'On Back Order',
- 
+    'table_in_stock'                => __( 'In Stock', 'wpt_pro' ),//'In Stock',
+    'table_out_of_stock'            => __( 'Out of Stock', 'wpt_pro' ),//'Out of Stock',
+    'table_on_back_order'           => __( 'On Back Order', 'wpt_pro' ),//'On Back Order',
     
 );
 
@@ -284,8 +286,7 @@ class WOO_Product_Table{
         }
 
         return self::$_instance;
-    }
-   
+    }   
    
     public function __construct() {
 

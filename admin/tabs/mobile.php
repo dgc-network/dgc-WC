@@ -18,10 +18,10 @@ $colums_disable_array = array_map(function($value){
         'wishlist',
         'quoterequest',
         'Message',
-       'attribute',
-       'variations',
-       'wishlist',
-       'quoterequest',
+        'attribute',
+        'variations',
+        'wishlist',
+        'quoterequest',
         //'ssss',
     );
     return !in_array( $value, $minus_from_disabledArray ) ? $value : false;
@@ -41,7 +41,6 @@ if( !$meta_column_array && empty( $meta_column_array ) ){
 }
 unset( $columns_array['product_title'] );
 unset( $columns_array['price'] );
-
 unset( $columns_array['action'] );
 unset( $columns_array['check'] );
 ?>
@@ -49,7 +48,7 @@ unset( $columns_array['check'] );
     <h1 style="color: #D01040;"><?php esc_html_e( 'Hide On Mobile', 'wpt_pro' ); ?></h1>
     <p style="padding: 0;margin: 0;"><?php esc_html_e( 'Pleach check you column to hide from Mobile. For all type Table(Responsive or Non-Responsive).', 'wpt_pro' ); ?></p>
     <hr>
-        <?php
+    <?php
     foreach( $columns_array as $keyword => $title ){
         $enabled_class = 'enabled';
         $checked_attribute = ' checked="checked"';
@@ -67,7 +66,6 @@ unset( $columns_array['check'] );
         </span>
     </li>
     <?php
-
     }
     ?>
 
