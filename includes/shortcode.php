@@ -1135,7 +1135,7 @@ function wpt_table_row_generator( $table_row_generator_array ){
                 $wpt_start_date = false;
                 $wpt_start_date .= "<td class='wpt_for_product_desc wpt_start_date'> ";
                 //$wpt_start_date .= get_the_date(); //add number date from Start Date
-                $wpt_start_date .= get_the_date() + $wpt_table_row_serial;
+                $wpt_start_date .= (get_the_date() + $wpt_table_row_serial);
         
                 $wpt_start_date .= "</td>";
                 $wpt_each_row['start_date'] = $wpt_start_date;
