@@ -980,17 +980,6 @@ function wpt_table_row_generator( $table_row_generator_array ){
             }
 
             /**
-             * Display Start Point Radio Option
-             */
-            if ( isset( $wpt_permitted_td['start_point'] ) ) {
-                $wpt_start_point = false;
-                $wpt_start_point .= "<td class='wpt_for_product_desc wpt_option' data-product_id='" . $data['id'] . "'> ";
-                $wpt_start_point .= "<input data-product_type='" . $product->get_type() . "' id='option_id_{$temp_number}_" . $data['id'] . "' data-temp_number='{$temp_number}' data-product_id='" . $data['id'] . "' class='" . ( ( $table_type == 'normal_table' && $product_type == 'grouped' ) || $product_type == 'variable' || $product_type == 'external' || ( $data['stock_status'] != 'instock' && $data['stock_status'] != 'onbackorder' ) ? 'disabled' : 'enabled' ) . " wpt_optionbox wpt_td_optionbox wpt_option_temp_{$temp_number}_pr_" . $data['id'] . " wpt_option_{$temp_number} wpt_inside_option_{$temp_number}' type='radio' value='0'><label for='option_id_{$temp_number}_" . $data['id'] . "'></label>";
-                $wpt_start_point .= " </td>";
-                $wpt_each_row['start_point'] = $wpt_start_point;
-            }
-            
-            /**
              * For Variable Product
              * 
              */
@@ -1080,21 +1069,6 @@ function wpt_table_row_generator( $table_row_generator_array ){
             }  
              
             /**
-             * To display Start Date
-             * 
-             * @since 1.0
-             * @date 09.19.2020 d.m.y
-             */
-            if ( isset( $wpt_permitted_td['start_date'] ) ) {
-                $wpt_start_date = false;
-                $wpt_start_date .= "<td class='wpt_for_product_desc wpt_start_date'> ";
-                $wpt_start_date .= get_the_date(); //add number date from Start Date
-        
-                $wpt_start_date .= "</td>";
-                $wpt_each_row['start_date'] = $wpt_start_date;
-            }  
-             
-            /**
              * To display Product's Publish Modified Date
              * 
              * @since 3.7
@@ -1140,6 +1114,33 @@ function wpt_table_row_generator( $table_row_generator_array ){
                 $wpt_each_row['variations'] = $wpt_variations;
             }
             
+            /**
+             * Display Start Point Radio Option
+             */
+            if ( isset( $wpt_permitted_td['start_point'] ) ) {
+                $wpt_start_point = false;
+                $wpt_start_point .= "<td class='wpt_for_product_desc wpt_option' data-product_id='" . $data['id'] . "'> ";
+                $wpt_start_point .= "<input data-product_type='" . $product->get_type() . "' id='option_id_{$temp_number}_" . $data['id'] . "' data-temp_number='{$temp_number}' data-product_id='" . $data['id'] . "' class='" . ( ( $table_type == 'normal_table' && $product_type == 'grouped' ) || $product_type == 'variable' || $product_type == 'external' || ( $data['stock_status'] != 'instock' && $data['stock_status'] != 'onbackorder' ) ? 'disabled' : 'enabled' ) . " wpt_optionbox wpt_td_optionbox wpt_option_temp_{$temp_number}_pr_" . $data['id'] . " wpt_option_{$temp_number} wpt_inside_option_{$temp_number}' type='radio' value='0'><label for='option_id_{$temp_number}_" . $data['id'] . "'></label>";
+                $wpt_start_point .= " </td>";
+                $wpt_each_row['start_point'] = $wpt_start_point;
+            }
+            
+            /**
+             * To display Start Date
+             * 
+             * @since 1.0
+             * @date 09.19.2020 d.m.y
+             */
+            if ( isset( $wpt_permitted_td['start_date'] ) ) {
+                $wpt_start_date = false;
+                $wpt_start_date .= "<td class='wpt_for_product_desc wpt_start_date'> ";
+                //$wpt_start_date .= get_the_date(); //add number date from Start Date
+                $wpt_start_date .= get_the_date() + $wpt_table_row_serial;
+        
+                $wpt_start_date .= "</td>";
+                $wpt_each_row['start_date'] = $wpt_start_date;
+            }  
+             
             /**
              * Display Add-To-Cart Button
              */
