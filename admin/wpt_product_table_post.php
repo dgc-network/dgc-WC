@@ -14,7 +14,8 @@ if ( ! function_exists('wpt_product_table_post') ) {
 		$labels = array(
 			'name'                  => _x( 'Product Table', 'Product Table', 'wpt_pro' ),
 			'singular_name'         => _x( 'PRODUCT TABLE', 'PRODUCT TABLE', 'wpt_pro' ),
-			'menu_name'             => __( 'PRODUCT TABLE', 'wpt_pro' ),
+			//'menu_name'             => __( 'PRODUCT TABLE', 'wpt_pro' ),
+			'menu_name'             => __( 'Product Table', 'wpt_pro' ),
 			'name_admin_bar'        => __( 'Product Table', 'wpt_pro' ),
 			'archives'              => __( 'Product Table Archives', 'wpt_pro' ),
 			'attributes'            => __( 'Product Table Attributes', 'wpt_pro' ),

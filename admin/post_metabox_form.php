@@ -1,7 +1,7 @@
 <div id="wpt_configuration_form" class="wpt_shortcode_gen_panel">
     <h3 style="margin: 0">
-        <a target="_blank" href="https://github.com/dgc.network/woo-product-table/wiki">Documentation</a> | 
-        <a target="_blank" href="https://github.com/dgc.network/woo-product-table/issues">Get Support</a>
+        <a target="_blank" href="https://github.com/dgc-network/woo-product-table/wiki">Documentation</a> | 
+        <a target="_blank" href="https://github.com/dgc-network/woo-product-table/issues">Get Support</a>
     </h3>
     <!-- New Version's Warning. We will remove it from 5.00 | End -->
     <?php

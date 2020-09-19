@@ -11,7 +11,7 @@ add_filter('plugin_action_links_' . WOO_Product_Table::getPath('PLUGIN_BASE_FILE
 function wpt_add_action_links($links) {
     $wpt_links[] = '<a href="' . admin_url( 'post-new.php?post_type=wpt_product_table' ) . '" title="' . esc_attr__( 'Add new Product Table', 'wpt_pro' ) . '">' . esc_html__( 'Add New', 'wpt_pro' ).'</a>';
     $wpt_links[] = '<a href="' . admin_url( 'edit.php?post_type=wpt_product_table&page=woo-product-table-config' ) . '" title="' . esc_attr__( 'Configure for Universal', 'wpt_pro' ) . '">' . esc_html__( 'Configure', 'wpt_pro' ) . '</a>';
-    //$wpt_links[] = '<a href="https://github.com/dgc.network/woo-product-table/issues" title="' . esc_attr__( 'CodeAstrology Support', 'wpt_pro' ) . '" target="_blank">'.esc_html__( 'Support','wpt_pro' ).'</a>';
+    //$wpt_links[] = '<a href="https://github.com/dgc-network/woo-product-table/issues" title="' . esc_attr__( 'CodeAstrology Support', 'wpt_pro' ) . '" target="_blank">'.esc_html__( 'Support','wpt_pro' ).'</a>';
     return array_merge( $wpt_links, $links );
 }
 
