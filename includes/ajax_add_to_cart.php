@@ -54,24 +54,25 @@ function wpt_ajax_paginate_links_load(){
         }
         
     }
+
     /**
      * Page Number Hander
      */
-    $args['paged']   = $pageNumber;
+    $args['paged']          = $pageNumber;
     $table_column_keywords  = $targetTableArgs['wpt_table_column_keywords'];
-    $sort                       = $args['order'];
-    $wpt_permitted_td           = $targetTableArgs['wpt_permitted_td'];
-    $add_to_cart_text           = $targetTableArgs['wpt_add_to_cart_text'];
+    $sort                   = $args['order'];
+    $wpt_permitted_td       = $targetTableArgs['wpt_permitted_td'];
+    $add_to_cart_text       = $targetTableArgs['wpt_add_to_cart_text'];
     
-    $texonomy_key               = isset( $targetTableArgs['texonomy_key'] ) ? $targetTableArgs['texonomy_key'] : false;
-    $customfield_key            = isset( $targetTableArgs['customfield_key'] ) && is_array( $targetTableArgs['customfield_key'] ) ? $targetTableArgs['customfield_key'] : false;
-    $filter_keywords            = $targetTableArgs['filter_key'];
-    $filter_box                 = $targetTableArgs['filter_box'];
-    $description_type           = $targetTableArgs['description_type'];
-    $ajax_action                = $targetTableArgs['ajax_action'];
-    $description_on                = $targetTableArgs['description_on'];
+    $texonomy_key           = isset( $targetTableArgs['texonomy_key'] ) ? $targetTableArgs['texonomy_key'] : false;
+    $customfield_key        = isset( $targetTableArgs['customfield_key'] ) && is_array( $targetTableArgs['customfield_key'] ) ? $targetTableArgs['customfield_key'] : false;
+    $filter_keywords        = $targetTableArgs['filter_key'];
+    $filter_box             = $targetTableArgs['filter_box'];
+    $description_type       = $targetTableArgs['description_type'];
+    $ajax_action            = $targetTableArgs['ajax_action'];
+    $description_on         = $targetTableArgs['description_on'];
     //'description_on'            => $description_on,
-    $table_type           = $targetTableArgs['table_type'];
+    $table_type             = $targetTableArgs['table_type'];
     
     $table_row_generator_array = array(
         'args'                      => $args,
@@ -87,7 +88,7 @@ function wpt_ajax_paginate_links_load(){
         'description_type'          => $description_type,
         'ajax_action'               => $ajax_action,
         'description_on'            => $description_on,
-        'table_type'            => $table_type, //$table_type           = $targetTableArgs['table_type'];
+        'table_type'                => $table_type, //$table_type           = $targetTableArgs['table_type'];
     );
     echo '<mypagi myjson="'. esc_attr( wp_json_encode( $table_row_generator_array ) ) .'">'. wpt_paginate_links( $args ) . '</mypagi>';
     die();
@@ -129,10 +130,10 @@ function wpt_ajax_table_row_load(){
             foreach( $texonomies as $texonomie_key => $texonomie ){
                 if(is_array( $texonomie ) && count( $texonomie ) > 0 ){
                     $args['tax_query'][] = array(
-                        'taxonomy' => $texonomie_key,
-                        'field' => 'id',
-                        'terms' => $texonomie,
-                        'operator' => 'IN'
+                        'taxonomy'  => $texonomie_key,
+                        'field'     => 'id',
+                        'terms'     => $texonomie,
+                        'operator'  => 'IN'
                     );
                 }
             }
@@ -144,35 +145,32 @@ function wpt_ajax_table_row_load(){
             foreach( $custom_field as $custom_field_key => $custom_field_value ){
                 if(is_array( $custom_field ) && count( $custom_field ) > 0 ){
                     $args['meta_query'][] = array(
-                        'key' => $custom_field_key,
+                        'key'   => $custom_field_key,
                         'value' => $custom_field_value,
                     );
                 }
             }
             $args['meta_query']['relation'] ='AND';
         }
-        
-        
-        
     }
+
     /**
      * Page Number Hander
      */
-   
-    $args['paged']   = $pageNumber;
+    $args['paged']          = $pageNumber;
     $table_column_keywords  = $targetTableArgs['wpt_table_column_keywords'];
-    $sort                       = $args['order'];
-    $wpt_permitted_td           = $targetTableArgs['wpt_permitted_td'];
-    $add_to_cart_text           = $targetTableArgs['wpt_add_to_cart_text'];
-    $texonomy_key               = isset( $targetTableArgs['texonomy_key'] ) ? $targetTableArgs['texonomy_key'] : false;
-    $customfield_key            = isset( $targetTableArgs['customfield_key'] ) && is_array( $targetTableArgs['customfield_key'] ) ? $targetTableArgs['customfield_key'] : false;
-    $filter_keywords            = $targetTableArgs['filter_key'];
-    $filter_box                 = $targetTableArgs['filter_box'];
-    $description_type           = $targetTableArgs['description_type'];
-    $ajax_action                = $targetTableArgs['ajax_action'];
-    $description_on                = $targetTableArgs['description_on'];
+    $sort                   = $args['order'];
+    $wpt_permitted_td       = $targetTableArgs['wpt_permitted_td'];
+    $add_to_cart_text       = $targetTableArgs['wpt_add_to_cart_text'];
+    $texonomy_key           = isset( $targetTableArgs['texonomy_key'] ) ? $targetTableArgs['texonomy_key'] : false;
+    $customfield_key        = isset( $targetTableArgs['customfield_key'] ) && is_array( $targetTableArgs['customfield_key'] ) ? $targetTableArgs['customfield_key'] : false;
+    $filter_keywords        = $targetTableArgs['filter_key'];
+    $filter_box             = $targetTableArgs['filter_box'];
+    $description_type       = $targetTableArgs['description_type'];
+    $ajax_action            = $targetTableArgs['ajax_action'];
+    $description_on         = $targetTableArgs['description_on'];
     //'description_on'            => $description_on,
-    $table_type           = $targetTableArgs['table_type'];
+    $table_type             = $targetTableArgs['table_type'];
     //$custom_field           = $targetTableArgs['custom_field'];
     
     $table_row_generator_array = array(
@@ -189,7 +187,7 @@ function wpt_ajax_table_row_load(){
         'description_type'          => $description_type,
         'ajax_action'               => $ajax_action,
         'description_on'            => $description_on,
-        'table_type'            => $table_type,
+        'table_type'                => $table_type,
         //'custom_field'            => $custom_field,
     );
     

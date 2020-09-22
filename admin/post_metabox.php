@@ -69,7 +69,7 @@ function wpt_shortcode_configuration_metabox_save_meta( $post_id, $post ) { // s
     //Mobile issue
     update_post_meta( $post_id, 'mobile', $_POST['mobile'] );
     
-    //Search Box & Filter
+    //Search & Filter
     update_post_meta( $post_id, 'search_n_filter', $_POST['search_n_filter'] );
         
     //Pagination

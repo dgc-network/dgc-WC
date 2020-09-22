@@ -1085,9 +1085,6 @@ function wpt_table_row_generator( $table_row_generator_array ){
             
             /**
              * To display Product's Attribute
-             * 
-             * @since 1.0
-             * @date 09.19.2020 d.m.y
              */
             if ( isset( $wpt_permitted_td['attribute'] ) ) {
                 $wpt_attribute = false;
@@ -1102,9 +1099,6 @@ function wpt_table_row_generator( $table_row_generator_array ){
 
             /**
              * To display Product's Variations
-             * 
-             * @since 1.0
-             * @date 09.19.2020 d.m.y
              */
             if ( isset( $wpt_permitted_td['variations'] ) ) {
                 $wpt_variations = false;$wpt_varitions_col = true;
@@ -1116,6 +1110,9 @@ function wpt_table_row_generator( $table_row_generator_array ){
             
             /**
              * Display Start Point Radio Option
+             * 
+             * @since 1.0
+             * @date 09.19.2020 d.m.y
              */
             if ( isset( $wpt_permitted_td['start_point'] ) ) {
                 $wpt_start_point = false;

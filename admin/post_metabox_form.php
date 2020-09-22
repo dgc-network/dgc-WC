@@ -14,7 +14,7 @@
         'basics'            => __( 'Basics', 'wpt_pro' ),
         'table_style'       => __( 'Style Design', 'wpt_pro' ),
         'conditions'        => __( 'Conditions', 'wpt_pro' ),
-        'search_n_filter'   => __( 'Search Box & Filter','wpt_pro' ),
+        'search_n_filter'   => __( 'Search & Filter','wpt_pro' ),
         'pagination'        => __( 'Pagination', 'wpt_pro' ),
         'mobile'            => __( 'Mobile Issue', 'wpt_pro' ),
         'config'            => __( 'Configuration', 'wpt_pro' ),

@@ -720,7 +720,7 @@ msgid "Conditions"
 msgstr ""
 
 #: admin/post_metabox_form.php:13
-msgid "Search Box & Filter"
+msgid "Search & Filter"
 msgstr ""
 
 #: admin/post_metabox_form.php:14 admin/tabs/table_style.php:352
