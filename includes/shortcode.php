@@ -76,6 +76,7 @@ function wpt_shortcode_generator( $atts = false ) {
         $add_to_cart_text = $basics['add_to_cart_text'];
         $add_to_cart_selected_text = $basics['add_to_cart_selected_text'];
         $check_uncheck_text = $basics['check_uncheck_text'];
+        $start_date_text = $basics['start_date_text'];
         $author = !empty( $basics['author'] ) ? $basics['author'] : false;
         $author_name = !empty( $basics['author_name'] ) ? $basics['author_name'] : false;
         
@@ -184,7 +185,7 @@ function wpt_shortcode_generator( $atts = false ) {
     }
 
     /**
-     * Modernize Shorting Option
+     * Modernize Sorting Option
      * Actually Default Value  will be RANDOM, So If not set ASC or DESC, Than Sorting 
      * will be Random by default. Although Just after WP_Query
      * 
@@ -320,6 +321,36 @@ function wpt_shortcode_generator( $atts = false ) {
     }
     
     /**
+     * Header Start Date Section
+     * 
+     * @version V1.0 
+     * @date 09/23/2020
+     */
+    $html_start_date = false; 
+    //$filter_identy_class = 'fullter_full';
+    if( isset( $wpt_permitted_td['start_date'] ) ){
+        //$filter_identy_class = 'fulter_half';
+        
+        $add_to_cart_selected_text = $add_to_cart_selected_text;//'Add to Cart [Selected]';
+        
+        $html_start_date .= "<div class='all_check_header_footer all_check_header check_header_{$temp_number}'>";
+        
+        $html_start_date .= "<span>";
+        $html_start_date .= "<link rel='stylesheet' href='//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css'>";
+        $html_start_date .= "<script src='//code.jquery.com/jquery-1.12.4.js'></script>";
+        $html_start_date .= "<label for='wpt_check_uncheck_button_{$temp_number}'>{$start_date_text}</lable>";
+        //$html_start_date .= "<input data-type='universal_checkbox' data-temp_number='{$temp_number}' class='wpt_check_universal wpt_check_universal_header' id='wpt_check_uncheck_button_{$temp_number}' type='text'>";
+        $html_start_date .= "<input name='start_date' id='datepicker' type='text'>";
+        $html_start_date .= "<script>$( '#datepicker' ).datepicker();</script>";
+        $html_start_date .= "";
+        $html_start_date .= "</span>";
+        
+        //$html_start_date .= "<a data-add_to_cart='{$add_to_cart_text}' data-temp_number='{$temp_number}' class='button add_to_cart_all_selected add2c_selected'>$add_to_cart_selected_text</a>";
+        
+        $html_start_date .= "</div>";
+    }
+    
+    /**
      * Maintenance Filter
      * Mainly Mini Filter
      */
@@ -376,6 +407,7 @@ function wpt_shortcode_generator( $atts = false ) {
     
     $html .= $instance_search; //For Instance Search Result
     $html .= $filter_html; //Its actually for Mini Filter Box
+    $html .= $html_start_date; //Added at @Version 1.0
     $html .= $html_check; //Added at @Version 1.0.4
     $html .= '<br class="wpt_clear">'; //Added @Version 2.0
     $html .= apply_filters('wpt_before_table', ''); //Apply Filter Jese Before Table Tag
@@ -731,7 +763,7 @@ function wpt_table_row_generator( $table_row_generator_array ){
             }
 
             /**
-             * Texonomy Handaler
+             * Custom Field Key Handaler
              * 
              * @since 1.9 
              * @date: 10.6.2016 d.m.y
@@ -950,6 +982,7 @@ function wpt_table_row_generator( $table_row_generator_array ){
             }
             
             $default_quantity = apply_filters( 'woocommerce_quantity_input_min', 1, $product );
+
             /**
              * Display Quantity for WooCommerce Product Loop
              * $current_config_value['default_quantity']
@@ -1116,7 +1149,7 @@ function wpt_table_row_generator( $table_row_generator_array ){
              */
             if ( isset( $wpt_permitted_td['start_point'] ) ) {
                 $wpt_start_point = false;
-                $wpt_start_point .= "<td class='wpt_for_product_desc wpt_option' data-product_id='" . $data['id'] . "'> ";
+                $wpt_start_point .= "<td class='wpt_for_product_desc wpt_check' data-product_id='" . $data['id'] . "'> ";
                 $wpt_start_point .= "<input data-product_type='" . $product->get_type() . "' id='option_id_{$temp_number}_" . $data['id'] . "' data-temp_number='{$temp_number}' data-product_id='" . $data['id'] . "' class='" . ( ( $table_type == 'normal_table' && $product_type == 'grouped' ) || $product_type == 'variable' || $product_type == 'external' || ( $data['stock_status'] != 'instock' && $data['stock_status'] != 'onbackorder' ) ? 'disabled' : 'enabled' ) . " wpt_optionbox wpt_td_optionbox wpt_option_temp_{$temp_number}_pr_" . $data['id'] . " wpt_option_{$temp_number} wpt_inside_option_{$temp_number}' type='radio' value='0'><label for='option_id_{$temp_number}_" . $data['id'] . "'></label>";
                 $wpt_start_point .= " </td>";
                 $wpt_each_row['start_point'] = $wpt_start_point;
@@ -1411,7 +1444,7 @@ function wpt_search_box($temp_number, $search_box_texonomiy_keyword = array( 'pr
 }
 
 /**
- * Total Search box Generator
+ * Total Filter box Generator
  * 
  * @param type $temp_number It's a Temporay Number for each Table,
  * @param type $search_box_texonomiy_keyword Obviously should be a Array, for product_cat tag etc
