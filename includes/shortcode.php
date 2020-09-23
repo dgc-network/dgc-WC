@@ -338,12 +338,12 @@ function wpt_shortcode_generator( $atts = false ) {
         
         //$html_start_date .= "<span>";
         $html_start_date .= "<link rel='stylesheet' href='//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css'>";
-        $html_start_date .= "<script src='//code.jquery.com/jquery-1.12.4.js'></script>";
+        $html_start_date .= "<script type='text/javascript' src='//code.jquery.com/jquery-1.12.4.js'></script>";
         //$html_start_date .= "<label for='wpt_check_uncheck_button_{$temp_number}'>{$start_date_text}</lable>";
-        $html_start_date .= "<label for='start_date_text'>{$start_date_text}</lable>";
+        $html_start_date .= "<label for='start_date_text'><h5>{$start_date_text}</h5></lable>";
         //$html_start_date .= "<input data-type='universal_checkbox' data-temp_number='{$temp_number}' class='wpt_check_universal wpt_check_universal_header' id='wpt_check_uncheck_button_{$temp_number}' type='text'>";
         $html_start_date .= "<input name='start_date' id='datepicker' type='text'>";
-        $html_start_date .= "<script>$( '#datepicker' ).datepicker();</script>";
+        $html_start_date .= "<script type='text/css'>$( '#datepicker' ).datepicker();</script>";
         $html_start_date .= "";
         //$html_start_date .= "</span>";
         
