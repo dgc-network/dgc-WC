@@ -122,7 +122,7 @@ $meta_basics = get_post_meta( $post->ID, 'basics', true );
 </div>
 
 <div class="wpt_column">
-    <label class="wpt_label" for="wpt_table_start_date_text"><?php esc_html_e( '選擇出發日期', 'wpt_pro' );?></label>
+    <label class="wpt_label" for="wpt_table_start_date_text"><?php esc_html_e( 'Start Date Text', 'wpt_pro' );?></label>
     <input name="basics[start_date_text]"  class="wpt_data_filed_atts" data-name="start_date_text" type="text" value="<?php echo isset( $meta_basics['start_date_text'] ) ? $meta_basics['start_date_text'] : __( '選擇出發日期','wpt_pro' ); ?>" placeholder="<?php esc_attr_e( '選擇出發日期', 'wpt_pro' );?>" id="wpt_table_start_date_text">
 </div>
 
