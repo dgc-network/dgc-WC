@@ -59,14 +59,12 @@
         $('body').on('click','.wpt_table_pagination a',function(e){
             e.preventDefault();
             var thisButton = $(this);
-
-            var page_number = $(thisButton).data('page_number');
-            
+            var page_number = $(thisButton).data('page_number');            
             var temp_number = $(thisButton).closest('.wpt_table_pagination').data('temp_number');            
             
             var targetTable = $('#table_id_' + temp_number + ' table#wpt_table');
             var targetTableArgs = targetTable.attr( 'data-data_json' );
-                targetTableArgs = JSON.parse(targetTableArgs);
+            targetTableArgs = JSON.parse(targetTableArgs);
             var targetTableBody = $('#table_id_' + temp_number + ' table#wpt_table tbody');
             var thisPagiWrappers = $('#table_id_' + temp_number + ' .wpt_table_pagination');
             var thisPagiLinks = $('#table_id_' + temp_number + ' .wpt_table_pagination a.page-numbers');
@@ -102,7 +100,7 @@
                         temp_number:    temp_number,
                         targetTableArgs:targetTableArgs, 
                         pageNumber:     pageNumber,
-                        load_type:     load_type,
+                        load_type:      load_type,
                     };
                     
                     loadPaginationLinks($data,temp_number);
@@ -150,8 +148,8 @@
          * @returns {Objectt} Json Object, Mainly getting config_json value based on table id.
          */
         function getConfig_json( temp_number ){
-           var temp_cjson = $('div#table_id_' + temp_number + ' #wpt_table').data('config_json');
-           if ( typeof temp_cjson === 'undefined' ){
+            var temp_cjson = $('div#table_id_' + temp_number + ' #wpt_table').data('config_json');
+            if ( typeof temp_cjson === 'undefined' ){
                 temp_cjson = config_json;
             }
             return temp_cjson;
@@ -239,13 +237,11 @@
                             $.each( fragments, function( key, value ) {
                                 if($.inArray(key, supportedElement) != -1) {
                                     html += value;
-                                }
-                                
+                                }                                
                             });
                             $('div.tables_cart_message_box').attr('data-type','refresh');//Set
                             $('div.tables_cart_message_box').html(html);
-                        }
-                        
+                        }                        
                     }
                 },
                 error: function(){
@@ -291,8 +287,6 @@
                     final_image_url = $(this).parent().data('url');
                     IMG_Generator(thisImg,final_image_url, image_width);
                 }
-                
-                
             });
             
             /**
@@ -306,7 +300,7 @@
              */
             function IMG_Generator(thisImg, final_image_url, image_width){
                 
-                var image_height, product_title,placeholder_image, wrapper_style;
+                var image_height, product_title, placeholder_image, wrapper_style;
                 
                 image_height = 'auto';
                 
@@ -361,7 +355,7 @@
             thisButton.addClass('loading');
             var data = {};
             $.each( thisButton.data(), function( key, value ) {
-                    data[ key ] = value;
+                data[ key ] = value;
             });
 
             // Trigger event.
@@ -417,7 +411,7 @@
                 success: function(response) {
                     //$('body').append(response);
                     //WPT_MiniCart();
-                    $( document.body ).trigger( 'added_to_cart', [ response.fragments, response.cart_hash, thisButton ] ); //Trigger and sent added_to_cart event
+                    $( document.body ).trigger( 'added_to_cart', [ response. fragments, response.cart_hash, thisButton ] ); //Trigger and sent added_to_cart event
                     thisButton.removeClass('disabled');
                     thisButton.removeClass('loading');
                     thisButton.addClass('added');
@@ -430,8 +424,7 @@
                     //Quick Button Active here and it will go Directly to checkout Page
                     if(config_json.product_direct_checkout === 'yes'){
                         window.location.href = checkoutURL;
-                    }
-                    
+                    }                    
                     //******************/
                 },
                 error: function() {
@@ -876,7 +869,7 @@
             });
         });        
         
-        //,wc_fragments_refresh,wc_fragment_refresh,removed_from_cart
+        //wc_fragments_refreshed, wc_fragments_refresh, wc_fragment_refresh, removed_from_cart
         $(document).on('wc_fragments_refreshed',function(){
             WPT_MiniCart();
         });
@@ -904,7 +897,7 @@
             var FooterCart = $('div.wpt-footer-cart-wrapper');
             
             $('span.wpt_ccount').html('');
-            $( '.wpt_action>a.wpt_woo_add_cart_button' ).removeClass( 'added' );
+            $('.wpt_action>a.wpt_woo_add_cart_button').removeClass( 'added' );
             if(response !== 'undefined'){
                 var fragments = response.fragments;
                 if ( fragments ) {
