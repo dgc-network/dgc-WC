@@ -3,7 +3,6 @@
  * @since 1.0.0
  */
 
-
 (function($) {
     'use strict';
     $(document).ready(function() {
@@ -56,14 +55,14 @@
             e.preventDefault();
             return false;
         });
+
         $('body').on('click','.wpt_table_pagination a',function(e){
             e.preventDefault();
             var thisButton = $(this);
 
             var page_number = $(thisButton).data('page_number');
             
-            var temp_number = $(thisButton).closest('.wpt_table_pagination').data('temp_number');
-            
+            var temp_number = $(thisButton).closest('.wpt_table_pagination').data('temp_number');            
             
             var targetTable = $('#table_id_' + temp_number + ' table#wpt_table');
             var targetTableArgs = targetTable.attr( 'data-data_json' );
@@ -124,15 +123,15 @@
             
         });
         //End of Pagination
+
         function fixAfterAjaxLoad() {
-        $('table.wpt_product_table td select').trigger('change');
-        //$.getScript(site_url + "/wp-includes/js/mediaelement/mediaelement-and-player.min.js");
-        //$.getScript(site_url + "/wp-practice/wp-includes/js/mediaelement/mediaelement-migrate.min.js");
-        $.getScript(site_url + "/wp-includes/js/mediaelement/wp-mediaelement.min.js");
-        $.getScript(site_url + "/wp-content/plugins/woocommerce/assets/js/frontend/add-to-cart-variation.min.js");
-        $.getScript(site_url + "/wp-content/plugins/woocommerce/assets/js/frontend/add-to-cart-variation.js");
-    }
-    
+            $('table.wpt_product_table td select').trigger('change');
+            //$.getScript(site_url + "/wp-includes/js/mediaelement/mediaelement-and-player.min.js");
+            //$.getScript(site_url + "/wp-practice/wp-includes/js/mediaelement/mediaelement-migrate.min.js");
+            $.getScript(site_url + "/wp-includes/js/mediaelement/wp-mediaelement.min.js");
+            $.getScript(site_url + "/wp-content/plugins/woocommerce/assets/js/frontend/add-to-cart-variation.min.js");
+            $.getScript(site_url + "/wp-content/plugins/woocommerce/assets/js/frontend/add-to-cart-variation.js");
+        }
     
         /**
          * Getting object for config_json from #wpt_table table.
@@ -144,7 +143,7 @@
         if ( typeof config_json === 'undefined' ){
             return false;
         }
-        
+            
         /**
          * Mainly getting config_json value based on table id. To get new value if available in inside any function, Use like following
          * config_json = getConfig_json( temp_number );
@@ -257,7 +256,6 @@
                 }
             });
         }
-
         
         WPT_MiniCart();
 
@@ -337,9 +335,9 @@
             }
 
             $('body').on('click', '.wpt_popup_image_wrapper', function() {
-                return false;
-                
+                return false;                
             });
+
             $('body').on('click', '#wpt_thumbs_popup span#wpt_popup_close, #wpt_thumbs_popup', function() {
                 $('#wpt_thumbs_popup').fadeOut(function(){
                     $(this).remove();
@@ -355,6 +353,7 @@
             alert(config_json.sorry_out_of_stock);
             return false;
         });
+
         //Add to cart
         $('body').on('click', 'a.ajax_active.wpt_variation_product.single_add_to_cart_button.button.enabled, a.ajax_active.add_to_cart_button.wpt_woo_add_cart_button', function(e) {
             e.preventDefault();
@@ -453,8 +452,8 @@
             return false;
             
         });
-        //Alert of out of stock 
 
+        //Alert of out of stock 
         $('body').on('click', 'a.wpt_woo_add_cart_button.button.disabled.loading,a.disabled.yith_add_to_quote_request.button.loading', function(e) {
             e.preventDefault();
             var temp_number = $(this).closest( '.wpt_action' ).data('temp_number');
@@ -463,8 +462,7 @@
             return false;
 
         });
-        
-        
+                
         //Product Variations change
         $('body').on('change','.wpt_varition_section',function() {
             
@@ -480,7 +478,6 @@
             var selectAllItemMessage = config_json.select_all_items_message;
             var outOfStockMessage = config_json.out_of_stock_message;
             
-
             /**
              * Finally targetPriceSelectorTd has removed becuase we have creaed a new function
              * for targetting any TD of selected Table.
@@ -546,6 +543,7 @@
             function setValueToTargetTD(target_td_name, gotten_value){
                 targetTD(target_td_name).html(gotten_value);
             }
+
             /**
              * 
              * @param {type} target_td_name suppose: weight,description,serial_number,thumbnails etc
@@ -679,7 +677,7 @@
                 if(finalWeightVal === 'NaN'){
                     finalWeightVal = '';
                 }
-               targetTD('weight').attr('data-weight',targetAttributeObject.weight);
+                targetTD('weight').attr('data-weight',targetAttributeObject.weight);
                 //Set Weight,Height,Lenght,Width
                 setValueToTargetTD_IfAvailable('weight', finalWeightVal);
                 setValueToTargetTD_IfAvailable('height', targetAttributeObject.dimensions.height);
@@ -699,19 +697,13 @@
                 //Unset variation ID data //Added at 4.0.20
                 targetThumbs.removeAttr('data-variation_id');
                 
-                
-                
-                
                 addToCartSelector.attr('data-variation', false);
                 addToCartSelector.attr('data-variation_id', false);
-                
                 addToQuoteSelector.attr('data-variation', false);
                 addToQuoteSelector.attr('data-variation_id', false);
                 addToQuoteSelector.attr('data-quote_data', false);
-                
-                
+                                
                 wptMessageText = '<p class="wpt_warning warning">' + targetRightCombinationMsg + '</p>'; //Please choose right combination. //Message will come from targatted tables data attribute //Mainly for WPML issues
-
 
                 //Class adding/Removing to add to cart button
                 enable_disable_class();
@@ -751,8 +743,8 @@
                 
                 checkBoxSelector.removeClass('enabled');
                 checkBoxSelector.addClass('disabled');
-
             }
+
             function disbale_enable_class() {
                 addToCartSelector.removeClass('disabled');
                 addToCartSelector.addClass('enabled');
@@ -839,6 +831,7 @@
                 alert('Please Choose items.');
                 return false;
             }
+
             $.ajax({
                 type: 'POST',
                 url: ajax_url,
@@ -890,13 +883,13 @@
                     alert('Failed');
                 },
             });
-        });
-        
+        });        
         
         //,wc_fragments_refresh,wc_fragment_refresh,removed_from_cart
         $(document).on('wc_fragments_refreshed',function(){
             WPT_MiniCart();
         });
+
         $(document).on('wc_fragments_refresh',function(){
             WPT_MiniCart();
         });
@@ -911,6 +904,7 @@
         
         $('div.wpt-footer-cart-wrapper>a').css('background-color',footer_bg_color);
         $('body').append('<style>div.wpt-footer-cart-wrapper>a:after{background-color: ' + footer_bg_color + ';}</style>');
+
         /**
          * @param {type} response
          * @returns {undefined}
@@ -921,36 +915,37 @@
             $('span.wpt_ccount').html('');
             $( '.wpt_action>a.wpt_woo_add_cart_button' ).removeClass( 'added' );
             if(response !== 'undefined'){
-                    var fragments = response.fragments;
-                    if ( fragments ) {
-                        $.each( fragments, function( key, value ) {
-                            if('string' === typeof key){
-                                $( key ).replaceWith( value );
-                            }
-                        });
-                    }
-                    //console.log(fragments);
-                    var wpt_per_product = fragments.wpt_per_product;
-                    wpt_per_product = $.parseJSON(wpt_per_product)
-                    if( wpt_per_product && wpt_per_product  !== 'false'){
-                        if(footer_cart !== 'always_hide'){
-                            FooterCart.fadeIn('slow');
+                var fragments = response.fragments;
+                if ( fragments ) {
+                    $.each( fragments, function( key, value ) {
+                        if('string' === typeof key){
+                            $( key ).replaceWith( value );
                         }
-                        
-                        $.each( wpt_per_product, function( key, value ) {
-                            $( '.wpt_row_product_id_' + key + ' .wpt_action button.single_add_to_cart_button>.wpt_ccount.wpt_ccount_' + key ).remove();
-                            $( '.wpt_row_product_id_' + key + ' .wpt_action>a.wpt_woo_add_cart_button' ).addClass( 'added' );
-                            $( '.wpt_row_product_id_' + key + ' .wpt_action>a.wpt_woo_add_cart_button' ).append( '<span class="wpt_ccount wpt_ccount_' + key + '">' + value + '</span>' );
-                        });
-                    }else{
-                        if(footer_cart === 'hide_for_zerro'){
-                            FooterCart.fadeOut('slow');
-                        }
-                        
-                    }
-                    $('div.wpt-footer-cart-wrapper>a').css('background-color',footer_bg_color);
+                    });
                 }
-                return false;
+
+                //console.log(fragments);
+                var wpt_per_product = fragments.wpt_per_product;
+                wpt_per_product = $.parseJSON(wpt_per_product)
+                if( wpt_per_product && wpt_per_product  !== 'false'){
+                    if(footer_cart !== 'always_hide'){
+                        FooterCart.fadeIn('slow');
+                    }
+                    
+                    $.each( wpt_per_product, function( key, value ) {
+                        $( '.wpt_row_product_id_' + key + ' .wpt_action button.single_add_to_cart_button>.wpt_ccount.wpt_ccount_' + key ).remove();
+                        $( '.wpt_row_product_id_' + key + ' .wpt_action>a.wpt_woo_add_cart_button' ).addClass( 'added' );
+                        $( '.wpt_row_product_id_' + key + ' .wpt_action>a.wpt_woo_add_cart_button' ).append( '<span class="wpt_ccount wpt_ccount_' + key + '">' + value + '</span>' );
+                    });
+                }else{
+                    if(footer_cart === 'hide_for_zerro'){
+                        FooterCart.fadeOut('slow');
+                    }
+                        
+                }
+                $('div.wpt-footer-cart-wrapper>a').css('background-color',footer_bg_color);
+            }
+            return false;
         }
         
         
@@ -965,25 +960,27 @@
                 delay || 500);
             };
         }
+
         //Neeeeeeeeeeeeeed Configuration 
         $('.query_box_direct_value').keyup(oneSecondDelay(function(){
             var thisID = $(this).attr('id');
             var temp_number = thisID.replace('single_keyword_','');
             $('#wpt_query_search_button_' + temp_number).trigger('click');
         }));
+
         $('body').on('change','.search_select,.query_box_direct_value',function(){
             var thisID = $(this).parents('.wpt_product_table_wrapper').attr('id');
             var temp_number = thisID.replace('table_id_','');
            $('#wpt_query_search_button_' + temp_number).trigger('click');
         });
+
         /**
          * Search Box Query and Scripting Here
          * @since 1.9
          * @date 9.6.2018 d.m.y
          */
         
-        $( 'body' ).on('click','button.wpt_query_search_button,button.wpt_load_more', function(){
-            
+        $( 'body' ).on('click','button.wpt_query_search_button,button.wpt_load_more', function(){            
             var temp_number = $(this).data('temp_number');
             config_json = getConfig_json( temp_number ); //Added vat V5.0
             //Added at 2.7
@@ -997,7 +994,6 @@
             var load_type = $(this).data('load_type');
             
             thisButton.html(loadingText);
-
             
             var targetTable = $('#table_id_' + temp_number + ' table#wpt_table');
             var targetTableArgs = targetTable.data( 'data_json' );
@@ -1007,12 +1003,10 @@
                 pageNumber = 1;
             }
             
-            
-            
             var key,value;
             var directkey = {};
-            $('#search_box_' + temp_number + ' .search_single_direct .query_box_direct_value').each(function(){
-                
+
+            $('#search_box_' + temp_number + ' .search_single_direct .query_box_direct_value').each(function(){                
                 key = $(this).data('key');
                 value = $(this).val();
                 directkey[key] = value;
@@ -1020,9 +1014,9 @@
 
             var texonomies = {};
             value = false;
+
             //console.log($('#search_box_' + temp_number + ' .search_select.query').val());
             $('#search_box_' + temp_number + ' .search_select.query').each(function(){
-                
                 key = $(this).data('key');
                 var value = $(this).val();//[];var tempSerial = 0;
                 if(value != ""){
@@ -1031,9 +1025,9 @@
             });
             var custom_field = {};
             value = false;
+
             //console.log($('#search_box_' + temp_number + ' .search_select.query').val());
             $('#search_box_' + temp_number + ' .search_select.cf_query').each(function(){
-                
                 key = $(this).data('key');
                 var value = $(this).val();//[];var tempSerial = 0;
                 if(value != ""){
@@ -1053,17 +1047,18 @@
                     targetTableArgs:targetTableArgs, 
                     texonomies:     texonomies,
                     pageNumber:     pageNumber,
-                    load_type:     load_type,
-                    custom_field:    custom_field,
+                    load_type:      load_type,
+                    custom_field:   custom_field,
                 },
+
                 complete: function(){
                     $( document ).trigger( 'wc_fragments_refreshed' );
                     arrangingTDContentForMobile(); //@Since 5.2
                     loadMiniFilter(); //@Since 4.8
                     fixAfterAjaxLoad();
                 },
+
                 success: function(data) {
-                    
                     $('.table_row_loader').remove();
                     if( actionType === 'query' ){
                         $('#wpt_load_more_wrapper_' + temp_number).remove();
@@ -1075,13 +1070,14 @@
                                 targetTableArgs:targetTableArgs, 
                                 texonomies:     texonomies,
                                 pageNumber:     pageNumber,
-                                load_type:     load_type,
+                                load_type:      load_type,
                             };
                         loadPaginationLinks($data,temp_number);
                         
                         targetTable.after('<div id="wpt_load_more_wrapper_' + temp_number + '" class="wpt_load_more_wrapper"><button data-temp_number="' + temp_number + '" data-type="load_more" class="button wpt_load_more">' + loadMoreText + '</button></div>');
                         thisButton.html(searchText);
                     }
+
                     if( actionType === 'load_more' ){
                         if(data !== config_json.product_not_founded){ //'Product Not found' //Products Not founded!
                             targetTableBody.append( data );
@@ -1093,12 +1089,12 @@
                             $('#wpt_load_more_wrapper_' + temp_number).remove();
                             alert(config_json.no_more_query_message);//"There is no more products based on current Query."
                         }
-                        
                     }
                     removeCatTagLings();//Removing Cat,tag link, if eanabled from configure page
                     pageNumber++; //Page Number Increasing 1 Plus
                     targetTable.attr('data-page_number',pageNumber);
                 },
+
                 error: function() {
                     console.log("Error On Ajax Query Load. Please check console. - wpt_query_search_button");
                 },
@@ -1143,7 +1139,7 @@
             filterTableRow(temp_number);
         });
         
-         $('body').on('click', 'input.wpt_check_universal,input.enabled.wpt_checkbox.wpt_td_checkbox', function() { //wpt_td_checkbox
+        $('body').on('click', 'input.wpt_check_universal,input.enabled.wpt_checkbox.wpt_td_checkbox', function() { //wpt_td_checkbox
             var temp_number = $(this).data('temp_number');
             var checkbox_type = $(this).data('type'); //universal_checkbox
             if (checkbox_type === 'universal_checkbox') {
@@ -1179,10 +1175,9 @@
                 }
             });
             var finalClassSelctor = '.filter_row' + ClassArray.join(''); //Test will keep
-            var hideAbleClass = '#table_id_' + temp_number + ' table tr.wpt_row';
-            
+            var hideAbleClass = '#table_id_' + temp_number + ' table tr.wpt_row';            
            
-           if( filterBoxYesNo ){
+            if( filterBoxYesNo ){
                 $(hideAbleClass + ' td.wpt_check input.enabled.wpt_checkbox').removeClass('wpt_td_checkbox');
                 $(hideAbleClass).css('display','none');
                 $(hideAbleClass).removeClass('visible_row');
@@ -1212,6 +1207,7 @@
             }
             currentAllSelectedButtonSelector.html( add_cart_text + ' [ ' + itemAmount + ' ' + itemText + ' ]');
         }
+
         function uncheckAllCheck(temp_number){
             $('#table_id_' + temp_number + ' input.wpt_check_universal:checkbox,#table_id_' + temp_number + ' table input:checkbox').attr('checked',false);
         }
@@ -1231,7 +1227,6 @@
                 return eachItem !== '';
             });
             value_size = value.length;
-
             
             var target_table = '#table_id_' + temp + ' #wpt_table';
             $(target_table + ' tr.visible_row').each(function(){
@@ -1287,8 +1282,7 @@
             
             var quantity = $(this).attr('data-quantity');
             var quote_data = $(this).attr('data-quote_data');
-            var yith_browse_list = $(this).data('yith_browse_list');
-            
+            var yith_browse_list = $(this).data('yith_browse_list');            
             
             add_to_cart_info = 'action=yith_ywraq_action&ywraq_action=add_item';
             add_to_cart_info += quote_data;
@@ -1300,39 +1294,39 @@
             yith_ajax_url = ywraq_frontend.ajaxurl.toString().replace( '%%endpoint%%', 'yith_ywraq_action' );
             
             $.ajax({
-            type   : 'POST',
-            url    : yith_ajax_url,
-            dataType: 'json',
-            data   : add_to_cart_info,
-            beforeSend: function(){
+                type   : 'POST',
+                url    : yith_ajax_url,
+                dataType: 'json',
+                data   : add_to_cart_info,
+                beforeSend: function(){
+                },
+                complete: function(){
+                },
 
-            },
-            complete: function(){
-            },
-            success: function (response) {
-                if( response && ( response.result === 'true' || response.result === 'exists' ) ){
-                    $('.' + selector).html(msg.added);
-                    if(response.result === 'exists'){
-                        
-                        $('.' + selector).attr('data-response_msg',response.message);
-                        //alert(response.message);
-                    }
-                    var html;
-                    //$('.wpt_quoterequest img').remove();
-                    //$('.' + selector + '+.yith_ywraq_add_item_browse_message').remove();
-                    //$('.' + selector + '+.yith_ywraq_add_item_response_message').remove();
-                    html = '<div class="yith_ywraq_add_item_response_message">' + response.message + '</div>';
-                    html += '<a href="'+response.rqa_url+'" target="_blank">' + yith_browse_list + '</a>';
+                success: function (response) {
+                    if( response && ( response.result === 'true' || response.result === 'exists' ) ){
+                        $('.' + selector).html(msg.added);
+
+                        if(response.result === 'exists'){                        
+                            $('.' + selector).attr('data-response_msg',response.message);
+                            //alert(response.message);
+                        }
+                        var html;
+                        //$('.wpt_quoterequest img').remove();
+                        //$('.' + selector + '+.yith_ywraq_add_item_browse_message').remove();
+                        //$('.' + selector + '+.yith_ywraq_add_item_response_message').remove();
+                        html = '<div class="yith_ywraq_add_item_response_message">' + response.message + '</div>';
+                        html += '<a href="'+response.rqa_url+'" target="_blank">' + yith_browse_list + '</a>';
                     
-                    $('.' + selector + '_td').html( html ).show(); //response.label_browse
-                    //$('.' + selector).hide();
+                        $('.' + selector + '_td').html( html ).show(); //response.label_browse
+                        //$('.' + selector).hide();
                    
-                }else{
-                    $('.' + selector).html(msg.added);
+                    }else{
+                        $('.' + selector).html(msg.added);
+                    }
+                    //thisButton.parent().show();  //New added at 4.0.19 
                 }
-                //thisButton.parent().show();  //New added at 4.0.19 
-            }
-        });
+            });
         });
         
         loadMiniFilter();
@@ -1380,6 +1374,7 @@
                 $(this).html(html);
             });
         }
+
         /**
          * Colunm Sorting Option
          * 
@@ -1413,6 +1408,7 @@
                 var contentArray = [];
                 var contentHTMLArray = [];
                 var currentColumnObject = $(target_table_wrapper_id + ' table tbody td' + target_class);
+
                 currentColumnObject.each(function(index){
                     var text,html = '';
                     text = $(this).text();
@@ -1438,10 +1434,9 @@
                     contentArray[index] = text;
                     contentHTMLArray[text] = html;
                 });
-                function sortingData(a, b){
-                    
-                    //Added at 3.4
 
+                function sortingData(a, b){                    
+                    //Added at 3.4
                     if(target_class === '.wpt_price' || target_class === '.wpt_price.this_column_sorted') { //.wpt_price.this_column_sorted
                         a = ( a.match(/\d+\.\d+|\d+\b|\d+(?=\w)/g) || [] ).map(function (v) {return +v;});
                         a = a[0];
@@ -1456,13 +1451,13 @@
                         return_data = ((b < a) ? -1 : ((b > a) ? 1 : 0));
                     }
                     return return_data;
-                  }
+                }
                   
-                  var sortedArray = contentArray.sort(sortingData);
-                  var finalHTMLData = '';
-                  $.each(sortedArray,function(index,value){
-                      finalHTMLData += contentHTMLArray[value];
-                  });
+                var sortedArray = contentArray.sort(sortingData);
+                var finalHTMLData = '';
+                $.each(sortedArray,function(index,value){
+                    finalHTMLData += contentHTMLArray[value];
+                });
 
                 //Backed HTML Data
                 $(target_table_wrapper_id + ' table>tbody').html(finalHTMLData);
@@ -1489,53 +1484,38 @@
         }
         // Removing link feature End here  */
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    /*
-     * Start code for Advance Version
-     * Version: 5.3
-     */
-    function Advance_NoticeBoard(notice){
-        var noticeBoard = $('div.wpt_notice_board');
-         if(notice !== ''){
-            noticeBoard.append(notice);
-            var boardHeight = noticeBoard.height();
-            var boardWidth = noticeBoard.width();
-            var windowHeight = $(window).height();
-            var windowWidth = $(window).width();
-            var topCal = (windowHeight - (boardHeight + 20))/2;
-            var leftCal = (windowWidth - (boardWidth + 20))/2;
-            noticeBoard.css({
-                top: topCal + 'px',
-                left: leftCal + 'px',
-            });                        
-            noticeBoard.fadeIn('slow');
+        /*
+         * Start code for Advance Version
+         * Version: 5.3
+         */
+        function Advance_NoticeBoard(notice){
+            var noticeBoard = $('div.wpt_notice_board');
+            if(notice !== ''){
+                noticeBoard.append(notice);
+                var boardHeight = noticeBoard.height();
+                var boardWidth = noticeBoard.width();
+                var windowHeight = $(window).height();
+                var windowWidth = $(window).width();
+                var topCal = (windowHeight - (boardHeight + 20))/2;
+                var leftCal = (windowWidth - (boardWidth + 20))/2;
+                noticeBoard.css({
+                    top: topCal + 'px',
+                    left: leftCal + 'px',
+                });                        
+                noticeBoard.fadeIn('slow');
+            }
+            var myTimeOut = setTimeout(function(){
+                noticeBoard.fadeOut('medium');
+                clearTimeout(myTimeOut);
+            },2000);
         }
-        var myTimeOut = setTimeout(function(){
-            noticeBoard.fadeOut('medium');
-            clearTimeout(myTimeOut);
-        },2000);
-    }
-    function WPT_BlankNotice(){
-        var noticeBoard = $('div.wpt_notice_board');
-        noticeBoard.html('');
-    }
+
+        function WPT_BlankNotice(){
+            var noticeBoard = $('div.wpt_notice_board');
+            noticeBoard.html('');
+        }
    
-    $(document).on('submit','div.advance_table_wrapper table.advance_table.wpt_product_table form',function(e){
+        $(document).on('submit','div.advance_table_wrapper table.advance_table.wpt_product_table form',function(e){
             WPT_BlankNotice();
             var product_id = $(this).parents('tr').data('product_id');
             var thisButton = $('tr.wpt_row_product_id_' + product_id + ' td.wpt_action button.single_add_to_cart_button');
@@ -1594,8 +1574,6 @@
             var currentAllSelectedButtonSelector = $('#table_id_' + temp_number + ' a.button.add_to_cart_all_selected');
             currentAllSelectedButtonSelector.addClass('disabled');
             currentAllSelectedButtonSelector.addClass('loading');
-
-
             
             var add_cart_text = $('#table_id_' + temp_number).data('add_to_cart');
             
@@ -1606,7 +1584,6 @@
                 var product_id = $(this).data('product_id');
                 var fullSelcetor = '#table_id_' + temp_number + ' #product_id_' + product_id + ' .wpt_action form';
                 var thisButton = $('#table_id_' + temp_number + ' #product_id_' + product_id + ' .wpt_action form button.single_add_to_cart_button');
-                
 
                 thisButton.removeClass('added');
                 thisButton.addClass( 'disabled' );
@@ -1630,9 +1607,7 @@
                         thisButton.addClass('added');
                     });
                 }
-                
-                
-               itemAmount++;
+                itemAmount++;
             });
 
             //Return false for if no data
@@ -1649,10 +1624,8 @@
                 window.location.href = checkoutURL;
             }
             currentAllSelectedButtonSelector.html(add_cart_text + ' [ ' + itemAmount + ' ' + config_json.add2cart_all_added_text + ' ]');
-            uncheckAllCheck(temp_number);
-            
-        });
-        
+            uncheckAllCheck(temp_number);            
+        });        
        
         $(document).on( 'reset_data', 'div.advance_table_wrapper table.advance_table.wpt_product_table form.cart', function() {
             var temp_number = $(this).parents('td').data('temp_number');
@@ -1667,9 +1640,9 @@
                 checkBoxSelector.removeClass('enabled');
                 checkBoxSelector.addClass('disabled');
             }
-            enable_disable_class();
-            
+            enable_disable_class();            
         });
+
         $(document).on( 'found_variation', 'div.advance_table_wrapper table.advance_table.wpt_product_table form.cart', function( event, variation ) {
             var temp_number = $(this).parents('td').data('temp_number');
             var product_id = $(this).parents('td').data('product_id');
@@ -1707,15 +1680,12 @@
                 targetTD(target_td_name).html(gotten_value);
             }
             
-            
-            
             targetThumbs.attr('src', variation.image.gallery_thumbnail_src);
             if(variation.image.srcset && 'false' !== variation.image.srcset) {
                 targetThumbs.attr('srcset', variation.image.srcset);
             };
             
-            function disbale_enable_class() {
-                
+            function disbale_enable_class() {                
                 /**
                  * For Add To Quote
                  */
@@ -1725,8 +1695,7 @@
                 checkBoxSelector.removeClass('disabled');
                 checkBoxSelector.addClass('enabled');
             }
-            disbale_enable_class();
-            
+            disbale_enable_class();            
             
             targetThumbs.attr('data-variation_id', variation.variation_id);
             console.log("Found Variation",product_id,temp_number);
@@ -1734,32 +1703,9 @@
             console.log(variation);
             //$(this).hide();
         });
-        
-        
+                
     //$(document).on('submit','table.advance_table.wpt_product_table form',function(e){ //div.advance_table_wrapper table.advance_table.wpt_product_table
-    
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
         arrangingTDContentForMobile();
         function arrangingTDContentForMobile(){
             $('table.mobile_responsive tr.wpt_row').each(function(){
@@ -1786,7 +1732,6 @@
                     });
                     htmlDesc += "</div>"
 
-
                     htmlImg = ""; //wpt_for_thumbs_desc
 
                     //htmlDesc += "<div class='wpt_mobile_desc_part'>";
@@ -1802,8 +1747,6 @@
                     });
                     //htmlDesc += "</div>"
 
-
-
                     htmlCfTax = "";
                     $(this).children('td.wpt_custom_cf_tax').each(function(){
                         var attr = "";
@@ -1813,8 +1756,8 @@
                             }
                         });
                         htmlCfTax += "<div " + attr + ">" + $(this).html() + "</div>";//"<div class='" + td_class + "'>" + $(this).html() + "</div>";
-
                     });
+
                     if(htmlCfTax !== ""){
                         htmlDesc += "<div class='wpt_custom_cf_tax'>";
                         htmlDesc += htmlCfTax;
@@ -1830,7 +1773,6 @@
                             }
                         });
                         htmlAction += "<div " + attr + ">" + $(this).html() + "</div>";//"<div class='" + td_class + "'>" + $(this).html() + "</div>";
-
                     });
 
                     if(actionElement.length > 0){
@@ -1853,10 +1795,6 @@
                 $(this).children('label').attr('for',id);
 
             });
-        }     
-        
+        }             
     });
-    
-    
-    
 })(jQuery);
