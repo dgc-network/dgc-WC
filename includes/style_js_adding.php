@@ -3,7 +3,7 @@
 /**
  * CSS or Style file add for FrontEnd Section. 
  * 
- * @since 1.0.0
+ * @since 1.0.1
  */
 function wpt_style_js_adding(){
     //Custom CSS Style for Woo Product Table's Table (Universal-for all table) and (template-for defien-table)
