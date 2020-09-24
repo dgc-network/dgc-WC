@@ -755,6 +755,8 @@
         /**
          * Working for start_date_header of our Table
          */
+        $("#datepicker").datepicker( "option", "dateFormat", "yy-mm-dd" );
+/*
         $('body').on('click', 'input.datepicker', function(e) {
             e.preventDefault();
             //var temp_number = $(this).data('temp_number');
@@ -763,7 +765,7 @@
             //return false;
             return datepicker();
         });
-
+*/
         /**
          * Working for Checkbox of our Table
          */
