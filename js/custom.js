@@ -761,7 +761,7 @@
             //config_json = getConfig_json( temp_number ); //Added vat V5.0
             //alert(config_json.sorry_plz_right_combination);
             //return false;
-            datepicker();
+            return datepicker();
         });
 
         /**
