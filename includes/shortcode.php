@@ -1009,7 +1009,13 @@ function wpt_table_row_generator( $table_row_generator_array ){
             if ( isset( $wpt_permitted_td['check'] ) ) {
                 $wpt_single_check = false;
                 $wpt_single_check .= "<td class='wpt_for_product_desc wpt_check' data-product_id='" . $data['id'] . "'> ";
-                $wpt_single_check .= "<input data-product_type='" . $product->get_type() . "' id='check_id_{$temp_number}_" . $data['id'] . "' data-temp_number='{$temp_number}' data-product_id='" . $data['id'] . "' class='" . ( ( $table_type == 'normal_table' && $product_type == 'grouped' ) || $product_type == 'variable' || $product_type == 'external' || ( $data['stock_status'] != 'instock' && $data['stock_status'] != 'onbackorder' ) ? 'disabled' : 'enabled' ) . " wpt_checkbox wpt_td_checkbox wpt_check_temp_{$temp_number}_pr_" . $data['id'] . " wpt_check_{$temp_number} wpt_inside_check_{$temp_number}' type='checkbox' value='0'><label for='check_id_{$temp_number}_" . $data['id'] . "'></label>";
+                //$wpt_single_check .= "<input data-product_type='" . $product->get_type() . "' id='check_id_{$temp_number}_" . $data['id'] . "' data-temp_number='{$temp_number}' data-product_id='" . $data['id'] . "' class='" . ( ( $table_type == 'normal_table' && $product_type == 'grouped' ) || $product_type == 'variable' || $product_type == 'external' || ( $data['stock_status'] != 'instock' && $data['stock_status'] != 'onbackorder' ) ? 'disabled' : 'enabled' ) . " wpt_checkbox wpt_td_checkbox wpt_check_temp_{$temp_number}_pr_" . $data['id'] . " wpt_check_{$temp_number} wpt_inside_check_{$temp_number}' type='checkbox' value='0'><label for='check_id_{$temp_number}_" . $data['id'] . "'></label>";
+                $wpt_single_check .= "<input data-product_type='" . $product->get_type() . "' id='check_id_{$temp_number}_";
+                $wpt_single_check .= $data['id'] . "' data-temp_number='{$temp_number}' data-product_id='" . $data['id']; 
+                $wpt_single_check .= "' class='" . ( ( $table_type == 'normal_table' && $product_type == 'grouped' ) || $product_type == 'variable' || $product_type == 'external' || ( $data['stock_status'] != 'instock' && $data['stock_status'] != 'onbackorder' ) ? 'disabled' : 'enabled' );
+                $wpt_single_check .= " wpt_checkbox wpt_td_checkbox wpt_check_temp_{$temp_number}_pr_" . $data['id'];
+                $wpt_single_check .= " wpt_check_{$temp_number} wpt_inside_check_{$temp_number}' type='checkbox' value='0'>";
+                $wpt_single_check .= "<label for='check_id_{$temp_number}_" . $data['id'] . "'></label>";
                 $wpt_single_check .= " </td>";
                 $wpt_each_row['check'] = $wpt_single_check;
             }
