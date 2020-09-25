@@ -992,8 +992,9 @@ function wpt_table_row_generator( $table_row_generator_array ){
                 $wpt_single_check = false;
                 $wpt_single_check .= "<td class='wpt_for_product_desc wpt_check' data-product_id='" . $data['id'] . "'> ";
                 //$wpt_single_check .= "<input data-product_type='" . $product->get_type() . "' id='check_id_{$temp_number}_" . $data['id'] . "' data-temp_number='{$temp_number}' data-product_id='" . $data['id'] . "' class='" . ( ( $table_type == 'normal_table' && $product_type == 'grouped' ) || $product_type == 'variable' || $product_type == 'external' || ( $data['stock_status'] != 'instock' && $data['stock_status'] != 'onbackorder' ) ? 'disabled' : 'enabled' ) . " wpt_checkbox wpt_td_checkbox wpt_check_temp_{$temp_number}_pr_" . $data['id'] . " wpt_check_{$temp_number} wpt_inside_check_{$temp_number}' type='checkbox' value='0'><label for='check_id_{$temp_number}_" . $data['id'] . "'></label>";
-                $wpt_single_check .= "<input data-product_type='" . $product->get_type() . "' id='check_id_{$temp_number}_";
-                $wpt_single_check .= $data['id'] . "' data-temp_number='{$temp_number}' data-product_id='" . $data['id']; 
+                $wpt_single_check .= "<input data-product_type='" . $product->get_type();
+                $wpt_single_check .= "' id='check_id_{$temp_number}_" . $data['id'];
+                $wpt_single_check .= "' data-temp_number='{$temp_number}' data-product_id='" . $data['id']; 
                 $wpt_single_check .= "' class='" . ( ( $table_type == 'normal_table' && $product_type == 'grouped' ) || $product_type == 'variable' || $product_type == 'external' || ( $data['stock_status'] != 'instock' && $data['stock_status'] != 'onbackorder' ) ? 'disabled' : 'enabled' );
                 $wpt_single_check .= " wpt_checkbox wpt_td_checkbox wpt_check_temp_{$temp_number}_pr_" . $data['id'];
                 $wpt_single_check .= " wpt_check_{$temp_number} wpt_inside_check_{$temp_number}' type='checkbox' value='0'>";
@@ -1139,8 +1140,15 @@ function wpt_table_row_generator( $table_row_generator_array ){
              */
             if ( isset( $wpt_permitted_td['start_point'] ) ) {
                 $wpt_start_point = false;
-                $wpt_start_point .= "<td class='wpt_for_product_desc wpt_check' data-product_id='" . $data['id'] . "'> ";
-                $wpt_start_point .= "<input data-product_type='" . $product->get_type() . "' id='option_id_{$temp_number}_" . $data['id'] . "' data-temp_number='{$temp_number}' data-product_id='" . $data['id'] . "' class='" . ( ( $table_type == 'normal_table' && $product_type == 'grouped' ) || $product_type == 'variable' || $product_type == 'external' || ( $data['stock_status'] != 'instock' && $data['stock_status'] != 'onbackorder' ) ? 'disabled' : 'enabled' ) . " wpt_optionbox wpt_td_optionbox wpt_option_temp_{$temp_number}_pr_" . $data['id'] . " wpt_option_{$temp_number} wpt_inside_option_{$temp_number}' type='radio' value='0'><label for='option_id_{$temp_number}_" . $data['id'] . "'></label>";
+                $wpt_start_point .= "<td class='wpt_for_product_desc wpt_radio' data-product_id='" . $data['id'] . "'> ";
+                //$wpt_start_point .= "<input data-product_type='" . $product->get_type() . "' id='option_id_{$temp_number}_" . $data['id'] . "' data-temp_number='{$temp_number}' data-product_id='" . $data['id'] . "' class='" . ( ( $table_type == 'normal_table' && $product_type == 'grouped' ) || $product_type == 'variable' || $product_type == 'external' || ( $data['stock_status'] != 'instock' && $data['stock_status'] != 'onbackorder' ) ? 'disabled' : 'enabled' ) . " wpt_optionbox wpt_td_optionbox wpt_option_temp_{$temp_number}_pr_" . $data['id'] . " wpt_option_{$temp_number} wpt_inside_option_{$temp_number}' type='radio' value='0'><label for='option_id_{$temp_number}_" . $data['id'] . "'></label>";
+                $wpt_start_point .= "<input data-product_type='" . $product->get_type();
+                $wpt_start_point .= "' id='radio_id_{$temp_number}_" . $data['id'];
+                $wpt_start_point .= "' data-temp_number='{$temp_number}' data-product_id='" . $data['id']; 
+                $wpt_start_point .= "' class='" . ( ( $table_type == 'normal_table' && $product_type == 'grouped' ) || $product_type == 'variable' || $product_type == 'external' || ( $data['stock_status'] != 'instock' && $data['stock_status'] != 'onbackorder' ) ? 'disabled' : 'enabled' );
+                $wpt_start_point .= " wpt_radio wpt_td_radio wpt_radio_temp_{$temp_number}_pr_" . $data['id'];
+                $wpt_start_point .= " wpt_radio_{$temp_number} wpt_inside_radio_{$temp_number}' type='radio' name='start_point' value='0'>";
+                $wpt_start_point .= "<label for='radio_id_{$temp_number}_" . $data['id'] . "'></label>";
                 $wpt_start_point .= " </td>";
                 $wpt_each_row['start_point'] = $wpt_start_point;
             }
