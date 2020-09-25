@@ -331,18 +331,18 @@ function wpt_shortcode_generator( $atts = false ) {
     if( isset( $wpt_permitted_td['start_date'] ) ){
         //$filter_identy_class = 'fulter_half';
         
-        $add_to_cart_selected_text = $add_to_cart_selected_text;//'Add to Cart [Selected]';
+        //$add_to_cart_selected_text = $add_to_cart_selected_text;//'Add to Cart [Selected]';
         
         $html_start_date .= "<div>";
         //$html_start_date .= "<div class='all_check_header_footer all_check_header check_header_{$temp_number}'>";
         
         //$html_start_date .= "<span>";
-        $html_start_date .= "<link rel='stylesheet' href='//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css'>";
-        $html_start_date .= "<script type='text/javascript' src='//code.jquery.com/jquery-1.12.4.js'></script>";
+        //$html_start_date .= "<link rel='stylesheet' href='//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css'>";
+        //$html_start_date .= "<script type='text/javascript' src='//code.jquery.com/jquery-1.12.4.js'></script>";
         //$html_start_date .= "<label for='wpt_check_uncheck_button_{$temp_number}'>{$start_date_text}</lable>";
         $html_start_date .= "<label for='start_date_text'><h5>{$start_date_text}</h5></lable>";
         //$html_start_date .= "<input data-type='universal_checkbox' data-temp_number='{$temp_number}' class='wpt_check_universal wpt_check_universal_header' id='wpt_check_uncheck_button_{$temp_number}' type='text'>";
-        $html_start_date .= "<input name='start_date' id='datepicker' type='text'>";
+        $html_start_date .= "<input name='header_start_date' id='datepicker' type='text'>";
         //$html_start_date .= "<script type='text/javascript'>$( '#datepicker' ).datepicker();</script>";
         $html_start_date .= "";
         //$html_start_date .= "</span>";
