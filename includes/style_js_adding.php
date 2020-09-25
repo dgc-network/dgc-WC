@@ -15,7 +15,7 @@ function wpt_style_js_adding(){
     wp_enqueue_script( 'jquery' );
     
     ///custom JavaScript for Woo Product Table pro plugin
-    wp_enqueue_script( 'wpt-custom-js', WOO_Product_Table::getPath('BASE_URL') . 'js/custom.js', array( 'jquery' ), WOO_Product_Table::getVersion(), true );
+    wp_enqueue_script( 'wpt-custom', WOO_Product_Table::getPath('BASE_URL') . 'js/custom.js', array( 'jquery' ), WOO_Product_Table::getVersion(), true );
     
     
     /**
@@ -61,7 +61,7 @@ function wpt_hook_javascript() {
     <script src="//code.jquery.com/jquery-1.12.4.js"></script>
     <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script type="text/javascript">
-        $( "#datepicker_new" ).datepicker();
+        $( "#datepicker" ).datepicker();
     </script>
     <?php
 }
