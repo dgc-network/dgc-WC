@@ -755,7 +755,7 @@
         /**
          * Working for start_date_header of our Table
          */
-        $("#datepicker").datepicker();
+        //$("#datepicker").datepicker();
         //$("#datepicker").datepicker( "option", "dateFormat", "yy-mm-dd" );
 /*
         $('body').on('click', 'input.datepicker', function(e) {

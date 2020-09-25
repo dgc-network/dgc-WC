@@ -60,6 +60,9 @@ function wpt_hook_javascript() {
     ?>
     <script src="//code.jquery.com/jquery-1.12.4.js"></script>
     <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $( "#datepicker" ).datepicker();
+    </script>
     <?php
 }
 add_action('wp_head', 'wpt_hook_javascript');
