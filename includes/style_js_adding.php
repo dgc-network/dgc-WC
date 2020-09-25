@@ -30,14 +30,14 @@ function wpt_style_js_adding(){
      * 
      * @since 1.0.0
      */    
-    wp_enqueue_style( 'jquery-js', '//code.jquery.com/jquery-1.12.4.js');
+    //wp_enqueue_style( 'jquery-js', '//code.jquery.com/jquery-1.12.4.js');
     
     /**
      * //code.jquery.com/ui/1.12.1/jquery-ui.js file including. 
      * 
      * @since 1.0.0
      */    
-    wp_enqueue_style( 'jquery-ui-js', '//code.jquery.com/ui/1.12.1/jquery-ui.js');
+    //wp_enqueue_style( 'jquery-ui-js', '//code.jquery.com/ui/1.12.1/jquery-ui.js');
     
     /**
      * Select2 CSS file including. 
@@ -55,3 +55,12 @@ function wpt_style_js_adding(){
     wp_enqueue_script( 'select2', WOO_Product_Table::getPath('BASE_URL') . 'js/select2.min.js', array( 'jquery' ), '4.0.5', true );
 }
 add_action( 'wp_enqueue_scripts', 'wpt_style_js_adding', 99 );
+
+function wpt_hook_javascript() {
+    ?>
+    <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <?php
+}
+add_action('wp_head', 'wpt_hook_javascript');
+
