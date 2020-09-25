@@ -1148,7 +1148,7 @@ function wpt_table_row_generator( $table_row_generator_array ){
                 $wpt_start_point .= "' class='" . ( ( $table_type == 'normal_table' && $product_type == 'grouped' ) || $product_type == 'variable' || $product_type == 'external' || ( $data['stock_status'] != 'instock' && $data['stock_status'] != 'onbackorder' ) ? 'disabled' : 'enabled' );
                 $wpt_start_point .= " wpt_table_row_serial_{$wpt_table_row_serial}";
                 $wpt_start_point .= " wpt_radio wpt_td_radio wpt_radio_temp_{$temp_number}_pr_" . $data['id'] . " wpt_radio_{$temp_number} wpt_inside_radio_{$temp_number}'";
-                if ($wpt_table_row_serial == 0) {
+                if ($wpt_table_row_serial == '1') {
                     $wpt_start_point .= " checked='true'";
                 }
                 $wpt_start_point .= " type='radio' name='start_point' value='start_point'>";
