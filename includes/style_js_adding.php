@@ -19,6 +19,20 @@ function wpt_style_js_adding(){
     
     
     /**
+     * link rel="stylesheet" file including. 
+     * 
+     * @since 1.0.0
+     */    
+    wp_enqueue_style( 'jquery-ui-css', '//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css', array( 'jquery' ), '1.0.0' );
+    
+    /**
+     * //code.jquery.com/ui/1.12.1/jquery-ui.js file including. 
+     * 
+     * @since 1.0.0
+     */    
+    wp_enqueue_style( 'jquery-ui-js', '//code.jquery.com/ui/1.12.1/jquery-ui.js', array( 'jquery' ), '1.0.0' );
+    
+    /**
      * Select2 CSS file including. 
      * 
      * @since 1.0.3

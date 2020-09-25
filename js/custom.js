@@ -85,7 +85,7 @@
                     pageNumber:     pageNumber,
                     load_type:      load_type,
                 },
-                complete: function(){
+                complete: function() {
                     $( document ).trigger( 'wc_fragments_refreshed' );
                     arrangingTDContentForMobile(); //@Since 5.2
                     loadMiniFilter(); //@Since 4.8                    
