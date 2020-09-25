@@ -23,7 +23,7 @@ function wpt_style_js_adding(){
      * 
      * @since 1.0.0
      */    
-    wp_enqueue_style( 'jquery-ui-css', '//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css');
+    wp_enqueue_style( 'jquery-ui', 'https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css');
     
     /**
      * //code.jquery.com/jquery-1.12.4.js file including. 
@@ -58,9 +58,9 @@ add_action( 'wp_enqueue_scripts', 'wpt_style_js_adding', 99 );
 
 function wpt_hook_javascript() {
     ?>
-    <script src="//code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript">
         $( "#datepicker_new" ).datepicker();
     </script>
     <?php
