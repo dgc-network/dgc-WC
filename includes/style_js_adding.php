@@ -23,21 +23,21 @@ function wpt_style_js_adding(){
      * 
      * @since 1.0.0
      */    
-    wp_enqueue_style( 'jquery-ui', '//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css');
+    wp_enqueue_style( 'jquery-ui-css', '//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css');
     
     /**
      * //code.jquery.com/jquery-1.12.4.js file including. 
      * 
      * @since 1.0.0
      */    
-    //wp_enqueue_style( 'jquery-js', '//code.jquery.com/jquery-1.12.4.js');
+    wp_enqueue_script( 'jquery-js', '//code.jquery.com/jquery-1.12.4.js');
     
     /**
      * //code.jquery.com/ui/1.12.1/jquery-ui.js file including. 
      * 
      * @since 1.0.0
      */    
-    //wp_enqueue_style( 'jquery-ui-js', '//code.jquery.com/ui/1.12.1/jquery-ui.js');
+    wp_enqueue_script( 'jquery-ui-js', '//code.jquery.com/ui/1.12.1/jquery-ui.js');
     
     /**
      * Select2 CSS file including. 
@@ -65,5 +65,5 @@ function wpt_hook_javascript() {
     </script>
     <?php
 }
-add_action('wp_head', 'wpt_hook_javascript');
+//add_action('wp_head', 'wpt_hook_javascript');
 
