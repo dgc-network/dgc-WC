@@ -328,9 +328,10 @@ function wpt_shortcode_generator( $atts = false ) {
      */
     $html_start_date = false; 
     if( isset( $wpt_permitted_td['start_date'] ) ){
+        $default_start_date = date("Y-m-d");
         $html_start_date .= "<div>";
         $html_start_date .= "<label for='start_date_header_section_text'><h5>{$start_date_header_section_text}</h5></lable>";
-        $html_start_date .= "<input id='datepicker' type='text' name='start_date_header_section'>";
+        $html_start_date .= "<input id='datepicker' type='text' name='start_date_header_section' value='{$default_start_date}'>";
         $html_start_date .= "</div>";
     }
     
