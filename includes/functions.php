@@ -21,10 +21,9 @@ function wpt_get_config_value( $table_ID ){
     $config_value['disable_cat_tag_link'] = $temp_config_value['disable_cat_tag_link'];
     return $config_value;
 }
+
 // Hook into Woocommerce when adding a product to the cart
-
 add_filter( 'woocommerce_add_to_cart_fragments', 'wpt_per_item_fragment', 999 , 1 );
-
 if( !function_exists( 'wpt_per_item_fragment' ) ) {
 	function wpt_per_item_fragment($fragments){
 		ob_start();
@@ -97,6 +96,7 @@ function wpt_pagination_by_args( $args = false, $temp_number = false ){
     }
     return $html;
 }
+
 /**
  * Generate Product's Attribute
  * 
@@ -236,7 +236,7 @@ function wpt_customfileds_column_generator( $item_key ){
 function wpt_limit_words( $string = '', $word_limit = 10 ){
     $words = explode( " ",$string );
     
-    $output = implode( " ",array_splice( $words,0,$word_limit ) );
+    $output = implode( " ",array_splice( $words, 0, $word_limit ) );
     if( count( $words ) > $word_limit ){
        $output .= $output . '...'; 
     }
@@ -250,7 +250,7 @@ function wpt_limit_words( $string = '', $word_limit = 10 ){
  * @param Array $default_array Actually if not fount a real String, and if we want to return and default value, than we can set here. 
  * @return Array This function will generate comman string to Array
  */
-function wpt_explode_string_to_array( $string,$default_array = false ) {
+function wpt_explode_string_to_array( $string, $default_array = false ) {
     $final_array = false;
     if ( $string && is_string( $string ) ) {
         $string = rtrim( $string, ', ' );
@@ -305,7 +305,7 @@ function wpt_define_permitted_td_array( $table_column_keywords = false ){
 
 /**
  * Generating <options>VAriation Atribute</option> for Product Variation
- * CAn be removed later.
+ * Can be removed later.
  * 
  * @param type $current_single_attribute
  * @return string
@@ -423,7 +423,6 @@ function wpt_custom_search_where( $where ) {
     /*****************
     $myPreg .= " AND (";
     $myPreg .= $wpdb->postmeta.".meta_key='test'";
-
 
     $myPreg .= " OR ";
     $myPreg .= $wpdb->postmeta.".meta_key='_sku'";

@@ -56,14 +56,3 @@ function wpt_style_js_adding(){
 }
 add_action( 'wp_enqueue_scripts', 'wpt_style_js_adding', 99 );
 
-function wpt_hook_javascript() {
-    ?>
-    <script src="//code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script type="text/javascript">
-        $( "#datepicker" ).datepicker();
-    </script>
-    <?php
-}
-//add_action('wp_head', 'wpt_hook_javascript');
-

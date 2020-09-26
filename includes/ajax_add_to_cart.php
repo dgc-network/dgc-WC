@@ -111,9 +111,7 @@ function wpt_ajax_table_row_load(){
     $pageNumber = ( isset( $_POST['pageNumber'] ) && $_POST['pageNumber'] > 0 ? $_POST['pageNumber'] : 1 );
     $load_type = ( isset( $_POST['load_type'] ) && $_POST['load_type'] == 'current_page' ? true : false );
     
-    
-    $args = $targetTableArgs['args'];
-    
+    $args = $targetTableArgs['args'];    
     
     if( !$load_type ){
         if( isset( $directkey['s'] ) ){
@@ -140,7 +138,7 @@ function wpt_ajax_table_row_load(){
         }
         $args['tax_query']['relation'] = 'AND';
 
-          //unset($args['meta_query']);
+        //unset($args['meta_query']);
         if( is_array( $custom_field ) && count( $custom_field ) > 0 ){
             foreach( $custom_field as $custom_field_key => $custom_field_value ){
                 if(is_array( $custom_field ) && count( $custom_field ) > 0 ){
@@ -235,7 +233,6 @@ function wpt_ajax_add_to_cart() {
    
     die();
 }
-
 add_action( 'wp_ajax_wpt_ajax_add_to_cart', 'wpt_ajax_add_to_cart' );
 add_action( 'wp_ajax_nopriv_wpt_ajax_add_to_cart', 'wpt_ajax_add_to_cart' );
 
