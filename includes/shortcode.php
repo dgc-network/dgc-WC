@@ -330,7 +330,7 @@ function wpt_shortcode_generator( $atts = false ) {
     if( isset( $wpt_permitted_td['start_date'] ) ){
         $html_start_date .= "<div>";
         $html_start_date .= "<label for='start_date_header_section_text'><h5>{$start_date_header_section_text}</h5></lable>";
-        $html_start_date .= "<input name='start_date_header_section' id='datepicker' type='text'>";
+        $html_start_date .= "<input id='datepicker' type='text' name='start_date_header_section'>";
         $html_start_date .= "</div>";
     }
     
@@ -376,7 +376,7 @@ function wpt_shortcode_generator( $atts = false ) {
          * @since 1.9
          * @date 9.6.2018 d.m.y
          */
-        $html .= wpt_search_box( $temp_number, $texonomiy_keywords, $sort_order_by, $sort, $search_n_filter,$table_ID );
+        $html .= wpt_search_box( $temp_number, $texonomiy_keywords, $sort_order_by, $sort, $search_n_filter, $table_ID );
     }
    
     /**
@@ -681,7 +681,7 @@ function wpt_table_row_generator( $table_row_generator_array ){
     $product_loop = new WP_Query($args);
 
     /**
-     * If not set any Shorting (ASC/DESC) than Post loop will Random by Shuffle()
+     * If not set any Sorting (ASC/DESC) than Post loop will Random by Shuffle()
      * @since 1.0.0 -9
      */
     if ($sort == 'random') {
@@ -1146,12 +1146,13 @@ function wpt_table_row_generator( $table_row_generator_array ){
                 $wpt_start_point .= "' id='radio_id_{$temp_number}_" . $data['id'];
                 $wpt_start_point .= "' data-temp_number='{$temp_number}' data-product_id='" . $data['id']; 
                 $wpt_start_point .= "' class='" . ( ( $table_type == 'normal_table' && $product_type == 'grouped' ) || $product_type == 'variable' || $product_type == 'external' || ( $data['stock_status'] != 'instock' && $data['stock_status'] != 'onbackorder' ) ? 'disabled' : 'enabled' );
-                $wpt_start_point .= " wpt_table_row_serial_{$wpt_table_row_serial}";
+                //$wpt_start_point .= " wpt_table_row_serial_{$wpt_table_row_serial}";
                 $wpt_start_point .= " wpt_radio wpt_td_radio wpt_radio_temp_{$temp_number}_pr_" . $data['id'] . " wpt_radio_{$temp_number} wpt_inside_radio_{$temp_number}'";
                 if ($wpt_table_row_serial == '1') {
-                    $wpt_start_point .= " checked='true'";
+                    $wpt_start_point .= " type='radio' name='start_point' value='start_point' checked='true'>";
+                } else {
+                    $wpt_start_point .= " type='radio' name='start_point' value='start_point'>";
                 }
-                $wpt_start_point .= " type='radio' name='start_point' value='start_point'>";
                 $wpt_start_point .= "<label for='radio_id_{$temp_number}_" . $data['id'] . "'></label>";
                 $wpt_start_point .= " </td>";
                 $wpt_each_row['start_point'] = $wpt_start_point;
@@ -1169,8 +1170,9 @@ function wpt_table_row_generator( $table_row_generator_array ){
                 
                 //$wpt_start_date .= get_the_date(); //add number date from Start Date
                 //$wpt_start_date .= date('Y-m-d', mktime(0, 0, 0, date("m")  , date("d")+$wpt_table_row_serial, date("Y")));
-                $wpt_start_date .= date('Y-m-d', mktime(0, 0, 0, get_the_date("m"), get_the_date("d")+$wpt_table_row_serial, get_the_date("Y")));
-        
+                if ($wpt_table_row_serial != '1') {
+                    $wpt_start_date .= date('Y-m-d', mktime(0, 0, 0, get_the_date("m"), get_the_date("d")+$wpt_table_row_serial, get_the_date("Y")));
+                }
                 $wpt_start_date .= "</td>";
                 $wpt_each_row['start_date'] = $wpt_start_date;
             }  

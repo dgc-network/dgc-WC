@@ -1,7 +1,6 @@
 <?php
 $colums_disable_array = WOO_Product_Table::$colums_disable_array; //For first time only
 
-
 $meta_column_array = $columns_array = get_post_meta( $post->ID, 'column_array', true );
 if( !$meta_column_array && empty( $meta_column_array ) ){
     $columns_array = WOO_Product_Table::$columns_array;
