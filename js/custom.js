@@ -755,6 +755,13 @@
         /**
          * Working for start_date_header of our Table
          */
+        $( function() {
+            $( "#datepicker" ).datepicker();
+            $( "#format" ).on( "change", function() {
+                $( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+            });
+        } );
+        
         $('body').on('change', 'input.datepicker', function(e) {
             //e.preventDefault();
             //var temp_number = $(this).data('temp_number');
