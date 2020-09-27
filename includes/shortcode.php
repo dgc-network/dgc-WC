@@ -336,7 +336,8 @@ function wpt_shortcode_generator( $atts = false ) {
         $html_start_date .= "$( '#datepicker' ).datepicker();";
         //$html_start_date .= "$( '#datepicker' ).datepicker( 'option', 'dateFormat', 'yy-mm-dd' );";
         $html_start_date .= "$( '#datepicker' ).on( 'change', function() {";
-        $html_start_date .= "alert(document.getElementById('datepicker').value;)";
+            $html_start_date .= "var start_date = document.getElementById('datepicker').value;";
+            $html_start_date .= "alert(start_date)";
         $html_start_date .= "})";
         $html_start_date .= "</script>";
         $html_start_date .= "</div>";
