@@ -333,8 +333,8 @@ function wpt_shortcode_generator( $atts = false ) {
         $html_start_date .= "<label for='start_date_header_section_text'><h5>{$start_date_header_section_text}</h5></lable>";
         $html_start_date .= "<input id='datepicker' type='text' name='start_date_header_section' value='{$default_start_date}'>";
         $html_start_date .= "<script>";
-        //$html_start_date .= "$( '#datepicker' ).datepicker();";
-        $html_start_date .= "$( '#datepicker' ).datepicker( 'option', 'dateFormat', 'yy-mm-dd' );";
+        $html_start_date .= "$( '#datepicker' ).datepicker();";
+        //$html_start_date .= "$( '#datepicker' ).datepicker( 'option', 'dateFormat', 'yy-mm-dd' );";
         $html_start_date .= "</script>";
         $html_start_date .= "</div>";
     }
