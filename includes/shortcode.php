@@ -337,7 +337,7 @@ function wpt_shortcode_generator( $atts = false ) {
         //$html_start_date .= "$( '#datepicker' ).datepicker( 'option', 'dateFormat', 'yy-mm-dd' );";
         $html_start_date .= "$( '#datepicker' ).on( 'change', function() {";
             $html_start_date .= "var start_date = document.getElementById('datepicker').value;";
-            $html_start_date .= "alert(start_date)";
+            //$html_start_date .= "alert(start_date)";
         $html_start_date .= "})";
         $html_start_date .= "</script>";
         $html_start_date .= "</div>";
@@ -1177,6 +1177,10 @@ function wpt_table_row_generator( $table_row_generator_array ){
                 $wpt_start_date = false;
                 $wpt_start_date .= "<td class='wpt_for_product_desc wpt_start_date'> ";
                 
+                $wpt_start_date .= "<script>";
+                $wpt_start_date .= "var start_date = document.getElementById('datepicker').value;";
+                $wpt_start_date .= "</script>";
+
                 //$wpt_start_date .= get_the_date(); //add number date from Start Date
                 //$wpt_start_date .= date('Y-m-d', mktime(0, 0, 0, date("m")  , date("d")+$wpt_table_row_serial, date("Y")));
                 if ($wpt_table_row_serial == '1') {
