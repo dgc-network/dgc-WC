@@ -756,7 +756,7 @@
          * Working for start_date_header of our Table
          */
         $('body').on('change', 'input.datepicker', function(e) {
-            e.preventDefault();
+            //e.preventDefault();
             //var temp_number = $(this).data('temp_number');
             //config_json = getConfig_json( temp_number ); //Added vat V5.0
             alert(config_json.sorry_plz_right_combination);
