@@ -1178,9 +1178,9 @@ function wpt_table_row_generator( $table_row_generator_array ){
                 $wpt_start_date .= "<td class='wpt_for_product_desc wpt_start_date'> ";
                 
                 $wpt_start_date .= "<script>";
-                $wpt_start_date .= "var start_date = document.getElementById('datepicker').value;";
+                $wpt_start_date .= "var start_date{$wpt_table_row_serial} = document.getElementById('datepicker').value;";
                 $wpt_start_date .= "var x{$wpt_table_row_serial} = document.getElementById('startdate{$wpt_table_row_serial}');";
-                $wpt_start_date .= "x{$wpt_table_row_serial}.innerHTML = start_date;";
+                $wpt_start_date .= "x{$wpt_table_row_serial}.innerHTML = start_date{$wpt_table_row_serial};";
                 $wpt_start_date .= "</script>";
 
                 //$wpt_start_date .= get_the_date(); //add number date from Start Date
