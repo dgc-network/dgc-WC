@@ -1179,7 +1179,7 @@ function wpt_table_row_generator( $table_row_generator_array ){
                 
                 $wpt_start_date .= "<script>";
                 $wpt_start_date .= "var start_date = document.getElementById('datepicker').value;";
-                $wpt_start_date .= "var x = document.getElementById('startdate');";
+                $wpt_start_date .= "var x = document.getElementById('startdate_{$wpt_table_row_serial}');";
                 $wpt_start_date .= "x.innerHTML = start_date;";
                 $wpt_start_date .= "</script>";
 
@@ -1188,7 +1188,7 @@ function wpt_table_row_generator( $table_row_generator_array ){
                 if ($wpt_table_row_serial == '1') {
                     $wpt_start_date .= "出發點";
                 } else {
-                    $wpt_start_date .= "<div id='startdate'></div>";
+                    $wpt_start_date .= "<div id='startdate_{$wpt_table_row_serial}'></div>";
                     //$wpt_start_date .= date('Y-m-d', mktime(0, 0, 0, get_the_date("m"), get_the_date("d")+$wpt_table_row_serial, get_the_date("Y")));
                 }
                 $wpt_start_date .= "</td>";
