@@ -1177,22 +1177,20 @@ function wpt_table_row_generator( $table_row_generator_array ){
                 $wpt_start_date = false;
                 $wpt_start_date .= "<td class='wpt_for_product_desc wpt_start_date'> ";
                 
-                //$wpt_start_date .= get_the_date(); //add number date from Start Date
-                //$wpt_start_date .= date('Y-m-d', mktime(0, 0, 0, date("m")  , date("d")+$wpt_table_row_serial, date("Y")));
                 if ($wpt_table_row_serial == '1') {
-                    $wpt_start_date .= "出發點";
+                    //$wpt_start_date .= "出發點";
+                    $wpt_start_date .= esc_html_e( '出發點', 'wpt_pro' );
                 } else {
                     $wpt_start_date .= "<div id='startdate{$wpt_table_row_serial}'></div>";
-                    //$wpt_start_date .= date('Y-m-d', mktime(0, 0, 0, get_the_date("m"), get_the_date("d")+$wpt_table_row_serial, get_the_date("Y")));
                 }
                 $wpt_start_date .= "</td>";
                 $wpt_start_date .= "<script>";
                 $wpt_start_date .= "var y = document.getElementById('datepicker').value;";
-                $wpt_start_date .= "var d = new Date(y);";
-                $wpt_start_date .= "d.setDate(d.getDate()+{$wpt_table_row_serial});";
-                $wpt_start_date .= "z = d.getFullYear()+'-' + (d.getMonth()+1) + '-' + d.getDate();";
+                $wpt_start_date .= "var z = new Date(y);";
+                $wpt_start_date .= "z.setDate(z.getDate()+{$wpt_table_row_serial});";
+                $wpt_start_date .= "d = z.getFullYear()+'-' + (z.getMonth()+1) + '-' + z.getDate();";
                 $wpt_start_date .= "var x = document.getElementById('startdate{$wpt_table_row_serial}');";
-                $wpt_start_date .= "x.innerHTML = z;";
+                $wpt_start_date .= "x.innerHTML = d;";
                 $wpt_start_date .= "</script>";
 
                 $wpt_each_row['start_date'] = $wpt_start_date;
