@@ -1189,7 +1189,7 @@ function wpt_table_row_generator( $table_row_generator_array ){
                 $wpt_start_date .= "<script>";
                 $wpt_start_date .= "var y = document.getElementById('datepicker').value;";
                 $wpt_start_date .= "var z = Date.parse(y);";
-                $wpt_start_date .= "var a = z.getDate();";
+                //$wpt_start_date .= "var a = z.getDate();";
                 //$wpt_start_date .= "z.setDate(z.getDate() + {$wpt_table_row_serial});";
                 $wpt_start_date .= "var x = document.getElementById('startdate{$wpt_table_row_serial}');";
                 $wpt_start_date .= "x.innerHTML = z;";
