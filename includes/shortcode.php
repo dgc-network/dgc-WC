@@ -589,7 +589,8 @@ only screen and (max-width: 767px) {
     $responsive_table td.wpt_action{ 
        min-height: 62px;
        height: auto;
-    }        
+    }
+
     $responsive_table td.data_product_variations.woocommerce-variation-add-to-cart.variations_button.woocommerce-variation-add-to-cart-disabled.wpt_action{ 
             height: 100%;
             padding: 7px 0;
@@ -620,7 +621,6 @@ table tr.wpt_row td.wpt_quoterequest.addedd{
                 
                 var target_product_id = $(this).parents('tr').data('product_id');
                 var targetTotalSelector = $('.wpt_temporary_table_{$temp_number} .wpt_row_product_id_' + target_product_id + ' td.wpt_total.total_general');
-                 
             
                 var targetWeightSelector = $('.wpt_temporary_table_{$temp_number} .wpt_row_product_id_' + target_product_id + ' td.wpt_weight');
                 var targetWeightAttr = $('.wpt_temporary_table_{$temp_number} .wpt_row_product_id_' + target_product_id + ' td.wpt_weight').attr('data-weight');
@@ -1177,12 +1177,6 @@ function wpt_table_row_generator( $table_row_generator_array ){
                 $wpt_start_date = false;
                 $wpt_start_date .= "<td class='wpt_for_product_desc wpt_start_date'> ";
                 
-                $wpt_start_date .= "<script>";
-                $wpt_start_date .= "var y = document.getElementById('datepicker').value;";
-                $wpt_start_date .= "var x = document.getElementById('startdate{$wpt_table_row_serial}');";
-                $wpt_start_date .= "x.innerHTML = y;";
-                $wpt_start_date .= "</script>";
-
                 //$wpt_start_date .= get_the_date(); //add number date from Start Date
                 //$wpt_start_date .= date('Y-m-d', mktime(0, 0, 0, date("m")  , date("d")+$wpt_table_row_serial, date("Y")));
                 if ($wpt_table_row_serial == '1') {
@@ -1192,6 +1186,12 @@ function wpt_table_row_generator( $table_row_generator_array ){
                     //$wpt_start_date .= date('Y-m-d', mktime(0, 0, 0, get_the_date("m"), get_the_date("d")+$wpt_table_row_serial, get_the_date("Y")));
                 }
                 $wpt_start_date .= "</td>";
+                $wpt_start_date .= "<script>";
+                $wpt_start_date .= "var y = document.getElementById('datepicker').value;";
+                $wpt_start_date .= "var x = document.getElementById('startdate{$wpt_table_row_serial}');";
+                $wpt_start_date .= "x.innerHTML = y;";
+                $wpt_start_date .= "</script>";
+
                 $wpt_each_row['start_date'] = $wpt_start_date;
             }  
              
