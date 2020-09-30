@@ -1191,7 +1191,7 @@ function wpt_table_row_generator( $table_row_generator_array ){
                 $wpt_start_date .= "var y = document.getElementById('datepicker').value;";
                 $wpt_start_date .= "var z = Date.parse(y);";
                 $wpt_start_date .= "z.setDate(z.getDate() + {$wpt_table_row_serial});";
-                $wpt_start_date .= "x.innerHTML = z;";
+                $wpt_start_date .= "x.innerHTML = y;";
                 $wpt_start_date .= "</script>";
 
                 $wpt_each_row['start_date'] = $wpt_start_date;
