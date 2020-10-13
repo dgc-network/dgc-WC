@@ -1158,7 +1158,7 @@ function wpt_table_row_generator( $table_row_generator_array ){
                 //$wpt_start_point .= " wpt_table_row_serial_{$wpt_table_row_serial}";
                 $wpt_start_point .= " wpt_start_point wpt_td_radio wpt_radio_temp_{$temp_number}_pr_" . $data['id'] . " wpt_start_point_{$temp_number} wpt_inside_radio_{$temp_number}'";
                 if ($wpt_table_row_serial == '1') {
-                    $wpt_start_point .= " type='radio' name='start_point' value='start_point' checked='true'>";
+                    $wpt_start_point .= " type='radio' name='start_point' value='start_point' checked='checked'>";
                 } else {
                     $wpt_start_point .= " type='radio' name='start_point' value='start_point'>";
                 }
