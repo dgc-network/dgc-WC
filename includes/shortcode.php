@@ -1178,7 +1178,7 @@ function wpt_table_row_generator( $table_row_generator_array ){
                 $wpt_start_date .= "<td class='wpt_for_product_desc wpt_start_date'> ";
                 
                 if ($wpt_table_row_serial == '1') {
-                    $wpt_start_date .= "出發點";
+                    $wpt_start_date .= "<div>出發點</div>";
                     //$wpt_start_date .= esc_html_e( 'Start Point', 'wpt_pro' );
                 } else {
                     $wpt_start_date .= "<div id='startdate{$wpt_table_row_serial}'></div>";
