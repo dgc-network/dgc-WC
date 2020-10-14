@@ -34,7 +34,7 @@ Add the shortcode to any existing post or page:
 
 This plugin will help any body to show All product in 1 page as Table. Also able to change/customize. Go to: Dashboard->WPT Table . 
 
-*All custom field and taxonomy plugin supported
+* All custom field and taxonomy plugin supported
 * More Light Weight
 * Table configuration saved as Table ID
 * Use Table  by Table ID
@@ -49,7 +49,7 @@ This plugin will help any body to show All product in 1 page as Table. Also able
 
 ## Installation
 
-1. Upload the plugin files to the `/wp-content/plugins/woo-product-table` directory, or install the plugin through the WordPress plugins screen directly.
+1. Upload the plugin files to the `/wp-content/plugins/dgc-WC` directory, or install the plugin through the WordPress plugins screen directly.
 2. Activate the plugin through the 'Plugins' screen in WordPress
 3. Use the Woo Table->Setting screen to configure the plugin's default setting.
 
@@ -78,4 +78,4 @@ That's it. So easy, Right !!!
 You can easily show specific category products. While creating new table click on the basic tab. You will find an option to select your category. You can also choose multiple categories.
 
 ### Is it suitable for any theme ?
- Yes. *WooCommerce Product Table* will adapt with your theme design.
+Yes. *dgc for WooCommerce* will adapt with your theme design.
