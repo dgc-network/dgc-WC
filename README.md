@@ -29,6 +29,7 @@ Auto Responsive Mobile & Tab, Nice Design, Fast Speed *WooCommerce Product Table
 Add the shortcode to any existing post or page:
 
 `[Product_Table ID='123' name='Table Name']`  
+
 *ID* - will be post's ID(required). It will generate automatically when you create your table.  
 *name* - only for identifying your table's shortcode.(Optional)
 
