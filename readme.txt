@@ -1,4 +1,4 @@
-=== Woo Product Table view solution ===
+=== dgc WooCommerce extended solution ===
 Tags: wc product table,woocommerce product table, product table, wc table, quick order table, wholesale table, restaurants table
 Requires at least: 4.0.0
 Tested up to: 5.2.2
