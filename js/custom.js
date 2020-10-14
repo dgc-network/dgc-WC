@@ -610,7 +610,7 @@
                 addToCartSelector.attr('data-variation_id', targetAttributeObject.variation_id);
                 
                 /**
-                 * For add to Queto Button
+                 * For add to Quote Button
                  * @since 2.6
                  * @date 20.7.2018
                  */
