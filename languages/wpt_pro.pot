@@ -1696,26 +1696,3 @@ msgstr ""
 #: admin/tabs/table_style.php:513
 msgid "Reset Style to Default"
 msgstr ""
-
-#. Name of the plugin
-msgid "WOO Product Table Pro"
-msgstr ""
-
-#. Description of the plugin
-msgid ""
-"WooCommerce all products display as a table in one page by shortcode. Fully "
-"responsive and mobile friendly. Easily customizable - color,background,title,"
-"text color etc."
-msgstr ""
-
-#. URI of the plugin
-msgid "https://codecanyon.net/item/woo-product-table-pro/20676867"
-msgstr ""
-
-#. Author of the plugin
-msgid "CodeAstrology"
-msgstr ""
-
-#. Author URI of the plugin
-msgid "https://codecanyon.net/user/codeastrology"
-msgstr ""
