@@ -1,13 +1,14 @@
 # dgc WooCommerce extended solutions
-Tags: wc product table,woocommerce product table, product table, wc table, quick order table, wholesale table, restaurants table
-Requires at least: 4.0.0
-Tested up to: 5.2.2
-Requires PHP: 5.6
-Stable tag: 4.3
-License: GPLv2 or later
-License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Tags: wc product table,woocommerce product table, product table, wc table, quick order table, wholesale table, restaurants table  
+Requires at least: 4.0.0  
+Tested up to: 5.2.2  
+Requires PHP: 5.6  
+Stable tag: 4.3  
+License: GPLv2 or later  
+License URI: https://www.gnu.org/licenses/gpl-2.0.html  
 
-Easily display your products as table by tiny shortcode. Such: [Product_Table id='1']. Support default editor, any Page Builder & Gutenberg.
+Easily display your products as table by tiny shortcode. Such: [Product_Table id='1'].  
+Support default editor, any Page Builder & Gutenberg.
 
 ## Description
 Auto Responsive Mobile & Tab, Nice Design, Fast Speed *WooCommerce Product Table*. Tiny Shortcode, Easy customizable, Ajax Add to cart, Ajax Search, Pagination & Load More. Fully responsive and mobile friendly. Easily customizable - color,background,title,text color etc.
@@ -27,15 +28,11 @@ Auto Responsive Mobile & Tab, Nice Design, Fast Speed *WooCommerce Product Table
 
 Add the shortcode to any existing post or page:
 
-`[Product_Table ID='123' name='Table Name']`
-*ID* - will be post's ID(required).It will generate automatically when you create your table. 
-
+`[Product_Table ID='123' name='Table Name']`  
+*ID* - will be post's ID(required). It will generate automatically when you create your table.  
 *name* - only for identifying your table's shortcode.(Optional)
 
-
 This plugin will help any body to show All product in 1 page as Table. Also able to change/customize. Go to: Dashboard->WPT Table . 
-If anybody found any issue, Please inform me to wo-info@detatech.xyz.
-
 
 *All custom field and taxonomy plugin supported
 * More Light Weight
@@ -55,7 +52,6 @@ If anybody found any issue, Please inform me to wo-info@detatech.xyz.
 1. Upload the plugin files to the `/wp-content/plugins/woo-product-table` directory, or install the plugin through the WordPress plugins screen directly.
 2. Activate the plugin through the 'Plugins' screen in WordPress
 3. Use the Woo Table->Setting screen to configure the plugin's default setting.
-
 
 ## Frequently Asked Questions
 
@@ -80,7 +76,6 @@ That's it. So easy, Right !!!
 ### How to show specific Category products ?
 
 You can easily show specific category products. While creating new table click on the basic tab. You will find an option to select your category. You can also choose multiple categories.
-
 
 ### Is it suitable for any theme ?
  Yes. *WooCommerce Product Table* will adapt with your theme design.
