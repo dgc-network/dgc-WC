@@ -755,6 +755,7 @@
         /**
          * Working for start_date_header of our Table
          */
+/*        
         $( function() {
             $( "#datepicker" ).datepicker();
             $( "#format" ).on( "change", function() {
@@ -769,7 +770,7 @@
             alert(config_json.sorry_plz_right_combination);
             return false;
         });
-
+*/
         /**
          * Working for Checkbox of our Table
          */
