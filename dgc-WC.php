@@ -70,6 +70,11 @@ function wk_custom_product_tab( $default_tabs ) {
     return $default_tabs;
 }
 
+add_action( 'woocommerce_product_data_panels', 'wk_custom_tab_data' );
+
+function wk_custom_tab_data() {
+   echo '<div id="wk_custom_tab_data" class="panel woocommerce_options_panel">// add content here</div>';
+}
 
 /**
  * Default Configuration for WOO Product Table Pro
