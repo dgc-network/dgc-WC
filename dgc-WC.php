@@ -47,7 +47,7 @@ $shortCodeText = 'Product_Table';
  * @since 1.0.0
  */
 include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-WOO_Product_Table::getInstance();
+//WOO_Product_Table::getInstance();
 
 /**
  * @since 1.7
