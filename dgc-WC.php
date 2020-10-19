@@ -42,8 +42,8 @@ function woo_new_product_tab( $tabs ) {
 	// Adds the new tab
 	
 	$tabs['test_tab'] = array(
-		'title' 	=> __( 'New Product Tab', 'woocommerce' ),
-		'priority' 	=> 50,
+		'title' 	=> __( 'Itineraries', 'woocommerce' ),
+		'priority' 	=> 0,
 		'callback' 	=> 'woo_new_product_tab_content'
 	);
 
@@ -65,7 +65,7 @@ function woo_new_product_tab_content() {
 add_filter( 'woocommerce_product_data_tabs', 'wk_custom_product_tab', 10, 1 );
 function wk_custom_product_tab( $default_tabs ) {
     $default_tabs['custom_tab'] = array(
-        'label'   =>  __( 'Custom Tab', 'domain' ),
+        'label'   =>  __( 'Itineraries', 'domain' ),
         'target'  =>  'wk_custom_tab_data',
         'priority' => 60,
         'class'   => array()
