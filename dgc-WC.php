@@ -59,6 +59,9 @@ function woo_new_product_tab_content() {
 	
 }
 
+/**
+ * Add a custom product data tab
+ */
 add_filter( 'woocommerce_product_data_tabs', 'wk_custom_product_tab', 10, 1 );
 function wk_custom_product_tab( $default_tabs ) {
     $default_tabs['custom_tab'] = array(
@@ -71,10 +74,35 @@ function wk_custom_product_tab( $default_tabs ) {
 }
 
 add_action( 'woocommerce_product_data_panels', 'wk_custom_tab_data' );
-
 function wk_custom_tab_data() {
    echo '<div id="wk_custom_tab_data" class="panel woocommerce_options_panel">// add content here</div>';
 }
+
+/**
+ * Add a custom product data tab
+ */
+$var = apply_filters( 'woocommerce_product_description_heading', $var ); 
+                         
+if ( !empty( $var ) ) { 
+                         
+   // everything has led up to this point... 
+                         
+} 
+
+// define the woocommerce_product_description_heading callback 
+function filter_woocommerce_product_description_heading( $var ) { 
+    // make filter magic happen here... 
+    return $var; 
+}; 
+         
+// add the filter 
+add_filter( 'woocommerce_product_description_heading', 'filter_woocommerce_product_description_heading', 10, 1 ); 
+
+
+
+
+
+
 
 /**
  * Default Configuration for WOO Product Table Pro
