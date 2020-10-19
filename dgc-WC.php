@@ -43,7 +43,7 @@ function woo_new_product_tab( $tabs ) {
 	
 	$tabs['test_tab'] = array(
 		'title' 	=> __( 'Itineraries', 'woocommerce' ),
-		'priority' 	=> 0,
+		'priority' 	=> 50,
 		'callback' 	=> 'woo_new_product_tab_content'
 	);
 
@@ -55,7 +55,8 @@ function woo_new_product_tab_content() {
 	// The new tab content
 
 	echo '<h2>New Product Tab</h2>';
-	echo '<p>Here\'s your new product tab.</p>';
+    echo '<p>Here\'s your new product tab.</p>';
+    do_shortcode( ' [Product_Table id="349"] ' );
 	
 }
 
