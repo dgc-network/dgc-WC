@@ -79,14 +79,13 @@ function wk_custom_tab_data() {
  * Step 2. Callback function with meta box HTML
  * Step 3. Save meta box data
  */
-add_action( 'admin_menu', 'misha_add_metabox' );
- 
-function misha_add_metabox() {
+add_action( 'admin_menu', 'trip_add_metabox' );
+function trip_add_metabox() {
  
 	add_meta_box(
-		'misha_metabox', // metabox ID
+		'trip_metabox', // metabox ID
 		'Itineraries', // title
-		'misha_metabox_callback', // callback function
+		'trip_metabox_callback', // callback function
 		'product', // post type or post types in array
 		'normal', // position (normal, side, advanced)
 		'default' // priority (default, low, high, core)
@@ -94,13 +93,13 @@ function misha_add_metabox() {
  
 }
  
-function misha_metabox_callback( $post ) {
+function trip_metabox_callback( $post ) {
  
 	$seo_title = get_post_meta( $post->ID, 'seo_title', true );
 	$seo_robots = get_post_meta( $post->ID, 'seo_robots', true );
  
 	// nonce, actually I think it is not necessary here
-	wp_nonce_field( 'somerandomstr', '_mishanonce' );
+	wp_nonce_field( 'somerandomstr', '_tripnonce' );
  
 	echo '<table class="form-table">
 		<tbody>
@@ -123,12 +122,11 @@ function misha_metabox_callback( $post ) {
  
 }
 
-add_action( 'save_post', 'misha_save_meta', 10, 2 );
- 
-function misha_save_meta( $post_id, $post ) {
+add_action( 'save_post', 'trip_save_meta', 10, 2 );
+function trip_save_meta( $post_id, $post ) {
  
 	// nonce check
-	if ( ! isset( $_POST[ '_mishanonce' ] ) || ! wp_verify_nonce( $_POST[ '_mishanonce' ], 'somerandomstr' ) ) {
+	if ( ! isset( $_POST[ '_tripnonce' ] ) || ! wp_verify_nonce( $_POST[ '_tripnonce' ], 'somerandomstr' ) ) {
 		return $post_id;
 	}
  
@@ -145,7 +143,7 @@ function misha_save_meta( $post_id, $post ) {
 	}
  
 	// define your own post type here
-	if( $post->post_type != 'page' ) {
+	if( $post->post_type != 'product' ) {
 		return $post_id;
 	}
  
@@ -161,7 +159,6 @@ function misha_save_meta( $post_id, $post ) {
 	}
  
 	return $post_id;
- 
 }
 
 
