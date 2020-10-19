@@ -39,7 +39,7 @@ define( "WPT_PLUGIN_FILE_NAME", __FILE__ ); //aDDED TO NEW VERSION
 add_filter( 'woocommerce_product_tabs', 'woo_new_product_tab' );
 function woo_new_product_tab( $tabs ) {
 	// Adds the new tab
-	$tabs['test_tab'] = array(
+	$tabs['itinerary_tab'] = array(
 		'title' 	=> __( 'Itineraries', 'woocommerce' ),
 		'priority' 	=> 50,
 		'callback' 	=> 'woo_new_product_tab_content'
@@ -578,6 +578,7 @@ class WOO_Product_Table{
         $data = self::getPluginData();
         return $data['Name'];
     }
+
     public static function getDefault( $indexKey = false ){
         $default = self::$default;
         if( $indexKey && isset( $default[$indexKey] ) ){
