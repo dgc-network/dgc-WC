@@ -248,6 +248,7 @@ class WP_Travel_Helpers_Trips {
 			}
 		}
 		update_post_meta( $trip_id, 'wp_travel_trip_itinerary_data', $itineraries );
+
 		$faqs = array();
 		if ( ! empty( $trip_data->faqs ) ) {
 			foreach ( $trip_data->faqs as $faq_id => $faq ) {
@@ -408,6 +409,7 @@ class WP_Travel_Helpers_Trips {
 				$query_args[ $wp_param ] = $_GET[ $api_param ];
 			}
 		}
+
 		/**
 		 * WP Travel Post-Type.
 		 */
@@ -538,7 +540,6 @@ class WP_Travel_Helpers_Trips {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIPS' );
 		}
 
-
 		// Get Distinct post ids.
 		$post_ids = array();
 		foreach ( $results as $result ) {
@@ -600,7 +601,6 @@ class WP_Travel_Helpers_Trips {
 			);
 
 		}
-
 		
 		$post_ids = array();
 		foreach ( $results as $result ) {
