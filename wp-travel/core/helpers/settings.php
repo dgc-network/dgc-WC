@@ -243,7 +243,8 @@ class WP_Travel_Helpers_Settings {
 				$global_tabs[ $tab_key ]['show_in_menu'] = $global_tab['show_in_menu'];
 			}
 			$settings['global_tab_settings'] = $global_tabs;
-		}
+        }
+        
 		if ( isset( $settings_data['sorted_gateways'] ) && is_array( $settings_data['sorted_gateways'] ) ) {
 
 			$sorted_gateways = array();
@@ -277,7 +278,8 @@ class WP_Travel_Helpers_Settings {
 				);
 			}
 			$settings['wp_travel_trip_facts_settings'] = $facts_settings;
-		}
+        }
+        
 		if ( is_array( $facts ) && count( $facts ) > 0 ) {
 			foreach ( $facts as $key => $fact ) {
 				$new_fact       = array(
