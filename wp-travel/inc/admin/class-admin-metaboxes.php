@@ -299,7 +299,8 @@ class WP_Travel_Admin_Metaboxes {
 		}
 		remove_meta_box( 'itinerary_pricing_categorydiv', WP_TRAVEL_POST_TYPE, 'side' );
 
-	}
+    }
+    
 	/**
 	 * Clean Metabox Classes.
 	 *
