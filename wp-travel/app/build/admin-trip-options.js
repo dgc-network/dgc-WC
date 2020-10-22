@@ -1891,20 +1891,643 @@ function(e,t,n){
                             renderContent:function(){
                                 var t=moment(e.end_date);
                                 return t=t.isValid()?t.toDate():"",
+                                Object(o.createElement)(
+                                    "div",
+                                    {className:"wp-travel-dropdown-content-wrap wp-travel-datetimepicker wp-travel-datetimepicker-hide-time"},
+                                    Object(o.createElement)(i.DateTimePicker,{
+                                        currentDate:t,
+                                        isInvalidDate:function(t){
+                                            return!moment(t).isAfter(new Date)||!moment(t).isAfter(new Date(e.start_date))
+                                        },
+                                        onChange:function(e){p({end_date:moment(e).format("YYYY-MM-DD",e)},l)}
+                                    })
+                                )
+                            }
+                        }),
+                        Object(o.createElement)("button",{
+                            className:"wp-travel-form-input-clear-btn",
+                            type:"button",
+                            onClick:function(){
+                                var e=t;e[l]=B(B({},e[l]),{},{end_date:""}),
+                                r(n,e)
+                            }
+                        },"X")
+                    )
+                ),
+                Object(c.applyFilters)("wp_travel_after_end_date","",t,l,e,r,n),
+                Object(o.createElement)("hr",null),
+                Object(o.createElement)(i.PanelRow,{className:"wp-travel-action-section has-right-padding"},
+                    Object(o.createElement)("span",null),
+                    Object(o.createElement)(i.Button,{
+                        isDefault:!0,
+                        onClick:function(){
+                            if(!confirm(Object(s.__)("Are you sure to delete this date?","wp-travel")))
+                                return!1;
+                            var e;
+                            e=t.filter((function(e,t){return t!=l})),
+                            void 0!==t[l]&&!1===t[l].id?f(e):void 0!==t[l]&&!1!==t[l].id&&g()({url:"".concat(ajaxurl,"?action=wp_travel_remove_trip_date&date_id=").concat(t[l].id,"&_nonce=").concat(_wp_travel._nonce)}).then((function(t){t.success&&"WP_TRAVEL_REMOVED_TRIP_DATE"===t.data.code&&f(e)}))
+                        },
+                        className:"wp-traval-button-danger"},
+                        Object(s.__)("- Remove Date","wp-travel")
+                    )
+                ))
+            })),
+            t.length>1&&Object(o.createElement)(i.PanelRow,{className:"wp-travel-action-section"},
+                Object(o.createElement)("span",null),
+                Object(o.createElement)(i.Button,{
+                    isDefault:!0,
+                    onClick:function(){return P()}
+                },Object(s.__)("+ Add Date","wp-travel"))
+            )
+        ),t.length<1&&Object(o.createElement)(i.Notice,{
+            isDismissible:!1,
+            actions:[{
+                label:Object(s.__)("Add date","wp-travel"),
+                onClick:function(){P()},
+                noDefaultClasses:!0,
+                className:"is-link"
+            }]
+        },Object(s.__)("No dates found.","wp-travel")))
+    };
+    function W(e,t){
+        var n=Object.keys(e);
+        if(Object.getOwnPropertySymbols){
+            var r=Object.getOwnPropertySymbols(e);
+            t&&(r=r.filter((function(t){
+                return Object.getOwnPropertyDescriptor(e,t).enumerable
+            }))),
+            n.push.apply(n,r)
+        }
+        return n
+    }
+    function U(e){
+        for(var t=1;t<arguments.length;t++){
+            var n=null!=arguments[t]?arguments[t]:{};
+            t%2?W(Object(n),!0).forEach((function(t){b()(e,t,n[t])})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):W(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))}))
+        }
+        return e
+    }
+    var H=function(){
+        var e=Object(l.useSelect)((function(e){
+            return e("WPTravel/TripEdit").getAllStore()
+        }),[]),
+        t=Object(l.dispatch)("WPTravel/TripEdit"),
+        n=t.updateTripData,
+        r=(t.updateRequestSending,t.setTripData,t.updateStateChange,e.is_fixed_departure),
+        u=(e.has_state_changes,e.is_multiple_dates,e.dates),
+        p=(e.trip_time,e.pricings),
+        f=e.trip_duration,
+        m=u.length>0?u[0]:{
+            start_date:Object(R.format)("Y-m-d",new Date),
+            end_date:""
+        },
+        h=Object(o.useState)({
+            stateHours:0,
+            stateMinutes:0,
+            enableTime:!1
+        }),
+        b=T()(h,2),
+        v=b[0],
+        g=(v.stateHours,v.stateMinutes,v.enableTime),
+        O=b[1];
+        Object(o.useEffect)((function(){
+            var e=void 0!==m.trip_time&&""!==m.trip_time||g;
+            O((function(t){return U(U({},t),{},{enableTime:e})}))
+        }),[]);
+        for(var E=Object(R.format)("Y",new Date),y=[],_=0;_<10;_++)y=[].concat(a()(y),["".concat(parseInt(E)+_)]);
+        var w=void 0!==m.years?m.years.split(","):[];
+        w=w.filter((function(e){return y.includes(e)}));
+        var j=["January","February","March","April","May","June","July","August","September","October","November","December"],C=void 0!==m.months?m.months.split(","):[],P=[];
+        C.filter((function(e){void 0!==j[e-1]&&(P=[].concat(a()(P),[j[e-1]]))}));
+        var D=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],x=["SU","MO","TU","WE","TH","FR","SA"],S=[];
+        (void 0!==m.days&&"every_days"!==m.days?m.days.split(","):[]).filter((function(e){
+            var t=N.a.indexOf(x,e);
+            void 0!==D[t]&&(S=[].concat(a()(S),[D[t]]))
+        }));
+        for(var A=[],k=1;k<33;k++)A=[].concat(a()(A),["".concat(k)]);var I=void 0!==m.date_days&&"every_date_days"!=m.date_days?m.date_days.split(","):[];I=(I=N.a.without(I,"")).filter((function(e){return I.includes(e)}));
+        void 0!==m.trip_time&&""!==m.trip_time&&m.trip_time.split(",");
+        return Object(o.createElement)(d.a,null,
+            Object(o.createElement)("div",{className:"wp-travel-ui wp-travel-ui-card wp-travel-ui-card-top-border"},
+                Object(o.createElement)("h4",null,
+                    Object(s.__)("Date & Time","wp-travel")
+                ),
+                Object(o.createElement)(i.PanelRow,null,
+                    Object(o.createElement)("label",null,
+                        Object(s.__)("Enable Fixed Departure","wp-travel")
+                    ),
+                    Object(o.createElement)(i.ToggleControl,{
+                        checked:r,
+                        onChange:function(){n(U(U({},e),{},{is_fixed_departure:!r}))}
+                    })
+                ),
+                Object(c.applyFilters)("wp_travel_before_dates_options",[]),r?Object(o.createElement)(V,{
+                    dates:u,
+                    storeKey:"dates",
+                    onUpdate:function(t,r){var o=e;o[t]=a()(r),n(o)},
+                    pricings:p
+                }):Object(o.createElement)(i.PanelRow,null,
+                    Object(o.createElement)("label",null,
+                        Object(s.__)("Trip Duration","wp-travel")
+                    ),
+                    Object(o.createElement)("div",{className:"wp-travel-trip-duration"},
+                        Object(o.createElement)(i.TextControl,{
+                            value:f.days,
+                            help:Object(s.__)("Day(s)","wp-travel"),
+                            onChange:function(t){
+                                var r=e.trip_duration;
+                                r.days=t,n(U(U({},e),{},{trip_duration:U({},r)}))
+                            }
+                        }),
+                        Object(o.createElement)(i.TextControl,{
+                            value:f.nights,
+                            help:Object(s.__)("Night(s)","wp-travel"),
+                            onChange:function(t){
+                                var r=e.trip_duration;
+                                r.nights=t,n(U(U({},e),{},{trip_duration:U({},r)}))
+                            }
+                        })
+                    )
+                ),Object(c.applyFilters)("wp_travel_after_dates_options",[])
+            ),
+            Object(c.applyFilters)("wp_travel_itinerary_price_tab_table_last_row","",e),
+            Object(o.createElement)("hr",null)
+        )
+    };
+    function Y(e,t){
+        var n=Object.keys(e);
+        if(Object.getOwnPropertySymbols){
+            var r=Object.getOwnPropertySymbols(e);
+            t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),
+            n.push.apply(n,r)
+        }
+        return n
+    }
+    function G(e){
+        for(var t=1;t<arguments.length;t++){
+            var n=null!=arguments[t]?arguments[t]:{};t%2?Y(Object(n),!0).forEach((function(t){b()(e,t,n[t])})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):Y(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))}))
+        }
+        return e
+    }
+    var z=function(){
+        var e=Object(l.useSelect)((function(e){
+            return e("WPTravel/TripEdit").getAllStore()
+        }),[]),
+        t=Object(o.useState)({tripExtrasData:[]}),
+        n=T()(t,2),
+        r=n[0].tripExtrasData,
+        u=n[1],
+        p=Object(l.useSelect)((function(e){
+            return e("WPTravel/TripEdit").getSettings()
+        }),[]),
+        f=e.pricing_type,
+        m=e.pricings,
+        h=(e.has_state_changes,e.is_multiple_dates,e.group_size,e.has_extras),
+        b=(e.dates,e.minimum_partial_payout_use_global),
+        v=e.minimum_partial_payout_percent,
+        O=Object(l.dispatch)("WPTravel/TripEdit"),
+        E=(O.updateStateChange,O.updateTripPricing),
+        y=O.addTripPricing,
+        _=O.updateTripPrices,
+        w=O.updateTripData,
+        j=(O.setTripData,O.updateRequestSending,void 0!==m?m:[]),
+        C=function(){y({id:!1,title:"",categories:[]})},P=0;
+        return Object(o.createElement)(d.a,null,
+            Object(o.createElement)("div",{className:"wp-travel-trip-pricings"},
+                Object(c.applyFilters)(
+                    "wp_travel_before_pricings_options",[],e),
+                    "multiple-price"===f&&Object(o.createElement)(
+                        o.Fragment,
+                        null,
+                        j.length>0?Object(o.createElement)(
+                            o.Fragment,
+                            null,
+
+
+                            
+                    Object(o.createElement)(i.Notice,{status:"warning",isDismissible:!1},
+                        Object(s.__)("Before making any changes in date, please make sure pricing is saved.","wp-travel")
+                    ),
+                    Object(o.createElement)(i.PanelRow,{className:"wp-travel-action-section"},
+                        Object(o.createElement)("span",null),
+                        Object(o.createElement)(i.Button,{isDefault:!0,onClick:function(){return C()}},
+                            Object(s.__)("+ Add Price","wp-travel")
+                        )
+                    ),
+                    Object(o.createElement)("div",{className:"wp-travel-sortable-component"},
+                        Object(o.createElement)(
+                            k.a,
+                            {
+                                list:j,
+                                setList:function(t){return function(t){w(G(G({},e),{},{pricings:t}))}(t)},
+                                handle:".wp-travel-trip-pricings .components-panel__icon"
+                            },
+                            j.map((function(t,n){
+                                var a=[];
+                                return void 0!==t.trip_extras&&t.trip_extras.length>0&&(a=t.trip_extras.map((function(e){
+                                    return G(G({},e),{},{value:e.id,label:e.title})
+                                }))),
+                                Object(o.createElement)(
+                                    i.PanelBody,
+                                    {
+                                        icon:A.a,
+                                        title:t.title?"".concat(t.title):Object(s.__)("Untitled Price","wp-travel"),
+                                        initialOpen:j.length-1===n
+                                    },
+                                    Object(o.createElement)(i.PanelRow,null,
+                                        Object(o.createElement)("label",null,
+                                            Object(s.__)("Pricing Name","wp-travel")
+                                        ),
+                                        Object(o.createElement)(i.TextControl,{
+                                            placeholder:Object(s.__)("Pricing Name","wp-travel"),
+                                            value:t.title,
+                                            onChange:function(e){
+                                                var r=t;
+                                                r.title=e,
+                                                E(r,n)
+                                            }
+                                        })
+                                    ),
+                                    Object(o.createElement)(i.PanelRow,null,
+                                        Object(o.createElement)("label",null,
+                                            Object(s.__)("Min Pax","wp-travel")
+                                        ),
+                                        Object(o.createElement)(i.TextControl,{
+                                            value:t.min_pax?t.min_pax:"",
+                                            type:"number",
+                                            min:"0",
+                                            autoComplete:"off",
+                                            onChange:function(e){
+                                                var r=t;
+                                                r.min_pax=e,
+                                                E(r,n)
+                                            }
+                                        })
+                                    ),
+                                    Object(o.createElement)(i.PanelRow,null,
+                                        Object(o.createElement)("label",null,
+                                            Object(s.__)("Max Pax","wp-travel")
+                                        ),
+                                        Object(o.createElement)(i.TextControl,{
+                                            value:t.max_pax?t.max_pax:"",
+                                            type:"number",
+                                            min:"0",
+                                            autoComplete:"off",
+                                            onChange:function(e){
+                                                var r=t;
+                                                r.max_pax=e,
+                                                E(r,n)
+                                            }
+                                        })
+                                    ),
+                                    Object(o.createElement)("hr",null),
+                                    Object(o.createElement)(i.PanelRow,{className:"wp-travel-has-child-panel"},
+                                        Object(o.createElement)("label",null,
+                                            Object(s.__)("Price Categories","wp-travel")
+                                        )
+                                    ),
+                                    Object(o.createElement)(i.PanelRow,{className:"wp-travel-has-child-panel"},
+                                        Object(o.createElement)("div",{className:"wp-travel-panel-wrap"},
+                                            Object(o.createElement)(M,{priceIndex:n})
+                                        )
+                                    ),
+                                    h?Object(o.createElement)(i.PanelRow,null,
+                                        Object(o.createElement)("label",null,
+                                            Object(s.__)("Trip Extras","wp-travel")
+                                        ),
+                                        Object(o.createElement)("div",{className:"wp-travel-field-value"},
+                                            Object(o.createElement)("div",{className:"wp-travel-select-wrapper"},
+                                                Object(o.createElement)(I.a,{
+                                                    options:r,
+                                                    onChange:function(e){
+                                                        var r=t;
+                                                        r.trip_extras=null!==e?e:[],
+                                                        E(r,n)
+                                                    },
+                                                    isMulti:!0,
+                                                    noOptionsMessage:function(){
+                                                        return Object(s.__)("No result found for searched term.","wp-travel")
+                                                    },
+                                                    onInputChange:function(e){
+                                                        ""!==e&&g()({
+                                                            url:"".concat(ajaxurl,"?action=wp_travel_search_trip_extras&keyword=").concat(e,"&_nonce=").concat(_wp_travel._nonce)
+                                                        }).then((function(e){
+                                                            if(e.success&&"WP_TRAVEL_TRIP_EXTRAS"===e.data.code){
+                                                                var t=e.data.trip_extras.map((function(e){
+                                                                    return G(G({},e),{},{value:e.id,label:e.title})
+                                                                }));
+                                                                u({tripExtrasData:t})
+                                                            }
+                                                            else u({tripExtrasData:[]})
+                                                        }))
+                                                    },
+                                                    defaultValue:a
+                                                })
+                                            ),
+                                            Object(c.applyFilters)("wp_travel_trip_extras_notice",[])
+                                        )
+                                    ):Object(o.createElement)(o.Fragment,null,
+                                        Object(o.createElement)(i.PanelRow,null,
+                                            Object(o.createElement)("label",null,
+                                                Object(s.__)("Trip Extras","wp-travel")
+                                            )
+                                        ),
+                                        Object(o.createElement)(i.PanelRow,null,
+                                            Object(o.createElement)(i.Notice,{
+                                                isDismissible:!1,
+                                                actions:[{
+                                                    label:Object(s.__)("Add Extras","wp-travel"),
+                                                    onClick:function(){
+                                                        var e=_wp_travel.admin_url+"post-new.php?post_type=tour-extras";
+                                                        window.location.href=e
+                                                    },
+                                                    noDefaultClasses:!0,
+                                                    className:"is-link"
+                                                }]
+                                            },Object(s.__)("Please add extras first","wp-travel"))
+                                        )
+                                    ),
+                                    Object(c.applyFilters)("wp_travel_after_pricings_fields",[],n,e),
+                                    Object(o.createElement)("hr",null),
+                                    Object(o.createElement)(
+                                        i.PanelRow,
+                                        {className:"wp-travel-action-section has-right-padding"},
+                                        Object(o.createElement)("span",null),
+                                        Object(o.createElement)(
+                                            i.Button,{
+                                                isDefault:!0,
+                                                onClick:function(){
+                                                    if(!confirm(Object(s.__)("Are you sure to delete this price?","wp-travel")))
+                                                        return!1;
+                                                    var e;
+                                                    e=j.filter((function(e,t){return t!=n})),
+                                                    void 0!==j[n]&&!1===j[n].id?_(e):void 0!==j[n]&&!1!==j[n].id&&g()({
+                                                        url:"".concat(ajaxurl,"?action=wp_travel_remove_trip_pricing&pricing_id=").concat(j[n].id,"&_nonce=").concat(_wp_travel._nonce)
+                                                    }).then((function(t){t.success&&"WP_TRAVEL_REMOVED_TRIP_PRICING"===t.datacode&&_(e)}))
+                                                },
+                                                className:"wp-traval-button-danger"
+                                            },
+                                            Object(s.__)("- Remove Price","wp-travel")
+                                        )
+                                    )
+                                )
+                            }))
+                        )
+                    ),
+                    j.length>1&&Object(o.createElement)(i.PanelRow,{className:"wp-travel-action-section"},
+                        Object(o.createElement)("span",null),
+                        Object(o.createElement)(i.Button,{isDefault:!0,onClick:function(){return C()}},
+                            Object(s.__)("+ Add Price","wp-travel")
+                        )
+                    )
+                ):Object(o.createElement)(o.Fragment,null,
+                    Object(o.createElement)(i.Notice,{
+                        isDismissible:!1,
+                        actions:[{
+                            label:Object(s.__)("Add Price","wp-travel"),
+                            onClick:function(){C()},
+                            noDefaultClasses:!0,
+                            className:"is-link"
+                        }]
+                    },
+                    Object(s.__)("No Pricings found.","wp-travel"))
+                )
+            ),
+            "yes"==p.partial_payment&&Object(o.createElement)(o.Fragment,null,Object(o.createElement)(i.PanelRow,null),Object(o.createElement)("h4",null,Object(s.__)("Payout","wp-travel")),Object(o.createElement)(i.PanelRow,null,Object(o.createElement)("label",null,Object(s.__)("Minimum Payout (%)","wp-travel")),Object(o.createElement)(i.ToggleControl,{checked:b,help:Object(s.__)("Use Global Payout","wp-travel"),onChange:function(){w(G(G({},e),{},{minimum_partial_payout_use_global:!b}))}})),!b&&p.minimum_partial_payout.length>0&&Object(o.createElement)(o.Fragment,null,p.minimum_partial_payout.map((function(t,n){var r=void 0!==v&&void 0!==v[n]?v[n]:t;r&&(r=parseInt(r));var l=Object(s.__)("Custom Min. Payout (%)","wp-travel");return p.minimum_partial_payout.length>1&&(l=Object(s.__)("Custom Partial Payout ".concat(n+1," (%)"),"wp-travel")),P+=r,Object(o.createElement)(i.PanelRow,null,Object(o.createElement)("label",null,l),Object(o.createElement)(i.TextControl,{value:r,type:"number",min:"0",help:Object(s.__)("Global partial payout: ".concat(t,"%"),"wp-travel"),autoComplete:"off",onChange:function(t){var r=v;r[n]=t,w(G(G({},e),{},{minimum_partial_payout_percent:a()(r)}))}}))})),p.minimum_partial_payout.length>1&&100!=P&&Object(o.createElement)(i.PanelRow,null,Object(o.createElement)(i.Notice,{status:"error",isDismissible:!1},Object(s.__)("Error: Total payout percent is not equals to 100%. Please update the trip once else global partial percent will be used as default.","wp-travel"))))),Object(c.applyFilters)("wp_travel_after_pricings_options",[],e)))},q=function(){return Object(o.createElement)(i.TabPanel,{className:"wp-travel-trip-edit-menu wp-travel-trip-edit-menu-horizontal wp-travel-trip-edit-menu-add-gap",activeClass:"active-tab",onSelect:function(){return!1},tabs:[{name:"prices",title:"Prices",className:"tab-one"},{name:"dates",title:"Dates",className:"tab-two"}]},(function(e){return"prices"==e.name?Object(o.createElement)(d.a,null," ",Object(o.createElement)(z,null)):Object(o.createElement)(d.a,null,Object(o.createElement)(H,null))}))},X=n(30);function Q(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}function K(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?Q(Object(n),!0).forEach((function(t){b()(e,t,n[t])})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):Q(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))}))}return e}var $=function(){var e=Object(l.useSelect)((function(e){return e("WPTravel/TripEdit").getAllStore()}),[]),t=Object(l.dispatch)("WPTravel/TripEdit"),n=t.updateTripData,r=t.addNewItinerary,u=e.trip_outline,p=e.itineraries,f=function(t,r,o){var i=p;i[o][t]=r,n(K(K({},e),{},{itineraries:a()(i)}))},m=Object(o.useState)({stateHours:0,stateMinutes:0}),h=T()(m,2),b=h[0],v=b.stateHours,g=b.stateMinutes,O=h[1],E=function(){r({label:Object(s.__)("Day X","wp-travel"),title:Object(s.__)("Your Plan","wp-travel"),date:null,time:null,desc:""})};
+return Object(o.createElement)(o.Fragment,null,
+    Object(o.createElement)("div",{className:"wp-travel-trip-itinerary"},                                    
+        Object(o.createElement)(d.a,null,
+            Object(c.applyFilters)("wp_travel_before_itinerary_content","",e),
+            Object(o.createElement)(i.PanelRow,null,
+                Object(o.createElement)("label",{htmlFor:"wp-travel-trip-outline"},
+                    Object(s.__)("Trip Outline")
+                )
+            ),
+            Object(o.createElement)(i.PanelRow,{className:"wp-travel-editor"},
+                void 0!==u&&Object(o.createElement)(X.a,{
+                    id:"wp-travel-trip-outline",
+                    value:u,
+                    onContentChange:function(t){n(K(K({},e),{},{trip_outline:t}))},
+                    name:"trip_outline"})
+            ),
+            Object(o.createElement)("hr",null),
+            Object(o.createElement)("div",{className:"wp-travel-itinerary-title"},
+                Object(o.createElement)("h3",{className:"wp-travel-tab-content-title"},
+                    Object(s.__)("Itinerary")
+                ),
+                void 0!==p&&p&&Object.keys(p).length>0&&Object(o.createElement)(
+                    i.PanelRow,
+                    {className:"wp-travel-action-section"},
+                    Object(o.createElement)("span",null),
+                    Object(o.createElement)(i.Button,{
+                        isDefault:!0,
+                        onClick:function(){return E()}
+                    },Object(s.__)("+ Add Itinerary"))
+                )
+            ),
+            void 0!==p&&p&&Object.keys(p).length>0?Object(o.createElement)(
+                "div",
+                {className:"wp-travel-sortable-component"},
+                Object(o.createElement)(k.a,{
+                    list:p,
+                    setList:function(t){return function(t){n(K(K({},e),{},{itineraries:t}))}(t)},
+                    handle:".wp-travel-trip-itinerary .components-panel__icon"
+                },
+                Object.keys(p).map((function(t){
+                    return Object(o.createElement)(i.PanelBody,{
+                        icon:A.a,
+                        title:"".concat(p[t].label?p[t].label:Object(s.__)("Day X","wp-travel"),", ").concat(p[t].title?p[t].title:Object(s.__)("Your Plan","wp-travel")," "),
+                        initialOpen:!1
+                    },
+                    Object(o.createElement)(i.PanelRow,null,
+                        Object(o.createElement)("label",null,
+                            Object(s.__)("Itinerary Label","wp-travel")
+                        ),
+                        Object(o.createElement)(i.TextControl,{
+                            value:p[t].label?p[t].label:"",
+                            placeholder:Object(s.__)("Day X","wp-travel"),
+                            onChange:function(e){return f("label",e,t)}
+                        })
+                    ),
+                    Object(o.createElement)(i.PanelRow,null,
+                        Object(o.createElement)("label",null,
+                            Object(s.__)("Itinerary Title","wp-travel")
+                        ),
+                        Object(o.createElement)(i.TextControl,{
+                            value:p[t].title?p[t].title:"",
+                            placeholder:Object(s.__)("Your Plan","wp-travel"),
+                            onChange:function(e){return f("title",e,t)}
+                        })
+                    ),
+                    Object(o.createElement)(i.PanelRow,null,
+                        Object(o.createElement)("label",null,
+                            Object(s.__)("Itinerary Date","wp-travel")
+                        ),
+                        Object(o.createElement)(i.Dropdown,{
+                            className:"wp-travel-dropdown-container",
+                            contentClassName:"wp-travel-dropdown-popup-content",
+                            position:"bottom right",
+                            renderToggle:function(e){
+                                var n=e.isOpen,
+                                r=e.onToggle,
+                                a=moment(p[t].date?p[t].date:null);
+                                return Object(o.createElement)(i.TextControl,{
+                                    value:a.isValid()?p[t].date:"",
+                                    onFocus:r,
+                                    "aria-expanded":n,
+                                    onChange:function(){return!1},autoComplete:"off"
+                                })
+                            },
+                            renderContent:function(){
+                                var e=moment(p[t].date?p[t].date:null);
+                                return e=e.isValid()?e.toDate():new Date,
                                 Object(o.createElement)("div",{className:"wp-travel-dropdown-content-wrap wp-travel-datetimepicker wp-travel-datetimepicker-hide-time"},
-                                    Object(o.createElement)(i.DateTimePicker,{currentDate:t,isInvalidDate:function(t){return!moment(t).isAfter(new Date)||!moment(t).isAfter(new Date(e.start_date))},onChange:function(e){p({end_date:moment(e).format("YYYY-MM-DD",e)},l)}}))}}),Object(o.createElement)("button",{className:"wp-travel-form-input-clear-btn",type:"button",onClick:function(){var e=t;e[l]=B(B({},e[l]),{},{end_date:""}),r(n,e)}},"X"))),Object(c.applyFilters)("wp_travel_after_end_date","",t,l,e,r,n),Object(o.createElement)("hr",null),Object(o.createElement)(i.PanelRow,{className:"wp-travel-action-section has-right-padding"},Object(o.createElement)("span",null),Object(o.createElement)(i.Button,{isDefault:!0,onClick:function(){if(!confirm(Object(s.__)("Are you sure to delete this date?","wp-travel")))return!1;var e;e=t.filter((function(e,t){return t!=l})),void 0!==t[l]&&!1===t[l].id?f(e):void 0!==t[l]&&!1!==t[l].id&&g()({url:"".concat(ajaxurl,"?action=wp_travel_remove_trip_date&date_id=").concat(t[l].id,"&_nonce=").concat(_wp_travel._nonce)}).then((function(t){t.success&&"WP_TRAVEL_REMOVED_TRIP_DATE"===t.data.code&&f(e)}))},className:"wp-traval-button-danger"},Object(s.__)("- Remove Date","wp-travel"))))})),t.length>1&&Object(o.createElement)(i.PanelRow,{className:"wp-travel-action-section"},Object(o.createElement)("span",null),Object(o.createElement)(i.Button,{isDefault:!0,onClick:function(){return P()}},Object(s.__)("+ Add Date","wp-travel")))),t.length<1&&Object(o.createElement)(i.Notice,{isDismissible:!1,actions:[{label:Object(s.__)("Add date","wp-travel"),onClick:function(){P()},noDefaultClasses:!0,className:"is-link"}]},Object(s.__)("No dates found.","wp-travel")))};function W(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}function U(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?W(Object(n),!0).forEach((function(t){b()(e,t,n[t])})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):W(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))}))}return e}var H=function(){var e=Object(l.useSelect)((function(e){return e("WPTravel/TripEdit").getAllStore()}),[]),t=Object(l.dispatch)("WPTravel/TripEdit"),n=t.updateTripData,r=(t.updateRequestSending,t.setTripData,t.updateStateChange,e.is_fixed_departure),u=(e.has_state_changes,e.is_multiple_dates,e.dates),p=(e.trip_time,e.pricings),f=e.trip_duration,m=u.length>0?u[0]:{start_date:Object(R.format)("Y-m-d",new Date),end_date:""},h=Object(o.useState)({stateHours:0,stateMinutes:0,enableTime:!1}),b=T()(h,2),v=b[0],g=(v.stateHours,v.stateMinutes,v.enableTime),O=b[1];Object(o.useEffect)((function(){var e=void 0!==m.trip_time&&""!==m.trip_time||g;O((function(t){return U(U({},t),{},{enableTime:e})}))}),[]);for(var E=Object(R.format)("Y",new Date),y=[],_=0;_<10;_++)y=[].concat(a()(y),["".concat(parseInt(E)+_)]);var w=void 0!==m.years?m.years.split(","):[];w=w.filter((function(e){return y.includes(e)}));var j=["January","February","March","April","May","June","July","August","September","October","November","December"],C=void 0!==m.months?m.months.split(","):[],P=[];C.filter((function(e){void 0!==j[e-1]&&(P=[].concat(a()(P),[j[e-1]]))}));var D=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],x=["SU","MO","TU","WE","TH","FR","SA"],S=[];(void 0!==m.days&&"every_days"!==m.days?m.days.split(","):[]).filter((function(e){var t=N.a.indexOf(x,e);void 0!==D[t]&&(S=[].concat(a()(S),[D[t]]))}));for(var A=[],k=1;k<33;k++)A=[].concat(a()(A),["".concat(k)]);var I=void 0!==m.date_days&&"every_date_days"!=m.date_days?m.date_days.split(","):[];I=(I=N.a.without(I,"")).filter((function(e){return I.includes(e)}));void 0!==m.trip_time&&""!==m.trip_time&&m.trip_time.split(",");return Object(o.createElement)(d.a,null,Object(o.createElement)("div",{className:"wp-travel-ui wp-travel-ui-card wp-travel-ui-card-top-border"},Object(o.createElement)("h4",null,Object(s.__)("Date & Time","wp-travel")),Object(o.createElement)(i.PanelRow,null,Object(o.createElement)("label",null,Object(s.__)("Enable Fixed Departure","wp-travel")),Object(o.createElement)(i.ToggleControl,{checked:r,onChange:function(){n(U(U({},e),{},{is_fixed_departure:!r}))}})),Object(c.applyFilters)("wp_travel_before_dates_options",[]),r?Object(o.createElement)(V,{dates:u,storeKey:"dates",onUpdate:function(t,r){var o=e;o[t]=a()(r),n(o)},pricings:p}):Object(o.createElement)(i.PanelRow,null,Object(o.createElement)("label",null,Object(s.__)("Trip Duration","wp-travel")),Object(o.createElement)("div",{className:"wp-travel-trip-duration"},Object(o.createElement)(i.TextControl,{value:f.days,help:Object(s.__)("Day(s)","wp-travel"),onChange:function(t){var r=e.trip_duration;r.days=t,n(U(U({},e),{},{trip_duration:U({},r)}))}}),Object(o.createElement)(i.TextControl,{value:f.nights,help:Object(s.__)("Night(s)","wp-travel"),onChange:function(t){var r=e.trip_duration;r.nights=t,n(U(U({},e),{},{trip_duration:U({},r)}))}}))),Object(c.applyFilters)("wp_travel_after_dates_options",[])),Object(c.applyFilters)("wp_travel_itinerary_price_tab_table_last_row","",e),Object(o.createElement)("hr",null))};function Y(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}function G(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?Y(Object(n),!0).forEach((function(t){b()(e,t,n[t])})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):Y(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))}))}return e}var z=function(){var e=Object(l.useSelect)((function(e){return e("WPTravel/TripEdit").getAllStore()}),[]),t=Object(o.useState)({tripExtrasData:[]}),n=T()(t,2),r=n[0].tripExtrasData,u=n[1],p=Object(l.useSelect)((function(e){return e("WPTravel/TripEdit").getSettings()}),[]),f=e.pricing_type,m=e.pricings,h=(e.has_state_changes,e.is_multiple_dates,e.group_size,e.has_extras),b=(e.dates,e.minimum_partial_payout_use_global),v=e.minimum_partial_payout_percent,O=Object(l.dispatch)("WPTravel/TripEdit"),E=(O.updateStateChange,O.updateTripPricing),y=O.addTripPricing,_=O.updateTripPrices,w=O.updateTripData,j=(O.setTripData,O.updateRequestSending,void 0!==m?m:[]),C=function(){y({id:!1,title:"",categories:[]})},P=0;return Object(o.createElement)(d.a,null,Object(o.createElement)("div",{className:"wp-travel-trip-pricings"},Object(c.applyFilters)("wp_travel_before_pricings_options",[],e),"multiple-price"===f&&Object(o.createElement)(o.Fragment,null,j.length>0?Object(o.createElement)(o.Fragment,null,Object(o.createElement)(i.Notice,{status:"warning",isDismissible:!1},Object(s.__)("Before making any changes in date, please make sure pricing is saved.","wp-travel")),Object(o.createElement)(i.PanelRow,{className:"wp-travel-action-section"},Object(o.createElement)("span",null),Object(o.createElement)(i.Button,{isDefault:!0,onClick:function(){return C()}},Object(s.__)("+ Add Price","wp-travel"))),Object(o.createElement)("div",{className:"wp-travel-sortable-component"},Object(o.createElement)(k.a,{list:j,setList:function(t){return function(t){w(G(G({},e),{},{pricings:t}))}(t)},handle:".wp-travel-trip-pricings .components-panel__icon"},j.map((function(t,n){var a=[];return void 0!==t.trip_extras&&t.trip_extras.length>0&&(a=t.trip_extras.map((function(e){return G(G({},e),{},{value:e.id,label:e.title})}))),Object(o.createElement)(i.PanelBody,{icon:A.a,title:t.title?"".concat(t.title):Object(s.__)("Untitled Price","wp-travel"),initialOpen:j.length-1===n},Object(o.createElement)(i.PanelRow,null,Object(o.createElement)("label",null,Object(s.__)("Pricing Name","wp-travel")),Object(o.createElement)(i.TextControl,{placeholder:Object(s.__)("Pricing Name","wp-travel"),value:t.title,onChange:function(e){var r=t;r.title=e,E(r,n)}})),Object(o.createElement)(i.PanelRow,null,Object(o.createElement)("label",null,Object(s.__)("Min Pax","wp-travel")),Object(o.createElement)(i.TextControl,{value:t.min_pax?t.min_pax:"",type:"number",min:"0",autoComplete:"off",onChange:function(e){var r=t;r.min_pax=e,E(r,n)}})),Object(o.createElement)(i.PanelRow,null,Object(o.createElement)("label",null,Object(s.__)("Max Pax","wp-travel")),Object(o.createElement)(i.TextControl,{value:t.max_pax?t.max_pax:"",type:"number",min:"0",autoComplete:"off",onChange:function(e){var r=t;r.max_pax=e,E(r,n)}})),Object(o.createElement)("hr",null),Object(o.createElement)(i.PanelRow,{className:"wp-travel-has-child-panel"},Object(o.createElement)("label",null,Object(s.__)("Price Categories","wp-travel"))),Object(o.createElement)(i.PanelRow,{className:"wp-travel-has-child-panel"},Object(o.createElement)("div",{className:"wp-travel-panel-wrap"},Object(o.createElement)(M,{priceIndex:n}))),h?Object(o.createElement)(i.PanelRow,null,Object(o.createElement)("label",null,Object(s.__)("Trip Extras","wp-travel")),Object(o.createElement)("div",{className:"wp-travel-field-value"},Object(o.createElement)("div",{className:"wp-travel-select-wrapper"},Object(o.createElement)(I.a,{options:r,onChange:function(e){var r=t;r.trip_extras=null!==e?e:[],E(r,n)},isMulti:!0,noOptionsMessage:function(){return Object(s.__)("No result found for searched term.","wp-travel")},onInputChange:function(e){""!==e&&g()({url:"".concat(ajaxurl,"?action=wp_travel_search_trip_extras&keyword=").concat(e,"&_nonce=").concat(_wp_travel._nonce)}).then((function(e){if(e.success&&"WP_TRAVEL_TRIP_EXTRAS"===e.data.code){var t=e.data.trip_extras.map((function(e){return G(G({},e),{},{value:e.id,label:e.title})}));u({tripExtrasData:t})}else u({tripExtrasData:[]})}))},defaultValue:a})),Object(c.applyFilters)("wp_travel_trip_extras_notice",[]))):Object(o.createElement)(o.Fragment,null,Object(o.createElement)(i.PanelRow,null,Object(o.createElement)("label",null,Object(s.__)("Trip Extras","wp-travel"))),Object(o.createElement)(i.PanelRow,null,Object(o.createElement)(i.Notice,{isDismissible:!1,actions:[{label:Object(s.__)("Add Extras","wp-travel"),onClick:function(){var e=_wp_travel.admin_url+"post-new.php?post_type=tour-extras";window.location.href=e},noDefaultClasses:!0,className:"is-link"}]},Object(s.__)("Please add extras first","wp-travel")))),Object(c.applyFilters)("wp_travel_after_pricings_fields",[],n,e),Object(o.createElement)("hr",null),Object(o.createElement)(i.PanelRow,{className:"wp-travel-action-section has-right-padding"},Object(o.createElement)("span",null),Object(o.createElement)(i.Button,{isDefault:!0,onClick:function(){if(!confirm(Object(s.__)("Are you sure to delete this price?","wp-travel")))return!1;var e;e=j.filter((function(e,t){return t!=n})),void 0!==j[n]&&!1===j[n].id?_(e):void 0!==j[n]&&!1!==j[n].id&&g()({url:"".concat(ajaxurl,"?action=wp_travel_remove_trip_pricing&pricing_id=").concat(j[n].id,"&_nonce=").concat(_wp_travel._nonce)}).then((function(t){t.success&&"WP_TRAVEL_REMOVED_TRIP_PRICING"===t.data.code&&_(e)}))},className:"wp-traval-button-danger"},Object(s.__)("- Remove Price","wp-travel"))))})))),j.length>1&&Object(o.createElement)(i.PanelRow,{className:"wp-travel-action-section"},Object(o.createElement)("span",null),Object(o.createElement)(i.Button,{isDefault:!0,onClick:function(){return C()}},Object(s.__)("+ Add Price","wp-travel")))):Object(o.createElement)(o.Fragment,null,Object(o.createElement)(i.Notice,{isDismissible:!1,actions:[{label:Object(s.__)("Add Price","wp-travel"),onClick:function(){C()},noDefaultClasses:!0,className:"is-link"}]},Object(s.__)("No Pricings found.","wp-travel")))),"yes"==p.partial_payment&&Object(o.createElement)(o.Fragment,null,Object(o.createElement)(i.PanelRow,null),Object(o.createElement)("h4",null,Object(s.__)("Payout","wp-travel")),Object(o.createElement)(i.PanelRow,null,Object(o.createElement)("label",null,Object(s.__)("Minimum Payout (%)","wp-travel")),Object(o.createElement)(i.ToggleControl,{checked:b,help:Object(s.__)("Use Global Payout","wp-travel"),onChange:function(){w(G(G({},e),{},{minimum_partial_payout_use_global:!b}))}})),!b&&p.minimum_partial_payout.length>0&&Object(o.createElement)(o.Fragment,null,p.minimum_partial_payout.map((function(t,n){var r=void 0!==v&&void 0!==v[n]?v[n]:t;r&&(r=parseInt(r));var l=Object(s.__)("Custom Min. Payout (%)","wp-travel");return p.minimum_partial_payout.length>1&&(l=Object(s.__)("Custom Partial Payout ".concat(n+1," (%)"),"wp-travel")),P+=r,Object(o.createElement)(i.PanelRow,null,Object(o.createElement)("label",null,l),Object(o.createElement)(i.TextControl,{value:r,type:"number",min:"0",help:Object(s.__)("Global partial payout: ".concat(t,"%"),"wp-travel"),autoComplete:"off",onChange:function(t){var r=v;r[n]=t,w(G(G({},e),{},{minimum_partial_payout_percent:a()(r)}))}}))})),p.minimum_partial_payout.length>1&&100!=P&&Object(o.createElement)(i.PanelRow,null,Object(o.createElement)(i.Notice,{status:"error",isDismissible:!1},Object(s.__)("Error: Total payout percent is not equals to 100%. Please update the trip once else global partial percent will be used as default.","wp-travel"))))),Object(c.applyFilters)("wp_travel_after_pricings_options",[],e)))},q=function(){return Object(o.createElement)(i.TabPanel,{className:"wp-travel-trip-edit-menu wp-travel-trip-edit-menu-horizontal wp-travel-trip-edit-menu-add-gap",activeClass:"active-tab",onSelect:function(){return!1},tabs:[{name:"prices",title:"Prices",className:"tab-one"},{name:"dates",title:"Dates",className:"tab-two"}]},(function(e){return"prices"==e.name?Object(o.createElement)(d.a,null," ",Object(o.createElement)(z,null)):Object(o.createElement)(d.a,null,Object(o.createElement)(H,null))}))},X=n(30);function Q(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}function K(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?Q(Object(n),!0).forEach((function(t){b()(e,t,n[t])})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):Q(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))}))}return e}var $=function(){var e=Object(l.useSelect)((function(e){return e("WPTravel/TripEdit").getAllStore()}),[]),t=Object(l.dispatch)("WPTravel/TripEdit"),n=t.updateTripData,r=t.addNewItinerary,u=e.trip_outline,p=e.itineraries,f=function(t,r,o){var i=p;i[o][t]=r,n(K(K({},e),{},{itineraries:a()(i)}))},m=Object(o.useState)({stateHours:0,stateMinutes:0}),h=T()(m,2),b=h[0],v=b.stateHours,g=b.stateMinutes,O=h[1],E=function(){r({label:Object(s.__)("Day X","wp-travel"),title:Object(s.__)("Your Plan","wp-travel"),date:null,time:null,desc:""})};return Object(o.createElement)(o.Fragment,null,Object(o.createElement)("div",{className:"wp-travel-trip-itinerary"},Object(o.createElement)(d.a,null,Object(c.applyFilters)("wp_travel_before_itinerary_content","",e),
-Object(o.createElement)(i.PanelRow,null,Object(o.createElement)("label",{htmlFor:"wp-travel-trip-outline"},Object(s.__)("Trip Outline"))),
-Object(o.createElement)(i.PanelRow,{className:"wp-travel-editor"},void 0!==u&&Object(o.createElement)(X.a,{id:"wp-travel-trip-outline",value:u,onContentChange:function(t){n(K(K({},e),{},{trip_outline:t}))},name:"trip_outline"})),
-Object(o.createElement)("hr",null),
-Object(o.createElement)("div",{className:"wp-travel-itinerary-title"},
-    Object(o.createElement)("h3",{className:"wp-travel-tab-content-title"},Object(s.__)("Itinerary")),
-    void 0!==p&&p&&Object.keys(p).length>0&&Object(o.createElement)
-    (i.PanelRow,{className:"wp-travel-action-section"},Object(o.createElement)("span",null),Object(o.createElement)(i.Button,{isDefault:!0,onClick:function(){return E()}},Object(s.__)("+ Add Itinerary")))
-),
-void 0!==p&&p&&Object.keys(p).length>0?Object(o.createElement)("div",{className:"wp-travel-sortable-component"},Object(o.createElement)(k.a,{list:p,setList:function(t){return function(t){n(K(K({},e),{},{itineraries:t}))}(t)},handle:".wp-travel-trip-itinerary .components-panel__icon"},Object.keys(p).map((function(t){return Object(o.createElement)(i.PanelBody,{icon:A.a,title:"".concat(p[t].label?p[t].label:Object(s.__)("Day X","wp-travel"),", ").concat(p[t].title?p[t].title:Object(s.__)("Your Plan","wp-travel")," "),initialOpen:!1},Object(o.createElement)(i.PanelRow,null,Object(o.createElement)("label",null,Object(s.__)("Itinerary Label","wp-travel")),Object(o.createElement)(i.TextControl,{value:p[t].label?p[t].label:"",placeholder:Object(s.__)("Day X","wp-travel"),onChange:function(e){return f("label",e,t)}})),Object(o.createElement)(i.PanelRow,null,Object(o.createElement)("label",null,Object(s.__)("Itinerary Title","wp-travel")),Object(o.createElement)(i.TextControl,{value:p[t].title?p[t].title:"",placeholder:Object(s.__)("Your Plan","wp-travel"),onChange:function(e){return f("title",e,t)}})),Object(o.createElement)(i.PanelRow,null,Object(o.createElement)("label",null,Object(s.__)("Itinerary Date","wp-travel")),Object(o.createElement)(i.Dropdown,{className:"wp-travel-dropdown-container",contentClassName:"wp-travel-dropdown-popup-content",position:"bottom right",renderToggle:function(e){var n=e.isOpen,r=e.onToggle,a=moment(p[t].date?p[t].date:null);return Object(o.createElement)(i.TextControl,{value:a.isValid()?p[t].date:"",onFocus:r,"aria-expanded":n,onChange:function(){return!1},autoComplete:"off"})},renderContent:function(){var e=moment(p[t].date?p[t].date:null);return e=e.isValid()?e.toDate():new Date,Object(o.createElement)("div",{className:"wp-travel-dropdown-content-wrap wp-travel-datetimepicker wp-travel-datetimepicker-hide-time"},Object(o.createElement)(i.DateTimePicker,{currentDate:e,onChange:function(n){if(moment(n).isSame(e))return!1;f("date",moment(n).format("YYYY-MM-DD",n),t)}}))}})),Object(o.createElement)(i.PanelRow,null,Object(o.createElement)("label",null,Object(s.__)("Itinerary Time","wp-travel")),Object(o.createElement)(i.Dropdown,{className:"my-container-class-name",contentClassName:"my-popover-content-classname",position:"bottom right",renderToggle:function(e){var n=e.isOpen,r=e.onToggle,a=moment(p[t].time?p[t].time:null);return Object(o.createElement)(i.TextControl,{value:a?p[t].time:"",onFocus:r,"aria-expanded":n,onChange:function(){return!1},autoComplete:"off"})},renderContent:function(e){e.isOpen;var n=e.onToggle;return Object(o.createElement)("div",{className:"wp-travel-dropdown-content-wrap"},Object(o.createElement)("div",null,Object(o.createElement)("label",null,Object(s.__)("Hours","wp-travel")),Object(o.createElement)(i.RangeControl,{value:v,onChange:function(e){O((function(t){return K(K({},t),{},{stateHours:e})}))},min:0,max:23})),Object(o.createElement)("div",null,Object(o.createElement)("label",null,Object(s.__)("Minute","wp-travel")),Object(o.createElement)(i.RangeControl,{value:g,onChange:function(e){O((function(t){return K(K({},t),{},{stateMinutes:e})}))},min:0,max:59})),Object(o.createElement)("div",{className:"wp-travel-add-time"},Object(o.createElement)(i.Button,{onClick:function(){var e=g<10?"0"+g:g,r="".concat(v<10?"0"+v:v,":").concat(e);f("time",r,t),n()},isDefault:!0},Object(s.__)("+ Add","wp-travel"))))}})),Object(c.applyFilters)("wp_travel_itinerary_list_before_description","",t),Object(o.createElement)(i.PanelRow,null,Object(o.createElement)("label",null,Object(s.__)("Description","wp-travel"))),Object(o.createElement)(i.PanelRow,{className:"itinerary-description"},Object(o.createElement)(i.TextareaControl,{value:p[t].desc?p[t].desc:null,onChange:function(e){return f("desc",e,t)}})),Object(o.createElement)("hr",null),Object(o.createElement)(i.PanelRow,{className:"wp-travel-action-section has-right-padding"},Object(o.createElement)("span",null),Object(o.createElement)(i.Button,{isDefault:!0,onClick:function(){if(!confirm(Object(s.__)("Are you sure to delete this itinerary?","wp-travel")))return!1;var r,o;r=p.filter((function(e,n){return n!=t})),o=r,n(K(K({},e),{},{itineraries:a()(o)}))},className:"wp-traval-button-danger wp-travel-ui"},Object(s.__)("- Remove Itinerary","wp-travel"))))}))),void 0!==p&&Object.keys(p).length>1&&Object(o.createElement)(i.PanelRow,{className:"wp-travel-action-section"},Object(o.createElement)("span",null),Object(o.createElement)(i.Button,{isDefault:!0,onClick:function(){return E()}},Object(s.__)("+ Add Itinerary")))):Object(o.createElement)(o.Fragment,null,Object(o.createElement)(i.Notice,{isDismissible:!1,actions:[{label:Object(s.__)("Add Itinerary","wp-travel"),onClick:function(){E()},noDefaultClasses:!0,className:"is-link"}]},Object(s.__)("No Itineraries found.","wp-travel"))))))};Object(c.addFilter)("wp_travel_before_itinerary_content","wp_travel",(function(e,t){var n=t.trip_code;return e=[Object(o.createElement)(i.PanelRow,null,Object(o.createElement)("label",null,Object(s.__)("Trip code","wp-travel")),Object(o.createElement)("div",{className:"wp-travel-field-value"},Object(o.createElement)(i.TextControl,{value:n,onChange:function(){return!1},disabled:!0,name:""}),Object(o.createElement)("p",{class:"description"},
-Object(s.__)("Need Custom Trip Code? Check","wp-travel"),
-Object(o.createElement)("a",{href:"https://wptravel.io/downloads/wp-travel-utilities/",target:"_blank",class:"wp-travel-upsell-badge"},
-Object(s.__)("Utilities addons","wp-travel")))))].concat(a()(e))}),9);
+                                    Object(o.createElement)(i.DateTimePicker,{
+                                        currentDate:e,
+                                        onChange:function(n){
+                                            if(moment(n).isSame(e))return!1;
+                                            f("date",moment(n).format("YYYY-MM-DD",n),t)
+                                        }
+                                    })
+                                )
+                            }
+                        })
+                    ),
+                    Object(o.createElement)(i.PanelRow,null,
+                        Object(o.createElement)("label",null,
+                            Object(s.__)("Itinerary Time","wp-travel")
+                        ),
+                        Object(o.createElement)(i.Dropdown,{
+                            className:"my-container-class-name",
+                            contentClassName:"my-popover-content-classname",
+                            position:"bottom right",
+                            renderToggle:function(e){
+                                var n=e.isOpen,r=e.onToggle,a=moment(p[t].time?p[t].time:null);
+                                return Object(o.createElement)(i.TextControl,{
+                                    value:a?p[t].time:"",
+                                    onFocus:r,
+                                    "aria-expanded":n,
+                                    onChange:function(){return!1},
+                                    autoComplete:"off"
+                                })
+                            },
+                            renderContent:function(e){
+                                e.isOpen;
+                                var n=e.onToggle;
+                                return Object(o.createElement)("div",{className:"wp-travel-dropdown-content-wrap"},
+                                    Object(o.createElement)("div",null,
+                                        Object(o.createElement)("label",null,
+                                            Object(s.__)("Hours","wp-travel")
+                                        ),
+                                        Object(o.createElement)(i.RangeControl,{
+                                            value:v,
+                                            onChange:function(e){O((function(t){return K(K({},t),{},{stateHours:e})}))},
+                                            min:0,
+                                            max:23
+                                        })
+                                    ),
+                                    Object(o.createElement)("div",null,
+                                        Object(o.createElement)("label",null,
+                                            Object(s.__)("Minute","wp-travel")
+                                        ),
+                                        Object(o.createElement)(i.RangeControl,{
+                                            value:g,
+                                            onChange:function(e){O((function(t){return K(K({},t),{},{stateMinutes:e})}))},
+                                            min:0,
+                                            max:59
+                                        })
+                                    ),
+                                    Object(o.createElement)("div",{className:"wp-travel-add-time"},
+                                        Object(o.createElement)(i.Button,{
+                                            onClick:function(){
+                                                var e=g<10?"0"+g:g,
+                                                r="".concat(v<10?"0"+v:v,":").concat(e);f("time",r,t),
+                                                n()
+                                            },
+                                            isDefault:!0
+                                        },Object(s.__)("+ Add","wp-travel"))
+                                    )
+                                )
+                            }
+                        })
+                    ),
+                    Object(c.applyFilters)("wp_travel_itinerary_list_before_description","",t),
+                    Object(o.createElement)(i.PanelRow,null,
+                        Object(o.createElement)("label",null,
+                            Object(s.__)("Description","wp-travel")
+                        )
+                    ),
+                    Object(o.createElement)(i.PanelRow,{className:"itinerary-description"},
+                        Object(o.createElement)(i.TextareaControl,{
+                            value:p[t].desc?p[t].desc:null,
+                            onChange:function(e){return f("desc",e,t)}
+                        })
+                    ),
+                    Object(o.createElement)("hr",null),
+                    Object(o.createElement)(
+                        i.PanelRow,
+                        {className:"wp-travel-action-section has-right-padding"},
+                        Object(o.createElement)("span",null),
+                        Object(o.createElement)(i.Button,{
+                            isDefault:!0,
+                            onClick:function(){
+                                if(!confirm(Object(s.__)("Are you sure to delete this itinerary?","wp-travel")))
+                                    return!1;
+                                var r,o;
+                                r=p.filter((function(e,n){return n!=t})),
+                                o=r,n(K(K({},e),{},{itineraries:a()(o)}))
+                            },
+                            className:"wp-traval-button-danger wp-travel-ui"
+                        },Object(s.__)("- Remove Itinerary","wp-travel"))
+                    ))
+                }))),
+                void 0!==p&&Object.keys(p).length>1&&Object(o.createElement)(
+                    i.PanelRow,
+                    {className:"wp-travel-action-section"},
+                    Object(o.createElement)("span",null),
+                    Object(o.createElement)(i.Button,{
+                        isDefault:!0,
+                        onClick:function(){return E()}
+                    },Object(s.__)("+ Add Itinerary"))
+                )
+            ):Object(o.createElement)(o.Fragment,null,
+                Object(o.createElement)(i.Notice,{
+                    isDismissible:!1,
+                    actions:[{
+                        label:Object(s.__)("Add Itinerary","wp-travel"),
+                        onClick:function(){E()},
+                        noDefaultClasses:!0,
+                        className:"is-link"
+                    }]
+                },Object(s.__)("No Itineraries found.","wp-travel"))
+            )
+        )
+    )
+)
+};
+Object(c.addFilter)("wp_travel_before_itinerary_content","wp_travel",(function(e,t){
+    var n=t.trip_code;
+    return e=[Object(o.createElement)(i.PanelRow,null,
+        Object(o.createElement)("label",null,
+            Object(s.__)("Trip code","wp-travel")
+        ),
+        Object(o.createElement)("div",{className:"wp-travel-field-value"},
+            Object(o.createElement)(i.TextControl,{
+                value:n,
+                onChange:function(){return!1},
+                disabled:!0,
+                name:""
+            }),
+            Object(o.createElement)("p",{class:"description"},
+                Object(s.__)("Need Custom Trip Code? Check","wp-travel"),
+                Object(o.createElement)("a",{
+                    href:"https://wptravel.io/downloads/wp-travel-utilities/",
+                    target:"_blank",
+                    class:"wp-travel-upsell-badge"
+                },Object(s.__)("Utilities addons","wp-travel"))
+            )
+        )
+    )].concat(a()(e))
+}),9);
 var J=function(){
     return Object(o.createElement)("div",{className:"wp-travel-ui wp-travel-ui-card wp-travel-ui-card-no-border"},
     Object(o.createElement)($,null))
