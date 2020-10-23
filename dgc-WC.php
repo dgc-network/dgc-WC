@@ -84,7 +84,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
     //require_once $this->path('BASE_DIR','includes/functions.php');
     //require_once $this->path('BASE_DIR','includes/ajax_add_to_cart.php'); 
     //require_once $this->path('BASE_DIR','includes/shortcode.php');
-    require_once path('BASE_DIR','itinerary-metabox-edit.php');
+    require_once $_SERVER['DOCUMENT_ROOT'] . 'itinerary-metabox-edit.php';
 } else {
     //require_once $this->path('BASE_DIR','includes/no_woocommerce.php');
 }
