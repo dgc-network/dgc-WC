@@ -76,14 +76,17 @@ function wk_custom_tab_data() {
 /**
  * Load these bellow file, Only woocommerce installed
  */
+$dir = dirname( __FILE__ ); //dirname( __FILE__ )
+define( "BASE_DIR", str_replace( '\\', '/', $dir . '/' ) );
+
 if ( is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
     //require_once $this->path('BASE_DIR','includes/style_js_adding.php');
     //require_once $this->path('BASE_DIR','includes/functions.php');
     //require_once $this->path('BASE_DIR','includes/ajax_add_to_cart.php'); 
     //require_once $this->path('BASE_DIR','includes/shortcode.php');
-    require_once $this->path('BASE_DIR','itinerary-metabox-edit.php');
+    require_once path('BASE_DIR','itinerary-metabox-edit.php');
 } else {
-    require_once $this->path('BASE_DIR','includes/no_woocommerce.php');
+    //require_once $this->path('BASE_DIR','includes/no_woocommerce.php');
 }
 
 
