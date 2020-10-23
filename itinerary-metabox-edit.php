@@ -106,7 +106,7 @@ public static function trip_save_metabox( $post_id, $post ) {
 	 * Updates a post meta field based on the given post ID.
 	 * update_post_meta( int $post_id, string $meta_key, mixed $meta_value, mixed $prev_value = '' )
 	 */
-
+/*
 	if( isset( $_POST[ 'seo_title' ] ) ) {
 		update_post_meta( $post_id, 'seo_title', sanitize_text_field( $_POST[ 'seo_title' ] ) );
 	} else {
@@ -118,7 +118,7 @@ public static function trip_save_metabox( $post_id, $post ) {
 	} else {
 		delete_post_meta( $post_id, 'seo_robots' );
 	}
-
+*/
 	return $post_id;
 }
 
