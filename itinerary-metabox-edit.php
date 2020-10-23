@@ -37,7 +37,8 @@ function trip_add_metabox() {
 	add_meta_box(
 		'trip_metabox', // metabox ID
 		'Itineraries', // title
-		'trip_metabox_callback', // callback function
+		//'trip_metabox_callback', // callback function
+		array( __CLASS__, 'trip_metabox_callback' ), // callback function
 		'product', // post type or post types in array
 		'normal', // position (normal, side, advanced)
 		'default' // priority (default, low, high, core)
