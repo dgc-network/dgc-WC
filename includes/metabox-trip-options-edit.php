@@ -12,7 +12,8 @@ class Metabox_Trip_Options_Edit {
 	 * Step 3. Save meta box data
 	 */
 	function trip_options_add_metabox() {
-		remove_meta_box( 'itineraries' , 'post' , 'normal' );
+		remove_meta_box( 'itineraries' , 'product' , 'normal' );
+		/*
 		add_meta_box(
 			'trip-options', // metabox ID
 			esc_html__( 'Trip Options', 'dgc-domain' ), // title
@@ -20,7 +21,7 @@ class Metabox_Trip_Options_Edit {
 			'product', // post type or post types in array
 			'normal', // position (normal, side, advanced)
 			'default' // priority (default, low, high, core)
-		); 
+		);*/ 
 	}
  
 	function trip_options_metabox_callback( $post ) {
