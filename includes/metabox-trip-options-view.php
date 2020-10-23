@@ -33,7 +33,8 @@ class Metabox_Trip_Options_View {
 	 * Step 2. Callback function with meta box HTML
 	 * Step 3. Save meta box data
 	 */
-	function trip_add_metabox() { 
+	function trip_add_metabox() {
+/*		
 		add_meta_box(
 			'trip_metabox', // metabox ID
 			'Itineraries', // title
@@ -42,7 +43,8 @@ class Metabox_Trip_Options_View {
 			'product', // post type or post types in array
 			'normal', // position (normal, side, advanced)
 			'default' // priority (default, low, high, core)
-		); 
+		);
+*/		
 	}
  
 	function trip_metabox_callback( $post ) {
