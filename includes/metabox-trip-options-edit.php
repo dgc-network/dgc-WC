@@ -12,7 +12,7 @@ class Metabox_Trip_Options_Edit {
 	 * Step 3. Save meta box data
 	 */
 	function trip_options_add_metabox() { 
-		remove_meta_box('itinerary', 'product', 'normal');
+		remove_meta_box('itineraries', 'product', 'normal');
 		add_meta_box(
 			'trip-options', // metabox ID
 			esc_html__( 'Trip Options', 'dgc-domain' ), // title
