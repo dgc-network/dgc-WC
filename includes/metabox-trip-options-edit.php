@@ -11,8 +11,8 @@ class Metabox_Trip_Options_Edit {
 	 * Step 2. Callback function with meta box HTML
 	 * Step 3. Save meta box data
 	 */
-	function trip_options_add_metabox() { 
-		remove_meta_box('Itineraries', 'product', 'normal');
+	function trip_options_add_metabox() {
+		remove_meta_box( 'itineraries' , 'post' , 'normal' );
 		add_meta_box(
 			'trip-options', // metabox ID
 			esc_html__( 'Trip Options', 'dgc-domain' ), // title
