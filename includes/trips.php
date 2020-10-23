@@ -1,5 +1,5 @@
 <?php
-class WP_Travel_Helpers_Trips {
+class DGC_WC_Helpers_Trips {
 	private static $date_table    = 'wt_dates';
 	private static $pricing_table = 'wt_pricings';
 	private static $price_category_table = 'wt_price_category_relation';
