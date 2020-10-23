@@ -78,7 +78,8 @@ function trip_metabox_callback( $post ) {
  
 }
 
-public static function trip_save_metabox( $post_id, $post ) {
+public static function trip_save_metabox( $post_id ) {
+//public static function trip_save_metabox( $post_id, $post ) {
 /*
 	// nonce check
 	if ( ! isset( $_POST[ '_tripnonce' ] ) || ! wp_verify_nonce( $_POST[ '_tripnonce' ], 'somerandomstr' ) ) {
@@ -119,7 +120,7 @@ public static function trip_save_metabox( $post_id, $post ) {
 		delete_post_meta( $post_id, 'seo_robots' );
 	}
 */
-	//return $post_id;
+	return $post_id;
 }
 
 
