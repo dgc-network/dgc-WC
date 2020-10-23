@@ -74,95 +74,17 @@ function wk_custom_tab_data() {
 }
 
 /**
- * Add a new meta box for product
- * Step 1. add_meta_box()
- * Step 2. Callback function with meta box HTML
- * Step 3. Save meta box data
+ * Load these bellow file, Only woocommerce installed
  */
-add_action( 'admin_menu', 'trip_add_metabox' );
-function trip_add_metabox() {
- 
-	add_meta_box(
-		'trip_metabox', // metabox ID
-		'Itineraries', // title
-		'trip_metabox_callback', // callback function
-		'product', // post type or post types in array
-		'normal', // position (normal, side, advanced)
-		'default' // priority (default, low, high, core)
-	);
- 
+if ( is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
+    //require_once $this->path('BASE_DIR','includes/style_js_adding.php');
+    //require_once $this->path('BASE_DIR','includes/functions.php');
+    //require_once $this->path('BASE_DIR','includes/ajax_add_to_cart.php'); 
+    //require_once $this->path('BASE_DIR','includes/shortcode.php');
+    require_once $this->path('BASE_DIR','itinerary-metabox-edit.php');
+} else {
+    require_once $this->path('BASE_DIR','includes/no_woocommerce.php');
 }
- 
-function trip_metabox_callback( $post ) {
- 
-	$seo_title = get_post_meta( $post->ID, 'seo_title', true );
-	$seo_robots = get_post_meta( $post->ID, 'seo_robots', true );
- 
-	// nonce, actually I think it is not necessary here
-	wp_nonce_field( 'somerandomstr', '_tripnonce' );
- 
-	echo '<table class="form-table">
-		<tbody>
-			<tr>
-				<th><label for="seo_title">SEO title</label></th>
-				<td><input type="text" id="seo_title" name="seo_title" value="' . esc_attr( $seo_title ) . '" class="regular-text"></td>
-			</tr>
-			<tr>
-				<th><label for="seo_tobots">SEO robots</label></th>
-				<td>
-					<select id="seo_robots" name="seo_robots">
-						<option value="">Select...</option>
-						<option value="index,follow"' . selected( 'index,follow', $seo_robots, false ) . '>Show for search engines</option>
-						<option value="noindex,nofollow"' . selected( 'noindex,nofollow', $seo_robots, false ) . '>Hide for search engines</option>
-					</select>
-				</td>
-			</tr>
-		</tbody>
-	</table>';
- 
-}
-
-add_action( 'save_post', 'trip_save_meta', 10, 2 );
-function trip_save_meta( $post_id, $post ) {
- 
-	// nonce check
-	if ( ! isset( $_POST[ '_tripnonce' ] ) || ! wp_verify_nonce( $_POST[ '_tripnonce' ], 'somerandomstr' ) ) {
-		return $post_id;
-	}
- 
-	// check current use permissions
-	$post_type = get_post_type_object( $post->post_type );
- 
-	if ( ! current_user_can( $post_type->cap->edit_post, $post_id ) ) {
-		return $post_id;
-	}
- 
-	// Do not save the data if autosave
-	if ( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE ) {
-		return $post_id;
-	}
- 
-	// define your own post type here
-	if( $post->post_type != 'product' ) {
-		return $post_id;
-	}
- 
-	if( isset( $_POST[ 'seo_title' ] ) ) {
-		update_post_meta( $post_id, 'seo_title', sanitize_text_field( $_POST[ 'seo_title' ] ) );
-	} else {
-		delete_post_meta( $post_id, 'seo_title' );
-	}
-	if( isset( $_POST[ 'seo_robots' ] ) ) {
-		update_post_meta( $post_id, 'seo_robots', sanitize_text_field( $_POST[ 'seo_robots' ] ) );
-	} else {
-		delete_post_meta( $post_id, 'seo_robots' );
-	}
- 
-	return $post_id;
-}
-
-
-
 
 
 /**
