@@ -5,7 +5,8 @@ class Metabox_Itinerary_Edit {
 		//add_action( 'admin_menu', 'trip_add_metabox' );
 		add_action( 'admin_menu', array( __CLASS__, 'trip_add_metabox' ) );
 		//add_action( 'save_post', 'trip_save_meta', 10, 2 );
-		add_action( 'save_post', array( __CLASS__, 'trip_save_metabox' ) );
+		//add_action( 'save_post', array( __CLASS__, 'trip_save_metabox' ) );
+		add_action( 'save_post', array( __CLASS__, 'trip_save_metabox' ), 10, 2 );
 	}
 
 	public static function register_meta_box() {
@@ -78,8 +79,8 @@ class Metabox_Itinerary_Edit {
  
 	}
 
-	function trip_save_metabox( $post_id ) {
-	//public static function trip_save_metabox( $post_id, $post ) {
+	//function trip_save_metabox( $post_id ) {
+	function trip_save_metabox( $post_id, $post ) {
 	/*
 		// nonce check
 		if ( ! isset( $_POST[ '_tripnonce' ] ) || ! wp_verify_nonce( $_POST[ '_tripnonce' ], 'somerandomstr' ) ) {
