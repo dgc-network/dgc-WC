@@ -80,7 +80,7 @@ function trip_metabox_callback( $post ) {
 
 public static function trip_save_metabox( $post_id ) {
 //public static function trip_save_metabox( $post_id, $post ) {
-
+/*
 	// nonce check
 	if ( ! isset( $_POST[ '_tripnonce' ] ) || ! wp_verify_nonce( $_POST[ '_tripnonce' ], 'somerandomstr' ) ) {
 		return $post_id;
@@ -102,7 +102,7 @@ public static function trip_save_metabox( $post_id ) {
 	if( $post->post_type != 'product' ) {
 		return $post_id;
 	}
-
+*/
 	/**
 	 * Updates a post meta field based on the given post ID.
 	 * update_post_meta( int $post_id, string $meta_key, mixed $meta_value, mixed $prev_value = '' )
