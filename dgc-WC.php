@@ -22,23 +22,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Including Plugin file for security
- * @since 1.0.0
- */
-include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-
-/**
  * Defining constant
  */
 $dir = dirname( __FILE__ ); //dirname( __FILE__ )
 define( "BASE_DIR", str_replace( '\\', '/', $dir . '/' ) );
 
 /**
+ * Including Plugin file for security
+ * @since 1.0.0
+ */
+include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+
+/**
  * Load these bellow file, Only woocommerce installed
  */
 if ( is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
-    require_once BASE_DIR . 'includes/metabox-itinerary-edit.php';
-    require_once BASE_DIR . 'includes/metabox-itinerary-view.php';
+    require_once BASE_DIR . 'includes/metabox-trip-options-edit.php';
+    require_once BASE_DIR . 'includes/metabox-trip-options-view.php';
+    require_once BASE_DIR . 'includes/trips.php';
 } else {
     //require_once $this->path('BASE_DIR','includes/no_woocommerce.php');
 }

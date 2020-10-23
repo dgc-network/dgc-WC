@@ -1,5 +1,5 @@
 <?php
-class Metabox_Itinerary_View {
+class Metabox_Trip_Options_View {
 	public static function init() {
 		add_action( 'add_meta_boxes', array( __CLASS__, 'register_meta_box' ) );
 		//add_action( 'admin_menu', 'trip_add_metabox' );
@@ -124,7 +124,7 @@ class Metabox_Itinerary_View {
 	}
 }
 
-Metabox_Itinerary_View::init();
+Metabox_Trip_Options_View::init();
 
 /**
  * Add a custom product data tab

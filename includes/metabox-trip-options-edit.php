@@ -1,31 +1,8 @@
 <?php
-class Metabox_Itinerary_Edit {
+class Metabox_Trip_Options_Edit {
 	public static function init() {
-		add_action( 'add_meta_boxes', array( __CLASS__, 'register_meta_box' ) );
-		//add_action( 'admin_menu', 'trip_add_metabox' );
-		add_action( 'admin_menu', array( __CLASS__, 'trip_add_metabox' ) );
-		//add_action( 'save_post', 'trip_save_meta', 10, 2 );
-		//add_action( 'save_post', array( __CLASS__, 'trip_save_metabox' ) );
-		add_action( 'save_post', array( __CLASS__, 'trip_save_metabox' ), 10, 2 );
-	}
-
-	public static function register_meta_box() {
-		$settings        = wp_travel_get_settings();
-		$switch_to_react = $settings['wp_travel_switch_to_react'];
-		if ( 'yes' === $switch_to_react ) {
-			add_meta_box( 
-				'wp-travel-trip-options', 
-				esc_html__( 'Trip Options', 'wp-travel' ), 
-				array( __CLASS__, 'meta_box_callback' ), // callback function
-				WP_TRAVEL_POST_TYPE, 
-				'advanced', 
-				'high' 
-			);
-		}
-	}
-
-	public static function meta_box_callback() {
-		echo '<div id="wp-travel-trip-options-wrap"></div>';
+		add_action( 'admin_menu', array( __CLASS__, 'trip_options_add_metabox' ) );
+		add_action( 'save_post', array( __CLASS__, 'trip_options_save_metabox' ), 10, 2 );
 	}
 
 	/**
@@ -34,19 +11,18 @@ class Metabox_Itinerary_Edit {
 	 * Step 2. Callback function with meta box HTML
 	 * Step 3. Save meta box data
 	 */
-	function trip_add_metabox() { 
+	function trip_options_add_metabox() { 
 		add_meta_box(
-			'trip_metabox', // metabox ID
-			'Itineraries', // title
-			//'trip_metabox_callback', // callback function
-			array( __CLASS__, 'trip_metabox_callback' ), // callback function
+			'trip-options', // metabox ID
+			esc_html__( 'Trip Options', 'dgc-domain' ), // title
+			array( __CLASS__, 'trip_option_metabox_callback' ), // callback function
 			'product', // post type or post types in array
 			'normal', // position (normal, side, advanced)
 			'default' // priority (default, low, high, core)
 		); 
 	}
  
-	function trip_metabox_callback( $post ) {
+	function trip_options_metabox_callback( $post ) {
 
 		/**
 		 * Retrieves a post meta field for the given post ID.
@@ -79,9 +55,8 @@ class Metabox_Itinerary_Edit {
  
 	}
 
-	//function trip_save_metabox( $post_id ) {
-	function trip_save_metabox( $post_id, $post ) {
-	/*
+	function trip_options_save_metabox( $post_id, $post ) {
+	
 		// nonce check
 		if ( ! isset( $_POST[ '_tripnonce' ] ) || ! wp_verify_nonce( $_POST[ '_tripnonce' ], 'somerandomstr' ) ) {
 			return $post_id;
@@ -103,7 +78,7 @@ class Metabox_Itinerary_Edit {
 		if( $post->post_type != 'product' ) {
 			return $post_id;
 		}
-	*/
+	
 		/**
 		 * Updates a post meta field based on the given post ID.
 		 * update_post_meta( int $post_id, string $meta_key, mixed $meta_value, mixed $prev_value = '' )
@@ -125,10 +100,10 @@ class Metabox_Itinerary_Edit {
 	}
 }
 
-Metabox_Itinerary_Edit::init();
+Metabox_Trip_Options_Edit::init();
 
 /**
- * Add a custom product data tab
+ * Add a custom Product Data tab
  */
 add_filter( 'woocommerce_product_data_tabs', 'wk_custom_product_tab', 10, 1 );
 function wk_custom_product_tab( $default_tabs ) {
