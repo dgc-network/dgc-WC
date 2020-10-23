@@ -119,7 +119,7 @@ public static function trip_save_metabox( $post_id, $post ) {
 		delete_post_meta( $post_id, 'seo_robots' );
 	}
 */
-	return $post_id;
+	//return $post_id;
 }
 
 
