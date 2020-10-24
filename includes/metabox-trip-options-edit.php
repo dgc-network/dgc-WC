@@ -154,7 +154,7 @@ add_action( 'add_meta_boxes_post', 'add_post_metabox' );
 
 function add_post_metabox() {
     //wp_enqueue_script( 'mytabs', get_bloginfo( 'stylesheet_directory' ). '/mytabs.js', array( 'jquery-ui-tabs' ) );
-    wp_enqueue_script( 'mytabs', 'mytabs.js', array( 'jquery-ui-tabs' ) );
+    wp_enqueue_script( 'mytabs', plugins_url( '/includes/mytabs.js', __FILE__ ), array( 'jquery-ui-tabs' ) );
     add_meta_box( 'examplebox' , __('Example box'), 'my_example_metabox', 'post', 'side', 'core'/*,array()*/);
 }
 
