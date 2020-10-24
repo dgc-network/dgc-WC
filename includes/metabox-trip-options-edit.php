@@ -15,13 +15,38 @@ class Metabox_Trip_Options_Edit {
 		add_meta_box(
 			'trip-options', // metabox ID
 			esc_html__( 'Trip Options', 'dgc-domain' ), // title
-			array( __CLASS__, 'trip_options_metabox_callback' ), // callback function
+			//array( __CLASS__, 'trip_options_metabox_callback' ), // callback function
+			array( __CLASS__, 'my_example_metabox' ), // callback function
 			'product', // post type or post types in array
 			'normal', // position (normal, side, advanced)
 			'default' // priority (default, low, high, core)
 		);
+		//wp_enqueue_script( 'mytabs', get_bloginfo( 'stylesheet_directory' ). '/mytabs.js', array( 'jquery-ui-tabs' ) );
+		wp_enqueue_script( 'mytabs', 'mytabs.js', array( 'jquery-ui-tabs' ) );
 	}
  
+	function my_example_metabox() {
+		?>
+		<div id="mytabs">
+			<ul class="category-tabs">
+				<li><a href="#frag1">Tab 1</a></li>
+				<li><a href="#frag2">Tab 2</a></li>
+				<li><a href="#frag3">Tab 3</a></li>
+			</ul>
+			<br class="clear" />
+			<div id="frag1">
+				<p>#1 - Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+			</div>
+			<div class="hidden" id="frag2">
+				<p>#2 - Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+			</div>
+			<div class="hidden" id="frag3">
+				<p>#3 - Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+			</div>
+		</div>
+		<?php
+	}
+
 	function trip_options_metabox_callback( $post ) {
 
 		/**
@@ -119,6 +144,40 @@ function wk_custom_product_tab( $default_tabs ) {
 add_action( 'woocommerce_product_data_panels', 'wk_custom_tab_data' );
 function wk_custom_tab_data() {
    echo '<div id="wk_custom_tab_data" class="panel woocommerce_options_panel">// add content here</div>';
+}
+
+/*
+    Code assumes it will be in the theme functions.php file
+    Update the enqueue path if using it elsewhere
+*/
+add_action( 'add_meta_boxes_post', 'add_post_metabox' );
+
+function add_post_metabox() {
+    //wp_enqueue_script( 'mytabs', get_bloginfo( 'stylesheet_directory' ). '/mytabs.js', array( 'jquery-ui-tabs' ) );
+    wp_enqueue_script( 'mytabs', 'mytabs.js', array( 'jquery-ui-tabs' ) );
+    add_meta_box( 'examplebox' , __('Example box'), 'my_example_metabox', 'post', 'side', 'core'/*,array()*/);
+}
+
+function my_example_metabox() {
+    ?>
+    <div id="mytabs">
+        <ul class="category-tabs">
+            <li><a href="#frag1">Tab 1</a></li>
+            <li><a href="#frag2">Tab 2</a></li>
+            <li><a href="#frag3">Tab 3</a></li>
+        </ul>
+        <br class="clear" />
+        <div id="frag1">
+            <p>#1 - Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+        </div>
+        <div class="hidden" id="frag2">
+            <p>#2 - Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+        </div>
+        <div class="hidden" id="frag3">
+            <p>#3 - Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+        </div>
+    </div>
+    <?php
 }
 
 
