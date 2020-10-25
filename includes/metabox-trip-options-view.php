@@ -7,7 +7,7 @@ class Metabox_Trip_Options_View {
 		//add_action( 'save_post', 'trip_save_meta', 10, 2 );
 		add_action( 'save_post', array( __CLASS__, 'trip_save_metabox' ) );
 	}
-
+/*
 	public static function register_meta_box() {
 		$settings        = wp_travel_get_settings();
 		$switch_to_react = $settings['wp_travel_switch_to_react'];
@@ -22,7 +22,7 @@ class Metabox_Trip_Options_View {
 			);
 		}
 	}
-
+*/
 	public static function meta_box_callback() {
 		echo '<div id="wp-travel-trip-options-wrap"></div>';
 	}
