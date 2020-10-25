@@ -44,6 +44,12 @@ class Metabox_Trip_Options_Edit {
 				<p>#3 - Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
 			</div>
 		</div>
+		<script>
+			jQuery(document).ready(function($) {
+    		$("#mytabs .hidden").removeClass('hidden');
+    		$("#mytabs").tabs();
+			});			
+		</script>
 		<?php
 	}
 
