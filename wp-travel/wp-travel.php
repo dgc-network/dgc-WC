@@ -241,8 +241,8 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			include sprintf( '%s/inc/class-assets.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-default-form-fields.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-email-template.php', WP_TRAVEL_ABSPATH );
-			include sprintf( '%s/inc/payments/wp-travel-payments.php', dirname( __FILE__ ) );
-			include sprintf( '%s/inc/license/wp-travel-license.php', dirname( __FILE__ ) );
+			//include sprintf( '%s/inc/payments/wp-travel-payments.php', dirname( __FILE__ ) );
+			//include sprintf( '%s/inc/license/wp-travel-license.php', dirname( __FILE__ ) );
 			include sprintf( '%s/inc/class-install.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/currencies.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/countries.php', WP_TRAVEL_ABSPATH );
@@ -257,11 +257,11 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			include sprintf( '%s/inc/template-functions.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-addons-settings.php', WP_TRAVEL_ABSPATH ); // @since 3.0.1
 
-			include sprintf( '%s/inc/coupon/wp-travel-coupon.php', WP_TRAVEL_ABSPATH );
+			//include sprintf( '%s/inc/coupon/wp-travel-coupon.php', WP_TRAVEL_ABSPATH );
 
-			include_once sprintf( '%s/inc/gateways/standard-paypal/class-wp-travel-gateway-paypal-request.php', WP_TRAVEL_ABSPATH );
-			include_once sprintf( '%s/inc/gateways/standard-paypal/paypal-functions.php', WP_TRAVEL_ABSPATH );
-			include_once sprintf( '%s/inc/gateways/bank-deposit/bank-deposit.php', WP_TRAVEL_ABSPATH );
+			//include_once sprintf( '%s/inc/gateways/standard-paypal/class-wp-travel-gateway-paypal-request.php', WP_TRAVEL_ABSPATH );
+			//include_once sprintf( '%s/inc/gateways/standard-paypal/paypal-functions.php', WP_TRAVEL_ABSPATH );
+			//include_once sprintf( '%s/inc/gateways/bank-deposit/bank-deposit.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/email-template-functions.php', WP_TRAVEL_ABSPATH );
 			// Open Graph Tags @since 1.7.6
 			include sprintf( '%s/inc/og-tags.php', WP_TRAVEL_ABSPATH );
@@ -271,13 +271,13 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			include sprintf( '%s/inc/class-taxonomies.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-itinerary-template.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-shortcode.php', WP_TRAVEL_ABSPATH );
-			include sprintf( '%s/inc/widgets/class-wp-travel-widget-search.php', WP_TRAVEL_ABSPATH );
-			include sprintf( '%s/inc/widgets/class-wp-travel-widget-featured.php', WP_TRAVEL_ABSPATH );
-			include sprintf( '%s/inc/widgets/class-wp-travel-widget-location.php', WP_TRAVEL_ABSPATH );
-			include sprintf( '%s/inc/widgets/class-wp-travel-widget-trip-type.php', WP_TRAVEL_ABSPATH );
-			include sprintf( '%s/inc/widgets/class-wp-travel-widget-sale-widget.php', WP_TRAVEL_ABSPATH );
-			include sprintf( '%s/inc/widgets/class-wp-travel-search-filters-widget.php', WP_TRAVEL_ABSPATH );
-			include sprintf( '%s/inc/widgets/class-wp-travel-trip-enquiry-form-widget.php', WP_TRAVEL_ABSPATH );
+			//include sprintf( '%s/inc/widgets/class-wp-travel-widget-search.php', WP_TRAVEL_ABSPATH );
+			//include sprintf( '%s/inc/widgets/class-wp-travel-widget-featured.php', WP_TRAVEL_ABSPATH );
+			//include sprintf( '%s/inc/widgets/class-wp-travel-widget-location.php', WP_TRAVEL_ABSPATH );
+			//include sprintf( '%s/inc/widgets/class-wp-travel-widget-trip-type.php', WP_TRAVEL_ABSPATH );
+			//include sprintf( '%s/inc/widgets/class-wp-travel-widget-sale-widget.php', WP_TRAVEL_ABSPATH );
+			//include sprintf( '%s/inc/widgets/class-wp-travel-search-filters-widget.php', WP_TRAVEL_ABSPATH );
+			//include sprintf( '%s/inc/widgets/class-wp-travel-trip-enquiry-form-widget.php', WP_TRAVEL_ABSPATH );
 
 			/**
 			 * Include Query Classes.
@@ -301,9 +301,9 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			 *
 			 * @since 1.2.3
 			 */
-			include sprintf( '%s/inc/cart/class-cart.php', WP_TRAVEL_ABSPATH );
-			include sprintf( '%s/inc/cart/class-checkout.php', WP_TRAVEL_ABSPATH );
-			include sprintf( '%s/inc/cron/class-wp-travel-cron.php', WP_TRAVEL_ABSPATH );
+			//include sprintf( '%s/inc/cart/class-cart.php', WP_TRAVEL_ABSPATH );
+			//include sprintf( '%s/inc/cart/class-checkout.php', WP_TRAVEL_ABSPATH );
+			//include sprintf( '%s/inc/cron/class-wp-travel-cron.php', WP_TRAVEL_ABSPATH );
 
 			if ( $this->is_request( 'admin' ) ) {
 				include sprintf( '%s/inc/admin/admin-helper.php', WP_TRAVEL_ABSPATH );
@@ -328,7 +328,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 
 			if ( ! class_exists( 'WP_Travel_Plugin_Updater' ) ) {
 				// load our custom updater.
-				include sprintf( '%s/inc/license/wp-travel-plugin-updater.php', WP_TRAVEL_ABSPATH );
+				//include sprintf( '%s/inc/license/wp-travel-plugin-updater.php', WP_TRAVEL_ABSPATH );
 			}
 
 		}
