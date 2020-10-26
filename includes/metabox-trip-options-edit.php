@@ -44,11 +44,56 @@ class Metabox_Trip_Options_Edit {
 				<p>#3 - Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
 			</div>
 		</div>
+
+		<div class="flat-form">
+            <ul class="tabs">
+                <li>
+                    <a  href="#tab1" class="active" >Tab1 </a>
+                </li>
+                <li>
+                    <a  href="#tab2" >Tab2</a>
+                </li>
+            </ul>
+            <div id="tab1"  class="form-action show">
+                Hello1
+            </div>
+             <div id="tab2"  class="form-action hide">
+                Hello2
+            </div>
+        </div>
+				
 		<script>
 			jQuery(document).ready(function($) {
     		$("#mytabs .hidden").removeClass('hidden');
     		$("#mytabs").tabs();
-			});			
+			});
+			
+			(function ($) {
+        		// constants
+        		var SHOW_CLASS = 'show',
+      			HIDE_CLASS = 'hide',
+      			ACTIVE_CLASS = 'active';
+
+        		$('.tabs').on('click', 'li a', function (e) {
+            		e.preventDefault();
+            		var $tab = $(this),
+         			href = $tab.attr('href');
+
+            		$('.active').removeClass(ACTIVE_CLASS);
+            		$tab.addClass(ACTIVE_CLASS);
+
+            		$('.show')
+        			.removeClass(SHOW_CLASS)
+        			.addClass(HIDE_CLASS)
+        			.hide();
+
+            		$(href)
+        			.removeClass(HIDE_CLASS)
+        			.addClass(SHOW_CLASS)
+        			.hide()
+        			.fadeIn(0); // changed from 550 to 0 since there was a jump while switching tabs. Try adding back 550 and see the jumping, if you dont want this to happen leave it as 0 itslef, else change to 550.
+        		});
+    		})(jQuery);			
 		</script>
 		<?php
 	}
