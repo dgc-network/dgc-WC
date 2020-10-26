@@ -16,7 +16,7 @@ class Metabox_Trip_Options_Edit {
 			'trip-options', // metabox ID
 			esc_html__( 'Trip Options', 'dgc-domain' ), // title
 			//array( __CLASS__, 'trip_options_metabox_callback' ), // callback function
-			array( __CLASS__, 'horizontal_example_metabox' ), // callback function
+			array( __CLASS__, 'my_example_metabox' ), // callback function
 			'product', // post type or post types in array
 			'normal', // position (normal, side, advanced)
 			'default' // priority (default, low, high, core)
