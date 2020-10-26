@@ -39,7 +39,7 @@ include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 if ( is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
     require_once BASE_DIR . 'includes/metabox-trip-options-edit.php';
     require_once BASE_DIR . 'includes/metabox-trip-options-view.php';
-    require_once BASE_DIR . 'includes/trips.php';
+    require_once BASE_DIR . 'wp-travel/wp-travel.php';
 } else {
     //require_once $this->path('BASE_DIR','includes/no_woocommerce.php');
 }
