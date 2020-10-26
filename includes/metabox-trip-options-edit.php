@@ -25,33 +25,9 @@ class Metabox_Trip_Options_Edit {
 		wp_enqueue_script( 'mytabs', 'mytabs.js', array( 'jquery-ui-tabs' ) );
 	}
  
-	function horizontal_example_metabox() {
+	function my_example_metabox() {
 		?>
-		<div id="mytabs">
-			<ul class="category-tabs">
-				<li><a href="#frag1">Tab 1</a></li>
-				<li><a href="#frag2">Tab 2</a></li>
-				<li><a href="#frag3">Tab 3</a></li>
-			</ul>
-			<br class="clear" />
-			<div id="frag1">
-				<p>#1 - Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
-			</div>
-			<div class="hidden" id="frag2">
-				<p>#2 - Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
-			</div>
-			<div class="hidden" id="frag3">
-				<p>#3 - Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
-			</div>
-		</div>
-
-		<script>
-			jQuery(document).ready(function($) {
-    			$("#mytabs .hidden").removeClass('hidden');
-    			$("#mytabs").tabs();
-			});
-		</script>
-
+<html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
@@ -103,6 +79,82 @@ body {font-family: "Lato", sans-serif;}
 }
 </style>
 </head>
+<body>
+
+<h2>Vertical Tabs</h2>
+<p>Click on the buttons inside the tabbed menu:</p>
+
+<div class="tab">
+  <button class="tablinks" onclick="openCity(event, 'London')" id="defaultOpen">London</button>
+  <button class="tablinks" onclick="openCity(event, 'Paris')">Paris</button>
+  <button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button>
+</div>
+
+<div id="London" class="tabcontent">
+  <h3>London</h3>
+  <p>London is the capital city of England.</p>
+</div>
+
+<div id="Paris" class="tabcontent">
+  <h3>Paris</h3>
+  <p>Paris is the capital of France.</p> 
+</div>
+
+<div id="Tokyo" class="tabcontent">
+  <h3>Tokyo</h3>
+  <p>Tokyo is the capital of Japan.</p>
+</div>
+
+<script>
+function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+</script>
+   
+</body>
+</html> 
+		<?php
+	}
+
+	function horizontal_example_metabox() {
+		?>
+		<div id="mytabs">
+			<ul class="category-tabs">
+				<li><a href="#frag1">Tab 1</a></li>
+				<li><a href="#frag2">Tab 2</a></li>
+				<li><a href="#frag3">Tab 3</a></li>
+			</ul>
+			<br class="clear" />
+			<div id="frag1">
+				<p>#1 - Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+			</div>
+			<div class="hidden" id="frag2">
+				<p>#2 - Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+			</div>
+			<div class="hidden" id="frag3">
+				<p>#3 - Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+			</div>
+		</div>
+
+		<script>
+			jQuery(document).ready(function($) {
+    			$("#mytabs .hidden").removeClass('hidden');
+    			$("#mytabs").tabs();
+			});
+		</script>
 		<?php
 	}
 
