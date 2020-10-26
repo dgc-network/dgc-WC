@@ -16,7 +16,7 @@ class Metabox_Trip_Options_Edit {
 			'trip-options', // metabox ID
 			esc_html__( 'Trip Options', 'dgc-domain' ), // title
 			//array( __CLASS__, 'trip_options_metabox_callback' ), // callback function
-			array( __CLASS__, 'my_example_metabox' ), // callback function
+			array( __CLASS__, 'horizontal_example_metabox' ), // callback function
 			'product', // post type or post types in array
 			'normal', // position (normal, side, advanced)
 			'default' // priority (default, low, high, core)
@@ -106,6 +106,34 @@ body {font-family: "Lato", sans-serif;}
 </div>
 
 <script>
+
+	(function ($) {
+        		// constants
+        		var SHOW_CLASS = 'show',
+      			HIDE_CLASS = 'hide',
+      			ACTIVE_CLASS = 'active';
+
+        $('.tab').on('click', 'tablinks', function (e) {
+            e.preventDefault();
+            var $tab = $(this),
+         	href = $tab.attr('href');
+
+            $('.active').removeClass(ACTIVE_CLASS);
+            $tab.addClass(ACTIVE_CLASS);
+
+            $('.show')
+        	.removeClass(SHOW_CLASS)
+        	.addClass(HIDE_CLASS)
+        	.hide();
+
+            $(href)
+        	.removeClass(HIDE_CLASS)
+        	.addClass(SHOW_CLASS)
+        	.hide()
+        	.fadeIn(0); // changed from 550 to 0 since there was a jump while switching tabs. Try adding back 550 and see the jumping, if you dont want this to happen leave it as 0 itslef, else change to 550.
+        });
+    })(jQuery);			
+
 function openCity(evt, cityName) {
   var i, tabcontent, tablinks;
   tabcontent = document.getElementsByClassName("tabcontent");
@@ -149,6 +177,7 @@ document.getElementById("defaultOpen").click();
 			</div>
 		</div>
 
+		<script src="vertical.js"></script>
 		<script>
 			jQuery(document).ready(function($) {
     			$("#mytabs .hidden").removeClass('hidden');
@@ -162,17 +191,13 @@ document.getElementById("defaultOpen").click();
 		?>
 		<div class="flat-form">
             <ul class="tabs">
-                <li>
-                    <a  href="#tab1" class="active" >Tab1 </a>
-                </li>
-                <li>
-                    <a  href="#tab2" >Tab2</a>
-                </li>
+                <li><a href="#tab1" class="active" >Tab1 </a></li>
+                <li><a href="#tab2" >Tab2</a></li>
             </ul>
-            <div id="tab1"  class="form-action show">
+            <div id="tab1" class="form-action show">
                 Hello1
             </div>
-             <div id="tab2"  class="form-action hide">
+            <div id="tab2" class="form-action hide">
                 Hello2
             </div>
         </div>
