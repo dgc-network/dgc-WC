@@ -108,10 +108,13 @@ class Metabox_Trip_Options_Edit {
       			HIDE_CLASS = 'hide',
       			ACTIVE_CLASS = 'active';
 
+				$(".tabcontent").removeClass('hidden');
+				$(".tabcontent #London").removeClass('show');
         		$('.tab').on('click', 'tablinks', function (e) {
             		e.preventDefault();
             		var $tab = $(this),
-         			href = $tab.attr('href');
+					href = $tab.attr('href');
+         			button = $tab.attr('button');
 
             		$('.active').removeClass(ACTIVE_CLASS);
             		$tab.addClass(ACTIVE_CLASS);
