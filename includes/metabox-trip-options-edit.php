@@ -25,7 +25,7 @@ class Metabox_Trip_Options_Edit {
 		wp_enqueue_script( 'mytabs', 'mytabs.js', array( 'jquery-ui-tabs' ) );
 	}
  
-	function my_example_metabox() {
+	function horizontal_example_metabox() {
 		?>
 		<div id="mytabs">
 			<ul class="category-tabs">
@@ -45,6 +45,17 @@ class Metabox_Trip_Options_Edit {
 			</div>
 		</div>
 
+		<script>
+			jQuery(document).ready(function($) {
+    			$("#mytabs .hidden").removeClass('hidden');
+    			$("#mytabs").tabs();
+			});
+		</script>
+		<?php
+	}
+
+	function vertical_example_metabox() {
+		?>
 		<div class="flat-form">
             <ul class="tabs">
                 <li>
@@ -63,11 +74,6 @@ class Metabox_Trip_Options_Edit {
         </div>
 				
 		<script>
-			jQuery(document).ready(function($) {
-    		$("#mytabs .hidden").removeClass('hidden');
-    		$("#mytabs").tabs();
-			});
-			
 			(function ($) {
         		// constants
         		var SHOW_CLASS = 'show',
