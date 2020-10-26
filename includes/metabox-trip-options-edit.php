@@ -27,133 +27,128 @@ class Metabox_Trip_Options_Edit {
  
 	function my_example_metabox() {
 		?>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-* {box-sizing: border-box}
-body {font-family: "Lato", sans-serif;}
+		<style>
+			* {box-sizing: border-box}
+			body {font-family: "Lato", sans-serif;}
 
-/* Style the tab */
-.tab {
-  float: left;
-  border: 1px solid #ccc;
-  background-color: #f1f1f1;
-  width: 30%;
-  height: 300px;
-}
+			/* Style the tab */
+			.tab {
+  				float: left;
+  				border: 1px solid #ccc;
+  				background-color: #f1f1f1;
+  				width: 30%;
+  				height: 300px;
+			}
 
-/* Style the buttons inside the tab */
-.tab button {
-  display: block;
-  background-color: inherit;
-  color: black;
-  padding: 22px 16px;
-  width: 100%;
-  border: none;
-  outline: none;
-  text-align: left;
-  cursor: pointer;
-  transition: 0.3s;
-  font-size: 17px;
-}
+			/* Style the buttons inside the tab */
+			.tab button {
+  				display: block;
+  				background-color: inherit;
+  				color: black;
+  				padding: 22px 16px;
+  				width: 100%;
+  				border: none;
+  				outline: none;
+  				text-align: left;
+  				cursor: pointer;
+  				transition: 0.3s;
+  				font-size: 17px;
+			}
 
-/* Change background color of buttons on hover */
-.tab button:hover {
-  background-color: #ddd;
-}
+			/* Change background color of buttons on hover */
+			.tab button:hover {
+  				background-color: #ddd;
+			}
 
-/* Create an active/current "tab button" class */
-.tab button.active {
-  background-color: #ccc;
-}
+			/* Create an active/current "tab button" class */
+			.tab button.active {
+  				background-color: #ccc;
+			}
 
-/* Style the tab content */
-.tabcontent {
-  float: left;
-  padding: 0px 12px;
-  border: 1px solid #ccc;
-  width: 70%;
-  border-left: none;
-  height: 300px;
-}
-</style>
-</head>
-<body>
+			/* Style the tab content */
+			.tabcontent {
+  				float: left;
+  				padding: 0px 12px;
+  				border: 1px solid #ccc;
+  				width: 70%;
+  				border-left: none;
+  				height: 300px;
+			}
+		</style>
 
-<h2>Vertical Tabs</h2>
-<p>Click on the buttons inside the tabbed menu:</p>
+		<body>
+			<h2>Vertical Tabs</h2>
+			<p>Click on the buttons inside the tabbed menu:</p>
 
-<div class="tab">
-  <button class="tablinks" onclick="openCity(event, 'London')" id="defaultOpen">London</button>
-  <button class="tablinks" onclick="openCity(event, 'Paris')">Paris</button>
-  <button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button>
-</div>
+			<div class="tab">
+  				<button class="tablinks" id="defaultOpen">London</button>
+  				<button class="tablinks" >Paris</button>
+  				<button class="tablinks" >Tokyo</button>
+			</div>
 
-<div id="London" class="tabcontent">
-  <h3>London</h3>
-  <p>London is the capital city of England.</p>
-</div>
+			<div class="tabcontent" id="London">
+  				<h3>London</h3>
+  				<p>London is the capital city of England.</p>
+			</div>
 
-<div id="Paris" class="tabcontent">
-  <h3>Paris</h3>
-  <p>Paris is the capital of France.</p> 
-</div>
+			<div class="tabcontent" id="Paris">
+  				<h3>Paris</h3>
+  				<p>Paris is the capital of France.</p> 
+			</div>
 
-<div id="Tokyo" class="tabcontent">
-  <h3>Tokyo</h3>
-  <p>Tokyo is the capital of Japan.</p>
-</div>
+			<div class="tabcontent" id="Tokyo">
+  				<h3>Tokyo</h3>
+  				<p>Tokyo is the capital of Japan.</p>
+			</div>
 
-<script>
-
-	(function ($) {
+		<script>
+			(function ($) {
         		// constants
         		var SHOW_CLASS = 'show',
       			HIDE_CLASS = 'hide',
       			ACTIVE_CLASS = 'active';
 
-        $('.tab').on('click', 'tablinks', function (e) {
-            e.preventDefault();
-            var $tab = $(this),
-         	href = $tab.attr('href');
+        		$('.tab').on('click', 'tablinks', function (e) {
+            		e.preventDefault();
+            		var $tab = $(this),
+         			href = $tab.attr('href');
 
-            $('.active').removeClass(ACTIVE_CLASS);
-            $tab.addClass(ACTIVE_CLASS);
+            		$('.active').removeClass(ACTIVE_CLASS);
+            		$tab.addClass(ACTIVE_CLASS);
 
-            $('.show')
-        	.removeClass(SHOW_CLASS)
-        	.addClass(HIDE_CLASS)
-        	.hide();
+            		$('.show')
+        			.removeClass(SHOW_CLASS)
+        			.addClass(HIDE_CLASS)
+        			.hide();
 
-            $(href)
-        	.removeClass(HIDE_CLASS)
-        	.addClass(SHOW_CLASS)
-        	.hide()
-        	.fadeIn(0); // changed from 550 to 0 since there was a jump while switching tabs. Try adding back 550 and see the jumping, if you dont want this to happen leave it as 0 itslef, else change to 550.
-        });
-    })(jQuery);			
+            		$(href)
+        			.removeClass(HIDE_CLASS)
+        			.addClass(SHOW_CLASS)
+        			.hide()
+        			.fadeIn(0); // changed from 550 to 0 since there was a jump while switching tabs. Try adding back 550 and see the jumping, if you dont want this to happen leave it as 0 itslef, else change to 550.
+        		});
+    		})(jQuery);			
+/*
+			function openCity(evt, cityName) {
+  				var i, tabcontent, tablinks;
+  				tabcontent = document.getElementsByClassName("tabcontent");
+  				for (i = 0; i < tabcontent.length; i++) {
+    				tabcontent[i].style.display = "none";
+  				}
+  				tablinks = document.getElementsByClassName("tablinks");
+  				for (i = 0; i < tablinks.length; i++) {
+    				tablinks[i].className = tablinks[i].className.replace(" active", "");
+  				}
+  				document.getElementById(cityName).style.display = "block";
+  				evt.currentTarget.className += " active";
+			}
 
-function openCity(evt, cityName) {
-  var i, tabcontent, tablinks;
-  tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
-  tablinks = document.getElementsByClassName("tablinks");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
-  }
-  document.getElementById(cityName).style.display = "block";
-  evt.currentTarget.className += " active";
-}
-
-// Get the element with id="defaultOpen" and click on it
-document.getElementById("defaultOpen").click();
-</script>
+			// Get the element with id="defaultOpen" and click on it
+			document.getElementById("defaultOpen").click();
+*/			
+		</script>
    
-</body>
-</html> 
+		</body>
 		<?php
 	}
 
