@@ -357,9 +357,9 @@ function wp_travel_trip_info( $post ) {
 		jQuery(document).ready(function($) {
     		$( "#sortable" ).sortable();
     		$( "#sortable" ).disableSelection();
-			$('#myFunction').on('click', function (e) {
-            	$('noFound').removeClass('hidden');
-			};
+			//$('#myFunction').on('click', function (e) {
+            //	$('noFound').removeClass('hidden');
+			//};
   		} );
 	</script>
 	<style>

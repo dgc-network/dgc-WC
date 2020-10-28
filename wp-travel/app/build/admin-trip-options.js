@@ -1918,7 +1918,8 @@ function(e,t,n){
                             className:"wp-travel-form-input-clear-btn",
                             type:"button",
                             onClick:function(){
-                                var e=t;e[l]=B(B({},e[l]),{},{end_date:""}),
+                                var e=t;
+                                e[l]=B(B({},e[l]),{},{end_date:""}),
                                 r(n,e)
                             }
                         },"X")
