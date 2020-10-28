@@ -159,13 +159,22 @@ class Metabox_Trip_Options_Edit {
 		?>
 		<div id="mytabs">
 			<ul class="category-tabs">
-				<li><a href="#frag1">Tab 1</a></li>
-				<li><a href="#frag2">Tab 2</a></li>
-				<li><a href="#frag3">Tab 3</a></li>
+				<li><a href="#frag1">Itinerary</a></li>
+				<li><a href="#frag2">Prices & Dates</a></li>
+				<li><a href="#frag3">Includes/Excludes</a></li>
+				<li><a href="#frag4">Facts</a></li>
+				<li><a href="#frag5">Gallery</a></li>
+				<li><a href="#frag6">Locations</a></li>
+				<li><a href="#frag7">FAQs</a></li>
+				<li><a href="#frag8">Misc. Options</a></li>
+				<li><a href="#frag9">Tabs</a></li>
 			</ul>
 			<br class="clear" />
 			<div id="frag1">
-				<p>#1 - Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+				<p>Trip Code</p>
+				<p>Trip Outline</p>
+				<p>Itinerary
+				No Itineraries found. Add Itinerary</p>
 			</div>
 			<div class="hidden" id="frag2">
 				<p>#2 - Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
