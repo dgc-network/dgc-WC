@@ -172,20 +172,6 @@ class Metabox_Trip_Options_Edit {
 			<br class="clear" />
 			<div id="frag1">
 				<?php wp_travel_trip_info( $post )?>
-				<p>Trip Code</p>
-				<p>Trip Outline</p>
-				<h3>Itinerary</h3>
-				<p>No Itineraries found.</p>
-				<button onclick="myFunction()">Add Itinerary</button>
-				<ul id="sortable">
-  					<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>
-  					<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 2</li>
-  					<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 3</li>
-  					<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 4</li>
-  					<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 5</li>
-  					<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 6</li>
-  					<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 7</li>
-				</ul>
 			</div>
 
 			<div class="hidden" id="frag2">
@@ -198,16 +184,11 @@ class Metabox_Trip_Options_Edit {
 			</div>
 		</div>
 
-		<script src="vertical.js"></script>
 		<script>
 			jQuery(document).ready(function($) {
     			$("#mytabs .hidden").removeClass('hidden');
     			$("#mytabs").tabs();
 			});
-			$( function() {
-    			$( "#sortable" ).sortable();
-    			$( "#sortable" ).disableSelection();
-  			} );
 		</script>
 		<?php
 	}
@@ -338,36 +319,48 @@ class Metabox_Trip_Options_Edit {
 
 Metabox_Trip_Options_Edit::init();
 
-	/**
-	 * Trip Info metabox. [ metabox is removed in utilities ]
-	 *
-	 * @param  Object $post Post object.
-	 */
-	function wp_travel_trip_info( $post ) {
-		if ( ! $post ) {
-			return;
-		}
-		$trip_code = wp_travel_get_trip_code( $post->ID );
-		?>
-		<table class="form-table trip-info-sidebar">
-			<tr>
-				<td><label for="wp-travel-detail"><?php esc_html_e( 'Trip Code', 'wp-travel' ); ?></label></td>
-				<td><input type="text" id="wp-travel-trip-code" disabled="disabled" value="<?php echo esc_attr( $trip_code ); ?>" /></td>
-			</tr>
-		</table>
-		<?php
-		if ( ! class_exists( 'WP_Travel_Utilities_Core' ) ) :
-			$args = array(
-				'title'       => __( 'Need Custom Trip Code ?', 'wp-travel' ),
-				'content'     => __( 'By upgrading to Pro, you can get Trip Code Customization and removal features and more !', 'wp-travel' ),
-				'link'        => 'https://wptravel.io/wp-travel-pro/',
-				'link_label'  => __( 'Get WP Travel Pro', 'wp-travel' ),
-				'link2'       => 'https://wptravel.io/downloads/wp-travel-utilities/',
-				'link2_label' => __( 'Get WP Travel Utilities Addon', 'wp-travel' ),
-			);
-			//wp_travel_upsell_message( $args );
-		endif;
+/**
+ * Trip Info metabox. [ metabox is removed in utilities ]
+ *
+ * @param  Object $post Post object.
+ */
+function wp_travel_trip_info( $post ) {
+	if ( ! $post ) {
+		return;
 	}
+	$trip_code = wp_travel_get_trip_code( $post->ID );
+	?>
+	<table class="form-table trip-info-sidebar">
+		<tr>
+			<td><label for="wp-travel-detail"><?php esc_html_e( 'Trip Code', 'wp-travel' ); ?></label></td>
+			<td><input type="text" id="wp-travel-trip-code" disabled="disabled" value="<?php echo esc_attr( $trip_code ); ?>" /></td>
+		</tr>
+	</table>
+
+	<table class="form-table trip-info-sidebar">
+		<tr>
+			<td><label for="wp-travel-detail"><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></label></td>
+			<td><button onclick="myFunction()"><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></button></td>
+		</tr>
+	</table>
+	<p>No Itineraries found.</p>
+	<ul id="sortable">
+  		<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>
+  		<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 2</li>
+  		<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 3</li>
+  		<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 4</li>
+  		<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 5</li>
+  		<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 6</li>
+  		<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 7</li>
+	</ul>
+	<script>
+		jQuery(document).ready(function($) {
+    		$( "#sortable" ).sortable();
+    		$( "#sortable" ).disableSelection();
+  		} );
+	</script>
+	<?php
+}
 
 /**
  * Add a custom Product Data tab
