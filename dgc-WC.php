@@ -21,6 +21,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die( '-1' );
 }
 
+// This enables debugging.
+define( 'WP_DEBUG', true );
+
 /**
  * Defining constant
  */
