@@ -27,6 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 $dir = dirname( __FILE__ ); //dirname( __FILE__ )
 define( "BASE_DIR", str_replace( '\\', '/', $dir . '/' ) );
 define( 'WP_TRAVEL_POST_TYPE', 'itineraries' );
+define( 'WP_TRAVEL_ABSPATH', dirname( __FILE__ ) . '/' );
 
 /**
  * Including Plugin file for security
