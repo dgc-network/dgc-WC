@@ -177,7 +177,17 @@ class Metabox_Trip_Options_Edit {
 				<h3>Itinerary</h3>
 				<p>No Itineraries found.</p>
 				<button onclick="myFunction()">Add Itinerary</button>
+				<ul id="sortable">
+  					<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>
+  					<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 2</li>
+  					<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 3</li>
+  					<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 4</li>
+  					<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 5</li>
+  					<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 6</li>
+  					<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 7</li>
+				</ul>
 			</div>
+
 			<div class="hidden" id="frag2">
 				<?php wp_travel_trip_info( $post )?>
 				<?php //array( __CLASS__, 'wp_travel_trip_info' )?>
@@ -194,6 +204,10 @@ class Metabox_Trip_Options_Edit {
     			$("#mytabs .hidden").removeClass('hidden');
     			$("#mytabs").tabs();
 			});
+			$( function() {
+    			$( "#sortable" ).sortable();
+    			$( "#sortable" ).disableSelection();
+  			} );
 		</script>
 		<?php
 	}
