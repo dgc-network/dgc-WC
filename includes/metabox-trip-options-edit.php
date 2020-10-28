@@ -155,7 +155,7 @@ class Metabox_Trip_Options_Edit {
 		<?php
 	}
 
-	function horizontal_example_metabox() {
+	function horizontal_example_metabox( $post ) {
 		?>
 		<div id="mytabs">
 			<ul class="category-tabs">
@@ -177,7 +177,7 @@ class Metabox_Trip_Options_Edit {
 				No Itineraries found. Add Itinerary</p>
 			</div>
 			<div class="hidden" id="frag2">
-				<p>#2 - Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+				<?php wp_travel_trip_info( $post )?>
 			</div>
 			<div class="hidden" id="frag3">
 				<p>#3 - Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
