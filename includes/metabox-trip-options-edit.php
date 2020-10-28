@@ -177,8 +177,8 @@ class Metabox_Trip_Options_Edit {
 				No Itineraries found. Add Itinerary</p>
 			</div>
 			<div class="hidden" id="frag2">
-				<?php //wp_travel_trip_info( $post )?>
-				<?php array( __CLASS__, 'wp_travel_trip_info' )?>
+				<?php wp_travel_trip_info( $post )?>
+				<?php //array( __CLASS__, 'wp_travel_trip_info' )?>
 				
 			</div>
 			<div class="hidden" id="frag3">
@@ -194,37 +194,6 @@ class Metabox_Trip_Options_Edit {
 			});
 		</script>
 		<?php
-	}
-
-	/**
-	 * Trip Info metabox. [ metabox is removed in utilities ]
-	 *
-	 * @param  Object $post Post object.
-	 */
-	function wp_travel_trip_info( $post ) {
-		if ( ! $post ) {
-			return;
-		}
-		$trip_code = wp_travel_get_trip_code( $post->ID );
-		?>
-		<table class="form-table trip-info-sidebar">
-			<tr>
-				<td><label for="wp-travel-detail"><?php esc_html_e( 'Trip Code', 'wp-travel' ); ?></label></td>
-				<td><input type="text" id="wp-travel-trip-code" disabled="disabled" value="<?php echo esc_attr( $trip_code ); ?>" /></td>
-			</tr>
-		</table>
-		<?php
-		if ( ! class_exists( 'WP_Travel_Utilities_Core' ) ) :
-			$args = array(
-				'title'       => __( 'Need Custom Trip Code ?', 'wp-travel' ),
-				'content'     => __( 'By upgrading to Pro, you can get Trip Code Customization and removal features and more !', 'wp-travel' ),
-				'link'        => 'https://wptravel.io/wp-travel-pro/',
-				'link_label'  => __( 'Get WP Travel Pro', 'wp-travel' ),
-				'link2'       => 'https://wptravel.io/downloads/wp-travel-utilities/',
-				'link2_label' => __( 'Get WP Travel Utilities Addon', 'wp-travel' ),
-			);
-			wp_travel_upsell_message( $args );
-		endif;
 	}
 
 	function vertical_example_metabox() {
@@ -352,6 +321,37 @@ class Metabox_Trip_Options_Edit {
 }
 
 Metabox_Trip_Options_Edit::init();
+
+	/**
+	 * Trip Info metabox. [ metabox is removed in utilities ]
+	 *
+	 * @param  Object $post Post object.
+	 */
+	function wp_travel_trip_info( $post ) {
+		if ( ! $post ) {
+			return;
+		}
+		$trip_code = wp_travel_get_trip_code( $post->ID );
+		?>
+		<table class="form-table trip-info-sidebar">
+			<tr>
+				<td><label for="wp-travel-detail"><?php esc_html_e( 'Trip Code', 'wp-travel' ); ?></label></td>
+				<td><input type="text" id="wp-travel-trip-code" disabled="disabled" value="<?php echo esc_attr( $trip_code ); ?>" /></td>
+			</tr>
+		</table>
+		<?php
+		if ( ! class_exists( 'WP_Travel_Utilities_Core' ) ) :
+			$args = array(
+				'title'       => __( 'Need Custom Trip Code ?', 'wp-travel' ),
+				'content'     => __( 'By upgrading to Pro, you can get Trip Code Customization and removal features and more !', 'wp-travel' ),
+				'link'        => 'https://wptravel.io/wp-travel-pro/',
+				'link_label'  => __( 'Get WP Travel Pro', 'wp-travel' ),
+				'link2'       => 'https://wptravel.io/downloads/wp-travel-utilities/',
+				'link2_label' => __( 'Get WP Travel Utilities Addon', 'wp-travel' ),
+			);
+			wp_travel_upsell_message( $args );
+		endif;
+	}
 
 /**
  * Add a custom Product Data tab
