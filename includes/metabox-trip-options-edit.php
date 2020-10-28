@@ -349,7 +349,7 @@ Metabox_Trip_Options_Edit::init();
 				'link2'       => 'https://wptravel.io/downloads/wp-travel-utilities/',
 				'link2_label' => __( 'Get WP Travel Utilities Addon', 'wp-travel' ),
 			);
-			wp_travel_upsell_message( $args );
+			//wp_travel_upsell_message( $args );
 		endif;
 	}
 
