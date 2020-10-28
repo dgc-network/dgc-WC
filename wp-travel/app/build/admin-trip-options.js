@@ -1289,7 +1289,8 @@ function(e,t,n){
                         case 0:
                             return n="".concat(ajaxurl,"?action=wp_travel_get_trip&trip_id=").concat(t,"&_nonce=").concat(_wp_travel._nonce),e.next=3,y.updateRequestSending(!0);
                         case 3:return e.next=5,y.getTripDataFromAPI(n);
-                        case 5:if(!1===(r=e.sent).success||"WP_TRAVEL_TRIP_INFO"!==r.data.code){e.next=8;break}return e.abrupt("return",y.setTripData(r.data.trip));
+                        case 5:if(!1===(r=e.sent).success||"WP_TRAVEL_TRIP_INFO"!==r.data.code)
+                            {e.next=8;break}return e.abrupt("return",y.setTripData(r.data.trip));
                         case 8:
                         case"end":return e.stop()
                     }
@@ -1329,10 +1330,19 @@ function(e,t,n){
                 return m.a.wrap((function(e){
                     for(;;)
                     switch(e.prev=e.next){
-                        case 0:return t="".concat(ajaxurl,"?action=wp_travel_get_settings&_nonce=").concat(_wp_travel._nonce),e.next=3,y.updateRequestSending(!0);
-                        case 3:return e.next=5,y.getSettingsFromAPI(t);
-                        case 5:if(!1===(n=e.sent).success||"WP_TRAVEL_SETTINGS"!==n.data.code){e.next=8;break}return e.abrupt("return",y.setSettings(n.data.settings));
-                        case 8:case"end":return e.stop()
+                        case 0:
+                            return t="".concat(ajaxurl,"?action=wp_travel_get_settings&_nonce=").concat(_wp_travel._nonce),e.next=3,y.updateRequestSending(!0);
+                        case 3:
+                            return e.next=5,y.getSettingsFromAPI(t);
+                        case 5:
+                            if(!1===(n=e.sent).success||"WP_TRAVEL_SETTINGS"!==n.data.code){
+                                e.next=8;
+                                break
+                            }
+                            return e.abrupt("return",y.setSettings(n.data.settings));
+                        case 8:
+                        case"end":
+                            return e.stop()
                     }
                 }),
                 e)
