@@ -22,7 +22,7 @@ class Metabox_Trip_Options_Edit {
 			'default' // priority (default, low, high, core)
 		);
 		//wp_enqueue_script( 'mytabs', get_bloginfo( 'stylesheet_directory' ). '/mytabs.js', array( 'jquery-ui-tabs' ) );
-		wp_enqueue_script( 'mytabs', 'mytabs.js', array( 'jquery-ui-tabs' ) );
+		//wp_enqueue_script( 'mytabs', 'mytabs.js', array( 'jquery-ui-tabs' ) );
 	}
  
 	function my_example_metabox() {

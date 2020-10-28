@@ -26,6 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 $dir = dirname( __FILE__ ); //dirname( __FILE__ )
 define( "BASE_DIR", str_replace( '\\', '/', $dir . '/' ) );
+define( 'WP_TRAVEL_POST_TYPE', 'itineraries' );
 
 /**
  * Including Plugin file for security
@@ -40,6 +41,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
     require_once BASE_DIR . 'includes/metabox-trip-options-edit.php';
     require_once BASE_DIR . 'includes/metabox-trip-options-view.php';
     //require_once BASE_DIR . 'wp-travel/wp-travel.php';
+    require_once BASE_DIR . 'wp-travel/inc/admin/class-admin-metaboxes.php';
 } else {
     //require_once $this->path('BASE_DIR','includes/no_woocommerce.php');
 }
