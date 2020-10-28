@@ -171,10 +171,12 @@ class Metabox_Trip_Options_Edit {
 			</ul>
 			<br class="clear" />
 			<div id="frag1">
+				<?php wp_travel_trip_info( $post )?>
 				<p>Trip Code</p>
 				<p>Trip Outline</p>
-				<p>Itinerary
-				No Itineraries found. Add Itinerary</p>
+				<h3>Itinerary</h3>
+				<p>No Itineraries found.</p>
+				<button onclick="myFunction()">Add Itinerary</button>
 			</div>
 			<div class="hidden" id="frag2">
 				<?php wp_travel_trip_info( $post )?>
