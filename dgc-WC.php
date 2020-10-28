@@ -41,7 +41,10 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
     require_once BASE_DIR . 'includes/metabox-trip-options-edit.php';
     require_once BASE_DIR . 'includes/metabox-trip-options-view.php';
     //require_once BASE_DIR . 'wp-travel/wp-travel.php';
+    require_once BASE_DIR . 'wp-travel/inc/helpers.php';
+    require_once BASE_DIR . 'wp-travel/inc/class-itinerary.php';
     require_once BASE_DIR . 'wp-travel/inc/admin/class-admin-metaboxes.php';
+    require_once BASE_DIR . 'wp-travel/inc/helpers/helpers-price.php';
 } else {
     //require_once $this->path('BASE_DIR','includes/no_woocommerce.php');
 }
