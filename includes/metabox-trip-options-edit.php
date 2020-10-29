@@ -265,8 +265,8 @@ function wp_travel_trip_info( $post ) {
 			<td><button id="add-itinerary" type="button"><?php esc_html_e( '+ Add Itinerary', 'wp-travel' ); ?></button></td>
 		</tr>
 	</table>
+	<div id="sortable-div"></div>
 	</div>
-	<div id="sortable-div">
 			<?php if ( is_array( $trip_outline ) && count( $trip_outline ) > 0 ) {?>
 				<ul id="sortable">
 				<?php foreach ( $trip_outline as $itinerary ) {?>
@@ -284,14 +284,14 @@ function wp_travel_trip_info( $post ) {
 			<?php }?>
 
 			<ul id="sortable">
-				<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>1. </li>
-				<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>2. </li>
-  				<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>3. </li>
-				<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>4. </li>
-				<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>5. </li>
-  				<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>6. </li>
+				<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Day 1, My plan</li>
+				<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Day 2, My plan</li>
+  				<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Day 3, My plan</li>
+				<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Day 4, My plan</li>
+				<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Day 5, My plan</li>
+  				<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Day 6, My plan</li>
 			</ul>
-	</div>
+	
 	<script>
 		jQuery(document).ready(function($) {
     		$( "#sortable" ).sortable();
@@ -300,6 +300,9 @@ function wp_travel_trip_info( $post ) {
 			$("#first-itinerary").click(function(){
 				$("#no-itineraries").hide();
 				$("#init-itineraries").show();
+			} );
+			$("#add-itinerary").click(function(){
+				$("#sortable-div").html("<ul id='sortable'><li class='ui-state-default'><span class='ui-icon ui-icon-arrowthick-2-n-s'></span>Day X, My plan</li></ul>");
 			} );
   		} );
 	</script>
