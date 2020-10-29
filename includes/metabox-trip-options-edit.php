@@ -46,7 +46,7 @@ class Metabox_Trip_Options_Edit {
 			</div>
 
 			<div class="hidden" id="frag2">
-				<?php $this->trip_options_metabox_callback( $post )?>
+				<?php self::trip_options_metabox_callback( $post )?>
 			</div>
 
 			<div class="hidden" id="frag3">
