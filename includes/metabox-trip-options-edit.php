@@ -266,7 +266,14 @@ function wp_travel_trip_info( $post ) {
 		</tr>
 	</table>
 	<div id="sortable-div"></div>
+	<table class="form-table trip-outline">
+		<tr>
+			<td></td>
+			<td><button id="add-itinerary" type="button"><?php esc_html_e( '+ Add Itinerary', 'wp-travel' ); ?></button></td>
+		</tr>
+	</table>
 	</div>
+
 			<?php if ( is_array( $trip_outline ) && count( $trip_outline ) > 0 ) {?>
 				<ul id="sortable">
 				<?php foreach ( $trip_outline as $itinerary ) {?>
@@ -295,7 +302,7 @@ function wp_travel_trip_info( $post ) {
 				$("#sortable-div").html("<ul id='sortable'><li class='ui-state-default'><span class='ui-icon ui-icon-arrowthick-2-n-s'></span>Day X, My plan</li></ul>");
 			} );
 			$("#add-itinerary").click(function(){
-				$("#sortable").append("<li class='ui-state-default'><span class='ui-icon ui-icon-arrowthick-2-n-s'></span>Day X, My plan</li>");
+				$("#sortable ul").append("<li class='ui-state-default'><span class='ui-icon ui-icon-arrowthick-2-n-s'></span>Day X, My plan</li>");
 			} );
   		} );
 	</script>
