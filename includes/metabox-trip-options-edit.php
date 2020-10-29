@@ -283,14 +283,6 @@ function wp_travel_trip_info( $post ) {
 				</div>
 			<?php }?>
 
-			<ul id="sortable">
-				<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Day 1, My plan</li>
-				<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Day 2, My plan</li>
-  				<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Day 3, My plan</li>
-				<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Day 4, My plan</li>
-				<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Day 5, My plan</li>
-  				<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Day 6, My plan</li>
-			</ul>
 	
 	<script>
 		jQuery(document).ready(function($) {
@@ -300,9 +292,10 @@ function wp_travel_trip_info( $post ) {
 			$("#first-itinerary").click(function(){
 				$("#no-itineraries").hide();
 				$("#init-itineraries").show();
+				$("#sortable-div").html("<ul id='sortable'><li class='ui-state-default'><span class='ui-icon ui-icon-arrowthick-2-n-s'></span>Day X, My plan</li></ul>");
 			} );
 			$("#add-itinerary").click(function(){
-				$("#sortable-div").html("<ul id='sortable'><li class='ui-state-default'><span class='ui-icon ui-icon-arrowthick-2-n-s'></span>Day X, My plan</li></ul>");
+				$("#sortable-div").append("<ul id='sortable'><li class='ui-state-default'><span class='ui-icon ui-icon-arrowthick-2-n-s'></span>Day X, My plan</li></ul>");
 			} );
   		} );
 	</script>
