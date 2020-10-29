@@ -16,7 +16,8 @@ class Metabox_Trip_Options_Edit {
 			'trip-options', // metabox ID
 			esc_html__( 'Trip Options', 'dgc-domain' ), // title
 			//array( __CLASS__, 'trip_options_metabox_callback' ), // callback function
-			array( __CLASS__, 'horizontal_example_metabox' ), // callback function
+			//array( __CLASS__, 'horizontal_example_metabox' ), // callback function
+			array( __CLASS__, 'vertical_example_metabox' ), // callback function
 			'product', // post type or post types in array
 			'normal', // position (normal, side, advanced)
 			'default' // priority (default, low, high, core)
@@ -25,136 +26,6 @@ class Metabox_Trip_Options_Edit {
 		wp_enqueue_script( 'mytabs', 'mytabs.js', array( 'jquery-ui-tabs' ) );
 	}
  
-	function my_example_metabox() {
-		?>
-		<style>
-			* {box-sizing: border-box}
-			body {font-family: "Lato", sans-serif;}
-
-			/* Style the tab */
-			.tab {
-  				float: left;
-  				border: 1px solid #ccc;
-  				background-color: #f1f1f1;
-  				width: 30%;
-  				height: 300px;
-			}
-
-			/* Style the buttons inside the tab */
-			.tab button {
-  				display: block;
-  				background-color: inherit;
-  				color: black;
-  				padding: 22px 16px;
-  				width: 100%;
-  				border: none;
-  				outline: none;
-  				text-align: left;
-  				cursor: pointer;
-  				transition: 0.3s;
-  				font-size: 17px;
-			}
-
-			/* Change background color of buttons on hover */
-			.tab button:hover {
-  				background-color: #ddd;
-			}
-
-			/* Create an active/current "tab button" class */
-			.tab button.active {
-  				background-color: #ccc;
-			}
-
-			/* Style the tab content */
-			.tabcontent {
-  				float: left;
-  				padding: 0px 12px;
-  				border: 1px solid #ccc;
-  				width: 70%;
-  				border-left: none;
-  				height: 300px;
-			}
-		</style>
-
-		<body>
-			<h2>Vertical Tabs</h2>
-			<p>Click on the buttons inside the tabbed menu:</p>
-
-			<div class="tab">
-  				<button class="tablinks" id="defaultOpen">London</button>
-  				<button class="tablinks" >Paris</button>
-  				<button class="tablinks" >Tokyo</button>
-			</div>
-
-			<div class="tabcontent" id="London">
-  				<h3>London</h3>
-  				<p>London is the capital city of England.</p>
-			</div>
-
-			<div class="tabcontent" id="Paris">
-  				<h3>Paris</h3>
-  				<p>Paris is the capital of France.</p> 
-			</div>
-
-			<div class="tabcontent" id="Tokyo">
-  				<h3>Tokyo</h3>
-  				<p>Tokyo is the capital of Japan.</p>
-			</div>
-
-		<script>
-			(function ($) {
-        		// constants
-        		var SHOW_CLASS = 'show',
-      			HIDE_CLASS = 'hide',
-      			ACTIVE_CLASS = 'active';
-
-				$(".tabcontent").removeClass('hidden');
-				$(".tabcontent #London").removeClass('show');
-        		$('.tab').on('click', 'tablinks', function (e) {
-            		e.preventDefault();
-            		var $tab = $(this),
-					href = $tab.attr('href');
-         			button = $tab.attr('button');
-
-            		$('.active').removeClass(ACTIVE_CLASS);
-            		$tab.addClass(ACTIVE_CLASS);
-
-            		$('.show')
-        			.removeClass(SHOW_CLASS)
-        			.addClass(HIDE_CLASS)
-        			.hide();
-
-            		$(href)
-        			.removeClass(HIDE_CLASS)
-        			.addClass(SHOW_CLASS)
-        			.hide()
-        			.fadeIn(0); // changed from 550 to 0 since there was a jump while switching tabs. Try adding back 550 and see the jumping, if you dont want this to happen leave it as 0 itslef, else change to 550.
-        		});
-    		})(jQuery);			
-/*
-			function openCity(evt, cityName) {
-  				var i, tabcontent, tablinks;
-  				tabcontent = document.getElementsByClassName("tabcontent");
-  				for (i = 0; i < tabcontent.length; i++) {
-    				tabcontent[i].style.display = "none";
-  				}
-  				tablinks = document.getElementsByClassName("tablinks");
-  				for (i = 0; i < tablinks.length; i++) {
-    				tablinks[i].className = tablinks[i].className.replace(" active", "");
-  				}
-  				document.getElementById(cityName).style.display = "block";
-  				evt.currentTarget.className += " active";
-			}
-
-			// Get the element with id="defaultOpen" and click on it
-			document.getElementById("defaultOpen").click();
-*/			
-		</script>
-   
-		</body>
-		<?php
-	}
-
 	function horizontal_example_metabox( $post ) {
 		?>
 		<div id="mytabs">
@@ -218,47 +89,70 @@ class Metabox_Trip_Options_Edit {
 
 	function vertical_example_metabox() {
 		?>
-		<div class="flat-form">
-            <ul class="tabs">
-                <li><a href="#tab1" class="active" >Tab1 </a></li>
-                <li><a href="#tab2" >Tab2</a></li>
-            </ul>
-            <div id="tab1" class="form-action show">
-                Hello1
-            </div>
-            <div id="tab2" class="form-action hide">
-                Hello2
-            </div>
-        </div>
-				
+		<div id="tabs">
+			<ul class="category-tabs">
+				<li><a href="#frag1">Itinerary</a></li>
+				<li><a href="#frag2">Prices & Dates</a></li>
+				<li><a href="#frag3">Includes/Excludes</a></li>
+				<li><a href="#frag4">Facts</a></li>
+				<li><a href="#frag5">Gallery</a></li>
+				<li><a href="#frag6">Locations</a></li>
+				<li><a href="#frag7">FAQs</a></li>
+				<li><a href="#frag8">Misc. Options</a></li>
+				<li><a href="#frag9">Tabs</a></li>
+			</ul>
+			<br class="clear" />
+			<div id="frag1">
+				<?php wp_travel_trip_info( $post )?>
+			</div>
+
+			<div class="hidden" id="frag2">
+				<?php wp_travel_trip_info( $post )?>				
+			</div>
+
+			<div class="hidden" id="frag3">
+				<?php wp_travel_trip_info( $post )?>
+			</div>
+			
+			<div class="hidden" id="frag4">
+				<?php wp_travel_trip_info( $post )?>
+			</div>
+			
+			<div class="hidden" id="frag5">
+				<?php wp_travel_trip_info( $post )?>
+			</div>
+			
+			<div class="hidden" id="frag6">
+				<?php wp_travel_trip_info( $post )?>
+			</div>
+			
+			<div class="hidden" id="frag7">
+				<?php wp_travel_trip_info( $post )?>
+			</div>
+			
+			<div class="hidden" id="frag8">
+				<?php wp_travel_trip_info( $post )?>
+			</div>
+			
+			<div class="hidden" id="frag9">
+				<?php wp_travel_trip_info( $post )?>
+			</div>
+		</div>
+
 		<script>
-			(function ($) {
-        		// constants
-        		var SHOW_CLASS = 'show',
-      			HIDE_CLASS = 'hide',
-      			ACTIVE_CLASS = 'active';
-
-        		$('.tabs').on('click', 'li a', function (e) {
-            		e.preventDefault();
-            		var $tab = $(this),
-         			href = $tab.attr('href');
-
-            		$('.active').removeClass(ACTIVE_CLASS);
-            		$tab.addClass(ACTIVE_CLASS);
-
-            		$('.show')
-        			.removeClass(SHOW_CLASS)
-        			.addClass(HIDE_CLASS)
-        			.hide();
-
-            		$(href)
-        			.removeClass(HIDE_CLASS)
-        			.addClass(SHOW_CLASS)
-        			.hide()
-        			.fadeIn(0); // changed from 550 to 0 since there was a jump while switching tabs. Try adding back 550 and see the jumping, if you dont want this to happen leave it as 0 itslef, else change to 550.
-        		});
-    		})(jQuery);			
+			jQuery(document).ready(function($) {
+				$( "#tabs" ).tabs().addClass( "ui-tabs-vertical ui-helper-clearfix" );
+			    $( "#tabs li" ).removeClass( "ui-corner-top" ).addClass( "ui-corner-left" );
+			});
 		</script>
+  		<style>
+  		.ui-tabs-vertical { width: 55em; }
+  		.ui-tabs-vertical .ui-tabs-nav { padding: .2em .1em .2em .2em; float: left; width: 12em; }
+  		.ui-tabs-vertical .ui-tabs-nav li { clear: left; width: 100%; border-bottom-width: 1px !important; border-right-width: 0 !important; margin: 0 -1px .2em 0; }
+  		.ui-tabs-vertical .ui-tabs-nav li a { display:block; }
+  		.ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active { padding-bottom: 0; padding-right: .1em; border-right-width: 1px; }
+  		.ui-tabs-vertical .ui-tabs-panel { padding: 1em; float: right; width: 40em;}
+  		</style>
 		<?php
 	}
 
@@ -360,10 +254,26 @@ function wp_travel_trip_info( $post ) {
 		</tr>
 	</table>
 
-	<table class="form-table trip-info-sidebar">
+	<?php 
+	$wp_travel_itinerary = new WP_Travel_Itinerary();
+	$trip_outline = $wp_travel_itinerary->get_outline();
+	?>
+	<table class="form-table trip-outline">
 		<tr>
 			<td><label for="wp-travel-detail"><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></label></td>
-			<td><button id="myFunction"><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></button></td>
+		</tr>
+		<tr>
+			<td>
+			<?php if ( is_array( $trip_outline ) && count( $trip_outline ) > 0 ) {?>
+				<ul id="sortable">
+				<?php foreach ( $trip_outline as $itinerary ) {?>
+  					<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span><?php $itinerary?></li>
+				<?php }?>
+				</ul>
+			<?php } else {?>
+				<p>No Itineraries found.</p><a href="#addItinerary"><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></a>
+			<?php }?>
+			</td>
 		</tr>
 	</table>
 	<script>
@@ -372,27 +282,6 @@ function wp_travel_trip_info( $post ) {
 				$('#sortable').html('<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>');
 			};
   		} );
-	</script>
-
-	<?php 
-	//$itineraries  = get_post_meta( $trip_id, 'wp_travel_trip_itinerary_data', true ); 
-	//global $wp_travel_itinerary;
-	$wp_travel_itinerary = new WP_Travel_Itinerary();
-	$trip_outline = $wp_travel_itinerary->get_outline();
-	//$trip_outline = WP_Travel_Itinerary::get_outline();
-	if ( is_array( $trip_outline ) && count( $trip_outline ) > 0 ) {?>
-		<ul id="sortable">
-		<?php foreach ( $trip_outline as $itinerary ) {?>
-  		<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span><?php $itinerary?></li>
-		<?php }?>
-		</ul>
-	<?php 
-	} else {?>
-		<p id='noFound'>No Itineraries found.</p>
-	<?php 
-	}
-	?>
-	<script>
 		jQuery(document).ready(function($) {
     		$( "#sortable" ).sortable();
     		$( "#sortable" ).disableSelection();
