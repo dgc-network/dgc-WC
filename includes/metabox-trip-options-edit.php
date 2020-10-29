@@ -347,7 +347,8 @@ function wp_travel_trip_info( $post ) {
 	<?php 
 	//$itineraries  = get_post_meta( $trip_id, 'wp_travel_trip_itinerary_data', true ); 
 	global $wp_travel_itinerary;
-	$trip_outline = $wp_travel_itinerary->get_outline();
+	//$trip_outline = $wp_travel_itinerary->get_outline();
+	$trip_outline = WP_Travel_Itinerary::get_outline();
 	if ( is_array( $trip_outline ) && count( $trip_outline ) > 0 ) {?>
 	<?php 
 	} else {?>
