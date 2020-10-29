@@ -343,7 +343,19 @@ function wp_travel_trip_info( $post ) {
 			<td><button id="myFunction"><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></button></td>
 		</tr>
 	</table>
-	<p id='noFound'>No Itineraries found.</p>
+
+	<?php 
+	//$itineraries  = get_post_meta( $trip_id, 'wp_travel_trip_itinerary_data', true ); 
+	global $wp_travel_itinerary;
+	$trip_outline = $wp_travel_itinerary->get_outline();
+	if ( is_array( $trip_outline ) && count( $trip_outline ) > 0 ) {?>
+	<?php 
+	} else {?>
+		<p id='noFound'>No Itineraries found.</p>
+	<?php 
+	}
+	?>
+
 	<ul id="sortable">
   		<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>
   		<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 2</li>
@@ -388,39 +400,4 @@ add_action( 'woocommerce_product_data_panels', 'wk_custom_tab_data' );
 function wk_custom_tab_data() {
    echo '<div id="wk_custom_tab_data" class="panel woocommerce_options_panel">// add content here</div>';
 }
-
-/*
-    Code assumes it will be in the theme functions.php file
-    Update the enqueue path if using it elsewhere
-*/
-add_action( 'add_meta_boxes_post', 'add_post_metabox' );
-
-function add_post_metabox() {
-    //wp_enqueue_script( 'mytabs', get_bloginfo( 'stylesheet_directory' ). '/mytabs.js', array( 'jquery-ui-tabs' ) );
-    wp_enqueue_script( 'mytabs', plugins_url( '/includes/mytabs.js', __FILE__ ), array( 'jquery-ui-tabs' ) );
-    add_meta_box( 'examplebox' , __('Example box'), 'my_example_metabox', 'post', 'side', 'core'/*,array()*/);
-}
-
-function my_example_metabox() {
-    ?>
-    <div id="mytabs">
-        <ul class="category-tabs">
-            <li><a href="#frag1">Tab 1</a></li>
-            <li><a href="#frag2">Tab 2</a></li>
-            <li><a href="#frag3">Tab 3</a></li>
-        </ul>
-        <br class="clear" />
-        <div id="frag1">
-            <p>#1 - Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
-        </div>
-        <div class="hidden" id="frag2">
-            <p>#2 - Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
-        </div>
-        <div class="hidden" id="frag3">
-            <p>#3 - Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
-        </div>
-    </div>
-    <?php
-}
-
 
