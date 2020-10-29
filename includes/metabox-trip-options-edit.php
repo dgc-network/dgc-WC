@@ -30,15 +30,15 @@ class Metabox_Trip_Options_Edit {
 		?>
 		<div id="mytabs">
 			<ul class="category-tabs">
-				<li><a href="#frag1">Itinerary</a></li>
-				<li><a href="#frag2">Prices & Dates</a></li>
-				<li><a href="#frag3">Includes/Excludes</a></li>
-				<li><a href="#frag4">Facts</a></li>
-				<li><a href="#frag5">Gallery</a></li>
-				<li><a href="#frag6">Locations</a></li>
-				<li><a href="#frag7">FAQs</a></li>
-				<li><a href="#frag8">Misc. Options</a></li>
-				<li><a href="#frag9">Tabs</a></li>
+			<li><a href="#frag1"><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></a></li>
+				<li><a href="#frag2"><?php esc_html_e( 'Prices & Dates', 'wp-travel' ); ?></a></li>
+				<li><a href="#frag3"><?php esc_html_e( 'Includes/Excludes', 'wp-travel' ); ?></a></li>
+				<li><a href="#frag4"><?php esc_html_e( 'Facts', 'wp-travel' ); ?></a></li>
+				<li><a href="#frag5"><?php esc_html_e( 'Gallery', 'wp-travel' ); ?></a></li>
+				<li><a href="#frag6"><?php esc_html_e( 'Locations', 'wp-travel' ); ?></a></li>
+				<li><a href="#frag7"><?php esc_html_e( 'FAQs', 'wp-travel' ); ?></a></li>
+				<li><a href="#frag8"><?php esc_html_e( 'Misc. Options', 'wp-travel' ); ?></a></li>
+				<li><a href="#frag9"><?php esc_html_e( 'Tabs', 'wp-travel' ); ?></a></li>
 			</ul>
 			<br class="clear" />
 			<div id="frag1">
@@ -91,15 +91,15 @@ class Metabox_Trip_Options_Edit {
 		?>
 		<div id="tabs">
 			<ul class="category-tabs">
-				<li><a href="#frag1">Itinerary</a></li>
-				<li><a href="#frag2">Prices & Dates</a></li>
-				<li><a href="#frag3">Includes/Excludes</a></li>
-				<li><a href="#frag4">Facts</a></li>
-				<li><a href="#frag5">Gallery</a></li>
-				<li><a href="#frag6">Locations</a></li>
-				<li><a href="#frag7">FAQs</a></li>
-				<li><a href="#frag8">Misc. Options</a></li>
-				<li><a href="#frag9">Tabs</a></li>
+				<li><a href="#frag1"><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></a></li>
+				<li><a href="#frag2"><?php esc_html_e( 'Prices & Dates', 'wp-travel' ); ?></a></li>
+				<li><a href="#frag3"><?php esc_html_e( 'Includes/Excludes', 'wp-travel' ); ?></a></li>
+				<li><a href="#frag4"><?php esc_html_e( 'Facts', 'wp-travel' ); ?></a></li>
+				<li><a href="#frag5"><?php esc_html_e( 'Gallery', 'wp-travel' ); ?></a></li>
+				<li><a href="#frag6"><?php esc_html_e( 'Locations', 'wp-travel' ); ?></a></li>
+				<li><a href="#frag7"><?php esc_html_e( 'FAQs', 'wp-travel' ); ?></a></li>
+				<li><a href="#frag8"><?php esc_html_e( 'Misc. Options', 'wp-travel' ); ?></a></li>
+				<li><a href="#frag9"><?php esc_html_e( 'Tabs', 'wp-travel' ); ?></a></li>
 			</ul>
 			<br class="clear" />
 			<div id="frag1">
@@ -275,6 +275,7 @@ function wp_travel_trip_info( $post ) {
 			<?php } else {?>
 				<p>No Itineraries found.</p><a href="#addItinerary"><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></a>
 			<?php }?>
+			<br class="clear" />
 	</div>
 	<script>
 		jQuery(document).ready(function($) {
