@@ -295,7 +295,7 @@ function wp_travel_trip_info( $post ) {
 				$("#sortable-div").html("<ul id='sortable'><li class='ui-state-default'><span class='ui-icon ui-icon-arrowthick-2-n-s'></span>Day X, My plan</li></ul>");
 			} );
 			$("#add-itinerary").click(function(){
-				$("#sortable-div").append("<ul id='sortable'><li class='ui-state-default'><span class='ui-icon ui-icon-arrowthick-2-n-s'></span>Day X, My plan</li></ul>");
+				$("#sortable").append("<li class='ui-state-default'><span class='ui-icon ui-icon-arrowthick-2-n-s'></span>Day X, My plan</li>");
 			} );
   		} );
 	</script>
