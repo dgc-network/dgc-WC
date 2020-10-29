@@ -175,12 +175,35 @@ class Metabox_Trip_Options_Edit {
 			</div>
 
 			<div class="hidden" id="frag2">
-				<?php wp_travel_trip_info( $post )?>
-				<?php //array( __CLASS__, 'wp_travel_trip_info' )?>
-				
+				<?php wp_travel_trip_info( $post )?>				
 			</div>
+
 			<div class="hidden" id="frag3">
-				<p>#3 - Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+				<?php wp_travel_trip_info( $post )?>
+			</div>
+			
+			<div class="hidden" id="frag4">
+				<?php wp_travel_trip_info( $post )?>
+			</div>
+			
+			<div class="hidden" id="frag5">
+				<?php wp_travel_trip_info( $post )?>
+			</div>
+			
+			<div class="hidden" id="frag6">
+				<?php wp_travel_trip_info( $post )?>
+			</div>
+			
+			<div class="hidden" id="frag7">
+				<?php wp_travel_trip_info( $post )?>
+			</div>
+			
+			<div class="hidden" id="frag8">
+				<?php wp_travel_trip_info( $post )?>
+			</div>
+			
+			<div class="hidden" id="frag9">
+				<?php wp_travel_trip_info( $post )?>
 			</div>
 		</div>
 
@@ -343,6 +366,13 @@ function wp_travel_trip_info( $post ) {
 			<td><button id="myFunction"><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></button></td>
 		</tr>
 	</table>
+	<script>
+		jQuery(document).ready(function($) {
+			$('#myFunction').on('click', function (e) {
+				$('#sortable').html('<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>');
+			};
+  		} );
+	</script>
 
 	<?php 
 	//$itineraries  = get_post_meta( $trip_id, 'wp_travel_trip_itinerary_data', true ); 
@@ -353,7 +383,7 @@ function wp_travel_trip_info( $post ) {
 	if ( is_array( $trip_outline ) && count( $trip_outline ) > 0 ) {?>
 		<ul id="sortable">
 		<?php foreach ( $trip_outline as $itinerary ) {?>
-  		<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>
+  		<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span><?php $itinerary?></li>
 		<?php }?>
 		</ul>
 	<?php 
@@ -366,9 +396,6 @@ function wp_travel_trip_info( $post ) {
 		jQuery(document).ready(function($) {
     		$( "#sortable" ).sortable();
     		$( "#sortable" ).disableSelection();
-			//$('#myFunction').on('click', function (e) {
-            //	$('noFound').removeClass('hidden');
-			//};
   		} );
 	</script>
 	<style>
