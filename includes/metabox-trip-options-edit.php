@@ -278,11 +278,6 @@ function wp_travel_trip_info( $post ) {
 	</table>
 	<script>
 		jQuery(document).ready(function($) {
-			$('#myFunction').on('click', function (e) {
-				$('#sortable').html('<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>');
-			};
-  		} );
-		jQuery(document).ready(function($) {
     		$( "#sortable" ).sortable();
     		$( "#sortable" ).disableSelection();
   		} );
