@@ -262,11 +262,8 @@ function wp_travel_trip_info( $post ) {
 		<tr>
 			<td><label for="wp-travel-detail"><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></label></td>
 		</tr>
-		<tr>
-			<td>
-			</td>
-		</tr>
 	</table>
+	<div id="sortable-div">
 			<?php if ( is_array( $trip_outline ) && count( $trip_outline ) > 0 ) {?>
 				<ul id="sortable">
 				<?php foreach ( $trip_outline as $itinerary ) {?>
@@ -278,6 +275,7 @@ function wp_travel_trip_info( $post ) {
 			<?php } else {?>
 				<p>No Itineraries found.</p><a href="#addItinerary"><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></a>
 			<?php }?>
+	</div>
 	<script>
 		jQuery(document).ready(function($) {
     		$( "#sortable" ).sortable();
