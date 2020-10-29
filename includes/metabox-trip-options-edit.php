@@ -273,9 +273,9 @@ function wp_travel_trip_info( $post ) {
 				<?php }?>
 				</ul>
 			<?php } else {?>
-				<div>
+				<div id="no-itineraries">
 				<label for="wp-travel-detail"><?php esc_html_e( 'No Itineraries found.', 'wp-travel' ); ?></label>
-				<a href="#addItinerary"><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></a>
+				<button id="add-itinerary" type="button"><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></button>
 				</div>
 			<?php }?>
 
@@ -292,6 +292,9 @@ function wp_travel_trip_info( $post ) {
 		jQuery(document).ready(function($) {
     		$( "#sortable" ).sortable();
     		$( "#sortable" ).disableSelection();
+			$("#add-itinerary").click(function(){
+				$("#no-itineraries").hide();
+			} );
   		} );
 	</script>
 	<style>
