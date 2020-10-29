@@ -264,18 +264,20 @@ function wp_travel_trip_info( $post ) {
 		</tr>
 		<tr>
 			<td>
+			</td>
+		</tr>
+	</table>
 			<?php if ( is_array( $trip_outline ) && count( $trip_outline ) > 0 ) {?>
 				<ul id="sortable">
 				<?php foreach ( $trip_outline as $itinerary ) {?>
-  					<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span><?php $itinerary?></li>
+					<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>1. <?php $itinerary?></li>
+					<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>2. <?php $itinerary?></li>
+  					<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>3. <?php $itinerary?></li>
 				<?php }?>
 				</ul>
 			<?php } else {?>
 				<p>No Itineraries found.</p><a href="#addItinerary"><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></a>
 			<?php }?>
-			</td>
-		</tr>
-	</table>
 	<script>
 		jQuery(document).ready(function($) {
     		$( "#sortable" ).sortable();
