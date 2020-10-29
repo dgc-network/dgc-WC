@@ -259,14 +259,14 @@ function wp_travel_trip_info( $post ) {
 	$trip_outline = $wp_travel_itinerary->get_outline();
 	?>
 	<div id="init-itineraries">
-	<table style="100%" class="form-table trip-outline">
+	<table style="width:100%" class="form-table trip-outline">
 		<tr>
 			<td><label for="wp-travel-detail"><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></label></td>
 			<td style="text-align:right"><button id="add-itinerary" type="button"><?php esc_html_e( '+ Add Itinerary', 'wp-travel' ); ?></button></td>
 		</tr>
 	</table>
 	<div id="sortable-div"></div>
-	<table style="100%" class="form-table trip-outline">
+	<table style="width:100%" class="form-table trip-outline">
 		<tr>
 			<td></td>
 			<td style="text-align:right"><button id="add-itinerary" type="button"><?php esc_html_e( '+ Add Itinerary', 'wp-travel' ); ?></button></td>
@@ -301,13 +301,13 @@ function wp_travel_trip_info( $post ) {
 				$("#init-itineraries").show();
 				$("#sortable-div").html("<ul id='sortable'><li class='ui-state-default'><span class='ui-icon ui-icon-arrowthick-2-n-s'></span>Day X, My plan</li></ul>");
 			} );
-			$("#add-itinerary").click(function(){
+			$("#add-itinerary").on('click',function(){
 				$("#sortable").append("<li class='ui-state-default'><span class='ui-icon ui-icon-arrowthick-2-n-s'></span>Day X, My plan</li>");
 			} );
   		} );
 	</script>
 	<style>
-  		#sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+  		#sortable { list-style-type: none; margin: 0; padding: 0; width: 100%; }
   		#sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
   		#sortable li span { position: absolute; margin-left: -1.3em; }
   	</style>
