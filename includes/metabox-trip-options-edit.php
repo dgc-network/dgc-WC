@@ -87,7 +87,7 @@ class Metabox_Trip_Options_Edit {
 		<?php
 	}
 
-	function vertical_example_metabox() {
+	function vertical_example_metabox( $post ) {
 		?>
 		<div id="tabs">
 			<ul class="category-tabs">
