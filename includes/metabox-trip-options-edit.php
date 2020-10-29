@@ -273,7 +273,10 @@ function wp_travel_trip_info( $post ) {
 				<?php }?>
 				</ul>
 			<?php } else {?>
-				<p>No Itineraries found.</p><a href="#addItinerary"><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></a>
+				<div>
+				<label for="wp-travel-detail"><?php esc_html_e( 'No Itineraries found.', 'wp-travel' ); ?></label>
+				<a href="#addItinerary"><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></a>
+				</div>
 			<?php }?>
 
 			<ul id="sortable">
