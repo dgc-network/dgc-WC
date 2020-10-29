@@ -275,7 +275,15 @@ function wp_travel_trip_info( $post ) {
 			<?php } else {?>
 				<p>No Itineraries found.</p><a href="#addItinerary"><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></a>
 			<?php }?>
-			<br class="clear" />
+
+			<ul id="sortable">
+				<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>1. </li>
+				<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>2. </li>
+  				<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>3. </li>
+				<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>4. </li>
+				<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>5. </li>
+  				<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>6. </li>
+			</ul>
 	</div>
 	<script>
 		jQuery(document).ready(function($) {
