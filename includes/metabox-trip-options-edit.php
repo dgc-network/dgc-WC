@@ -258,13 +258,14 @@ function wp_travel_trip_info( $post ) {
 	$wp_travel_itinerary = new WP_Travel_Itinerary();
 	$trip_outline = $wp_travel_itinerary->get_outline();
 	?>
-	<table class="form-table trip-outline">
 	<div id="init-itineraries">
+	<table class="form-table trip-outline">
 		<tr>
 			<td><label for="wp-travel-detail"><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></label></td>
 			<td><button id="add-itinerary" type="button"><?php esc_html_e( '+ Add Itinerary', 'wp-travel' ); ?></button></td>
 		</tr>
 	</table>
+	</div>
 	<div id="sortable-div">
 			<?php if ( is_array( $trip_outline ) && count( $trip_outline ) > 0 ) {?>
 				<ul id="sortable">
