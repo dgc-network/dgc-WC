@@ -30,7 +30,7 @@ class Metabox_Trip_Options_Edit {
 		?>
 		<div id="mytabs">
 			<ul class="category-tabs">
-			<li><a href="#frag1"><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></a></li>
+				<li><a href="#frag1"><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></a></li>
 				<li><a href="#frag2"><?php esc_html_e( 'Prices & Dates', 'wp-travel' ); ?></a></li>
 				<li><a href="#frag3"><?php esc_html_e( 'Includes/Excludes', 'wp-travel' ); ?></a></li>
 				<li><a href="#frag4"><?php esc_html_e( 'Facts', 'wp-travel' ); ?></a></li>
@@ -46,7 +46,7 @@ class Metabox_Trip_Options_Edit {
 			</div>
 
 			<div class="hidden" id="frag2">
-				<?php wp_travel_trip_info( $post )?>				
+				<?php array( __CLASS__, 'trip_options_metabox_callback' )?>				
 			</div>
 
 			<div class="hidden" id="frag3">
