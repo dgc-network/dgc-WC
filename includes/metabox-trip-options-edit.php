@@ -259,8 +259,10 @@ function wp_travel_trip_info( $post ) {
 	$trip_outline = $wp_travel_itinerary->get_outline();
 	?>
 	<table class="form-table trip-outline">
+	<div id="init-itineraries">
 		<tr>
 			<td><label for="wp-travel-detail"><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></label></td>
+			<td><button id="add-itinerary" type="button"><?php esc_html_e( '+ Add Itinerary', 'wp-travel' ); ?></button></td>
 		</tr>
 	</table>
 	<div id="sortable-div">
@@ -274,8 +276,9 @@ function wp_travel_trip_info( $post ) {
 				</ul>
 			<?php } else {?>
 				<div id="no-itineraries">
+				<label for="wp-travel-detail"><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></label><br>
 				<label for="wp-travel-detail"><?php esc_html_e( 'No Itineraries found.', 'wp-travel' ); ?></label>
-				<button id="add-itinerary" type="button"><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></button>
+				<button id="first-itinerary" type="button"><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></button>
 				</div>
 			<?php }?>
 
@@ -292,8 +295,10 @@ function wp_travel_trip_info( $post ) {
 		jQuery(document).ready(function($) {
     		$( "#sortable" ).sortable();
     		$( "#sortable" ).disableSelection();
-			$("#add-itinerary").click(function(){
+			$("#init-itineraries").hide();
+			$("#first-itinerary").click(function(){
 				$("#no-itineraries").hide();
+				$("#init-itineraries").show();
 			} );
   		} );
 	</script>
