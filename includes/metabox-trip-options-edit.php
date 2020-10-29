@@ -16,8 +16,8 @@ class Metabox_Trip_Options_Edit {
 			'trip-options', // metabox ID
 			esc_html__( 'Trip Options', 'dgc-domain' ), // title
 			//array( __CLASS__, 'trip_options_metabox_callback' ), // callback function
-			//array( __CLASS__, 'horizontal_example_metabox' ), // callback function
-			array( __CLASS__, 'vertical_example_metabox' ), // callback function
+			array( __CLASS__, 'horizontal_example_metabox' ), // callback function
+			//array( __CLASS__, 'vertical_example_metabox' ), // callback function
 			'product', // post type or post types in array
 			'normal', // position (normal, side, advanced)
 			'default' // priority (default, low, high, core)
@@ -146,12 +146,12 @@ class Metabox_Trip_Options_Edit {
 			});
 		</script>
   		<style>
-  		.ui-tabs-vertical { width: 55em; }
-  		.ui-tabs-vertical .ui-tabs-nav { padding: .2em .1em .2em .2em; float: left; width: 12em; }
-  		.ui-tabs-vertical .ui-tabs-nav li { clear: left; width: 100%; border-bottom-width: 1px !important; border-right-width: 0 !important; margin: 0 -1px .2em 0; }
-  		.ui-tabs-vertical .ui-tabs-nav li a { display:block; }
-  		.ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active { padding-bottom: 0; padding-right: .1em; border-right-width: 1px; }
-  		.ui-tabs-vertical .ui-tabs-panel { padding: 1em; float: right; width: 40em;}
+  			.ui-tabs-vertical { width: 55em; }
+  			.ui-tabs-vertical .ui-tabs-nav { padding: .2em .1em .2em .2em; float: left; width: 12em; }
+  			.ui-tabs-vertical .ui-tabs-nav li { clear: left; width: 100%; border-bottom-width: 1px !important; border-right-width: 0 !important; margin: 0 -1px .2em 0; }
+  			.ui-tabs-vertical .ui-tabs-nav li a { display:block; }
+  			.ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active { padding-bottom: 0; padding-right: .1em; border-right-width: 1px; }
+  			.ui-tabs-vertical .ui-tabs-panel { padding: 1em; float: right; width: 40em;}
   		</style>
 		<?php
 	}
@@ -247,7 +247,7 @@ function wp_travel_trip_info( $post ) {
 	}
 	$trip_code = wp_travel_get_trip_code( $post->ID );
 	?>
-	<table class="form-table trip-info-sidebar">
+	<table class="form-table trip-info">
 		<tr>
 			<td><label for="wp-travel-detail"><?php esc_html_e( 'Trip Code', 'wp-travel' ); ?></label></td>
 			<td><input type="text" id="wp-travel-trip-code" disabled="disabled" value="<?php echo esc_attr( $trip_code ); ?>" /></td>
