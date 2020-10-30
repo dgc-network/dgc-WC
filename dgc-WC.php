@@ -50,6 +50,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
     require_once BASE_DIR . 'wp-travel/inc/email-template-functions.php';
     require_once BASE_DIR . 'wp-travel/inc/admin/class-admin-metaboxes.php';
     require_once BASE_DIR . 'wp-travel/inc/helpers/helpers-price.php';
+    require_once BASE_DIR . 'wp-travel/inc/helpers/helpers-fontawesome.php';
     require_once BASE_DIR . 'wp-travel/inc/payments/wp-travel-payments.php';
 } else {
     //require_once $this->path('BASE_DIR','includes/no_woocommerce.php');
