@@ -30,7 +30,18 @@ define( 'WP_DEBUG', true );
 $dir = dirname( __FILE__ ); //dirname( __FILE__ )
 define( "BASE_DIR", str_replace( '\\', '/', $dir . '/' ) );
 define( 'WP_TRAVEL_POST_TYPE', 'itineraries' );
+define( 'WP_TRAVEL_POST_TITLE', __( 'trips', 'wp-travel' ) );
+define( 'WP_TRAVEL_POST_TITLE_SINGULAR', __( 'trip', 'wp-travel' ) );
+define( 'WP_TRAVEL_PLUGIN_FILE', __FILE__ );
+//define( 'WP_TRAVEL_ABSPATH', dirname( __FILE__ ) . '/' );
 define( 'WP_TRAVEL_ABSPATH', dirname( __FILE__ ) . '/wp-travel' . '/' );
+define( 'WP_TRAVEL_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
+define( 'WP_TRAVEL_PLUGIN_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
+define( 'WP_TRAVEL_TEMPLATE_PATH', 'wp-travel/' );
+//define( 'WP_TRAVEL_VERSION', $this->version );
+define( 'WP_TRAVEL_VERSION', '1.0.0' );
+define( 'WP_TRAVEL_MINIMUM_PARTIAL_PAYOUT', array( 10 ) ); // In percent.
+define( 'WP_TRAVEL_SLIP_UPLOAD_DIR', 'wp-travel-slip' ); // In percent.
 
 /**
  * Including Plugin file for security
@@ -47,6 +58,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
     //require_once BASE_DIR . 'wp-travel/wp-travel.php';
     require_once BASE_DIR . 'wp-travel/inc/helpers.php';
     require_once BASE_DIR . 'wp-travel/inc/class-itinerary.php';
+    require_once BASE_DIR . 'wp-travel/inc/class-assets.php';
     require_once BASE_DIR . 'wp-travel/inc/email-template-functions.php';
     require_once BASE_DIR . 'wp-travel/inc/admin/class-admin-metaboxes.php';
     require_once BASE_DIR . 'wp-travel/inc/helpers/helpers-price.php';
