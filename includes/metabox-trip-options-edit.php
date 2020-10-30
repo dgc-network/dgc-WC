@@ -299,7 +299,7 @@ function wp_travel_trip_info( $post ) {
 			$("#first-itinerary").click(function(){
 				$("#no-itineraries").hide();
 				$("#init-itineraries").show();
-				$("#sortable-div").html("<ul id='sortable'><li class='ui-state-default'><i class='fas fa-bars'></i>Day X, My plan</li><div id='xxx'></div></ul>");
+				$("#sortable-div").html("<ul id='sortable'><li class='ui-state-default'><span class='fas fa-bars'></span>Day X, My plan</li><div id='xxx'></div></ul>");
 			} );
 			$("#add-itinerary").on('click',function(){
 				$("#sortable").append("<li class='ui-state-default'><span class='ui-icon ui-icon-arrowthick-2-n-s'></span>Day X, My plan</li>");
