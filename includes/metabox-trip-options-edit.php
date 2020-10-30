@@ -299,7 +299,7 @@ function wp_travel_trip_info( $post ) {
 			$("#first-itinerary").click(function(){
 				$("#no-itineraries").hide();
 				$("#init-itineraries").show();
-				$("#sortable-div").html("<ul id='sortable'><li class='ui-state-default'><span class='fas fa-bars'></span>Day X, My plan</li><div id='xxx'></div></ul>");
+				$("#sortable-div").html("<ul id='sortable'><li class='ui-state-default'><i class='fas fa-bars'></i>Day X, My plan</li><div id='xxx'></div></ul>");
 			} );
 			$("#add-itinerary").on('click',function(){
 				$("#sortable").append("<li class='ui-state-default'><span class='ui-icon ui-icon-arrowthick-2-n-s'></span>Day X, My plan</li>");
@@ -312,7 +312,8 @@ function wp_travel_trip_info( $post ) {
 	<style>
   		#sortable { list-style-type: none; margin: 0; padding: 0; width: 100%; }
   		#sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
-  		#sortable li span { position: absolute; margin-left: -1.3em; }
+		#sortable li span { position: absolute; margin-left: -1.3em; }
+		<i class="fas fa-bars"></i>  f0c9
   	</style>
 	<?php
 }
