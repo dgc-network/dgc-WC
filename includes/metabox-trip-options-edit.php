@@ -50,31 +50,31 @@ class Metabox_Trip_Options_Edit {
 			</div>
 
 			<div class="hidden" id="frag3">
-				<?php wp_travel_trip_info( $post )?>
+				<?php self::trip_options_metabox_callback( $post )?>
 			</div>
 			
 			<div class="hidden" id="frag4">
-				<?php wp_travel_trip_info( $post )?>
+				<?php self::trip_options_metabox_callback( $post )?>
 			</div>
 			
 			<div class="hidden" id="frag5">
-				<?php wp_travel_trip_info( $post )?>
+				<?php self::trip_options_metabox_callback( $post )?>
 			</div>
 			
 			<div class="hidden" id="frag6">
-				<?php wp_travel_trip_info( $post )?>
+				<?php self::trip_options_metabox_callback( $post )?>
 			</div>
 			
 			<div class="hidden" id="frag7">
-				<?php wp_travel_trip_info( $post )?>
+				<?php self::trip_options_metabox_callback( $post )?>
 			</div>
 			
 			<div class="hidden" id="frag8">
-				<?php wp_travel_trip_info( $post )?>
+				<?php self::trip_options_metabox_callback( $post )?>
 			</div>
 			
 			<div class="hidden" id="frag9">
-				<?php wp_travel_trip_info( $post )?>
+				<?php self::trip_options_metabox_callback( $post )?>
 			</div>
 		</div>
 
@@ -299,10 +299,10 @@ function wp_travel_trip_info( $post ) {
 			$("#first-itinerary").click(function(){
 				$("#no-itineraries").hide();
 				$("#init-itineraries").show();
-				$("#sortable-div").html("<ul id='sortable'><li class='ui-state-default'><span class='fas fa-bars'></span>Day X, My plan</li><div id='xxx'></div></ul>");
+				$("#sortable-div").html("<ul id='sortable'><li class='ui-state-default'><span class='fas fa-bars'></span>Day X, My plan<div id='xxx'></div></li></ul>");
 			} );
 			$("#add-itinerary").on('click',function(){
-				$("#sortable").append("<li class='ui-state-default'><span class='ui-icon ui-icon-arrowthick-2-n-s'></span>Day X, My plan</li>");
+				$("#sortable").after("<li class='ui-state-default'><span class='ui-icon ui-icon-arrowthick-2-n-s'></span>Day X, My plan</li>");
 			} );
 			$(".ui-state-default").on('click',function(){
 				$("#xxx").html("<label for='seo_title'>Label</label>");
@@ -313,7 +313,6 @@ function wp_travel_trip_info( $post ) {
   		#sortable { list-style-type: none; margin: 0; padding: 0; width: 100%; }
   		#sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
 		#sortable li span { position: absolute; margin-left: -1.3em; }
-		<i class="fas fa-bars"></i>  f0c9
   	</style>
 	<?php
 }
