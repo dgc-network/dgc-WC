@@ -313,8 +313,8 @@ function wp_travel_trip_info( $post ) {
 				$("#sort-li-1").show();
 				$("#sort-li-1").html("Day X, My plan");
 			} );
-			$(".ui-state-default").on('click',function(){
-				$("#xxx").html("<label for='seo_title'>Label</label>");
+			$("#sort-li-0").on('click',function(){
+				$("#sort-li-0").html("<style>#sort-li-0 {height: 180px;}</style>");
 			} );
   		} );
 	</script>
