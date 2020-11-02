@@ -314,7 +314,9 @@ function wp_travel_trip_info( $post ) {
 				$("#sort-li-1").html("Day X, My plan");
 			} );
 			$("#sort-li-0").on('click',function(){
-				$("#sort-li-0").html("<style>#sort-li-0 {height: 180px;}</style>");
+		        //var newHeight = $(".input-height").val();
+        		//$("#sort-li-0").height(newHeight);
+        		$("#sort-li-0").height(200px);
 			} );
   		} );
 	</script>
