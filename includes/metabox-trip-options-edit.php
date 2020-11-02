@@ -305,10 +305,13 @@ function wp_travel_trip_info( $post ) {
 			$("#first-itinerary").click(function(){
 				$("#no-itineraries").hide();
 				$("#init-itineraries").show();
+				$(".ui-state-default").hide();
+				$("#sort-li-0").show();
 				$("#sort-li-0").html("Day X, My plan");
 			} );
 			$("#add-itinerary").on('click',function(){
-				$("#sortable").after("<li class='ui-state-default'><span class='ui-icon ui-icon-arrowthick-2-n-s'></span>Day X, My plan</li>");
+				$("#sort-li-0").show();
+				$("#sort-li-0").html("Day X, My plan");
 			} );
 			$(".ui-state-default").on('click',function(){
 				$("#xxx").html("<label for='seo_title'>Label</label>");
