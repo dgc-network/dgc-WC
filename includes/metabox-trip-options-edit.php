@@ -268,7 +268,7 @@ function wp_travel_trip_info( $post ) {
 	<ul id="sortable">
 	<?php  
 	for ($x = 0; $x <= 10; $x++) {
-		echo "<li class='ui-state-default' id=sort-li-'" . $x . "'><span class='fas fa-bars'></span>" . $x . "<div><br>" . $x . "<br></div></li>";
+		echo "<li class='ui-state-default' id='sort-li-" . $x . "'><span class='fas fa-bars'></span>" . $x . "<div><br>" . $x . "<br></div></li>";
 	}
 	?>
 	</ul>
@@ -280,7 +280,7 @@ function wp_travel_trip_info( $post ) {
 	</table>
 	</div>
 
-	  			<?php if ( is_array( $trip_outline ) && count( $trip_outline ) > 0 ) {?>
+	  		<?php if ( is_array( $trip_outline ) && count( $trip_outline ) > 0 ) {?>
 				<ul id="sortable">
 				<?php foreach ( $trip_outline as $itinerary ) {?>
 					<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>1. <?php $itinerary?></li>
@@ -305,7 +305,7 @@ function wp_travel_trip_info( $post ) {
 			$("#first-itinerary").click(function(){
 				$("#no-itineraries").hide();
 				$("#init-itineraries").show();
-				$("#sort-li").html("Day X, My plan");
+				$("#sort-li-0").html("Day X, My plan");
 			} );
 			$("#add-itinerary").on('click',function(){
 				$("#sortable").after("<li class='ui-state-default'><span class='ui-icon ui-icon-arrowthick-2-n-s'></span>Day X, My plan</li>");
