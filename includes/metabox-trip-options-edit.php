@@ -313,11 +313,11 @@ function wp_travel_trip_info( $post ) {
 				$("#sort-li-1").show();
 				$("#sort-li-1").html("Day X, My plan");
 			} );
-			$( "#sort-li-0" ).click(
+			$( "#sort-li-0" ).clickToggle(
 				function() {
         			$("#sort-li-0").height(200);
-				//}, function() {
-        		//	$("#sort-li-0").height(18);
+				}, function() {
+        			$("#sort-li-0").height(18);
 				}
 			);
   		} );
