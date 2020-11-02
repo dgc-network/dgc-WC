@@ -277,7 +277,7 @@ function wp_travel_trip_info( $post ) {
 	<ul id="sortable">
 	<?php  
 	for ($x = 0; $x <= 10; $x++) {
-		echo " <li class='ui-state-default'><span class='ui-icon ui-icon-arrowthick-2-n-s'></span>" . $x . "</li>";
+		echo " <li class='ui-state-default'><span class='fas fa-bars'></span>" . $x . "</li>";
 	}
 	?>
 	</ul>
