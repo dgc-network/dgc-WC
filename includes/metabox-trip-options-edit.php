@@ -316,7 +316,7 @@ function wp_travel_trip_info( $post ) {
 			$("#sort-li-0").on('click',function(){
 		        //var newHeight = $(".input-height").val();
         		//$("#sort-li-0").height(newHeight);
-        		$("#sort-li-0").height(200px);
+        		$("#sort-li-0").height(200);
 			} );
   		} );
 	</script>
