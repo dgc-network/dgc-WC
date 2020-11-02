@@ -193,7 +193,8 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 			wp_register_style( 'magnific-popup-css', self::$assets_path . 'assets/css/magnific-popup' . $suffix . '.css' );
 			wp_register_style( 'wp-travel-slick', self::$assets_path . 'assets/css/lib/slick/slick.min.css' );
 			// fontawesome.
-			wp_register_style( 'font-awesome-css', self::$assets_path . 'assets/css/lib/font-awesome/css/fontawesome-all' . $suffix . '.css' );
+			//wp_register_style( 'font-awesome-css', self::$assets_path . 'assets/css/lib/font-awesome/css/fontawesome-all' . $suffix . '.css' );
+			wp_register_style( 'font-awesome-css', self::$assets_path . 'wp-travel/assets/css/lib/font-awesome/css/fontawesome-all' . $suffix . '.css' );
 			wp_register_style( 'select2-style', self::$assets_path . 'assets/css/lib/select2/select2' . $suffix . '.css', array(), '4.0.5' );
 
 			wp_enqueue_media();
