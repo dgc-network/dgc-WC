@@ -265,7 +265,13 @@ function wp_travel_trip_info( $post ) {
 			<td style="text-align:right"><button id="add-itinerary" type="button"><?php esc_html_e( '+ Add Itinerary', 'wp-travel' ); ?></button></td>
 		</tr>
 	</table>
-	<div id="sortable-div"></div>
+	<ul id="sortable">
+	<?php  
+	for ($x = 0; $x <= 10; $x++) {
+		echo "<li class='ui-state-default' id=sort-li-'" . $x . "'><span class='fas fa-bars'></span>" . $x . "<div><br>" . $x . "<br></div></li>";
+	}
+	?>
+	</ul>
 	<table style="width:100%" class="form-table trip-outline">
 		<tr>
 			<td></td>
@@ -274,13 +280,6 @@ function wp_travel_trip_info( $post ) {
 	</table>
 	</div>
 
-	<ul id="sortable">
-	<?php  
-	for ($x = 0; $x <= 10; $x++) {
-		echo " <li class='ui-state-default'><span class='fas fa-bars'></span>" . $x . "<div><br>" . $x . "<br></div></li>";
-	}
-	?>
-	</ul>
 	  			<?php if ( is_array( $trip_outline ) && count( $trip_outline ) > 0 ) {?>
 				<ul id="sortable">
 				<?php foreach ( $trip_outline as $itinerary ) {?>
@@ -306,7 +305,7 @@ function wp_travel_trip_info( $post ) {
 			$("#first-itinerary").click(function(){
 				$("#no-itineraries").hide();
 				$("#init-itineraries").show();
-				$("#sortable-div").html("<ul id='sortable'><li class='ui-state-default'><span class='fas fa-bars'></span>Day X, My plan<div id='xxx'></div></li></ul>");
+				$("#sort-li").html("Day X, My plan");
 			} );
 			$("#add-itinerary").on('click',function(){
 				$("#sortable").after("<li class='ui-state-default'><span class='ui-icon ui-icon-arrowthick-2-n-s'></span>Day X, My plan</li>");
@@ -318,7 +317,7 @@ function wp_travel_trip_info( $post ) {
 	</script>
 	<style>
   		#sortable { list-style-type: none; margin: 0; padding: 0; width: 100%; }
-  		#sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 180px; }
+  		#sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
 		#sortable li span { position: absolute; margin-left: -1.3em; }
   	</style>
 	<?php
