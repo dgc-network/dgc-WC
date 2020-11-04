@@ -313,6 +313,9 @@ function wp_travel_trip_info( $post ) {
 				$("#sort-li-1").show();
 				$("#sort-li-1").html("Day X, My plan");
 			} );
+			$('#sort-li-0').on('click', function() {
+    			$('#sort-li-0').toggleClass('active');
+  			});
 			$( "#sort-li-0" ).clickToggle(
 				function() {
         			$("#sort-li-0").height(200);
@@ -327,6 +330,7 @@ function wp_travel_trip_info( $post ) {
   		#sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
 		#sortable li span { position: absolute; margin-left: -1.3em; }
 		#sortable div { background: #f2f2f2; border: 1px solid #ccc;}
+		#sortable li.active { background: #dd6149; height: 380px; }
   	</style>
 	<?php
 }
