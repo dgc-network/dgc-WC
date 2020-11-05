@@ -164,50 +164,52 @@ class Metabox_Trip_Options_Edit {
 		return $post_id;
 	}
 
-/**
- * Trip Info metabox.
- *
- * @param  Object $post Post object.
- */
-function wp_travel_trip_info( $post ) {
-	if ( ! $post ) {
-		return;
-	}
-	$trip_code = wp_travel_get_trip_code( $post->ID );
-	?>
-	<table class="form-table trip-info">
-		<tr>
-			<td><label for="wp-travel-detail"><?php esc_html_e( 'Trip Code', 'wp-travel' ); ?></label></td>
-			<td><input type="text" id="wp-travel-trip-code" disabled="disabled" value="<?php echo esc_attr( $trip_code ); ?>" /></td>
-		</tr>
-	</table>
+	/**
+	 * Trip Info metabox.
+	 *
+	 * @param  Object $post Post object.
+	 */
+	function wp_travel_trip_info( $post ) {
+		if ( ! $post ) {
+			return;
+		}
+		$trip_code = wp_travel_get_trip_code( $post->ID );
+		?>
+		<table class="form-table trip-info">
+			<tr>
+				<td><label for="wp-travel-detail"><?php esc_html_e( 'Trip Code', 'wp-travel' ); ?></label></td>
+				<td><input type="text" id="wp-travel-trip-code" disabled="disabled" value="<?php echo esc_attr( $trip_code ); ?>" /></td>
+			</tr>
+		</table>
 
-	<?php 
-	$wp_travel_itinerary = new WP_Travel_Itinerary();
-	$trip_outline = $wp_travel_itinerary->get_outline();
-	?>
-	<div id="init-itineraries">
-	<table style="width:100%" class="form-table trip-outline">
-		<tr>
-			<td><label for="wp-travel-detail"><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></label></td>
-			<td style="text-align:right"><button id="add-itinerary" type="button"><?php esc_html_e( '+ Add Itinerary', 'wp-travel' ); ?></button></td>
-		</tr>
-	</table>
-	<ul id="sortable">
-	<?php  
-	for ($x = 0; $x <= 100; $x++) {
-		echo "<li class='sort-li' id='sort-li-" . $x . "'><span class='fas fa-bars'></span>" . $x . "<div class='sort-div' id='sort-div-" . $x . "'>" . self::trip_options_metabox_callback( $post ) . "</div></li>";
-	}
-	?>
-	</ul>
-	<table style="width:100%" class="form-table trip-outline">
-		<tr>
-			<td></td>
-			<td style="text-align:right"><button id="add-itinerary" type="button"><?php esc_html_e( '+ Add Itinerary', 'wp-travel' ); ?></button></td>
-		</tr>
-	</table>
-	</div>
+		<div id="init-itineraries">
+		<table style="width:100%" class="form-table trip-outline">
+			<tr>
+				<td><label for="wp-travel-detail"><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></label></td>
+				<td style="text-align:right"><button id="add-itinerary" type="button"><?php esc_html_e( '+ Add Itinerary', 'wp-travel' ); ?></button></td>
+			</tr>
+		</table>
+		<ul id="sortable">
+		<?php  
+		for ($x = 0; $x < 100; $x++) {
+			echo "<li class='sort-li' id='sort-li-" . $x . "'><span class='fas fa-bars'></span>" . $x . 
+			"<div class='sort-div' id='sort-div-" . $x . "'>" . self::trip_options_metabox_callback( $post ) . 
+			"</div></li>";
+		}
+		?>
+		</ul>
+		<table style="width:100%" class="form-table trip-outline">
+			<tr>
+				<td></td>
+				<td style="text-align:right"><button id="add-itinerary" type="button"><?php esc_html_e( '+ Add Itinerary', 'wp-travel' ); ?></button></td>
+			</tr>
+		</table>
+		</div>
 
+		<?php 
+		$wp_travel_itinerary = new WP_Travel_Itinerary();
+		$trip_outline = $wp_travel_itinerary->get_outline();
+		?>
 	  		<?php if ( is_array( $trip_outline ) && count( $trip_outline ) > 0 ) {?>
 				<ul id="sortable">
 				<?php foreach ( $trip_outline as $itinerary ) {?>
@@ -225,49 +227,51 @@ function wp_travel_trip_info( $post ) {
 			<?php }?>
 
 	
-	<script>
-		jQuery(document).ready(function($) {
-    		$( "#sortable" ).sortable();
-			$( "#sortable" ).disableSelection();
+		<script>
+			jQuery(document).ready(function($) {
+    			$( "#sortable" ).sortable();
+				$( "#sortable" ).disableSelection();
 			
-			$("#init-itineraries").hide();
-			$("#first-itinerary").click(function(){
-				$("#no-itineraries").hide();
-				$("#init-itineraries").show();
-				$(".sort-li").hide();
-				$(".sort-div").hide();
-				$("#sort-li-0").show();
-				$("#sort-li-0").html("Day X, My plan");
-				$('#sort-li-0').on('click', function() {
-    				$('#sort-li-0').toggleClass('active');
-					$("#sort-div-0").show();
-	  			});
-			} );
+				$("#init-itineraries").hide();
+				$("#first-itinerary").click( function(){
+					$("#no-itineraries").hide();
+					$("#init-itineraries").show();
+					$(".sort-li").hide();
+					$(".sort-div").hide();
+					$("#sort-li-0").show();
+					$("#sort-li-0").html("Day X, My plan");
+					$('#sort-li-0').on('click', function() {
+    					$('#sort-li-0').toggleClass('active');
+						$("#sort-div-0").show();
+	  				});
+				} );
 			
-			$("#add-itinerary").click(function(){
-				$( ".sort-li" ).each(function( index, element ) {
-					if ( $( this ).is(":hidden") ) {
-						$( this ).show();
-						$( this ).html("Day X, My plan");
-						$( this ).on("click", function() {
-							$( this ).toggleClass('active');
-						});
-						return false;
-					};
-				});
+				$("#add-itinerary").click( function(){
+					$( ".sort-li" ).each( function( index, element ) {
+						if ( $( this ).is(":hidden") ) {
+							$( this ).show();
+							$( this ).html("Day X, My plan");
+							$( this ).on("click", function() {
+								$( this ).toggleClass('active');
+							});
+							return false;
+						};
+					});
+				} );
 			} );
-		} );
-	</script>
-	<style>
-  		#sortable { list-style-type: none; margin: 0; padding: 0; width: 100%; }
-  		#sortable li { background: #f2f2f2; border: 1px solid #ccc; margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
-		#sortable li span { position: absolute; margin-left: -1.3em; }
-		#sortable div { background: #f2f2f2; border: 1px solid #ccc;}
-		#sortable li.active { background: #FFFFFF; height: 500px; }
-		#first-itinerary { color: blue; text-decoration: underline; cursor: pointer;}
-  	</style>
-	<?php
-}
+		</script>
+	
+		<style>
+  			#sortable { list-style-type: none; margin: 0; padding: 0; width: 100%; }
+  			#sortable li { background: #f2f2f2; border: 1px solid #ccc; margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px;
+			  	display: inline-block; zoom: 1; *display: inline; list-style-type: none; vertical-align: middle;}
+			#sortable li span { position: absolute; margin-left: -1.3em; }
+			#sortable div { background: #f2f2f2; border: 1px solid #ccc;}
+			#sortable li.active { background: #FFFFFF; height: 500px; }
+			#first-itinerary { color: blue; text-decoration: underline; cursor: pointer;}
+  		</style>
+		<?php
+	}
 }
 
 Metabox_Trip_Options_Edit::init();
