@@ -309,6 +309,9 @@ function wp_travel_trip_info( $post ) {
 				$(".sort-li").hide();
 				$("#sort-li-0").show();
 				$("#sort-li-0").html("Day X, My plan");
+				$('#sort-li-0').on('click', function() {
+    				$('#sort-li-0').toggleClass('active');
+	  			});
 			} );
 			
 			$("#add-itinerary").click(function(){
@@ -335,9 +338,6 @@ function wp_travel_trip_info( $post ) {
 			});
 */			
 /*
-			$('#sort-li-0').on('click', function() {
-    			$('#sort-li-0').toggleClass('active');
-  			});
 			$('#sort-li-1').on('click', function() {
     			$('#sort-li-1').toggleClass('active');
 			});
