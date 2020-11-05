@@ -320,7 +320,7 @@ function wp_travel_trip_info( $post ) {
 					};
 				});
 			} );
-
+/*
 			$( ".sort-li" ).each(function( index, element ) {
 				if ( $( this ).is(":visible") ) {
 					$( this ).click( function() {
@@ -328,6 +328,7 @@ function wp_travel_trip_info( $post ) {
 					});
 				};
 			});
+*/			
 /*
 			$('#sort-li-0').on('click', function() {
     			$('#sort-li-0').toggleClass('active');
