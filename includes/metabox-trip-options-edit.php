@@ -312,8 +312,9 @@ function wp_travel_trip_info( $post ) {
 			} );
 			
 			$("#add-itinerary").on('click',function(){
-				//$("#sort-li-1").show();
-				//$("#sort-li-1").html("Day X, My plan");
+				$("#sort-li-1").show();
+				$("#sort-li-1").html("Day X, My plan");
+/*				
 				$( ".sort-li" ).each(function( index, element ) {
 					if ( $(element).is(":hidden") ) {
 						$(element).show();
@@ -321,6 +322,7 @@ function wp_travel_trip_info( $post ) {
 						return false;
 					};
 				};
+*/				
 			} );
 
 			$('#sort-li-0').on('click', function() {
