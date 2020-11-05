@@ -196,7 +196,7 @@ function wp_travel_trip_info( $post ) {
 	<ul id="sortable">
 	<?php  
 	for ($x = 0; $x <= 100; $x++) {
-		echo "<li class='sort-li' id='sort-li-" . $x . "'><span class='fas fa-bars'></span>" . $x . "<div>". self::trip_options_metabox_callback( $post ) ."</div></li>";
+		echo "<li class='sort-li' id='sort-li-" . $x . "'><span class='fas fa-bars'></span>" . $x . "<div class='sort-div' id='sort-div-" . $x . "'>" . self::trip_options_metabox_callback( $post ) . "</div></li>";
 	}
 	?>
 	</ul>
@@ -235,10 +235,12 @@ function wp_travel_trip_info( $post ) {
 				$("#no-itineraries").hide();
 				$("#init-itineraries").show();
 				$(".sort-li").hide();
+				$(".sort-div").hide();
 				$("#sort-li-0").show();
 				$("#sort-li-0").html("Day X, My plan");
 				$('#sort-li-0').on('click', function() {
     				$('#sort-li-0').toggleClass('active');
+					$("#sort-div-0").show();
 	  			});
 			} );
 			
