@@ -313,6 +313,11 @@ function wp_travel_trip_info( $post ) {
 			
 			$("#add-itinerary").click(function(){
 				$( ".sort-li" ).each(function( index, element ) {
+					if ( $( this ).is(":visible") ) {
+						$( this ).on("click", function() {
+							$( this ).toggleClass('active');
+						});
+					};
 					if ( $( this ).is(":hidden") ) {
 						$( this ).show();
 						$( this ).html("Day X, My plan");
