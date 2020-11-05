@@ -268,7 +268,7 @@ function wp_travel_trip_info( $post ) {
 	<ul id="sortable">
 	<?php  
 	for ($x = 0; $x <= 10; $x++) {
-		echo "<li class='ui-state-default' id='sort-li-" . $x . "'><span class='fas fa-bars'></span>" . $x . "<div></div></li>";
+		echo "<li class='sort-li' id='sort-li-" . $x . "'><span class='fas fa-bars'></span>" . $x . "<div></div></li>";
 	}
 	?>
 	</ul>
@@ -300,28 +300,27 @@ function wp_travel_trip_info( $post ) {
 	<script>
 		jQuery(document).ready(function($) {
     		$( "#sortable" ).sortable();
-    		$( "#sortable" ).disableSelection();
+			$( "#sortable" ).disableSelection();
+			
 			$("#init-itineraries").hide();
 			$("#first-itinerary").click(function(){
 				$("#no-itineraries").hide();
 				$("#init-itineraries").show();
-				$(".ui-state-default").hide();
+				$(".sort-li").hide();
 				$("#sort-li-0").show();
 				$("#sort-li-0").html("Day X, My plan");
 			} );
 			
-			$( "div" ).each(function( index, element ) {
-			    // element == this
-    			$( element ).css( "backgroundColor", "yellow" );
-    			if ( $( this ).is( "#stop" ) ) {
-      				$( "span" ).text( "Stopped at div index #" + index );
-      				return false;
-    			}
-  			});
-
 			$("#add-itinerary").on('click',function(){
-				$("#sort-li-1").show();
-				$("#sort-li-1").html("Day X, My plan");
+				//$("#sort-li-1").show();
+				//$("#sort-li-1").html("Day X, My plan");
+				$( ".sort-li" ).each(function( index, element ) {
+					if ( $(element).is(":hidden") ) {
+						$(element).show();
+						$(element).html("Day X, My plan");
+						return false;
+					};
+				};
 			} );
 
 			$('#sort-li-0').on('click', function() {
@@ -337,7 +336,7 @@ function wp_travel_trip_info( $post ) {
   		#sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
 		#sortable li span { position: absolute; margin-left: -1.3em; }
 		#sortable div { background: #f2f2f2; border: 1px solid #ccc;}
-		#sortable li.active { background: #FFFFFF; height: 5000px; }
+		#sortable li.active { background: #FFFFFF; height: 500px; }
   	</style>
 	<?php
 }
