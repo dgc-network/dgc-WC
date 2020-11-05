@@ -237,12 +237,12 @@ class Metabox_Trip_Options_Edit {
 					$("#no-itineraries").hide();
 					$("#init-itineraries").show();
 					$(".sort-li").hide();
-					$(".sort-div").hide();
+					//$(".sort-div").hide();
 					$("#sort-li-0").show();
 					$("#sort-li-0").html("Day X, My plan");
 					$('#sort-li-0').on('click', function() {
     					$('#sort-li-0').toggleClass('active');
-						$("#sort-div-0").show();
+						//$("#sort-div-0").show();
 	  				});
 				} );
 			
