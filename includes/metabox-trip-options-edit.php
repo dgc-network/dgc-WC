@@ -344,7 +344,7 @@ function wp_travel_trip_info( $post ) {
     			$('#sort-li-1').toggleClass('active');
   			});
 		} );
-		  
+/*		  
 		function add_itinerary() {
 				$( ".sort-li" ).each(function( index, element ) {
 					if ( $(element).is(":hidden") ) {
@@ -354,7 +354,7 @@ function wp_travel_trip_info( $post ) {
 					};
 				};
 		}
-
+*/
 	</script>
 	<style>
   		#sortable { list-style-type: none; margin: 0; padding: 0; width: 100%; }
