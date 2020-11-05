@@ -311,10 +311,20 @@ function wp_travel_trip_info( $post ) {
 				$("#sort-li-0").html("Day X, My plan");
 			} );
 			
-			$("#add-itinerary").on('click',function(){
-				$("#sort-li-1").show();
-				$("#sort-li-1").html("Day X, My plan");
-/*				
+			$("#add-itinerary").click(function(){
+				//$("#sort-li-1").show();
+				//$("#sort-li-1").html("Day X, My plan");
+				//add_itinerary();
+				$( ".sort-li" ).each(function( index, element ) {
+					if ( $( this ).is(":hidden") ) {
+						$( this ).show();
+						$( this ).html("Day X, My plan");
+						return false;
+					};
+				};
+			} );
+
+			function add_itinerary() {
 				$( ".sort-li" ).each(function( index, element ) {
 					if ( $(element).is(":hidden") ) {
 						$(element).show();
@@ -322,8 +332,7 @@ function wp_travel_trip_info( $post ) {
 						return false;
 					};
 				};
-*/				
-			} );
+			}
 
 			$('#sort-li-0').on('click', function() {
     			$('#sort-li-0').toggleClass('active');
@@ -335,7 +344,7 @@ function wp_travel_trip_info( $post ) {
 	</script>
 	<style>
   		#sortable { list-style-type: none; margin: 0; padding: 0; width: 100%; }
-  		#sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
+  		#sortable li { background: #f2f2f2; border: 1px solid #ccc; margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
 		#sortable li span { position: absolute; margin-left: -1.3em; }
 		#sortable div { background: #f2f2f2; border: 1px solid #ccc;}
 		#sortable li.active { background: #FFFFFF; height: 500px; }
