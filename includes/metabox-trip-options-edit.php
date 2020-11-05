@@ -362,6 +362,7 @@ function wp_travel_trip_info( $post ) {
 		#sortable li span { position: absolute; margin-left: -1.3em; }
 		#sortable div { background: #f2f2f2; border: 1px solid #ccc;}
 		#sortable li.active { background: #FFFFFF; height: 500px; }
+		span #first-itinerary { color: blue; text-decoration: underline; cursor: pointer;}
   	</style>
 	<?php
 }
