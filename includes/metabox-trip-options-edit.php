@@ -16,7 +16,7 @@ class Metabox_Trip_Options_Edit {
 			'trip-options', // metabox ID
 			esc_html__( 'Trip Options', 'dgc-domain' ), // title
 			//array( __CLASS__, 'trip_options_metabox_callback' ), // callback function
-			array( __CLASS__, 'horizontal_example_metabox' ), // callback function
+			array( __CLASS__, 'horizontal_tabs_metabox' ), // callback function
 			//array( __CLASS__, 'vertical_example_metabox' ), // callback function
 			'product', // post type or post types in array
 			'normal', // position (normal, side, advanced)
@@ -26,7 +26,7 @@ class Metabox_Trip_Options_Edit {
 		wp_enqueue_script( 'mytabs', 'mytabs.js', array( 'jquery-ui-tabs' ) );
 	}
  
-	function horizontal_example_metabox( $post ) {
+	function horizontal_tabs_metabox( $post ) {
 		?>
 		<div id="mytabs">
 			<ul class="category-tabs">
@@ -42,7 +42,7 @@ class Metabox_Trip_Options_Edit {
 			</ul>
 			<br class="clear" />
 			<div id="frag1">
-				<?php wp_travel_trip_info( $post )?>
+				<?php self::wp_travel_trip_info( $post )?>
 			</div>
 
 			<div class="hidden" id="frag2">
@@ -84,75 +84,6 @@ class Metabox_Trip_Options_Edit {
     			$("#mytabs").tabs();
 			});
 		</script>
-		<?php
-	}
-
-	function vertical_example_metabox( $post ) {
-		?>
-		<div id="tabs">
-			<ul class="category-tabs">
-				<li><a href="#frag1"><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></a></li>
-				<li><a href="#frag2"><?php esc_html_e( 'Prices & Dates', 'wp-travel' ); ?></a></li>
-				<li><a href="#frag3"><?php esc_html_e( 'Includes/Excludes', 'wp-travel' ); ?></a></li>
-				<li><a href="#frag4"><?php esc_html_e( 'Facts', 'wp-travel' ); ?></a></li>
-				<li><a href="#frag5"><?php esc_html_e( 'Gallery', 'wp-travel' ); ?></a></li>
-				<li><a href="#frag6"><?php esc_html_e( 'Locations', 'wp-travel' ); ?></a></li>
-				<li><a href="#frag7"><?php esc_html_e( 'FAQs', 'wp-travel' ); ?></a></li>
-				<li><a href="#frag8"><?php esc_html_e( 'Misc. Options', 'wp-travel' ); ?></a></li>
-				<li><a href="#frag9"><?php esc_html_e( 'Tabs', 'wp-travel' ); ?></a></li>
-			</ul>
-			<br class="clear" />
-			<div id="frag1">
-				<?php wp_travel_trip_info( $post )?>
-			</div>
-
-			<div class="hidden" id="frag2">
-				<?php wp_travel_trip_info( $post )?>				
-			</div>
-
-			<div class="hidden" id="frag3">
-				<?php wp_travel_trip_info( $post )?>
-			</div>
-			
-			<div class="hidden" id="frag4">
-				<?php wp_travel_trip_info( $post )?>
-			</div>
-			
-			<div class="hidden" id="frag5">
-				<?php wp_travel_trip_info( $post )?>
-			</div>
-			
-			<div class="hidden" id="frag6">
-				<?php wp_travel_trip_info( $post )?>
-			</div>
-			
-			<div class="hidden" id="frag7">
-				<?php wp_travel_trip_info( $post )?>
-			</div>
-			
-			<div class="hidden" id="frag8">
-				<?php wp_travel_trip_info( $post )?>
-			</div>
-			
-			<div class="hidden" id="frag9">
-				<?php wp_travel_trip_info( $post )?>
-			</div>
-		</div>
-
-		<script>
-			jQuery(document).ready(function($) {
-				$( "#tabs" ).tabs().addClass( "ui-tabs-vertical ui-helper-clearfix" );
-			    $( "#tabs li" ).removeClass( "ui-corner-top" ).addClass( "ui-corner-left" );
-			});
-		</script>
-  		<style>
-  			.ui-tabs-vertical { width: 55em; }
-  			.ui-tabs-vertical .ui-tabs-nav { padding: .2em .1em .2em .2em; float: left; width: 12em; }
-  			.ui-tabs-vertical .ui-tabs-nav li { clear: left; width: 100%; border-bottom-width: 1px !important; border-right-width: 0 !important; margin: 0 -1px .2em 0; }
-  			.ui-tabs-vertical .ui-tabs-nav li a { display:block; }
-  			.ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active { padding-bottom: 0; padding-right: .1em; border-right-width: 1px; }
-  			.ui-tabs-vertical .ui-tabs-panel { padding: 1em; float: right; width: 40em;}
-  		</style>
 		<?php
 	}
 
@@ -232,12 +163,9 @@ class Metabox_Trip_Options_Edit {
 
 		return $post_id;
 	}
-}
-
-Metabox_Trip_Options_Edit::init();
 
 /**
- * Trip Info metabox. [ metabox is removed in utilities ]
+ * Trip Info metabox.
  *
  * @param  Object $post Post object.
  */
@@ -268,7 +196,7 @@ function wp_travel_trip_info( $post ) {
 	<ul id="sortable">
 	<?php  
 	for ($x = 0; $x <= 100; $x++) {
-		echo "<li class='sort-li' id='sort-li-" . $x . "'><span class='fas fa-bars'></span>" . $x . "<div>". Metabox_Trip_Options_Edit::trip_options_metabox_callback() ."</div></li>";
+		echo "<li class='sort-li' id='sort-li-" . $x . "'><span class='fas fa-bars'></span>" . $x . "<div>". self::trip_options_metabox_callback( $post ) ."</div></li>";
 	}
 	?>
 	</ul>
@@ -338,6 +266,10 @@ function wp_travel_trip_info( $post ) {
   	</style>
 	<?php
 }
+}
+
+Metabox_Trip_Options_Edit::init();
+
 
 /**
  * Add a custom Product Data tab
@@ -356,5 +288,74 @@ function wk_custom_product_tab( $default_tabs ) {
 add_action( 'woocommerce_product_data_panels', 'wk_custom_tab_data' );
 function wk_custom_tab_data() {
    echo '<div id="wk_custom_tab_data" class="panel woocommerce_options_panel">// add content here</div>';
+}
+
+function vertical_example_metabox( $post ) {
+	?>
+	<div id="tabs">
+		<ul class="category-tabs">
+			<li><a href="#frag1"><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></a></li>
+			<li><a href="#frag2"><?php esc_html_e( 'Prices & Dates', 'wp-travel' ); ?></a></li>
+			<li><a href="#frag3"><?php esc_html_e( 'Includes/Excludes', 'wp-travel' ); ?></a></li>
+			<li><a href="#frag4"><?php esc_html_e( 'Facts', 'wp-travel' ); ?></a></li>
+			<li><a href="#frag5"><?php esc_html_e( 'Gallery', 'wp-travel' ); ?></a></li>
+			<li><a href="#frag6"><?php esc_html_e( 'Locations', 'wp-travel' ); ?></a></li>
+			<li><a href="#frag7"><?php esc_html_e( 'FAQs', 'wp-travel' ); ?></a></li>
+			<li><a href="#frag8"><?php esc_html_e( 'Misc. Options', 'wp-travel' ); ?></a></li>
+			<li><a href="#frag9"><?php esc_html_e( 'Tabs', 'wp-travel' ); ?></a></li>
+		</ul>
+		<br class="clear" />
+		<div id="frag1">
+			<?php wp_travel_trip_info( $post )?>
+		</div>
+
+		<div class="hidden" id="frag2">
+			<?php wp_travel_trip_info( $post )?>				
+		</div>
+
+		<div class="hidden" id="frag3">
+			<?php wp_travel_trip_info( $post )?>
+		</div>
+		
+		<div class="hidden" id="frag4">
+			<?php wp_travel_trip_info( $post )?>
+		</div>
+		
+		<div class="hidden" id="frag5">
+			<?php wp_travel_trip_info( $post )?>
+		</div>
+		
+		<div class="hidden" id="frag6">
+			<?php wp_travel_trip_info( $post )?>
+		</div>
+		
+		<div class="hidden" id="frag7">
+			<?php wp_travel_trip_info( $post )?>
+		</div>
+		
+		<div class="hidden" id="frag8">
+			<?php wp_travel_trip_info( $post )?>
+		</div>
+		
+		<div class="hidden" id="frag9">
+			<?php wp_travel_trip_info( $post )?>
+		</div>
+	</div>
+
+	<script>
+		jQuery(document).ready(function($) {
+			$( "#tabs" ).tabs().addClass( "ui-tabs-vertical ui-helper-clearfix" );
+			$( "#tabs li" ).removeClass( "ui-corner-top" ).addClass( "ui-corner-left" );
+		});
+	</script>
+	  <style>
+		  .ui-tabs-vertical { width: 55em; }
+		  .ui-tabs-vertical .ui-tabs-nav { padding: .2em .1em .2em .2em; float: left; width: 12em; }
+		  .ui-tabs-vertical .ui-tabs-nav li { clear: left; width: 100%; border-bottom-width: 1px !important; border-right-width: 0 !important; margin: 0 -1px .2em 0; }
+		  .ui-tabs-vertical .ui-tabs-nav li a { display:block; }
+		  .ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active { padding-bottom: 0; padding-right: .1em; border-right-width: 1px; }
+		  .ui-tabs-vertical .ui-tabs-panel { padding: 1em; float: right; width: 40em;}
+	  </style>
+	<?php
 }
 
