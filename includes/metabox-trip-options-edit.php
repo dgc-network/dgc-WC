@@ -293,7 +293,6 @@ function wp_travel_trip_info( $post ) {
 				<label for="wp-travel-detail"><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></label><br>
 				<label for="wp-travel-detail"><?php esc_html_e( 'No Itineraries found.', 'wp-travel' ); ?></label>
 				<span id="first-itinerary"><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></span>
-				<button id="first-itinerary" type="button"><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></button>
 				</div>
 			<?php }?>
 
@@ -313,10 +312,6 @@ function wp_travel_trip_info( $post ) {
 			} );
 			
 			$("#add-itinerary").click(function(){
-				//$("#sort-li-1").show();
-				//$("#sort-li-1").html("Day X, My plan");
-				//add_itinerary();
-			
 				$( ".sort-li" ).each(function( index, element ) {
 					if ( $( this ).is(":hidden") ) {
 						$( this ).show();
@@ -324,37 +319,24 @@ function wp_travel_trip_info( $post ) {
 						return false;
 					};
 				});
-		
 			} );
-/*
-			function add_itinerary() {
-				$( ".sort-li" ).each(function( index, element ) {
-					if ( $(element).is(":hidden") ) {
-						$(element).show();
-						$(element).html("Day X, My plan");
-						return false;
-					};
+
+			$( ".sort-li" ).each(function( index, element ) {
+				if ( $( this ).is(":visible") ) {
+					$( this ).click( function() {
+						$( this ).toggleClass('active');
+					});
 				};
-			}
-*/
+			});
+/*
 			$('#sort-li-0').on('click', function() {
     			$('#sort-li-0').toggleClass('active');
   			});
 			$('#sort-li-1').on('click', function() {
     			$('#sort-li-1').toggleClass('active');
-  			});
+			});
+*/			  
 		} );
-/*		  
-		function add_itinerary() {
-				$( ".sort-li" ).each(function( index, element ) {
-					if ( $(element).is(":hidden") ) {
-						$(element).show();
-						$(element).html("Day X, My plan");
-						return false;
-					};
-				};
-		}
-*/
 	</script>
 	<style>
   		#sortable { list-style-type: none; margin: 0; padding: 0; width: 100%; }
