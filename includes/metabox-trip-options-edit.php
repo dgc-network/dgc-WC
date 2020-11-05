@@ -315,7 +315,7 @@ function wp_travel_trip_info( $post ) {
 			$("#add-itinerary").click(function(){
 				$("#sort-li-1").show();
 				$("#sort-li-1").html("Day X, My plan");
-				add_itinerary();
+				//add_itinerary();
 /*				
 				$( ".sort-li" ).each(function( index, element ) {
 					if ( $( this ).is(":hidden") ) {
