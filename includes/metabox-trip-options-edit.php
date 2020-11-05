@@ -267,8 +267,8 @@ function wp_travel_trip_info( $post ) {
 	</table>
 	<ul id="sortable">
 	<?php  
-	for ($x = 0; $x <= 10; $x++) {
-		echo "<li class='sort-li' id='sort-li-" . $x . "'><span class='fas fa-bars'></span>" . $x . "<div></div></li>";
+	for ($x = 0; $x <= 100; $x++) {
+		echo "<li class='sort-li' id='sort-li-" . $x . "'><span class='fas fa-bars'></span>" . $x . "<div>". Metabox_Trip_Options_Edit::trip_options_metabox_callback() ."</div></li>";
 	}
 	?>
 	</ul>
