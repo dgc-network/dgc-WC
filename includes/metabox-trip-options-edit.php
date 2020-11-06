@@ -192,7 +192,7 @@ class Metabox_Trip_Options_Edit {
 		<ul id="sortable">
 		<?php  
 		for ($x = 0; $x < 100; $x++) {
-			echo "<li class='sort-li' id='sort-li-" . $x . "'><span class='fas fa-bars'></span>" . $x . 
+			echo "<li class='sort-li' id='sort-li-" . $x . "'><span class='fas fa-bars'></span>" . esc_html_e( 'Day X, My plan', 'wp-travel' ) . 
 			"<table><tr><td>123</td></tr><tr><td>456</td></tr><tr><td>789</td></tr></table>" . 
 			"</li>";
 		}
@@ -239,10 +239,10 @@ class Metabox_Trip_Options_Edit {
 					$(".sort-li").hide();
 					//$(".sort-div").hide();
 					$("#sort-li-0").show();
-					$("#sort-li-0").html("Day X, My plan");
+					//$("#sort-li-0").html("Day X, My plan");
 					$('#sort-li-0').on('click', function() {
     					$('#sort-li-0').toggleClass('active');
-						$("#sort-div-0").show();
+						//$("#sort-div-0").show();
 	  				});
 				} );
 			
@@ -250,7 +250,7 @@ class Metabox_Trip_Options_Edit {
 					$( ".sort-li" ).each( function( index, element ) {
 						if ( $( this ).is(":hidden") ) {
 							$( this ).show();
-							$( this ).html("Day X, My plan");
+							//$( this ).html("Day X, My plan");
 							$( this ).on("click", function() {
 								$( this ).toggleClass('active');
 							});
