@@ -275,11 +275,11 @@ class Metabox_Trip_Options_Edit {
 						if ( $( this ).is(":hidden") ) {
 							$( this ).show();
 							//$( this ).html("Day X, My plan");
-							$( this ).on("click", function() {
+							$( this ).on("click", "span", function() {
 								$( this ).toggleClass('active');
 								//$( this ).children('form-table').off(); 
 								//$( this ).off( "click" , "table" );
-								$( ".form-table" ).mousemove();
+								//$( ".form-table" ).mousemove();
 							});
 							return false;
 						};
@@ -291,11 +291,9 @@ class Metabox_Trip_Options_Edit {
 		<style>
   			#sortable { list-style-type: none; margin: 0; padding: 0; width: 100%; }
   			#sortable li { background: #f2f2f2; border: 1px solid #ccc; margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em;}
-/*			  	display: inline-block; zoom: 1; *display: inline; list-style-type: none; vertical-align: middle; height: 20px; }*/
 			#sortable li span { position: absolute; margin-left: -1.3em; }
-			#sortable li table { background: #FFFFFF; border: 1px solid #ccc; width: 100%; display: none; margin-left: -1.3em; padding-left: 1.5em; }
+			#sortable li table { background: #ffffff; border: 1px solid #ccc; width: 100%; display: none; margin-left: -1.2em; padding-left: 1.5em; }
 			#sortable li.active table { display: block; }
-			/*#sortable li.active { height: 500px; }*/
 			#first-itinerary { color: blue; text-decoration: underline; cursor: pointer;}
 			.fa,
 			.fas,
