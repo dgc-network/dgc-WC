@@ -277,7 +277,7 @@ class Metabox_Trip_Options_Edit {
 							//$( this ).html("Day X, My plan");
 							$( this ).on("click", function() {
 								$( this ).toggleClass('active');
-								$( this ).children('.form-table').off(); 
+								$( this ).children('form-table').off(); 
 							});
 							return false;
 						};
@@ -291,7 +291,7 @@ class Metabox_Trip_Options_Edit {
   			#sortable li { background: #f2f2f2; border: 1px solid #ccc; margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em;}
 /*			  	display: inline-block; zoom: 1; *display: inline; list-style-type: none; vertical-align: middle; height: 20px; }*/
 			#sortable li span { position: absolute; margin-left: -1.3em; }
-			#sortable li table { background: #FFFFFF; border: 1px solid #ccc; width: 100%; display: none; margin-left: -1.3em;}
+			#sortable li table { background: #FFFFFF; border: 1px solid #ccc; width: 100%; display: none; margin-left: -1.3em; padding-left: 1.5em; }
 			#sortable li.active table { display: block; }
 			/*#sortable li.active { height: 500px; }*/
 			#first-itinerary { color: blue; text-decoration: underline; cursor: pointer;}
