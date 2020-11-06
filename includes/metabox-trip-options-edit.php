@@ -237,12 +237,12 @@ class Metabox_Trip_Options_Edit {
 					$("#no-itineraries").hide();
 					$("#init-itineraries").show();
 					$(".sort-li").hide();
-					$(".sort-table").hide();
+					//$(".sort-table").hide();
 					$("#sort-li-0").show();
 					//$("#sort-li-0").html("Day X, My plan");
 					$('#sort-li-0').on('click', function() {
     					$('#sort-li-0').toggleClass('active');
-						$("#sort-table-0").show();
+						//$("#sort-table-0").show();
 	  				});
 				} );
 			
@@ -263,10 +263,10 @@ class Metabox_Trip_Options_Edit {
 	
 		<style>
   			#sortable { list-style-type: none; margin: 0; padding: 0; width: 100%; }
-  			#sortable li { background: #f2f2f2; border: 1px solid #ccc; margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em;}
-/*			  	display: inline-block; zoom: 1; *display: inline; list-style-type: none; vertical-align: middle; height: 18px;}*/
+  			#sortable li { background: #f2f2f2; border: 1px solid #ccc; margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 20px;}
+/*			  	display: inline-block; zoom: 1; *display: inline; list-style-type: none; vertical-align: middle; }*/
 			#sortable li span { position: absolute; margin-left: -1.3em; }
-			#sortable li table { background: #FFFFFF; border: 1px solid #ccc;}
+			#sortable li table { background: #FFFFFF; border: 1px solid #ccc; width: 100%;}
 			#sortable li.active { height: 500px; }
 			#first-itinerary { color: blue; text-decoration: underline; cursor: pointer;}
   		</style>
