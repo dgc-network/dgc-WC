@@ -267,7 +267,7 @@ class Metabox_Trip_Options_Edit {
 					//$("#sort-li-0").html("Day X, My plan");
 					$('#sort-li-0').on('click', function() {
     					$('#sort-li-0').toggleClass('active');
-						$('#sort-li-0').off( "click" , "table" );
+						$('#sort-li-0').children('form-table').off(); 
 					});
 				} );
 			
@@ -276,7 +276,7 @@ class Metabox_Trip_Options_Edit {
 						if ( $( this ).is(":hidden") ) {
 							$( this ).show();
 							//$( this ).html("Day X, My plan");
-							$( this ).on("click", "span", function() {
+							$( this ).on("click", function() {
 								$( this ).toggleClass('active');
 								//$( this ).children('form-table').off(); 
 								//$( this ).off( "click" , "table" );
