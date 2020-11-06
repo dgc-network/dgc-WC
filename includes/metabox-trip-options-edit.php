@@ -174,6 +174,15 @@ class Metabox_Trip_Options_Edit {
 			return;
 		}
 		$trip_code = wp_travel_get_trip_code( $post->ID );
+
+		/**
+		 * Retrieves a post meta field for the given post ID.
+		 * get_post_meta( int $post_id, string $key = '', bool $single = false )
+		 */
+		$seo_title = get_post_meta( $post->ID, 'seo_title', true );
+		$seo_robots = get_post_meta( $post->ID, 'seo_robots', true );
+ 
+
 		?>
 		<table class="form-table trip-info">
 			<tr>
@@ -193,7 +202,24 @@ class Metabox_Trip_Options_Edit {
 		<?php  
 		for ($x = 0; $x < 100; $x++) {
 			echo "<li class='sort-li' id='sort-li-" . $x . "'><span class='fas fa-bars'></span>" . __( 'Day X, My plan', 'wp-travel' ) . 
-			"<table class='sort-table' id='sort-table-" . $x . "'><tr><td>123</td></tr><tr><td>456</td></tr><tr><td>789</td></tr></table>" . 
+			'<table class="form-table">
+			  <tbody>
+				<tr>
+					<th><label for="seo_title">SEO title</label></th>
+					<td><input type="text" id="seo_title" name="seo_title" value="' . esc_attr( $seo_title ) . '" class="regular-text"></td>
+				</tr>
+				<tr>
+					<th><label for="seo_tobots">SEO robots</label></th>
+					<td>
+						<select id="seo_robots" name="seo_robots">
+							<option value="">Select...</option>
+							<option value="index,follow"' . selected( 'index,follow', $seo_robots, false ) . '>Show for search engines</option>
+							<option value="noindex,nofollow"' . selected( 'noindex,nofollow', $seo_robots, false ) . '>Hide for search engines</option>
+						</select>
+					</td>
+				</tr>
+			  </tbody>
+			</table>' .
 			"</li>";
 		}
 		?>
@@ -237,12 +263,10 @@ class Metabox_Trip_Options_Edit {
 					$("#no-itineraries").hide();
 					$("#init-itineraries").show();
 					$(".sort-li").hide();
-					//$(".sort-table").hide();
 					$("#sort-li-0").show();
 					//$("#sort-li-0").html("Day X, My plan");
 					$('#sort-li-0').on('click', function() {
     					$('#sort-li-0').toggleClass('active');
-						//$("#sort-table-0").show();
 	  				});
 				} );
 			
