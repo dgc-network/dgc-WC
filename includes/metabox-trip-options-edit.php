@@ -185,13 +185,13 @@ class Metabox_Trip_Options_Edit {
 		<?php 
 		$wp_travel_itinerary = new WP_Travel_Itinerary();
 		$trip_outline = $wp_travel_itinerary->get_outline();
-		$x = 0;
+		$xx = 0;
 		if ( is_array( $trip_outline ) && count( $trip_outline ) > 0 ) {
 			foreach ( $trip_outline as $itinerary ) {
-				$itinerary_title[$x] = get_post_meta( $post->ID, 'itinerary_title_'.$x, true );
-				$itinerary_description[$x] = get_post_meta( $post->ID, 'itinerary_description_'.$x, true );
-				$itinerary_robots[$x] = get_post_meta( $post->ID, 'itinerary_robots_'.$x, true );
-				$x++;
+				$itinerary_title[$xx] = get_post_meta( $post->ID, 'itinerary_title_'.$xx, true );
+				$itinerary_description[$x] = get_post_meta( $post->ID, 'itinerary_description_'.$xx, true );
+				$itinerary_robots[$x] = get_post_meta( $post->ID, 'itinerary_robots_'.$xx, true );
+				$xx++;
 			}
 		} else {?>
 			<div id="no-itineraries">
@@ -211,8 +211,15 @@ class Metabox_Trip_Options_Edit {
 		<ul id="sortable">
 		<?php  
 		for ($x = 0; $x < 100; $x++) {
-			echo "<li class='sort-li' id='sort-li-" . $x . "'><span class='fas fa-bars'></span>" . __( 'Day X, My plan', 'wp-travel' ) . 
-			'<table class="form-table">
+			echo "<li class='sort-li' id='sort-li-" . $x . "'><span class='fas fa-bars'></span>";
+			if ($xx==0) {
+				echo __( 'Day X, My plan', 'wp-travel' );
+			} else{
+				echo esc_attr( $itinerary_title[$x] );
+			}
+			$xx--;
+			echo '<span class="fas fa-bars" style="text-align:right"></span>
+			<table class="form-table">
 			  <tbody>
 				<tr>
 					<th><label for="itinerary_title">Itinerary title</label></th>
