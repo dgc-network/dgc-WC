@@ -263,12 +263,26 @@ class Metabox_Trip_Options_Edit {
 	
 		<style>
   			#sortable { list-style-type: none; margin: 0; padding: 0; width: 100%; }
-  			#sortable li { background: #f2f2f2; border: 1px solid #ccc; margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 20px;}
-/*			  	display: inline-block; zoom: 1; *display: inline; list-style-type: none; vertical-align: middle; }*/
+  			#sortable li { background: #f2f2f2; border: 1px solid #ccc; margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em;}
+/*			  	display: inline-block; zoom: 1; *display: inline; list-style-type: none; vertical-align: middle; height: 20px; }*/
 			#sortable li span { position: absolute; margin-left: -1.3em; }
-			#sortable li table { background: #FFFFFF; border: 1px solid #ccc; width: 100%;}
-			#sortable li.active { height: 500px; }
+			#sortable li table { background: #FFFFFF; border: 1px solid #ccc; width: 100%; height: 0px;}
+			#sortable li.active table { height: 300px;}
+			/*#sortable li.active { height: 500px; }*/
 			#first-itinerary { color: blue; text-decoration: underline; cursor: pointer;}
+			.fa,
+			.fas,
+			.far,
+			.fal,
+			.fab {
+  				-moz-osx-font-smoothing: grayscale;
+  				-webkit-font-smoothing: antialiased;
+  				display: inline-block;
+  				font-style: normal;
+  				font-variant: normal;
+  				text-rendering: auto;
+  				line-height: 1; }
+			.fa-bars:before { content: "\f0c9"; }
   		</style>
 		<?php
 	}
