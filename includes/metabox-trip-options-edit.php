@@ -30,50 +30,50 @@ class Metabox_Trip_Options_Edit {
 		?>
 		<div id="mytabs">
 			<ul class="category-tabs">
-				<li><a href="#frag1"><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></a></li>
-				<li><a href="#frag2"><?php esc_html_e( 'Prices & Dates', 'wp-travel' ); ?></a></li>
-				<li><a href="#frag3"><?php esc_html_e( 'Includes/Excludes', 'wp-travel' ); ?></a></li>
-				<li><a href="#frag4"><?php esc_html_e( 'Facts', 'wp-travel' ); ?></a></li>
-				<li><a href="#frag5"><?php esc_html_e( 'Gallery', 'wp-travel' ); ?></a></li>
-				<li><a href="#frag6"><?php esc_html_e( 'Locations', 'wp-travel' ); ?></a></li>
-				<li><a href="#frag7"><?php esc_html_e( 'FAQs', 'wp-travel' ); ?></a></li>
-				<li><a href="#frag8"><?php esc_html_e( 'Misc. Options', 'wp-travel' ); ?></a></li>
-				<li><a href="#frag9"><?php esc_html_e( 'Tabs', 'wp-travel' ); ?></a></li>
+				<li><a href="#tab1"><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></a></li>
+				<li><a href="#tab2"><?php esc_html_e( 'Prices & Dates', 'wp-travel' ); ?></a></li>
+				<li><a href="#tab3"><?php esc_html_e( 'Includes/Excludes', 'wp-travel' ); ?></a></li>
+				<li><a href="#tab4"><?php esc_html_e( 'Facts', 'wp-travel' ); ?></a></li>
+				<li><a href="#tab5"><?php esc_html_e( 'Gallery', 'wp-travel' ); ?></a></li>
+				<li><a href="#tab6"><?php esc_html_e( 'Locations', 'wp-travel' ); ?></a></li>
+				<li><a href="#tab7"><?php esc_html_e( 'FAQs', 'wp-travel' ); ?></a></li>
+				<li><a href="#tab8"><?php esc_html_e( 'Misc. Options', 'wp-travel' ); ?></a></li>
+				<li><a href="#tab9"><?php esc_html_e( 'Tabs', 'wp-travel' ); ?></a></li>
 			</ul>
 			<br class="clear" />
-			<div id="frag1">
+			<div id="tab1">
 				<?php self::wp_travel_trip_info( $post )?>
 			</div>
 
-			<div class="hidden" id="frag2">
+			<div class="hidden" id="tab2">
 				<?php self::trip_options_metabox_callback( $post )?>
 			</div>
 
-			<div class="hidden" id="frag3">
+			<div class="hidden" id="tab3">
 				<?php self::trip_options_metabox_callback( $post )?>
 			</div>
 			
-			<div class="hidden" id="frag4">
+			<div class="hidden" id="tab4">
 				<?php self::trip_options_metabox_callback( $post )?>
 			</div>
 			
-			<div class="hidden" id="frag5">
+			<div class="hidden" id="tab5">
 				<?php self::trip_options_metabox_callback( $post )?>
 			</div>
 			
-			<div class="hidden" id="frag6">
+			<div class="hidden" id="tab6">
 				<?php self::trip_options_metabox_callback( $post )?>
 			</div>
 			
-			<div class="hidden" id="frag7">
+			<div class="hidden" id="tab7">
 				<?php self::trip_options_metabox_callback( $post )?>
 			</div>
 			
-			<div class="hidden" id="frag8">
+			<div class="hidden" id="tab8">
 				<?php self::trip_options_metabox_callback( $post )?>
 			</div>
 			
-			<div class="hidden" id="frag9">
+			<div class="hidden" id="tab9">
 				<?php self::trip_options_metabox_callback( $post )?>
 			</div>
 		</div>
@@ -263,8 +263,8 @@ class Metabox_Trip_Options_Edit {
 	
 		<style>
   			#sortable { list-style-type: none; margin: 0; padding: 0; width: 100%; }
-  			#sortable li { background: #f2f2f2; border: 1px solid #ccc; margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px;}
-/*			  	display: inline-block; zoom: 1; *display: inline; list-style-type: none; vertical-align: middle;}*/
+  			#sortable li { background: #f2f2f2; border: 1px solid #ccc; margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em;}
+/*			  	display: inline-block; zoom: 1; *display: inline; list-style-type: none; vertical-align: middle; height: 18px;}*/
 			#sortable li span { position: absolute; margin-left: -1.3em; }
 /*			#sortable div { background: #f2f2f2; border: 1px solid #ccc;}*/
 			#sortable li.active { background: #FFFFFF; height: 500px; }
@@ -300,50 +300,50 @@ function vertical_example_metabox( $post ) {
 	?>
 	<div id="tabs">
 		<ul class="category-tabs">
-			<li><a href="#frag1"><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></a></li>
-			<li><a href="#frag2"><?php esc_html_e( 'Prices & Dates', 'wp-travel' ); ?></a></li>
-			<li><a href="#frag3"><?php esc_html_e( 'Includes/Excludes', 'wp-travel' ); ?></a></li>
-			<li><a href="#frag4"><?php esc_html_e( 'Facts', 'wp-travel' ); ?></a></li>
-			<li><a href="#frag5"><?php esc_html_e( 'Gallery', 'wp-travel' ); ?></a></li>
-			<li><a href="#frag6"><?php esc_html_e( 'Locations', 'wp-travel' ); ?></a></li>
-			<li><a href="#frag7"><?php esc_html_e( 'FAQs', 'wp-travel' ); ?></a></li>
-			<li><a href="#frag8"><?php esc_html_e( 'Misc. Options', 'wp-travel' ); ?></a></li>
-			<li><a href="#frag9"><?php esc_html_e( 'Tabs', 'wp-travel' ); ?></a></li>
+			<li><a href="#tab1"><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></a></li>
+			<li><a href="#tab2"><?php esc_html_e( 'Prices & Dates', 'wp-travel' ); ?></a></li>
+			<li><a href="#tab3"><?php esc_html_e( 'Includes/Excludes', 'wp-travel' ); ?></a></li>
+			<li><a href="#tab4"><?php esc_html_e( 'Facts', 'wp-travel' ); ?></a></li>
+			<li><a href="#tab5"><?php esc_html_e( 'Gallery', 'wp-travel' ); ?></a></li>
+			<li><a href="#tab6"><?php esc_html_e( 'Locations', 'wp-travel' ); ?></a></li>
+			<li><a href="#tab7"><?php esc_html_e( 'FAQs', 'wp-travel' ); ?></a></li>
+			<li><a href="#tab8"><?php esc_html_e( 'Misc. Options', 'wp-travel' ); ?></a></li>
+			<li><a href="#tab9"><?php esc_html_e( 'Tabs', 'wp-travel' ); ?></a></li>
 		</ul>
 		<br class="clear" />
-		<div id="frag1">
+		<div id="tab1">
 			<?php wp_travel_trip_info( $post )?>
 		</div>
 
-		<div class="hidden" id="frag2">
+		<div class="hidden" id="tab2">
 			<?php wp_travel_trip_info( $post )?>				
 		</div>
 
-		<div class="hidden" id="frag3">
+		<div class="hidden" id="tab3">
 			<?php wp_travel_trip_info( $post )?>
 		</div>
 		
-		<div class="hidden" id="frag4">
+		<div class="hidden" id="tab4">
 			<?php wp_travel_trip_info( $post )?>
 		</div>
 		
-		<div class="hidden" id="frag5">
+		<div class="hidden" id="tab5">
 			<?php wp_travel_trip_info( $post )?>
 		</div>
 		
-		<div class="hidden" id="frag6">
+		<div class="hidden" id="tab6">
 			<?php wp_travel_trip_info( $post )?>
 		</div>
 		
-		<div class="hidden" id="frag7">
+		<div class="hidden" id="tab7">
 			<?php wp_travel_trip_info( $post )?>
 		</div>
 		
-		<div class="hidden" id="frag8">
+		<div class="hidden" id="tab8">
 			<?php wp_travel_trip_info( $post )?>
 		</div>
 		
-		<div class="hidden" id="frag9">
+		<div class="hidden" id="tab9">
 			<?php wp_travel_trip_info( $post )?>
 		</div>
 	</div>
