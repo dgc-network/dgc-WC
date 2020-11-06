@@ -267,7 +267,8 @@ class Metabox_Trip_Options_Edit {
 					//$("#sort-li-0").html("Day X, My plan");
 					$('#sort-li-0').on('click', function() {
     					$('#sort-li-0').toggleClass('active');
-	  				});
+						$('#sort-li-0').off( "click" , "table" );
+					});
 				} );
 			
 				$("#add-itinerary").click( function(){
