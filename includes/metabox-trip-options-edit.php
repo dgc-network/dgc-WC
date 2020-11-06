@@ -174,15 +174,6 @@ class Metabox_Trip_Options_Edit {
 			return;
 		}
 		$trip_code = wp_travel_get_trip_code( $post->ID );
-
-		/**
-		 * Retrieves a post meta field for the given post ID.
-		 * get_post_meta( int $post_id, string $key = '', bool $single = false )
-		 */
-		$seo_title = get_post_meta( $post->ID, 'seo_title', true );
-		$seo_robots = get_post_meta( $post->ID, 'seo_robots', true );
- 
-
 		?>
 		<table class="form-table trip-info">
 			<tr>
@@ -190,6 +181,29 @@ class Metabox_Trip_Options_Edit {
 				<td><input type="text" id="wp-travel-trip-code" disabled="disabled" value="<?php echo esc_attr( $trip_code ); ?>" /></td>
 			</tr>
 		</table>
+
+		<?php 
+		$wp_travel_itinerary = new WP_Travel_Itinerary();
+		$trip_outline = $wp_travel_itinerary->get_outline();
+		?>
+	  		<?php if ( is_array( $trip_outline ) && count( $trip_outline ) > 0 ) {?>
+				<?php $x = 0;?>
+				<?php foreach ( $trip_outline as $itinerary ) {?>
+					<?php $itinerary_title[$x] = get_post_meta( $post->ID, 'itinerary_title_'.$x, true );?>
+					<?php $itinerary_description[$x] = get_post_meta( $post->ID, 'itinerary_description_'.$x, true );?>
+					<?php $itinerary_robots[$x] = get_post_meta( $post->ID, 'itinerary_robots_'.$x, true );?>
+					<?php $x++;?>
+				<?php }?>
+
+
+			<?php } else {?>
+				<div id="no-itineraries">
+				<label for="wp-travel-detail"><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></label><br>
+				<label for="wp-travel-detail"><?php esc_html_e( 'No Itineraries found.', 'wp-travel' ); ?></label>
+				<span id="first-itinerary"><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></span>
+				</div>
+			<?php }?>
+
 
 		<div id="init-itineraries">
 		<table style="width:100%" class="form-table trip-outline">
@@ -205,22 +219,22 @@ class Metabox_Trip_Options_Edit {
 			'<table class="form-table">
 			  <tbody>
 				<tr>
-					<th><label for="seo_title">SEO title</label></th>
-					<td><input type="text" id="seo_title" name="seo_title" value="' . esc_attr( $seo_title ) . '" class="regular-text"></td>
+					<th><label for="itinerary_title">Itinerary title</label></th>
+					<td><input type="text" id="itinerary_title" name="itinerary_title" value="' . esc_attr( $itinerary_title[$x] ) . '" class="regular-text"></td>
 				</tr>
 				<tr>
-					<th><label for="seo_tobots">SEO robots</label></th>
+					<th><label for="itinerary_tobots">Itinerary robots</label></th>
 					<td>
-						<select id="seo_robots" name="seo_robots">
+						<select id="itinerary_robots" name="itinerary_robots">
 							<option value="">Select...</option>
-							<option value="index,follow"' . selected( 'index,follow', $seo_robots, false ) . '>Show for search engines</option>
-							<option value="noindex,nofollow"' . selected( 'noindex,nofollow', $seo_robots, false ) . '>Hide for search engines</option>
+							<option value="index,follow"' . selected( 'index,follow', $itinerary_robots[$x], false ) . '>Show for search engines</option>
+							<option value="noindex,nofollow"' . selected( 'noindex,nofollow', $itinerary_robots[$x], false ) . '>Hide for search engines</option>
 						</select>
 					</td>
 				</tr>
 			  </tbody>
 			</table>' .
-			"</li>";
+		  "</li>";
 		}
 		?>
 		</ul>
@@ -232,25 +246,6 @@ class Metabox_Trip_Options_Edit {
 		</table>
 		</div>
 
-		<?php 
-		$wp_travel_itinerary = new WP_Travel_Itinerary();
-		$trip_outline = $wp_travel_itinerary->get_outline();
-		?>
-	  		<?php if ( is_array( $trip_outline ) && count( $trip_outline ) > 0 ) {?>
-				<ul id="sortable">
-				<?php foreach ( $trip_outline as $itinerary ) {?>
-					<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>1. <?php $itinerary?></li>
-					<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>2. <?php $itinerary?></li>
-  					<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>3. <?php $itinerary?></li>
-				<?php }?>
-				</ul>
-			<?php } else {?>
-				<div id="no-itineraries">
-				<label for="wp-travel-detail"><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></label><br>
-				<label for="wp-travel-detail"><?php esc_html_e( 'No Itineraries found.', 'wp-travel' ); ?></label>
-				<span id="first-itinerary"><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></span>
-				</div>
-			<?php }?>
 
 	
 		<script>
@@ -267,7 +262,6 @@ class Metabox_Trip_Options_Edit {
 					//$("#sort-li-0").html("Day X, My plan");
 					$('#sort-li-0').on('click', function() {
     					$('#sort-li-0').toggleClass('active');
-						$('#sort-li-0').children('form-table').off(); 
 					});
 				} );
 			
@@ -278,9 +272,6 @@ class Metabox_Trip_Options_Edit {
 							//$( this ).html("Day X, My plan");
 							$( this ).on("click", function() {
 								$( this ).toggleClass('active');
-								//$( this ).children('form-table').off(); 
-								//$( this ).off( "click" , "table" );
-								$( ".form-table" ).mousemove();
 							});
 							return false;
 						};
