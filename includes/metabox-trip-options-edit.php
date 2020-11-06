@@ -280,7 +280,7 @@ class Metabox_Trip_Options_Edit {
 								$( this ).toggleClass('active');
 								//$( this ).children('form-table').off(); 
 								//$( this ).off( "click" , "table" );
-								//$( ".form-table" ).mousemove();
+								$( ".form-table" ).mousemove();
 							});
 							return false;
 						};
