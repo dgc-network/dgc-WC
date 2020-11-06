@@ -192,7 +192,7 @@ class Metabox_Trip_Options_Edit {
 		<ul id="sortable">
 		<?php  
 		for ($x = 0; $x < 100; $x++) {
-			echo "<li class='sort-li' id='sort-li-" . $x . "'><span class='fas fa-bars'></span>" . esc_html_e( 'Day X, My plan', 'wp-travel' ) . 
+			echo "<li class='sort-li' id='sort-li-" . $x . "'><span class='fas fa-bars'></span>" . __( 'Day X, My plan', 'wp-travel' ) . 
 			"<table><tr><td>123</td></tr><tr><td>456</td></tr><tr><td>789</td></tr></table>" . 
 			"</li>";
 		}
