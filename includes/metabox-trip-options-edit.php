@@ -278,7 +278,7 @@ class Metabox_Trip_Options_Edit {
 							$( this ).on("click", function() {
 								$( this ).toggleClass('active');
 								//$( this ).children('form-table').off(); 
-								$( this ).off( "click" , ".form-table" );
+								$( this ).off( "click" , "table" );
 							});
 							return false;
 						};
