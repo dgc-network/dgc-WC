@@ -185,30 +185,26 @@ class Metabox_Trip_Options_Edit {
 		<?php 
 		$wp_travel_itinerary = new WP_Travel_Itinerary();
 		$trip_outline = $wp_travel_itinerary->get_outline();
-		?>
-	  		<?php if ( is_array( $trip_outline ) && count( $trip_outline ) > 0 ) {?>
-				<?php $x = 0;?>
-				<?php foreach ( $trip_outline as $itinerary ) {?>
-					<?php $itinerary_title[$x] = get_post_meta( $post->ID, 'itinerary_title_'.$x, true );?>
-					<?php $itinerary_description[$x] = get_post_meta( $post->ID, 'itinerary_description_'.$x, true );?>
-					<?php $itinerary_robots[$x] = get_post_meta( $post->ID, 'itinerary_robots_'.$x, true );?>
-					<?php $x++;?>
-				<?php }?>
-
-
-			<?php } else {?>
-				<div id="no-itineraries">
-				<label for="wp-travel-detail"><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></label><br>
-				<label for="wp-travel-detail"><?php esc_html_e( 'No Itineraries found.', 'wp-travel' ); ?></label>
-				<span id="first-itinerary"><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></span>
-				</div>
-			<?php }?>
-
+		$x = 0;
+		if ( is_array( $trip_outline ) && count( $trip_outline ) > 0 ) {
+			foreach ( $trip_outline as $itinerary ) {
+				$itinerary_title[$x] = get_post_meta( $post->ID, 'itinerary_title_'.$x, true );
+				$itinerary_description[$x] = get_post_meta( $post->ID, 'itinerary_description_'.$x, true );
+				$itinerary_robots[$x] = get_post_meta( $post->ID, 'itinerary_robots_'.$x, true );
+				$x++;
+			}
+		} else {?>
+			<div id="no-itineraries">
+			<label for="itinerary-title"><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></label><br>
+			<label for="no-itineraries-found"><?php esc_html_e( 'No Itineraries found.', 'wp-travel' ); ?></label>
+			<span id="first-itinerary"><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></span>
+			</div>
+		<?php }?>
 
 		<div id="init-itineraries">
 		<table style="width:100%" class="form-table trip-outline">
 			<tr>
-				<td><label for="wp-travel-detail"><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></label></td>
+				<td><label for="itinerary-title"><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></label></td>
 				<td style="text-align:right"><button id="add-itinerary" type="button"><?php esc_html_e( '+ Add Itinerary', 'wp-travel' ); ?></button></td>
 			</tr>
 		</table>
@@ -221,6 +217,10 @@ class Metabox_Trip_Options_Edit {
 				<tr>
 					<th><label for="itinerary_title">Itinerary title</label></th>
 					<td><input type="text" id="itinerary_title" name="itinerary_title" value="' . esc_attr( $itinerary_title[$x] ) . '" class="regular-text"></td>
+				</tr>
+				<tr>
+					<th><label for="itinerary_description">Itinerary description</label></th>
+					<td><input type="textarea" id="itinerary_description" name="itinerary_description" value="' . esc_attr( $itinerary_description[$x] ) . '" class="regular-text"></td>
 				</tr>
 				<tr>
 					<th><label for="itinerary_tobots">Itinerary robots</label></th>
