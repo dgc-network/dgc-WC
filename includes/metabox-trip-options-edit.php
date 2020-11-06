@@ -277,7 +277,7 @@ class Metabox_Trip_Options_Edit {
 							//$( this ).html("Day X, My plan");
 							$( this ).on("click", function() {
 								$( this ).toggleClass('active');
-								$( this ).children('class').off(); 
+								$( this ).children('.form-table').off(); 
 							});
 							return false;
 						};
