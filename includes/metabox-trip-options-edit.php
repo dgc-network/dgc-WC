@@ -177,7 +177,7 @@ class Metabox_Trip_Options_Edit {
 		?>
 		<table class="form-table trip-info">
 			<tr>
-				<td><label for="wp-travel-detail"><?php esc_html( 'Trip Code', 'wp-travel' ); ?></label></td>
+				<td><label for="wp-travel-detail"><?php esc_html_e( 'Trip Code', 'wp-travel' ); ?></label></td>
 				<td><input type="text" id="wp-travel-trip-code" disabled="disabled" value="<?php echo esc_attr( $trip_code ); ?>" /></td>
 			</tr>
 		</table>
@@ -186,7 +186,7 @@ class Metabox_Trip_Options_Edit {
 		<table style="width:100%" class="form-table trip-outline">
 			<tr>
 				<td><label for="wp-travel-detail"><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></label></td>
-				<td style="text-align:right"><button id="add-itinerary" type="button"><?php esc_html( '+ Add Itinerary', 'wp-travel' ); ?></button></td>
+				<td style="text-align:right"><button id="add-itinerary" type="button"><?php esc_html_e( '+ Add Itinerary', 'wp-travel' ); ?></button></td>
 			</tr>
 		</table>
 		<ul id="sortable">
@@ -201,7 +201,7 @@ class Metabox_Trip_Options_Edit {
 		<table style="width:100%" class="form-table trip-outline">
 			<tr>
 				<td></td>
-				<td style="text-align:right"><button id="add-itinerary" type="button"><?php esc_html( '+ Add Itinerary', 'wp-travel' ); ?></button></td>
+				<td style="text-align:right"><button id="add-itinerary" type="button"><?php esc_html_e( '+ Add Itinerary', 'wp-travel' ); ?></button></td>
 			</tr>
 		</table>
 		</div>
@@ -220,9 +220,9 @@ class Metabox_Trip_Options_Edit {
 				</ul>
 			<?php } else {?>
 				<div id="no-itineraries">
-				<label for="wp-travel-detail"><h3><?php esc_html( 'Itinerary', 'wp-travel' ); ?></h3></label><br>
-				<label for="wp-travel-detail"><?php esc_html( 'No Itineraries found.', 'wp-travel' ); ?></label>
-				<span id="first-itinerary"><?php esc_html( 'Add Itinerary', 'wp-travel' ); ?></span>
+				<label for="wp-travel-detail"><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></label><br>
+				<label for="wp-travel-detail"><?php esc_html_e( 'No Itineraries found.', 'wp-travel' ); ?></label>
+				<span id="first-itinerary"><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></span>
 				</div>
 			<?php }?>
 
