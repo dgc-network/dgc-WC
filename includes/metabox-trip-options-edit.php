@@ -193,7 +193,7 @@ class Metabox_Trip_Options_Edit {
 		<?php  
 		for ($x = 0; $x < 100; $x++) {
 			echo "<li class='sort-li' id='sort-li-" . $x . "'><span class='fas fa-bars'></span>" . $x . 
-			"<table class='sort-div' id='sort-div-" . $x . "'>" . "<tr><td>123</td></tr></table>" . 
+			"<table><tr><td>123</td></tr><tr><td>456</td></tr><tr><td>789</td></tr></table>" . 
 			"</li>";
 		}
 		?>
