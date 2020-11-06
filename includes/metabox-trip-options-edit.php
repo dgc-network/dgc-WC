@@ -177,7 +177,7 @@ class Metabox_Trip_Options_Edit {
 		?>
 		<table class="form-table trip-info">
 			<tr>
-				<td><label for="wp-travel-detail"><?php esc_html_e( 'Trip Code', 'wp-travel' ); ?></label></td>
+				<td><label for="wp-travel-detail"><?php __( 'Trip Code', 'wp-travel' ); ?></label></td>
 				<td><input type="text" id="wp-travel-trip-code" disabled="disabled" value="<?php echo esc_attr( $trip_code ); ?>" /></td>
 			</tr>
 		</table>
@@ -186,14 +186,14 @@ class Metabox_Trip_Options_Edit {
 		<table style="width:100%" class="form-table trip-outline">
 			<tr>
 				<td><label for="wp-travel-detail"><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></label></td>
-				<td style="text-align:right"><button id="add-itinerary" type="button"><?php esc_html_e( '+ Add Itinerary', 'wp-travel' ); ?></button></td>
+				<td style="text-align:right"><button id="add-itinerary" type="button"><?php __( '+ Add Itinerary', 'wp-travel' ); ?></button></td>
 			</tr>
 		</table>
 		<ul id="sortable">
 		<?php  
 		for ($x = 0; $x < 100; $x++) {
 			echo "<li class='sort-li' id='sort-li-" . $x . "'><span class='fas fa-bars'></span>" . __( 'Day X, My plan', 'wp-travel' ) . 
-			"<table><tr><td>123</td></tr><tr><td>456</td></tr><tr><td>789</td></tr></table>" . 
+			"<table class='sort-table' id='sort-table-" . $x . "'><tr><td>123</td></tr><tr><td>456</td></tr><tr><td>789</td></tr></table>" . 
 			"</li>";
 		}
 		?>
@@ -201,7 +201,7 @@ class Metabox_Trip_Options_Edit {
 		<table style="width:100%" class="form-table trip-outline">
 			<tr>
 				<td></td>
-				<td style="text-align:right"><button id="add-itinerary" type="button"><?php esc_html_e( '+ Add Itinerary', 'wp-travel' ); ?></button></td>
+				<td style="text-align:right"><button id="add-itinerary" type="button"><?php __( '+ Add Itinerary', 'wp-travel' ); ?></button></td>
 			</tr>
 		</table>
 		</div>
@@ -220,9 +220,9 @@ class Metabox_Trip_Options_Edit {
 				</ul>
 			<?php } else {?>
 				<div id="no-itineraries">
-				<label for="wp-travel-detail"><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></label><br>
-				<label for="wp-travel-detail"><?php esc_html_e( 'No Itineraries found.', 'wp-travel' ); ?></label>
-				<span id="first-itinerary"><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></span>
+				<label for="wp-travel-detail"><h3><?php __( 'Itinerary', 'wp-travel' ); ?></h3></label><br>
+				<label for="wp-travel-detail"><?php __( 'No Itineraries found.', 'wp-travel' ); ?></label>
+				<span id="first-itinerary"><?php __( 'Add Itinerary', 'wp-travel' ); ?></span>
 				</div>
 			<?php }?>
 
@@ -237,12 +237,12 @@ class Metabox_Trip_Options_Edit {
 					$("#no-itineraries").hide();
 					$("#init-itineraries").show();
 					$(".sort-li").hide();
-					//$(".sort-div").hide();
+					$(".sort-table").hide();
 					$("#sort-li-0").show();
 					//$("#sort-li-0").html("Day X, My plan");
 					$('#sort-li-0').on('click', function() {
     					$('#sort-li-0').toggleClass('active');
-						//$("#sort-div-0").show();
+						$("#sort-table-0").show();
 	  				});
 				} );
 			
@@ -266,8 +266,8 @@ class Metabox_Trip_Options_Edit {
   			#sortable li { background: #f2f2f2; border: 1px solid #ccc; margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em;}
 /*			  	display: inline-block; zoom: 1; *display: inline; list-style-type: none; vertical-align: middle; height: 18px;}*/
 			#sortable li span { position: absolute; margin-left: -1.3em; }
-/*			#sortable div { background: #f2f2f2; border: 1px solid #ccc;}*/
-			#sortable li.active { background: #FFFFFF; height: 500px; }
+			#sortable li table { background: #FFFFFF; border: 1px solid #ccc;}
+			#sortable li.active { height: 500px; }
 			#first-itinerary { color: blue; text-decoration: underline; cursor: pointer;}
   		</style>
 		<?php
