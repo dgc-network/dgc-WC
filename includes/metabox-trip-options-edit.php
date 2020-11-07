@@ -211,14 +211,14 @@ class Metabox_Trip_Options_Edit {
 		<ul id="sortable">
 		<?php  
 		for ($x = 0; $x < 100; $x++) {
-			echo "<li class='sort-li' id='sort-li-" . $x . "'><span class='fas fa-bars'>";
+			echo "<li class='sort-li' id='sort-li-" . $x . "'><span class='fas fa-bars'></span>";
 			if ($xx<=0) {
 				echo __( 'Day X, My plan', 'wp-travel' );
 			} else{
 				echo esc_attr( $itinerary_title[$x] );
 			}
 			$xx--;
-			echo '</span>
+			echo '
 			<table class="form-table">
 			  <tbody>
 				<tr>
