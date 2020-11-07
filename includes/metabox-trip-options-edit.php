@@ -277,7 +277,7 @@ class Metabox_Trip_Options_Edit {
 						if ( $( this ).is(":hidden") ) {
 							$( this ).show();
 							//$( this ).html("Day X, My plan");
-							$( "#sortable li span" ).on("click", function() {
+							$( "span" ).on("click", function() {
 								$( this ).toggleClass('active');
 							});
 							return false;
