@@ -211,14 +211,14 @@ class Metabox_Trip_Options_Edit {
 		<ul id="sortable">
 		<?php  
 		for ($x = 0; $x < 100; $x++) {
-			echo "<li class='sort-li' id='sort-li-" . $x . "'><span class='fas fa-bars'></span>";
+			echo "<li class='sort-li' id='sort-li-" . $x . "'><span class='fas fa-bars'>";
 			if ($xx<=0) {
 				echo __( 'Day X, My plan', 'wp-travel' );
 			} else{
 				echo esc_attr( $itinerary_title[$x] );
 			}
 			$xx--;
-			echo '
+			echo '</span>
 			<table class="form-table">
 			  <tbody>
 				<tr>
@@ -266,7 +266,6 @@ class Metabox_Trip_Options_Edit {
 					$("#init-itineraries").show();
 					$(".sort-li").hide();
 					$("#sort-li-0").show();
-					//$("#sort-li-0").html("Day X, My plan");
 					$('#sort-li-0').on('click', "span", function() {
     					$('#sort-li-0').toggleClass('active');
 					});
@@ -276,7 +275,6 @@ class Metabox_Trip_Options_Edit {
 					$( ".sort-li" ).each( function( index, element ) {
 						if ( $( this ).is(":hidden") ) {
 							$( this ).show();
-							//$( this ).html("Day X, My plan");
 							$( this ).on("click", "span", function() {
 								$( this ).toggleClass('active');
 							});
