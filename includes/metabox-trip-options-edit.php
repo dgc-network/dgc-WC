@@ -275,7 +275,7 @@ class Metabox_Trip_Options_Edit {
 					$( ".sort-li" ).each( function( index, element ) {
 						if ( $( this ).is(":hidden") ) {
 							$( this ).show();
-							$( this ).on("click", "span", function() {
+							$( this ).on("click", function() {
 								$( this ).toggleClass('active');
 							});
 							return false;
