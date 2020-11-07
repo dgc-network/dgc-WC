@@ -195,23 +195,23 @@ class Metabox_Trip_Options_Edit {
 			}
 		} else {?>
 			<div id="no-itineraries">
-			<label for="itinerary-title"><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></label><br>
-			<label for="no-itineraries-found"><?php esc_html_e( 'No Itineraries found.', 'wp-travel' ); ?></label>
-			<span id="first-itinerary"><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></span>
+			<span id="first-itinerary-title"><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></label><br>
+			<span id="first-itinerary-text"><?php esc_html_e( 'No Itineraries found.', 'wp-travel' ); ?></label>
+			<span id="first-itinerary-link"><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></span>
 			</div>
 		<?php }?>
 
 		<div id="init-itineraries">
 		<table style="width:100%" class="form-table trip-outline">
 			<tr>
-				<td><label for="itinerary-title"><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></label></td>
+				<td><label for="add-itinerary"><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></label></td>
 				<td style="text-align:right"><button id="add-itinerary" type="button"><?php esc_html_e( '+ Add Itinerary', 'wp-travel' ); ?></button></td>
 			</tr>
 		</table>
 		<ul id="sortable">
 		<?php  
 		for ($x = 0; $x < 100; $x++) {
-			echo "<li class='sort-li' id='sort-li-" . $x . "'><span class='fas fa-bars'></span><span class='itinerary-title'>";
+			echo "<li class='sort-li' id='sort-li-" . $x . "'><span class='fas fa-bars'>";
 			if ($xx<=0) {
 				echo __( 'Day X, My plan', 'wp-travel' );
 			} else{
@@ -261,13 +261,13 @@ class Metabox_Trip_Options_Edit {
 				$( "#sortable" ).disableSelection();
 			
 				$("#init-itineraries").hide();
-				$("#first-itinerary").click( function(){
+				$("#first-itinerary-link").click( function(){
 					$("#no-itineraries").hide();
 					$("#init-itineraries").show();
 					$(".sort-li").hide();
 					$("#sort-li-0").show();
-					//$('#sort-li-0').on('click', "span", function() {
-					$( ".itinerary-title" ).on("click", function() {
+					$('#sort-li-0').on('click', "span", function() {
+					//$( ".itinerary-title" ).on("click", function() {
     					$('#sort-li-0').toggleClass('active');
 					});
 				} );
@@ -276,8 +276,8 @@ class Metabox_Trip_Options_Edit {
 					$( ".sort-li" ).each( function( index, element ) {
 						if ( $( this ).is(":hidden") ) {
 							$( this ).show();
-							//$( this ).on("click", function() {
-							$( ".itinerary-title" ).on("click", function() {
+							$( this ).on("click", "span", function() {
+							//$( ".itinerary-title" ).on("click", function() {
 								$( this ).toggleClass('active');
 							});
 							return false;
@@ -291,7 +291,7 @@ class Metabox_Trip_Options_Edit {
   			#sortable { list-style-type: none; margin: 0; padding: 0; width: 100%; }
   			#sortable li { background: #f2f2f2; border: 1px solid #ccc; margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em;}
 			#sortable li span { position: absolute; margin-left: -1.3em; }
-			.itinerary-title { margin-left: 0; }
+			/*.itinerary-title { margin-left: 0; }*/
 			#sortable li table { background: #ffffff; border: 1px solid #ccc; width: 100%; display: none; margin-left: -1.2em; padding-left: 1.5em; }
 			#sortable li.active table { display: block; }
 			#first-itinerary { color: blue; text-decoration: underline; cursor: pointer;}
