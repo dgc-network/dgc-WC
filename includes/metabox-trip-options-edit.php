@@ -211,15 +211,15 @@ class Metabox_Trip_Options_Edit {
 		<ul id="sortable">
 		<?php  
 		for ($x = 0; $x < 100; $x++) {
-			echo "<li class='sort-li' id='sort-li-" . $x . "'><span class='fas fa-bars'>";
+			echo "<li class='sort-li' id='sort-li-" . $x . "'><span class='fas fa-bars'></span>";
 			if ($xx<=0) {
 				echo __( 'Day X, My plan', 'wp-travel' );
 			} else{
 				echo esc_attr( $itinerary_title[$x] );
 			}
 			$xx--;
-			echo '</span>
-			<table class="form-table">
+			echo '
+			<table class="form-table" onclick="hide(); return false">
 			  <tbody>
 				<tr>
 					<th><label for="itinerary_title">Itinerary title</label></th>
@@ -266,7 +266,8 @@ class Metabox_Trip_Options_Edit {
 					$("#init-itineraries").show();
 					$(".sort-li").hide();
 					$("#sort-li-0").show();
-					$('#sort-li-0').on('click', "span", function() {
+					$('#sort-li-0').on('click', function() {
+					//$('#sort-li-0').on('click', "span", function() {
 					//$( ".itinerary-title" ).on("click", function() {
     					$('#sort-li-0').toggleClass('active');
 					});
@@ -276,7 +277,8 @@ class Metabox_Trip_Options_Edit {
 					$( ".sort-li" ).each( function( index, element ) {
 						if ( $( this ).is(":hidden") ) {
 							$( this ).show();
-							$( this ).on("click", "span", function() {
+							$( this ).on("click", function() {
+							//$( this ).on("click", "span", function() {
 							//$( ".itinerary-title" ).on("click", function() {
 								$( this ).toggleClass('active');
 							});
@@ -294,19 +296,7 @@ class Metabox_Trip_Options_Edit {
 			/*.itinerary-title { margin-left: 0; }*/
 			#sortable li table { background: #ffffff; border: 1px solid #ccc; width: 100%; display: none; margin-left: -1.2em; padding-left: 1.5em; }
 			#sortable li.active table { display: block; }
-			#first-itinerary { color: blue; text-decoration: underline; cursor: pointer;}
-			.fa,
-			.fas,
-			.far,
-			.fal,
-			.fab {
-  				-moz-osx-font-smoothing: grayscale;
-  				-webkit-font-smoothing: antialiased;
-  				display: inline-block;
-  				font-style: normal;
-  				font-variant: normal;
-  				text-rendering: auto;
-  				line-height: 1; }
+			#first-itinerary-link { color: blue; text-decoration: underline; cursor: pointer;}
 			.fa-bars:before { content: "\f0c9"; }
   		</style>
 		<?php
