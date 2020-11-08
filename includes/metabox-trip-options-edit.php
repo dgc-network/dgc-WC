@@ -211,14 +211,14 @@ class Metabox_Trip_Options_Edit {
 		<ul id="sortable">
 		<?php  
 		for ($x = 0; $x < 100; $x++) {
-			echo "<li class='sort-li' id='sort-li-" . $x . "'><span class='fas fa-bars'></span><span class='itinerary-title'>";
+			echo "<li class='sort-li' id='sort-li-" . $x . "'><span class='fas fa-bars'></span>";
 			if ($xx<=0) {
 				echo __( 'Day X, My plan', 'wp-travel' );
 			} else{
 				echo esc_attr( $itinerary_title[$x] );
 			}
 			$xx--;
-			echo '</span>
+			echo '<span class="itinerary-title">Click Me</span>
 			<table class="form-table" onclick="hide(); return false">
 			  <tbody>
 				<tr>
@@ -279,7 +279,7 @@ class Metabox_Trip_Options_Edit {
 							$( this ).show();
 							//$( this ).on("click", function() {
 							//$( this ).on("click", "span", function() {
-							$( ".itinerary-title" ).on("click", function() {
+							$( ".itinerary-title-click" ).on("click", function() {
 								$( this ).toggleClass('active');
 							});
 							return false;
@@ -293,7 +293,7 @@ class Metabox_Trip_Options_Edit {
   			#sortable { list-style-type: none; margin: 0; padding: 0; width: 100%; }
   			#sortable li { background: #f2f2f2; border: 1px solid #ccc; margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em;}
 			#sortable li span { position: absolute; margin-left: -1.3em; }
-			.itinerary-title { margin-left: 0; }
+			.itinerary-title-click { margin-left: 0; }
 			#sortable li table { background: #ffffff; border: 1px solid #ccc; width: 100%; display: none; margin-left: -1.2em; padding-left: 1.5em; }
 			#sortable li.active table { display: block; }
 			#first-itinerary-link { color: blue; text-decoration: underline; cursor: pointer;}
