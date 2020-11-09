@@ -219,7 +219,7 @@ class Metabox_Trip_Options_Edit {
 			}
 			$xx--;
 			echo '<button id="click-itinerary-' . $x . '" type="button">Click Me</button>
-			<table class="edit-itinerary">
+			<table>
 			  <tbody>
 				<tr>
 					<th><label for="itinerary_title">Itinerary title</label></th>
