@@ -269,7 +269,7 @@ class Metabox_Trip_Options_Edit {
 					//$('#sort-li-0').on('click', function() {
 					$('#click-itinerary-0').click(function() {
     					//$('#sort-li-0').toggleClass('active');
-    					$('#sort-li-0').toggleClass('edit-itinerary');
+    					$('#sort-li-0 table').toggleClass('edit-itinerary');
 					});
 				} );
 			
