@@ -218,7 +218,7 @@ class Metabox_Trip_Options_Edit {
 				echo esc_attr( $itinerary_title[$x] );
 			}
 			$xx--;
-			echo '<button class="click-me" type="button">Click Me</button>
+			echo '<button id="click-itinerary-"' . $x . 'type="button">Click Me</button>
 			<table class="edit-itinerary">
 			  <tbody>
 				<tr>
@@ -267,7 +267,7 @@ class Metabox_Trip_Options_Edit {
 					$(".sort-li").hide();
 					$("#sort-li-0").show();
 					//$('#sort-li-0').on('click', function() {
-					$('#sort-li-0 .click-me').on('click', function() {
+					$('#click-itinerary-0').on('click', function() {
     					//$('#sort-li-0').toggleClass('active');
     					$('#sort-li-0').toggleClass('edit-itinerary');
 					});
