@@ -218,7 +218,7 @@ class Metabox_Trip_Options_Edit {
 				echo esc_attr( $itinerary_title[$x] );
 			}
 			$xx--;
-			echo '<button id="click-itinerary-"' . $x . 'type="button">Click Me</button>
+			echo '<button id="click-itinerary-' . $x . '" type="button">Click Me</button>
 			<table class="edit-itinerary">
 			  <tbody>
 				<tr>
@@ -293,7 +293,7 @@ class Metabox_Trip_Options_Edit {
   			#sortable { list-style-type: none; margin: 0; padding: 0; width: 100%; }
   			#sortable li { background: #f2f2f2; border: 1px solid #ccc; margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em;}
 			#sortable li span { position: absolute; margin-left: -1.3em; }
-			.click-me { margin-right: 3px; }
+			/*.click-me { margin-right: 3px; }*/
 			/*#sortable li table { background: #ffffff; border: 1px solid #ccc; width: 100%; display: none; margin-left: -1.2em; padding-left: 1.5em; }
 			#sortable li.active table { display: block; }*/
 			#sortable li table { background: #ffffff; border: 1px solid #ccc; width: 100%; display: none; margin-left: -1.2em; padding-left: 1.5em; }
