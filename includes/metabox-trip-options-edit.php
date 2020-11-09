@@ -218,8 +218,8 @@ class Metabox_Trip_Options_Edit {
 				echo esc_attr( $itinerary_title[$x] );
 			}
 			$xx--;
-			echo '<span class="click-me">Click Me</span>
-			<table class="form-table" onclick="hide(); return false">
+			echo '<button class="click-me" type="button">Click Me</button>
+			<table class="edit-itinerary">
 			  <tbody>
 				<tr>
 					<th><label for="itinerary_title">Itinerary title</label></th>
@@ -266,16 +266,10 @@ class Metabox_Trip_Options_Edit {
 					$("#init-itineraries").show();
 					$(".sort-li").hide();
 					$("#sort-li-0").show();
-					$('#sort-li-0').on('click', function() {
-					//$('#sort-li-0').on('click', "span", function() {
-					//$( ".itinerary-title" ).on("click", function() {
+					//$('#sort-li-0').on('click', function() {
+					$('#sort-li-0 .click-me').on('click', function() {
     					//$('#sort-li-0').toggleClass('active');
-						$( '#sort-li-0 table' ).css('display','block');
-						$('#sort-li-0').off('click');
-						$('#sort-li-0 .click-me').on('click', function() {
-							$( '#sort-li-0 table' ).css('display','none');
-							$('#sort-li-0').on('click');
-						});
+    					$('#sort-li-0').toggleClass('edit-itinerary');
 					});
 				} );
 			
@@ -283,9 +277,9 @@ class Metabox_Trip_Options_Edit {
 					$( ".sort-li" ).each( function( index, element ) {
 						if ( $( this ).is(":hidden") ) {
 							$( this ).show();
-							//$( this ).on("click", function() {
+							$( this ).on("click", function() {
 							//$( this ).on("click", "span", function() {
-							$( ".itinerary-title-click" ).on("click", function() {
+							//$( ".itinerary-title-click" ).on("click", function() {
 								$( this ).toggleClass('active');
 							});
 							return false;
@@ -300,10 +294,10 @@ class Metabox_Trip_Options_Edit {
   			#sortable li { background: #f2f2f2; border: 1px solid #ccc; margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em;}
 			#sortable li span { position: absolute; margin-left: -1.3em; }
 			.click-me { margin-right: 3px; }
+			/*#sortable li table { background: #ffffff; border: 1px solid #ccc; width: 100%; display: none; margin-left: -1.2em; padding-left: 1.5em; }
+			#sortable li.active table { display: block; }*/
 			#sortable li table { background: #ffffff; border: 1px solid #ccc; width: 100%; display: none; margin-left: -1.2em; padding-left: 1.5em; }
-			#sortable li.active table { display: block; }
-			#sortable li table { background: #ffffff; border: 1px solid #ccc; width: 100%; display: none; margin-left: -1.2em; padding-left: 1.5em; }
-			#sortable li.active table { display: block; }
+			.edit-itinerary { display: block; }
 			#first-itinerary-link { color: blue; text-decoration: underline; cursor: pointer;}
 			.fa-bars:before { content: "\f0c9"; }
   		</style>
