@@ -278,10 +278,12 @@ class Metabox_Trip_Options_Edit {
 						if ( $( this ).is(":hidden") ) {
 							$( this ).show();
 							//$( this ).on("click", function() {
-							$( this ).find(".click-itinerary").on("click", function() {
+							//$( this ).find(".click-itinerary").on("click", function() {
+							$( ".click-itinerary", this ).on("click", function() {
 							//$( ".itinerary-title-click" ).on("click", function() {
 								//$( this ).toggleClass('active');
-								$( this ).find(".update-itinerary").toggleClass('edit-itinerary');
+								//$( this ).find(".update-itinerary").toggleClass('edit-itinerary');
+								$( ".update-itinerary", this ).toggleClass('edit-itinerary');
 								//$('#sort-li-0 table').toggleClass('edit-itinerary');
 							});
 							return false;
