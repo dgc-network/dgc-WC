@@ -280,7 +280,9 @@ class Metabox_Trip_Options_Edit {
 							//$( ".click-itinerary", this ).on("click", function() {
 								//$( ".update-itinerary", this ).toggleClass('edit-itinerary');
 							$( this ).on("click", function() {
-								$( this ).toggleClass('edit-itinerary');
+								//$( this ).toggleClass('edit-itinerary');
+								$( this ).css("font-size","200%");;
+								$( "table", this ).css("visibility","visible");;
 							});
 							return false;
 						};
