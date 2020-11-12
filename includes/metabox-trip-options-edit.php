@@ -297,7 +297,7 @@ class Metabox_Trip_Options_Edit {
 			/*#sortable li table { background: #ffffff; border: 1px solid #ccc; width: 100%; display: none; margin-left: -1.2em; padding-left: 1.5em; }
 			#sortable li.active table { display: block; }*/
 			#sortable li table { background: #ffffff; border: 1px solid #ccc; width: 100%; display: block; margin-left: -1.2em; padding-left: 1.5em; }
-			.edit-itinerary { display: none; }
+			#sortable li .edit-itinerary { display: none; }
 			#first-itinerary-link { color: blue; text-decoration: underline; cursor: pointer;}
 			.fa-bars:before { content: "\f0c9"; }
   		</style>
