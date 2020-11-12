@@ -218,8 +218,8 @@ class Metabox_Trip_Options_Edit {
 				echo esc_attr( $itinerary_title[$x] );
 			}
 			$xx--;
-			echo '<button id="click-itinerary-' . $x . '" type="button">Click Me</button>
-			<table>
+			echo '<button class="click-itinerary" id="click-itinerary-' . $x . '" type="button">Click Me</button>
+			<table class="update-itinerary">
 			  <tbody>
 				<tr>
 					<th><label for="itinerary_title">Itinerary title</label></th>
@@ -277,11 +277,11 @@ class Metabox_Trip_Options_Edit {
 					$( ".sort-li" ).each( function( index, element ) {
 						if ( $( this ).is(":hidden") ) {
 							$( this ).show();
-							$( this ).on("click", function() {
-							//$( this ).on("click", "span", function() {
+							//$( this ).on("click", function() {
+							$( this ).find(".click-itinerary").on("click", function() {
 							//$( ".itinerary-title-click" ).on("click", function() {
 								//$( this ).toggleClass('active');
-								$( this ).toggleClass('edit-itinerary');
+								$( this ).find(".update-itinerary").toggleClass('edit-itinerary');
 								//$('#sort-li-0 table').toggleClass('edit-itinerary');
 							});
 							return false;
