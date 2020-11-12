@@ -267,9 +267,6 @@ class Metabox_Trip_Options_Edit {
 					$(".sort-li").hide();
 					$("#sort-li-0").show();
 					$('button','#sort-li-0').on('click', function() {
-					//$('#click-itinerary-0').click(function() {
-    					//$('#sort-li-0').toggleClass('active');
-    					//$('#sort-li-0 table').toggleClass('edit-itinerary');
     					$('table','#sort-li-0').toggleClass('edit-itinerary');
 					});
 				} );
@@ -278,12 +275,8 @@ class Metabox_Trip_Options_Edit {
 					$( ".sort-li" ).each( function( index, element ) {
 						if ( $( this ).is(":hidden") ) {
 							$( this ).show();
-							//$( ".click-itinerary", this ).on("click", function() {
-								//$( ".update-itinerary", this ).toggleClass('edit-itinerary');
-							$( this ).on("click", function() {
-								//$( this ).toggleClass('edit-itinerary');
-								$( this ).css("font-size","200%");;
-								$( "table", this ).css("visibility","visible");;
+							$( 'button', this ).on("click", function() {
+								$( 'table', this ).toggleClass('edit-itinerary');
 							});
 							return false;
 						};
