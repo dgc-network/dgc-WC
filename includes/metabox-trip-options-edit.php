@@ -280,7 +280,9 @@ class Metabox_Trip_Options_Edit {
 							$( this ).on("click", function() {
 							//$( this ).on("click", "span", function() {
 							//$( ".itinerary-title-click" ).on("click", function() {
-								$( this ).toggleClass('active');
+								//$( this ).toggleClass('active');
+								$( this ).toggleClass('edit-itinerary');
+								//$('#sort-li-0 table').toggleClass('edit-itinerary');
 							});
 							return false;
 						};
@@ -295,9 +297,9 @@ class Metabox_Trip_Options_Edit {
 			#sortable li span { position: absolute; margin-left: -1.3em; }
 			/*.click-me { margin-right: 3px; }*/
 			/*#sortable li table { background: #ffffff; border: 1px solid #ccc; width: 100%; display: none; margin-left: -1.2em; padding-left: 1.5em; }
-			#sortable li.active table { display: block; }*/
-			#sortable li table { background: #ffffff; border: 1px solid #ccc; width: 100%; display: block; margin-left: -1.2em; padding-left: 1.5em; }
-			#sortable li .edit-itinerary { display: none; }
+			#sortable li .active table { display: block; }*/
+			#sortable li table { background: #ffffff; border: 1px solid #ccc; width: 100%; display: none; margin-left: -1.2em; padding-left: 1.5em; }
+			#sortable li .edit-itinerary { display: block; }
 			#first-itinerary-link { color: blue; text-decoration: underline; cursor: pointer;}
 			.fa-bars:before { content: "\f0c9"; }
   		</style>
