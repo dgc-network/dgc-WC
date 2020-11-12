@@ -218,7 +218,7 @@ class Metabox_Trip_Options_Edit {
 				echo esc_attr( $itinerary_title[$x] );
 			}
 			$xx--;
-			echo '<button class="click-itinerary" id="click-itinerary-' . $x . '">Click Me</button>
+			echo '<button class="click-itinerary" id="click-itinerary-' . $x . '" type="button">Click Me</button>
 			<table class="update-itinerary">
 			  <tbody>
 				<tr>
@@ -275,7 +275,7 @@ class Metabox_Trip_Options_Edit {
 					$( ".sort-li" ).each( function( index, element ) {
 						if ( $( this ).is(":hidden") ) {
 							$( this ).show();
-							$( "button", this ).on("click", function() {
+							$( "button" ).on("click", function() {
 							//$( 'button', this ).on("click", function() {
 								$( 'table', this ).toggleClass('edit-itinerary');
 							});
