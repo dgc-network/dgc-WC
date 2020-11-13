@@ -280,12 +280,14 @@ class Metabox_Trip_Options_Edit {
   							//	$(this).addClass("toggled");
 							//});
 
-							$( this ).delegate("button","click",function(){
+							$( .sort-li ).delegate(this,"click",function(){
+								$( this ).delegate("button","click",function(){
 
 							//$( 'button', this ).on("click", "button", function() {
 							//$( 'button', this ).on("click", function() {
 							//$('#sort-li-1').on('click', function() {
 								$( 'table', this ).toggleClass('edit-itinerary');
+							});
 							});
 							return false;
 						};
