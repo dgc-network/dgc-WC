@@ -276,18 +276,10 @@ class Metabox_Trip_Options_Edit {
 						if ( $( this ).is(":hidden") ) {
 							$( this ).show();
 
-							//$(myContainer).on('click', '.gamePiece', function(){
-  							//	$(this).addClass("toggled");
-							//});
-
-							$( .sort-li ).delegate(this,"click",function(){
-								$( this ).delegate("button","click",function(){
-
-							//$( 'button', this ).on("click", "button", function() {
+							$( this ).on( 'click', 'button', function() {
 							//$( 'button', this ).on("click", function() {
 							//$('#sort-li-1').on('click', function() {
 								$( 'table', this ).toggleClass('edit-itinerary');
-							});
 							});
 							return false;
 						};
