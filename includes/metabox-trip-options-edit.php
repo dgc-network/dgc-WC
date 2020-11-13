@@ -276,7 +276,8 @@ class Metabox_Trip_Options_Edit {
 						if ( $( this ).is(":hidden") ) {
 							$( this ).show();
 
-							$( this ).on( 'click', 'button', function() {
+							$( this ).on( 'click', 'button', function(e) {
+								e.preventDefault();
 							//$( 'button', this ).on("click", function() {
 							//$('#sort-li-1').on('click', function() {
 								$( 'table', this ).toggleClass('edit-itinerary');
