@@ -203,11 +203,13 @@ class Metabox_Trip_Options_Edit {
 		//$wp_travel_itinerary = new WP_Travel_Itinerary();
 		//$trip_outline = $wp_travel_itinerary->get_outline();
 
-		$trip_id = get_post_meta( $post_id, 'wp_travel_post_id', true );
-		$itineraries  = get_post_meta( $trip_id, 'wp_travel_trip_itinerary_data', true );
+		//$trip_id = get_post_meta( $post_id, 'wp_travel_post_id', true );
+		//$itineraries  = get_post_meta( $trip_id, 'wp_travel_trip_itinerary_data', true );
+
+		$itineraries = get_post_meta( $post->ID, 'wp_travel_trip_itinerary_data', true );
 		$xx = 0;
 		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) {
-			foreach ( $itineraries as $itinerary_id => $trip_tab ) {
+			foreach ( $itineraries as $itinerary ) {
 				//$itinerary_item_title[$xx] = get_post_meta( $post->ID, 'itinerary_item_title_'.$xx, true );
 				//$itinerary_item_description[$x] = get_post_meta( $post->ID, 'itinerary_item_description_'.$xx, true );
 				//$itinerary_item_robots[$x] = get_post_meta( $post->ID, 'itinerary_item_robots_'.$xx, true );
