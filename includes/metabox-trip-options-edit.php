@@ -148,7 +148,7 @@ class Metabox_Trip_Options_Edit {
 		 * Updates a post meta field based on the given post ID.
 		 * update_post_meta( int $post_id, string $meta_key, mixed $meta_value, mixed $prev_value = '' )
 		 */
-
+/*
 		$itineraries = array();
 		if ( ! empty( $trip_data->itineraries ) ) {
 			foreach ( $trip_data->itineraries as $itinerary_id => $trip_tab ) {
@@ -162,14 +162,16 @@ class Metabox_Trip_Options_Edit {
 				}
 			}
 		}
+		$trip_id = get_post_meta( $post_id, 'wp_travel_post_id', true );
 		update_post_meta( $trip_id, 'wp_travel_trip_itinerary_data', $itineraries );
-/*
-		if( isset( $_POST[ '$itinerary_item_title' ] ) ) {
-			update_post_meta( $post_id, '$itinerary_item_title', sanitize_text_field( $_POST[ '$itinerary_item_title' ] ) );
-		} else {
-			delete_post_meta( $post_id, '$itinerary_item_title' );
-		}
+*/
 
+		if( isset( $_POST[ 'wp_travel_trip_itinerary_data' ] ) ) {
+			update_post_meta( $post_id, 'wp_travel_trip_itinerary_data', sanitize_text_field( $_POST[ 'wp_travel_trip_itinerary_data' ] ) );
+		} else {
+			delete_post_meta( $post_id, 'wp_travel_trip_itinerary_data' );
+		}
+/*
 		if( isset( $_POST[ 'seo_robots' ] ) ) {
 			update_post_meta( $post_id, 'seo_robots', sanitize_text_field( $_POST[ 'seo_robots' ] ) );
 		} else {
@@ -201,6 +203,7 @@ class Metabox_Trip_Options_Edit {
 		//$wp_travel_itinerary = new WP_Travel_Itinerary();
 		//$trip_outline = $wp_travel_itinerary->get_outline();
 
+		$trip_id = get_post_meta( $post_id, 'wp_travel_post_id', true );
 		$itineraries  = get_post_meta( $trip_id, 'wp_travel_trip_itinerary_data', true );
 		$xx = 0;
 		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) {
