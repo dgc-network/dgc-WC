@@ -280,7 +280,7 @@ class Metabox_Trip_Options_Edit {
 							//$( 'li' ).on( 'click', 'button', function() {
 							//$( 'li' ).on( 'click', function() {
 							//$( this ).on( 'click', 'click-itinerary', function() {
-							$( this ).delegate("click",function(){
+							$( this ).delegate(".click-itinerary","click",function(){
 
 								$( 'table', this ).toggleClass('edit-itinerary');
 							});
