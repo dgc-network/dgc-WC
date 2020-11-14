@@ -255,8 +255,8 @@ class Metabox_Trip_Options_Edit {
 					<td>
 						<select id="itinerary_item_robots" name="itinerary_item_robots">
 							<option value="">Select...</option>
-							<option value="index,follow"' . selected( 'index,follow', $itineraries[$x]['time'], false ) . '>Show for search engines</option>
-							<option value="noindex,nofollow"' . selected( 'noindex,nofollow', $itineraries[$x]['time'], false ) . '>Hide for search engines</option>
+							<option value="index,follow"' . selected( 'index,follow', $itineraries[$x]['label'], false ) . '>Show for search engines</option>
+							<option value="noindex,nofollow"' . selected( 'noindex,nofollow', $itineraries[$x]['label'], false ) . '>Hide for search engines</option>
 						</select>
 					</td>
 				</tr>
