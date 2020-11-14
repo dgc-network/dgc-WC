@@ -148,23 +148,6 @@ class Metabox_Trip_Options_Edit {
 		 * Updates a post meta field based on the given post ID.
 		 * update_post_meta( int $post_id, string $meta_key, mixed $meta_value, mixed $prev_value = '' )
 		 */
-/*
-		$itineraries = array();
-		if ( ! empty( $trip_data->itineraries ) ) {
-			foreach ( $trip_data->itineraries as $itinerary_id => $trip_tab ) {
-				$itineraries[ $itinerary_id ]['label'] = $trip_tab['label'];
-				$itineraries[ $itinerary_id ]['title'] = $trip_tab['title'];
-				$itineraries[ $itinerary_id ]['date']  = $trip_tab['date'];
-				$itineraries[ $itinerary_id ]['time']  = $trip_tab['time'];
-				$itineraries[ $itinerary_id ]['desc']  = $trip_tab['desc'];
-				if ( isset( $trip_tab['image'] ) ) {
-					$itineraries[ $itinerary_id ]['image'] = $trip_tab['image'];
-				}
-			}
-		}
-		$trip_id = get_post_meta( $post_id, 'wp_travel_post_id', true );
-		update_post_meta( $trip_id, 'wp_travel_trip_itinerary_data', $itineraries );
-*/
 		$itineraries = array();
 		for ($x = 0; $x < 100; $x++) {
 			$itineraries[$x]['label'] = $_POST['itinerary_item_label-' . $x];
@@ -209,93 +192,88 @@ class Metabox_Trip_Options_Edit {
 		</table>
 
 		<?php 
-		//$wp_travel_itinerary = new WP_Travel_Itinerary();
-		//$trip_outline = $wp_travel_itinerary->get_outline();
-
-		//$trip_id = get_post_meta( $post_id, 'wp_travel_post_id', true );
-		//$itineraries  = get_post_meta( $trip_id, 'wp_travel_trip_itinerary_data', true );
-
 		$itineraries = get_post_meta( $post->ID, 'wp_travel_trip_itinerary_data', true );
 		$xx = 0;
 		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) {
 			foreach ( $itineraries as $itinerary ) {
-				//$itinerary_item_title[$xx] = get_post_meta( $post->ID, 'itinerary_item_title_'.$xx, true );
-				//$itinerary_item_description[$x] = get_post_meta( $post->ID, 'itinerary_item_description_'.$xx, true );
-				//$itinerary_item_robots[$x] = get_post_meta( $post->ID, 'itinerary_item_robots_'.$xx, true );
 				$xx++;
-			}
+			}?>
+
+			<div id="init-itineraries">
+				<table style="width:100%" class="form-table">
+					<tr>
+						<td><label for="add-itinerary"><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></label></td>
+						<td style="text-align:right"><button id="add-itinerary" type="button"><?php esc_html_e( '+ Add Itinerary', 'wp-travel' ); ?></button></td>
+					</tr>
+				</table>
+
+				<ul id="sortable"><?php
+			  
+				for ($x = 0; $x < 100; $x++) {
+					echo "<li class='sort-li' id='sort-li-" . $x . "'><span class='fas fa-bars'></span>";
+					if ($xx<=0) {
+						echo __( 'Day X, My plan', 'wp-travel' );
+					} else{
+						echo esc_attr( $itineraries[$x]['title'] );
+					}
+					$xx--;
+					echo '<button class="click-itinerary" id="click-itinerary-' . $x . '" type="button">Click Me</button>
+					<table class="update-itinerary">
+				  	  <tbody>
+						<tr>
+							<th><label for="itinerary_item_title">Itinerary title</label></th>
+							<td><input type="text" id="itinerary_item_title" name="itinerary_item_title-' . $x . '" value="' . esc_attr( $itineraries[$x]['title'] ) . '" class="regular-text"></td>
+						</tr>
+						<tr>
+							<th><label for="itinerary_item_description">Itinerary description</label></th>
+							<td><textarea rows="3" id="itinerary_item_description" name="itinerary_item_desc-' . $x . '" value="' . esc_attr( $itineraries[$x]['desc'] ) . '" class="regular-text"></textarea></td>
+						</tr>
+						<tr>
+							<th><label for="itinerary_item_date">Itinerary date</label></th>
+							<td><input type="text" id="itinerary_item_date" name="itinerary_item_date-' . $x . '" value="' . esc_attr( $itineraries[$x]['date'] ) . '" class="regular-text"></td>
+						</tr>
+						<tr>
+							<th><label for="itinerary_item_tobots">Itinerary robots</label></th>
+							<td>
+								<select id="itinerary_item_robots" name="itinerary_item_label-' . $x . '">
+									<option value="">Select...</option>
+									<option value="index,follow"' . selected( 'index,follow', $itineraries[$x]['label'], false ) . '>Show for search engines</option>
+									<option value="noindex,nofollow"' . selected( 'noindex,nofollow', $itineraries[$x]['label'], false ) . '>Hide for search engines</option>
+								</select>
+							</td>
+						</tr>
+				  	  </tbody>
+					</table>' .
+			  		"</li>";
+				}?>			
+				</ul>
+
+				<table style="width:100%" class="form-table">
+					<tr>
+						<td></td>
+						<td style="text-align:right"><button id="add-itinerary" type="button"><?php esc_html_e( '+ Add Itinerary', 'wp-travel' ); ?></button></td>
+					</tr>
+				</table>
+			</div><?php
+
 		} else {?>
 			<div id="no-itineraries">
-			<span id="first-itinerary-title"><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></label><br>
-			<span id="first-itinerary-text"><?php esc_html_e( 'No Itineraries found.', 'wp-travel' ); ?></label>
-			<span id="first-itinerary-link"><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></span>
-			</div>
-		<?php }?>
-
-		<div id="init-itineraries">
-		<table style="width:100%" class="form-table trip-outline">
-			<tr>
-				<td><label for="add-itinerary"><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></label></td>
-				<td style="text-align:right"><button id="add-itinerary" type="button"><?php esc_html_e( '+ Add Itinerary', 'wp-travel' ); ?></button></td>
-			</tr>
-		</table>
-		<ul id="sortable">
-		<?php  
-		for ($x = 0; $x < 100; $x++) {
-			echo "<li class='sort-li' id='sort-li-" . $x . "'><span class='fas fa-bars'></span>";
-			if ($xx<=0) {
-				echo __( 'Day X, My plan', 'wp-travel' );
-			} else{
-				echo esc_attr( $itineraries[$x]['title'] );
-			}
-			$xx--;
-			echo '<button class="click-itinerary" id="click-itinerary-' . $x . '" type="button">Click Me</button>
-			<table class="update-itinerary">
-			  <tbody>
-				<tr>
-					<th><label for="itinerary_item_title">Itinerary title</label></th>
-					<td><input type="text" id="itinerary_item_title" name="itinerary_item_title-' . $x . '" value="' . esc_attr( $itineraries[$x]['title'] ) . '" class="regular-text"></td>
-				</tr>
-				<tr>
-					<th><label for="itinerary_item_description">Itinerary description</label></th>
-					<td><textarea rows="3" id="itinerary_item_description" name="itinerary_item_desc-' . $x . '" value="' . esc_attr( $itineraries[$x]['desc'] ) . '" class="regular-text"></textarea></td>
-				</tr>
-				<tr>
-					<th><label for="itinerary_item_date">Itinerary date</label></th>
-					<td><input type="text" id="itinerary_item_date" name="itinerary_item_date-' . $x . '" value="' . esc_attr( $itineraries[$x]['date'] ) . '" class="regular-text"></td>
-				</tr>
-				<tr>
-					<th><label for="itinerary_item_tobots">Itinerary robots</label></th>
-					<td>
-						<select id="itinerary_item_robots" name="itinerary_item_label-' . $x . '">
-							<option value="">Select...</option>
-							<option value="index,follow"' . selected( 'index,follow', $itineraries[$x]['label'], false ) . '>Show for search engines</option>
-							<option value="noindex,nofollow"' . selected( 'noindex,nofollow', $itineraries[$x]['label'], false ) . '>Hide for search engines</option>
-						</select>
-					</td>
-				</tr>
-			  </tbody>
-			</table>' .
-		  "</li>";
-		}
-		?>
-		</ul>
-		<table style="width:100%" class="form-table trip-outline">
-			<tr>
-				<td></td>
-				<td style="text-align:right"><button id="add-itinerary" type="button"><?php esc_html_e( '+ Add Itinerary', 'wp-travel' ); ?></button></td>
-			</tr>
-		</table>
-		</div>
-
-
+				<span id="first-itinerary-title"><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></span><br>
+				<span id="first-itinerary-text"><?php esc_html_e( 'No Itineraries found.', 'wp-travel' ); ?></span>
+				<span id="first-itinerary-link"><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></span>
+			</div><?php 		
+		}?>
 	
 		<script>
 			jQuery(document).ready(function($) {
     			$( "#sortable" ).sortable();
 				$( "#sortable" ).disableSelection();
-			
-				$("#init-itineraries").hide();
+				var x = "<?php echo $xx; ?>";
+				if (x==0) {
+					$("#init-itineraries").hide();
+				} else {
+					$("#no-itineraries").hide();
+				}
 				$("#first-itinerary-link").click( function(){
 					$("#no-itineraries").hide();
 					$("#init-itineraries").show();
