@@ -273,15 +273,9 @@ class Metabox_Trip_Options_Edit {
 			
 				$("#add-itinerary").click( function(){
 					$( ".sort-li" ).each( function( index, element ) {
-					//$( ".sort-li" ).each( function() {
 						if ( $( this ).is(":hidden") ) {
 							$( this ).show();
-
-							//$( 'li' ).on( 'click', 'button', function() {
-							//$( 'li' ).on( 'click', function() {
-							//$( this ).on( 'click', 'click-itinerary', function() {
 							$( element ).delegate("button", "click", function(){
-
 								$( 'table', element ).toggleClass('edit-itinerary');
 							});
 							return false;
@@ -295,10 +289,8 @@ class Metabox_Trip_Options_Edit {
   			#sortable { list-style-type: none; margin: 0; padding: 0; width: 100%; }
   			#sortable li { background: #f2f2f2; border: 1px solid #ccc; margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em;}
 			#sortable li span { position: absolute; margin-left: -1.3em; }
-			/*.click-me { margin-right: 3px; }*/
-			/*#sortable li table { background: #ffffff; border: 1px solid #ccc; width: 100%; display: none; margin-left: -1.2em; padding-left: 1.5em; }
-			#sortable li .active table { display: block; }*/
 			#sortable li table { background: #ffffff; border: 1px solid #ccc; width: 100%; display: none; margin-left: -1.2em; padding-left: 1.5em; }
+			#sortable li table textarea { height: 30px; }
 			#sortable li .edit-itinerary { display: block; }
 			#first-itinerary-link { color: blue; text-decoration: underline; cursor: pointer;}
 			.fa-bars:before { content: "\f0c9"; }
