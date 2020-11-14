@@ -272,8 +272,8 @@ class Metabox_Trip_Options_Edit {
 				} );
 			
 				$("#add-itinerary").click( function(){
-					//$( ".sort-li" ).each( function( index, element ) {
-					$( ".sort-li" ).each( function() {
+					$( ".sort-li" ).each( function( index, element ) {
+					//$( ".sort-li" ).each( function() {
 						if ( $( this ).is(":hidden") ) {
 							$( this ).show();
 
