@@ -149,10 +149,25 @@ class Metabox_Trip_Options_Edit {
 		 * update_post_meta( int $post_id, string $meta_key, mixed $meta_value, mixed $prev_value = '' )
 		 */
 
-		if( isset( $_POST[ 'seo_title' ] ) ) {
-			update_post_meta( $post_id, 'seo_title', sanitize_text_field( $_POST[ 'seo_title' ] ) );
+		$itineraries = array();
+		if ( ! empty( $trip_data->itineraries ) ) {
+			foreach ( $trip_data->itineraries as $itinerary_id => $trip_tab ) {
+				$itineraries[ $itinerary_id ]['label'] = $trip_tab['label'];
+				$itineraries[ $itinerary_id ]['title'] = $trip_tab['title'];
+				$itineraries[ $itinerary_id ]['date']  = $trip_tab['date'];
+				$itineraries[ $itinerary_id ]['time']  = $trip_tab['time'];
+				$itineraries[ $itinerary_id ]['desc']  = $trip_tab['desc'];
+				if ( isset( $trip_tab['image'] ) ) {
+					$itineraries[ $itinerary_id ]['image'] = $trip_tab['image'];
+				}
+			}
+		}
+		update_post_meta( $trip_id, 'wp_travel_trip_itinerary_data', $itineraries );
+/*
+		if( isset( $_POST[ '$itinerary_item_title' ] ) ) {
+			update_post_meta( $post_id, '$itinerary_item_title', sanitize_text_field( $_POST[ '$itinerary_item_title' ] ) );
 		} else {
-			delete_post_meta( $post_id, 'seo_title' );
+			delete_post_meta( $post_id, '$itinerary_item_title' );
 		}
 
 		if( isset( $_POST[ 'seo_robots' ] ) ) {
@@ -160,7 +175,7 @@ class Metabox_Trip_Options_Edit {
 		} else {
 			delete_post_meta( $post_id, 'seo_robots' );
 		}
-
+*/
 		return $post_id;
 	}
 
@@ -183,14 +198,16 @@ class Metabox_Trip_Options_Edit {
 		</table>
 
 		<?php 
-		$wp_travel_itinerary = new WP_Travel_Itinerary();
-		$trip_outline = $wp_travel_itinerary->get_outline();
+		//$wp_travel_itinerary = new WP_Travel_Itinerary();
+		//$trip_outline = $wp_travel_itinerary->get_outline();
+
+		$itineraries  = get_post_meta( $trip_id, 'wp_travel_trip_itinerary_data', true );
 		$xx = 0;
-		if ( is_array( $trip_outline ) && count( $trip_outline ) > 0 ) {
-			foreach ( $trip_outline as $itinerary ) {
-				$itinerary_title[$xx] = get_post_meta( $post->ID, 'itinerary_title_'.$xx, true );
-				$itinerary_description[$x] = get_post_meta( $post->ID, 'itinerary_description_'.$xx, true );
-				$itinerary_robots[$x] = get_post_meta( $post->ID, 'itinerary_robots_'.$xx, true );
+		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) {
+			foreach ( $itineraries as $itinerary_id => $trip_tab ) {
+				//$itinerary_item_title[$xx] = get_post_meta( $post->ID, 'itinerary_item_title_'.$xx, true );
+				//$itinerary_item_description[$x] = get_post_meta( $post->ID, 'itinerary_item_description_'.$xx, true );
+				//$itinerary_item_robots[$x] = get_post_meta( $post->ID, 'itinerary_item_robots_'.$xx, true );
 				$xx++;
 			}
 		} else {?>
@@ -215,7 +232,7 @@ class Metabox_Trip_Options_Edit {
 			if ($xx<=0) {
 				echo __( 'Day X, My plan', 'wp-travel' );
 			} else{
-				echo esc_attr( $itinerary_title[$x] );
+				echo esc_attr( $itineraries[$x]['title'] );
 			}
 			$xx--;
 			echo '<button class="click-itinerary" id="click-itinerary-' . $x . '" type="button">Click Me</button>
@@ -223,23 +240,23 @@ class Metabox_Trip_Options_Edit {
 			  <tbody>
 				<tr>
 					<th><label for="itinerary_item_title">Itinerary title</label></th>
-					<td><input type="text" id="itinerary_item_title" name="itinerary_item_title" value="' . esc_attr( $itinerary_item_title[$x] ) . '" class="regular-text"></td>
+					<td><input type="text" id="itinerary_item_title" name="itinerary_item_title" value="' . esc_attr( $itineraries[$x]['title'] ) . '" class="regular-text"></td>
 				</tr>
 				<tr>
 					<th><label for="itinerary_item_description">Itinerary description</label></th>
-					<td><textarea rows="3" id="itinerary_item_description" name="itinerary_item_description" value="' . esc_attr( $itinerary_item_description[$x] ) . '" class="regular-text"></textarea></td>
+					<td><textarea rows="3" id="itinerary_item_description" name="itinerary_item_description" value="' . esc_attr( $itineraries[$x]['desc'] ) . '" class="regular-text"></textarea></td>
 				</tr>
 				<tr>
 					<th><label for="itinerary_item_date">Itinerary date</label></th>
-					<td><input type="text" id="itinerary_item_date" name="itinerary_item_date" value="' . esc_attr( $itinerary_item_date[$x] ) . '" class="regular-text"></td>
+					<td><input type="text" id="itinerary_item_date" name="itinerary_item_date" value="' . esc_attr( $itineraries[$x]['date'] ) . '" class="regular-text"></td>
 				</tr>
 				<tr>
 					<th><label for="itinerary_item_tobots">Itinerary robots</label></th>
 					<td>
 						<select id="itinerary_item_robots" name="itinerary_item_robots">
 							<option value="">Select...</option>
-							<option value="index,follow"' . selected( 'index,follow', $itinerary_robots[$x], false ) . '>Show for search engines</option>
-							<option value="noindex,nofollow"' . selected( 'noindex,nofollow', $itinerary_robots[$x], false ) . '>Hide for search engines</option>
+							<option value="index,follow"' . selected( 'index,follow', $itineraries[$x]['time'], false ) . '>Show for search engines</option>
+							<option value="noindex,nofollow"' . selected( 'noindex,nofollow', $itineraries[$x]['time'], false ) . '>Hide for search engines</option>
 						</select>
 					</td>
 				</tr>
