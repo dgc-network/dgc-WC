@@ -165,13 +165,22 @@ class Metabox_Trip_Options_Edit {
 		$trip_id = get_post_meta( $post_id, 'wp_travel_post_id', true );
 		update_post_meta( $trip_id, 'wp_travel_trip_itinerary_data', $itineraries );
 */
-
+		$itineraries = array();
+		for ($x = 0; $x < 100; $x++) {
+			$itineraries[$x]['label'] = $_POST['itinerary_item_label-' . $x];
+			$itineraries[$x]['title'] = $_POST['itinerary_item_title-' . $x];
+			$itineraries[$x]['date'] = $_POST['itinerary_item_date-' . $x];
+			$itineraries[$x]['time'] = $_POST['itinerary_item_time-' . $x];
+			$itineraries[$x]['desc'] = $_POST['itinerary_item_desc-' . $x];
+		}
+		update_post_meta( $post_id, 'wp_travel_trip_itinerary_data', $itineraries );
+/*
 		if( isset( $_POST[ 'wp_travel_trip_itinerary_data' ] ) ) {
 			update_post_meta( $post_id, 'wp_travel_trip_itinerary_data', sanitize_text_field( $_POST[ 'wp_travel_trip_itinerary_data' ] ) );
 		} else {
 			delete_post_meta( $post_id, 'wp_travel_trip_itinerary_data' );
 		}
-/*
+
 		if( isset( $_POST[ 'seo_robots' ] ) ) {
 			update_post_meta( $post_id, 'seo_robots', sanitize_text_field( $_POST[ 'seo_robots' ] ) );
 		} else {
@@ -245,20 +254,20 @@ class Metabox_Trip_Options_Edit {
 			  <tbody>
 				<tr>
 					<th><label for="itinerary_item_title">Itinerary title</label></th>
-					<td><input type="text" id="itinerary_item_title" name="itinerary_item_title" value="' . esc_attr( $itineraries[$x]['title'] ) . '" class="regular-text"></td>
+					<td><input type="text" id="itinerary_item_title" name="itinerary_item_title-' . $x . '" value="' . esc_attr( $itineraries[$x]['title'] ) . '" class="regular-text"></td>
 				</tr>
 				<tr>
 					<th><label for="itinerary_item_description">Itinerary description</label></th>
-					<td><textarea rows="3" id="itinerary_item_description" name="itinerary_item_description" value="' . esc_attr( $itineraries[$x]['desc'] ) . '" class="regular-text"></textarea></td>
+					<td><textarea rows="3" id="itinerary_item_description" name="itinerary_item_desc-' . $x . '" value="' . esc_attr( $itineraries[$x]['desc'] ) . '" class="regular-text"></textarea></td>
 				</tr>
 				<tr>
 					<th><label for="itinerary_item_date">Itinerary date</label></th>
-					<td><input type="text" id="itinerary_item_date" name="itinerary_item_date" value="' . esc_attr( $itineraries[$x]['date'] ) . '" class="regular-text"></td>
+					<td><input type="text" id="itinerary_item_date" name="itinerary_item_date-' . $x . '" value="' . esc_attr( $itineraries[$x]['date'] ) . '" class="regular-text"></td>
 				</tr>
 				<tr>
 					<th><label for="itinerary_item_tobots">Itinerary robots</label></th>
 					<td>
-						<select id="itinerary_item_robots" name="itinerary_item_robots">
+						<select id="itinerary_item_robots" name="itinerary_item_label-' . $x . '">
 							<option value="">Select...</option>
 							<option value="index,follow"' . selected( 'index,follow', $itineraries[$x]['label'], false ) . '>Show for search engines</option>
 							<option value="noindex,nofollow"' . selected( 'noindex,nofollow', $itineraries[$x]['label'], false ) . '>Hide for search engines</option>
