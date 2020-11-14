@@ -269,10 +269,10 @@ class Metabox_Trip_Options_Edit {
     			$( "#sortable" ).sortable();
 				$( "#sortable" ).disableSelection();
 				var x = "<?php echo $xx; ?>";
-				if (x==0) {
-					$("#init-itineraries").hide();
-				} else {
+				if (x>0) {
 					$("#no-itineraries").hide();
+				} else {
+					$("#init-itineraries").hide();
 				}
 				$("#first-itinerary-link").click( function(){
 					$("#no-itineraries").hide();
