@@ -227,7 +227,7 @@ class Metabox_Trip_Options_Edit {
 				</tr>
 				<tr>
 					<th><label for="itinerary_item_description">Itinerary description</label></th>
-					<td><input type="textarea" rows="3" id="itinerary_item_description" name="itinerary_item_description" value="' . esc_attr( $itinerary_item_description[$x] ) . '" class="regular-text"></td>
+					<td><textarea rows="3" id="itinerary_item_description" name="itinerary_item_description" value="' . esc_attr( $itinerary_item_description[$x] ) . '" class="regular-text"></textarea></td>
 				</tr>
 				<tr>
 					<th><label for="itinerary_item_date">Itinerary date</label></th>
