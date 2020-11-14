@@ -222,17 +222,21 @@ class Metabox_Trip_Options_Edit {
 			<table class="update-itinerary">
 			  <tbody>
 				<tr>
-					<th><label for="itinerary_title">Itinerary title</label></th>
-					<td><input type="text" id="itinerary_title" name="itinerary_title" value="' . esc_attr( $itinerary_title[$x] ) . '" class="regular-text"></td>
+					<th><label for="itinerary_item_title">Itinerary title</label></th>
+					<td><input type="text" id="itinerary_item_title" name="itinerary_item_title" value="' . esc_attr( $itinerary_item_title[$x] ) . '" class="regular-text"></td>
 				</tr>
 				<tr>
-					<th><label for="itinerary_description">Itinerary description</label></th>
-					<td><input type="textarea" id="itinerary_description" name="itinerary_description" value="' . esc_attr( $itinerary_description[$x] ) . '" class="regular-text"></td>
+					<th><label for="itinerary_item_description">Itinerary description</label></th>
+					<td><input type="textarea" rows="3" id="itinerary_item_description" name="itinerary_item_description" value="' . esc_attr( $itinerary_item_description[$x] ) . '" class="regular-text"></td>
 				</tr>
 				<tr>
-					<th><label for="itinerary_tobots">Itinerary robots</label></th>
+					<th><label for="itinerary_item_date">Itinerary date</label></th>
+					<td><input type="text" id="itinerary_item_date" name="itinerary_item_date" value="' . esc_attr( $itinerary_item_date[$x] ) . '" class="regular-text"></td>
+				</tr>
+				<tr>
+					<th><label for="itinerary_item_tobots">Itinerary robots</label></th>
 					<td>
-						<select id="itinerary_robots" name="itinerary_robots">
+						<select id="itinerary_item_robots" name="itinerary_item_robots">
 							<option value="">Select...</option>
 							<option value="index,follow"' . selected( 'index,follow', $itinerary_robots[$x], false ) . '>Show for search engines</option>
 							<option value="noindex,nofollow"' . selected( 'noindex,nofollow', $itinerary_robots[$x], false ) . '>Hide for search engines</option>
@@ -282,6 +286,8 @@ class Metabox_Trip_Options_Edit {
 						};
 					});
 				} );
+
+				$( '#itinerary_item_date' ).datepicker();
 			} );
 		</script>
 	
@@ -290,7 +296,6 @@ class Metabox_Trip_Options_Edit {
   			#sortable li { background: #f2f2f2; border: 1px solid #ccc; margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em;}
 			#sortable li span { position: absolute; margin-left: -1.3em; }
 			#sortable li table { background: #ffffff; border: 1px solid #ccc; width: 100%; display: none; margin-left: -1.2em; padding-left: 1.5em; }
-			#sortable li table textarea { height: 30px; }
 			#sortable li .edit-itinerary { display: block; }
 			#first-itinerary-link { color: blue; text-decoration: underline; cursor: pointer;}
 			.fa-bars:before { content: "\f0c9"; }
