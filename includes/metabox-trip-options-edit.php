@@ -195,11 +195,6 @@ class Metabox_Trip_Options_Edit {
 		$itineraries = get_post_meta( $post->ID, 'wp_travel_trip_itinerary_data', true );
 		$xx = 0;
 		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) {
-			echo '<script>
-			jQuery(document).ready(function($) {
-				$(".sort-li").hide();
-			});
-			</script>';
 			foreach ( $itineraries as $itinerary ) {
 				echo '<script>
 				jQuery(document).ready(function($) {
@@ -207,17 +202,7 @@ class Metabox_Trip_Options_Edit {
 				});
 				</script>';				
 				$xx++;
-			}
-			//echo "<script>alert('Hello World');</script>";
-			//echo '<script>$("#add-itinerary").trigger("click");</script>';
-		} else {?>
-			<div id="no-itineraries">
-				<span id="first-itinerary-title"><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></span><br>
-				<span id="first-itinerary-text"><?php esc_html_e( 'No Itineraries found.', 'wp-travel' ); ?></span>
-				<span id="first-itinerary-link"><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></span>
-			</div><?php
-			echo '<script>$("#init-itineraries").hide();</script>';
-		}?>
+			}?>
 
 			<div id="init-itineraries">
 				<table style="width:100%" class="form-table">
@@ -274,7 +259,21 @@ class Metabox_Trip_Options_Edit {
 						<td style="text-align:right"><button id="add-itinerary" type="button"><?php esc_html_e( '+ Add Itinerary', 'wp-travel' ); ?></button></td>
 					</tr>
 				</table>
-			</div>
+			</div><?php
+			echo '<script>
+			jQuery(document).ready(function($) {
+				$(".sort-li").hide();
+			});
+			</script>';
+
+		} else {?>
+			<div id="no-itineraries">
+				<span id="first-itinerary-title"><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></span><br>
+				<span id="first-itinerary-text"><?php esc_html_e( 'No Itineraries found.', 'wp-travel' ); ?></span>
+				<span id="first-itinerary-link"><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></span>
+			</div><?php
+			echo '<script>$("#init-itineraries").hide();</script>';
+		}?>
 
 
 		<script>
