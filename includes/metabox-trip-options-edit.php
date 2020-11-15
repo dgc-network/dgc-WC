@@ -303,7 +303,8 @@ class Metabox_Trip_Options_Edit {
 				$( '#itinerary_item_date' ).datepicker();
 			} );
 			function disab(){
-				$("#add-itinerary").trigger("click");
+				$("#sort-li-0").show();
+				//$("#add-itinerary").trigger("click");
  			}
 		</script>
 	
