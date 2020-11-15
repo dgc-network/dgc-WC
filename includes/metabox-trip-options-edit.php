@@ -195,9 +195,17 @@ class Metabox_Trip_Options_Edit {
 		$itineraries = get_post_meta( $post->ID, 'wp_travel_trip_itinerary_data', true );
 		$xx = 0;
 		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) {
-			echo '<script>$(".sort-li").hide();</script>';
+			echo '<script>
+			jQuery(document).ready(function($) {
+				$(".sort-li").hide();
+			});
+			</script>';
 			foreach ( $itineraries as $itinerary ) {
-				echo '<script>$("#sort-li-'.$xx.'").show();</script>';				
+				echo '<script>
+				jQuery(document).ready(function($) {
+					$("#sort-li-'.$xx.'").show();
+				});
+				</script>';				
 				$xx++;
 			}
 			//echo "<script>alert('Hello World');</script>";
