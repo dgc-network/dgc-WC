@@ -256,7 +256,7 @@ class Metabox_Trip_Options_Edit {
 				</table>
 			</div><?php
 			echo '<script>
-			jQuery(document).ready(function($) {
+			$(function(){
 				$("#add-itinerary").trigger("click");
 			});
 			</script>';
