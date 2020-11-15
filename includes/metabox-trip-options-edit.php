@@ -257,7 +257,7 @@ class Metabox_Trip_Options_Edit {
 			</div><?php
 			echo '<script>
 			$(function(){
-				$("#add-itinerary").trigger("click");
+				disab();
 			});
 			</script>';
 
@@ -267,7 +267,7 @@ class Metabox_Trip_Options_Edit {
 				<span id="first-itinerary-text"><?php esc_html_e( 'No Itineraries found.', 'wp-travel' ); ?></span>
 				<span id="first-itinerary-link"><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></span>
 			</div><?php
-			echo '<script>$("#init-itineraries").hide();</script>';
+			//echo '<script>$("#init-itineraries").hide();</script>';
 		}?>
 
 
@@ -302,6 +302,9 @@ class Metabox_Trip_Options_Edit {
 
 				$( '#itinerary_item_date' ).datepicker();
 			} );
+			function disab(){
+				$("#add-itinerary").trigger("click");
+ 			}
 		</script>
 	
 		<style>
