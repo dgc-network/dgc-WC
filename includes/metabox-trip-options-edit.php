@@ -274,13 +274,13 @@ class Metabox_Trip_Options_Edit {
 				$(".sort-li").hide();
 
 				$( ".sort-li" ).each( function( index, element ) {
-						if ( $( this ).is(":empty") ) {
+						//if ( $( this ).is(":empty") ) {
 							$( this ).show();
 							$( element ).delegate("button", "click", function(){
 								$( 'table', element ).toggleClass('edit-itinerary');
 							});
 							return false;
-						};
+						//};
 				});
 
 				$("#first-itinerary-link").click( function(){
