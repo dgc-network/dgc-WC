@@ -196,11 +196,6 @@ class Metabox_Trip_Options_Edit {
 		$xx = 0;
 		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) {
 			foreach ( $itineraries as $itinerary ) {
-				echo '<script>
-				jQuery(document).ready(function($) {
-					$("#sort-li-'.$xx.'").show();
-				});
-				</script>';				
 				$xx++;
 			}?>
 
@@ -262,7 +257,7 @@ class Metabox_Trip_Options_Edit {
 			</div><?php
 			echo '<script>
 			jQuery(document).ready(function($) {
-				$(".sort-li").hide();
+				$("#add-itinerary").trigger("click");
 			});
 			</script>';
 
