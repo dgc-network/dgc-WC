@@ -255,9 +255,6 @@ class Metabox_Trip_Options_Edit {
 					</tr>
 				</table>
 			</div><?php
-echo '<script>$(document).ready(function(){
-	$("#sort-li-0").show();
-});</script>';
 
 		} else {?>
 			<div id="no-itineraries">
@@ -275,6 +272,16 @@ echo '<script>$(document).ready(function(){
 				$( "#sortable" ).disableSelection();
 				//$("#init-itineraries").hide();
 				$(".sort-li").hide();
+
+				$( ".sort-li" ).each( function( index, element ) {
+						if ( $( this ).is(":empty") ) {
+							$( this ).show();
+							$( element ).delegate("button", "click", function(){
+								$( 'table', element ).toggleClass('edit-itinerary');
+							});
+							return false;
+						};
+				});
 
 				$("#first-itinerary-link").click( function(){
 					$("#no-itineraries").hide();
