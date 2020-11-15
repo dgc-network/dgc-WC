@@ -255,9 +255,9 @@ class Metabox_Trip_Options_Edit {
 					</tr>
 				</table>
 			</div><?php
-echo "<script>$(document).ready(function(){
-	$.alert({title: 'Alert!',content: 'Simple alert!'});
-});</script>";
+echo '<script>$(document).ready(function(){
+	$("#sort-li-0").show();
+});</script>';
 
 		} else {?>
 			<div id="no-itineraries">
