@@ -215,7 +215,7 @@ class Metabox_Trip_Options_Edit {
 				<ul id="sortable"><?php
 			  
 				for ($x = 0; $x < 100; $x++) {
-					echo "<li class='sort-li' id='sort-li-" . $x . "'><span class='fas fa-bars'></span>";
+					echo '<li class="sort-li" id="sort-li-' . $x . '"><span class="fas fa-bars"></span>';
 					if ($xx<=0) {
 						echo __( 'Day X, My plan', 'wp-travel' );
 					} else{
@@ -281,6 +281,7 @@ class Metabox_Trip_Options_Edit {
     			$( "#sortable" ).sortable();
 				$( "#sortable" ).disableSelection();
 				//$("#init-itineraries").hide();
+				$(".sort-li").hide();
 
 				$("#first-itinerary-link").click( function(){
 					$("#no-itineraries").hide();
