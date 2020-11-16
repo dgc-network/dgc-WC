@@ -223,11 +223,11 @@ class Metabox_Trip_Options_Edit {
 				for ($x = 0; $x < 100; $x++) {
 					echo '<li class="sort-li" id="sort-li-' . $x . '"><span class="fas fa-bars">';
 					if ($xx<=0) {
-						echo __( 'Day X, My plan', 'wp-travel' );
-						echo '</span><p style="display:none"></p>';
+						$itinerary_title = __( 'Day X, My plan', 'wp-travel' );
+						echo $itinerary_title . '</span><p style="display:none"></p>';
 					} else {
-						echo esc_attr( $itineraries[$x]['title'] );
-						echo '</span><p style="display:none">' . $x . '</p>';
+						$itinerary_title = esc_attr( $itineraries[$x]['title'] );
+						echo $itinerary_title . '</span><p style="display:none">' . $x . '</p>';
 					}
 					$xx--;
 					echo '
@@ -235,7 +235,7 @@ class Metabox_Trip_Options_Edit {
 				  	  <tbody>
 						<tr>
 							<th><label">Itinerary title</label></th>
-							<td><input type="text" id="itinerary_item_title" name="itinerary_item_title-' . $x . '" value="' . esc_attr( $itineraries[$x]['title'] ) . '" class="regular-text"></td>
+							<td><input type="text" id="itinerary_item_title" name="itinerary_item_title-' . $x . '" value="' . $itinerary_title . '" class="regular-text"></td>
 						</tr>
 						<tr>
 							<th><label">Itinerary description</label></th>
@@ -276,7 +276,7 @@ class Metabox_Trip_Options_Edit {
 				$(".sort-li").hide();
 
 				$( ".sort-li" ).each( function( index, element ) {
-					if ( !$( 'p', element ).is(":empty") ) {
+					if ( $( 'p', element ).is(":empty") ) {
 						$(".init-rows").show();
 						//$(".sort-li").hide();
 						//$( element ).show();
