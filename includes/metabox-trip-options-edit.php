@@ -258,7 +258,7 @@ class Metabox_Trip_Options_Edit {
 						</tr>
 						<tr>
 							<th></th>
-							<td style="text-align:right"><button style="color:red" id="remove-itinerary" type="button"><?php esc_html_e( "- Remove Itinerary", "wp-travel" ); ?></button></td>
+							<td style="text-align:right"><button style="color:red" id="remove-itinerary" type="button">' . esc_html_e( "- Remove Itinerary", "wp-travel" ) . '</button></td>
 						</tr>
 				  	  </tbody>
 					</table>' .
@@ -324,7 +324,7 @@ class Metabox_Trip_Options_Edit {
   			#sortable { list-style-type: none; margin: 0; padding: 0; width: 100%; }
   			#sortable li { background: #f2f2f2; border: 1px solid #ccc; margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em;}
 			/*#sortable li span { position: absolute; margin-left: -1.3em; }*/
-			#sortable li span { margin-left: -1.3em; }
+			#sortable li span { margin-left: -1.3em; cursor: pointer;}
 			#sortable li table { background: #ffffff; border: 1px solid #ccc; width: 100%; display: none; margin-left: -1.2em; padding-left: 1.5em; }
 			#sortable li .edit-itinerary { display: block; }
 			#first-itinerary { color: blue; text-decoration: underline; cursor: pointer;}
