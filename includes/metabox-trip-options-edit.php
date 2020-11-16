@@ -185,6 +185,7 @@ class Metabox_Trip_Options_Edit {
 		}
 		$trip_code = wp_travel_get_trip_code( $post->ID );
 		$itineraries = get_post_meta( $post->ID, 'wp_travel_trip_itinerary_data', true );
+		$remove_itinerary = esc_html_e( "- Remove Itinerary", "wp-travel" );
 		$xx = 0;
 		?>
 		<table style="width:100%" class="form-table trip-info">
@@ -203,9 +204,7 @@ class Metabox_Trip_Options_Edit {
 		$default_title = __( 'Day X, My plan', 'wp-travel' );
 		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) {
 			foreach ( $itineraries as $x=>$itinerary ) {
-				//if (($itineraries[$x]['title'] != __( 'Day X, My plan', 'wp-travel' )) || ($itineraries[$x]['title'] != "")) {
 				if (($itineraries[$x]['title'] != $default_title) && ($itineraries[$x]['title'] != "")) {
-				//if ($itineraries[$x]['title'] != "") {
 					$xx++;
 				}
 			}
@@ -231,7 +230,6 @@ class Metabox_Trip_Options_Edit {
 						echo $itinerary_title . '</span><p style="display:none">' . $x . '</p>';
 					}
 					$xx--;
-					//$remove_itinerary = esc_html_e( "- Remove Itinerary", "wp-travel" );
 					echo '
 					<table class="update-itinerary">
 				  	  <tbody>
@@ -259,7 +257,7 @@ class Metabox_Trip_Options_Edit {
 						</tr>
 						<tr>
 							<td></td>
-							<td style="text-align:right"><button style="color:red" type="button">remove_itinerary</button></td>
+							<td style="text-align:right"><button style="color:red" type="button">' . $remove_itinerary . '</button></td>
 						</tr>
 				  	  </tbody>
 					</table>
