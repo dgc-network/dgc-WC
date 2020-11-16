@@ -262,8 +262,8 @@ class Metabox_Trip_Options_Edit {
 							<td style="text-align:right"><button style="color:red" id="remove-itinerary" type="button">' . $remove_itinerary . '</button></td>
 						</tr>
 				  	  </tbody>
-					</table>' .
-			  		"</li>";
+					</table>
+			  		</li>';
 				}?>			
 				</ul>
 
