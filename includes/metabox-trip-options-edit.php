@@ -203,13 +203,14 @@ class Metabox_Trip_Options_Edit {
 		<?php 
 		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) {
 			foreach ( $itineraries as $x=>$itinerary ) {
-				if (($itineraries[$x]['title'] != __( 'Day X, My plan', 'wp-travel' )) || ($itineraries[$x]['title'] != "")) {
+				//if (($itineraries[$x]['title'] != __( 'Day X, My plan', 'wp-travel' )) || ($itineraries[$x]['title'] != "")) {
+				if ($itineraries[$x]['title'] != __( 'Day X, My plan', 'wp-travel' )) {
 				//if ($itineraries[$x]['title'] != "") {
 					$xx++;
 				}
 			}
 		} else {?>
-			<tr class="no-itineraries"><td>
+			<tr class="no-itineraries"><td colspan="2">
 				<span><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></span><br>
 				<span><?php esc_html_e( 'No Itineraries found.', 'wp-travel' ); ?></span>
 				<span id="first-itinerary"><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></span>
