@@ -259,7 +259,7 @@ class Metabox_Trip_Options_Edit {
 						</tr>
 						<tr>
 							<td></td>
-							<td style="text-align:right"><button style="background-color:red" type="button">remove_itinerary</button></td>
+							<td style="text-align:right"><button style="color:red" type="button">remove_itinerary</button></td>
 						</tr>
 				  	  </tbody>
 					</table>
