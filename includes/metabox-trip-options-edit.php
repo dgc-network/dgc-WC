@@ -190,13 +190,13 @@ class Metabox_Trip_Options_Edit {
 		<table style="width:100%" class="form-table trip-info">
 			<tr>
 				<td>
-					<label for="wp-travel-trip-code"><?php esc_html_e( 'Trip Code: ', 'wp-travel' ); ?></label>
+					<label><?php esc_html_e( 'Trip Code : ', 'wp-travel' ); ?></label>
 					<input type="text" id="wp-travel-trip-code" disabled="disabled" value="<?php echo esc_attr( $trip_code ); ?>" />
 				</td>
 				<td></td>
 			</tr>
 			<tr style="display:none" class="init-rows">
-				<td><label for="add-itinerary"><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></label></td>
+				<td><label><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></label></td>
 				<td style="text-align:right"><button id="add-itinerary" type="button"><?php esc_html_e( '+ Add Itinerary', 'wp-travel' ); ?></button></td>
 			</tr>
 
@@ -221,7 +221,7 @@ class Metabox_Trip_Options_Edit {
 					echo '<li class="sort-li" id="sort-li-' . $x . '"><span class="fas fa-bars">';
 					if ($xx<=0) {
 						echo __( 'Day X, My plan', 'wp-travel' );
-						echo '</span>';
+						echo '</span><p style="display:none"></p>';
 					} else {
 						echo esc_attr( $itineraries[$x]['title'] );
 						echo '</span><p style="display:none">' . $x . '</p>';
@@ -231,15 +231,15 @@ class Metabox_Trip_Options_Edit {
 					<table class="update-itinerary">
 				  	  <tbody>
 						<tr>
-							<th><label for="itinerary_item_title">Itinerary title</label></th>
+							<th><label">Itinerary title</label></th>
 							<td><input type="text" id="itinerary_item_title" name="itinerary_item_title-' . $x . '" value="' . esc_attr( $itineraries[$x]['title'] ) . '" class="regular-text"></td>
 						</tr>
 						<tr>
-							<th><label for="itinerary_item_description">Itinerary description</label></th>
+							<th><label">Itinerary description</label></th>
 							<td><textarea rows="3" id="itinerary_item_description" name="itinerary_item_desc-' . $x . '" value="' . esc_attr( $itineraries[$x]['desc'] ) . '" class="regular-text"></textarea></td>
 						</tr>
 						<tr>
-							<th><label for="itinerary_item_date">Itinerary date</label></th>
+							<th><label">Itinerary date</label></th>
 							<td><input type="text" id="itinerary_item_date" name="itinerary_item_date-' . $x . '" value="' . esc_attr( $itineraries[$x]['date'] ) . '" class="regular-text"></td>
 						</tr>
 						<tr>
