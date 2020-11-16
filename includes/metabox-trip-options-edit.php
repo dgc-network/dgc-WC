@@ -203,7 +203,8 @@ class Metabox_Trip_Options_Edit {
 		<?php 
 		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) {
 			foreach ( $itineraries as $itinerary ) {
-				if (($itineraries[$x]['title'] != __( 'Day X, My plan', 'wp-travel' )) || ($itineraries[$x]['title'] != "")) {
+				//if (($itineraries[$x]['title'] != __( 'Day X, My plan', 'wp-travel' )) || ($itineraries[$x]['title'] != "")) {
+				if ($itineraries[$x]['title'] != "") {
 					$xx++;
 				}
 			}
