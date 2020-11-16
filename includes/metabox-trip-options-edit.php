@@ -210,21 +210,14 @@ class Metabox_Trip_Options_Edit {
 
 		} else {?>
 			<tr class="no-itineraries"><td>
-			<div id="no-itineraries">
 				<span id="first-itinerary-title"><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></span><br>
 				<span id="first-itinerary-text"><?php esc_html_e( 'No Itineraries found.', 'wp-travel' ); ?></span>
 				<span id="first-itinerary-link"><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></span>
-			</div></td><?php
+			</td></tr><?php
 		}?>
 
 			<tr style="display:none" class="init-rows"><td>
 			<div id="init-itineraries">
-				<table style="width:100% display:none" class="form-table itineraries">
-					<tr>
-						<td><label for="add-itinerary"><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></label></td>
-						<td style="text-align:right"><button id="add-itinerary" type="button"><?php esc_html_e( '+ Add Itinerary', 'wp-travel' ); ?></button></td>
-					</tr>
-				</table>
 
 				<ul id="sortable"><?php
 			  
@@ -267,13 +260,7 @@ class Metabox_Trip_Options_Edit {
 				}?>			
 				</ul>
 
-				<table style="width:100%" class="form-table">
-					<tr>
-						<td></td>
-						<td style="text-align:right"><button id="add-itinerary" type="button"><?php esc_html_e( '+ Add Itinerary', 'wp-travel' ); ?></button></td>
-					</tr>
-				</table>
-			</div></td>
+			</div></td></tr>
 
 			<tr style="display:none" class="init-rows">
 				<td></td>
@@ -291,7 +278,7 @@ class Metabox_Trip_Options_Edit {
 				$( ".sort-li" ).each( function( index, element ) {
 						//if ( $( this ).is(":empty") ) {
 							$( this ).show();
-							$(".init-rows").show();
+							//$(".init-rows").show();
 							$( element ).delegate("button", "click", function(){
 								$( 'table', element ).toggleClass('edit-itinerary');
 							});
