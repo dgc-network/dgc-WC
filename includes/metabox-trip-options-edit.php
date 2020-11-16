@@ -257,7 +257,7 @@ class Metabox_Trip_Options_Edit {
 							</td>
 						</tr>
 						<tr>
-							<th></th>
+							<td></td>
 							<td style="text-align:right"><button style="color:red" id="remove-itinerary" type="button">' . esc_html_e( "- Remove Itinerary", "wp-travel" ) . '</button></td>
 						</tr>
 				  	  </tbody>
