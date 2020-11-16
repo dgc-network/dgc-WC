@@ -217,19 +217,17 @@ class Metabox_Trip_Options_Edit {
 		}?>
 
 			<tr style="display:none" class="init-rows"><td colspan="2">
-			<div id="init-itineraries">
 
 				<ul id="sortable"><?php
 			  
 				for ($x = 0; $x < 100; $x++) {
-					echo '<li class="sort-li" id="sort-li-' . $x . '"><span class="fas fa-bars">';
+					echo '<li class="sort-li" id="sort-li-' . $x . '"><span class="fas fa-bars"></span><span class="itinerary-item-title">';
 					if ($xx<=0) {
 						echo __( 'Day X, My plan', 'wp-travel' );
 					} else{
 						echo esc_attr( $itineraries[$x]['title'] );
 					}
 					$xx--;
-					//echo '<button class="click-itinerary" id="click-itinerary-' . $x . '" type="button">Click Me</button>
 					echo '</span>
 					<table class="update-itinerary">
 				  	  <tbody>
@@ -261,7 +259,7 @@ class Metabox_Trip_Options_Edit {
 				}?>			
 				</ul>
 
-			</div></td></tr>
+			</td></tr>
 
 			<tr style="display:none" class="init-rows">
 				<td></td>
@@ -275,7 +273,7 @@ class Metabox_Trip_Options_Edit {
 				$( "#sortable" ).disableSelection();
 				//$("#init-itineraries").hide();
 				$(".sort-li").hide();
-/*
+
 				$( ".sort-li" ).each( function( index, element ) {
 						//if ( $( this ).is(":empty") ) {
 							$( this ).show();
@@ -286,7 +284,7 @@ class Metabox_Trip_Options_Edit {
 							//return false;
 						//};
 				});
-*/
+
 				$("#first-itinerary-link").click( function(){
 					//$("#no-itineraries").hide();
 					$(".no-itineraries").hide();
@@ -315,16 +313,13 @@ class Metabox_Trip_Options_Edit {
 
 				$( '#itinerary_item_date' ).datepicker();
 			} );
-			function disab(){
-				$("#sort-li-0").show();
-				//$("#add-itinerary").trigger("click");
- 			}
 		</script>
 	
 		<style>
   			#sortable { list-style-type: none; margin: 0; padding: 0; width: 100%; }
   			#sortable li { background: #f2f2f2; border: 1px solid #ccc; margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em;}
-			#sortable li span { position: absolute; margin-left: -1.3em; }
+			/*#sortable li span { position: absolute; margin-left: -1.3em; }*/
+			#sortable li span { margin-left: -1.3em; }
 			#sortable li table { background: #ffffff; border: 1px solid #ccc; width: 100%; display: none; margin-left: -1.2em; padding-left: 1.5em; }
 			#sortable li .edit-itinerary { display: block; }
 			#first-itinerary-link { color: blue; text-decoration: underline; cursor: pointer;}
@@ -414,14 +409,14 @@ function vertical_example_metabox( $post ) {
 			$( "#tabs li" ).removeClass( "ui-corner-top" ).addClass( "ui-corner-left" );
 		});
 	</script>
-	  <style>
-		  .ui-tabs-vertical { width: 55em; }
-		  .ui-tabs-vertical .ui-tabs-nav { padding: .2em .1em .2em .2em; float: left; width: 12em; }
-		  .ui-tabs-vertical .ui-tabs-nav li { clear: left; width: 100%; border-bottom-width: 1px !important; border-right-width: 0 !important; margin: 0 -1px .2em 0; }
-		  .ui-tabs-vertical .ui-tabs-nav li a { display:block; }
-		  .ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active { padding-bottom: 0; padding-right: .1em; border-right-width: 1px; }
-		  .ui-tabs-vertical .ui-tabs-panel { padding: 1em; float: right; width: 40em;}
-	  </style>
+	<style>
+		.ui-tabs-vertical { width: 55em; }
+		.ui-tabs-vertical .ui-tabs-nav { padding: .2em .1em .2em .2em; float: left; width: 12em; }
+		.ui-tabs-vertical .ui-tabs-nav li { clear: left; width: 100%; border-bottom-width: 1px !important; border-right-width: 0 !important; margin: 0 -1px .2em 0; }
+		.ui-tabs-vertical .ui-tabs-nav li a { display:block; }
+		.ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active { padding-bottom: 0; padding-right: .1em; border-right-width: 1px; }
+		.ui-tabs-vertical .ui-tabs-panel { padding: 1em; float: right; width: 40em;}
+	</style>
 	<?php
 }
 
