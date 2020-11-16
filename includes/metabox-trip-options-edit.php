@@ -279,7 +279,7 @@ class Metabox_Trip_Options_Edit {
 					if ( !$( 'p', element ).is(":empty") ) {
 						$(".init-rows").show();
 						//$(".sort-li").hide();
-						//$( element ).show();
+						$( element ).show();
 						//$( element ).delegate("span", "click", function(){
 						//	$( 'table', element ).toggleClass('edit-itinerary');
 						//});
