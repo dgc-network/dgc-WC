@@ -209,7 +209,7 @@ class Metabox_Trip_Options_Edit {
 			<tr class="no-itineraries"><td>
 				<span><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></span><br>
 				<span><?php esc_html_e( 'No Itineraries found.', 'wp-travel' ); ?></span>
-				<span><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></span>
+				<span id="first-itinerary-link"><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></span>
 			</td></tr><?php
 		}?>
 
@@ -277,7 +277,7 @@ class Metabox_Trip_Options_Edit {
 						$(".init-rows").show();
 						$(".sort-li").hide();
 						$( element ).show();
-						$( element ).delegate("button", "click", function(){
+						$( element ).delegate("span", "click", function(){
 							$( 'table', element ).toggleClass('edit-itinerary');
 						});
 					};
