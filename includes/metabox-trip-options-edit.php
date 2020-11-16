@@ -209,7 +209,7 @@ class Metabox_Trip_Options_Edit {
 			<tr class="no-itineraries"><td>
 				<span><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></span><br>
 				<span><?php esc_html_e( 'No Itineraries found.', 'wp-travel' ); ?></span>
-				<span id="first-itinerary-link"><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></span>
+				<span id="first-itinerary"><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></span>
 			</td></tr><?php
 		}?>
 
@@ -283,7 +283,7 @@ class Metabox_Trip_Options_Edit {
 					};
 				});
 
-				$("#first-itinerary-link").click( function(){
+				$("#first-itinerary").click( function(){
 					$(".no-itineraries").hide();
 					$(".init-rows").show();
 					$(".sort-li").hide();
@@ -316,7 +316,7 @@ class Metabox_Trip_Options_Edit {
 			#sortable li span { margin-left: -1.3em; }
 			#sortable li table { background: #ffffff; border: 1px solid #ccc; width: 100%; display: none; margin-left: -1.2em; padding-left: 1.5em; }
 			#sortable li .edit-itinerary { display: block; }
-			#first-itinerary-link { color: blue; text-decoration: underline; cursor: pointer;}
+			#first-itinerary { color: blue; text-decoration: underline; cursor: pointer;}
 			.fa-bars:before { content: "\f0c9"; }
   		</style>
 		<?php
