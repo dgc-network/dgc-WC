@@ -190,19 +190,19 @@ class Metabox_Trip_Options_Edit {
 		<table style="width:100%" class="form-table trip-info">
 			<tr>
 				<td>
-					<label><?php esc_html_e( 'Trip Code : ', 'wp-travel' ); ?></label>
+					<?php esc_html_e( 'Trip Code : ', 'wp-travel' ); ?>
 					<input type="text" id="wp-travel-trip-code" disabled="disabled" value="<?php echo esc_attr( $trip_code ); ?>" />
 				</td>
 				<td></td>
 			</tr>
 			<tr style="display:none" class="init-rows">
-				<td><label><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></label></td>
+				<td><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></td>
 				<td style="text-align:right"><button id="add-itinerary" type="button"><?php esc_html_e( '+ Add Itinerary', 'wp-travel' ); ?></button></td>
 			</tr>
 
 		<?php 
 		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) {
-			foreach ( $itineraries as $itinerary ) {
+			foreach ( $itineraries as $x=>$itinerary ) {
 				//if (($itineraries[$x]['title'] != __( 'Day X, My plan', 'wp-travel' )) || ($itineraries[$x]['title'] != "")) {
 				if ($itineraries[$x]['title'] != "") {
 					$xx++;
