@@ -183,11 +183,16 @@ class Metabox_Trip_Options_Edit {
 			return;
 		}
 		$trip_code = wp_travel_get_trip_code( $post->ID );
+		$itineraries = get_post_meta( $post->ID, 'wp_travel_trip_itinerary_data', true );
+		$xx = 0;
 		?>
 		<table style="width:100%" class="form-table trip-info">
 			<tr>
-				<td><label for="wp-travel-detail"><?php esc_html_e( 'Trip Code', 'wp-travel' ); ?></label></td>
-				<td><input type="text" id="wp-travel-trip-code" disabled="disabled" value="<?php echo esc_attr( $trip_code ); ?>" /></td>
+				<td>
+					<label for="wp-travel-trip-code"><?php esc_html_e( 'Trip Code: ', 'wp-travel' ); ?></label>
+					<input type="text" id="wp-travel-trip-code" disabled="disabled" value="<?php echo esc_attr( $trip_code ); ?>" />
+				</td>
+				<td></td>
 			</tr>
 			<tr style="display:none" class="init-rows">
 				<td><label for="add-itinerary"><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></label></td>
@@ -196,8 +201,6 @@ class Metabox_Trip_Options_Edit {
 		</table>
 
 		<?php 
-		$itineraries = get_post_meta( $post->ID, 'wp_travel_trip_itinerary_data', true );
-		$xx = 0;
 		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) {
 			foreach ( $itineraries as $itinerary ) {
 				$xx++;
@@ -269,6 +272,11 @@ class Metabox_Trip_Options_Edit {
 			//echo '<script>$("#init-itineraries").hide();</script>';
 		}?>
 
+			<tr style="display:none" class="init-rows">
+				<td></td>
+				<td style="text-align:right"><button id="add-itinerary" type="button"><?php esc_html_e( '+ Add Itinerary', 'wp-travel' ); ?></button></td>
+			</tr>
+		</table>
 
 		<script>
 			jQuery(document).ready(function($) {
