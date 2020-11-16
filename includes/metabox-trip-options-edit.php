@@ -205,15 +205,11 @@ class Metabox_Trip_Options_Edit {
 			foreach ( $itineraries as $itinerary ) {
 				$xx++;
 			}
-			?>
-
-			<?php
-
 		} else {?>
 			<tr class="no-itineraries"><td>
-				<span id="first-itinerary-title"><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></span><br>
-				<span id="first-itinerary-text"><?php esc_html_e( 'No Itineraries found.', 'wp-travel' ); ?></span>
-				<span id="first-itinerary-link"><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></span>
+				<span><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></span><br>
+				<span><?php esc_html_e( 'No Itineraries found.', 'wp-travel' ); ?></span>
+				<span><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></span>
 			</td></tr><?php
 		}?>
 
@@ -222,14 +218,16 @@ class Metabox_Trip_Options_Edit {
 				<ul id="sortable"><?php
 			  
 				for ($x = 0; $x < 100; $x++) {
-					echo '<li class="sort-li" id="sort-li-' . $x . '"><span class="fas fa-bars"></span><span class="itinerary-item-title">';
+					echo '<li class="sort-li" id="sort-li-' . $x . '"><span class="fas fa-bars">';
 					if ($xx<=0) {
 						echo __( 'Day X, My plan', 'wp-travel' );
-					} else{
+						echo '</span>';
+					} else {
 						echo esc_attr( $itineraries[$x]['title'] );
+						echo '</span><p style="display:none">' . $x . '</p>';
 					}
 					$xx--;
-					echo '</span>
+					echo '
 					<table class="update-itinerary">
 				  	  <tbody>
 						<tr>
@@ -272,28 +270,24 @@ class Metabox_Trip_Options_Edit {
 			jQuery(document).ready(function($) {
     			$( "#sortable" ).sortable();
 				$( "#sortable" ).disableSelection();
-				//$("#init-itineraries").hide();
 				$(".sort-li").hide();
 
 				$( ".sort-li" ).each( function( index, element ) {
-						//if ( $( this ).is(":empty") ) {
-							$( this ).show();
-							//$(".init-rows").show();
-							$( element ).delegate("button", "click", function(){
-								$( 'table', element ).toggleClass('edit-itinerary');
-							});
-							//return false;
-						//};
+					if ( !$( 'p', element ).is(":empty") ) {
+						$(".init-rows").show();
+						$(".sort-li").hide();
+						$( element ).show();
+						$( element ).delegate("button", "click", function(){
+							$( 'table', element ).toggleClass('edit-itinerary');
+						});
+					};
 				});
 
 				$("#first-itinerary-link").click( function(){
-					//$("#no-itineraries").hide();
 					$(".no-itineraries").hide();
-					//$("#init-itineraries").show();
 					$(".init-rows").show();
 					$(".sort-li").hide();
 					$("#sort-li-0").show();
-					//$('button','#sort-li-0').on('click', function() {
 					$('span','#sort-li-0').on('click', function() {
 						$('table','#sort-li-0').toggleClass('edit-itinerary');
 					});
@@ -303,7 +297,6 @@ class Metabox_Trip_Options_Edit {
 					$( ".sort-li" ).each( function( index, element ) {
 						if ( $( this ).is(":hidden") ) {
 							$( this ).show();
-							//$( element ).delegate("button", "click", function(){
 							$( element ).delegate("span", "click", function(){
 								$( 'table', element ).toggleClass('edit-itinerary');
 							});
