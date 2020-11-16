@@ -231,7 +231,7 @@ class Metabox_Trip_Options_Edit {
 						echo $itinerary_title . '</span><p style="display:none">' . $x . '</p>';
 					}
 					$xx--;
-					$remove_itinerary = esc_html_e( "- Remove Itinerary", "wp-travel" );
+					//$remove_itinerary = esc_html_e( "- Remove Itinerary", "wp-travel" );
 					echo '
 					<table class="update-itinerary">
 				  	  <tbody>
