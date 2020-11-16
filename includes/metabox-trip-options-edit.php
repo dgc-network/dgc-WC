@@ -235,7 +235,7 @@ class Metabox_Trip_Options_Edit {
 					<table class="update-itinerary">
 				  	  <tbody>
 						<tr>
-							<th><label">Itinerary title</label></th>
+							<th>Itinerary title</th>
 							<td><input type="text" id="itinerary_item_title" name="itinerary_item_title-' . $x . '" value="' . $itinerary_title . '" class="regular-text"></td>
 						</tr>
 						<tr>
@@ -256,6 +256,10 @@ class Metabox_Trip_Options_Edit {
 								</select>
 							</td>
 						</tr>
+						<tr>
+							<th></th>
+							<td style="text-align:right;text-color:red"><button id="remove-itinerary" type="button"><?php esc_html_e( "- Remove Itinerary", "wp-travel" ); ?></button></td>
+						</tr>
 				  	  </tbody>
 					</table>' .
 			  		"</li>";
@@ -266,7 +270,7 @@ class Metabox_Trip_Options_Edit {
 
 			<tr style="display:none" class="init-rows">
 				<td></td>
-				<td style="text-align:right"><button id="add-itinerary" type="button"><?php esc_html_e( '+ Add Itinerary', 'wp-travel' ); ?></button></td>
+				<td style="text-align:right"><button id="add-itinerary" type="button"><?php esc_html_e( "+ Add Itinerary", "wp-travel" ); ?></button></td>
 			</tr>
 		</table>
 
@@ -307,6 +311,9 @@ class Metabox_Trip_Options_Edit {
 							return false;
 						};
 					});
+				} );
+
+				$("#remove-itinerary").click( function(){
 				} );
 
 				$( '#itinerary_item_date' ).datepicker();
