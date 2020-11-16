@@ -216,20 +216,21 @@ class Metabox_Trip_Options_Edit {
 			</td></tr><?php
 		}?>
 
-			<tr style="display:none" class="init-rows"><td>
+			<tr style="display:none" class="init-rows"><td colspan="2">
 			<div id="init-itineraries">
 
 				<ul id="sortable"><?php
 			  
 				for ($x = 0; $x < 100; $x++) {
-					echo '<li class="sort-li" id="sort-li-' . $x . '"><span class="fas fa-bars"></span>';
+					echo '<li class="sort-li" id="sort-li-' . $x . '"><span class="fas fa-bars">';
 					if ($xx<=0) {
 						echo __( 'Day X, My plan', 'wp-travel' );
 					} else{
 						echo esc_attr( $itineraries[$x]['title'] );
 					}
 					$xx--;
-					echo '<button class="click-itinerary" id="click-itinerary-' . $x . '" type="button">Click Me</button>
+					//echo '<button class="click-itinerary" id="click-itinerary-' . $x . '" type="button">Click Me</button>
+					echo '</span>
 					<table class="update-itinerary">
 				  	  <tbody>
 						<tr>
@@ -274,7 +275,7 @@ class Metabox_Trip_Options_Edit {
 				$( "#sortable" ).disableSelection();
 				//$("#init-itineraries").hide();
 				$(".sort-li").hide();
-
+/*
 				$( ".sort-li" ).each( function( index, element ) {
 						//if ( $( this ).is(":empty") ) {
 							$( this ).show();
@@ -285,7 +286,7 @@ class Metabox_Trip_Options_Edit {
 							//return false;
 						//};
 				});
-
+*/
 				$("#first-itinerary-link").click( function(){
 					//$("#no-itineraries").hide();
 					$(".no-itineraries").hide();
@@ -293,8 +294,9 @@ class Metabox_Trip_Options_Edit {
 					$(".init-rows").show();
 					$(".sort-li").hide();
 					$("#sort-li-0").show();
-					$('button','#sort-li-0').on('click', function() {
-    					$('table','#sort-li-0').toggleClass('edit-itinerary');
+					//$('button','#sort-li-0').on('click', function() {
+					$('span','#sort-li-0').on('click', function() {
+						$('table','#sort-li-0').toggleClass('edit-itinerary');
 					});
 				} );
 			
@@ -302,7 +304,8 @@ class Metabox_Trip_Options_Edit {
 					$( ".sort-li" ).each( function( index, element ) {
 						if ( $( this ).is(":hidden") ) {
 							$( this ).show();
-							$( element ).delegate("button", "click", function(){
+							//$( element ).delegate("button", "click", function(){
+							$( element ).delegate("span", "click", function(){
 								$( 'table', element ).toggleClass('edit-itinerary');
 							});
 							return false;
