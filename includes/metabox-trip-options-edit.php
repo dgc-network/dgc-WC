@@ -198,7 +198,6 @@ class Metabox_Trip_Options_Edit {
 				<td><label for="add-itinerary"><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></label></td>
 				<td style="text-align:right"><button id="add-itinerary" type="button"><?php esc_html_e( '+ Add Itinerary', 'wp-travel' ); ?></button></td>
 			</tr>
-		</table>
 
 		<?php 
 		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) {
@@ -206,6 +205,7 @@ class Metabox_Trip_Options_Edit {
 				$xx++;
 			}?>
 
+			<tr class="init-rows"><td>
 			<div id="init-itineraries">
 				<table style="width:100% display:none" class="form-table itineraries">
 					<tr>
@@ -261,15 +261,15 @@ class Metabox_Trip_Options_Edit {
 						<td style="text-align:right"><button id="add-itinerary" type="button"><?php esc_html_e( '+ Add Itinerary', 'wp-travel' ); ?></button></td>
 					</tr>
 				</table>
-			</div><?php
+			</div></td><?php
 
 		} else {?>
+			<tr class="no-itineraries"><td>
 			<div id="no-itineraries">
 				<span id="first-itinerary-title"><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></span><br>
 				<span id="first-itinerary-text"><?php esc_html_e( 'No Itineraries found.', 'wp-travel' ); ?></span>
 				<span id="first-itinerary-link"><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></span>
-			</div><?php
-			//echo '<script>$("#init-itineraries").hide();</script>';
+			</div></td><?php
 		}?>
 
 			<tr style="display:none" class="init-rows">
@@ -296,8 +296,9 @@ class Metabox_Trip_Options_Edit {
 				});
 
 				$("#first-itinerary-link").click( function(){
-					$("#no-itineraries").hide();
-					$("#init-itineraries").show();
+					//$("#no-itineraries").hide();
+					$(".no-itineraries").hide();
+					//$("#init-itineraries").show();
 					$(".init-rows").show();
 					$(".sort-li").hide();
 					$("#sort-li-0").show();
