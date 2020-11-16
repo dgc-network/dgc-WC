@@ -189,14 +189,11 @@ class Metabox_Trip_Options_Edit {
 				<td><label for="wp-travel-detail"><?php esc_html_e( 'Trip Code', 'wp-travel' ); ?></label></td>
 				<td><input type="text" id="wp-travel-trip-code" disabled="disabled" value="<?php echo esc_attr( $trip_code ); ?>" /></td>
 			</tr>
+			<tr style="display:none">
+				<td><label for="add-itinerary"><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></label></td>
+				<td style="text-align:right"><button id="add-itinerary" type="button"><?php esc_html_e( '+ Add Itinerary', 'wp-travel' ); ?></button></td>
+			</tr>
 		</table>
-
-				<table style="width:100%" class="form-table itineraries">
-					<tr>
-						<td><label for="add-itinerary"><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></label></td>
-						<td style="text-align:right"><button id="add-itinerary" type="button"><?php esc_html_e( '+ Add Itinerary', 'wp-travel' ); ?></button></td>
-					</tr>
-				</table>
 
 		<?php 
 		$itineraries = get_post_meta( $post->ID, 'wp_travel_trip_itinerary_data', true );
