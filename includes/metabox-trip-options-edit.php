@@ -231,6 +231,7 @@ class Metabox_Trip_Options_Edit {
 						echo $itinerary_title . '</span><p style="display:none">' . $x . '</p>';
 					}
 					$xx--;
+					$remove_itinerary = esc_html_e( "- Remove Itinerary", "wp-travel" );
 					echo '
 					<table class="update-itinerary">
 				  	  <tbody>
@@ -258,7 +259,7 @@ class Metabox_Trip_Options_Edit {
 						</tr>
 						<tr>
 							<td></td>
-							<td style="text-align:right"><button style="color:red" id="remove-itinerary" type="button">' . esc_html_e( "- Remove Itinerary", "wp-travel" ) . '</button></td>
+							<td style="text-align:right"><button style="color:red" id="remove-itinerary" type="button">' . $remove_itinerary . '</button></td>
 						</tr>
 				  	  </tbody>
 					</table>' .
