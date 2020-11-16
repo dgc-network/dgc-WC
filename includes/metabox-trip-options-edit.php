@@ -276,7 +276,7 @@ class Metabox_Trip_Options_Edit {
 				$(".sort-li").hide();
 
 				$( ".sort-li" ).each( function( index, element ) {
-					if ( $( 'p', element ).is(":empty") ) {
+					if ( !$( 'p', element ).is(":empty") ) {
 						$(".init-rows").show();
 						//$(".sort-li").hide();
 						//$( element ).show();
