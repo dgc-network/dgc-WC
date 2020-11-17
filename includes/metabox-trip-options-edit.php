@@ -288,14 +288,14 @@ class Metabox_Trip_Options_Edit {
 						});
 					};
 				});
-
+/*
 				$( ".remove-itinerary" ).each( function( index, element ) {
 					$( element ).delegate("click", function(){
 						$(this).closest('.li').remove();
 						//$(this).closest('.li').hide();
 					});
 				});
-
+*/
 				$("#first-itinerary").click( function(){
 					$(".no-itineraries").hide();
 					$(".init-rows").show();
