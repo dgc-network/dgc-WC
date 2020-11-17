@@ -257,7 +257,7 @@ class Metabox_Trip_Options_Edit {
 						</tr>
 						<tr>
 							<td></td>
-							<td style="text-align:right"><button id="remove-itinerary-' . $x . '" style="color:red" type="button">' . $remove_itinerary . '</button></td>
+							<td style="text-align:right"><button class="remove-itinerary" id="remove-itinerary-' . $x . '" style="color:red" type="button">' . $remove_itinerary . '</button></td>
 						</tr>
 				  	  </tbody>
 					</table>
@@ -288,6 +288,10 @@ class Metabox_Trip_Options_Edit {
 						});
 					};
 				});
+
+				$( ".remove-itinerary").on("click", function(){
+						$(this).closest('.li').hide();
+				})
 
 				$( ".sort-li" ).each( function( index, element ) {
 				//$( ".update-itinerary" ).each( function( index, element ) {
