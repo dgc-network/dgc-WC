@@ -289,15 +289,10 @@ class Metabox_Trip_Options_Edit {
 					};
 				});
 
-				$( ".remove-itinerary").on("click", function(){
-						$(this).closest('.li').hide();
-				})
-
-				$( ".sort-li" ).each( function( index, element ) {
-				//$( ".update-itinerary" ).each( function( index, element ) {
-					$( element ).delegate("button", "click", function(){
+				$( ".remove-itinerary" ).each( function( index, element ) {
+					$( element ).delegate("click", function(){
 						$(this).closest('.li').remove();
-						$(this).closest('.li').hide();
+						//$(this).closest('.li').hide();
 					});
 				});
 
