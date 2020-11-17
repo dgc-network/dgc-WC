@@ -238,11 +238,11 @@ class Metabox_Trip_Options_Edit {
 							<td><input type="text" id="itinerary_item_title" name="itinerary_item_title-' . $x . '" value="' . $itinerary_title . '" class="regular-text"></td>
 						</tr>
 						<tr>
-							<th><label">Itinerary description</label></th>
+							<th>Itinerary description</th>
 							<td><textarea rows="3" id="itinerary_item_description" name="itinerary_item_desc-' . $x . '" value="' . esc_attr( $itineraries[$x]['desc'] ) . '" class="regular-text"></textarea></td>
 						</tr>
 						<tr>
-							<th><label">Itinerary date</label></th>
+							<th>Itinerary date</th>
 							<td><input type="text" id="itinerary_item_date" name="itinerary_item_date-' . $x . '" value="' . esc_attr( $itineraries[$x]['date'] ) . '" class="regular-text"></td>
 						</tr>
 						<tr>
@@ -257,7 +257,7 @@ class Metabox_Trip_Options_Edit {
 						</tr>
 						<tr>
 							<td></td>
-							<td style="text-align:right"><button style="color:red" type="button">' . $remove_itinerary . '</button></td>
+							<td style="text-align:right"><button id="remove-itinerary-' . $x . '" style="color:red" type="button">' . $remove_itinerary . '</button></td>
 						</tr>
 				  	  </tbody>
 					</table>
@@ -277,17 +277,22 @@ class Metabox_Trip_Options_Edit {
 			jQuery(document).ready(function($) {
     			$( "#sortable" ).sortable();
 				$( "#sortable" ).disableSelection();
-				$(".sort-li").hide();
+				$( ".sort-li" ).hide();
 
 				$( ".sort-li" ).each( function( index, element ) {
 					if ( !$( 'p', element ).is(":empty") ) {
-						$(".init-rows").show();
-						//$(".sort-li").hide();
+						$( ".init-rows" ).show();
 						$( element ).show();
 						$( element ).delegate("span", "click", function(){
 							$( 'table', element ).toggleClass('edit-itinerary');
 						});
 					};
+				});
+
+				$( ".update-itinerary" ).each( function( index, element ) {
+					$( element ).delegate("button", "click", function(){
+						$(this).closest('.li').remove();
+					});
 				});
 
 				$("#first-itinerary").click( function(){
