@@ -11,8 +11,8 @@ class Metabox_Trip_Options_View {
 		// Adds the new tab
 		$tabs['itineraries_tab'] = array(
 			'title' 	=> __( 'Itineraries', 'woocommerce' ),
-			'priority' 	=> 10,
-			'callback' 	=> 'itineraries_tab_content'
+			'priority' 	=> 50,
+			'callback' 	=> 'woo_new_product_tab_content'
 		);
 		$tabs['prices_date_tab'] = array(
 			'title' 	=> __( 'Prices & Dates', 'wp-travel' ),
