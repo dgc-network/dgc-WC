@@ -59,9 +59,9 @@ class Metabox_Trip_Options_View {
 	}	
 
 	function itineraries_tab_content( $post ) {
-		if ( ! $post ) {
-			return;
-		}
+		//if ( ! $post ) {
+		//	return;
+		//}
 		$trip_code = wp_travel_get_trip_code( $post->ID );
 		$itineraries = get_post_meta( $post->ID, 'wp_travel_trip_itinerary_data', true );
 		// The new tab content
