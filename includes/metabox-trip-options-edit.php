@@ -240,7 +240,7 @@ class Metabox_Trip_Options_Edit {
 						</tr>
 						<tr>
 							<th>Itinerary description</th>
-							<td><textarea rows="3" name="itinerary_item_desc-' . $x . '" value="' . $itinerary_desc . '" class="regular-text"></textarea></td>
+							<td><textarea rows="3" name="itinerary_item_desc-' . $x . '" value="" class="regular-text">' . $itinerary_desc . '</textarea></td>
 						</tr>
 						<tr>
 							<th>Itinerary date</th>
