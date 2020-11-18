@@ -292,9 +292,9 @@ class Metabox_Trip_Options_Edit {
 				$( ".remove-itinerary" ).each( function( index, element ) {
 					//$( this ).css({"background-color":"yellow","font-size":"200%"});
 
-					$( element ).delegate("click", function(){
+					$( element ).delegate("button", "click", function(){
 						//$( this ).css({"background-color":"yellow","font-size":"200%"});
-						//$(this).closest('.li').remove();
+						$( element ).closest('.li').remove();
 						//$(this).closest('.li').hide();
 					});	
 					
