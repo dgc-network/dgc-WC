@@ -221,7 +221,7 @@ class Metabox_Trip_Options_Edit {
 				<ul id="sortable"><?php
 			  
 				for ($x = 0; $x < 100; $x++) {
-					echo '<li class="itinerary-li" id="itinerary-li-' . $x . '"><span class="fas fa-bars">';
+					echo '<li class="itinerary-li" id="itinerary-li-' . $x . '"><span><i class="fas fa-bars"></i>';
 					if ($xx<=0) {
 						$itinerary_title = __( 'Day X, My plan', 'wp-travel' );
 						echo $itinerary_title . '</span><p style="display:none"></p>';
@@ -232,7 +232,7 @@ class Metabox_Trip_Options_Edit {
 					$itinerary_desc = esc_attr( $itineraries[$x]['desc'] );
 					$xx--;
 					echo '
-					<table class="update-itinerary">
+					<table class="update-itinerary" style="width:100%">
 				  	  <tbody>
 						<tr>
 							<th>Itinerary title</th>
@@ -339,7 +339,8 @@ class Metabox_Trip_Options_Edit {
 			#sortable li table { background: #ffffff; border: 1px solid #ccc; width: 100%; display: none; margin-left: -1.2em; padding-left: 1.5em; }
 			#sortable li .edit-itinerary { display: block; }
 			#first-itinerary { color: blue; text-decoration: underline; cursor: pointer;}
-			#sortable li span .fa-bars:before { content: "\f0c9"; }
+			/*i.fas
+			.fa-bars:before { content: "\f0c9"; }*/
   		</style>
 		<?php
 	}
