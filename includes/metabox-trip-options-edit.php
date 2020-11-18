@@ -218,7 +218,7 @@ class Metabox_Trip_Options_Edit {
 
 			<tr style="display:none" class="init-rows"><td colspan="2">
 
-				<ul id="sortable-itineraries"><?php
+				<ul id="sortable"><?php
 			  
 				for ($x = 0; $x < 100; $x++) {
 					echo '<li class="itinerary-li" id="itinerary-li-' . $x . '"><span class="fas fa-bars">';
@@ -257,7 +257,7 @@ class Metabox_Trip_Options_Edit {
 						</tr>
 						<tr>
 							<td></td>
-							<td style="text-align:right"><button class="remove-itinerary" id="remove-itinerary-' . $x . '" style="color:red" type="button">' . $remove_itinerary . '</button></td>
+							<td class="remove-itinerary" style="text-align:right"><button id="remove-itinerary-' . $x . '" style="color:red" type="button">' . $remove_itinerary . '</button></td>
 						</tr>
 				  	  </tbody>
 					</table>
@@ -291,19 +291,20 @@ class Metabox_Trip_Options_Edit {
 					$( element ).delegate(".item-title-input", "keyup", function(){
 						$( 'span', element ).text($(this).val());
 					});
-
+/*
 					$( element ).delegate(".remove-itinerary", "click", function(){
 						$( this ).closest('.itinerary-li').remove();
 					});
+*/					
 				});
-/*
+
 				$( ".remove-itinerary" ).each( function( index, element ) {
 					$( element ).delegate("button", "click", function(){
 						$( this ).closest('.itinerary-li').remove();
 					});	
 					
 				});
-*/
+
 				$("#first-itinerary").click( function(){
 					$(".no-itineraries").hide();
 					$(".init-rows").show();
