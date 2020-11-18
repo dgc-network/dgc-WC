@@ -290,11 +290,14 @@ class Metabox_Trip_Options_Edit {
 				});
 
 				$( ".remove-itinerary" ).each( function( index, element ) {
+					$( this ).css({"background-color":"yellow","font-size":"200%"});
+/*
 					$( element ).delegate("click", function(){
 						$( this ).css({"background-color":"yellow","font-size":"200%"});
 						//$(this).closest('.li').remove();
 						//$(this).closest('.li').hide();
 					});	
+*/					
 				});
 
 				$("#first-itinerary").click( function(){
@@ -317,9 +320,6 @@ class Metabox_Trip_Options_Edit {
 							return false;
 						};
 					});
-				} );
-
-				$("#remove-itinerary").click( function(){
 				} );
 
 				$( '#itinerary_item_date' ).datepicker();
