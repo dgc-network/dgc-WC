@@ -352,8 +352,7 @@ class Metabox_Trip_Options_Edit {
 			return;
 		}
 		$faqs         = wp_travel_get_faqs( $post->ID );
-		//$trip_code = wp_travel_get_trip_code( $post->ID );
-		//$itineraries = get_post_meta( $post->ID, 'wp_travel_trip_itinerary_data', true );
+/*
 		$default_title = __( 'FAQ Questions', 'wp-travel' );
 		$remove_faq = __( "- Remove FAQ", "wp-travel" );
 		$xx = 0;
@@ -440,11 +439,6 @@ class Metabox_Trip_Options_Edit {
 					$( element ).delegate(".item-title-input", "keyup", function(){
 						$( 'span', element ).text($(this).val());
 					});
-/*
-					$( element ).delegate(".remove-itinerary", "click", function(){
-						$( this ).closest('.itinerary-li').remove();
-					});
-*/					
 				});
 
 				$( ".remove-faq" ).each( function( index, element ) {
@@ -486,10 +480,10 @@ class Metabox_Trip_Options_Edit {
 			#faqs-ul li table { background: #ffffff; border: 1px solid #ccc; width: 100%; display: none; margin-left: -1.2em; padding-left: 1.5em; }
 			#faqs-ul li .edit-faq { display: block; }
 			#first-faq { color: blue; text-decoration: underline; cursor: pointer;}
-			/*i.fas*/
-			/*.fa-bars:before { content: "\f0c9"; }*/
+			.fa-bars:before { content: "\f0c9"; }
   		</style>
 		<?php
+*/		
 	}
 
 	//Please add new FAQ here.Add FAQ
