@@ -235,7 +235,7 @@ class Metabox_Trip_Options_Edit {
 				  	  <tbody>
 						<tr>
 							<th>Itinerary title</th>
-							<td class="itinerary-item-title-input"><input type="text" name="itinerary_item_title-' . $x . '" value="' . $itinerary_title . '" class="regular-text"></td>
+							<td><input type="text" class="itinerary-item-title-input" name="itinerary_item_title-' . $x . '" value="' . $itinerary_title . '" class="regular-text"></td>
 						</tr>
 						<tr>
 							<th>Itinerary description</th>
