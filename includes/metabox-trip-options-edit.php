@@ -235,7 +235,7 @@ class Metabox_Trip_Options_Edit {
 				  	  <tbody>
 						<tr>
 							<th>Itinerary title</th>
-							<td><input type="text" id="itinerary_item_title" name="itinerary_item_title-' . $x . '" value="' . $itinerary_title . '" class="regular-text"></td>
+							<td class="itinerary-item-title-input"><input type="text" name="itinerary_item_title-' . $x . '" value="' . $itinerary_title . '" class="regular-text"></td>
 						</tr>
 						<tr>
 							<th>Itinerary description</th>
@@ -287,19 +287,23 @@ class Metabox_Trip_Options_Edit {
 							$( 'table', element ).toggleClass('edit-itinerary');
 						});
 					};
+
+					$( element ).delegate(".itinerary-item-title-input", "keyup", function(){
+						$( 'span', element ).text($(this).val());
+					});
 				});
 
 				$( ".remove-itinerary" ).each( function( index, element ) {
-					//$( this ).css({"background-color":"yellow","font-size":"200%"});
-
 					$( element ).delegate("button", "click", function(){
-						//$( this ).css({"background-color":"yellow","font-size":"200%"});
 						$( this ).closest('.sort-li').remove();
-						//$( this ).closest('.sort-li').hide();
 					});	
 					
 				});
-
+/*
+				$('.itinerary-item-title-input').keyup(function () {
+  					$('#display').text($(this).val());
+				});
+*/
 				$("#first-itinerary").click( function(){
 					$(".no-itineraries").hide();
 					$(".init-rows").show();
