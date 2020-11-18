@@ -229,7 +229,6 @@ class Metabox_Trip_Options_Edit {
 						$itinerary_title = esc_attr( $itineraries[$x]['title'] );
 						echo $itinerary_title . '</span><p style="display:none">' . $x . '</p>';
 					}
-					$itinerary_desc = esc_attr( $itineraries[$x]['desc'] );
 					$xx--;
 					echo '
 					<table class="update-itinerary" style="width:100%">
