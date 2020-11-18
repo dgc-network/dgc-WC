@@ -489,7 +489,7 @@ class Metabox_Trip_Options_Edit {
 			#faqs-ul li .edit-faq { display: block; }
 			#first-faq { color: blue; text-decoration: underline; cursor: pointer;}
 			/*i.fas*/
-			.fa-bars:before { content: "\f0c9"; }
+			/*.fa-bars:before { content: "\f0c9"; }*/
   		</style>
 		<?php
 	}
