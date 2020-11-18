@@ -218,10 +218,10 @@ class Metabox_Trip_Options_Edit {
 
 			<tr style="display:none" class="init-rows"><td colspan="2">
 
-				<ul id="sortable"><?php
+				<ul id="sortable-itineraries"><?php
 			  
 				for ($x = 0; $x < 100; $x++) {
-					echo '<li class="sort-li" id="sort-li-' . $x . '"><span class="fas fa-bars">';
+					echo '<li class="itinerary-li" id="itinerary-li-' . $x . '"><span class="fas fa-bars">';
 					if ($xx<=0) {
 						$itinerary_title = __( 'Day X, My plan', 'wp-travel' );
 						echo $itinerary_title . '</span><p style="display:none"></p>';
@@ -235,7 +235,7 @@ class Metabox_Trip_Options_Edit {
 				  	  <tbody>
 						<tr>
 							<th>Itinerary title</th>
-							<td><input type="text" class="itinerary-item-title-input" name="itinerary_item_title-' . $x . '" value="' . $itinerary_title . '" class="regular-text"></td>
+							<td><input type="text" class="item-title-input" name="itinerary_item_title-' . $x . '" value="' . $itinerary_title . '" class="regular-text"></td>
 						</tr>
 						<tr>
 							<th>Itinerary description</th>
@@ -249,7 +249,7 @@ class Metabox_Trip_Options_Edit {
 							<th><label for="itinerary_item_tobots">Itinerary robots</label></th>
 							<td>
 								<select id="itinerary_item_robots" name="itinerary_item_label-' . $x . '">
-									<option value="">Select...</option>
+									<option value="">Home Stay ...</option>
 									<option value="index,follow"' . selected( 'index,follow', $itineraries[$x]['label'], false ) . '>Show for search engines</option>
 									<option value="noindex,nofollow"' . selected( 'noindex,nofollow', $itineraries[$x]['label'], false ) . '>Hide for search engines</option>
 								</select>
@@ -257,7 +257,7 @@ class Metabox_Trip_Options_Edit {
 						</tr>
 						<tr>
 							<td></td>
-							<td class="remove-itinerary" style="text-align:right"><button id="remove-itinerary-' . $x . '" style="color:red" type="button">' . $remove_itinerary . '</button></td>
+							<td style="text-align:right"><button class="remove-itinerary" id="remove-itinerary-' . $x . '" style="color:red" type="button">' . $remove_itinerary . '</button></td>
 						</tr>
 				  	  </tbody>
 					</table>
@@ -277,9 +277,9 @@ class Metabox_Trip_Options_Edit {
 			jQuery(document).ready(function($) {
     			$( "#sortable" ).sortable();
 				$( "#sortable" ).disableSelection();
-				$( ".sort-li" ).hide();
+				$( ".itinerary-li" ).hide();
 
-				$( ".sort-li" ).each( function( index, element ) {
+				$( ".itinerary-li" ).each( function( index, element ) {
 					if ( !$( 'p', element ).is(":empty") ) {
 						$( ".init-rows" ).show();
 						$( element ).show();
@@ -288,34 +288,34 @@ class Metabox_Trip_Options_Edit {
 						});
 					};
 
-					$( element ).delegate(".itinerary-item-title-input", "keyup", function(){
+					$( element ).delegate(".item-title-input", "keyup", function(){
 						$( 'span', element ).text($(this).val());
 					});
-				});
 
-				$( ".remove-itinerary" ).each( function( index, element ) {
-					$( element ).delegate("button", "click", function(){
-						$( this ).closest('.sort-li').remove();
-					});	
-					
+					$( element ).delegate(".remove-itinerary", "click", function(){
+						$( this ).closest('.itinerary-li').remove();
+					});
 				});
 /*
-				$('.itinerary-item-title-input').keyup(function () {
-  					$('#display').text($(this).val());
+				$( ".remove-itinerary" ).each( function( index, element ) {
+					$( element ).delegate("button", "click", function(){
+						$( this ).closest('.itinerary-li').remove();
+					});	
+					
 				});
 */
 				$("#first-itinerary").click( function(){
 					$(".no-itineraries").hide();
 					$(".init-rows").show();
-					$(".sort-li").hide();
-					$("#sort-li-0").show();
-					$('span','#sort-li-0').on('click', function() {
-						$('table','#sort-li-0').toggleClass('edit-itinerary');
+					$(".itinerary-li").hide();
+					$("#itinerary-li-0").show();
+					$('span','#itinerary-li-0').on('click', function() {
+						$('table','#itinerary-li-0').toggleClass('edit-itinerary');
 					});
 				} );
 			
 				$("#add-itinerary").click( function(){
-					$( ".sort-li" ).each( function( index, element ) {
+					$( ".itinerary-li" ).each( function( index, element ) {
 						if ( $( this ).is(":hidden") ) {
 							$( this ).show();
 							$( element ).delegate("span", "click", function(){
