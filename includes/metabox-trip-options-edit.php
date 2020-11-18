@@ -67,7 +67,7 @@ class Metabox_Trip_Options_Edit {
 			</div>
 			
 			<div class="hidden" id="tab7">
-				<?php self::wp_travel_faqs( $post )?>
+				<?php //self::wp_travel_faqs( $post )?>
 			</div>
 			
 			<div class="hidden" id="tab8">
