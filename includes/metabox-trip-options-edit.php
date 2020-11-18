@@ -67,7 +67,7 @@ class Metabox_Trip_Options_Edit {
 			</div>
 			
 			<div class="hidden" id="tab7">
-				<?php //self::wp_travel_faqs( $post )?>
+				<?php self::wp_travel_faqs( $post )?>
 			</div>
 			
 			<div class="hidden" id="tab8">
@@ -218,7 +218,7 @@ class Metabox_Trip_Options_Edit {
 
 			<tr style="display:none" class="init-rows"><td colspan="2">
 
-				<ul id="itineraries"><?php
+				<ul id="itineraries-ul"><?php
 			  
 				for ($x = 0; $x < 100; $x++) {
 					echo '<li class="itinerary-li" id="itinerary-li-' . $x . '"><span><i class="fas fa-bars"></i>';
@@ -275,8 +275,8 @@ class Metabox_Trip_Options_Edit {
 
 		<script>
 			jQuery(document).ready(function($) {
-    			$( "#sortable" ).sortable();
-				$( "#sortable" ).disableSelection();
+    			$( "#itineraries-ul" ).sortable();
+				$( "#itineraries-ul" ).disableSelection();
 				$( ".itinerary-li" ).hide();
 
 				$( ".itinerary-li" ).each( function( index, element ) {
@@ -383,7 +383,7 @@ class Metabox_Trip_Options_Edit {
 
 			<tr style="display:none" class="init-rows"><td colspan="2">
 
-				<ul id="faqs"><?php
+				<ul id="faqs-ul"><?php
 			  
 				for ($x = 0; $x < 100; $x++) {
 					echo '<li class="faq-li" id="faq-li-' . $x . '"><span><i class="fas fa-bars"></i>';
