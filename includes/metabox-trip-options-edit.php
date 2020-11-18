@@ -293,9 +293,9 @@ class Metabox_Trip_Options_Edit {
 					//$( this ).css({"background-color":"yellow","font-size":"200%"});
 
 					$( element ).delegate("button", "click", function(){
-						$( this ).css({"background-color":"yellow","font-size":"200%"});
-						//$( this ).closest('.li').remove();
-						$( this ).closest('.sort-li').hide();
+						//$( this ).css({"background-color":"yellow","font-size":"200%"});
+						$( this ).closest('.sort-li').remove();
+						//$( this ).closest('.sort-li').hide();
 					});	
 					
 				});
