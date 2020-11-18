@@ -293,8 +293,8 @@ class Metabox_Trip_Options_Edit {
 					//$( this ).css({"background-color":"yellow","font-size":"200%"});
 
 					$( element ).delegate("button", "click", function(){
-						//$( this ).css({"background-color":"yellow","font-size":"200%"});
-						$( element ).closest('.li').remove();
+						$( this ).css({"background-color":"yellow","font-size":"200%"});
+						//$( element ).closest('.li').remove();
 						//$(this).closest('.li').hide();
 					});	
 					
