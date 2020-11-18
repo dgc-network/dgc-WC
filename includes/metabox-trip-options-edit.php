@@ -240,11 +240,11 @@ class Metabox_Trip_Options_Edit {
 						</tr>
 						<tr>
 							<th>Itinerary description</th>
-							<td><textarea rows="3" name="itinerary_item_desc-' . $x . '" value="" class="regular-text">' . $itinerary_desc . '</textarea></td>
+							<td><textarea rows="3" name="itinerary_item_desc-' . $x . '" class="regular-text">' . esc_attr( $itineraries[$x]['desc'] ) . '</textarea></td>
 						</tr>
 						<tr>
 							<th>Itinerary date</th>
-							<td><input type="text" id="itinerary_item_date" name="itinerary_item_date-' . $x . '" value="' . esc_attr( $itineraries[$x]['date'] ) . '" class="regular-text"></td>
+							<td><input type="text" class="itinerary_item_date" name="itinerary_item_date-' . $x . '" value="' . esc_attr( $itineraries[$x]['date'] ) . '" class="regular-text"></td>
 						</tr>
 						<tr>
 							<th><label for="itinerary_item_tobots">Itinerary robots</label></th>
@@ -328,19 +328,18 @@ class Metabox_Trip_Options_Edit {
 					});
 				} );
 
-				$( '#itinerary_item_date' ).datepicker();
+				$( '.itinerary_item_date' ).datepicker();
 			} );
 		</script>
 	
 		<style>
   			#sortable { list-style-type: none; margin: 0; padding: 0; width: 100%; }
   			#sortable li { background: #f2f2f2; border: 1px solid #ccc; margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em;}
-			/*#sortable li span { position: absolute; margin-left: -1.3em; }*/
 			#sortable li span { margin-left: -1.3em; cursor: pointer;}
 			#sortable li table { background: #ffffff; border: 1px solid #ccc; width: 100%; display: none; margin-left: -1.2em; padding-left: 1.5em; }
 			#sortable li .edit-itinerary { display: block; }
 			#first-itinerary { color: blue; text-decoration: underline; cursor: pointer;}
-			.fa-bars:before { content: "\f0c9"; }
+			#sortable li span .fa-bars:before { content: "\f0c9"; }
   		</style>
 		<?php
 	}
