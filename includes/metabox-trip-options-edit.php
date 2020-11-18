@@ -229,6 +229,7 @@ class Metabox_Trip_Options_Edit {
 						$itinerary_title = esc_attr( $itineraries[$x]['title'] );
 						echo $itinerary_title . '</span><p style="display:none">' . $x . '</p>';
 					}
+					$itinerary_desc = esc_attr( $itineraries[$x]['desc'] );
 					$xx--;
 					echo '
 					<table class="update-itinerary">
@@ -239,7 +240,7 @@ class Metabox_Trip_Options_Edit {
 						</tr>
 						<tr>
 							<th>Itinerary description</th>
-							<td><textarea rows="3" id="itinerary_item_description" name="itinerary_item_desc-' . $x . '" value="' . esc_attr( $itineraries[$x]['desc'] ) . '" class="regular-text"></textarea></td>
+							<td><textarea rows="3" name="itinerary_item_desc-' . $x . '" value="' . $itinerary_desc . '" class="regular-text"></textarea></td>
 						</tr>
 						<tr>
 							<th>Itinerary date</th>
