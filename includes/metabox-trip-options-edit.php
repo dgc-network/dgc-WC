@@ -352,7 +352,7 @@ class Metabox_Trip_Options_Edit {
 			return;
 		}
 		$faqs         = wp_travel_get_faqs( $post->ID );
-/*
+
 		$default_title = __( 'FAQ Questions', 'wp-travel' );
 		$remove_faq = __( "- Remove FAQ", "wp-travel" );
 		$xx = 0;
@@ -483,7 +483,7 @@ class Metabox_Trip_Options_Edit {
 			.fa-bars:before { content: "\f0c9"; }
   		</style>
 		<?php
-*/		
+		
 	}
 
 	//Please add new FAQ here.Add FAQ
