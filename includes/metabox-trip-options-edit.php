@@ -295,7 +295,7 @@ class Metabox_Trip_Options_Edit {
 					$( element ).delegate("button", "click", function(){
 						$( this ).css({"background-color":"yellow","font-size":"200%"});
 						//$( this ).closest('.li').remove();
-						$( this ).closest('.li').hide();
+						$( this ).closest('.sort-li').hide();
 					});	
 					
 				});
