@@ -359,7 +359,7 @@ class Metabox_Trip_Options_Edit {
 		$xx = 0;
 		?>
 		<table style="width:100%" class="form-table">
-			<tr style="display:none" class="init-rows">
+			<tr style="display:none" class="faq-init-rows">
 				<td><h3><?php esc_html_e( 'FAQ', 'wp-travel' ); ?></h3></td>
 				<td style="text-align:right"><button id="add-faq" type="button"><?php esc_html_e( '+ Add FAQ', 'wp-travel' ); ?></button></td>
 			</tr>
@@ -379,7 +379,7 @@ class Metabox_Trip_Options_Edit {
 			</td></tr><?php
 		}?>
 
-			<tr style="display:none" class="init-rows"><td colspan="2">
+			<tr style="display:none" class="faq-init-rows"><td colspan="2">
 
 				<ul id="faqs-ul"><?php
 			  
@@ -416,7 +416,7 @@ class Metabox_Trip_Options_Edit {
 
 			</td></tr>
 
-			<tr style="display:none" class="init-rows">
+			<tr style="display:none" class="faq-init-rows">
 				<td></td>
 				<td style="text-align:right"><button id="add-faq" type="button"><?php esc_html_e( "+ Add FAQ", "wp-travel" ); ?></button></td>
 			</tr>
@@ -430,7 +430,7 @@ class Metabox_Trip_Options_Edit {
 
 				$( ".faq-li" ).each( function( index, element ) {
 					if ( !$( 'p', element ).is(":empty") ) {
-						$( ".init-rows" ).show();
+						$( ".faq-init-rows" ).show();
 						$( element ).show();
 						$( element ).delegate("span", "click", function(){
 							$( 'table', element ).toggleClass('edit-faq');
@@ -455,7 +455,7 @@ class Metabox_Trip_Options_Edit {
 
 				$("#first-faq").click( function(){
 					$(".no-faqs").hide();
-					$(".init-rows").show();
+					$(".faq-init-rows").show();
 					$(".faq-li").hide();
 					$("#faq-li-0").show();
 					$('span','#faq-li-0').on('click', function() {
