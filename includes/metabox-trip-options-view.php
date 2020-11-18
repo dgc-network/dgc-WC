@@ -58,12 +58,13 @@ class Metabox_Trip_Options_View {
 		echo '<p>Here\'s your new product tab.</p>';
 	}	
 
-	function itineraries_tab_content( $post ) {
+	//function itineraries_tab_content( $post ) {
+	function itineraries_tab_content() {
 		//if ( ! $post ) {
 		//	return;
 		//}
-		$trip_code = wp_travel_get_trip_code( $post->ID );
-		$itineraries = get_post_meta( $post->ID, 'wp_travel_trip_itinerary_data', true );
+		//$trip_code = wp_travel_get_trip_code( $post->ID );
+		//$itineraries = get_post_meta( $post->ID, 'wp_travel_trip_itinerary_data', true );
 		// The new tab content
 		echo '<h2>New Product Tab</h2>';
 		echo '<p>Here\'s your new product tab.</p>';
