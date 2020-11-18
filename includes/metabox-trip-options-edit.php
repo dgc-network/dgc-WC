@@ -67,7 +67,7 @@ class Metabox_Trip_Options_Edit {
 			</div>
 			
 			<div class="hidden" id="tab7">
-				<?php self::trip_options_metabox_callback( $post )?>
+				<?php self::wp_travel_faqs( $post )?>
 			</div>
 			
 			<div class="hidden" id="tab8">
@@ -218,7 +218,7 @@ class Metabox_Trip_Options_Edit {
 
 			<tr style="display:none" class="init-rows"><td colspan="2">
 
-				<ul id="sortable"><?php
+				<ul id="itineraries"><?php
 			  
 				for ($x = 0; $x < 100; $x++) {
 					echo '<li class="itinerary-li" id="itinerary-li-' . $x . '"><span><i class="fas fa-bars"></i>';
@@ -332,17 +332,170 @@ class Metabox_Trip_Options_Edit {
 		</script>
 	
 		<style>
-  			#sortable { list-style-type: none; margin: 0; padding: 0; width: 100%; }
-  			#sortable li { background: #f2f2f2; border: 1px solid #ccc; margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em;}
-			#sortable li span { margin-left: -1.3em; cursor: pointer;}
-			#sortable li table { background: #ffffff; border: 1px solid #ccc; width: 100%; display: none; margin-left: -1.2em; padding-left: 1.5em; }
-			#sortable li .edit-itinerary { display: block; }
+  			#itineraries-ul { list-style-type: none; margin: 0; padding: 0; width: 100%; }
+  			#itineraries-ul li { background: #f2f2f2; border: 1px solid #ccc; margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em;}
+			#itineraries-ul li span { margin-left: -1.3em; cursor: pointer;}
+			#itineraries-ul li table { background: #ffffff; border: 1px solid #ccc; width: 100%; display: none; margin-left: -1.2em; padding-left: 1.5em; }
+			#itineraries-ul li .edit-itinerary { display: block; }
 			#first-itinerary { color: blue; text-decoration: underline; cursor: pointer;}
 			/*i.fas*/
 			.fa-bars:before { content: "\f0c9"; }
   		</style>
 		<?php
 	}
+
+	/**
+	 * FAQs metabox.
+	 *
+	 * @param  Object $post Post object.
+	 */
+	function wp_travel_faqs( $post ) {
+		if ( ! $post ) {
+			return;
+		}
+		$faqs         = wp_travel_get_faqs( $post->ID );
+		//$trip_code = wp_travel_get_trip_code( $post->ID );
+		//$itineraries = get_post_meta( $post->ID, 'wp_travel_trip_itinerary_data', true );
+		$default_title = __( 'FAQ Questions', 'wp-travel' );
+		$remove_faq = __( "- Remove FAQ", "wp-travel" );
+		$xx = 0;
+		?>
+		<table style="width:100%" class="form-table">
+			<tr style="display:none" class="init-rows">
+				<td><h3><?php esc_html_e( 'FAQ', 'wp-travel' ); ?></h3></td>
+				<td style="text-align:right"><button id="add-itinerary" type="button"><?php esc_html_e( '+ Add FAQ', 'wp-travel' ); ?></button></td>
+			</tr>
+
+		<?php
+		if ( is_array( $faqs ) && count( $faqs ) > 0 ) {
+			foreach ( $faqs as $x=>$faq ) {
+				if (($faqs[$x]['title'] != $default_title) && ($faqs[$x]['title'] != "")) {
+					$xx++;
+				}
+			}
+		} else {?>
+			<tr class="no-faqs"><td colspan="2">
+				<span><h3><?php esc_html_e( 'FAQ', 'wp-travel' ); ?></h3></span><br>
+				<span><?php esc_html_e( 'Please add new FAQ here.', 'wp-travel' ); ?></span>
+				<span id="first-faq"><?php esc_html_e( 'Add FAQ', 'wp-travel' ); ?></span>
+			</td></tr><?php
+		}?>
+
+			<tr style="display:none" class="init-rows"><td colspan="2">
+
+				<ul id="faqs"><?php
+			  
+				for ($x = 0; $x < 100; $x++) {
+					echo '<li class="faq-li" id="faq-li-' . $x . '"><span><i class="fas fa-bars"></i>';
+					if ($xx<=0) {
+						$faq_title = $default_title;
+						echo $faq_title . '</span><p style="display:none"></p>';
+					} else {
+						$faq_title = esc_attr( $faqs[$x]['title'] );
+						echo $faq_title . '</span><p style="display:none">' . $x . '</p>';
+					}
+					$xx--;
+					echo '
+					<table class="update-faq" style="width:100%">
+				  	  <tbody>
+						<tr>
+							<th>Enter your question</th>
+							<td><input type="text" class="item-title-input" name="faq_item_title-' . $x . '" value="' . $faq_title . '" class="regular-text"></td>
+						</tr>
+						<tr>
+							<th>Your answer</th>
+							<td><textarea rows="3" name="faq_item_desc-' . $x . '" class="regular-text">' . esc_attr( $faqs[$x]['desc'] ) . '</textarea></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td class="remove-faq" style="text-align:right"><button id="remove-faq-' . $x . '" style="color:red" type="button">' . $remove_itinerary . '</button></td>
+						</tr>
+				  	  </tbody>
+					</table>
+			  		</li>';
+				}?>			
+				</ul>
+
+			</td></tr>
+
+			<tr style="display:none" class="init-rows">
+				<td></td>
+				<td style="text-align:right"><button id="add-faq" type="button"><?php esc_html_e( "+ Add FAQ", "wp-travel" ); ?></button></td>
+			</tr>
+		</table>
+
+		<script>
+			jQuery(document).ready(function($) {
+    			//$( "#sortable" ).sortable();
+				//$( "#sortable" ).disableSelection();
+				$( ".faq-li" ).hide();
+
+				$( ".faq-li" ).each( function( index, element ) {
+					if ( !$( 'p', element ).is(":empty") ) {
+						$( ".init-rows" ).show();
+						$( element ).show();
+						$( element ).delegate("span", "click", function(){
+							$( 'table', element ).toggleClass('edit-faq');
+						});
+					};
+
+					$( element ).delegate(".item-title-input", "keyup", function(){
+						$( 'span', element ).text($(this).val());
+					});
+/*
+					$( element ).delegate(".remove-itinerary", "click", function(){
+						$( this ).closest('.itinerary-li').remove();
+					});
+*/					
+				});
+
+				$( ".remove-faq" ).each( function( index, element ) {
+					$( element ).delegate("button", "click", function(){
+						$( this ).closest('.faq-li').remove();
+					});						
+				});
+
+				$("#first-faq").click( function(){
+					$(".no-faqs").hide();
+					$(".init-rows").show();
+					$(".faq-li").hide();
+					$("#faq-li-0").show();
+					$('span','#faq-li-0').on('click', function() {
+						$('table','#faq-li-0').toggleClass('edit-faq');
+					});
+				} );
+			
+				$("#add-faq").click( function(){
+					$( ".faq-li" ).each( function( index, element ) {
+						if ( $( this ).is(":hidden") ) {
+							$( this ).show();
+							$( element ).delegate("span", "click", function(){
+								$( 'table', element ).toggleClass('edit-faq');
+							});
+							return false;
+						};
+					});
+				} );
+
+				$( '.faq_item_date' ).datepicker();
+			} );
+		</script>
+	
+		<style>
+  			#faqs-ul { list-style-type: none; margin: 0; padding: 0; width: 100%; }
+  			#faqs-ul li { background: #f2f2f2; border: 1px solid #ccc; margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em;}
+			#faqs-ul li span { margin-left: -1.3em; cursor: pointer;}
+			#faqs-ul li table { background: #ffffff; border: 1px solid #ccc; width: 100%; display: none; margin-left: -1.2em; padding-left: 1.5em; }
+			#faqs-ul li .edit-faq { display: block; }
+			#first-faq { color: blue; text-decoration: underline; cursor: pointer;}
+			/*i.fas*/
+			.fa-bars:before { content: "\f0c9"; }
+  		</style>
+		<?php
+	}
+
+	//Please add new FAQ here.Add FAQ
+
 }
 
 Metabox_Trip_Options_Edit::init();
