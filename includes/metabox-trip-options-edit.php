@@ -339,8 +339,8 @@ class Metabox_Trip_Options_Edit {
 			#sortable li table { background: #ffffff; border: 1px solid #ccc; width: 100%; display: none; margin-left: -1.2em; padding-left: 1.5em; }
 			#sortable li .edit-itinerary { display: block; }
 			#first-itinerary { color: blue; text-decoration: underline; cursor: pointer;}
-			/*i.fas
-			.fa-bars:before { content: "\f0c9"; }*/
+			/*i.fas*/
+			.fa-bars:before { content: "\f0c9"; }
   		</style>
 		<?php
 	}
