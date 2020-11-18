@@ -176,8 +176,6 @@ class Metabox_Trip_Options_Edit {
 
 	/**
 	 * Trip Info metabox.
-	 *
-	 * @param  Object $post Post object.
 	 */
 	function wp_travel_trip_info( $post ) {
 		if ( ! $post ) {
@@ -275,7 +273,7 @@ class Metabox_Trip_Options_Edit {
 
 		<script>
 			jQuery(document).ready(function($) {
-    			$( "#itineraries-ul" ).sortable();
+    			//$( "#itineraries-ul" ).sortable();
 				$( "#itineraries-ul" ).disableSelection();
 				$( ".itinerary-li" ).hide();
 
@@ -363,7 +361,7 @@ class Metabox_Trip_Options_Edit {
 		<table style="width:100%" class="form-table">
 			<tr style="display:none" class="init-rows">
 				<td><h3><?php esc_html_e( 'FAQ', 'wp-travel' ); ?></h3></td>
-				<td style="text-align:right"><button id="add-itinerary" type="button"><?php esc_html_e( '+ Add FAQ', 'wp-travel' ); ?></button></td>
+				<td style="text-align:right"><button id="add-faq" type="button"><?php esc_html_e( '+ Add FAQ', 'wp-travel' ); ?></button></td>
 			</tr>
 
 		<?php
@@ -408,7 +406,7 @@ class Metabox_Trip_Options_Edit {
 						</tr>
 						<tr>
 							<td></td>
-							<td class="remove-faq" style="text-align:right"><button id="remove-faq-' . $x . '" style="color:red" type="button">' . $remove_itinerary . '</button></td>
+							<td class="remove-faq" style="text-align:right"><button id="remove-faq-' . $x . '" style="color:red" type="button">' . $remove_faq . '</button></td>
 						</tr>
 				  	  </tbody>
 					</table>
