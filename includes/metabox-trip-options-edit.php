@@ -370,7 +370,9 @@ class Metabox_Trip_Options_Edit {
 				echo '<li class="tab-li" id="tab-li-' . $x . '"><span><i class="fas fa-bars"></i>';
 				$tab_custom = esc_attr( $tabs[$x]['custom'] );
 				//echo $tab_custom . '</span>';
-				echo $tab . '</span>';
+				foreach ( $tab as $key=>$value ) {
+					echo $value . '</span>';
+				}
 				echo '
 				<table class="update-tab" style="width:100%">
 					<tbody>
