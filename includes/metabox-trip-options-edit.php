@@ -164,6 +164,8 @@ class Metabox_Trip_Options_Edit {
 			$faqs['question'][$x] = $_POST['faq_item_question-' . $x];
 			$faqs['answer'][$x] = $_POST['faq_item_answer-' . $x];
 		}
+		$question = isset( $faqs['question'] ) ? $faqs['question'] : array();
+		$answer   = isset( $faqs['answer'] ) ? $faqs['answer'] : array();
 		update_post_meta( $post_id, 'wp_travel_faq_question', $question );
 		update_post_meta( $post_id, 'wp_travel_faq_answer', $answer );
 
