@@ -49,9 +49,9 @@ class Metabox_Trip_Options_View {
 			'priority' 	=> 50,
 			'callback' 	=> array( __CLASS__, 'woo_new_product_tab_content' )
 		);
-		//return $tabs;
+		return $tabs;
 
-		return wp_travel_get_default_trip_tabs();
+		//return wp_travel_get_default_trip_tabs();
 	}
 	
 	function woo_new_product_tab_content() {

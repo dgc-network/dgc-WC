@@ -354,7 +354,7 @@ class Metabox_Trip_Options_Edit {
 	}
 
 	/**
-	 * Trip Info metabox.
+	 * Tabs metabox.
 	 */
 	function wp_travel_tabs( $post ) {
 		if ( ! $post ) {
@@ -362,47 +362,38 @@ class Metabox_Trip_Options_Edit {
 		}
 		$tabs = wp_travel_get_admin_trip_tabs($post->ID);
 		?>
-		<table style="width:100%" class="form-table tabs">
-		<tr style="display:none" class="init-rows"><td colspan="2">
-		<ul id="tabs-ul">
+		<ul id="tabs-ul" style="width:100%" >
 		<?php
 		if ( is_array( $tabs ) && count( $tabs ) > 0 ) {
 			foreach ( $tabs as $x=>$tab ) {?>
 			<?php
 				echo '<li class="tab-li" id="tab-li-' . $x . '"><span><i class="fas fa-bars"></i>';
-				$tab_label = esc_attr( $tabs[$x]['label'] );
-				echo $tab_label . '</span><p style="display:none">' . $x . '</p>';
+				$tab_custom = esc_attr( $tabs[$x]['custom'] );
+				echo $tab_custom . '</span><p style="display:none">' . $x . '</p>';
 				echo '
 				<table class="update-tab" style="width:100%">
 					<tbody>
 					<tr>
-						<th>Tab label</th>
-						<td><input type="text" class="item-title-input" name="tab_item_label-' . $x . '" value="' . $tab_label . '" class="regular-text"></td>
+						<th>Global Trip Title</th>
+						<td><input type="text" class="tab_item_global" name="tab_item_global-' . $x . '" value="' . esc_attr( $tabs[$x]['global'] ) . '" class="regular-text"></td>
 					</tr>
 					<tr>
-						<th>Tab description</th>
-						<td><textarea rows="3" name="tab_item_desc-' . $x . '" class="regular-text">' . esc_attr( $tabs[$x]['custom'] ) . '</textarea></td>
+						<th>Custom Trip Title</th>
+						<td><input type="text" class="item-title-input" name="tab_item_custom-' . $x . '" value="' . $tab_custom . '" class="regular-text"></td>
 					</tr>
 					<tr>
-						<th>Tab date</th>
-						<td><input type="text" class="tab_item_date" name="tab_item_date-' . $x . '" value="' . esc_attr( $tabs[$x]['global'] ) . '" class="regular-text"></td>
-					</tr>
-					<tr>
-						<th><label for="tab_item_tobots">Tab robots</label></th>
-						<td>
-							<select id="tab_item_robots" name="tab_item_label-' . $x . '">
-								<option value="">Home Stay ...</option>
-								<option value="index,follow"' . selected( 'index,follow', $tabs[$x]['label'], false ) . '>Show for search engines</option>
-								<option value="noindex,nofollow"' . selected( 'noindex,nofollow', $tabs[$x]['label'], false ) . '>Hide for search engines</option>
-							</select>
-						</td>
+						<th>Display</th>
+						<td><input type="checkbox" checked name="tab_item_show_in_menu-' . $x . '" value="' . esc_attr( $tabs[$x]['show_in_menu'] ) . '" class="regular-text"></td>
 					</tr>
 					</tbody>
 				</table>
 				</li>';
 			}
 		}?>			
-		</ul></td></tr></table>
+		</ul>
+		<table style="width:100%" class="form-table tabs">
+		<tr style="display:none" class="init-rows"><td colspan="2">
+		</td></tr></table>
 
 		<script>
 			jQuery(document).ready(function($) {

@@ -79,6 +79,12 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
     //require_once $this->path('BASE_DIR','includes/no_woocommerce.php');
 }
 
+function wpx_add_fontawesome() {
+    wp_enqueue_style( 'font-awesome-5', 'https://use.fontawesome.com/releases/v5.0.0/css/all.css', false );
+}
+add_action( 'wp_enqueue_scripts', 'wpx_add_fontawesome' );
+    
+
 $itineraries = get_posts(
     array(
         //'post_type'   => 'itineraries',
