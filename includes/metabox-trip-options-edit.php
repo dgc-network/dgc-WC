@@ -361,96 +361,48 @@ class Metabox_Trip_Options_Edit {
 			return;
 		}
 		$tabs = wp_travel_get_admin_trip_tabs($post->ID);
-/*		
-		$trip_code = wp_travel_get_trip_code( $post->ID );
-		$itineraries = get_post_meta( $post->ID, 'wp_travel_trip_itinerary_data', true );
-		$default_title = __( 'Day X, My plan', 'wp-travel' );
-		$remove_itinerary = __( "- Remove Itinerary", "wp-travel" );
-		$xx = 0;
 		?>
-		<table style="width:100%" class="form-table trip-info">
-			<tr>
-				<td>
-					<?php esc_html_e( 'Trip Code : ', 'wp-travel' ); ?>
-					<input type="text" id="wp-travel-trip-code" disabled="disabled" value="<?php echo esc_attr( $trip_code ); ?>" />
-				</td>
-			</tr>
-			<tr style="display:none" class="init-rows">
-				<td><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></td>
-				<td style="text-align:right"><button id="add-itinerary" type="button"><?php esc_html_e( '+ Add Itinerary', 'wp-travel' ); ?></button></td>
-			</tr>
-
+		<table style="width:100%" class="form-table tabs">
+		<tr style="display:none" class="init-rows"><td colspan="2">
+		<ul id="tabs-ul">
 		<?php
-		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) {
-			foreach ( $itineraries as $x=>$itinerary ) {
-				if (($itineraries[$x]['title'] != $default_title) && ($itineraries[$x]['title'] != "")) {
-					$xx++;
-				}
+		if ( is_array( $tabs ) && count( $tabs ) > 0 ) {
+			foreach ( $tabs as $x=>$tab ) {?>
+			<?php
+				echo '<li class="tab-li" id="tab-li-' . $x . '"><span><i class="fas fa-bars"></i>';
+				$tab_title = esc_attr( $tabs[$x]['title'] );
+				echo $tab_title . '</span><p style="display:none">' . $x . '</p>';
+				echo '
+				<table class="update-tab" style="width:100%">
+					<tbody>
+					<tr>
+						<th>Tab title</th>
+						<td><input type="text" class="item-title-input" name="tab_item_title-' . $x . '" value="' . $tab_title . '" class="regular-text"></td>
+					</tr>
+					<tr>
+						<th>Tab description</th>
+						<td><textarea rows="3" name="tab_item_desc-' . $x . '" class="regular-text">' . esc_attr( $tabs[$x]['desc'] ) . '</textarea></td>
+					</tr>
+					<tr>
+						<th>Tab date</th>
+						<td><input type="text" class="tab_item_date" name="tab_item_date-' . $x . '" value="' . esc_attr( $tabs[$x]['date'] ) . '" class="regular-text"></td>
+					</tr>
+					<tr>
+						<th><label for="tab_item_tobots">Tab robots</label></th>
+						<td>
+							<select id="tab_item_robots" name="tab_item_label-' . $x . '">
+								<option value="">Home Stay ...</option>
+								<option value="index,follow"' . selected( 'index,follow', $tabs[$x]['label'], false ) . '>Show for search engines</option>
+								<option value="noindex,nofollow"' . selected( 'noindex,nofollow', $tabs[$x]['label'], false ) . '>Hide for search engines</option>
+							</select>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+				</li>';
 			}
-		} else {?>
-			<tr class="no-itineraries"><td colspan="2">
-				<span><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></span><br>
-				<span><?php esc_html_e( 'No Itineraries found.', 'wp-travel' ); ?></span>
-				<span id="first-itinerary"><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></span>
-			</td></tr><?php
-		}?>
-
-			<tr style="display:none" class="init-rows"><td colspan="2">
-
-				<ul id="itineraries-ul"><?php
-			  
-				for ($x = 0; $x < 100; $x++) {
-					echo '<li class="itinerary-li" id="itinerary-li-' . $x . '"><span><i class="fas fa-bars"></i>';
-					if ($xx<=0) {
-						$itinerary_title = __( 'Day X, My plan', 'wp-travel' );
-						echo $itinerary_title . '</span><p style="display:none"></p>';
-					} else {
-						$itinerary_title = esc_attr( $itineraries[$x]['title'] );
-						echo $itinerary_title . '</span><p style="display:none">' . $x . '</p>';
-					}
-					$xx--;
-					echo '
-					<table class="update-itinerary" style="width:100%">
-				  	  <tbody>
-						<tr>
-							<th>Itinerary title</th>
-							<td><input type="text" class="item-title-input" name="itinerary_item_title-' . $x . '" value="' . $itinerary_title . '" class="regular-text"></td>
-						</tr>
-						<tr>
-							<th>Itinerary description</th>
-							<td><textarea rows="3" name="itinerary_item_desc-' . $x . '" class="regular-text">' . esc_attr( $itineraries[$x]['desc'] ) . '</textarea></td>
-						</tr>
-						<tr>
-							<th>Itinerary date</th>
-							<td><input type="text" class="itinerary_item_date" name="itinerary_item_date-' . $x . '" value="' . esc_attr( $itineraries[$x]['date'] ) . '" class="regular-text"></td>
-						</tr>
-						<tr>
-							<th><label for="itinerary_item_tobots">Itinerary robots</label></th>
-							<td>
-								<select id="itinerary_item_robots" name="itinerary_item_label-' . $x . '">
-									<option value="">Home Stay ...</option>
-									<option value="index,follow"' . selected( 'index,follow', $itineraries[$x]['label'], false ) . '>Show for search engines</option>
-									<option value="noindex,nofollow"' . selected( 'noindex,nofollow', $itineraries[$x]['label'], false ) . '>Hide for search engines</option>
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<td></td>
-							<td class="remove-itinerary" style="text-align:right"><button id="remove-itinerary-' . $x . '" style="color:red" type="button">' . $remove_itinerary . '</button></td>
-						</tr>
-				  	  </tbody>
-					</table>
-			  		</li>';
-				}?>			
-				</ul>
-
-			</td></tr>
-
-			<tr style="display:none" class="init-rows">
-				<td></td>
-				<td style="text-align:right"><button id="add-itinerary" type="button"><?php esc_html_e( "+ Add Itinerary", "wp-travel" ); ?></button></td>
-			</tr>
-		</table>
+		}?>			
+		</ul></td></tr></table>
 
 		<script>
 			jQuery(document).ready(function($) {
@@ -515,7 +467,6 @@ class Metabox_Trip_Options_Edit {
 			.fa-bars:before { content: "\f0c9"; }
   		</style>
 		<?php
-*/		
 	}
 
 	/**
