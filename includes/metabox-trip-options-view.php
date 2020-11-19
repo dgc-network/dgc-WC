@@ -51,7 +51,7 @@ class Metabox_Trip_Options_View {
 		);
 		//return $tabs;
 
-		return wp_travel_get_frontend_tabs();
+		return wp_travel_get_default_trip_tabs();
 	}
 	
 	function woo_new_product_tab_content() {

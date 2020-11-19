@@ -370,22 +370,22 @@ class Metabox_Trip_Options_Edit {
 			foreach ( $tabs as $x=>$tab ) {?>
 			<?php
 				echo '<li class="tab-li" id="tab-li-' . $x . '"><span><i class="fas fa-bars"></i>';
-				$tab_title = esc_attr( $tabs[$x]['title'] );
-				echo $tab_title . '</span><p style="display:none">' . $x . '</p>';
+				$tab_label = esc_attr( $tabs[$x]['label'] );
+				echo $tab_label . '</span><p style="display:none">' . $x . '</p>';
 				echo '
 				<table class="update-tab" style="width:100%">
 					<tbody>
 					<tr>
-						<th>Tab title</th>
-						<td><input type="text" class="item-title-input" name="tab_item_title-' . $x . '" value="' . $tab_title . '" class="regular-text"></td>
+						<th>Tab label</th>
+						<td><input type="text" class="item-title-input" name="tab_item_label-' . $x . '" value="' . $tab_label . '" class="regular-text"></td>
 					</tr>
 					<tr>
 						<th>Tab description</th>
-						<td><textarea rows="3" name="tab_item_desc-' . $x . '" class="regular-text">' . esc_attr( $tabs[$x]['desc'] ) . '</textarea></td>
+						<td><textarea rows="3" name="tab_item_desc-' . $x . '" class="regular-text">' . esc_attr( $tabs[$x]['custom'] ) . '</textarea></td>
 					</tr>
 					<tr>
 						<th>Tab date</th>
-						<td><input type="text" class="tab_item_date" name="tab_item_date-' . $x . '" value="' . esc_attr( $tabs[$x]['date'] ) . '" class="regular-text"></td>
+						<td><input type="text" class="tab_item_date" name="tab_item_date-' . $x . '" value="' . esc_attr( $tabs[$x]['global'] ) . '" class="regular-text"></td>
 					</tr>
 					<tr>
 						<th><label for="tab_item_tobots">Tab robots</label></th>
@@ -406,11 +406,11 @@ class Metabox_Trip_Options_Edit {
 
 		<script>
 			jQuery(document).ready(function($) {
-    			//$( "#itineraries-ul" ).sortable();
-				$( "#itineraries-ul" ).disableSelection();
-				$( ".itinerary-li" ).hide();
+    			$( "#tabs-ul" ).sortable();
+				$( "#tabs-ul" ).disableSelection();
+				$( ".tab-li" ).hide();
 
-				$( ".itinerary-li" ).each( function( index, element ) {
+				$( ".tab-li" ).each( function( index, element ) {
 					if ( !$( 'p', element ).is(":empty") ) {
 						$( ".init-rows" ).show();
 						$( element ).show();
@@ -424,25 +424,25 @@ class Metabox_Trip_Options_Edit {
 					});
 				});
 
-				$( ".remove-itinerary" ).each( function( index, element ) {
+				$( ".remove-tab" ).each( function( index, element ) {
 					$( element ).delegate("button", "click", function(){
-						$( this ).closest('.itinerary-li').remove();
+						$( this ).closest('.tab-li').remove();
 					});	
 					
 				});
 
-				$("#first-itinerary").click( function(){
-					$(".no-itineraries").hide();
+				$("#first-tab").click( function(){
+					$(".no-tabs").hide();
 					$(".init-rows").show();
-					$(".itinerary-li").hide();
-					$("#itinerary-li-0").show();
-					$('span','#itinerary-li-0').on('click', function() {
-						$('table','#itinerary-li-0').toggleClass('toggle-access');
+					$(".tab-li").hide();
+					$("#tab-li-0").show();
+					$('span','#tab-li-0').on('click', function() {
+						$('table','#tab-li-0').toggleClass('toggle-access');
 					});
 				} );
 			
-				$("#add-itinerary").click( function(){
-					$( ".itinerary-li" ).each( function( index, element ) {
+				$("#add-tab").click( function(){
+					$( ".tab-li" ).each( function( index, element ) {
 						if ( $( this ).is(":hidden") ) {
 							$( this ).show();
 							$( element ).delegate("span", "click", function(){
@@ -453,17 +453,17 @@ class Metabox_Trip_Options_Edit {
 					});
 				} );
 
-				$( '.itinerary_item_date' ).datepicker();
+				$( '.tab_item_date' ).datepicker();
 			} );
 		</script>
 	
 		<style>
-  			#itineraries-ul { list-style-type: none; margin: 0; padding: 0; width: 100%; }
-  			#itineraries-ul li { background: #f2f2f2; border: 1px solid #ccc; margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em;}
-			#itineraries-ul li span { margin-left: -1.3em; cursor: pointer;}
-			#itineraries-ul li table { background: #ffffff; border: 1px solid #ccc; width: 100%; display: none; margin-left: -1.2em; padding-left: 1.5em; }
-			#itineraries-ul li .toggle-access { display: block; }
-			#first-itinerary { color: blue; text-decoration: underline; cursor: pointer;}
+  			#tabs-ul { list-style-type: none; margin: 0; padding: 0; width: 100%; }
+  			#tabs-ul li { background: #f2f2f2; border: 1px solid #ccc; margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em;}
+			#tabs-ul li span { margin-left: -1.3em; cursor: pointer;}
+			#tabs-ul li table { background: #ffffff; border: 1px solid #ccc; width: 100%; display: none; margin-left: -1.2em; padding-left: 1.5em; }
+			#tabs-ul li .toggle-access { display: block; }
+			#first-tab { color: blue; text-decoration: underline; cursor: pointer;}
 			.fa-bars:before { content: "\f0c9"; }
   		</style>
 		<?php
