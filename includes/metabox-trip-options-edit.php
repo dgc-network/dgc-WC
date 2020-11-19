@@ -360,7 +360,8 @@ class Metabox_Trip_Options_Edit {
 		if ( ! $post ) {
 			return;
 		}
-		$tabs = wp_travel_get_admin_trip_tabs($post->ID);
+		//$tabs = wp_travel_get_admin_trip_tabs($post->ID);
+		$tabs = wp_travel_get_default_trip_tabs($post->ID);
 		?>
 		<ul id="tabs-ul" style="width:100%" >
 		<?php
