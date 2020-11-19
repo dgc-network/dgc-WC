@@ -158,6 +158,15 @@ class Metabox_Trip_Options_Edit {
 			$itineraries[$x]['desc'] = $_POST['itinerary_item_desc-' . $x];
 		}
 		update_post_meta( $post_id, 'wp_travel_trip_itinerary_data', $itineraries );
+
+		$faqs = array();
+		for ($x = 0; $x < 100; $x++) {
+			$faqs['question'][$x] = $_POST['faq_item_question-' . $x];
+			$faqs['answer'][$x] = $_POST['faq_item_answer-' . $x];
+		}
+		update_post_meta( $post_id, 'wp_travel_faq_question', $question );
+		update_post_meta( $post_id, 'wp_travel_faq_answer', $answer );
+
 /*
 		if( isset( $_POST[ 'wp_travel_trip_itinerary_data' ] ) ) {
 			update_post_meta( $post_id, 'wp_travel_trip_itinerary_data', sanitize_text_field( $_POST[ 'wp_travel_trip_itinerary_data' ] ) );
@@ -351,9 +360,9 @@ class Metabox_Trip_Options_Edit {
 		if ( ! $post ) {
 			return;
 		}
-		$faqs         = wp_travel_get_faqs( $post->ID );
+		$faqs = wp_travel_get_faqs( $post->ID );
 
-		$default_title = __( 'FAQ Questions', 'wp-travel' );
+		$default_question = __( 'FAQ Questions', 'wp-travel' );
 		$remove_faq = __( "- Remove FAQ", "wp-travel" );
 		$xx = 0;
 		?>
@@ -366,7 +375,7 @@ class Metabox_Trip_Options_Edit {
 		<?php
 		if ( is_array( $faqs ) && count( $faqs ) > 0 ) {
 			foreach ( $faqs as $x=>$faq ) {
-				if (($faqs[$x]['title'] != $default_title) && ($faqs[$x]['title'] != "")) {
+				if (($faqs['question'][$x] != $default_question) && ($faqs['question'][$x] != "")) {
 					$xx++;
 				}
 			}
@@ -385,11 +394,11 @@ class Metabox_Trip_Options_Edit {
 				for ($x = 0; $x < 100; $x++) {
 					echo '<li class="faq-li" id="faq-li-' . $x . '"><span><i class="fas fa-bars"></i>';
 					if ($xx<=0) {
-						$faq_title = $default_title;
-						echo $faq_title . '</span><p style="display:none"></p>';
+						$faq_question = $default_question;
+						echo $faq_question . '</span><p style="display:none"></p>';
 					} else {
-						$faq_title = esc_attr( $faqs[$x]['title'] );
-						echo $faq_title . '</span><p style="display:none">' . $x . '</p>';
+						$faq_question = esc_attr( $faqs['question'][$x] );
+						echo $faq_question . '</span><p style="display:none">' . $x . '</p>';
 					}
 					$xx--;
 					echo '
@@ -397,11 +406,11 @@ class Metabox_Trip_Options_Edit {
 				  	  <tbody>
 						<tr>
 							<th>Enter your question</th>
-							<td><input type="text" class="item-title-input" name="faq_item_title-' . $x . '" value="' . $faq_title . '" class="regular-text"></td>
+							<td><input type="text" class="item-title-input" name="faq_item_question-' . $x . '" value="' . $faq_question . '" class="regular-text"></td>
 						</tr>
 						<tr>
 							<th>Your answer</th>
-							<td><textarea rows="3" name="faq_item_desc-' . $x . '" class="regular-text">' . esc_attr( $faqs[$x]['desc'] ) . '</textarea></td>
+							<td><textarea rows="3" name="faq_item_answer-' . $x . '" class="regular-text">' . esc_attr( $faqs['answer'][$x] ) . '</textarea></td>
 						</tr>
 						<tr>
 							<td></td>
