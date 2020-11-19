@@ -369,7 +369,8 @@ class Metabox_Trip_Options_Edit {
 			<?php
 				echo '<li class="tab-li" id="tab-li-' . $x . '"><span><i class="fas fa-bars"></i>';
 				$tab_custom = esc_attr( $tabs[$x]['custom'] );
-				echo $tab_custom . '</span><p style="display:none">' . $x . '</p>';
+				//echo $tab_custom . '</span>';
+				echo $tab . '</span>';
 				echo '
 				<table class="update-tab" style="width:100%">
 					<tbody>
@@ -455,7 +456,7 @@ class Metabox_Trip_Options_Edit {
 			#tabs-ul li table { background: #ffffff; border: 1px solid #ccc; width: 100%; display: none; margin-left: -1.2em; padding-left: 1.5em; }
 			#tabs-ul li .toggle-access { display: block; }
 			#first-tab { color: blue; text-decoration: underline; cursor: pointer;}
-			.fa-bars:before { content: "\f0c9"; }
+			/*.fa-bars:before { content: "\f0c9"; }*/
   		</style>
 		<?php
 	}
