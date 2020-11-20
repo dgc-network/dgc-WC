@@ -475,8 +475,10 @@ class Metabox_Trip_Options_Edit {
 			return;
 		}
 		$faqs = wp_travel_get_faqs( $post->ID );
-		foreach ( $faqs as $key=>$value ) {
-			echo $value;
+		foreach ( $faqs as $key=>$faq ) {
+			foreach ( $faq as $key=>$value ) {
+				echo $value;
+			}
 		}
 
 		$default_question = __( 'FAQ Questions', 'wp-travel' );
