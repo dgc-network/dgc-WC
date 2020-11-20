@@ -477,7 +477,7 @@ class Metabox_Trip_Options_Edit {
 		$faqs = wp_travel_get_faqs( $post->ID );
 		foreach ( $faqs as $key=>$faq ) {
 			foreach ( $faq as $key=>$value ) {
-				echo $value;
+				echo '{'.$key.':'.$value.'},';
 			}
 		}
 
