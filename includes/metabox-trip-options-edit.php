@@ -362,9 +362,11 @@ class Metabox_Trip_Options_Edit {
 		}
 		$tabs = wp_travel_get_default_trip_tabs();
 		foreach ( $tabs as $key=>$tab ) {
+			echo '{'.$key.':';
 			foreach ( $tab as $key=>$value ) {
 				echo '{'.$key.':'.$value.'},';
 			}
+			echo '},';
 		}
 
 		?>
