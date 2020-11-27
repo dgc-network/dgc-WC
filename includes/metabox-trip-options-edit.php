@@ -360,9 +360,13 @@ class Metabox_Trip_Options_Edit {
 		if ( ! $post ) {
 			return;
 		}
-		//$tabs = wp_travel_get_admin_trip_tabs($post->ID);
-		$tabs = wp_travel_get_default_trip_tabs(true);
-		//$tabs = wp_travel_get_global_tabs($post->ID);
+		$tabs = wp_travel_get_default_trip_tabs();
+		foreach ( $tabs as $key=>$tab ) {
+			foreach ( $tab as $key=>$value ) {
+				echo '{'.$key.':'.$value.'},';
+			}
+		}
+
 		?>
 		<ul id="tabs-ul" style="width:100%" >
 		<?php
