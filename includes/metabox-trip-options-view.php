@@ -66,7 +66,7 @@ class Metabox_Trip_Options_View {
 		}
 		$trip_code = wp_travel_get_trip_code( $post->ID );
 		$itineraries = get_post_meta( $post->ID, 'wp_travel_trip_itinerary_data', true );
-		$default_title = __( 'Day X, My plan', 'wp-travel' );
+		$default_itinerary = __( 'Day X, My plan', 'wp-travel' );
 		$xx = 0;
 		?>
 		<table style="width:100%" class="form-table trip-info">
@@ -80,7 +80,7 @@ class Metabox_Trip_Options_View {
 		<?php
 		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) {
 			foreach ( $itineraries as $x=>$itinerary ) {
-				if (($itineraries[$x]['title'] != $default_title) && ($itineraries[$x]['title'] != "")) {
+				if (($itineraries[$x]['title'] != $default_itinerary) && ($itineraries[$x]['title'] != "")) {
 					$xx++;
 				}
 			}?>

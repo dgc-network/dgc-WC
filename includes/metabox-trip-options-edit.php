@@ -1,8 +1,14 @@
 <?php
 class Metabox_Trip_Options_Edit {
+
+	//public $version = '4.3.0';
+	//public $translated = __( $string, $text_domain );
+
 	public static function init() {
 		add_action( 'admin_menu', array( __CLASS__, 'trip_options_add_metabox' ) );
 		add_action( 'save_post', array( __CLASS__, 'trip_options_save_metabox' ), 10, 2 );
+		$default_itinerary = __( 'Day X, My plan', 'wp-travel' );
+		$default_question = __( 'FAQ Questions', 'wp-travel' );
 	}
 
 	/**
@@ -151,21 +157,28 @@ class Metabox_Trip_Options_Edit {
 		 */
 		$itineraries = array();
 		for ($x = 0; $x < 100; $x++) {
-			$itineraries[$x]['label'] = $_POST['itinerary_item_label-' . $x];
-			$itineraries[$x]['title'] = $_POST['itinerary_item_title-' . $x];
-			$itineraries[$x]['date'] = $_POST['itinerary_item_date-' . $x];
-			$itineraries[$x]['time'] = $_POST['itinerary_item_time-' . $x];
-			$itineraries[$x]['desc'] = $_POST['itinerary_item_desc-' . $x];
+			if ($_POST['itinerary_item_label-' . $x]!="" || $_POST['itinerary_item_label-' . $x] != self::$default_itinerary) {
+				$itineraries[$x]['label'] = $_POST['itinerary_item_label-' . $x];
+				$itineraries[$x]['title'] = $_POST['itinerary_item_title-' . $x];
+				$itineraries[$x]['date'] = $_POST['itinerary_item_date-' . $x];
+				$itineraries[$x]['time'] = $_POST['itinerary_item_time-' . $x];
+				$itineraries[$x]['desc'] = $_POST['itinerary_item_desc-' . $x];
+			}
 		}
+		delete_post_meta( $post_id, 'wp_travel_trip_itinerary_data' );
 		update_post_meta( $post_id, 'wp_travel_trip_itinerary_data', $itineraries );
 
 		$faqs = array();
 		for ($x = 0; $x < 100; $x++) {
-			$faqs['question'][$x] = $_POST['faq_item_question-' . $x];
-			$faqs['answer'][$x] = $_POST['faq_item_answer-' . $x];
+			if ($_POST['faq_item_question-' . $x] != "" || $_POST['faq_item_question-' . $x] != self::$default_question) {
+				$faqs['question'][$x] = $_POST['faq_item_question-' . $x];
+				$faqs['answer'][$x] = $_POST['faq_item_answer-' . $x];
+			}
 		}
 		$question = isset( $faqs['question'] ) ? $faqs['question'] : array();
 		$answer   = isset( $faqs['answer'] ) ? $faqs['answer'] : array();
+		delete_post_meta( $post_id, 'wp_travel_faq_question' );
+		delete_post_meta( $post_id, 'wp_travel_faq_answer' );
 		update_post_meta( $post_id, 'wp_travel_faq_question', $question );
 		update_post_meta( $post_id, 'wp_travel_faq_answer', $answer );
 
@@ -194,7 +207,7 @@ class Metabox_Trip_Options_Edit {
 		}
 		$trip_code = wp_travel_get_trip_code( $post->ID );
 		$itineraries = get_post_meta( $post->ID, 'wp_travel_trip_itinerary_data', true );
-		$default_title = __( 'Day X, My plan', 'wp-travel' );
+		$default_itinerary = __( 'Day X, My plan', 'wp-travel' );
 		$remove_itinerary = __( "- Remove Itinerary", "wp-travel" );
 		$xx = 0;
 		?>
@@ -213,7 +226,7 @@ class Metabox_Trip_Options_Edit {
 		<?php
 		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) {
 			foreach ( $itineraries as $x=>$itinerary ) {
-				if (($itineraries[$x]['title'] != $default_title) && ($itineraries[$x]['title'] != "")) {
+				if (($itineraries[$x]['title'] != $default_itinerary) && ($itineraries[$x]['title'] != "")) {
 					$xx++;
 				}
 			}
@@ -361,13 +374,13 @@ class Metabox_Trip_Options_Edit {
 			return;
 		}
 		$tabs = wp_travel_get_default_trip_tabs();
-		//foreach ( $tabs as $key=>$tab ) {
-		//	echo '{'.$key.':';
-		//	foreach ( $tab as $key=>$value ) {
-		//		echo '{'.$key.':'.$value.'},';
-		//	}
-		//	echo '},';
-		//}
+		foreach ( $tabs as $key=>$tab ) {
+			echo '{'.$key.':';
+			foreach ( $tab as $key=>$value ) {
+				echo '{'.$key.':'.$value.'},';
+			}
+			echo '},';
+		}
 
 		?>
 		<ul id="tabs-ul" style="width:100%" >
