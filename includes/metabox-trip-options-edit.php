@@ -374,7 +374,8 @@ class Metabox_Trip_Options_Edit {
 			foreach ( $tabs as $x=>$tab ) {?>
 			<?php
 				echo '<li class="tab-li" id="tab-li-' . $x . '"><span><i class="fas fa-bars"></i>';
-				$tab_custom = esc_attr( $tabs[$x]['custom'] );
+				//$tab_custom = esc_attr( $tabs[$x]['custom'] );
+				$tab_custom = esc_attr( $tabs[$x]['label'] );
 				//echo $tab_custom . '</span>';
 				foreach ( $tab as $key=>$value ) {
 					echo $value . '</span>';
@@ -384,7 +385,7 @@ class Metabox_Trip_Options_Edit {
 					<tbody>
 					<tr>
 						<th>Global Trip Title</th>
-						<td><input type="text" class="tab_item_global" name="tab_item_global-' . $x . '" value="' . esc_attr( $tabs[$x]['global'] ) . '" class="regular-text"></td>
+						<td><input type="text" class="tab_item_global" name="tab_item_global-' . $x . '" value="' . esc_attr( $tabs[$x]['use_global'] ) . '" class="regular-text"></td>
 					</tr>
 					<tr>
 						<th>Custom Trip Title</th>
