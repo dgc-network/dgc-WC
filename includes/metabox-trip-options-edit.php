@@ -361,13 +361,13 @@ class Metabox_Trip_Options_Edit {
 			return;
 		}
 		$tabs = wp_travel_get_default_trip_tabs();
-		foreach ( $tabs as $key=>$tab ) {
-			echo '{'.$key.':';
-			foreach ( $tab as $key=>$value ) {
-				echo '{'.$key.':'.$value.'},';
-			}
-			echo '},';
-		}
+		//foreach ( $tabs as $key=>$tab ) {
+		//	echo '{'.$key.':';
+		//	foreach ( $tab as $key=>$value ) {
+		//		echo '{'.$key.':'.$value.'},';
+		//	}
+		//	echo '},';
+		//}
 
 		?>
 		<ul id="tabs-ul" style="width:100%" >
@@ -378,10 +378,10 @@ class Metabox_Trip_Options_Edit {
 				echo '<li class="tab-li" id="tab-li-' . $x . '"><span><i class="fas fa-bars"></i>';
 				//$tab_custom = esc_attr( $tabs[$x]['custom'] );
 				$tab_custom = esc_attr( $tabs[$x]['label'] );
-				//echo $tab_custom . '</span>';
-				foreach ( $tab as $key=>$value ) {
-					echo $value . '</span>';
-				}
+				echo $tab_custom . '</span>';
+				//foreach ( $tab as $key=>$value ) {
+				//	echo $value . '</span>';
+				//}
 				echo '
 				<table class="update-tab" style="width:100%">
 					<tbody>
@@ -483,9 +483,11 @@ class Metabox_Trip_Options_Edit {
 		}
 		$faqs = wp_travel_get_faqs( $post->ID );
 		foreach ( $faqs as $key=>$faq ) {
+			echo '{'.$key.':';
 			foreach ( $faq as $key=>$value ) {
 				echo '{'.$key.':'.$value.'},';
 			}
+			echo '},';
 		}
 
 		$default_question = __( 'FAQ Questions', 'wp-travel' );
