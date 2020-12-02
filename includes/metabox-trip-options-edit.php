@@ -7,8 +7,8 @@ class Metabox_Trip_Options_Edit {
 	function __construct() {
 		add_action( 'admin_menu', array( __CLASS__, 'trip_options_add_metabox' ) );
 		add_action( 'save_post', array( __CLASS__, 'trip_options_save_metabox' ), 10, 2 );
-		$this->$default_itinerary = __( 'Day X, My plan', 'wp-travel' );
-		$this->$default_question = __( 'FAQ Questions', 'wp-travel' );
+		$this->default_itinerary = __( 'Day X, My plan', 'wp-travel' );
+		$this->default_question = __( 'FAQ Questions', 'wp-travel' );
 	}
 
 	public static function init() {
@@ -164,7 +164,7 @@ class Metabox_Trip_Options_Edit {
 		 */
 		$itineraries = array();
 		for ($x = 0; $x < 100; $x++) {
-			if ($_POST['itinerary_item_label-' . $x]!="" && $_POST['itinerary_item_label-' . $x] != $this->$default_itinerary) {
+			if ($_POST['itinerary_item_label-' . $x]!="" && $_POST['itinerary_item_label-' . $x] != $this->default_itinerary) {
 				$itineraries[$x]['label'] = $_POST['itinerary_item_label-' . $x];
 				$itineraries[$x]['title'] = $_POST['itinerary_item_title-' . $x];
 				$itineraries[$x]['date'] = $_POST['itinerary_item_date-' . $x];
@@ -177,7 +177,7 @@ class Metabox_Trip_Options_Edit {
 
 		$faqs = array();
 		for ($x = 0; $x < 100; $x++) {
-			if ($_POST['faq_item_question-' . $x] != "" && $_POST['faq_item_question-' . $x] != $this->$default_question) {
+			if ($_POST['faq_item_question-' . $x] != "" && $_POST['faq_item_question-' . $x] != $this->default_question) {
 				$faqs['question'][$x] = $_POST['faq_item_question-' . $x];
 				$faqs['answer'][$x] = $_POST['faq_item_answer-' . $x];
 			}
@@ -234,7 +234,7 @@ class Metabox_Trip_Options_Edit {
 		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) {
 			foreach ( $itineraries as $x=>$itinerary ) {
 				//if (($itineraries[$x]['title'] != $default_itinerary) && ($itineraries[$x]['title'] != "")) {
-				if (($itineraries[$x]['title'] != $this->$default_itinerary) && ($itineraries[$x]['title'] != "")) {
+				if (($itineraries[$x]['title'] != $this->default_itinerary) && ($itineraries[$x]['title'] != "")) {
 					$xx++;
 				}
 			}
@@ -525,7 +525,7 @@ class Metabox_Trip_Options_Edit {
 		if ( is_array( $faqs ) && count( $faqs ) > 0 ) {
 			foreach ( $faqs as $x=>$faq ) {
 				//if (($faqs['question'][$x] != $default_question) && ($faqs['question'][$x] != "")) {
-				if (($faqs['question'][$x] != $this->$default_question) && ($faqs['question'][$x] != "")) {
+				if (($faqs['question'][$x] != $this->default_question) && ($faqs['question'][$x] != "")) {
 					$xx++;
 				}
 			}
@@ -545,7 +545,7 @@ class Metabox_Trip_Options_Edit {
 					echo '<li class="faq-li" id="faq-li-' . $x . '"><span><i class="fas fa-bars"></i>';
 					if ($xx<=0) {
 						//$faq_question = $default_question;
-						$faq_question = $this->$default_question;
+						$faq_question = $this->default_question;
 						echo $faq_question . '</span><p style="display:none"></p>';
 					} else {
 						$faq_question = esc_attr( $faqs['question'][$x] );
