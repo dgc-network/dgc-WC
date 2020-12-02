@@ -7,8 +7,8 @@ class Metabox_Trip_Options_Edit {
 	function __construct() {
 		add_action( 'admin_menu', array( __CLASS__, 'trip_options_add_metabox' ) );
 		add_action( 'save_post', array( __CLASS__, 'trip_options_save_metabox' ), 10, 2 );
-		$default_itinerary = __( 'Day X, My plan', 'wp-travel' );
-		$default_question = __( 'FAQ Questions', 'wp-travel' );
+		$this->$default_itinerary = __( 'Day X, My plan', 'wp-travel' );
+		$this->$default_question = __( 'FAQ Questions', 'wp-travel' );
 	}
 
 	public static function init() {
