@@ -5,20 +5,8 @@ class Metabox_Trip_Options_Edit {
 	 * Constructor.
 	 */
 	function __construct() {
-		//$this->define( 'DEFAULT_ITINERARY', __( 'Day X, My plan', 'wp-travel' ) );
-		//$this->define( 'DEFAULT_QUESTION', __( 'FAQ Questions', 'wp-travel' ) );
-
 		add_action( 'admin_menu', array( __CLASS__, 'trip_options_add_metabox' ) );
 		add_action( 'save_post', array( __CLASS__, 'trip_options_save_metabox' ), 10, 2 );
-		//$this->default_itinerary = __( 'Day X, My plan', 'wp-travel' );
-		//$this->default_question = __( 'FAQ Questions', 'wp-travel' );
-	}
-
-	public static function init() {
-		add_action( 'admin_menu', array( __CLASS__, 'trip_options_add_metabox' ) );
-		add_action( 'save_post', array( __CLASS__, 'trip_options_save_metabox' ), 10, 2 );
-		$default_itinerary = __( 'Day X, My plan', 'wp-travel' );
-		$default_question = __( 'FAQ Questions', 'wp-travel' );
 	}
 
 	/**
@@ -175,7 +163,7 @@ class Metabox_Trip_Options_Edit {
 				$itineraries[$x]['desc'] = $_POST['itinerary_item_desc-' . $x];
 			}
 		}
-		delete_post_meta( $post_id, 'wp_travel_trip_itinerary_data' );
+		//delete_post_meta( $post_id, 'wp_travel_trip_itinerary_data' );
 		update_post_meta( $post_id, 'wp_travel_trip_itinerary_data', $itineraries );
 
 		$faqs = array();
@@ -187,18 +175,12 @@ class Metabox_Trip_Options_Edit {
 		}
 		$question = isset( $faqs['question'] ) ? $faqs['question'] : array();
 		$answer   = isset( $faqs['answer'] ) ? $faqs['answer'] : array();
-		delete_post_meta( $post_id, 'wp_travel_faq_question' );
-		delete_post_meta( $post_id, 'wp_travel_faq_answer' );
+		//delete_post_meta( $post_id, 'wp_travel_faq_question' );
+		//delete_post_meta( $post_id, 'wp_travel_faq_answer' );
 		update_post_meta( $post_id, 'wp_travel_faq_question', $question );
 		update_post_meta( $post_id, 'wp_travel_faq_answer', $answer );
 
 /*
-		if( isset( $_POST[ 'wp_travel_trip_itinerary_data' ] ) ) {
-			update_post_meta( $post_id, 'wp_travel_trip_itinerary_data', sanitize_text_field( $_POST[ 'wp_travel_trip_itinerary_data' ] ) );
-		} else {
-			delete_post_meta( $post_id, 'wp_travel_trip_itinerary_data' );
-		}
-
 		if( isset( $_POST[ 'seo_robots' ] ) ) {
 			update_post_meta( $post_id, 'seo_robots', sanitize_text_field( $_POST[ 'seo_robots' ] ) );
 		} else {
@@ -217,7 +199,7 @@ class Metabox_Trip_Options_Edit {
 		}
 		$trip_code = wp_travel_get_trip_code( $post->ID );
 		$itineraries = get_post_meta( $post->ID, 'wp_travel_trip_itinerary_data', true );
-		$default_itinerary = __( 'Day X, My plan', 'wp-travel' );
+		//$default_itinerary = __( 'Day X, My plan', 'wp-travel' );
 		$remove_itinerary = __( "- Remove Itinerary", "wp-travel" );
 		$xx = 0;
 		?>
@@ -256,7 +238,8 @@ class Metabox_Trip_Options_Edit {
 				for ($x = 0; $x < 100; $x++) {
 					echo '<li class="itinerary-li" id="itinerary-li-' . $x . '"><span><i class="fas fa-bars"></i>';
 					if ($xx<=0) {
-						$itinerary_title = __( 'Day X, My plan', 'wp-travel' );
+						//$itinerary_title = __( 'Day X, My plan', 'wp-travel' );
+						$itinerary_title = DEFAULT_ITINERARY;
 						echo $itinerary_title . '</span><p style="display:none"></p>';
 					} else {
 						$itinerary_title = esc_attr( $itineraries[$x]['title'] );
@@ -324,18 +307,12 @@ class Metabox_Trip_Options_Edit {
 					$( element ).delegate(".item-title-input", "keyup", function(){
 						$( 'span', element ).text($(this).val());
 					});
-/*
-					$( element ).delegate(".remove-itinerary", "click", function(){
-						$( this ).closest('.itinerary-li').remove();
-					});
-*/					
 				});
 
 				$( ".remove-itinerary" ).each( function( index, element ) {
 					$( element ).delegate("button", "click", function(){
 						$( this ).closest('.itinerary-li').remove();
-					});	
-					
+					});					
 				});
 
 				$("#first-itinerary").click( function(){
@@ -400,12 +377,8 @@ class Metabox_Trip_Options_Edit {
 			foreach ( $tabs as $x=>$tab ) {?>
 			<?php
 				echo '<li class="tab-li" id="tab-li-' . $x . '"><span><i class="fas fa-bars"></i>';
-				//$tab_custom = esc_attr( $tabs[$x]['custom'] );
 				$tab_custom = esc_attr( $tabs[$x]['label'] );
 				echo $tab_custom . '</span>';
-				//foreach ( $tab as $key=>$value ) {
-				//	echo $value . '</span>';
-				//}
 				echo '
 				<table class="update-tab" style="width:100%">
 					<tbody>
@@ -454,8 +427,7 @@ class Metabox_Trip_Options_Edit {
 				$( ".remove-tab" ).each( function( index, element ) {
 					$( element ).delegate("button", "click", function(){
 						$( this ).closest('.tab-li').remove();
-					});	
-					
+					});					
 				});
 
 				$("#first-tab").click( function(){
@@ -514,7 +486,7 @@ class Metabox_Trip_Options_Edit {
 			echo '},';
 		}
 
-		$default_question = __( 'FAQ Questions', 'wp-travel' );
+		//$default_question = __( 'FAQ Questions', 'wp-travel' );
 		$remove_faq = __( "- Remove FAQ", "wp-travel" );
 		$xx = 0;
 		?>
