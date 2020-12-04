@@ -155,12 +155,12 @@ class Metabox_Trip_Options_Edit {
 		 */
 		$itineraries = array();
 		for ($x = 0; $x < 100; $x++) {
-			if ($_POST['itinerary_item_label-' . $x]!="" && $_POST['itinerary_item_label-' . $x] != DEFAULT_ITINERARY) {
-				$itineraries[$x]['label'] = $_POST['itinerary_item_label-' . $x];
+			if ($_POST['itinerary_item_title-' . $x]!="" && $_POST['itinerary_item_title-' . $x] != DEFAULT_ITINERARY) {
 				$itineraries[$x]['title'] = $_POST['itinerary_item_title-' . $x];
 				$itineraries[$x]['date'] = $_POST['itinerary_item_date-' . $x];
 				$itineraries[$x]['time'] = $_POST['itinerary_item_time-' . $x];
 				$itineraries[$x]['desc'] = $_POST['itinerary_item_desc-' . $x];
+				$itineraries[$x]['label'] = $_POST['itinerary_item_label-' . $x];
 			}
 		}
 		//delete_post_meta( $post_id, 'wp_travel_trip_itinerary_data' );
