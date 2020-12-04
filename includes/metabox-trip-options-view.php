@@ -11,7 +11,7 @@ class Metabox_Trip_Options_View {
  	* Add a custom product data tab
  	*/
 	//function woo_new_product_tab( $tabs ) {
-	function woo_new_product_tab( $post ) {
+	function woo_new_product_tab() {
 		$tabs['itineraries_tab'] = array(
 			'title' 	=> __( 'Itineraries', 'woocommerce' ),
 			'priority' 	=> 10,
@@ -66,7 +66,8 @@ class Metabox_Trip_Options_View {
 			return;
 		}
 		$trip_code = wp_travel_get_trip_code( $post->ID );
-		$itineraries = get_post_meta( $post->ID, 'wp_travel_trip_itinerary_data', true );
+		//$itineraries = get_post_meta( $post->ID, 'wp_travel_trip_itinerary_data', true );
+		$itineraries = WP_Travel_Helpers_Trips::get_trip( $post->ID );
 		echo '{';
 			foreach ( $itineraries as $key=>$itinerary ) {
 				echo $key.':{';
