@@ -7,15 +7,10 @@ class Metabox_Trip_Options_View {
 		add_filter( 'woocommerce_product_tabs', array( __CLASS__, 'woo_new_product_tab' ) );
 	}
 
-	public static function init() {
-		/**
- 		* Add a custom product data tab
- 		*/
-		add_filter( 'woocommerce_product_tabs', array( __CLASS__, 'woo_new_product_tab' ) );
-	}
-
+	/**
+ 	* Add a custom product data tab
+ 	*/
 	function woo_new_product_tab( $tabs ) {
-		// Adds the new tab
 		$tabs['itineraries_tab'] = array(
 			'title' 	=> __( 'Itineraries', 'woocommerce' ),
 			'priority' 	=> 10,
@@ -57,8 +52,6 @@ class Metabox_Trip_Options_View {
 			'callback' 	=> array( __CLASS__, 'woo_new_product_tab_content' )
 		);
 		return $tabs;
-
-		//return wp_travel_get_default_trip_tabs();
 	}
 	
 	function woo_new_product_tab_content() {
@@ -73,8 +66,17 @@ class Metabox_Trip_Options_View {
 		}
 		$trip_code = wp_travel_get_trip_code( $post->ID );
 		$itineraries = get_post_meta( $post->ID, 'wp_travel_trip_itinerary_data', true );
+		echo '{';
+			foreach ( $itineraries as $key=>$itinerary ) {
+				echo $key.':{';
+				foreach ( $itinerary as $key=>$value ) {
+					echo '{'.$key.':'.$value.'},';
+				}
+				echo '},';
+			}
+		echo '}';
 		?>
-		<table style="width:100%" class="form-table trip-info">
+		<table style="width:100%">
 			<tr>
 				<td>
 					<?php esc_html_e( 'Trip Code : ', 'wp-travel' ); ?>
