@@ -523,7 +523,8 @@ class Metabox_Trip_Options_Edit {
 						$faq_question = DEFAULT_QUESTION;
 						echo $faq_question . '</span><p style="display:none"></p>';
 					} else {
-						$faq_question = esc_attr( $faqs['question'][$x] );
+						//$faq_question = esc_attr( $faqs['question'][$x] );
+						$faq_question = esc_attr( $faqs[$x]['question'] );
 						echo $faq_question . '</span><p style="display:none">' . $x . '</p>';
 					}
 					$xx--;
@@ -536,7 +537,7 @@ class Metabox_Trip_Options_Edit {
 						</tr>
 						<tr>
 							<th>Your answer</th>
-							<td><textarea rows="3" name="faq_item_answer-' . $x . '" class="regular-text">' . esc_attr( $faqs['answer'][$x] ) . '</textarea></td>
+							<td><textarea rows="3" name="faq_item_answer-' . $x . '" class="regular-text">' . esc_attr( $faqs[$x]['answer'] ) . '</textarea></td>
 						</tr>
 						<tr>
 							<td></td>
