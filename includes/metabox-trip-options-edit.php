@@ -220,10 +220,6 @@ class Metabox_Trip_Options_Edit {
 					<input type="text" id="wp-travel-trip-code" disabled="disabled" value="<?php echo esc_attr( $trip_code ); ?>" />
 				</td>
 			</tr>
-			<tr style="display:none" class="init-rows">
-				<td><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></td>
-				<td style="text-align:right"><button id="add-itinerary" type="button"><?php esc_html_e( '+ Add Itinerary', 'wp-travel' ); ?></button></td>
-			</tr>
 
 		<?php
 		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) {
@@ -241,6 +237,11 @@ class Metabox_Trip_Options_Edit {
 			</td></tr><?php
 		}?>
 
+			<tr style="display:none" class="init-rows">
+				<td><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></td>
+				<td style="text-align:right"><button id="add-itinerary" type="button"><?php esc_html_e( '+ Add Itinerary', 'wp-travel' ); ?></button></td>
+			</tr>
+			
 			<tr style="display:none" class="init-rows"><td colspan="2">
 
 				<ul id="itineraries-ul"><?php
@@ -352,12 +353,12 @@ class Metabox_Trip_Options_Edit {
 		</script>
 	
 		<style>
-  			#itineraries-ul { list-style-type: none; margin: 0; padding: 0; width: 100%; }
-  			#itineraries-ul li { background: #f2f2f2; border: 1px solid #ccc; margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em;}
-			#itineraries-ul li span { margin-left: -1.3em; cursor: pointer;}
-			#itineraries-ul li table { background: #ffffff; border: 1px solid #ccc; width: 100%; display: none; margin-left: -1.2em; padding-left: 1.5em; }
-			#itineraries-ul li .toggle-access { display: block; }
-			#first-itinerary { color: blue; text-decoration: underline; cursor: pointer;}
+  			#itineraries-ul { list-style-type:none; margin:0; padding:0; width:100%; }
+  			#itineraries-ul li { background:#f2f2f2; border:1px solid #ccc; margin:0 3px 3px 3px; padding:0.4em; padding-left:1.5em; font-size:1.4em; }
+			#itineraries-ul li span { margin-left:-1.3em; cursor:pointer; }
+			#itineraries-ul li table { background:#ffffff; border:1px solid #ccc; width:100%; display:none; margin-left:-1.2em; padding-left:1.5em; }
+			#itineraries-ul li .toggle-access { display:block; }
+			#first-itinerary { color:blue; text-decoration:underline; cursor:pointer;}
 			/*i.fas*/
 			.fa-bars:before { content: "\f0c9"; }
   		</style>
@@ -372,6 +373,7 @@ class Metabox_Trip_Options_Edit {
 			return;
 		}
 		$tabs = wp_travel_get_default_trip_tabs();
+/*		
 		echo '{';
 		foreach ( $tabs as $key=>$tab ) {
 			echo $key.':{';
@@ -381,7 +383,7 @@ class Metabox_Trip_Options_Edit {
 			echo '},';
 		}
 		echo '}';
-
+*/
 		?>
 		<ul id="tabs-ul" style="width:100%" >
 		<?php
@@ -412,9 +414,6 @@ class Metabox_Trip_Options_Edit {
 			}
 		}?>			
 		</ul>
-		<table style="width:100%" class="form-table tabs">
-		<tr style="display:none" class="init-rows"><td colspan="2">
-		</td></tr></table>
 
 		<script>
 			jQuery(document).ready(function($) {
@@ -450,31 +449,17 @@ class Metabox_Trip_Options_Edit {
 					$('span','#tab-li-0').on('click', function() {
 						$('table','#tab-li-0').toggleClass('toggle-access');
 					});
-				} );
-			
-				$("#add-tab").click( function(){
-					$( ".tab-li" ).each( function( index, element ) {
-						if ( $( this ).is(":hidden") ) {
-							$( this ).show();
-							$( element ).delegate("span", "click", function(){
-								$( 'table', element ).toggleClass('toggle-access');
-							});
-							return false;
-						};
-					});
-				} );
-
-				$( '.tab_item_date' ).datepicker();
+				} );			
 			} );
 		</script>
 	
 		<style>
-  			#tabs-ul { list-style-type: none; margin: 0; padding: 0; width: 100%; }
-  			#tabs-ul li { background: #f2f2f2; border: 1px solid #ccc; margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em;}
-			#tabs-ul li span { margin-left: -1.3em; cursor: pointer;}
-			#tabs-ul li table { background: #ffffff; border: 1px solid #ccc; width: 100%; display: none; margin-left: -1.2em; padding-left: 1.5em; }
-			#tabs-ul li .toggle-access { display: block; }
-			#first-tab { color: blue; text-decoration: underline; cursor: pointer;}
+  			#tabs-ul { list-style-type:none; margin:0; padding:0; width:100%; }
+  			#tabs-ul li { background:#f2f2f2; border:1px solid #ccc; margin:0 3px 3px 3px; padding:0.4em; padding-left:1.5em; font-size:1.4em; }
+			#tabs-ul li span { margin-left:-1.3em; cursor:pointer; }
+			#tabs-ul li table { background:#ffffff; border:1px solid #ccc; width:100%; display:none; margin-left:-1.2em; padding-left:1.5em; }
+			#tabs-ul li .toggle-access { display:block; }
+			#first-tab { color:blue; text-decoration:underline; cursor:pointer;}
 			/*.fa-bars:before { content: "\f0c9"; }*/
   		</style>
 		<?php
@@ -490,6 +475,7 @@ class Metabox_Trip_Options_Edit {
 			return;
 		}
 		$faqs = wp_travel_get_faqs( $post->ID );
+/*		
 		echo '{';
 		foreach ( $faqs as $key=>$faq ) {
 			echo $key.':{';
@@ -499,7 +485,7 @@ class Metabox_Trip_Options_Edit {
 			echo '},';
 		}
 		echo '}';
-
+*/
 		//$default_question = __( 'FAQ Questions', 'wp-travel' );
 		$remove_faq = __( "- Remove FAQ", "wp-travel" );
 		$xx = 0;
@@ -624,12 +610,12 @@ class Metabox_Trip_Options_Edit {
 		</script>
 	
 		<style>
-  			#faqs-ul { list-style-type: none; margin: 0; padding: 0; width: 100%; }
-  			#faqs-ul li { background: #f2f2f2; border: 1px solid #ccc; margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em;}
-			#faqs-ul li span { margin-left: -1.3em; cursor: pointer;}
-			#faqs-ul li table { background: #ffffff; border: 1px solid #ccc; width: 100%; display: none; margin-left: -1.2em; padding-left: 1.5em; }
-			#faqs-ul li .toggle-access { display: block; }
-			#first-faq { color: blue; text-decoration: underline; cursor: pointer;}
+  			#faqs-ul { list-style-type:none; margin:0; padding:0; width:100%; }
+  			#faqs-ul li { background:#f2f2f2; border:1px solid #ccc; margin:0 3px 3px 3px; padding:0.4em; padding-left:1.5em; font-size:1.4em; }
+			#faqs-ul li span { margin-left:-1.3em; cursor:pointer; }
+			#faqs-ul li table { background:#ffffff; border:1px solid #ccc; width:100%; display:none; margin-left:-1.2em; padding-left:1.5em; }
+			#faqs-ul li .toggle-access { display:block; }
+			#first-faq { color:blue; text-decoration:underline; cursor:pointer;}
 			.fa-bars:before { content: "\f0c9"; }
   		</style>
 		<?php
