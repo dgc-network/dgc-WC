@@ -199,6 +199,16 @@ class Metabox_Trip_Options_Edit {
 		}
 		$trip_code = wp_travel_get_trip_code( $post->ID );
 		$itineraries = get_post_meta( $post->ID, 'wp_travel_trip_itinerary_data', true );
+		echo '{';
+		foreach ( $itineraries as $key=>$itinerary ) {
+			echo $key.':{';
+			foreach ( $itinerary as $key=>$value ) {
+				echo '{'.$key.':'.$value.'},';
+			}
+			echo '},';
+		}
+		echo '}';
+		
 		//$default_itinerary = __( 'Day X, My plan', 'wp-travel' );
 		$remove_itinerary = __( "- Remove Itinerary", "wp-travel" );
 		$xx = 0;
@@ -219,9 +229,9 @@ class Metabox_Trip_Options_Edit {
 		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) {
 			foreach ( $itineraries as $x=>$itinerary ) {
 				//if (($itineraries[$x]['title'] != $default_itinerary) && ($itineraries[$x]['title'] != "")) {
-				if (($itineraries[$x]['title'] != DEFAULT_ITINERARY) && ($itineraries[$x]['title'] != "")) {
+				//if (($itineraries[$x]['title'] != DEFAULT_ITINERARY) && ($itineraries[$x]['title'] != "")) {
 					$xx++;
-				}
+				//}
 			}
 		} else {?>
 			<tr class="no-itineraries"><td colspan="2">
@@ -251,7 +261,7 @@ class Metabox_Trip_Options_Edit {
 				  	  <tbody>
 						<tr>
 							<th>Itinerary title</th>
-							<td><input type="text" class="item-title-input" name="itinerary_item_title-' . $x . '" value="' . $itinerary_title . '" class="regular-text"></td>
+							<td><input type="text" class="item-title" name="itinerary_item_title-' . $x . '" value="' . $itinerary_title . '" class="regular-text"></td>
 						</tr>
 						<tr>
 							<th>Itinerary description</th>
@@ -292,7 +302,7 @@ class Metabox_Trip_Options_Edit {
 		<script>
 			jQuery(document).ready(function($) {
     			//$( "#itineraries-ul" ).sortable();
-				$( "#itineraries-ul" ).disableSelection();
+				//$( "#itineraries-ul" ).disableSelection();
 				$( ".itinerary-li" ).hide();
 
 				$( ".itinerary-li" ).each( function( index, element ) {
@@ -304,7 +314,7 @@ class Metabox_Trip_Options_Edit {
 						});
 					};
 
-					$( element ).delegate(".item-title-input", "keyup", function(){
+					$( element ).delegate(".item-title", "keyup", function(){
 						$( 'span', element ).text($(this).val());
 					});
 				});
@@ -362,13 +372,15 @@ class Metabox_Trip_Options_Edit {
 			return;
 		}
 		$tabs = wp_travel_get_default_trip_tabs();
+		echo '{';
 		foreach ( $tabs as $key=>$tab ) {
-			echo '{'.$key.':';
+			echo $key.':{';
 			foreach ( $tab as $key=>$value ) {
 				echo '{'.$key.':'.$value.'},';
 			}
 			echo '},';
 		}
+		echo '}';
 
 		?>
 		<ul id="tabs-ul" style="width:100%" >
@@ -388,7 +400,7 @@ class Metabox_Trip_Options_Edit {
 					</tr>
 					<tr>
 						<th>Custom Trip Title</th>
-						<td><input type="text" class="item-title-input" name="tab_item_custom-' . $x . '" value="' . $tab_custom . '" class="regular-text"></td>
+						<td><input type="text" class="item-title" name="tab_item_custom-' . $x . '" value="' . $tab_custom . '" class="regular-text"></td>
 					</tr>
 					<tr>
 						<th>Display</th>
@@ -419,7 +431,7 @@ class Metabox_Trip_Options_Edit {
 						});
 					};
 
-					$( element ).delegate(".item-title-input", "keyup", function(){
+					$( element ).delegate(".item-title", "keyup", function(){
 						$( 'span', element ).text($(this).val());
 					});
 				});
@@ -478,13 +490,15 @@ class Metabox_Trip_Options_Edit {
 			return;
 		}
 		$faqs = wp_travel_get_faqs( $post->ID );
+		echo '{';
 		foreach ( $faqs as $key=>$faq ) {
-			echo '{'.$key.':{';
+			echo $key.':{';
 			foreach ( $faq as $key=>$value ) {
 				echo '{'.$key.':'.$value.'},';
 			}
-			echo '}},';
+			echo '},';
 		}
+		echo '}';
 
 		//$default_question = __( 'FAQ Questions', 'wp-travel' );
 		$remove_faq = __( "- Remove FAQ", "wp-travel" );
@@ -533,7 +547,7 @@ class Metabox_Trip_Options_Edit {
 				  	  <tbody>
 						<tr>
 							<th>Enter your question</th>
-							<td><input type="text" class="item-title-input" name="faq_item_question-' . $x . '" value="' . $faq_question . '" class="regular-text"></td>
+							<td><input type="text" width="100%" class="item-title" name="faq_item_question-' . $x . '" value="' . $faq_question . '" class="regular-text"></td>
 						</tr>
 						<tr>
 							<th>Your answer</th>
@@ -572,7 +586,7 @@ class Metabox_Trip_Options_Edit {
 						});
 					};
 
-					$( element ).delegate(".item-title-input", "keyup", function(){
+					$( element ).delegate(".item-title", "keyup", function(){
 						$( 'span', element ).text($(this).val());
 					});
 				});

@@ -109,7 +109,7 @@ class Metabox_Trip_Options_View {
 				  	  <tbody>
 						<tr>
 							<th>Itinerary title</th>
-							<td><input type="text" class="item-title-input" name="itinerary_item_title-' . $x . '" value="' . esc_attr( $itineraries[$x]['title'] ) . '" class="regular-text"></td>
+							<td><input type="text" class="item-title" name="itinerary_item_title-' . $x . '" value="' . esc_attr( $itineraries[$x]['title'] ) . '" class="regular-text"></td>
 						</tr>
 						<tr>
 							<th>Itinerary description</th>
