@@ -479,11 +479,11 @@ class Metabox_Trip_Options_Edit {
 		}
 		$faqs = wp_travel_get_faqs( $post->ID );
 		foreach ( $faqs as $key=>$faq ) {
-			echo '{'.$key.':';
+			echo '{'.$key.':{';
 			foreach ( $faq as $key=>$value ) {
 				echo '{'.$key.':'.$value.'},';
 			}
-			echo '},';
+			echo '}},';
 		}
 
 		//$default_question = __( 'FAQ Questions', 'wp-travel' );
@@ -500,9 +500,9 @@ class Metabox_Trip_Options_Edit {
 		if ( is_array( $faqs ) && count( $faqs ) > 0 ) {
 			foreach ( $faqs as $x=>$faq ) {
 				//if (($faqs['question'][$x] != $default_question) && ($faqs['question'][$x] != "")) {
-				if (($faqs['question'][$x] != DEFAULT_QUESTION) && ($faqs['question'][$x] != "")) {
+				//if (($faqs['question'][$x] != DEFAULT_QUESTION) && ($faqs['question'][$x] != "")) {
 					$xx++;
-				}
+				//}
 			}
 		} else {?>
 			<tr class="no-faqs"><td colspan="2">
