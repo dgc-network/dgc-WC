@@ -199,6 +199,7 @@ class Metabox_Trip_Options_Edit {
 		}
 		$trip_code = wp_travel_get_trip_code( $post->ID );
 		$itineraries = get_post_meta( $post->ID, 'wp_travel_trip_itinerary_data', true );
+/*		
 		echo '{';
 		foreach ( $itineraries as $key=>$itinerary ) {
 			echo $key.':{';
@@ -208,8 +209,7 @@ class Metabox_Trip_Options_Edit {
 			echo '},';
 		}
 		echo '}';
-		
-		//$default_itinerary = __( 'Day X, My plan', 'wp-travel' );
+*/		
 		$remove_itinerary = __( "- Remove Itinerary", "wp-travel" );
 		$xx = 0;
 		?>
@@ -223,11 +223,8 @@ class Metabox_Trip_Options_Edit {
 
 		<?php
 		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) {
-			foreach ( $itineraries as $x=>$itinerary ) {
-				//if (($itineraries[$x]['title'] != $default_itinerary) && ($itineraries[$x]['title'] != "")) {
-				//if (($itineraries[$x]['title'] != DEFAULT_ITINERARY) && ($itineraries[$x]['title'] != "")) {
-					$xx++;
-				//}
+			foreach ( $itineraries as $itinerary ) {
+				$xx++;
 			}
 		} else {?>
 			<tr class="no-itineraries"><td colspan="2">
@@ -243,13 +240,10 @@ class Metabox_Trip_Options_Edit {
 			</tr>
 			
 			<tr style="display:none" class="init-rows"><td colspan="2">
-
-				<ul id="itineraries-ul"><?php
-			  
+				<ul id="itineraries-ul"><?php			  
 				for ($x = 0; $x < 100; $x++) {
 					echo '<li class="itinerary-li" id="itinerary-li-' . $x . '"><span><i class="fas fa-bars"></i>';
 					if ($xx<=0) {
-						//$itinerary_title = __( 'Day X, My plan', 'wp-travel' );
 						$itinerary_title = DEFAULT_ITINERARY;
 						echo $itinerary_title . '</span><p style="display:none"></p>';
 					} else {
@@ -291,7 +285,6 @@ class Metabox_Trip_Options_Edit {
 			  		</li>';
 				}?>			
 				</ul>
-
 			</td></tr>
 
 			<tr style="display:none" class="init-rows">
@@ -388,8 +381,7 @@ class Metabox_Trip_Options_Edit {
 		<ul id="tabs-ul" style="width:100%" >
 		<?php
 		if ( is_array( $tabs ) && count( $tabs ) > 0 ) {
-			foreach ( $tabs as $x=>$tab ) {?>
-			<?php
+			foreach ( $tabs as $x=>$tab ) {
 				echo '<li class="tab-li" id="tab-li-' . $x . '"><span><i class="fas fa-bars"></i>';
 				$tab_custom = esc_attr( $tabs[$x]['label'] );
 				echo $tab_custom . '</span>';
@@ -434,7 +426,7 @@ class Metabox_Trip_Options_Edit {
 						$( 'span', element ).text($(this).val());
 					});
 				});
-
+/*
 				$( ".remove-tab" ).each( function( index, element ) {
 					$( element ).delegate("button", "click", function(){
 						$( this ).closest('.tab-li').remove();
@@ -449,7 +441,8 @@ class Metabox_Trip_Options_Edit {
 					$('span','#tab-li-0').on('click', function() {
 						$('table','#tab-li-0').toggleClass('toggle-access');
 					});
-				} );			
+				} );
+*/					
 			} );
 		</script>
 	
@@ -459,7 +452,7 @@ class Metabox_Trip_Options_Edit {
 			#tabs-ul li span { margin-left:-1.3em; cursor:pointer; }
 			#tabs-ul li table { background:#ffffff; border:1px solid #ccc; width:100%; display:none; margin-left:-1.2em; padding-left:1.5em; }
 			#tabs-ul li .toggle-access { display:block; }
-			#first-tab { color:blue; text-decoration:underline; cursor:pointer;}
+			/*#first-tab { color:blue; text-decoration:underline; cursor:pointer;}*/
 			/*.fa-bars:before { content: "\f0c9"; }*/
   		</style>
 		<?php
@@ -486,7 +479,6 @@ class Metabox_Trip_Options_Edit {
 		}
 		echo '}';
 */
-		//$default_question = __( 'FAQ Questions', 'wp-travel' );
 		$remove_faq = __( "- Remove FAQ", "wp-travel" );
 		$xx = 0;
 		?>
@@ -499,10 +491,7 @@ class Metabox_Trip_Options_Edit {
 		<?php
 		if ( is_array( $faqs ) && count( $faqs ) > 0 ) {
 			foreach ( $faqs as $x=>$faq ) {
-				//if (($faqs['question'][$x] != $default_question) && ($faqs['question'][$x] != "")) {
-				//if (($faqs['question'][$x] != DEFAULT_QUESTION) && ($faqs['question'][$x] != "")) {
-					$xx++;
-				//}
+				$xx++;
 			}
 		} else {?>
 			<tr class="no-faqs"><td colspan="2">
@@ -513,17 +502,13 @@ class Metabox_Trip_Options_Edit {
 		}?>
 
 			<tr style="display:none" class="faq-init-rows"><td colspan="2">
-
-				<ul id="faqs-ul"><?php
-			  
+				<ul id="faqs-ul"><?php			  
 				for ($x = 0; $x < 100; $x++) {
 					echo '<li class="faq-li" id="faq-li-' . $x . '"><span><i class="fas fa-bars"></i>';
 					if ($xx<=0) {
-						//$faq_question = $default_question;
 						$faq_question = DEFAULT_QUESTION;
 						echo $faq_question . '</span><p style="display:none"></p>';
 					} else {
-						//$faq_question = esc_attr( $faqs['question'][$x] );
 						$faq_question = esc_attr( $faqs[$x]['question'] );
 						echo $faq_question . '</span><p style="display:none">' . $x . '</p>';
 					}
@@ -548,7 +533,6 @@ class Metabox_Trip_Options_Edit {
 			  		</li>';
 				}?>			
 				</ul>
-
 			</td></tr>
 
 			<tr style="display:none" class="faq-init-rows">
