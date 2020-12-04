@@ -1,5 +1,5 @@
 <?php
-class Metabox_Trip_Options_View {
+class Trip_Options_View_Metabox {
 	/**
 	 * Constructor.
 	 */
@@ -127,6 +127,6 @@ class Metabox_Trip_Options_View {
 	}	
 }
 
-//Metabox_Trip_Options_View::init();
-new Metabox_Trip_Options_View;
+//Trip_Options_View_Metabox::init();
+new Trip_Options_View_Metabox;
 
