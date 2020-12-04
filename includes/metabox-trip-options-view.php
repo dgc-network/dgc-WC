@@ -88,26 +88,25 @@ class Metabox_Trip_Options_View {
 				<td><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></td>
 			</tr><?php
 			foreach ( $itineraries as $x=>$itinerary ) {
-echo '
-<tr><td>
-<table class="update-itinerary" style="width:100%">
-	<tbody>
-	<tr>
-		<th>Itinerary title</th>
-		<td><input type="text" class="item-title" name="itinerary_item_title-' . $x . '" value="' . esc_attr( $itineraries[$x]['title'] ) . '" class="regular-text"></td>
-	</tr>
-	<tr>
-		<th>Itinerary description</th>
-		<td><textarea rows="3" name="itinerary_item_desc-' . $x . '" class="regular-text">' . esc_attr( $itineraries[$x]['desc'] ) . '</textarea></td>
-	</tr>
-	<tr>
-		<th>Itinerary date</th>
-		<td><input type="text" class="itinerary_item_date" name="itinerary_item_date-' . $x . '" value="' . esc_attr( $itineraries[$x]['date'] ) . '" class="regular-text"></td>
-	</tr>
-	</tbody>
-</table>
-</td></tr>';
-
+				echo '
+				<tr><td>
+				<table class="update-itinerary" style="width:100%">
+					<tbody>
+					<tr>
+						<th>Itinerary title</th>
+						<td><input type="text" class="item-title" name="itinerary_item_title-' . $x . '" value="' . esc_attr( $itineraries[$x]['title'] ) . '" class="regular-text"></td>
+					</tr>
+					<tr>
+						<th>Itinerary description</th>
+						<td><textarea rows="3" name="itinerary_item_desc-' . $x . '" class="regular-text">' . esc_attr( $itineraries[$x]['desc'] ) . '</textarea></td>
+					</tr>
+					<tr>
+						<th>Itinerary date</th>
+						<td><input type="text" class="itinerary_item_date" name="itinerary_item_date-' . $x . '" value="' . esc_attr( $itineraries[$x]['date'] ) . '" class="regular-text"></td>
+					</tr>
+					</tbody>
+				</table>
+				</td></tr>';
 			}
 		} else {?>
 			<tr class="no-itineraries"><td>
