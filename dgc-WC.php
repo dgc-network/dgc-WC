@@ -29,7 +29,8 @@ define( 'WP_DEBUG', true );
  */
 $dir = dirname( __FILE__ ); //dirname( __FILE__ )
 define( "BASE_DIR", str_replace( '\\', '/', $dir . '/' ) );
-define( 'WP_TRAVEL_POST_TYPE', 'itineraries' );
+//define( 'WP_TRAVEL_POST_TYPE', 'itineraries' );
+define( 'WP_TRAVEL_POST_TYPE', 'product' );
 define( 'WP_TRAVEL_POST_TITLE', __( 'trips', 'wp-travel' ) );
 define( 'WP_TRAVEL_POST_TITLE_SINGULAR', __( 'trip', 'wp-travel' ) );
 define( 'WP_TRAVEL_PLUGIN_FILE', __FILE__ );
