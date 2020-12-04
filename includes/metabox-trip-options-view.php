@@ -10,7 +10,8 @@ class Metabox_Trip_Options_View {
 	/**
  	* Add a custom product data tab
  	*/
-	function woo_new_product_tab( $tabs ) {
+	//function woo_new_product_tab( $tabs ) {
+	function woo_new_product_tab( $post ) {
 		$tabs['itineraries_tab'] = array(
 			'title' 	=> __( 'Itineraries', 'woocommerce' ),
 			'priority' 	=> 10,
