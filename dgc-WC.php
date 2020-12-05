@@ -58,8 +58,8 @@ include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
  * Load these bellow file, Only woocommerce installed
  */
 if ( is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
-    require_once BASE_DIR . 'includes/metabox-trip-options-edit.php';
-    require_once BASE_DIR . 'includes/metabox-trip-options-view.php';
+    require_once BASE_DIR . 'includes/trip-options-edit-metabox.php';
+    require_once BASE_DIR . 'includes/trip-options-view-metabox.php';
     require_once BASE_DIR . 'wp-travel/inc/helpers.php';
     require_once BASE_DIR . 'wp-travel/inc/class-itinerary.php';
     require_once BASE_DIR . 'wp-travel/inc/email-template-functions.php';
