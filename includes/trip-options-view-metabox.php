@@ -66,11 +66,13 @@ class Trip_Options_View_Metabox {
 			return;
 		}
 		$trip_code = wp_travel_get_trip_code( $post->ID );
-		$itineraries = get_post_meta( $post->ID, 'wp_travel_trip_itinerary_data', true );
+		//$itineraries = get_post_meta( $post->ID, 'wp_travel_trip_itinerary_data', true );
 		//$itineraries = WP_Travel_Helpers_Trips::get_trip( $post->ID );
 		//$itineraries = wp_travel_get_itineraries_array();
 
-		echo '$post->ID = ' . $post->ID;
+		$post_id = get_the_ID();
+		$itineraries = get_post_meta( $post_id, 'wp_travel_trip_itinerary_data', true );
+		echo '$post->ID = ' . $post_id;
 		echo '{';
 			foreach ( $itineraries as $key=>$itinerary ) {
 				echo $key.':{';
