@@ -65,6 +65,7 @@ class Trip_Options_View_Metabox {
 		$post_id = get_the_ID();
 		$trip_code = wp_travel_get_trip_code( $post_id );
 		$itineraries = get_post_meta( $post_id, 'wp_travel_trip_itinerary_data', true );
+/*
 		echo '$post->ID = ' . $post_id;
 		echo '{';
 			foreach ( $itineraries as $key=>$itinerary ) {
@@ -75,15 +76,14 @@ class Trip_Options_View_Metabox {
 				echo '},';
 			}
 		echo '}';
+*/		
 		?>
 		<?php esc_html_e( 'Trip Code : ', 'wp-travel' ); ?>
-		<input type="text" id="wp-travel-trip-code" disabled="disabled" value="<?php echo esc_attr( $trip_code ); ?>" />
-		<br>
-		<h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3><?php
+		<?php echo esc_attr( $trip_code ); ?><br>
+		<?php esc_html_e( 'Itinerary', 'wp-travel' ); ?><?php
 		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) {
 			foreach ( $itineraries as $x=>$itinerary ) {
 				echo '
-				<tr><td>
 				<table class="update-itinerary" style="width:100%">
 					<tbody>
 					<tr>
@@ -99,8 +99,7 @@ class Trip_Options_View_Metabox {
 						<td><input type="text" class="itinerary_item_date" name="itinerary_item_date-' . $x . '" value="' . esc_attr( $itineraries[$x]['date'] ) . '" class="regular-text"></td>
 					</tr>
 					</tbody>
-				</table>
-				</td></tr>';
+				</table>';
 			}
 		} else {?>
 			<span><?php esc_html_e( 'No Itineraries found.', 'wp-travel' ); ?></span><?php
