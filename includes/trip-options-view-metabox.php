@@ -70,6 +70,7 @@ class Trip_Options_View_Metabox {
 		//$itineraries = WP_Travel_Helpers_Trips::get_trip( $post->ID );
 		//$itineraries = wp_travel_get_itineraries_array();
 
+		echo '$post->ID = ' . $post->ID;
 		echo '{';
 			foreach ( $itineraries as $key=>$itinerary ) {
 				echo $key.':{';
