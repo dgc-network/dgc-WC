@@ -80,9 +80,12 @@ class Trip_Options_View_Metabox {
 		?>
 		<?php esc_html_e( 'Trip Code : ', 'wp-travel' ); ?>
 		<?php echo esc_attr( $trip_code ); ?><br>
-		<?php esc_html_e( 'Itinerary', 'wp-travel' ); ?><?php
-		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) {
-			foreach ( $itineraries as $x=>$itinerary ) {
+		<?php esc_html_e( 'Itinerary : ', 'wp-travel' ); ?><?php
+		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) { ?>
+			<ul><?php
+			foreach ( $itineraries as $x=>$itinerary ) { ?>
+				<li><?php esc_attr( $itineraries[$x]['title'] ); ?><br><?php
+				esc_attr( $itineraries[$x]['desc'] );
 				echo '
 				<table class="update-itinerary" style="width:100%">
 					<tbody>
