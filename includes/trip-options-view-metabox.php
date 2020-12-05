@@ -84,79 +84,12 @@ class Trip_Options_View_Metabox {
 		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) { ?>
 			<ul><?php
 			foreach ( $itineraries as $x=>$itinerary ) { ?>
-				<li><?php esc_attr( $itineraries[$x]['title'] ); ?><br><?php
-				esc_attr( $itineraries[$x]['desc'] );
-				echo '
-				<table class="update-itinerary" style="width:100%">
-					<tbody>
-					<tr>
-						<th>Itinerary title</th>
-						<td><input type="text" class="item-title" name="itinerary_item_title-' . $x . '" value="' . esc_attr( $itineraries[$x]['title'] ) . '" class="regular-text"></td>
-					</tr>
-					<tr>
-						<th>Itinerary description</th>
-						<td><textarea rows="3" name="itinerary_item_desc-' . $x . '" class="regular-text">' . esc_attr( $itineraries[$x]['desc'] ) . '</textarea></td>
-					</tr>
-					<tr>
-						<th>Itinerary date</th>
-						<td><input type="text" class="itinerary_item_date" name="itinerary_item_date-' . $x . '" value="' . esc_attr( $itineraries[$x]['date'] ) . '" class="regular-text"></td>
-					</tr>
-					</tbody>
-				</table>';
-			}
-		} else {?>
+				<li><?php echo esc_attr( $itineraries[$x]['title'] ); ?><br><?php
+				echo esc_attr( $itineraries[$x]['desc'] ); ?></li><?php
+			} ?></ul><?php
+		} else { ?>
 			<span><?php esc_html_e( 'No Itineraries found.', 'wp-travel' ); ?></span><?php
-		}?>
-
-
-
-		<table style="width:100%">
-			<tr>
-				<td>
-					<?php esc_html_e( 'Trip Code : ', 'wp-travel' ); ?>
-					<input type="text" id="wp-travel-trip-code" disabled="disabled" value="<?php echo esc_attr( $trip_code ); ?>" />
-				</td>
-			</tr>
-
-		<?php
-		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) {?>
-			<tr class="init-rows">
-				<td><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></td>
-			</tr><?php
-			foreach ( $itineraries as $x=>$itinerary ) {
-				echo '
-				<tr><td>
-				<table class="update-itinerary" style="width:100%">
-					<tbody>
-					<tr>
-						<th>Itinerary title</th>
-						<td><input type="text" class="item-title" name="itinerary_item_title-' . $x . '" value="' . esc_attr( $itineraries[$x]['title'] ) . '" class="regular-text"></td>
-					</tr>
-					<tr>
-						<th>Itinerary description</th>
-						<td><textarea rows="3" name="itinerary_item_desc-' . $x . '" class="regular-text">' . esc_attr( $itineraries[$x]['desc'] ) . '</textarea></td>
-					</tr>
-					<tr>
-						<th>Itinerary date</th>
-						<td><input type="text" class="itinerary_item_date" name="itinerary_item_date-' . $x . '" value="' . esc_attr( $itineraries[$x]['date'] ) . '" class="regular-text"></td>
-					</tr>
-					</tbody>
-				</table>
-				</td></tr>';
-			}
-		} else {?>
-			<tr class="no-itineraries"><td>
-				<span><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></span><br>
-				<span><?php esc_html_e( 'No Itineraries found.', 'wp-travel' ); ?></span>
-			</td></tr><?php
-		}?>
-
-		</table>
-		<?php
-
+		}
 	}	
 }
-
-//Trip_Options_View_Metabox::init();
 new Trip_Options_View_Metabox;
-
