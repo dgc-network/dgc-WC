@@ -199,7 +199,7 @@ class Trip_Options_Edit_Metabox {
 		}
 		$trip_code = wp_travel_get_trip_code( $post->ID );
 		$itineraries = get_post_meta( $post->ID, 'wp_travel_trip_itinerary_data', true );
-
+/*
 		echo '$post->ID = ' . $post->ID;
 		echo '{';
 		foreach ( $itineraries as $key=>$itinerary ) {
@@ -210,7 +210,7 @@ class Trip_Options_Edit_Metabox {
 			echo '},';
 		}
 		echo '}';
-
+*/
 		$remove_itinerary = __( "- Remove Itinerary", "wp-travel" );
 		$xx = 0;
 		?>
