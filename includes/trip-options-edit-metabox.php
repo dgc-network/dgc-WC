@@ -37,7 +37,7 @@ class Trip_Options_Edit_Metabox {
 			<ul class="category-tabs">
 				<li><a href="#tab_itinerary"><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></a></li>
 				<li><a href="#tab_prices_dates"><?php esc_html_e( 'Prices & Dates', 'wp-travel' ); ?></a></li>
-				<li><a href="#tab_includes"><?php esc_html_e( 'Includes/Excludes', 'wp-travel' ); ?></a></li>
+				<li><a href="#tab_includes_excludes"><?php esc_html_e( 'Includes/Excludes', 'wp-travel' ); ?></a></li>
 				<li><a href="#tab_facts"><?php esc_html_e( 'Facts', 'wp-travel' ); ?></a></li>
 				<li><a href="#tab_gallery"><?php esc_html_e( 'Gallery', 'wp-travel' ); ?></a></li>
 				<li><a href="#tab_locations"><?php esc_html_e( 'Locations', 'wp-travel' ); ?></a></li>
@@ -51,11 +51,11 @@ class Trip_Options_Edit_Metabox {
 			</div>
 
 			<div class="hidden" id="tab_prices_dates">
-				<?php self::trip_options_metabox_callback( $post )?>
+				<?php self::trip_options_callback_prices_dates( $post )?>
 			</div>
 
-			<div class="hidden" id="tab_includes">
-				<?php self::trip_options_callback_includes( $post )?>
+			<div class="hidden" id="tab_includes_excludes">
+				<?php self::trip_options_callback_includes_excludes( $post )?>
 			</div>
 			
 			<div class="hidden" id="tab_facts">
@@ -137,28 +137,6 @@ class Trip_Options_Edit_Metabox {
 
 
 	/**
-	 * Includes/Excludes metabox callback
-	 */
-	function trip_options_callback_includes( $post ) {
-		if ( ! $post ) {
-			return;
-		}
-		echo '<h3>';
-		esc_html_e( 'Trip Includes', 'wp-travel' );
-		echo '</h3>';
-		$trip_include = get_post_meta( $post->ID, 'wp_travel_trip_include', true );
-		wp_editor ( $trip_include , 'wp_travel_trip_include', array ( "media_buttons" => true ) );
-		echo '<br>';
-
-		echo '<h3>';
-		esc_html_e( 'Trip Excludes', 'wp-travel' );
-		echo '</h3>';
-		$trip_exclude = get_post_meta( $post->ID, 'wp_travel_trip_exclude', true );
-		wp_editor ( $trip_exclude , 'wp_travel_trip_exclude', array ( "media_buttons" => true ) );
-	}
-
-
-	/**
 	 * Itinerary metabox callback
 	 */
 	function trip_options_callback_itinerary( $post ) {
@@ -166,6 +144,7 @@ class Trip_Options_Edit_Metabox {
 			return;
 		}
 		$trip_code = wp_travel_get_trip_code( $post->ID );
+		$trip_outline = get_post_meta( $post->ID, 'wp_travel_outline', true );
 		$itineraries = get_post_meta( $post->ID, 'wp_travel_trip_itinerary_data', true );
 /*
 		echo '$post->ID = ' . $post->ID;
@@ -326,6 +305,191 @@ class Trip_Options_Edit_Metabox {
   		</style>
 		<?php
 	}
+
+	/**
+	 * Prices & Dates metabox callback
+	 */
+	function trip_options_callback_prices_dates( $post ) {
+		if ( ! $post ) {
+			return;
+		}
+		$pricings = WP_Travel_Helpers_Pricings::get_pricings( $post->ID );
+		if ( ! is_wp_error( $pricings ) && 'WP_TRAVEL_TRIP_PRICINGS' === $pricings['code'] ) {
+			$trip_data['pricings'] = (array) $pricings['pricings'];
+		}
+
+		$dates = WP_Travel_Helpers_Trip_Dates::get_dates( $post->ID );
+		if ( ! is_wp_error( $dates ) && 'WP_TRAVEL_TRIP_DATES' === $dates['code'] ) {
+			$trip_data['dates'] = (array) $dates['dates'];
+		}
+
+		$excluded_dates_times = WP_Travel_Helpers_Trip_Excluded_Dates_Times::get_dates_times( $post->ID );
+		if ( ! is_wp_error( $excluded_dates_times ) && 'WP_TRAVEL_TRIP_EXCLUDED_DATES_TIMES' === $excluded_dates_times['code'] ) {
+			$trip_data['excluded_dates_times'] = (array) $excluded_dates_times['dates_times'];
+		}
+
+
+		echo '$post->ID = ' . $post->ID;
+		echo '{';
+		foreach ( $pricings as $key=>$pricing ) {
+			echo $key.':{';
+			foreach ( $pricing as $key=>$value ) {
+				echo '{'.$key.':'.$value.'},';
+			}
+			echo '},';
+		}
+		echo '}';
+
+		$remove_pricing = __( "- Remove Price", "wp-travel" );
+		$xx = 0;
+		?>
+		<table style="width:100%" class="form-table trip-info">
+		<?php
+		if ( is_array( $pricings ) && count( $pricings ) > 0 ) {
+			foreach ( $pricings as $pricing ) {
+				$xx++;
+			}
+		} else {?>
+			<tr class="no-pricings"><td colspan="2">
+				<span><?php esc_html_e( 'No Pricings found.', 'wp-travel' ); ?></span>
+				<span id="first-pricing"><?php esc_html_e( 'Add Price', 'wp-travel' ); ?></span>
+			</td></tr><?php
+		}?>
+
+			<tr style="display:none" class="init-rows">
+				<td></td>
+				<td style="text-align:right"><button id="add-pricing" type="button"><?php esc_html_e( '+ Add Price', 'wp-travel' ); ?></button></td>
+			</tr>
+			
+			<tr style="display:none" class="init-rows"><td colspan="2">
+				<ul id="pricings-ul"><?php
+				for ($x = 0; $x < 100; $x++) {
+					echo '<li class="pricing-li" id="pricing-li-' . $x . '"><span><i class="fas fa-bars"></i>';
+					if ($xx<=0) {
+						$pricing_title = DEFAULT_ITINERARY;
+						echo $pricing_title . '</span><p style="display:none"></p>';
+					} else {
+						$pricing_title = esc_attr( $pricings[$x]['title'] );
+						echo $pricing_title . '</span><p style="display:none">' . $x . '</p>';
+					}
+					$xx--;
+					echo '
+					<table class="update-pricing" style="width:100%">
+				  	  <tbody>
+						<tr>
+							<th>Pricing Name</th>
+							<td><input type="text" class="item-title" name="pricing_item_title-' . $x . '" value="' . $pricing_title . '"></td>
+						</tr>
+						<tr>
+							<th>Min. Pax</th>
+							<td><input type="text" class="item-title" name="pricing_item_title-' . $x . '" value="' . esc_attr( $pricings[$x]['min'] ) . '"></td>
+						</tr>
+						<tr>
+							<th>Max. Pax</th>
+							<td><input type="text" class="item-title" name="pricing_item_title-' . $x . '" value="' . esc_attr( $pricings[$x]['max'] ) . '"></td>
+						</tr>
+						<tr>
+							<th>Price Categories</th>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td class="remove-pricing" style="text-align:right"><button id="remove-pricing-' . $x . '" style="color:red" type="button">' . $remove_pricing . '</button></td>
+						</tr>
+				  	  </tbody>
+					</table>
+			  		</li>';
+				}?>			
+				</ul>
+			</td></tr>
+		</table>
+
+		<script>
+			jQuery(document).ready(function($) {
+    			//$( "#itineraries-ul" ).sortable();
+				//$( "#itineraries-ul" ).disableSelection();
+				$( ".pricing-li" ).hide();
+
+				$( ".pricing-li" ).each( function( index, element ) {
+					if ( !$( 'p', element ).is(":empty") ) {
+						$( ".init-rows" ).show();
+						$( element ).show();
+						$( element ).delegate("span", "click", function(){
+							$( 'table', element ).toggleClass('toggle-access');
+						});
+					};
+
+					$( element ).delegate(".item-title", "keyup", function(){
+						$( 'span', element ).text($(this).val());
+					});
+				});
+
+				$( ".remove-pricing" ).each( function( index, element ) {
+					$( element ).delegate("button", "click", function(){
+						$( this ).closest('.pricing-li').remove();
+					});					
+				});
+
+				$("#first-pricing").click( function(){
+					$(".no-pricings").hide();
+					$(".init-rows").show();
+					$(".pricing-li").hide();
+					$("#pricing-li-0").show();
+					$('span','#pricing-li-0').on('click', function() {
+						$('table','#pricing-li-0').toggleClass('toggle-access');
+					});
+				} );
+			
+				$("#add-pricing").click( function(){
+					$( ".pricing-li" ).each( function( index, element ) {
+						if ( $( this ).is(":hidden") ) {
+							$( this ).show();
+							$( element ).delegate("span", "click", function(){
+								$( 'table', element ).toggleClass('toggle-access');
+							});
+							return false;
+						};
+					});
+				} );
+
+				$( '.pricing_item_date' ).datepicker();
+			} );
+		</script>
+	
+		<style>
+  			#pricings-ul { list-style-type:none; margin:0; padding:0; width:100%; }
+  			#pricings-ul li { background:#f2f2f2; border:1px solid #ccc; margin:0 3px 3px 3px; padding:0.4em; padding-left:1.5em; font-size:1.4em; }
+			#pricings-ul li span { margin-left:-1.3em; cursor:pointer; }
+			#pricings-ul li table { background:#ffffff; border:1px solid #ccc; width:100%; display:none; margin-left:-1.2em; padding-left:1.5em; }
+			#pricings-ul li .toggle-access { display:block; }
+			#first-pricing { color:blue; text-decoration:underline; cursor:pointer;}
+			/*i.fas*/
+			.fa-bars:before { content: "\f0c9"; }
+  		</style>
+		<?php
+	}
+
+	/**
+	 * Includes/Excludes metabox callback
+	 */
+	function trip_options_callback_includes_excludes( $post ) {
+		if ( ! $post ) {
+			return;
+		}
+		echo '<h3>';
+		esc_html_e( 'Trip Includes', 'wp-travel' );
+		echo '</h3>';
+		$trip_include = get_post_meta( $post->ID, 'wp_travel_trip_include', true );
+		wp_editor ( $trip_include , 'wp_travel_trip_include', array ( "media_buttons" => true ) );
+		echo '<br>';
+
+		echo '<h3>';
+		esc_html_e( 'Trip Excludes', 'wp-travel' );
+		echo '</h3>';
+		$trip_exclude = get_post_meta( $post->ID, 'wp_travel_trip_exclude', true );
+		wp_editor ( $trip_exclude , 'wp_travel_trip_exclude', array ( "media_buttons" => true ) );
+	}
+
 
 	/**
 	 * FAQs metabox callback
