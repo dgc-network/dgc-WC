@@ -94,6 +94,16 @@ class Trip_Options_Edit_Metabox {
 
 	function trip_options_metabox_callback( $post ) {
 
+		echo "<h3>Add Your Content Here</h3>";
+		$content = get_post_meta($post->ID, 'custom_editor', true);
+		
+		//This function adds the WYSIWYG Editor 
+		wp_editor ( 
+		 $content , 
+		 'custom_editor', 
+		 array ( "media_buttons" => true ) 
+		);
+		
 		/**
 		 * Retrieves a post meta field for the given post ID.
 		 * get_post_meta( int $post_id, string $key = '', bool $single = false )
@@ -384,22 +394,22 @@ class Trip_Options_Edit_Metabox {
 		if ( is_array( $tabs ) && count( $tabs ) > 0 ) {
 			foreach ( $tabs as $x=>$tab ) {
 				echo '<li class="tab-li" id="tab-li-' . $x . '"><span><i class="fas fa-bars"></i>';
-				$tab_custom = esc_attr( $tabs[$x]['label'] );
-				echo $tab_custom . '</span>';
+				$tab_label = esc_attr( $tabs[$x]['label'] );
+				echo $tab_label . '</span>';
 				echo '
 				<table class="update-tab" style="width:100%">
 					<tbody>
 					<tr>
-						<th>Global Trip Title</th>
-						<td><input type="text" class="tab_item_global" name="tab_item_global-' . $x . '" value="' . esc_attr( $tabs[$x]['use_global'] ) . '" class="regular-text"></td>
+						<th>Default Trip Title</th>
+						<td><input type="text" class="tab_item_default" name="tab_item_default-' . $x . '" value="' . esc_attr( $tabs[$x]['use_global'] ) . '></td>
 					</tr>
 					<tr>
 						<th>Custom Trip Title</th>
-						<td><input type="text" class="item-title" name="tab_item_custom-' . $x . '" value="' . $tab_custom . '" class="regular-text"></td>
+						<td><input type="text" class="item-title" name="tab_item_custom-' . $x . '" value="' . $tab_label . '></td>
 					</tr>
 					<tr>
 						<th>Display</th>
-						<td><input type="checkbox" checked name="tab_item_show_in_menu-' . $x . '" value="' . esc_attr( $tabs[$x]['show_in_menu'] ) . '" class="regular-text"></td>
+						<td><input type="checkbox" checked name="tab_item_show_in_menu-' . $x . '" value="' . esc_attr( $tabs[$x]['show_in_menu'] ) . '></td>
 					</tr>
 					</tbody>
 				</table>
