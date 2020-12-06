@@ -25,7 +25,7 @@ class Trip_Options_View_Metabox {
 		$tabs['includes_excludes_tab'] = array(
 			'title' 	=> __( 'Includes/Excludes', 'wp-travel' ),
 			'priority' 	=> 30,
-			'callback' 	=> array( __CLASS__, 'woo_new_product_tab_content' )
+			'callback' 	=> array( __CLASS__, 'includes_tab_content' )
 		);
 		$tabs['facts_tab'] = array(
 			'title' 	=> __( 'Facts', 'wp-travel' ),
@@ -105,5 +105,39 @@ class Trip_Options_View_Metabox {
 			<span><?php esc_html_e( 'No FAQs found.', 'wp-travel' ); ?></span><?php
 		}
 	}
+
+	function includes_tab_content() {
+		$post_id = get_the_ID();
+		$trip_include = get_post_meta( $post_id, 'wp_travel_trip_include', true );
+		$trip_exclude = get_post_meta( $post_id, 'wp_travel_trip_exclude', true );
+/*
+		echo '$post->ID = ' . $post_id;
+		echo '{';
+			foreach ( $faqs as $key=>$vales ) {
+				echo $key.':{';
+				foreach ( $vales as $key=>$value ) {
+					echo '{'.$key.':'.$value.'},';
+				}
+				echo '},';
+			}
+		echo '}';
+*/		
+		esc_html_e( 'Include : ', 'wp-travel' );
+		echo esc_attr( $trip_include );
+		echo 'br';
+		esc_html_e( 'Exclude : ', 'wp-travel' );
+		echo esc_attr( $trip_exclude );
+/*		
+		if ( is_array( $faqs ) && count( $faqs ) > 0 ) { ?>
+			<ul><?php
+			foreach ( $faqs as $key=>$value ) { ?>
+				<li><?php echo esc_attr( $faqs[$key]['question'] ); ?><br><?php
+				echo esc_attr( $faqs[$key]['answer'] ); ?></li><?php
+			} ?></ul><?php
+		} else { ?>
+			<span><?php esc_html_e( 'No FAQs found.', 'wp-travel' ); ?></span><?php
+		}
+*/		
+	}	
 }
 new Trip_Options_View_Metabox;

@@ -146,14 +146,14 @@ class Trip_Options_Edit_Metabox {
 		echo '<h3>';
 		esc_html_e( 'Trip Includes', 'wp-travel' );
 		echo '</h3>';
-		$trip_include = get_post_meta( $post->ID, 'wp_travel_trip_include', true );		
+		$trip_include = get_post_meta( $post->ID, 'wp_travel_trip_include', true );
 		wp_editor ( $trip_include , 'wp_travel_trip_include', array ( "media_buttons" => true ) );
 		echo '<br>';
 
 		echo '<h3>';
 		esc_html_e( 'Trip Excludes', 'wp-travel' );
 		echo '</h3>';
-		$trip_exclude = get_post_meta( $post->ID, 'wp_travel_trip_exclude', true );		
+		$trip_exclude = get_post_meta( $post->ID, 'wp_travel_trip_exclude', true );
 		wp_editor ( $trip_exclude , 'wp_travel_trip_exclude', array ( "media_buttons" => true ) );
 	}
 
