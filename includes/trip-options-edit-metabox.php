@@ -393,6 +393,18 @@ class Trip_Options_Edit_Metabox {
 							<td></td>
 						</tr>
 						<tr>
+							<td>' . esc_html_e( 'No Categories found.', 'wp-travel' ) . '</td>
+							<td></td>
+						</tr>
+						<tr>
+							<th>Trip Extras</th>
+							<td></td>
+						</tr>
+						<tr>
+							<td>' . esc_html_e( 'Please add extras first', 'wp-travel' ) . '</td>
+							<td></td>
+						</tr>
+						<tr>
 							<td></td>
 							<td class="remove-pricing" style="text-align:right"><button id="remove-pricing-' . $x . '" style="color:red" type="button">' . $remove_pricing . '</button></td>
 						</tr>
