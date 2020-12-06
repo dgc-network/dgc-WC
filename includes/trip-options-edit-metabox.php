@@ -313,6 +313,7 @@ class Trip_Options_Edit_Metabox {
 		if ( ! $post ) {
 			return;
 		}
+/*		
 		$pricings = WP_Travel_Helpers_Pricings::get_pricings( $post->ID );
 		if ( ! is_wp_error( $pricings ) && 'WP_TRAVEL_TRIP_PRICINGS' === $pricings['code'] ) {
 			$trip_data['pricings'] = (array) $pricings['pricings'];
@@ -327,7 +328,7 @@ class Trip_Options_Edit_Metabox {
 		if ( ! is_wp_error( $excluded_dates_times ) && 'WP_TRAVEL_TRIP_EXCLUDED_DATES_TIMES' === $excluded_dates_times['code'] ) {
 			$trip_data['excluded_dates_times'] = (array) $excluded_dates_times['dates_times'];
 		}
-
+*/
 
 		echo '$post->ID = ' . $post->ID;
 		echo '{';
