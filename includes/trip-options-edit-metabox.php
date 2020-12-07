@@ -150,10 +150,10 @@ class Trip_Options_Edit_Metabox {
 		$trip_code = $trip_data['trip']['trip_code'];
 		$trip_outline = $trip_data['trip']['trip_outline'];
 		$itineraries = $trip_data['trip']['itineraries'];
-/*		
+	
 		echo '$post->ID = ' . $post->ID;
 		echo '{';
-			foreach ( $trip_data as $key=>$values ) {
+			foreach ( $itineraries as $key=>$values ) {
 				echo $key.':{';
 				foreach ( $values as $key=>$value ) {
 					echo '{'.$key.':'.$value.'},';
@@ -161,19 +161,7 @@ class Trip_Options_Edit_Metabox {
 				echo '},';
 			}
 		echo '}';
-*/		
-/*
-		echo '$post->ID = ' . $post->ID;
-		echo '{';
-		foreach ( $itineraries as $key=>$itinerary ) {
-			echo $key.':{';
-			foreach ( $itinerary as $key=>$value ) {
-				echo '{'.$key.':'.$value.'},';
-			}
-			echo '},';
-		}
-		echo '}';
-*/
+
 		$remove_itinerary = __( "- Remove Itinerary", "wp-travel" );
 		$xx = 0;
 		?>
@@ -655,6 +643,17 @@ class Trip_Options_Edit_Metabox {
 		$trip_data = WP_Travel_Helpers_Trips::get_trip( $post->ID );
 		$trip_tabs = $trip_data['trip']['trip_tabs'];
 
+		echo '$post->ID = ' . $post->ID;
+		echo '{';
+			foreach ( $trip_tabs as $key=>$values ) {
+				echo $key.':{';
+				foreach ( $values as $key=>$value ) {
+					echo '{'.$key.':'.$value.'},';
+				}
+				echo '},';
+			}
+		echo '}';
+
 		?>
 		<ul id="tabs-ul" style="width:100%" >
 		<?php
@@ -662,7 +661,7 @@ class Trip_Options_Edit_Metabox {
 			foreach ( $trip_tabs as $key=>$value ) {
 				echo '<li class="tab-li" id="tab-li-' . $key . '"><span><i class="fas fa-bars"></i>';
 				$tab_label = esc_attr( $trip_tabs[$key]['label'] );
-				echo $tab_label . '</span>';
+				echo $tab_label . '</span><p style="display:none">' . $key . '</p>';
 				echo '
 				<table class="update-tab" style="width:100%">
 					<tbody>
