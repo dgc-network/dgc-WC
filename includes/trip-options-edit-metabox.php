@@ -765,6 +765,7 @@ class Trip_Options_Edit_Metabox {
 		 * Updates a post meta field based on the given post ID.
 		 * update_post_meta( int $post_id, string $meta_key, mixed $meta_value, mixed $prev_value = '' )
 		 */
+		$trip_data = WP_Travel_Helpers_Trips::get_trip( $post_id );
 		$pricings = array();
 		$xx = 0;
 		for ($x = 0; $x < 100; $x++) {
