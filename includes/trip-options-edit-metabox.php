@@ -147,9 +147,9 @@ class Trip_Options_Edit_Metabox {
 		//$trip_outline = get_post_meta( $post->ID, 'wp_travel_outline', true );
 		//$itineraries = get_post_meta( $post->ID, 'wp_travel_trip_itinerary_data', true );
 		$trip_data = WP_Travel_Helpers_Trips::get_trip( $post->ID );
-		$trip_code = $trip_data['trip_code'];
-		$trip_outline = $trip_data['trip_outline'];
-		$itineraries = $trip_data['itineraries'];
+		$trip_code = $trip_data['trip']['trip_code'];
+		$trip_outline = $trip_data['trip']['trip_outline'];
+		$itineraries = $trip_data['trip']['itineraries'];
 		echo '$post->ID = ' . $post->ID;
 		echo '{';
 			foreach ( $trip_data as $key=>$values ) {
