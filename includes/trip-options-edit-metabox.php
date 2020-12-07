@@ -150,6 +150,7 @@ class Trip_Options_Edit_Metabox {
 		$trip_code = $trip_data['trip']['trip_code'];
 		$trip_outline = $trip_data['trip']['trip_outline'];
 		$itineraries = $trip_data['trip']['itineraries'];
+/*		
 		echo '$post->ID = ' . $post->ID;
 		echo '{';
 			foreach ( $trip_data as $key=>$values ) {
@@ -160,6 +161,7 @@ class Trip_Options_Edit_Metabox {
 				echo '},';
 			}
 		echo '}';
+*/		
 /*
 		echo '$post->ID = ' . $post->ID;
 		echo '{';
@@ -327,35 +329,17 @@ class Trip_Options_Edit_Metabox {
 		if ( ! $post ) {
 			return;
 		}
-		//$pricings = wp_travel_get_trip_pricings( $post->ID );
 		$trip_data = WP_Travel_Helpers_Trips::get_trip( $post->ID );
-		$pricings = $trip_data['pricings'];
-/*		
-		$pricings = WP_Travel_Helpers_Pricings::get_pricings( $post->ID );
-		if ( ! is_wp_error( $pricings ) && 'WP_TRAVEL_TRIP_PRICINGS' === $pricings['code'] ) {
-			$trip_data['pricings'] = (array) $pricings['pricings'];
-		}
-
-		$dates = WP_Travel_Helpers_Trip_Dates::get_dates( $post->ID );
-		if ( ! is_wp_error( $dates ) && 'WP_TRAVEL_TRIP_DATES' === $dates['code'] ) {
-			$trip_data['dates'] = (array) $dates['dates'];
-		}
-
-		$excluded_dates_times = WP_Travel_Helpers_Trip_Excluded_Dates_Times::get_dates_times( $post->ID );
-		if ( ! is_wp_error( $excluded_dates_times ) && 'WP_TRAVEL_TRIP_EXCLUDED_DATES_TIMES' === $excluded_dates_times['code'] ) {
-			$trip_data['excluded_dates_times'] = (array) $excluded_dates_times['dates_times'];
-		}
-*/
-
+		$pricings = $trip_data['trip']['pricings'];
 		echo '$post->ID = ' . $post->ID;
 		echo '{';
-		foreach ( $pricings as $key=>$pricing ) {
-			echo $key.':{';
-			foreach ( $pricing as $key=>$value ) {
-				echo '{'.$key.':'.$value.'},';
+			foreach ( $pricings as $key=>$values ) {
+				echo $key.':{';
+				foreach ( $values as $key=>$value ) {
+					echo '{'.$key.':'.$value.'},';
+				}
+				echo '},';
 			}
-			echo '},';
-		}
 		echo '}';
 
 		$remove_pricing = __( "- Remove Price", "wp-travel" );
@@ -507,12 +491,11 @@ class Trip_Options_Edit_Metabox {
 			return;
 		}
 		$trip_data = WP_Travel_Helpers_Trips::get_trip( $post->ID );
-		$trip_include = $trip_data['trip_include'];
-		$trip_exclude = $trip_data['trip_exclude'];
+		$trip_include = $trip_data['trip']['trip_include'];
+		$trip_exclude = $trip_data['trip']['trip_exclude'];
 		echo '<h3>';
 		esc_html_e( 'Trip Includes', 'wp-travel' );
 		echo '</h3>';
-		//$trip_include = get_post_meta( $post->ID, 'wp_travel_trip_include', true );
 		wp_editor ( $trip_include , 'wp_travel_trip_include', array ( "media_buttons" => true ) );
 		echo '<br>';
 		echo '<br>';
@@ -520,7 +503,6 @@ class Trip_Options_Edit_Metabox {
 		echo '<h3>';
 		esc_html_e( 'Trip Excludes', 'wp-travel' );
 		echo '</h3>';
-		//$trip_exclude = get_post_meta( $post->ID, 'wp_travel_trip_exclude', true );
 		wp_editor ( $trip_exclude , 'wp_travel_trip_exclude', array ( "media_buttons" => true ) );
 	}
 
@@ -534,20 +516,9 @@ class Trip_Options_Edit_Metabox {
 		if ( ! $post ) {
 			return;
 		}
-		//$faqs = wp_travel_get_faqs( $post->ID );
 		$trip_data = WP_Travel_Helpers_Trips::get_trip( $post->ID );
-		$faqs = $trip_data['faqs'];
-/*		
-		echo '{';
-		foreach ( $faqs as $key=>$faq ) {
-			echo $key.':{';
-			foreach ( $faq as $key=>$value ) {
-				echo '{'.$key.':'.$value.'},';
-			}
-			echo '},';
-		}
-		echo '}';
-*/
+		$faqs = $trip_data['trip']['faqs'];
+
 		$remove_faq = __( "- Remove FAQ", "wp-travel" );
 		$xx = 0;
 		?>
@@ -681,20 +652,9 @@ class Trip_Options_Edit_Metabox {
 		if ( ! $post ) {
 			return;
 		}
-		//$tabs = wp_travel_get_default_trip_tabs();
 		$trip_data = WP_Travel_Helpers_Trips::get_trip( $post->ID );
-		$trip_tabs = $trip_data['trip_tabs'];
-/*		
-		echo '{';
-		foreach ( $tabs as $key=>$tab ) {
-			echo $key.':{';
-			foreach ( $tab as $key=>$value ) {
-				echo '{'.$key.':'.$value.'},';
-			}
-			echo '},';
-		}
-		echo '}';
-*/
+		$trip_tabs = $trip_data['trip']['trip_tabs'];
+
 		?>
 		<ul id="tabs-ul" style="width:100%" >
 		<?php
@@ -800,7 +760,7 @@ class Trip_Options_Edit_Metabox {
 				$xx++;
 			}
 		}
-		$trip_data['itineraries'] = $itineraries;
+		$trip_data['trip']['itineraries'] = $itineraries;
 		//update_post_meta( $post_id, 'wp_travel_trip_itinerary_data', $itineraries );
 
 		$pricings = array();
@@ -813,30 +773,36 @@ class Trip_Options_Edit_Metabox {
 				$xx++;
 			}
 		}
-		$trip_data['pricings'] = $pricings;
-		$response = WP_Travel_Helpers_Trips::update_trip( $post_id, $trip_data );
+		$trip_data['trip']['pricings'] = $pricings;
 
 		if (!empty($_POST['wp_travel_trip_include'])) {
 			$includes = $_POST['wp_travel_trip_include'];
-			update_post_meta($post_id, 'wp_travel_trip_include', $includes);
+			$trip_data['trip']['includes'] = $includes;
+			//update_post_meta($post_id, 'wp_travel_trip_include', $includes);
 		}
 
 		if (!empty($_POST['wp_travel_trip_exclude'])) {
 			$excludes = $_POST['wp_travel_trip_exclude'];
-			update_post_meta($post_id, 'wp_travel_trip_exclude', $excludes);
+			$trip_data['trip']['excludes'] = $excludes;
+			//update_post_meta($post_id, 'wp_travel_trip_exclude', $excludes);
 		}
 
 		$faqs = array();
+		$xx = 0;
 		for ($x = 0; $x < 100; $x++) {
 			if ($_POST['faq_item_question-' . $x] != "" && $_POST['faq_item_question-' . $x] != DEFAULT_QUESTION) {
-				$faqs['question'][$x] = $_POST['faq_item_question-' . $x];
-				$faqs['answer'][$x] = $_POST['faq_item_answer-' . $x];
+				$faqs['question'][$xx] = $_POST['faq_item_question-' . $x];
+				$faqs['answer'][$xx] = $_POST['faq_item_answer-' . $x];
+				$xx = 0;
 			}
 		}
-		$question = isset( $faqs['question'] ) ? $faqs['question'] : array();
-		$answer   = isset( $faqs['answer'] ) ? $faqs['answer'] : array();
-		update_post_meta( $post_id, 'wp_travel_faq_question', $question );
-		update_post_meta( $post_id, 'wp_travel_faq_answer', $answer );
+		$trip_data['trip']['faqs'] = $faqs;
+		//$question = isset( $faqs['question'] ) ? $faqs['question'] : array();
+		//$answer   = isset( $faqs['answer'] ) ? $faqs['answer'] : array();
+		//update_post_meta( $post_id, 'wp_travel_faq_question', $question );
+		//update_post_meta( $post_id, 'wp_travel_faq_answer', $answer );
+
+		$response = WP_Travel_Helpers_Trips::update_trip( $post_id, $trip_data );
 
 /*
 		if( isset( $_POST[ 'seo_robots' ] ) ) {
