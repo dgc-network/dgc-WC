@@ -313,7 +313,9 @@ class Trip_Options_Edit_Metabox {
 		if ( ! $post ) {
 			return;
 		}
-		$pricings = wp_travel_get_trip_pricings( $post->ID );
+		//$pricings = wp_travel_get_trip_pricings( $post->ID );
+		$trip_data = WP_Travel_Helpers_Trips::get_trip( $post->ID );
+		$pricings = $trip_data['pricings'];
 /*		
 		$pricings = WP_Travel_Helpers_Pricings::get_pricings( $post->ID );
 		if ( ! is_wp_error( $pricings ) && 'WP_TRAVEL_TRIP_PRICINGS' === $pricings['code'] ) {
@@ -384,11 +386,11 @@ class Trip_Options_Edit_Metabox {
 						</tr>
 						<tr>
 							<th>Min. Pax</th>
-							<td><input type="text" class="item-title" name="pricing_item_title-' . $x . '" value="' . esc_attr( $pricings[$x]['min'] ) . '"></td>
+							<td><input type="text" name="pricing_min_pax-' . $x . '" value="' . esc_attr( $pricings[$x]['min'] ) . '"></td>
 						</tr>
 						<tr>
 							<th>Max. Pax</th>
-							<td><input type="text" class="item-title" name="pricing_item_title-' . $x . '" value="' . esc_attr( $pricings[$x]['max'] ) . '"></td>
+							<td><input type="text" name="pricing_max_pax-' . $x . '" value="' . esc_attr( $pricings[$x]['max'] ) . '"></td>
 						</tr>
 						<tr>
 							<th>Price Categories</th>
@@ -763,6 +765,19 @@ class Trip_Options_Edit_Metabox {
 		 * Updates a post meta field based on the given post ID.
 		 * update_post_meta( int $post_id, string $meta_key, mixed $meta_value, mixed $prev_value = '' )
 		 */
+		$pricings = array();
+		$xx = 0;
+		for ($x = 0; $x < 100; $x++) {
+			if ($_POST['pricing_item_title-' . $x]!="" && $_POST['pricing_item_title-' . $x] != DEFAULT_PRICING) {
+				$pricings[$xx]['title'] = $_POST['pricing_item_title-' . $x];
+				$pricings[$xx]['min'] = $_POST['pricing_min_pax-' . $x];
+				$pricings[$xx]['max'] = $_POST['pricing_max_pax-' . $x];
+				$xx++;
+			}
+		}
+		$trip_data['pricings'] = $pricings;
+		$response = WP_Travel_Helpers_Trips::update_trip( $post_id, $trip_data );
+
 		$itineraries = array();
 		for ($x = 0; $x < 100; $x++) {
 			if ($_POST['itinerary_item_title-' . $x]!="" && $_POST['itinerary_item_title-' . $x] != DEFAULT_ITINERARY) {

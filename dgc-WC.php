@@ -45,6 +45,7 @@ define( 'WP_TRAVEL_MINIMUM_PARTIAL_PAYOUT', array( 10 ) ); // In percent.
 define( 'WP_TRAVEL_SLIP_UPLOAD_DIR', 'wp-travel-slip' ); // In percent.
 
 define( 'DEFAULT_ITINERARY', __( 'Day X, My plan', 'wp-travel' ) );
+define( 'DEFAULT_PRICING', __( 'Pricing Name', 'wp-travel' ) );
 define( 'DEFAULT_QUESTION', __( 'FAQ Questions', 'wp-travel' ) );
 
 
@@ -64,12 +65,14 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
     require_once BASE_DIR . 'wp-travel/inc/class-itinerary.php';
     require_once BASE_DIR . 'wp-travel/inc/email-template-functions.php';
     require_once BASE_DIR . 'wp-travel/inc/payments/wp-travel-payments.php';
+    require_once BASE_DIR . 'wp-travel/core/helpers/trips.php';
     require_once BASE_DIR . 'wp-travel/core/helpers/error-codes.php';
     require_once BASE_DIR . 'wp-travel/core/helpers/pricings.php';
     require_once BASE_DIR . 'wp-travel/core/helpers/trip-pricing-categories.php';
     require_once BASE_DIR . 'wp-travel/core/helpers/trip-pricing-categories-taxonomy.php';
     require_once BASE_DIR . 'wp-travel/core/helpers/trip-extras.php';
     require_once BASE_DIR . 'wp-travel/core/helpers/trip-dates.php';
+    require_once BASE_DIR . 'wp-travel/core/helpers/trip-excluded-dates-times.php';
     require_once BASE_DIR . 'wp-travel/core/helpers/response-codes.php';
 /*    
     require_once BASE_DIR . 'wp-travel/wp-travel.php';
@@ -77,8 +80,6 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
     require_once BASE_DIR . 'wp-travel/inc/helpers/helpers-price.php';
     require_once BASE_DIR . 'wp-travel/inc/helpers/helpers-fontawesome.php';
     require_once BASE_DIR . 'wp-travel/inc/admin/class-admin-metaboxes.php';
-    require_once BASE_DIR . 'wp-travel/core/helpers/trips.php';
-    require_once BASE_DIR . 'wp-travel/core/helpers/trip-excluded-dates-times.php';
 */    
 } else {
     //require_once $this->path('BASE_DIR','includes/no_woocommerce.php');
