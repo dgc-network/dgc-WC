@@ -658,24 +658,24 @@ class Trip_Options_Edit_Metabox {
 		<ul id="tabs-ul" style="width:100%" >
 		<?php
 		if ( is_array( $trip_tabs ) && count( $trip_tabs ) > 0 ) {
-			foreach ( $trip_tabs as $key=>$value ) {
-				echo '<li class="tab-li" id="tab-li-' . $key . '"><span><i class="fas fa-bars"></i>';
-				$tab_label = esc_attr( $trip_tabs[$key]['label'] );
-				echo $tab_label . '</span><p style="display:none">' . $key . '</p>';
+			foreach ( $trip_tabs as $x=>$value ) {
+				echo '<li class="tab-li" id="tab-li-' . $x . '"><span class="fas fa-bars">';
+				$tab_label = esc_attr( $trip_tabs[$x]['label'] );
+				echo $tab_label . '</span><p style="display:none">' . $x . '</p>';
 				echo '
 				<table class="update-tab" style="width:100%">
 					<tbody>
 					<tr>
 						<th>Default Trip Title</th>
-						<td><input type="text" class="tab_item_default" name="tab_item_default-' . $key . '" value="' . esc_attr( $trip_tabs[$key]['default_label'] ) . '></td>
+						<td><input type="text" name="tab_item_default-' . $x . '" value="' . esc_attr( $trip_tabs[$x]['default_label'] ) . '></td>
 					</tr>
 					<tr>
 						<th>Custom Trip Title</th>
-						<td><input type="text" class="item-title" name="tab_item_custom-' . $key . '" value="' . $tab_label . '></td>
+						<td><input type="text" class="item-title" name="tab_item_custom-' . $x . '" value="' . $tab_label . '></td>
 					</tr>
 					<tr>
 						<th>Display</th>
-						<td><input type="checkbox" checked name="tab_item_show_in_menu-' . $key . '" value="' . esc_attr( $trip_tabs[$key]['show_in_menu'] ) . '></td>
+						<td><input type="checkbox" checked name="tab_item_show_in_menu-' . $x . '" value="' . esc_attr( $trip_tabs[$x]['show_in_menu'] ) . '></td>
 					</tr>
 					</tbody>
 				</table>
