@@ -150,6 +150,15 @@ class Trip_Options_Edit_Metabox {
 		$trip_code = $trip_data['trip_code'];
 		$trip_outline = $trip_data['trip_outline'];
 		$itineraries = $trip_data['itineraries'];
+		echo '{';
+			foreach ( $trip_data as $key=>$values ) {
+				echo $key.':{';
+				foreach ( $values as $key=>$value ) {
+					echo '{'.$key.':'.$value.'},';
+				}
+				echo '},';
+			}
+		echo '}';
 /*
 		echo '$post->ID = ' . $post->ID;
 		echo '{';
