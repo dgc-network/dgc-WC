@@ -313,6 +313,7 @@ class Trip_Options_Edit_Metabox {
 		if ( ! $post ) {
 			return;
 		}
+		$pricings = wp_travel_get_trip_pricings( $post->ID );
 /*		
 		$pricings = WP_Travel_Helpers_Pricings::get_pricings( $post->ID );
 		if ( ! is_wp_error( $pricings ) && 'WP_TRAVEL_TRIP_PRICINGS' === $pricings['code'] ) {
