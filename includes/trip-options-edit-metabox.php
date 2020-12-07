@@ -368,7 +368,7 @@ class Trip_Options_Edit_Metabox {
 				for ($x = 0; $x < 100; $x++) {
 					echo '<li class="pricing-li" id="pricing-li-' . $x . '"><span><i class="fas fa-bars"></i>';
 					if ($xx<=0) {
-						$pricing_title = DEFAULT_ITINERARY;
+						$pricing_title = DEFAULT_PRICING;
 						echo $pricing_title . '</span><p style="display:none"></p>';
 					} else {
 						$pricing_title = esc_attr( $pricings[$x]['title'] );
@@ -384,18 +384,18 @@ class Trip_Options_Edit_Metabox {
 						</tr>
 						<tr>
 							<th>Min. Pax</th>
-							<td><input type="text" name="pricing_min_pax-' . $x . '" value="' . esc_attr( $pricings[$x]['min'] ) . '"></td>
+							<td><input type="text" name="pricing_min_pax-' . $x . '" value="' . esc_attr( $pricings[$x]['min_pax'] ) . '"></td>
 						</tr>
 						<tr>
 							<th>Max. Pax</th>
-							<td><input type="text" name="pricing_max_pax-' . $x . '" value="' . esc_attr( $pricings[$x]['max'] ) . '"></td>
+							<td><input type="text" name="pricing_max_pax-' . $x . '" value="' . esc_attr( $pricings[$x]['max_pax'] ) . '"></td>
 						</tr>
 						<tr>
 							<th>Price Categories</th>
 							<td></td>
 						</tr>
 						<tr>
-							<td>' . esc_html_e( 'No Categories found.', 'wp-travel' ) . '</td>
+							<th>' . esc_html_e( 'No Categories found.', 'wp-travel' ) . '</th>
 							<td></td>
 						</tr>
 						<tr>
@@ -403,7 +403,7 @@ class Trip_Options_Edit_Metabox {
 							<td></td>
 						</tr>
 						<tr>
-							<td>' . esc_html_e( 'Please add extras first', 'wp-travel' ) . '</td>
+							<th>' . esc_html_e( 'Please add extras first', 'wp-travel' ) . '</th>
 							<td></td>
 						</tr>
 						<tr>
@@ -659,24 +659,24 @@ class Trip_Options_Edit_Metabox {
 		<ul id="tabs-ul" style="width:100%" >
 		<?php
 		if ( is_array( $trip_tabs ) && count( $trip_tabs ) > 0 ) {
-			foreach ( $trip_tabs as $x=>$tab ) {
-				echo '<li class="tab-li" id="tab-li-' . $x . '"><span><i class="fas fa-bars"></i>';
-				$tab_label = esc_attr( $tabs[$x]['label'] );
+			foreach ( $trip_tabs as $key=>$value ) {
+				echo '<li class="tab-li" id="tab-li-' . $key . '"><span><i class="fas fa-bars"></i>';
+				$tab_label = esc_attr( $trip_tabs[$key]['label'] );
 				echo $tab_label . '</span>';
 				echo '
 				<table class="update-tab" style="width:100%">
 					<tbody>
 					<tr>
 						<th>Default Trip Title</th>
-						<td><input type="text" class="tab_item_default" name="tab_item_default-' . $x . '" value="' . esc_attr( $tabs[$x]['default_label'] ) . '></td>
+						<td><input type="text" class="tab_item_default" name="tab_item_default-' . $key . '" value="' . esc_attr( $trip_tabs[$key]['default_label'] ) . '></td>
 					</tr>
 					<tr>
 						<th>Custom Trip Title</th>
-						<td><input type="text" class="item-title" name="tab_item_custom-' . $x . '" value="' . $tab_label . '></td>
+						<td><input type="text" class="item-title" name="tab_item_custom-' . $key . '" value="' . $tab_label . '></td>
 					</tr>
 					<tr>
 						<th>Display</th>
-						<td><input type="checkbox" checked name="tab_item_show_in_menu-' . $x . '" value="' . esc_attr( $tabs[$x]['show_in_menu'] ) . '></td>
+						<td><input type="checkbox" checked name="tab_item_show_in_menu-' . $key . '" value="' . esc_attr( $trip_tabs[$key]['show_in_menu'] ) . '></td>
 					</tr>
 					</tbody>
 				</table>
@@ -768,8 +768,8 @@ class Trip_Options_Edit_Metabox {
 		for ($x = 0; $x < 100; $x++) {
 			if ($_POST['pricing_item_title-' . $x]!="" && $_POST['pricing_item_title-' . $x] != DEFAULT_PRICING) {
 				$pricings[$xx]['title'] = $_POST['pricing_item_title-' . $x];
-				$pricings[$xx]['min'] = $_POST['pricing_min_pax-' . $x];
-				$pricings[$xx]['max'] = $_POST['pricing_max_pax-' . $x];
+				$pricings[$xx]['min_pax'] = $_POST['pricing_min_pax-' . $x];
+				$pricings[$xx]['max_pax'] = $_POST['pricing_max_pax-' . $x];
 				$xx++;
 			}
 		}
