@@ -36,7 +36,7 @@ class Trip_Options_Edit_Metabox {
 		<div id="mytabs">
 			<ul class="category-tabs">
 				<li><a href="#tab_itinerary"><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></a></li>
-				<li><a href="#tab_prices_dates"><?php esc_html_e( 'Prices & Dates', 'wp-travel' ); ?></a></li>
+<!--			<li><a href="#tab_prices_dates"><?php //esc_html_e( 'Prices & Dates', 'wp-travel' ); ?></a></li>  -->
 				<li><a href="#tab_includes_excludes"><?php esc_html_e( 'Includes/Excludes', 'wp-travel' ); ?></a></li>
 				<li><a href="#tab_facts"><?php esc_html_e( 'Facts', 'wp-travel' ); ?></a></li>
 				<li><a href="#tab_gallery"><?php esc_html_e( 'Gallery', 'wp-travel' ); ?></a></li>
@@ -143,13 +143,13 @@ class Trip_Options_Edit_Metabox {
 		if ( ! $post ) {
 			return;
 		}
-		//$trip_code = wp_travel_get_trip_code( $post->ID );
-		//$trip_outline = get_post_meta( $post->ID, 'wp_travel_outline', true );
-		//$itineraries = get_post_meta( $post->ID, 'wp_travel_trip_itinerary_data', true );
-		$trip_data = WP_Travel_Helpers_Trips::get_trip( $post->ID );
-		$trip_code = $trip_data['trip']['trip_code'];
-		$trip_outline = $trip_data['trip']['trip_outline'];
-		$itineraries = $trip_data['trip']['itineraries'];
+		$trip_code = wp_travel_get_trip_code( $post->ID );
+		$trip_outline = get_post_meta( $post->ID, 'wp_travel_outline', true );
+		$itineraries = get_post_meta( $post->ID, 'wp_travel_trip_itinerary_data', true );
+		//$trip_data = WP_Travel_Helpers_Trips::get_trip( $post->ID );
+		//$trip_code = $trip_data['trip']['trip_code'];
+		//$trip_outline = $trip_data['trip']['trip_outline'];
+		//$itineraries = $trip_data['trip']['itineraries'];
 	
 		echo '$post->ID = ' . $post->ID;
 		echo '{';
@@ -478,9 +478,11 @@ class Trip_Options_Edit_Metabox {
 		if ( ! $post ) {
 			return;
 		}
-		$trip_data = WP_Travel_Helpers_Trips::get_trip( $post->ID );
-		$trip_include = $trip_data['trip']['trip_include'];
-		$trip_exclude = $trip_data['trip']['trip_exclude'];
+		//$trip_data = WP_Travel_Helpers_Trips::get_trip( $post->ID );
+		//$trip_include = $trip_data['trip']['trip_include'];
+		//$trip_exclude = $trip_data['trip']['trip_exclude'];
+		$trip_include = get_post_meta( $post->ID, 'wp_travel_trip_include', true );
+		$trip_exclude = get_post_meta( $post->ID, 'wp_travel_trip_exclude', true );
 		echo '<h3>';
 		esc_html_e( 'Trip Includes', 'wp-travel' );
 		echo '</h3>';
@@ -504,8 +506,9 @@ class Trip_Options_Edit_Metabox {
 		if ( ! $post ) {
 			return;
 		}
-		$trip_data = WP_Travel_Helpers_Trips::get_trip( $post->ID );
-		$faqs = $trip_data['trip']['faqs'];
+		//$trip_data = WP_Travel_Helpers_Trips::get_trip( $post->ID );
+		//$faqs = $trip_data['trip']['faqs'];
+		$faqs = wp_travel_get_faqs( $post->ID );
 
 		$remove_faq = __( "- Remove FAQ", "wp-travel" );
 		$xx = 0;
@@ -640,8 +643,9 @@ class Trip_Options_Edit_Metabox {
 		if ( ! $post ) {
 			return;
 		}
-		$trip_data = WP_Travel_Helpers_Trips::get_trip( $post->ID );
-		$trip_tabs = $trip_data['trip']['trip_tabs'];
+		//$trip_data = WP_Travel_Helpers_Trips::get_trip( $post->ID );
+		//$trip_tabs = $trip_data['trip']['trip_tabs'];
+		$trip_tabs = wp_travel_get_admin_trip_tabs( $post->ID );
 
 		echo '$post->ID = ' . $post->ID;
 		echo '{';
@@ -746,7 +750,8 @@ class Trip_Options_Edit_Metabox {
 		 * Updates a post meta field based on the given post ID.
 		 * update_post_meta( int $post_id, string $meta_key, mixed $meta_value, mixed $prev_value = '' )
 		 */
-		$trip_data = WP_Travel_Helpers_Trips::get_trip( $post_id );
+
+		//$trip_data = WP_Travel_Helpers_Trips::get_trip( $post_id );
 		$itineraries = array();
 		$xx = 0;
 		for ($x = 0; $x < 100; $x++) {
@@ -759,8 +764,8 @@ class Trip_Options_Edit_Metabox {
 				$xx++;
 			}
 		}
-		$trip_data['trip']['itineraries'] = $itineraries;
-		//update_post_meta( $post_id, 'wp_travel_trip_itinerary_data', $itineraries );
+		//$trip_data['trip']['itineraries'] = $itineraries;
+		update_post_meta( $post_id, 'wp_travel_trip_itinerary_data', $itineraries );
 
 		$pricings = array();
 		$xx = 0;
@@ -772,18 +777,18 @@ class Trip_Options_Edit_Metabox {
 				$xx++;
 			}
 		}
-		$trip_data['trip']['pricings'] = $pricings;
+		//$trip_data['trip']['pricings'] = $pricings;
 
 		if (!empty($_POST['wp_travel_trip_include'])) {
 			$includes = $_POST['wp_travel_trip_include'];
-			$trip_data['trip']['includes'] = $includes;
-			//update_post_meta($post_id, 'wp_travel_trip_include', $includes);
+			//$trip_data['trip']['includes'] = $includes;
+			update_post_meta($post_id, 'wp_travel_trip_include', $includes);
 		}
 
 		if (!empty($_POST['wp_travel_trip_exclude'])) {
 			$excludes = $_POST['wp_travel_trip_exclude'];
-			$trip_data['trip']['excludes'] = $excludes;
-			//update_post_meta($post_id, 'wp_travel_trip_exclude', $excludes);
+			//$trip_data['trip']['excludes'] = $excludes;
+			update_post_meta($post_id, 'wp_travel_trip_exclude', $excludes);
 		}
 
 		$faqs = array();
