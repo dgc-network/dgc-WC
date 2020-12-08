@@ -32,7 +32,8 @@ class Trip_Options_Edit_Metabox {
 	}
  
 	function horizontal_tabs_metabox( $post ) {
-		$admin_tabs = new WP_Travel_Admin_Tabs();
+		//$admin_tabs = new WP_Travel_Admin_Tabs();
+		$admin_tabs = WP_Travel_Admin_Tabs::list_all();
 		echo $admin_tabs;
 		?>
 		<div id="mytabs">
