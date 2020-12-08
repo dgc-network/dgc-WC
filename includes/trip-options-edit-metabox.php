@@ -93,8 +93,12 @@ class Trip_Options_Edit_Metabox {
 				<?php self::trip_options_callback_tabs( $post )?>
 			</div>
 		</div>
-		<div><?php esc_html_e( 'Save changes', 'wp-travel' ); ?>
-		</div>
+		<table>
+			<tr>
+				<td><?php esc_html_e( 'Save Changes', 'wp-travel' ); ?></td>
+				<td style="text-align:right"><button id="save-changes" type="button"><?php esc_html_e( 'Save Changes', 'wp-travel' ); ?></button></td>
+			</tr>
+		</table>
 
 		<script>
 			jQuery(document).ready(function($) {
