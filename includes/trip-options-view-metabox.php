@@ -21,11 +21,11 @@ class Trip_Options_View_Metabox {
 				$tabs[$key] = array(
 					'title' 	=> __( $trip_tabs[$key]['label'], 'wp-travel' ),
 					'priority' 	=> 20,
-					'callback' 	=> array( __CLASS__, 'woo_new_product_tab_content' )
+					'callback' 	=> array( __CLASS__, $key . '_tab_content' )
 				);		
 			}
 		}
-
+/*
 		$tabs['itineraries_tab'] = array(
 			'title' 	=> __( 'Itineraries', 'woocommerce' ),
 			'priority' 	=> 10,
@@ -66,6 +66,7 @@ class Trip_Options_View_Metabox {
 			'priority' 	=> 50,
 			'callback' 	=> array( __CLASS__, 'woo_new_product_tab_content' )
 		);
+*/		
 		return $tabs;
 	}
 	
@@ -75,7 +76,8 @@ class Trip_Options_View_Metabox {
 		echo '<p>Here\'s your new product tab.</p>';
 	}	
 
-	function itineraries_tab_content() {
+	//function itineraries_tab_content() {
+	function overview_tab_content() {
 		$post_id = get_the_ID();
 		$trip_code = wp_travel_get_trip_code( $post_id );
 		$itineraries = get_post_meta( $post_id, 'wp_travel_trip_itinerary_data', true );
@@ -93,7 +95,7 @@ class Trip_Options_View_Metabox {
 		}
 	}
 
-	function includes_tab_content() {
+	function trip_include_tab_content() {
 		$post_id = get_the_ID();
 		$trip_include = get_post_meta( $post_id, 'wp_travel_trip_include', true );
 		$trip_exclude = get_post_meta( $post_id, 'wp_travel_trip_exclude', true );
@@ -101,12 +103,18 @@ class Trip_Options_View_Metabox {
 		echo '<br>';
 		echo esc_attr( $trip_include );
 		echo '<br>';
+	}	
+
+	function trip_exclude_tab_content() {
+		$post_id = get_the_ID();
+		$trip_include = get_post_meta( $post_id, 'wp_travel_trip_include', true );
+		$trip_exclude = get_post_meta( $post_id, 'wp_travel_trip_exclude', true );
 		esc_html_e( 'Exclude : ', 'wp-travel' );
 		echo '<br>';
 		echo esc_attr( $trip_exclude );
 	}	
 
-	function faqs_tab_content() {
+	function faq_tab_content() {
 		$post_id = get_the_ID();
 		$faqs = wp_travel_get_faqs( $post_id );
 /*
