@@ -666,6 +666,7 @@ class Trip_Options_Edit_Metabox {
 				echo '<li class="tab-li" id="tab-li-' . $key . '"><span class="fas fa-bars">';
 				$tab_label = esc_attr( $trip_tabs[$key]['label'] );
 				echo $tab_label . '</span><p style="display:none">' . $key . '</p>';
+/*
 				echo '
 				<table class="update-tab" style="width:100%">
 					<tbody>
@@ -684,6 +685,7 @@ class Trip_Options_Edit_Metabox {
 					</tbody>
 				</table>
 				</li>';
+*/
 			}
 		}?>			
 		</ul>
