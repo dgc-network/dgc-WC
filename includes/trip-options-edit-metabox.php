@@ -646,7 +646,7 @@ class Trip_Options_Edit_Metabox {
 		//$trip_data = WP_Travel_Helpers_Trips::get_trip( $post->ID );
 		//$trip_tabs = $trip_data['trip']['trip_tabs'];
 		$trip_tabs = wp_travel_get_admin_trip_tabs( $post->ID );
-/*
+
 		echo '$post->ID = ' . $post->ID;
 		echo '{';
 			foreach ( $trip_tabs as $key=>$values ) {
@@ -657,7 +657,7 @@ class Trip_Options_Edit_Metabox {
 				echo '},';
 			}
 		echo '}';
-*/
+
 		?>
 		<ul id="tabs-ul" style="width:100%" >
 		<?php
