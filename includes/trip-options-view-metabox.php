@@ -33,11 +33,11 @@ class Trip_Options_View_Metabox {
 		$post_id = get_the_ID();
 		$trip_code = wp_travel_get_trip_code( $post_id );
 		$itineraries = get_post_meta( $post_id, 'wp_travel_trip_itinerary_data', true );
-		echo '<div style="text-align:left"><h4>';
+		echo '<div style="text-align:left"><h5>';
 		esc_html_e( 'Trip Code : ', 'wp-travel' );
 		echo esc_attr( $trip_code ); ?><br><?php
 		esc_html_e( 'Itinerary', 'wp-travel' );
-		echo '</h4></div>';
+		echo '</h5></div>';
 		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) { ?>
 			<ul><?php
 			foreach ( $itineraries as $x=>$itinerary ) { ?>
@@ -53,7 +53,7 @@ class Trip_Options_View_Metabox {
 		$post_id = get_the_ID();
 		$trip_include = get_post_meta( $post_id, 'wp_travel_trip_include', true );
 		echo '<h3>';
-		esc_html_e( 'Trip Include : ', 'wp-travel' );
+		esc_html_e( 'Trip Includes', 'wp-travel' );
 		echo '</h3>';
 		echo '<br>';
 		if (!empty($trip_include)) {
@@ -68,7 +68,7 @@ class Trip_Options_View_Metabox {
 		$post_id = get_the_ID();
 		$trip_exclude = get_post_meta( $post_id, 'wp_travel_trip_exclude', true );
 		echo '<h3>';
-		esc_html_e( 'Trip Exclude : ', 'wp-travel' );
+		esc_html_e( 'Trip Excludes', 'wp-travel' );
 		echo '</h3>';
 		echo '<br>';
 		if (!empty($trip_exclude)) {
