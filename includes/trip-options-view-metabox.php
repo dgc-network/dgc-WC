@@ -12,6 +12,20 @@ class Trip_Options_View_Metabox {
  	*/
 	function woo_new_product_tab( $tabs ) {
 	//function woo_new_product_tab() {
+
+		$tabs = array();
+		$post_id = get_the_ID();
+		$trip_tabs = wp_travel_get_admin_trip_tabs( $post_id );
+		if ( is_array( $trip_tabs ) && count( $trip_tabs ) > 0 ) {
+			foreach ( $trip_tabs as $key=>$value ) {
+				$tabs[$key] = array(
+					'title' 	=> __( $trip_tabs[$key]['label'], 'wp-travel' ),
+					'priority' 	=> 20,
+					'callback' 	=> array( __CLASS__, 'woo_new_product_tab_content' )
+				);		
+			}
+		}
+
 		$tabs['itineraries_tab'] = array(
 			'title' 	=> __( 'Itineraries', 'woocommerce' ),
 			'priority' 	=> 10,
