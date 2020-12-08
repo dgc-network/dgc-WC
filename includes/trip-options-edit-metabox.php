@@ -32,6 +32,8 @@ class Trip_Options_Edit_Metabox {
 	}
  
 	function horizontal_tabs_metabox( $post ) {
+		$admin_tabs = new WP_Travel_Admin_Tabs();
+		echo $admin_tabs;
 		?>
 		<div id="mytabs">
 			<ul class="category-tabs">
@@ -81,6 +83,8 @@ class Trip_Options_Edit_Metabox {
 			<div class="hidden" id="tab_tabs">
 				<?php self::trip_options_callback_tabs( $post )?>
 			</div>
+		</div>
+		<div><?php esc_html_e( 'Save changes', 'wp-travel' ); ?>
 		</div>
 
 		<script>
