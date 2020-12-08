@@ -51,7 +51,7 @@ class Trip_Options_Edit_Metabox {
 			</div>
 
 			<div class="hidden" id="tab_prices_dates">
-				<?php self::trip_options_callback_prices_dates( $post )?>
+				<?php //self::trip_options_callback_prices_dates( $post )?>
 			</div>
 
 			<div class="hidden" id="tab_includes_excludes">
