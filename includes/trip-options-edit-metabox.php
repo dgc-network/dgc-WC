@@ -150,7 +150,7 @@ class Trip_Options_Edit_Metabox {
 		//$trip_code = $trip_data['trip']['trip_code'];
 		//$trip_outline = $trip_data['trip']['trip_outline'];
 		//$itineraries = $trip_data['trip']['itineraries'];
-	
+/*	
 		echo '$post->ID = ' . $post->ID;
 		echo '{';
 			foreach ( $itineraries as $key=>$values ) {
@@ -161,7 +161,7 @@ class Trip_Options_Edit_Metabox {
 				echo '},';
 			}
 		echo '}';
-
+*/
 		$remove_itinerary = __( "- Remove Itinerary", "wp-travel" );
 		$xx = 0;
 		?>
@@ -662,24 +662,24 @@ class Trip_Options_Edit_Metabox {
 		<ul id="tabs-ul" style="width:100%" >
 		<?php
 		if ( is_array( $trip_tabs ) && count( $trip_tabs ) > 0 ) {
-			foreach ( $trip_tabs as $x=>$value ) {
-				echo '<li class="tab-li" id="tab-li-' . $x . '"><span class="fas fa-bars">';
-				$tab_label = esc_attr( $trip_tabs[$x]['label'] );
-				echo $tab_label . '</span><p style="display:none">' . $x . '</p>';
+			foreach ( $trip_tabs as $key=>$value ) {
+				echo '<li class="tab-li" id="tab-li-' . $key . '"><span class="fas fa-bars">';
+				$tab_label = esc_attr( $trip_tabs[$key]['label'] );
+				echo $tab_label . '</span><p style="display:none">' . $key . '</p>';
 				echo '
 				<table class="update-tab" style="width:100%">
 					<tbody>
 					<tr>
 						<th>Default Trip Title</th>
-						<td><input type="text" name="tab_item_default-' . $x . '" value="' . esc_attr( $trip_tabs[$x]['default_label'] ) . '></td>
+						<td><input type="text" name="tab_item_default-' . $key . '" value="' . esc_attr( $trip_tabs[$key]['label'] ) . '></td>
 					</tr>
 					<tr>
 						<th>Custom Trip Title</th>
-						<td><input type="text" class="item-title" name="tab_item_custom-' . $x . '" value="' . $tab_label . '></td>
+						<td><input type="text" class="item-title" name="tab_item_custom-' . $key . '" value="' . $tab_label . '></td>
 					</tr>
 					<tr>
 						<th>Display</th>
-						<td><input type="checkbox" checked name="tab_item_show_in_menu-' . $x . '" value="' . esc_attr( $trip_tabs[$x]['show_in_menu'] ) . '></td>
+						<td><input type="checkbox" checked name="tab_item_show_in_menu-' . $key . '" value="' . esc_attr( $trip_tabs[$key]['show_in_menu'] ) . '></td>
 					</tr>
 					</tbody>
 				</table>
