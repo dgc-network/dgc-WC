@@ -34,7 +34,15 @@ class Trip_Options_Edit_Metabox {
 	function horizontal_tabs_metabox( $post ) {
 		//$admin_tabs = new WP_Travel_Admin_Tabs();
 		$admin_tabs = WP_Travel_Admin_Tabs::list_all();
-		echo $admin_tabs;
+		echo '{';
+			foreach ( $admin_tabs as $key=>$values ) {
+				echo $key.':{';
+				foreach ( $values as $key=>$value ) {
+					echo '{'.$key.':'.$value.'},';
+				}
+				echo '},';
+			}
+		echo '}';
 		?>
 		<div id="mytabs">
 			<ul class="category-tabs">
@@ -103,11 +111,7 @@ class Trip_Options_Edit_Metabox {
 		$content = get_post_meta($post->ID, 'custom_editor', true);
 		
 		//This function adds the WYSIWYG Editor 
-		wp_editor ( 
-		 $content , 
-		 'custom_editor', 
-		 array ( "media_buttons" => true ) 
-		);
+		wp_editor ( $content , 'custom_editor', array ( "media_buttons" => true ) );
 		
 		/**
 		 * Retrieves a post meta field for the given post ID.
