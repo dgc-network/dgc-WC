@@ -33,11 +33,11 @@ class Trip_Options_View_Metabox {
 		$post_id = get_the_ID();
 		$trip_code = wp_travel_get_trip_code( $post_id );
 		$itineraries = get_post_meta( $post_id, 'wp_travel_trip_itinerary_data', true );
-		echo '<h4 style="text-align:left">';
+		echo '<div style="text-align:left"><h4>';
 		esc_html_e( 'Trip Code : ', 'wp-travel' );
 		echo esc_attr( $trip_code ); ?><br><?php
 		esc_html_e( 'Itinerary', 'wp-travel' );
-		echo '</h4>';
+		echo '</h4></div>';
 		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) { ?>
 			<ul><?php
 			foreach ( $itineraries as $x=>$itinerary ) { ?>
