@@ -666,26 +666,26 @@ class Trip_Options_Edit_Metabox {
 				echo '<li class="tab-li" id="tab-li-' . $key . '"><span class="fas fa-bars">';
 				$tab_label = esc_attr( $trip_tabs[$key]['label'] );
 				echo $tab_label . '</span><p style="display:none">' . $key . '</p>';
-/*
+
 				echo '
 				<table class="update-tab" style="width:100%">
 					<tbody>
 					<tr>
 						<th>Default Trip Title</th>
-						<td><input type="text" name="tab_item_default-' . $key . '" value="' . esc_attr( $trip_tabs[$key]['label'] ) . '></td>
+						<td><input type="text" name="tab_item_default-' . $key . '" value="' . esc_attr( $trip_tabs[$key]['label'] ) . '"></td>
 					</tr>
 					<tr>
 						<th>Custom Trip Title</th>
-						<td><input type="text" class="item-title" name="tab_item_custom-' . $key . '" value="' . $tab_label . '></td>
+						<td><input type="text" class="item-title" name="tab_item_custom-' . $key . '" value="' . $tab_label . '"></td>
 					</tr>
 					<tr>
 						<th>Display</th>
-						<td><input type="checkbox" checked name="tab_item_show_in_menu-' . $key . '" value="' . esc_attr( $trip_tabs[$key]['show_in_menu'] ) . '></td>
+						<td><input type="checkbox" checked name="tab_item_show_in_menu-' . $key . '" value="' . esc_attr( $trip_tabs[$key]['show_in_menu'] ) . '"></td>
 					</tr>
 					</tbody>
 				</table>
 				</li>';
-*/
+
 			}
 		}?>			
 		</ul>
