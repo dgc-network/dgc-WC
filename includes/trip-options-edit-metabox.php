@@ -790,8 +790,8 @@ class Trip_Options_Edit_Metabox {
 		$xx = 0;
 		for ($x = 0; $x < 100; $x++) {
 			if ($_POST['faq_item_question-' . $x] != "" && $_POST['faq_item_question-' . $x] != DEFAULT_QUESTION) {
-				$faqs['question'][$xx] = $_POST['faq_item_question-' . $x];
-				$faqs['answer'][$xx] = $_POST['faq_item_answer-' . $x];
+				$faqs['question'][$x] = $_POST['faq_item_question-' . $x];
+				$faqs['answer'][$x] = $_POST['faq_item_answer-' . $x];
 				$xx = 0;
 			}
 		}
