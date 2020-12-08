@@ -313,6 +313,7 @@ class Trip_Options_Edit_Metabox {
 			#itineraries-ul li table { background:#ffffff; border:1px solid #ccc; width:100%; display:none; margin-left:-1.2em; padding-left:1.5em; }
 			#itineraries-ul li .toggle-access { display:block; }
 			#first-itinerary { color:blue; text-decoration:underline; cursor:pointer;}
+			.item-title { width:100%;}
 			/*i.fas*/
 			.fa-bars:before { content: "\f0c9"; }
   		</style>
