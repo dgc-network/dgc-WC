@@ -103,7 +103,19 @@ class Trip_Options_Edit_Metabox {
 		<script>
 			jQuery(document).ready(function($) {
     			$("#mytabs .hidden").removeClass('hidden');
-    			$("#mytabs").tabs();
+				$("#mytabs").tabs();
+				
+				$("#save-changes").click( function(){
+					$.ajax({
+            			url:"test.php",    //the page containing php script
+            			type: "post",    //request type,
+            			dataType: 'json',
+            			data: {registration: "success", name: "xyz", email: "abc@gmail.com"},
+            			success:function(result){
+                			console.log(result.abc);
+            			}
+        			});
+				});
 			});
 		</script>
 		<?php
