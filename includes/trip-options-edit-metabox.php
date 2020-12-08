@@ -790,19 +790,19 @@ class Trip_Options_Edit_Metabox {
 		$xx = 0;
 		for ($x = 0; $x < 100; $x++) {
 			if ($_POST['faq_item_question-' . $x] != "" && $_POST['faq_item_question-' . $x] != DEFAULT_QUESTION) {
-				$faqs['question'][$x] = $_POST['faq_item_question-' . $x];
-				$faqs['answer'][$x] = $_POST['faq_item_answer-' . $x];
+				$faqs['question'][$xx] = $_POST['faq_item_question-' . $x];
+				$faqs['answer'][$xx] = $_POST['faq_item_answer-' . $x];
 				$xx++;
 			}
 		}
 		//$trip_data['trip']['faqs'] = $faqs;
-		$trip_data->faqs = $faqs;
-		//$question = isset( $faqs['question'] ) ? $faqs['question'] : array();
-		//$answer   = isset( $faqs['answer'] ) ? $faqs['answer'] : array();
-		//update_post_meta( $post_id, 'wp_travel_faq_question', $question );
-		//update_post_meta( $post_id, 'wp_travel_faq_answer', $answer );
+		//->faqs = $faqs;
+		$question = isset( $faqs['question'] ) ? $faqs['question'] : array();
+		$answer   = isset( $faqs['answer'] ) ? $faqs['answer'] : array();
+		update_post_meta( $post_id, 'wp_travel_faq_question', $question );
+		update_post_meta( $post_id, 'wp_travel_faq_answer', $answer );
 
-		$response = WP_Travel_Helpers_Trips::update_trip( $post_id, $trip_data );
+		//$response = WP_Travel_Helpers_Trips::update_trip( $post_id, $trip_data );
 
 /*
 		if( isset( $_POST[ 'seo_robots' ] ) ) {
