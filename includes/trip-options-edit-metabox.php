@@ -107,6 +107,48 @@ class Trip_Options_Edit_Metabox {
 				
 				$("#save-changes").click( function(){
 					$.ajax({
+                		type: 'POST',
+                		url: ajax_url,
+                		data: {
+                    		action:         'wpt_query_table_load_by_args',
+                    		temp_number:    temp_number,
+                    		targetTableArgs:targetTableArgs,
+                    		pageNumber:     pageNumber,
+                    		load_type:      load_type,
+                		},
+                		complete: function() {
+                    		$( document ).trigger( 'wc_fragments_refreshed' );
+                    		arrangingTDContentForMobile(); //@Since 5.2
+                    		loadMiniFilter(); //@Since 4.8                    
+                    		fixAfterAjaxLoad();
+                		},
+                		success: function(data) {
+                    		targetTableBody.html(data);
+                    		targetTableBody.css('opacity','1');
+                    
+                    		var $data = {
+                        		action:         'wpt_ajax_paginate_links_load',
+                        		temp_number:    temp_number,
+                        		targetTableArgs:targetTableArgs, 
+                        		pageNumber:     pageNumber,
+                        		load_type:      load_type,
+                    		};
+                    
+                    		loadPaginationLinks($data,temp_number);
+
+                    		removeCatTagLings();//Removing Cat,tag link, if eanabled from configure page
+                    		updateCheckBoxCount(temp_number); //Selection reArrange 
+                    		uncheckAllCheck(temp_number);//Uncheck All CheckBox after getting New pagination
+                    		emptyInstanceSearchBox(temp_number);//CleanUp or do empty Instant Search
+
+                    		pageNumber++; //Page Number Increasing 1 Plus
+                    		targetTable.attr('data-page_number',pageNumber);
+                		},
+                		error: function() {
+                    		console.log("Error On Ajax Query Load. Please check console.");
+                		},
+            		});
+					$.ajax({
             			url:"test.php",    //the page containing php script
             			type: "post",    //request type,
             			dataType: 'json',
