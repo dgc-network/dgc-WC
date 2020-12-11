@@ -23,15 +23,16 @@ class Trip_Options_View_Metabox {
 					</div>
 				</div>
 			</div>
-			<script type="text/javascript">
-				$(function () {
-					$('#datetimepicker3').datetimepicker({
-						format: 'HH:mm'
-					});
-				});
-			</script>
 		</div>
-		</div>	<?php
+		</div>	
+		<script type="text/javascript">
+			jQuery(document).ready(function($) {
+				$('#datetimepicker3').datetimepicker({
+						format: 'HH:mm'
+				});
+			});
+		</script>
+		<?php
 	}
          
 	/**
