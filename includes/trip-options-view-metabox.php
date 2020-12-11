@@ -38,7 +38,6 @@ class Trip_Options_View_Metabox {
 	/**
  	* Add a custom product data tab
  	*/
-	//function woo_new_product_tab( $tabs ) {
 	function woo_new_product_tab() {
 
 		$tabs = array();
@@ -56,7 +55,6 @@ class Trip_Options_View_Metabox {
 		return $tabs;
 	}
 	
-	//function itineraries_tab_content() {
 	function overview_tab_content() {
 		$post_id = get_the_ID();
 		$trip_code = wp_travel_get_trip_code( $post_id );
