@@ -266,8 +266,9 @@ class Trip_Options_Edit_Metabox {
 						$itinerary_title = esc_attr( $itineraries[$x]['title'] );
 					}
 					$xx--;
-					echo '<span class="fas fa-bars" id="itinerary_label">' . $itinerary_label . '</span>, ';
-					echo '<span id="itinerary_title">' . $itinerary_title . '</span><p style="display:none"></p>';
+					echo '<span class="fas fa-bars"></span>';
+					echo '<span class="itinerary_label">' . $itinerary_label . '</span>, ';
+					echo '<span class="itinerary_title">' . $itinerary_title . '</span><p style="display:none"></p>';
 					echo '
 					<table class="update-itinerary" style="width:100%">
 				  	  <tbody>
@@ -288,8 +289,8 @@ class Trip_Options_Edit_Metabox {
 							<td><input type="text" class="item_time" name="itinerary_item_time-' . $x . '" value="' . esc_attr( $itineraries[$x]['time'] ) . '"></td>
 						</tr>
 						<tr>
-							<td colspan="2" style="width:100%"><b>Description</b><br>
-							<textarea rows="3" name="itinerary_item_desc-' . $x . '">' . esc_attr( $itineraries[$x]['desc'] ) . '</textarea></td>
+							<td colspan="2"><b>Description</b><br>
+							<textarea rows="3" style="width:100%" name="itinerary_item_desc-' . $x . '">' . esc_attr( $itineraries[$x]['desc'] ) . '</textarea></td>
 						</tr>
 						<tr>
 							<th><label for="itinerary_item_robots">Itinerary robots</label></th>
@@ -334,10 +335,10 @@ class Trip_Options_Edit_Metabox {
 					};
 
 					$( element ).delegate(".item-label", "keyup", function(){
-						$( '#span-label', element ).text($(this).val());
+						$( '.span-label', element ).text($(this).val());
 					});
 					$( element ).delegate(".item-title", "keyup", function(){
-						$( '#span-title', element ).text($(this).val());
+						$( '.span-title', element ).text($(this).val());
 					});
 				});
 
