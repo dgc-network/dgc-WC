@@ -5,8 +5,35 @@ class Trip_Options_View_Metabox {
 	 */
 	function __construct() {
 		add_filter( 'woocommerce_product_tabs', array( __CLASS__, 'woo_new_product_tab' ) );
+		add_action( 'woocommerce_before_add_to_cart_button', array( __CLASS__, 'action_woocommerce_before_add_to_cart_button', 10, 0 ) );	
 	}
 
+	// define the woocommerce_before_add_to_cart_button callback 
+	function action_woocommerce_before_add_to_cart_button(  ) { ?>
+    	// make action magic happen here... 
+		<div class="container">
+		<div class="row">
+			<div class='col-sm-6'>
+				<div class="form-group">
+					<div class='input-group date' id='datetimepicker3'>
+						<input type='text' class="form-control" />
+						<span class="input-group-addon">
+							<span class="glyphicon glyphicon-time"></span>
+						</span>
+					</div>
+				</div>
+			</div>
+			<script type="text/javascript">
+				$(function () {
+					$('#datetimepicker3').datetimepicker({
+						format: 'HH:mm'
+					});
+				});
+			</script>
+		</div>
+		</div>	<?php
+	}
+         
 	/**
  	* Add a custom product data tab
  	*/
