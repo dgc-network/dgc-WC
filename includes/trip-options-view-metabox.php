@@ -24,7 +24,7 @@ class Trip_Options_View_Metabox {
 			</div>
 		</div>
 		</div><?php
-		echo '<input type="text" class="itinerary_item_date" name="itinerary_item_date-"';
+		echo '<input type="text" class="itinerary_item_date" name="itinerary_item_date-">';
 		?>
 		<script>
 			jQuery(document).ready(function($) {
