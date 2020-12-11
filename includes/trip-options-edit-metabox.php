@@ -257,29 +257,38 @@ class Trip_Options_Edit_Metabox {
 			<tr style="display:none" class="init-rows"><td colspan="2">
 				<ul id="itineraries-ul"><?php			  
 				for ($x = 0; $x < 100; $x++) {
-					echo '<li class="itinerary-li" id="itinerary-li-' . $x . '"><span><i class="fas fa-bars"></i>';
+					echo '<li class="itinerary-li" id="itinerary-li-' . $x . '">';
 					if ($xx<=0) {
-						$itinerary_title = DEFAULT_ITINERARY;
-						echo $itinerary_title . '</span><p style="display:none"></p>';
+						$itinerary_label = DEFAULT_ITINERARY_LABEL;
+						$itinerary_title = DEFAULT_ITINERARY_TITLE;
 					} else {
+						$itinerary_label = esc_attr( $itineraries[$x]['label'] );
 						$itinerary_title = esc_attr( $itineraries[$x]['title'] );
-						echo $itinerary_title . '</span><p style="display:none">' . $x . '</p>';
 					}
 					$xx--;
+					echo '<span class="fas fa-bars">' . $itinerary_label . '</span>, <span class="span-title">' . $itinerary_title . '</span><p style="display:none"></p>';
 					echo '
 					<table class="update-itinerary" style="width:100%">
 				  	  <tbody>
 						<tr>
-							<th>Itinerary title</th>
-							<td><input type="text" class="item-title" name="itinerary_item_title-' . $x . '" value="' . $itinerary_title . '" class="regular-text"></td>
+							<th>Itinerary label</th>
+							<td><input type="text" class="item-label" name="itinerary_item_label-' . $x . '" value="' . $itinerary_label . '"></td>
 						</tr>
 						<tr>
-							<th>Itinerary description</th>
-							<td><textarea rows="3" name="itinerary_item_desc-' . $x . '" class="regular-text">' . esc_attr( $itineraries[$x]['desc'] ) . '</textarea></td>
+							<th>Itinerary title</th>
+							<td><input type="text" class="item-title" name="itinerary_item_title-' . $x . '" value="' . $itinerary_title . '"></td>
 						</tr>
 						<tr>
 							<th>Itinerary date</th>
-							<td><input type="text" class="itinerary_item_date" name="itinerary_item_date-' . $x . '" value="' . esc_attr( $itineraries[$x]['date'] ) . '" class="regular-text"></td>
+							<td><input type="text" class="item_date" name="itinerary_item_date-' . $x . '" value="' . esc_attr( $itineraries[$x]['date'] ) . '"></td>
+						</tr>
+						<tr>
+							<th>Itinerary time</th>
+							<td><input type="text" class="item_time" name="itinerary_item_time-' . $x . '" value="' . esc_attr( $itineraries[$x]['time'] ) . '"></td>
+						</tr>
+						<tr>
+							<td colspan="2"><b>Itinerary description</b><br>
+							<textarea rows="3" name="itinerary_item_desc-' . $x . '">' . esc_attr( $itineraries[$x]['desc'] ) . '</textarea></td>
 						</tr>
 						<tr>
 							<th><label for="itinerary_item_tobots">Itinerary robots</label></th>
@@ -323,8 +332,11 @@ class Trip_Options_Edit_Metabox {
 						});
 					};
 
-					$( element ).delegate(".item-title", "keyup", function(){
+					$( element ).delegate(".item-label", "keyup", function(){
 						$( 'span', element ).text($(this).val());
+					});
+					$( element ).delegate(".item-title", "keyup", function(){
+						$( '.span-title', element ).text($(this).val());
 					});
 				});
 
@@ -356,7 +368,8 @@ class Trip_Options_Edit_Metabox {
 					});
 				} );
 
-				$( '.itinerary_item_date' ).datepicker();
+				$( '.item_date' ).datepicker();
+				$( '.item_time' ).datepicker({format: 'HH:mm'});
 			} );
 		</script>
 	
@@ -596,7 +609,7 @@ class Trip_Options_Edit_Metabox {
 				for ($x = 0; $x < 100; $x++) {
 					echo '<li class="faq-li" id="faq-li-' . $x . '"><span><i class="fas fa-bars"></i>';
 					if ($xx<=0) {
-						$faq_question = DEFAULT_QUESTION;
+						$faq_question = DEFAULT_FAQ_QUESTION;
 						echo $faq_question . '</span><p style="display:none"></p>';
 					} else {
 						$faq_question = esc_attr( $faqs[$x]['question'] );
@@ -813,7 +826,7 @@ class Trip_Options_Edit_Metabox {
 		$itineraries = array();
 		$xx = 0;
 		for ($x = 0; $x < 100; $x++) {
-			if ($_POST['itinerary_item_title-' . $x]!="" && $_POST['itinerary_item_title-' . $x] != DEFAULT_ITINERARY) {
+			if ($_POST['itinerary_item_title-' . $x]!="" && $_POST['itinerary_item_title-' . $x] != DEFAULT_ITINERARY_TITLE) {
 				$itineraries[$xx]['title'] = $_POST['itinerary_item_title-' . $x];
 				$itineraries[$xx]['date'] = $_POST['itinerary_item_date-' . $x];
 				$itineraries[$xx]['time'] = $_POST['itinerary_item_time-' . $x];
@@ -848,7 +861,7 @@ class Trip_Options_Edit_Metabox {
 		$faqs = array();
 		$xx = 0;
 		for ($x = 0; $x < 100; $x++) {
-			if ($_POST['faq_item_question-' . $x] != "" && $_POST['faq_item_question-' . $x] != DEFAULT_QUESTION) {
+			if ($_POST['faq_item_question-' . $x] != "" && $_POST['faq_item_question-' . $x] != DEFAULT_FAQ_QUESTION) {
 				$faqs['question'][$xx] = $_POST['faq_item_question-' . $x];
 				$faqs['answer'][$xx] = $_POST['faq_item_answer-' . $x];
 				$xx++;

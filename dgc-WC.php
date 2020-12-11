@@ -44,9 +44,10 @@ define( 'WP_TRAVEL_VERSION', '1.0.0' );
 define( 'WP_TRAVEL_MINIMUM_PARTIAL_PAYOUT', array( 10 ) ); // In percent.
 define( 'WP_TRAVEL_SLIP_UPLOAD_DIR', 'wp-travel-slip' ); // In percent.
 
-define( 'DEFAULT_ITINERARY', __( 'Day X, My plan', 'wp-travel' ) );
+define( 'DEFAULT_ITINERARY_LABEL', __( 'Day X', 'wp-travel' ) );
+define( 'DEFAULT_ITINERARY_TITLE', __( 'My plan', 'wp-travel' ) );
 define( 'DEFAULT_PRICING', __( 'Pricing Name', 'wp-travel' ) );
-define( 'DEFAULT_QUESTION', __( 'FAQ Questions', 'wp-travel' ) );
+define( 'DEFAULT_FAQ_QUESTION', __( 'FAQ Questions', 'wp-travel' ) );
 
 
 /**
