@@ -213,10 +213,6 @@ class Trip_Options_Edit_Metabox {
 		$trip_code = wp_travel_get_trip_code( $post->ID );
 		$trip_outline = get_post_meta( $post->ID, 'wp_travel_outline', true );
 		$itineraries = get_post_meta( $post->ID, 'wp_travel_trip_itinerary_data', true );
-		//$trip_data = WP_Travel_Helpers_Trips::get_trip( $post->ID );
-		//$trip_code = $trip_data['trip']['trip_code'];
-		//$trip_outline = $trip_data['trip']['trip_outline'];
-		//$itineraries = $trip_data['trip']['itineraries'];
 /*	
 		echo '$post->ID = ' . $post->ID;
 		echo '{';
@@ -546,9 +542,6 @@ class Trip_Options_Edit_Metabox {
 		if ( ! $post ) {
 			return;
 		}
-		//$trip_data = WP_Travel_Helpers_Trips::get_trip( $post->ID );
-		//$trip_include = $trip_data['trip']['trip_include'];
-		//$trip_exclude = $trip_data['trip']['trip_exclude'];
 		$trip_include = get_post_meta( $post->ID, 'wp_travel_trip_include', true );
 		$trip_exclude = get_post_meta( $post->ID, 'wp_travel_trip_exclude', true );
 		echo '<h3>';
@@ -574,8 +567,6 @@ class Trip_Options_Edit_Metabox {
 		if ( ! $post ) {
 			return;
 		}
-		//$trip_data = WP_Travel_Helpers_Trips::get_trip( $post->ID );
-		//$faqs = $trip_data['trip']['faqs'];
 		$faqs = wp_travel_get_faqs( $post->ID );
 
 		$remove_faq = __( "- Remove FAQ", "wp-travel" );
@@ -711,8 +702,6 @@ class Trip_Options_Edit_Metabox {
 		if ( ! $post ) {
 			return;
 		}
-		//$trip_data = WP_Travel_Helpers_Trips::get_trip( $post->ID );
-		//$trip_tabs = $trip_data['trip']['trip_tabs'];
 		$trip_tabs = wp_travel_get_admin_trip_tabs( $post->ID );
 
 		echo '$post->ID = ' . $post->ID;
@@ -821,7 +810,6 @@ class Trip_Options_Edit_Metabox {
 		 * update_post_meta( int $post_id, string $meta_key, mixed $meta_value, mixed $prev_value = '' )
 		 */
 
-		//$trip_data = WP_Travel_Helpers_Trips::get_trip( $post_id );
 		$itineraries = array();
 		$xx = 0;
 		for ($x = 0; $x < 100; $x++) {
@@ -834,7 +822,6 @@ class Trip_Options_Edit_Metabox {
 				$xx++;
 			}
 		}
-		//$trip_data['trip']['itineraries'] = $itineraries;
 		update_post_meta( $post_id, 'wp_travel_trip_itinerary_data', $itineraries );
 
 		$pricings = array();
@@ -847,17 +834,14 @@ class Trip_Options_Edit_Metabox {
 				$xx++;
 			}
 		}
-		//$trip_data['trip']['pricings'] = $pricings;
 
 		if (!empty($_POST['wp_travel_trip_include'])) {
 			$includes = $_POST['wp_travel_trip_include'];
-			//$trip_data['trip']['includes'] = $includes;
 			update_post_meta($post_id, 'wp_travel_trip_include', $includes);
 		}
 
 		if (!empty($_POST['wp_travel_trip_exclude'])) {
 			$excludes = $_POST['wp_travel_trip_exclude'];
-			//$trip_data['trip']['excludes'] = $excludes;
 			update_post_meta($post_id, 'wp_travel_trip_exclude', $excludes);
 		}
 
@@ -870,25 +854,12 @@ class Trip_Options_Edit_Metabox {
 				$xx++;
 			}
 		}
-		//$trip_data['trip']['faqs'] = $faqs;
-		//->faqs = $faqs;
 		$question = isset( $faqs['question'] ) ? $faqs['question'] : array();
 		$answer   = isset( $faqs['answer'] ) ? $faqs['answer'] : array();
 		update_post_meta( $post_id, 'wp_travel_faq_question', $question );
 		update_post_meta( $post_id, 'wp_travel_faq_answer', $answer );
-/*
-		// Creates woocommerce product 
-		$product = array(
-    		'post_title'    => $name,
-    		'post_content'  => '',
-    		'post_status'   => 'publish',
-    		'post_author'   => $current_user->ID,
-    		'post_type'     =>'product'
-		);
 
-		// Insert the post into the database
-		$product_ID = wp_insert_post($product);
-*/
+		// Create Category
 		wp_insert_term(
 			__( "Itinerary", "wp-travel" ), // the term 
 			'product_cat', // the taxonomy
@@ -897,20 +868,9 @@ class Trip_Options_Edit_Metabox {
 	  			'slug' => 'itinerary'
 			)
   		);
-/*  
-		  wp_insert_term(
-			'Itinerary', // the term 
-			'product_cat', // the taxonomy
-			array(
-	  			'description'=> 'Category of Itinerary',
-	  			'slug' => 'itinerary'
-			)
-  		);
-*/ 
-  		// Gets term object from Tree in the database. 
-		$term = get_term_by('name', __( "Itinerary", "wp-travel" ), 'product_cat');
-		//$term = get_term_by('name', 'Itinerary', 'product_cat');
 
+		// Gets term object from Category in the database. 
+		$term = get_term_by('name', __( "Itinerary", "wp-travel" ), 'product_cat');
 		wp_set_object_terms( $post_id, $term->term_id, 'product_cat' );
 
 /*
