@@ -9,7 +9,7 @@ class Trip_Options_View_Metabox {
 	}
 
 	// define the woocommerce_before_add_to_cart_button callback 
-	function action_woocommerce_before_add_to_cart_button(  ) { ?>
+	function action_woocommerce_before_add_to_cart_button() { ?>
 		<div class="container">
 		<div class="row">
 			<div class='col-sm-6'>
@@ -20,18 +20,21 @@ class Trip_Options_View_Metabox {
 							<span class="glyphicon glyphicon-time"></span>
 						</span>
 					</div>
-					<script>
-						jQuery(document).ready(function($) {
-							$( '#begin_date' ).datepicker();
-							$('#datetimepicker3').datetimepicker({
-								format: 'HH:mm'
-							});
-						});
-					</script>
 				</div>
 			</div>
 		</div>
-		</div>	
+		</div><?php
+		echo '<input type="text" class="itinerary_item_date" name="itinerary_item_date-"';
+		?>
+		<script>
+			jQuery(document).ready(function($) {
+				$( '.itinerary_item_date' ).datepicker();
+				$( '#begin_date' ).datepicker();
+				$('#datetimepicker3').datetimepicker({
+					format: 'HH:mm'
+				});
+			});
+		</script>
 		<?php
 	}
          
