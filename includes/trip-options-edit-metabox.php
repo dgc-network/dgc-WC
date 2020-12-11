@@ -876,8 +876,23 @@ class Trip_Options_Edit_Metabox {
 		$answer   = isset( $faqs['answer'] ) ? $faqs['answer'] : array();
 		update_post_meta( $post_id, 'wp_travel_faq_question', $question );
 		update_post_meta( $post_id, 'wp_travel_faq_answer', $answer );
+/*
+		// Creates woocommerce product 
+		$product = array(
+    		'post_title'    => $name,
+    		'post_content'  => '',
+    		'post_status'   => 'publish',
+    		'post_author'   => $current_user->ID,
+    		'post_type'     =>'product'
+		);
 
-		//$response = WP_Travel_Helpers_Trips::update_trip( $post_id, $trip_data );
+		// Insert the post into the database
+		$product_ID = wp_insert_post($product);
+*/
+		// Gets term object from Tree in the database. 
+		$term = get_term_by('name', 'Itinerary', 'product_cat');
+
+		wp_set_object_terms( $post_id, $term->term_id, 'product_cat' );
 
 /*
 		if( isset( $_POST[ 'seo_robots' ] ) ) {
