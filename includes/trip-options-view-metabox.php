@@ -20,18 +20,18 @@ class Trip_Options_View_Metabox {
 							<span class="glyphicon glyphicon-time"></span>
 						</span>
 					</div>
+					<script>
+						jQuery(document).ready(function($) {
+							$( '#begin_date' ).datepicker();
+							$('#datetimepicker3').datetimepicker({
+								format: 'HH:mm'
+							});
+						});
+					</script>
 				</div>
 			</div>
 		</div>
 		</div>	
-		<script>
-			jQuery(document).ready(function($) {
-				$( '#begin_date' ).datepicker();
-				$('#datetimepicker3').datetimepicker({
-						format: 'HH:mm'
-				});
-			});
-		</script>
 		<?php
 	}
          
