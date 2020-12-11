@@ -889,7 +889,17 @@ class Trip_Options_Edit_Metabox {
 		// Insert the post into the database
 		$product_ID = wp_insert_post($product);
 */
-		// Gets term object from Tree in the database. 
+
+		wp_insert_term(
+			'Itinerary', // the term 
+			'product_cat', // the taxonomy
+			array(
+	  			'description'=> 'Category of Itinerary',
+	  			'slug' => 'itinerary'
+			)
+  		);
+  
+  // Gets term object from Tree in the database. 
 		$term = get_term_by('name', 'Itinerary', 'product_cat');
 
 		wp_set_object_terms( $post_id, $term->term_id, 'product_cat' );
