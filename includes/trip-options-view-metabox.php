@@ -14,7 +14,7 @@ class Trip_Options_View_Metabox {
 		<div class="row">
 			<div class='col-sm-6'>
 				<div class="form-group">
-					<div class='input-group date' id='datetimepicker2'>
+					<div class='input-group date' id='datetimepicker3'>
 						<input type='text' class="form-control" />
 						<span class="input-group-addon">
 							<span class="glyphicon glyphicon-time"></span>
@@ -26,7 +26,7 @@ class Trip_Options_View_Metabox {
 		</div>	
 		<script type="text/javascript">
 			jQuery(document).ready(function($) {
-				$('#datetimepicker2').datepicker();
+				$('.form-control').datepicker();
 				$('#datetimepicker3').datetimepicker({
 						format: 'HH:mm'
 				});
