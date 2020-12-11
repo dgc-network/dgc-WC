@@ -5,7 +5,7 @@ class Trip_Options_View_Metabox {
 	 */
 	function __construct() {
 		add_filter( 'woocommerce_product_tabs', array( __CLASS__, 'woo_new_product_tab' ) );
-		add_action( 'woocommerce_before_add_to_cart_button', array( __CLASS__, 'action_woocommerce_before_add_to_cart_button' ), 10, 0 );	
+		add_action( 'woocommerce_before_add_to_cart_form', array( __CLASS__, 'action_woocommerce_before_add_to_cart_button' ), 10, 0 );	
 	}
 
 	// define the woocommerce_before_add_to_cart_button callback 
