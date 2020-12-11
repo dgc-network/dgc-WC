@@ -10,7 +10,6 @@ class Trip_Options_View_Metabox {
 
 	// define the woocommerce_before_add_to_cart_button callback 
 	function action_woocommerce_before_add_to_cart_button(  ) { ?>
-    	// make action magic happen here... 
 		<div class="container">
 		<div class="row">
 			<div class='col-sm-6'>
