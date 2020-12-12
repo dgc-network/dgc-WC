@@ -277,10 +277,8 @@ class Trip_Options_Edit_Metabox {
 		<div id='itinerary_options' class='panel woocommerce_options_panel'>
 		<table style="width:100%;">
 			<tr>
-				<td colspan="2">
-					<?php esc_html_e( 'Trip Code : ', 'wp-travel' ); ?>
-					<input type="text" id="wp-travel-trip-code" disabled="disabled" value="<?php echo esc_attr( $trip_code ); ?>" />
-				</td>
+				<td><h3><?php esc_html_e( 'Trip Code : ', 'wp-travel' ); ?></h3></td>
+				<td><input type="text" disabled="disabled" value="<?php echo esc_attr( $trip_code ); ?>" /></td>
 			</tr>
 
 		<?php
@@ -292,7 +290,7 @@ class Trip_Options_Edit_Metabox {
 			}
 		} else {?>
 			<tr class="no-itineraries"><td colspan="2">
-				<span><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></span><br>
+				<h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3><br>
 				<span><?php esc_html_e( 'No Itineraries found.', 'wp-travel' ); ?></span>
 				<span id="first-itinerary"><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></span>
 			</td></tr><?php
