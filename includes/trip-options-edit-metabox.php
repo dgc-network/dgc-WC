@@ -278,7 +278,7 @@ class Trip_Options_Edit_Metabox {
 		echo '}';
 */
 		?>
-		<table>
+		<table style="margin-right:0px">
 			<tr>
 				<td>
 					<?php esc_html_e( 'Trip Code : ', 'wp-travel' ); ?>
