@@ -923,6 +923,7 @@ new Trip_Options_Edit_Metabox;
 /**
  * Add a custom Product Data tab
  */
+/*
 add_filter( 'woocommerce_product_data_tabs', 'wk_custom_product_tab', 10, 1 );
 function wk_custom_product_tab( $default_tabs ) {
     $default_tabs['custom_tab'] = array(
@@ -939,7 +940,7 @@ function wk_custom_tab_data() {
    echo '<div id="wk_custom_tab_data" class="panel woocommerce_options_panel">// add content here</div>';
    //Trip_Options_Edit_Metabox::trip_options_callback_itinerary();
 }
-
+*/
 function vertical_example_metabox( $post ) {
 	?>
 	<div id="tabs">
