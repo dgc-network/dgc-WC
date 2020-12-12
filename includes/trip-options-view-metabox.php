@@ -24,7 +24,7 @@ class Trip_Options_View_Metabox {
 			<div class='col-sm-6'>
 				<div class="form-group">
 					<div class='input-group date' id='datetimepicker3'>
-						<input type='text' class="form-control" id='begin_date'>
+						<input type='text' class="form-control">
 						<span class="input-group-addon">
 							<span class="glyphicon glyphicon-time"></span>
 						</span>
@@ -33,17 +33,21 @@ class Trip_Options_View_Metabox {
 			</div>
 		</div>
 		</div><?php
-		echo '<input type="text" class="itinerary_item_date" name="itinerary_item_date-">';
+		echo '<label for="start_date">' . esc_html_e( 'Start Date : ', 'wp-travel' ) . '</label>';
+		echo '<input type="text" class="start_date" name="start_date" />';
 		?>
 		<script>
 			jQuery(document).ready(function($) {
-				$( '.itinerary_item_date' ).datepicker();
+				$( '.start_date' ).datepicker();
 				$( '#begin_date' ).datepicker();
 				$( '#datetimepicker3' ).datetimepicker({
 					format: 'HH:mm'
 				});
 			});
 		</script>
+		<style>
+			.start_date { opacity: 0.5; }
+		</style>
 		<?php
 	}
          
@@ -79,7 +83,8 @@ class Trip_Options_View_Metabox {
 		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) { ?>
 			<ul><?php
 			foreach ( $itineraries as $x=>$itinerary ) { ?>
-				<li><?php echo esc_attr( $itineraries[$x]['title'] ); ?><br><?php
+				<li><?php echo esc_attr( $itineraries[$x]['label'] ) . ', ' . 
+				esc_attr( $itineraries[$x]['title'] ); ?><br><?php
 				echo esc_attr( $itineraries[$x]['desc'] ); ?></li><?php
 			} ?></ul><?php
 		} else { ?>
