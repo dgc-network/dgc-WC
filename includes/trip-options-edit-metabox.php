@@ -266,7 +266,7 @@ class Trip_Options_Edit_Metabox {
 						$itinerary_title = esc_attr( $itineraries[$x]['title'] );
 					}
 					$xx--;
-					echo '<span class="fas fa-bars"></span>';
+					echo '<span class="fas fa-bars"> </span>';
 					echo '<span class="span-label">' . $itinerary_label . '</span>, ';
 					echo '<span class="span-title">' . $itinerary_title . '</span><p style="display:none"></p>';
 					echo '
