@@ -17,7 +17,7 @@ class Trip_Options_Edit_Metabox {
 	 * Add 'Itinerary' product option
 	 */
 	function add_itinerary_product_option( $options ) {
-
+/*
 		// remove "Virtual" checkbox
 		if( isset( $options[ 'virtual' ] ) ) {
 			unset( $options[ 'virtual' ] );
@@ -27,9 +27,7 @@ class Trip_Options_Edit_Metabox {
 		if( isset( $options[ 'downloadable' ] ) ) {
 			unset( $options[ 'downloadable' ] );
 		}
- 
-		//return $options;
-
+*/
 		$options['itinerary'] = array(
 			'id'            => '_itinerary',
 			'wrapper_class' => 'show_if_simple show_if_variable',
@@ -278,7 +276,7 @@ class Trip_Options_Edit_Metabox {
 		echo '}';
 */
 		?>
-		<table style="margin-right:0px">
+		<table style="margin:0;">
 			<tr>
 				<td>
 					<?php esc_html_e( 'Trip Code : ', 'wp-travel' ); ?>
