@@ -14,27 +14,15 @@ class Trip_Options_View_Metabox {
 		wp_enqueue_script('jquery-ui-core');          
 		wp_enqueue_script('jquery-ui-timepicker-addon',get_stylesheet_directory_uri().'/js/jquery-ui-timepicker-addon.js',array());
 		wp_enqueue_style('jquery-ui-timepicker-addon',get_stylesheet_directory_uri().'/css/jquery-ui-timepicker-addon.css',array());
-		wp_enqueue_style('jquery-ui',get_stylesheet_directory_uri().'/css/jquery-ui.css',array());  
+		wp_enqueue_style('jquery-ui',get_stylesheet_directory_uri().'/css/jquery-ui.css',array());
+		wp_enqueue_style('jquery-ui','https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css',array());
+		//<link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css">
 	}
 	
 	// define the woocommerce_before_add_to_cart_button callback 
-	function action_woocommerce_before_add_to_cart_button() { ?>
-		<div class="container">
-		<div class="row">
-			<div class='col-sm-6'>
-				<div class="form-group">
-					<div class='input-group date' id='datetimepicker3'>
-						<input type='text' class="form-control">
-						<span class="input-group-addon">
-							<span class="glyphicon glyphicon-time"></span>
-						</span>
-					</div>
-				</div>
-			</div>
-		</div>
-		</div><?php
-		echo '<label for="start_date">' . esc_html_e( 'Start Date : ', 'wp-travel' ) . '</label>';
-		echo '<input type="text" class="start_date" name="start_date" />';
+	function action_woocommerce_before_add_to_cart_button() {
+		echo '<span><label for="start_date">' . esc_html_e( 'Start Date : ', 'wp-travel' ) . '</label>';
+		echo '<input type="text" class="start_date" name="start_date" /></span><br>';
 		?>
 		<script>
 			jQuery(document).ready(function($) {
@@ -44,9 +32,6 @@ class Trip_Options_View_Metabox {
 				});
 			});
 		</script>
-		<style>
-			.start_date { opacity: 0.5; }
-		</style>
 		<?php
 	}
          
