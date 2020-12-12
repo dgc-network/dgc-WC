@@ -21,13 +21,13 @@ class Trip_Options_View_Metabox {
 	
 	// define the woocommerce_before_add_to_cart_button callback 
 	function action_woocommerce_before_add_to_cart_button() {
-		echo '<span><label for="start_date">' . esc_html_e( 'Start Date : ', 'wp-travel' ) . '</label>';
-		echo '<input type="text" class="start_date" name="start_date" /></span><br>';
+		echo '<label for="start_date">' . esc_html_e( 'Start Date : ', 'wp-travel' ) . '</label>';
+		echo '<span><input type="text" class="start_date" name="start_date" /></span><br>';
 		?>
 		<script>
 			jQuery(document).ready(function($) {
-				$( '.start_date' ).datepicker();
-				$( '#datetimepicker3' ).datetimepicker({
+				//$( '.start_date' ).datepicker();
+				$( '.start_date' ).datetimepicker({
 					format: 'HH:mm'
 				});
 			});
