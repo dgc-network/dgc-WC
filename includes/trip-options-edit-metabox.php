@@ -7,7 +7,24 @@ class Trip_Options_Edit_Metabox {
 	function __construct() {
 		add_action( 'admin_menu', array( __CLASS__, 'trip_options_add_metabox' ) );
 		add_action( 'save_post', array( __CLASS__, 'trip_options_save_metabox' ), 10, 2 );
+
+		add_filter( 'woocommerce_product_data_tabs', array( __CLASS__, 'wk_custom_product_tab' ), 10, 1 );
+		add_action( 'woocommerce_product_data_panels', array( __CLASS__, 'trip_options_callback_itinerary' ) );
 	}
+
+	/**
+	 * Add a custom Product Data tab
+ 	 */
+	function wk_custom_product_tab( $default_tabs ) {
+    	$default_tabs['custom_tab'] = array(
+        	'label'   =>  __( 'Itinerary', 'domain' ),
+        	'target'  =>  'trip_options_callback_itinerary',
+        	'priority' => 60,
+        	'class'   => array()
+    	);
+    	return $default_tabs;
+	}
+
 
 	/**
 	 * Add a new meta box for product
@@ -919,8 +936,8 @@ function wk_custom_product_tab( $default_tabs ) {
 
 add_action( 'woocommerce_product_data_panels', 'wk_custom_tab_data' );
 function wk_custom_tab_data() {
-   //echo '<div id="wk_custom_tab_data" class="panel woocommerce_options_panel">// add content here</div>';
-   Trip_Options_Edit_Metabox::trip_options_callback_itinerary();
+   echo '<div id="wk_custom_tab_data" class="panel woocommerce_options_panel">// add content here</div>';
+   //Trip_Options_Edit_Metabox::trip_options_callback_itinerary();
 }
 
 function vertical_example_metabox( $post ) {
