@@ -8,31 +8,71 @@ class Trip_Options_Edit_Metabox {
 		add_action( 'admin_menu', array( __CLASS__, 'trip_options_add_metabox' ) );
 		add_action( 'save_post', array( __CLASS__, 'trip_options_save_metabox' ), 10, 2 );
 
+		add_filter( 'product_type_options', array( __CLASS__, 'add_itinerary_product_option' ) );
 		add_filter( 'woocommerce_product_data_tabs', array( __CLASS__, 'custom_product_data_tab' ), 10, 1 );
-		add_action( 'woocommerce_product_data_panels', array( __CLASS__, 'trip_options_callback_itinerary' ) );
-		//add_action( 'woocommerce_product_data_panels', array( __CLASS__, 'wk_custom_tab_data' ) );
+		add_filter( 'woocommerce_product_data_panels', array( __CLASS__, 'trip_options_callback_itinerary' ) );
+	}
+
+	/**
+	 * Add 'Itinerary' product option
+	 */
+	function add_itinerary_product_option( $options ) {
+
+		// remove "Virtual" checkbox
+		if( isset( $options[ 'virtual' ] ) ) {
+			unset( $options[ 'virtual' ] );
+		}
+ 
+		// remove "Downloadable" checkbox
+		if( isset( $options[ 'downloadable' ] ) ) {
+			unset( $options[ 'downloadable' ] );
+		}
+ 
+		//return $options;
+
+		$options['itinerary'] = array(
+			'id'            => '_itinerary',
+			'wrapper_class' => 'show_if_simple show_if_variable',
+			'label'         => __( 'Itinerary', 'woocommerce' ),
+			'description'   => __( 'Itinerary allow users to put in personalised messages.', 'woocommerce' ),
+			'default'       => 'no'
+		);
+		return $options; ?>
+
+<script>
+	jQuery( document ).ready( function( $ ) {
+
+		$( 'input#_itinerary' ).change( function() {
+			var is_itinerary = $( 'input#_itinerary:checked' ).size();
+
+			$( '.show_if_itinerary' ).hide();
+			$( '.hide_if_itinerary' ).hide();
+
+			if ( is_itinerary ) {
+				$( '.hide_if_itinerary' ).hide();
+			}
+			if ( is_itinerary ) {
+				$( '.show_if_itinerary' ).show();
+			}
+		});
+		$( 'input#_itinerary' ).trigger( 'change' );
+	});
+</script><?php		
 	}
 
 	/**
 	 * Add a custom Product Data tab
  	 */
-	function custom_product_data_tab( $default_tabs ) {
-    	$default_tabs['custom_tab'] = array(
+	function custom_product_data_tab( $tabs ) {
+    	$tabs['itinerary_tab'] = array(
         	'label'   =>  __( 'Itinerary', 'dgc-domain' ),
-        	'target'  =>  'trip_options_callback_itinerary',
-        	//'target'  =>  'wk_custom_tab_data',
-        	//'target'  =>  array( __CLASS__, 'trip_options_callback_itinerary' ),
+        	'target'  =>  'trip_options',
         	'priority' => 60,
-        	'class'   => array()
+        	'class'   => array( 'show_if_itinerary')
     	);
-    	return $default_tabs;
+    	return $tabs;
 	}
 
-	function wk_custom_tab_data() {
-		echo '<div id="wk_custom_tab_data" class="panel woocommerce_options_panel">// add content here</div>';
-		//Trip_Options_Edit_Metabox::trip_options_callback_itinerary();
-	 }
-	 
 	/**
 	 * Add a new meta box for product
 	 * Step 1. add_meta_box()
@@ -230,10 +270,10 @@ class Trip_Options_Edit_Metabox {
 	/**
 	 * Itinerary metabox callback
 	 */
-	function trip_options_callback_itinerary( $post ) {
-		global $post;
+	function trip_options_callback_itinerary( $post=false ) {
 		if ( ! $post ) {
-			return;
+			global $post;
+			//return;
 		}
 		$trip_code = wp_travel_get_trip_code( $post->ID );
 		$trip_outline = get_post_meta( $post->ID, 'wp_travel_outline', true );
@@ -251,7 +291,7 @@ class Trip_Options_Edit_Metabox {
 		echo '}';
 */
 		?>
-		<table style="width:100%" class="form-table trip-info">
+		<table class="form-table trip-info">
 			<tr>
 				<td>
 					<?php esc_html_e( 'Trip Code : ', 'wp-travel' ); ?>
@@ -844,7 +884,11 @@ class Trip_Options_Edit_Metabox {
 		if( $post->post_type != 'product' ) {
 			return $post_id;
 		}
-	
+
+		// save the checkbox of product data option
+		$is_itinerary = isset( $_POST['_itinerary'] ) ? 'yes' : 'no';
+		update_post_meta( $post_id, '_itinerary', $is_itinerary );
+
 		/**
 		 * Updates a post meta field based on the given post ID.
 		 * update_post_meta( int $post_id, string $meta_key, mixed $meta_value, mixed $prev_value = '' )
