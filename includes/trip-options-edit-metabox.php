@@ -12,8 +12,10 @@ class Trip_Options_Edit_Metabox {
 		add_filter( 'woocommerce_product_data_tabs', array( __CLASS__, 'custom_product_data_tab' ), 10, 1 );
 		add_action( 'woocommerce_product_data_panels', array( __CLASS__, 'trip_options_callback_itinerary' ) );
 		//add_filter( 'woocommerce_product_data_panels', array( __CLASS__, 'trip_options_callback_itinerary' ) );
+		//add_filter( 'woocommerce_product_data_tabs', 'custom_product_tabs' ); // WC 2.5 and below
+		//add_filter( 'woocommerce_product_data_panels', 'custom_product_tabs' ); // WC 2.6 and up	}
 	}
-
+	
 	/**
 	 * Add 'Itinerary' product option
 	 */
@@ -45,7 +47,7 @@ class Trip_Options_Edit_Metabox {
 	function custom_product_data_tab( $tabs ) {
     	$tabs['itinerary_tab'] = array(
         	'label'   =>  __( 'Itinerary', 'dgc-domain' ),
-        	'target'  =>  'trip_options_callback_itinerary',
+        	'target'  =>  'itinerary_options',
         	'priority' => 60,
         	'class'   => array( 'show_if_itinerary')
     	);
@@ -272,7 +274,7 @@ class Trip_Options_Edit_Metabox {
 		echo '}';
 */
 		?>
-		<div style="clear: both;">
+		<div id='itinerary_options' class='panel woocommerce_options_panel'>
 		<table>
 			<tr>
 				<td>
