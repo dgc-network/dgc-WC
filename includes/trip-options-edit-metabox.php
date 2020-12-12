@@ -225,8 +225,6 @@ class Trip_Options_Edit_Metabox {
 			}
 		echo '}';
 */
-		$remove_itinerary = __( "- Remove Itinerary", "wp-travel" );
-		$xx = 0;
 		?>
 		<table style="width:100%" class="form-table trip-info">
 			<tr>
@@ -237,6 +235,8 @@ class Trip_Options_Edit_Metabox {
 			</tr>
 
 		<?php
+		$remove_itinerary = __( "- Remove Itinerary", "wp-travel" );
+		$xx = 0;
 		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) {
 			foreach ( $itineraries as $itinerary ) {
 				$xx++;
@@ -268,7 +268,8 @@ class Trip_Options_Edit_Metabox {
 					$xx--;
 					echo '<span class="fas fa-bars"> </span>';
 					echo '<span class="span-label">' . $itinerary_label . '</span>, ';
-					echo '<span class="span-title">' . $itinerary_title . '</span><p style="display:none"></p>';
+					echo '<span class="span-title">' . $itinerary_title . '</span>';
+					echo '<p style="display:none">' . $x . '</p>';
 					echo '
 					<table class="update-itinerary" style="width:100%">
 				  	  <tbody>
@@ -379,7 +380,7 @@ class Trip_Options_Edit_Metabox {
   			#itineraries-ul { list-style-type:none; margin:0; padding:0; width:100%; }
   			#itineraries-ul li { background:#f2f2f2; border:1px solid #ccc; margin:0 3px 3px 3px; padding:0.4em; padding-left:1.5em; font-size:1.4em; }
 			#itineraries-ul li span { cursor:pointer; }
-			#itineraries-ul li span .fas { margin-left:-1.3em; }
+			#itineraries-ul li span .fas.fa-bars { margin-left:-1.3em; }
 			/*#itineraries-ul li span { margin-left:-1.3em; cursor:pointer; }*/
 			#itineraries-ul li table { background:#ffffff; border:1px solid #ccc; width:100%; display:none; margin-left:-1.2em; padding-left:1.5em; }
 			#itineraries-ul li .toggle-access { display:block; }
@@ -411,11 +412,11 @@ class Trip_Options_Edit_Metabox {
 			}
 		echo '}';
 
-		$remove_pricing = __( "- Remove Price", "wp-travel" );
-		$xx = 0;
 		?>
 		<table style="width:100%" class="form-table trip-info">
 		<?php
+		$remove_pricing = __( "- Remove Price", "wp-travel" );
+		$xx = 0;
 		if ( is_array( $pricings ) && count( $pricings ) > 0 ) {
 			foreach ( $pricings as $pricing ) {
 				$xx++;
@@ -831,11 +832,11 @@ class Trip_Options_Edit_Metabox {
 		$xx = 0;
 		for ($x = 0; $x < 100; $x++) {
 			if ($_POST['itinerary_item_title-' . $x]!="" && $_POST['itinerary_item_title-' . $x] != DEFAULT_ITINERARY_TITLE) {
+				$itineraries[$xx]['label'] = $_POST['itinerary_item_label-' . $x];
 				$itineraries[$xx]['title'] = $_POST['itinerary_item_title-' . $x];
 				$itineraries[$xx]['date'] = $_POST['itinerary_item_date-' . $x];
 				$itineraries[$xx]['time'] = $_POST['itinerary_item_time-' . $x];
 				$itineraries[$xx]['desc'] = $_POST['itinerary_item_desc-' . $x];
-				$itineraries[$xx]['label'] = $_POST['itinerary_item_label-' . $x];
 				$xx++;
 			}
 		}
