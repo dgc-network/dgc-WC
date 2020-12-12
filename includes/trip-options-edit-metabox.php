@@ -652,10 +652,10 @@ class Trip_Options_Edit_Metabox {
 ?>
 		<div id='include_exclude_panel' class='panel woocommerce_options_panel'>
 			<h3><?php esc_html_e( 'Trip Includes', 'wp-travel' );?></h3>
-			<?php wp_editor ( $trip_include , 'wp_travel_trip_include', array ( "media_buttons" => true ) );?>
+			<?php wp_editor ( $trip_include , 'wp_travel_trip_include', array ( "media_buttons" => true, 'textarea_rows' => 10,) );?>
 			<br><br>
 			<h3><?php esc_html_e( 'Trip Excludes', 'wp-travel' );?></h3>
-			<?php wp_editor ( $trip_exclude , 'wp_travel_trip_exclude', array ( "media_buttons" => true ) );?>
+			<?php wp_editor ( $trip_exclude , 'wp_travel_trip_exclude', array ( "media_buttons" => true, 'textarea_rows' => 10, ) );?>
 			<br><br>
 		</div>
 <?php		
