@@ -267,8 +267,8 @@ class Trip_Options_Edit_Metabox {
 					}
 					$xx--;
 					echo '<span class="fas fa-bars"></span>';
-					echo '<span class="itinerary_label">' . $itinerary_label . '</span>, ';
-					echo '<span class="itinerary_title">' . $itinerary_title . '</span><p style="display:none"></p>';
+					echo '<span class="span-label">' . $itinerary_label . '</span>, ';
+					echo '<span class="span-title">' . $itinerary_title . '</span><p style="display:none"></p>';
 					echo '
 					<table class="update-itinerary" style="width:100%">
 				  	  <tbody>
@@ -371,14 +371,16 @@ class Trip_Options_Edit_Metabox {
 				} );
 
 				$( '.item_date' ).datepicker();
-				$( '.item_time' ).datetimepicker({format: 'HH:mm'});
+				$( '.item_time' ).timepicker({format: 'HH:mm'});
 			} );
 		</script>
 	
 		<style>
   			#itineraries-ul { list-style-type:none; margin:0; padding:0; width:100%; }
   			#itineraries-ul li { background:#f2f2f2; border:1px solid #ccc; margin:0 3px 3px 3px; padding:0.4em; padding-left:1.5em; font-size:1.4em; }
-			#itineraries-ul li span { margin-left:-1.3em; cursor:pointer; }
+			#itineraries-ul li span { cursor:pointer; }
+			#itineraries-ul li span .fas { cursor:pointer; }
+			/*#itineraries-ul li span { margin-left:-1.3em; cursor:pointer; }*/
 			#itineraries-ul li table { background:#ffffff; border:1px solid #ccc; width:100%; display:none; margin-left:-1.2em; padding-left:1.5em; }
 			#itineraries-ul li .toggle-access { display:block; }
 			#first-itinerary { color:blue; text-decoration:underline; cursor:pointer;}
