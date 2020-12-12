@@ -6,8 +6,17 @@ class Trip_Options_View_Metabox {
 	function __construct() {
 		add_filter( 'woocommerce_product_tabs', array( __CLASS__, 'woo_new_product_tab' ) );
 		add_action( 'woocommerce_before_add_to_cart_form', array( __CLASS__, 'action_woocommerce_before_add_to_cart_button' ), 10, 0 );	
+		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'custom_datepicker' ));
 	}
 
+	function custom_datepicker() {
+		wp_enqueue_script('jquery-ui-datepicker');
+		wp_enqueue_script('jquery-ui-core');          
+		wp_enqueue_script('jquery-ui-timepicker-addon',get_stylesheet_directory_uri().'/js/jquery-ui-timepicker-addon.js',array());
+		wp_enqueue_style('jquery-ui-timepicker-addon',get_stylesheet_directory_uri().'/css/jquery-ui-timepicker-addon.css',array());
+		wp_enqueue_style('jquery-ui',get_stylesheet_directory_uri().'/css/jquery-ui.css',array());  
+	}
+	
 	// define the woocommerce_before_add_to_cart_button callback 
 	function action_woocommerce_before_add_to_cart_button() { ?>
 		<div class="container">
@@ -30,7 +39,7 @@ class Trip_Options_View_Metabox {
 			jQuery(document).ready(function($) {
 				$( '.itinerary_item_date' ).datepicker();
 				$( '#begin_date' ).datepicker();
-				$('#datetimepicker3').datetimepicker({
+				$( '#datetimepicker3' ).datetimepicker({
 					format: 'HH:mm'
 				});
 			});

@@ -832,7 +832,8 @@ class Trip_Options_Edit_Metabox {
 		$itineraries = array();
 		$xx = 0;
 		for ($x = 0; $x < 100; $x++) {
-			if ($_POST['itinerary_item_label-' . $x]!="" && $_POST['itinerary_item_label-' . $x] != DEFAULT_ITINERARY_LABEL && $_POST['itinerary_item_title-' . $x]!="" && $_POST['itinerary_item_title-' . $x] != DEFAULT_ITINERARY_TITLE) {
+			//if ($_POST['itinerary_item_label-' . $x]!="" && $_POST['itinerary_item_label-' . $x] != DEFAULT_ITINERARY_LABEL && $_POST['itinerary_item_title-' . $x]!="" && $_POST['itinerary_item_title-' . $x] != DEFAULT_ITINERARY_TITLE) {
+			if ($_POST['itinerary_item_label-' . $x]!="" && $_POST['itinerary_item_label-' . $x] != DEFAULT_ITINERARY_LABEL) {
 				$itineraries[$xx]['label'] = sanitize_text_field( $_POST['itinerary_item_label-' . $x] );
 				$itineraries[$xx]['title'] = sanitize_text_field( $_POST['itinerary_item_title-' . $x] );
 				$itineraries[$xx]['date'] = sanitize_text_field( $_POST['itinerary_item_date-' . $x] );
@@ -841,27 +842,27 @@ class Trip_Options_Edit_Metabox {
 				$xx++;
 			}
 		}
-		delete_post_meta( $post_id, 'wp_travel_trip_itinerary_data' );
+		//delete_post_meta( $post_id, 'wp_travel_trip_itinerary_data' );
 		update_post_meta( $post_id, 'wp_travel_trip_itinerary_data', $itineraries );
 
 		$pricings = array();
 		$xx = 0;
 		for ($x = 0; $x < 100; $x++) {
 			if ($_POST['pricing_item_title-' . $x]!="" && $_POST['pricing_item_title-' . $x] != DEFAULT_PRICING) {
-				$pricings[$xx]['title'] = $_POST['pricing_item_title-' . $x];
-				$pricings[$xx]['min_pax'] = $_POST['pricing_min_pax-' . $x];
-				$pricings[$xx]['max_pax'] = $_POST['pricing_max_pax-' . $x];
+				$pricings[$xx]['title'] = sanitize_text_field( $_POST['pricing_item_title-' . $x] );
+				$pricings[$xx]['min_pax'] = sanitize_text_field( $_POST['pricing_min_pax-' . $x] );
+				$pricings[$xx]['max_pax'] = sanitize_text_field( $_POST['pricing_max_pax-' . $x] );
 				$xx++;
 			}
 		}
 
 		if (!empty($_POST['wp_travel_trip_include'])) {
-			$includes = $_POST['wp_travel_trip_include'];
+			$includes = sanitize_text_field( $_POST['wp_travel_trip_include'] );
 			update_post_meta($post_id, 'wp_travel_trip_include', $includes);
 		}
 
 		if (!empty($_POST['wp_travel_trip_exclude'])) {
-			$excludes = $_POST['wp_travel_trip_exclude'];
+			$excludes = sanitize_text_field( $_POST['wp_travel_trip_exclude'] );
 			update_post_meta($post_id, 'wp_travel_trip_exclude', $excludes);
 		}
 
@@ -869,8 +870,8 @@ class Trip_Options_Edit_Metabox {
 		$xx = 0;
 		for ($x = 0; $x < 100; $x++) {
 			if ($_POST['faq_item_question-' . $x] != "" && $_POST['faq_item_question-' . $x] != DEFAULT_FAQ_QUESTION) {
-				$faqs['question'][$xx] = $_POST['faq_item_question-' . $x];
-				$faqs['answer'][$xx] = $_POST['faq_item_answer-' . $x];
+				$faqs['question'][$xx] = sanitize_text_field( $_POST['faq_item_question-' . $x] );
+				$faqs['answer'][$xx] = sanitize_text_field( $_POST['faq_item_answer-' . $x] );
 				$xx++;
 			}
 		}
