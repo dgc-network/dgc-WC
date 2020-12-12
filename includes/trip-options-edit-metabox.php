@@ -15,7 +15,7 @@ class Trip_Options_Edit_Metabox {
 		//add_filter( 'woocommerce_product_data_tabs', 'custom_product_tabs' ); // WC 2.5 and below
 		//add_filter( 'woocommerce_product_data_panels', 'custom_product_tabs' ); // WC 2.6 and up	}
 	}
-	
+
 	/**
 	 * Add 'Itinerary' product option
 	 */
@@ -275,9 +275,9 @@ class Trip_Options_Edit_Metabox {
 */
 		?>
 		<div id='itinerary_options' class='panel woocommerce_options_panel'>
-		<table>
+		<table style="width:100%;">
 			<tr>
-				<td>
+				<td colspan="2">
 					<?php esc_html_e( 'Trip Code : ', 'wp-travel' ); ?>
 					<input type="text" id="wp-travel-trip-code" disabled="disabled" value="<?php echo esc_attr( $trip_code ); ?>" />
 				</td>
