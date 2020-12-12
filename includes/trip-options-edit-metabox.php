@@ -43,12 +43,18 @@ class Trip_Options_Edit_Metabox {
 	}
 
 	/**
-	 * Add a custom Product Data tab
+	 * Add/Remove custom Product Data tabs
  	 */
 	function custom_product_data_tabs( $tabs ) {
+
 		// remove "Shipping" tab
 		if( isset( $tabs[ 'shipping' ] ) ) {
 			unset( $tabs[ 'shipping' ] );
+		}
+
+		// remove "Get more options" tab
+		if( isset( $tabs[ 'get_more_options' ] ) ) {
+			unset( $tabs[ 'get_more_options' ] );
 		}
 
     	$tabs['itinerary_tab'] = array(
@@ -693,7 +699,7 @@ class Trip_Options_Edit_Metabox {
 
 		<?php
 		if ( is_array( $faqs ) && count( $faqs ) > 0 ) {
-			foreach ( $faqs as $x=>$faq ) {
+			foreach ( $faqs as $faq ) {
 				$xx++;
 			}
 		} else {?>
@@ -707,7 +713,7 @@ class Trip_Options_Edit_Metabox {
 			<tr style="display:none" class="faq-init-rows"><td colspan="2">
 				<ul id="faqs-ul"><?php			  
 				for ($x = 0; $x < 100; $x++) {
-					echo '<li class="faq-li" id="faq-li-' . $x . '"><span><i class="fas fa-bars"></i>';
+					echo '<li class="faq-li" id="faq-li-' . $x . '"><span class="fas fa-bars"> ';
 					if ($xx<=0) {
 						$faq_question = DEFAULT_FAQ_QUESTION;
 						echo $faq_question . '</span><p style="display:none"></p>';
@@ -717,7 +723,7 @@ class Trip_Options_Edit_Metabox {
 					}
 					$xx--;
 					echo '
-					<table class="update-faq" style="width:100%">
+					<table style="width:100%">
 				  	  <tbody>
 						<tr>
 							<th>Enter your question</th>
