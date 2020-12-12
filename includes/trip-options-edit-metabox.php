@@ -16,7 +16,7 @@ class Trip_Options_Edit_Metabox {
 	}
 
 	/**
-	 * Add 'Itinerary','FAQ' product options
+	 * Add 'Itinerary' product options
 	 * Remove 'Virtual','Downloadable' product options
 	 */
 	function add_remove_product_options( $options ) {
@@ -46,6 +46,11 @@ class Trip_Options_Edit_Metabox {
 	 * Add a custom Product Data tab
  	 */
 	function custom_product_data_tabs( $tabs ) {
+		// remove "Shipping" tab
+		if( isset( $tabs[ 'shipping' ] ) ) {
+			unset( $tabs[ 'shipping' ] );
+		}
+
     	$tabs['itinerary_tab'] = array(
         	'label'   =>  __( 'Itinerary', 'dgc-domain' ),
         	'target'  =>  'itinerary_panel',
