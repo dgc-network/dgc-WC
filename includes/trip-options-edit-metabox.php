@@ -11,8 +11,8 @@ class Trip_Options_Edit_Metabox {
 		add_filter( 'product_type_options', array( __CLASS__, 'add_remove_product_options' ) );
 		add_filter( 'woocommerce_product_data_tabs', array( __CLASS__, 'custom_product_data_tabs' ), 10, 1 );
 		add_action( 'woocommerce_product_data_panels', array( __CLASS__, 'trip_options_callback_itinerary' ) );
-		add_action( 'woocommerce_product_data_panels', array( __CLASS__, 'trip_options_callback_include_exclude' ) );
-		add_action( 'woocommerce_product_data_panels', array( __CLASS__, 'trip_options_callback_faq' ) );
+		add_action( 'woocommerce_product_data_panels', array( __CLASS__, 'trip_options_callback_includes_excludes' ) );
+		add_action( 'woocommerce_product_data_panels', array( __CLASS__, 'trip_options_callback_faqs' ) );
 	}
 
 	/**
@@ -53,13 +53,13 @@ class Trip_Options_Edit_Metabox {
         	'class'   => array( 'show_if_itinerary')
     	);
     	$tabs['include_exclude_tab'] = array(
-        	'label'   =>  __( 'Include/Exclude', 'dgc-domain' ),
+        	'label'   =>  __( 'Includes/Excludes', 'dgc-domain' ),
         	'target'  =>  'include_exclude_panel',
         	'priority' => 60,
         	'class'   => array( 'show_if_itinerary')
     	);
     	$tabs['faq_tab'] = array(
-        	'label'   =>  __( 'FAQ', 'dgc-domain' ),
+        	'label'   =>  __( 'FAQs', 'dgc-domain' ),
         	'target'  =>  'faq_panel',
         	'priority' => 60,
         	'class'   => array( 'show_if_itinerary')
@@ -471,7 +471,7 @@ class Trip_Options_Edit_Metabox {
 	/**
 	 * Prices & Dates metabox callback
 	 */
-	function trip_options_callback_prices_dates( $post ) {
+	function trip_options_callback_prices_dates( $post=false ) {
 		if ( ! $post ) {
 			global $post;
 			//return;
