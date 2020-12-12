@@ -42,22 +42,9 @@ class Trip_Options_Edit_Metabox {
 <script>
 	jQuery( document ).ready( function( $ ) {
 
-		$( 'input#_itinerary' ).change( function() {
-			var is_itinerary = $( 'input#_itinerary:checked' ).size();
-
-			$( '.show_if_itinerary' ).hide();
-			$( '.hide_if_itinerary' ).hide();
-
-			if ( is_itinerary ) {
-				$( '.hide_if_itinerary' ).hide();
-			}
-			if ( is_itinerary ) {
-				$( '.show_if_itinerary' ).show();
-			}
-		});
-		$( 'input#_itinerary' ).trigger( 'change' );
 	});
-</script><?php		
+</script>
+<?php		
 	}
 
 	/**
@@ -291,7 +278,7 @@ class Trip_Options_Edit_Metabox {
 		echo '}';
 */
 		?>
-		<table class="form-table trip-info">
+		<table>
 			<tr>
 				<td>
 					<?php esc_html_e( 'Trip Code : ', 'wp-travel' ); ?>
@@ -388,6 +375,22 @@ class Trip_Options_Edit_Metabox {
 
 		<script>
 			jQuery(document).ready(function($) {
+
+				$( 'input#_itinerary' ).change( function() {
+					var is_itinerary = $( 'input#_itinerary:checked' ).size();
+
+					$( '.show_if_itinerary' ).hide();
+					$( '.hide_if_itinerary' ).hide();
+
+					if ( is_itinerary ) {
+						$( '.hide_if_itinerary' ).hide();
+					}
+					if ( is_itinerary ) {
+						$( '.show_if_itinerary' ).show();
+					}
+				});
+				$( 'input#_itinerary' ).trigger( 'change' );
+
     			//$( "#itineraries-ul" ).sortable();
 				//$( "#itineraries-ul" ).disableSelection();
 				$( ".itinerary-li" ).hide();
