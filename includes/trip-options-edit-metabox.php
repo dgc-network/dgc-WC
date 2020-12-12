@@ -8,17 +8,18 @@ class Trip_Options_Edit_Metabox {
 		add_action( 'admin_menu', array( __CLASS__, 'trip_options_add_metabox' ) );
 		add_action( 'save_post', array( __CLASS__, 'trip_options_save_metabox' ), 10, 2 );
 
-		add_filter( 'woocommerce_product_data_tabs', array( __CLASS__, 'wk_custom_product_tab' ), 10, 1 );
+		add_filter( 'woocommerce_product_data_tabs', array( __CLASS__, 'custom_product_data_tab' ), 10, 1 );
 		add_action( 'woocommerce_product_data_panels', array( __CLASS__, 'trip_options_callback_itinerary' ) );
 	}
 
 	/**
 	 * Add a custom Product Data tab
  	 */
-	function wk_custom_product_tab( $default_tabs ) {
+	function custom_product_data_tab( $default_tabs ) {
     	$default_tabs['custom_tab'] = array(
         	'label'   =>  __( 'Itinerary', 'dgc-domain' ),
-        	'target'  =>  array( __CLASS__, 'trip_options_callback_itinerary' ),
+        	'target'  =>  'trip_options_callback_itinerary',
+        	//'target'  =>  array( __CLASS__, 'trip_options_callback_itinerary' ),
         	'priority' => 60,
         	'class'   => array()
     	);
