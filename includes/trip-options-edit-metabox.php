@@ -8,18 +8,18 @@ class Trip_Options_Edit_Metabox {
 		add_action( 'admin_menu', array( __CLASS__, 'trip_options_add_metabox' ) );
 		add_action( 'save_post', array( __CLASS__, 'trip_options_save_metabox' ), 10, 2 );
 
-		add_filter( 'product_type_options', array( __CLASS__, 'add_itinerary_product_option' ) );
-		add_filter( 'woocommerce_product_data_tabs', array( __CLASS__, 'custom_product_data_tab' ), 10, 1 );
+		add_filter( 'product_type_options', array( __CLASS__, 'add_remove_product_options' ) );
+		add_filter( 'woocommerce_product_data_tabs', array( __CLASS__, 'custom_product_data_tabs' ), 10, 1 );
 		add_action( 'woocommerce_product_data_panels', array( __CLASS__, 'trip_options_callback_itinerary' ) );
-		//add_filter( 'woocommerce_product_data_panels', array( __CLASS__, 'trip_options_callback_itinerary' ) );
-		//add_filter( 'woocommerce_product_data_tabs', 'custom_product_tabs' ); // WC 2.5 and below
-		//add_filter( 'woocommerce_product_data_panels', 'custom_product_tabs' ); // WC 2.6 and up	}
+		add_action( 'woocommerce_product_data_panels', array( __CLASS__, 'trip_options_callback_include_exclude' ) );
+		add_action( 'woocommerce_product_data_panels', array( __CLASS__, 'trip_options_callback_faq' ) );
 	}
 
 	/**
-	 * Add 'Itinerary' product option
+	 * Add 'Itinerary','FAQ' product options
+	 * Remove 'Virtual','Downloadable' product options
 	 */
-	function add_itinerary_product_option( $options ) {
+	function add_remove_product_options( $options ) {
 
 		// remove "Virtual" checkbox
 		if( isset( $options[ 'virtual' ] ) ) {
@@ -35,19 +35,32 @@ class Trip_Options_Edit_Metabox {
 			'id'            => '_itinerary',
 			'wrapper_class' => 'show_if_simple show_if_variable',
 			'label'         => __( 'Itinerary', 'dgc-domain' ),
-			'description'   => __( 'Itinerary allow users to put in personalised messages.', 'woocommerce' ),
+			'description'   => __( 'Itinerary allow users to put in personalised messages.', 'dgc-domain' ),
 			'default'       => 'no'
 		);
+
 		return $options;
 	}
 
 	/**
 	 * Add a custom Product Data tab
  	 */
-	function custom_product_data_tab( $tabs ) {
+	function custom_product_data_tabs( $tabs ) {
     	$tabs['itinerary_tab'] = array(
         	'label'   =>  __( 'Itinerary', 'dgc-domain' ),
-        	'target'  =>  'itinerary_options',
+        	'target'  =>  'itinerary_panel',
+        	'priority' => 60,
+        	'class'   => array( 'show_if_itinerary')
+    	);
+    	$tabs['include_exclude_tab'] = array(
+        	'label'   =>  __( 'Include/Exclude', 'dgc-domain' ),
+        	'target'  =>  'include_exclude_panel',
+        	'priority' => 60,
+        	'class'   => array( 'show_if_itinerary')
+    	);
+    	$tabs['faq_tab'] = array(
+        	'label'   =>  __( 'FAQ', 'dgc-domain' ),
+        	'target'  =>  'faq_panel',
         	'priority' => 60,
         	'class'   => array( 'show_if_itinerary')
     	);
@@ -274,7 +287,7 @@ class Trip_Options_Edit_Metabox {
 		echo '}';
 */
 		?>
-		<div id='itinerary_options' class='panel woocommerce_options_panel'>
+		<div id='itinerary_panel' class='panel woocommerce_options_panel'>
 		<table style="width:100%;">
 			<tr>
 				<td><h3><?php esc_html_e( 'Trip Code : ', 'wp-travel' ); ?></h3></td>
@@ -408,12 +421,6 @@ class Trip_Options_Edit_Metabox {
 					});
 				});
 
-				$( ".remove-itinerary" ).each( function( index, element ) {
-					$( element ).delegate("button", "click", function(){
-						$( this ).closest('.itinerary-li').remove();
-					});					
-				});
-
 				$("#first-itinerary").click( function(){
 					$(".no-itineraries").hide();
 					$(".init-rows").show();
@@ -426,8 +433,8 @@ class Trip_Options_Edit_Metabox {
 			
 				$("#add-itinerary").click( function(){
 					$( ".itinerary-li" ).each( function( index, element ) {
-						if ( $( this ).is(":hidden") ) {
-							$( this ).show();
+						if ( $( element ).is(":hidden") ) {
+							$( element ).show();
 							$( element ).delegate("span", "click", function(){
 								$( 'table', element ).toggleClass('toggle-access');
 							});
@@ -435,6 +442,12 @@ class Trip_Options_Edit_Metabox {
 						};
 					});
 				} );
+
+				$( ".remove-itinerary" ).each( function( index, element ) {
+					$( element ).delegate("button", "click", function(){
+						$( this ).closest('.itinerary-li').remove();
+					});					
+				});
 
 				$( '.item_date' ).datepicker();
 				$( '.item_time' ).timepicker({format: 'HH:mm'});
@@ -460,7 +473,8 @@ class Trip_Options_Edit_Metabox {
 	 */
 	function trip_options_callback_prices_dates( $post ) {
 		if ( ! $post ) {
-			return;
+			global $post;
+			//return;
 		}
 		$trip_data = WP_Travel_Helpers_Trips::get_trip( $post->ID );
 		$pricings = $trip_data['trip']['pricings'];
@@ -619,10 +633,22 @@ class Trip_Options_Edit_Metabox {
 	 */
 	function trip_options_callback_includes_excludes( $post ) {
 		if ( ! $post ) {
-			return;
+			global $post;
+			//return;
 		}
 		$trip_include = get_post_meta( $post->ID, 'wp_travel_trip_include', true );
 		$trip_exclude = get_post_meta( $post->ID, 'wp_travel_trip_exclude', true );
+?>
+		<div id='include_exclude_panel' class='panel woocommerce_options_panel'>
+			<h3><?php esc_html_e( 'Trip Includes', 'wp-travel' );?></h3>
+			<?php wp_editor ( $trip_include , 'wp_travel_trip_include', array ( "media_buttons" => true ) );?>
+			<br><br>
+			<h3><?php esc_html_e( 'Trip Excludes', 'wp-travel' );?></h3>
+			<?php wp_editor ( $trip_exclude , 'wp_travel_trip_exclude', array ( "media_buttons" => true ) );?>
+			<br><br>
+		</div>
+<?php		
+/*
 		echo '<h3>';
 		esc_html_e( 'Trip Includes', 'wp-travel' );
 		echo '</h3>';
@@ -634,6 +660,7 @@ class Trip_Options_Edit_Metabox {
 		esc_html_e( 'Trip Excludes', 'wp-travel' );
 		echo '</h3>';
 		wp_editor ( $trip_exclude , 'wp_travel_trip_exclude', array ( "media_buttons" => true ) );
+*/		
 	}
 
 
@@ -644,14 +671,16 @@ class Trip_Options_Edit_Metabox {
 	 */
 	function trip_options_callback_faqs( $post ) {
 		if ( ! $post ) {
-			return;
+			global $post;
+			//return;
 		}
 		$faqs = wp_travel_get_faqs( $post->ID );
 
 		$remove_faq = __( "- Remove FAQ", "wp-travel" );
 		$xx = 0;
 		?>
-		<table style="width:100%" class="form-table">
+		<div id='faq_panel' class='panel woocommerce_options_panel'>
+		<table style="width:100%">
 			<tr style="display:none" class="faq-init-rows">
 				<td><h3><?php esc_html_e( 'FAQ', 'wp-travel' ); ?></h3></td>
 				<td style="text-align:right"><button id="add-faq" type="button"><?php esc_html_e( '+ Add FAQ', 'wp-travel' ); ?></button></td>
@@ -709,6 +738,7 @@ class Trip_Options_Edit_Metabox {
 				<td style="text-align:right"><button id="add-faq" type="button"><?php esc_html_e( "+ Add FAQ", "wp-travel" ); ?></button></td>
 			</tr>
 		</table>
+		</div>
 
 		<script>
 			jQuery(document).ready(function($) {
