@@ -10,7 +10,8 @@ class Trip_Options_Edit_Metabox {
 
 		add_filter( 'product_type_options', array( __CLASS__, 'add_itinerary_product_option' ) );
 		add_filter( 'woocommerce_product_data_tabs', array( __CLASS__, 'custom_product_data_tab' ), 10, 1 );
-		add_filter( 'woocommerce_product_data_panels', array( __CLASS__, 'trip_options_callback_itinerary' ) );
+		add_action( 'woocommerce_product_data_panels', array( __CLASS__, 'trip_options_callback_itinerary' ) );
+		//add_filter( 'woocommerce_product_data_panels', array( __CLASS__, 'trip_options_callback_itinerary' ) );
 	}
 
 	/**
@@ -271,7 +272,7 @@ class Trip_Options_Edit_Metabox {
 		echo '}';
 */
 		?>
-		<div style="margin:0;">
+		<div style="clear: both;">
 		<table>
 			<tr>
 				<td>
