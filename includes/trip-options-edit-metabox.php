@@ -17,8 +17,8 @@ class Trip_Options_Edit_Metabox {
  	 */
 	function wk_custom_product_tab( $default_tabs ) {
     	$default_tabs['custom_tab'] = array(
-        	'label'   =>  __( 'Itinerary', 'domain' ),
-        	'target'  =>  'trip_options_callback_itinerary',
+        	'label'   =>  __( 'Itinerary', 'dgc-domain' ),
+        	'target'  =>  array( __CLASS__, 'trip_options_callback_itinerary' ),
         	'priority' => 60,
         	'class'   => array()
     	);
