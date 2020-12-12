@@ -17,7 +17,7 @@ class Trip_Options_Edit_Metabox {
 	 * Add 'Itinerary' product option
 	 */
 	function add_itinerary_product_option( $options ) {
-/*
+
 		// remove "Virtual" checkbox
 		if( isset( $options[ 'virtual' ] ) ) {
 			unset( $options[ 'virtual' ] );
@@ -27,22 +27,15 @@ class Trip_Options_Edit_Metabox {
 		if( isset( $options[ 'downloadable' ] ) ) {
 			unset( $options[ 'downloadable' ] );
 		}
-*/
+
 		$options['itinerary'] = array(
 			'id'            => '_itinerary',
 			'wrapper_class' => 'show_if_simple show_if_variable',
-			'label'         => __( 'Itinerary', 'woocommerce' ),
+			'label'         => __( 'Itinerary', 'dgc-domain' ),
 			'description'   => __( 'Itinerary allow users to put in personalised messages.', 'woocommerce' ),
 			'default'       => 'no'
 		);
-		return $options; ?>
-
-<script>
-	jQuery( document ).ready( function( $ ) {
-
-	});
-</script>
-<?php		
+		return $options;
 	}
 
 	/**
@@ -51,7 +44,7 @@ class Trip_Options_Edit_Metabox {
 	function custom_product_data_tab( $tabs ) {
     	$tabs['itinerary_tab'] = array(
         	'label'   =>  __( 'Itinerary', 'dgc-domain' ),
-        	'target'  =>  'trip_options',
+        	'target'  =>  'trip_options_callback_itinerary',
         	'priority' => 60,
         	'class'   => array( 'show_if_itinerary')
     	);
@@ -81,6 +74,7 @@ class Trip_Options_Edit_Metabox {
 	}
  
 	function horizontal_tabs_metabox( $post ) {
+/*		
 		//$admin_tabs = new WP_Travel_Admin_Tabs();
 		$admin_tabs = WP_Travel_Admin_Tabs::list_all();
 		echo '{';
@@ -92,6 +86,7 @@ class Trip_Options_Edit_Metabox {
 				echo '},';
 			}
 		echo '}';
+*/		
 		?>
 		<div id="mytabs">
 			<ul class="category-tabs">
@@ -276,7 +271,8 @@ class Trip_Options_Edit_Metabox {
 		echo '}';
 */
 		?>
-		<table style="margin:0;">
+		<div style="margin:0;">
+		<table>
 			<tr>
 				<td>
 					<?php esc_html_e( 'Trip Code : ', 'wp-travel' ); ?>
@@ -370,6 +366,7 @@ class Trip_Options_Edit_Metabox {
 				<td style="text-align:right"><button id="add-itinerary" type="button"><?php esc_html_e( "+ Add Itinerary", "wp-travel" ); ?></button></td>
 			</tr>
 		</table>
+		</div>
 
 		<script>
 			jQuery(document).ready(function($) {
