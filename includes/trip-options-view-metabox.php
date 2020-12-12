@@ -39,7 +39,6 @@ class Trip_Options_View_Metabox {
 		<script>
 			jQuery(document).ready(function($) {
 				$( '.start_date' ).datepicker();
-				$( '#begin_date' ).datepicker();
 				$( '#datetimepicker3' ).datetimepicker({
 					format: 'HH:mm'
 				});

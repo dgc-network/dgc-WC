@@ -261,15 +261,16 @@ class Trip_Options_Edit_Metabox {
 					if ($xx<=0) {
 						$itinerary_label = DEFAULT_ITINERARY_LABEL;
 						$itinerary_title = DEFAULT_ITINERARY_TITLE;
+						echo '<p style="display:none"></p>';
 					} else {
 						$itinerary_label = esc_attr( $itineraries[$x]['label'] );
 						$itinerary_title = esc_attr( $itineraries[$x]['title'] );
+						echo '<p style="display:none">' . $x . '</p>';
 					}
 					$xx--;
 					echo '<span class="fas fa-bars"> </span>';
 					echo '<span class="span-label">' . $itinerary_label . '</span>, ';
 					echo '<span class="span-title">' . $itinerary_title . '</span>';
-					echo '<p style="display:none">' . $x . '</p>';
 					echo '
 					<table class="update-itinerary" style="width:100%">
 				  	  <tbody>
@@ -382,13 +383,10 @@ class Trip_Options_Edit_Metabox {
 			#itineraries-ul li span { cursor:pointer; }
 			#itineraries-ul li .fas.fa-bars { margin-left:-1.3em; }
 			#itineraries-ul li .fas.fa-bars:before { content: "\f0c9"; }
-			/*#itineraries-ul li span { margin-left:-1.3em; cursor:pointer; }*/
 			#itineraries-ul li table { background:#ffffff; border:1px solid #ccc; width:100%; display:none; margin-left:-1.2em; padding-left:1.5em; }
 			#itineraries-ul li .toggle-access { display:block; }
 			#first-itinerary { color:blue; text-decoration:underline; cursor:pointer;}
 			.item-title { width:100%;}
-			/*i.fas*/
-			/*.fa-bars:before { content: "\f0c9"; }*/
   		</style>
 		<?php
 	}
@@ -491,8 +489,6 @@ class Trip_Options_Edit_Metabox {
 
 		<script>
 			jQuery(document).ready(function($) {
-    			//$( "#itineraries-ul" ).sortable();
-				//$( "#itineraries-ul" ).disableSelection();
 				$( ".pricing-li" ).hide();
 
 				$( ".pricing-li" ).each( function( index, element ) {
