@@ -380,14 +380,15 @@ class Trip_Options_Edit_Metabox {
   			#itineraries-ul { list-style-type:none; margin:0; padding:0; width:100%; }
   			#itineraries-ul li { background:#f2f2f2; border:1px solid #ccc; margin:0 3px 3px 3px; padding:0.4em; padding-left:1.5em; font-size:1.4em; }
 			#itineraries-ul li span { cursor:pointer; }
-			#itineraries-ul li span .fas.fa-bars { margin-left:-1.3em; }
+			#itineraries-ul li .fas.fa-bars { margin-left:-1.3em; }
+			#itineraries-ul li .fas.fa-bars:before { content: "\f0c9"; }
 			/*#itineraries-ul li span { margin-left:-1.3em; cursor:pointer; }*/
 			#itineraries-ul li table { background:#ffffff; border:1px solid #ccc; width:100%; display:none; margin-left:-1.2em; padding-left:1.5em; }
 			#itineraries-ul li .toggle-access { display:block; }
 			#first-itinerary { color:blue; text-decoration:underline; cursor:pointer;}
 			.item-title { width:100%;}
 			/*i.fas*/
-			.fa-bars:before { content: "\f0c9"; }
+			/*.fa-bars:before { content: "\f0c9"; }*/
   		</style>
 		<?php
 	}
@@ -831,15 +832,16 @@ class Trip_Options_Edit_Metabox {
 		$itineraries = array();
 		$xx = 0;
 		for ($x = 0; $x < 100; $x++) {
-			if ($_POST['itinerary_item_title-' . $x]!="" && $_POST['itinerary_item_title-' . $x] != DEFAULT_ITINERARY_TITLE) {
-				$itineraries[$xx]['label'] = $_POST['itinerary_item_label-' . $x];
-				$itineraries[$xx]['title'] = $_POST['itinerary_item_title-' . $x];
-				$itineraries[$xx]['date'] = $_POST['itinerary_item_date-' . $x];
-				$itineraries[$xx]['time'] = $_POST['itinerary_item_time-' . $x];
-				$itineraries[$xx]['desc'] = $_POST['itinerary_item_desc-' . $x];
+			if ($_POST['itinerary_item_label-' . $x]!="" && $_POST['itinerary_item_label-' . $x] != DEFAULT_ITINERARY_LABEL && $_POST['itinerary_item_title-' . $x]!="" && $_POST['itinerary_item_title-' . $x] != DEFAULT_ITINERARY_TITLE) {
+				$itineraries[$xx]['label'] = sanitize_text_field( $_POST['itinerary_item_label-' . $x] );
+				$itineraries[$xx]['title'] = sanitize_text_field( $_POST['itinerary_item_title-' . $x] );
+				$itineraries[$xx]['date'] = sanitize_text_field( $_POST['itinerary_item_date-' . $x] );
+				$itineraries[$xx]['time'] = sanitize_text_field( $_POST['itinerary_item_time-' . $x] );
+				$itineraries[$xx]['desc'] = sanitize_text_field( $_POST['itinerary_item_desc-' . $x] );
 				$xx++;
 			}
 		}
+		delete_post_meta( $post_id, 'wp_travel_trip_itinerary_data' );
 		update_post_meta( $post_id, 'wp_travel_trip_itinerary_data', $itineraries );
 
 		$pricings = array();
