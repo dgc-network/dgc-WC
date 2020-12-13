@@ -746,13 +746,23 @@ class Trip_Options_Edit_Metabox {
 			jQuery(document).ready(function($) {
     			//$( "#sortable" ).sortable();
 				//$( "#sortable" ).disableSelection();
+				$("#first-faq").click( function(){
+					$(".no-faqs").hide();
+					$(".faq-init-rows").show();
+					$(".faq-li").hide();
+					$("#faq-li-0").show();
+					$('span','#faq-li-0').on('click', function() {
+						$('table','#faq-li-0').toggleClass('toggle-access');
+					});
+				} );
+			
 				$( ".faq-li" ).hide();
 
 				$( ".faq-li" ).each( function( index, element ) {
 					if ( !$( 'p', element ).is(":empty") ) {
 						$( ".faq-init-rows" ).show();
 						$( element ).show();
-						$( 'span', element ).on('click', function() {
+						$( element ).delegate(".item-title", "click", function(){
 							$( 'table', element ).toggleClass('toggle-access');
 						});
 /*						
@@ -767,26 +777,10 @@ class Trip_Options_Edit_Metabox {
 					});
 				});
 
-				$( ".remove-faq" ).each( function( index, element ) {
-					$( element ).delegate("button", "click", function(){
-						$( this ).closest('.faq-li').remove();
-					});						
-				});
-
-				$("#first-faq").click( function(){
-					$(".no-faqs").hide();
-					$(".faq-init-rows").show();
-					$(".faq-li").hide();
-					$("#faq-li-0").show();
-					$('span','#faq-li-0').on('click', function() {
-						$('table','#faq-li-0').toggleClass('toggle-access');
-					});
-				} );
-			
-				$("#add-faq").click( function(){
+				$( "#add-faq" ).click( function(){
 					$( ".faq-li" ).each( function( index, element ) {
-						if ( $( this ).is(":hidden") ) {
-							$( this ).show();
+						if ( $( element ).is(":hidden") ) {
+							$( element ).show();
 							$( element ).delegate("span", "click", function(){
 								$( 'table', element ).toggleClass('toggle-access');
 							});
@@ -794,6 +788,12 @@ class Trip_Options_Edit_Metabox {
 						};
 					});
 				} );
+
+				$( ".remove-faq" ).each( function( index, element ) {
+					$( element ).delegate("button", "click", function(){
+						$( this ).closest('.faq-li').remove();
+					});						
+				});
 
 				$( '.faq_item_date' ).datepicker();
 			} );
