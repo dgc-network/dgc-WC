@@ -770,7 +770,7 @@ class Trip_Options_Edit_Metabox {
 */
 					};
 
-					$( element ).delegate(".item-title", "click", function(){
+					$( element ).delegate(".fas.fa-bars", "click", function(){
 						$( 'table', element ).toggleClass('toggle-access');
 					});
 					$( element ).delegate(".item-title", "keyup", function(){
