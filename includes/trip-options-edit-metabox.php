@@ -343,7 +343,7 @@ class Trip_Options_Edit_Metabox {
 					echo '<span class="span-label">' . $itinerary_label . '</span>, ';
 					echo '<span class="span-title">' . $itinerary_title . '</span>';
 					echo '
-					<table class="update-itinerary" style="width:100%">
+					<table style="width:100%">
 				  	  <tbody>
 						<tr>
 							<th>Itinerary label</th>
@@ -413,8 +413,18 @@ class Trip_Options_Edit_Metabox {
 
     			//$( "#itineraries-ul" ).sortable();
 				//$( "#itineraries-ul" ).disableSelection();
-				$( ".itinerary-li" ).hide();
 
+				$("#first-itinerary").click( function(){
+					$(".no-itineraries").hide();
+					$(".init-rows").show();
+					$(".itinerary-li").hide();
+					$("#itinerary-li-0").show();
+					$('span','#itinerary-li-0').on('click', function() {
+						$('table','#itinerary-li-0').toggleClass('toggle-access');
+					});
+				} );
+
+				$( ".itinerary-li" ).hide();
 				$( ".itinerary-li" ).each( function( index, element ) {
 					if ( !$( 'p', element ).is(":empty") ) {
 						$( ".init-rows" ).show();
@@ -432,16 +442,6 @@ class Trip_Options_Edit_Metabox {
 					});
 				});
 
-				$("#first-itinerary").click( function(){
-					$(".no-itineraries").hide();
-					$(".init-rows").show();
-					$(".itinerary-li").hide();
-					$("#itinerary-li-0").show();
-					$('span','#itinerary-li-0').on('click', function() {
-						$('table','#itinerary-li-0').toggleClass('toggle-access');
-					});
-				} );
-			
 				$("#add-itinerary").click( function(){
 					$( ".itinerary-li" ).each( function( index, element ) {
 						if ( $( element ).is(":hidden") ) {
@@ -649,29 +649,20 @@ class Trip_Options_Edit_Metabox {
 		}
 		$trip_include = get_post_meta( $post->ID, 'wp_travel_trip_include', true );
 		$trip_exclude = get_post_meta( $post->ID, 'wp_travel_trip_exclude', true );
-?>
+		$settings = array ( 
+			"media_buttons" => true, 
+			'textarea_rows' => 10
+		);
+		?>
 		<div id='include_exclude_panel' class='panel woocommerce_options_panel'>
 			<h3><?php esc_html_e( 'Trip Includes', 'wp-travel' );?></h3>
-			<?php wp_editor ( $trip_include , 'wp_travel_trip_include', array ( "media_buttons" => true, 'textarea_rows' => 10,) );?>
+			<?php wp_editor ( $trip_include , 'wp_travel_trip_include', $settings );?>
 			<br><br>
 			<h3><?php esc_html_e( 'Trip Excludes', 'wp-travel' );?></h3>
-			<?php wp_editor ( $trip_exclude , 'wp_travel_trip_exclude', array ( "media_buttons" => true, 'textarea_rows' => 10, ) );?>
+			<?php wp_editor ( $trip_exclude , 'wp_travel_trip_exclude', array ( "media_buttons" => true, 'textarea_rows' => 10 ) );?>
 			<br><br>
 		</div>
-<?php		
-/*
-		echo '<h3>';
-		esc_html_e( 'Trip Includes', 'wp-travel' );
-		echo '</h3>';
-		wp_editor ( $trip_include , 'wp_travel_trip_include', array ( "media_buttons" => true ) );
-		echo '<br>';
-		echo '<br>';
-
-		echo '<h3>';
-		esc_html_e( 'Trip Excludes', 'wp-travel' );
-		echo '</h3>';
-		wp_editor ( $trip_exclude , 'wp_travel_trip_exclude', array ( "media_buttons" => true ) );
-*/		
+		<?php		
 	}
 
 
@@ -761,9 +752,14 @@ class Trip_Options_Edit_Metabox {
 					if ( !$( 'p', element ).is(":empty") ) {
 						$( ".faq-init-rows" ).show();
 						$( element ).show();
+						$( 'span', element ).on('click', function() {
+							$( 'table', element ).toggleClass('toggle-access');
+						});
+/*						
 						$( element ).delegate("span", "click", function(){
 							$( 'table', element ).toggleClass('toggle-access');
 						});
+*/						
 					};
 
 					$( element ).delegate(".item-title", "keyup", function(){
