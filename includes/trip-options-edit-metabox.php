@@ -782,9 +782,11 @@ class Trip_Options_Edit_Metabox {
 					$( ".faq-li" ).each( function( index, element ) {
 						if ( $( element ).is(":hidden") ) {
 							$( element ).show();
+/*
 							$( element ).delegate("span", "click", function(){
 								$( 'table', element ).toggleClass('toggle-access');
 							});
+*/
 							return false;
 						};
 					});
