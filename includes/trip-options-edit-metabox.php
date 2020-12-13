@@ -681,7 +681,7 @@ class Trip_Options_Edit_Metabox {
 		$remove_faq = __( "- Remove FAQ", "wp-travel" );
 		$xx = 0;
 		?>
-		<div id='faq_panel' class='panel woocommerce_options_panel'>
+		<div id='faq_panel'>
 		<table style="width:100%">
 			<tr style="display:none" class="faq-init-rows">
 				<td><h3><?php esc_html_e( 'FAQ', 'wp-travel' ); ?></h3></td>
@@ -762,14 +762,11 @@ class Trip_Options_Edit_Metabox {
 					if ( !$( 'p', element ).is(":empty") ) {
 						$( ".faq-init-rows" ).show();
 						$( element ).show();
-						$( element ).delegate(".item-title", "click", function(){
-							$( 'table', element ).toggleClass('toggle-access');
-						});
-/*						
+
 						$( element ).delegate("span", "click", function(){
 							$( 'table', element ).toggleClass('toggle-access');
 						});
-*/						
+
 					};
 
 					$( element ).delegate(".item-title", "keyup", function(){
