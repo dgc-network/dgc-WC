@@ -331,7 +331,6 @@ class Trip_Options_Edit_Metabox {
 					echo '<span class="span-title">' . $itinerary_title . '</span>';
 					echo '
 					<table style="width:100%">
-				  	  <tbody>
 						<tr>
 							<th>Itinerary label</th>
 							<td><input type="text" class="item-label" name="itinerary_item_label-' . $x . '" value="' . $itinerary_label . '"></td>
@@ -353,7 +352,7 @@ class Trip_Options_Edit_Metabox {
 							<textarea rows="3" style="width:100%" name="itinerary_item_desc-' . $x . '">' . esc_attr( $itineraries[$x]['desc'] ) . '</textarea></td>
 						</tr>
 						<tr>
-							<th><label for="itinerary_item_robots">Itinerary robots</label></th>
+							<th>Itinerary robots</th>
 							<td>
 								<select id="itinerary_item_robots" name="itinerary_item_robots-' . $x . '">
 									<option value="">Home Stay ...</option>
@@ -366,7 +365,6 @@ class Trip_Options_Edit_Metabox {
 							<td></td>
 							<td class="remove-itinerary" style="text-align:right"><button id="remove-itinerary-' . $x . '" style="color:red" type="button">' . $remove_itinerary . '</button></td>
 						</tr>
-				  	  </tbody>
 					</table>
 			  		</li>';
 				}?>			
@@ -405,9 +403,9 @@ class Trip_Options_Edit_Metabox {
 					$(".no-itineraries").hide();
 					$(".init-rows").show();
 					$(".itinerary-li").hide();
-					$("li#itinerary-li-0").show();
-					$('span','li#itinerary-li-0').on('click', function() {
-						$('table','li#itinerary-li-0').toggleClass('toggle-access');
+					$("#itinerary-li-0").show();
+					$('span','#itinerary-li-0').on('click', function() {
+						$('table','#itinerary-li-0').toggleClass('toggle-access');
 					});
 				} );
 
@@ -430,7 +428,7 @@ class Trip_Options_Edit_Metabox {
 				});
 
 				$("#add-itinerary").click( function(){
-					$( "li.itinerary-li" ).each( function( index, element ) {
+					$( ".itinerary-li" ).each( function( index, element ) {
 						if ( $( element ).is(":hidden") ) {
 							$( element ).show();
 							$( element ).delegate("span", "click", function(){
@@ -457,8 +455,9 @@ class Trip_Options_Edit_Metabox {
   			#itineraries-ul li { background:#f2f2f2; border:1px solid #ccc; margin:0 3px 3px 3px; padding:0.4em; padding-left:1.5em; font-size:1.4em; }
 			#itineraries-ul li span { cursor:pointer; }
 			#itineraries-ul li .fas.fa-bars { margin-left:-1.3em; }
-			#itineraries-ul li .fas.fa-bars:before { content: "\f0c9"; }
-			#itineraries-ul li table { background:#ffffff; border:1px solid #ccc; width:100%; display:none; margin-left:-1.2em; padding-left:1.5em; }
+			/*#itineraries-ul li .fas.fa-bars:before { content: "\f0c9"; }*/
+			/*#itineraries-ul li table { background:#ffffff; border:1px solid #ccc; width:100%; display:none; margin-left:-1.2em; padding-left:1.5em; }*/
+			#itineraries-ul li table { background:#ffffff; border:1px solid #ccc; display:none; }
 			#itineraries-ul li .toggle-access { display:block; }
 			#first-itinerary { color:blue; text-decoration:underline; cursor:pointer;}
 			.item-title { width:100%;}
