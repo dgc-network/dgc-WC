@@ -332,8 +332,8 @@ class Trip_Options_Edit_Metabox {
 					echo '
 					<table style="width:100%">
 						<tr>
-							<th>Itinerary label</th>
-							<td><input type="text" class="item-label" name="itinerary_item_label-' . $x . '" value="' . $itinerary_label . '"></td>
+							<th style="width:20%">Itinerary label</th>
+							<td><input style="width:100%" type="text" class="item-label" name="itinerary_item_label-' . $x . '" value="' . $itinerary_label . '"></td>
 						</tr>
 						<tr>
 							<th>Itinerary title</th>
