@@ -683,11 +683,11 @@ class Trip_Options_Edit_Metabox {
 					echo '
 					<table>
 						<tr>
-							<th>' . esc_html_e( 'Your question', 'wp-travel' ) . '</th>
+							<th>' . __( 'Your question', 'wp-travel' ) . '</th>
 							<td><input type="text" width="100%" class="item-title" name="faq_item_question-' . $x . '" value="' . $faq_question . '" class="regular-text"></td>
 						</tr>
 						<tr>
-							<th>' . esc_html_e( 'Your answer', 'wp-travel' ) . '</th>
+							<th>' . __( 'Your answer', 'wp-travel' ) . '</th>
 							<td><textarea rows="3" name="faq_item_answer-' . $x . '" class="regular-text">' . esc_attr( $faqs[$x]['answer'] ) . '</textarea></td>
 						</tr>
 						<tr>
