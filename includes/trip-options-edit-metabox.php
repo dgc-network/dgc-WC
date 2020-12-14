@@ -766,8 +766,7 @@ class Trip_Options_Edit_Metabox {
   			#faqs-ul { list-style-type:none; margin:0; padding:0; width:100%; }
   			#faqs-ul li { background:#f2f2f2; border:1px solid #ccc; margin:0 3px 3px 3px; padding:0.4em; padding-left:1.5em; font-size:1.4em; }
 			#faqs-ul li span { margin-left:-1.3em; cursor:pointer; }
-			#faqs-ul li table { background:#ffffff; border:1px solid #ccc; width:100%; display:none; margin-left:-1.3em; padding-left:1.3em; margin-right:-1.3em; }
-/*			#faqs-ul li table { background:#ffffff; border:1px solid #ccc; width:100%; display:none; margin-left:-1.3em; }*/
+			#faqs-ul li table { background:#ffffff; border:1px solid #ccc; width:100%; display:none; margin-left:-1.3em; padding-left:1.3em; }
 			#faqs-ul li .toggle-access { display:block; }
 			#faqs-ul li th { width:25%; }
 			#faqs-ul li input { width:100%; }
