@@ -88,8 +88,8 @@ class Trip_Options_Edit_Metabox {
 		add_meta_box(
 			'trip-options', // metabox ID
 			esc_html__( 'Trip Options', 'dgc-domain' ), // title
-			//array( __CLASS__, 'trip_options_metabox_callback' ), // callback function
-			array( __CLASS__, 'horizontal_tabs_metabox' ), // callback function
+			array( __CLASS__, 'trip_options_metabox_callback' ), // callback function
+			//array( __CLASS__, 'horizontal_tabs_metabox' ), // callback function
 			//array( __CLASS__, 'vertical_example_metabox' ), // callback function
 			'product', // post type or post types in array
 			'normal', // position (normal, side, advanced)
@@ -101,19 +101,6 @@ class Trip_Options_Edit_Metabox {
 	}
  
 	function horizontal_tabs_metabox( $post ) {
-/*		
-		//$admin_tabs = new WP_Travel_Admin_Tabs();
-		$admin_tabs = WP_Travel_Admin_Tabs::list_all();
-		echo '{';
-			foreach ( $admin_tabs as $key=>$values ) {
-				echo $key.':{';
-				foreach ( $values as $key=>$value ) {
-					echo '{'.$key.':'.$value.'},';
-				}
-				echo '},';
-			}
-		echo '}';
-*/		
 		?>
 		<div id="mytabs">
 			<ul class="category-tabs">
@@ -418,9 +405,9 @@ class Trip_Options_Edit_Metabox {
 					$(".no-itineraries").hide();
 					$(".init-rows").show();
 					$(".itinerary-li").hide();
-					$("#itinerary-li-0").show();
-					$('span','#itinerary-li-0').on('click', function() {
-						$('table','#itinerary-li-0').toggleClass('toggle-access');
+					$("li#itinerary-li-0").show();
+					$('span','li#itinerary-li-0').on('click', function() {
+						$('table','li#itinerary-li-0').toggleClass('toggle-access');
 					});
 				} );
 
@@ -443,7 +430,7 @@ class Trip_Options_Edit_Metabox {
 				});
 
 				$("#add-itinerary").click( function(){
-					$( ".itinerary-li" ).each( function( index, element ) {
+					$( "li.itinerary-li" ).each( function( index, element ) {
 						if ( $( element ).is(":hidden") ) {
 							$( element ).show();
 							$( element ).delegate("span", "click", function(){
