@@ -317,26 +317,26 @@ class Trip_Options_Edit_Metabox {
 					echo '<span class="span-label">' . $itinerary_label . '</span>, ';
 					echo '<span class="span-title">' . $itinerary_title . '</span>';
 					echo '
-					<table style="width:100%">
+					<table>
 						<tr>
-							<th style="width:20%">' . esc_html_e( 'Itinerary label', 'wp-travel' ) .'</th>
-							<td><input style="width:100%" type="text" class="item-label" name="itinerary_item_label-' . $x . '" value="' . $itinerary_label . '"></td>
+							<th>' . __( 'Itinerary label', 'wp-travel' ) .'</th>
+							<td><input type="text" class="item-label" name="itinerary_item_label-' . $x . '" value="' . $itinerary_label . '"></td>
 						</tr>
 						<tr>
-							<th style="width:20%">' . esc_html_e( 'Itinerary title', 'wp-travel' ) .'</th>
-							<td><input style="width:100%" type="text" class="item-title" name="itinerary_item_title-' . $x . '" value="' . $itinerary_title . '"></td>
+							<th>' . __( 'Itinerary title', 'wp-travel' ) .'</th>
+							<td><input type="text" class="item-title" name="itinerary_item_title-' . $x . '" value="' . $itinerary_title . '"></td>
 						</tr>
 						<tr>
-							<th style="width:20%">' . esc_html_e( 'Itinerary date', 'wp-travel' ) .'</th>
+							<th>' . __( 'Itinerary date', 'wp-travel' ) .'</th>
 							<td><input type="text" class="item_date" name="itinerary_item_date-' . $x . '" value="' . esc_attr( $itineraries[$x]['date'] ) . '"></td>
 						</tr>
 						<tr>
-							<th style="width:20%">' . esc_html_e( 'Itinerary time', 'wp-travel' ) .'</th>
+							<th>' . __( 'Itinerary time', 'wp-travel' ) .'</th>
 							<td><input type="text" class="item_time" name="itinerary_item_time-' . $x . '" value="' . esc_attr( $itineraries[$x]['time'] ) . '"></td>
 						</tr>
 						<tr>
-							<td colspan="2"><b>' . esc_html_e( 'Description', 'wp-travel' ) .'</b><br>
-							<textarea rows="3" style="width:100%" name="itinerary_item_desc-' . $x . '">' . esc_attr( $itineraries[$x]['desc'] ) . '</textarea></td>
+							<td colspan="2"><b>' . __( 'Description', 'wp-travel' ) .'</b><br>
+							<textarea rows="3" name="itinerary_item_desc-' . $x . '">' . esc_attr( $itineraries[$x]['desc'] ) . '</textarea></td>
 						</tr>
 						<tr>
 							<th>Itinerary robots</th>
@@ -441,10 +441,13 @@ class Trip_Options_Edit_Metabox {
   			#itineraries-ul li { background:#f2f2f2; border:1px solid #ccc; margin:0 3px 3px 3px; padding:0.4em; padding-left:1.5em; font-size:1.4em; }
 			#itineraries-ul li span { cursor:pointer; }
 			#itineraries-ul li .fas.fa-bars { margin-left:-1.3em; }
-			#itineraries-ul li table { background:#ffffff; border:1px solid #ccc; width:100%; display:none; margin-left:-1.3em; padding-left:1.3em; }
+			#itineraries-ul li table { background:#ffffff; border:1px solid #ccc; width:100%; display:none; margin-left:-1.3em; }
 			#itineraries-ul li .toggle-access { display:block; }
+			#itineraries-ul li th { width:20%; }
+			#itineraries-ul li input { width:100%; }
+			#itineraries-ul li textarea { width:100%; }
 			#first-itinerary { color:blue; text-decoration:underline; cursor:pointer; }
-			.item-title { width:100%; }
+			.fa-bars:before { content: "\f0c9"; }
   		</style>
 		<?php
 	}
@@ -603,7 +606,6 @@ class Trip_Options_Edit_Metabox {
 			#pricings-ul li table { background:#ffffff; border:1px solid #ccc; width:100%; display:none; margin-left:-1.2em; padding-left:1.5em; }
 			#pricings-ul li .toggle-access { display:block; }
 			#first-pricing { color:blue; text-decoration:underline; cursor:pointer;}
-			/*i.fas*/
 			.fa-bars:before { content: "\f0c9"; }
   		</style>
 		<?php
@@ -764,12 +766,14 @@ class Trip_Options_Edit_Metabox {
   			#faqs-ul { list-style-type:none; margin:0; padding:0; width:100%; }
   			#faqs-ul li { background:#f2f2f2; border:1px solid #ccc; margin:0 3px 3px 3px; padding:0.4em; padding-left:1.5em; font-size:1.4em; }
 			#faqs-ul li span { margin-left:-1.3em; cursor:pointer; }
-			#faqs-ul li table { background:#ffffff; border:1px solid #ccc; width:100%; display:none; margin-left:-1.3em; padding-left:1.3em; }
+/*			#faqs-ul li table { background:#ffffff; border:1px solid #ccc; width:100%; display:none; margin-left:-1.3em; padding-left:1.3em; }*/
+			#faqs-ul li table { background:#ffffff; border:1px solid #ccc; width:100%; display:none; margin-left:-1.3em; }
 			#faqs-ul li .toggle-access { display:block; }
 			#faqs-ul li th { width:20%; }
 			#faqs-ul li input { width:100%; }
 			#faqs-ul li textarea { width:100%; }
 			#first-faq { color:blue; text-decoration:underline; cursor:pointer; }
+			.fa-bars:before { content: "\f0c9"; }
   		</style>
 		<?php		
 	}
