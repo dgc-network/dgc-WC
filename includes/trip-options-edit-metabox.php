@@ -13,6 +13,7 @@ class Trip_Options_Edit_Metabox {
 		add_action( 'woocommerce_product_data_panels', array( __CLASS__, 'trip_options_callback_itinerary' ) );
 		add_action( 'woocommerce_product_data_panels', array( __CLASS__, 'trip_options_callback_includes_excludes' ) );
 		add_action( 'woocommerce_product_data_panels', array( __CLASS__, 'trip_options_callback_faqs' ) );
+		add_action( 'admin_head', array( __CLASS__, 'dgc_custom_style' ) );
 	}
 
 	/**
@@ -76,6 +77,19 @@ class Trip_Options_Edit_Metabox {
         	'class'   => array( 'show_if_itinerary')
     	);
     	return $tabs;
+	}
+
+	/**
+	 * Add a bit of style.
+	 */
+	function dgc_custom_style() {
+
+		?><style>
+			#woocommerce-product-data ul.wc-tabs li.itinerary_panel a:before { font-family: WooCommerce; content: '\e600'; }
+			#woocommerce-product-data ul.wc-tabs li.include_exclude_panel a:before { font-family: WooCommerce; content: '\e601'; }
+			#woocommerce-product-data ul.wc-tabs li.faq_panel a:before { font-family: WooCommerce; content: '\e602'; }
+		</style><?php
+
 	}
 
 	/**
