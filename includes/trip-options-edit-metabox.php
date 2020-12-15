@@ -354,24 +354,24 @@ class Trip_Options_Edit_Metabox {
 						</tr>
 						<tr>
 							<td colspan="2"><b>' . __( 'Resources Assignment', 'wp-travel' ) .'</b>
-							<table style="width:100%>
-								<tr>
+								<table style="width:100%">
+									<tr>
 									<td>
 										<select id="itinerary_item_robots" name="itinerary_item_robots-' . $x . '">
-											<option value="">Home Stay ...</option>
-											<option value="index,follow"' . selected( 'index,follow', $itineraries[$x]['label'], false ) . '>Show for search engines</option>
-											<option value="noindex,nofollow"' . selected( 'noindex,nofollow', $itineraries[$x]['label'], false ) . '>Hide for search engines</option>
+											<option value="">Stay ...</option>
+											<option value="index,follow"' . selected( 'index,follow', $itineraries[$x]['label'], false ) . '>Lunch ...</option>
+											<option value="noindex,nofollow"' . selected( 'noindex,nofollow', $itineraries[$x]['label'], false ) . '>Dinner ...</option>
 										</select>
 									</td>
 									<td>
 										<select id="itinerary_item_robots" name="itinerary_item_robots-' . $x . '">
-											<option value="">Home Stay ...</option>
-											<option value="index,follow"' . selected( 'index,follow', $itineraries[$x]['label'], false ) . '>Show for search engines</option>
-											<option value="noindex,nofollow"' . selected( 'noindex,nofollow', $itineraries[$x]['label'], false ) . '>Hide for search engines</option>
+											<option value="">背包客棧1</option>
+											<option value="index,follow"' . selected( 'index,follow', $itineraries[$x]['label'], false ) . '>背包客棧2</option>
+											<option value="noindex,nofollow"' . selected( 'noindex,nofollow', $itineraries[$x]['label'], false ) . '>背包客棧3</option>
 										</select>
 									</td>
-								</tr>
-							</table>
+									</tr>
+								</table>
 							</td>
 						</tr>
 						<tr>
