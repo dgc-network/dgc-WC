@@ -375,7 +375,7 @@ class Trip_Options_Edit_Metabox {
 								</tr>
 								</table>';
 								} else {
-									echo 'br';
+									echo '<br>';
 									esc_html_e( 'No Assignment found. ', 'wp-travel' );
 									echo '<span id="first-assignment">' . __( 'Add Assignment', 'wp-travel' ) . '</span>';
 					
