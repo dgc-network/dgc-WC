@@ -465,7 +465,7 @@ class Trip_Options_Edit_Metabox {
 	 * Resources Assignment
 	 */
 	function resources_assignment( $itineraries, $x ) {
-		echo '<table style="width:100%;margin:0">
+		echo '<table style="width:100%;margin-left:0">
 		<tr>
 		<td>
 			<select id="itinerary_item_robots" name="itinerary_item_robots-' . $x . '">
