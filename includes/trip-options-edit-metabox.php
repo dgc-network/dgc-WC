@@ -354,7 +354,25 @@ class Trip_Options_Edit_Metabox {
 						</tr>
 						<tr>
 							<td colspan="2"><b>' . __( 'Resources Assignment', 'wp-travel' ) .'</b>
-								'. self::resources_assignment( $itineraries, $x ).'
+								'. //self::resources_assignment( $itineraries, $x ).
+								'<table style="width:100%;margin-left:0">
+								<tr>
+								<td>
+									<select id="itinerary_item_robots" name="itinerary_item_robots-' . $x . '">
+										<option value="">Stay ...</option>
+										<option value="index,follow"' . selected( 'index,follow', $itineraries[$x]['label'], false ) . '>Lunch ...</option>
+										<option value="noindex,nofollow"' . selected( 'noindex,nofollow', $itineraries[$x]['label'], false ) . '>Dinner ...</option>
+									</select>
+								</td>
+								<td>
+									<select id="itinerary_item_robots" name="itinerary_item_robots-' . $x . '">
+										<option value="">背包客棧1</option>
+										<option value="index,follow"' . selected( 'index,follow', $itineraries[$x]['label'], false ) . '>背包客棧2</option>
+										<option value="noindex,nofollow"' . selected( 'noindex,nofollow', $itineraries[$x]['label'], false ) . '>背包客棧3</option>
+									</select>
+								</td>
+								</tr>
+								</table>
 							</td>
 						</tr>
 						<tr>
@@ -465,24 +483,6 @@ class Trip_Options_Edit_Metabox {
 	 * Resources Assignment
 	 */
 	function resources_assignment( $itineraries, $x ) {
-		echo '<table style="width:100%;margin-left:0">
-		<tr>
-		<td>
-			<select id="itinerary_item_robots" name="itinerary_item_robots-' . $x . '">
-				<option value="">Stay ...</option>
-				<option value="index,follow"' . selected( 'index,follow', $itineraries[$x]['label'], false ) . '>Lunch ...</option>
-				<option value="noindex,nofollow"' . selected( 'noindex,nofollow', $itineraries[$x]['label'], false ) . '>Dinner ...</option>
-			</select>
-		</td>
-		<td>
-			<select id="itinerary_item_robots" name="itinerary_item_robots-' . $x . '">
-				<option value="">背包客棧1</option>
-				<option value="index,follow"' . selected( 'index,follow', $itineraries[$x]['label'], false ) . '>背包客棧2</option>
-				<option value="noindex,nofollow"' . selected( 'noindex,nofollow', $itineraries[$x]['label'], false ) . '>背包客棧3</option>
-			</select>
-		</td>
-		</tr>
-		</table>';
 	}
 
 	/**
