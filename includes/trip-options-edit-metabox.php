@@ -354,8 +354,9 @@ class Trip_Options_Edit_Metabox {
 						</tr>
 						<tr>
 							<td colspan="2"><b>' . __( 'Resources Assignment', 'wp-travel' ) .'</b>
-								'. //self::resources_assignment( $itineraries, $x ).
-								'<table style="width:100%;margin-left:0">
+								'; //self::resources_assignment( $itineraries, $x ).
+								if (isset($itineraries[$x]['assignment'])) {
+								echo '<table style="width:100%;margin-left:0">
 								<tr>
 								<td>
 									<select id="itinerary_item_robots" name="itinerary_item_robots-' . $x . '">
@@ -372,8 +373,13 @@ class Trip_Options_Edit_Metabox {
 									</select>
 								</td>
 								</tr>
-								</table>
-							</td>
+								</table>';
+								} else {
+									esc_html_e( 'No Assignment found.', 'wp-travel' );
+									echo '<span id="first-assignment">' . __( 'Add Assignment', 'wp-travel' ) . '</span>';
+					
+								}
+							echo '</td>
 						</tr>
 						<tr>
 							<td></td>
