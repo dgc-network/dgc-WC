@@ -375,7 +375,8 @@ class Trip_Options_Edit_Metabox {
 								</tr>
 								</table>';
 								} else {
-									esc_html_e( 'No Assignment found.', 'wp-travel' );
+									echo 'br';
+									esc_html_e( 'No Assignment found. ', 'wp-travel' );
 									echo '<span id="first-assignment">' . __( 'Add Assignment', 'wp-travel' ) . '</span>';
 					
 								}
@@ -480,6 +481,7 @@ class Trip_Options_Edit_Metabox {
 			#itineraries-ul li input { width:100%; }
 			#itineraries-ul li textarea { width:100%; }
 			#first-itinerary { color:blue; text-decoration:underline; cursor:pointer; }
+			#first-assignment { color:blue; text-decoration:underline; cursor:pointer; }
 			.fa-bars:before { content: "\f0c9"; }
   		</style>
 		<?php
