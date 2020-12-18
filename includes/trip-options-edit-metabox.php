@@ -355,31 +355,48 @@ class Trip_Options_Edit_Metabox {
 						<tr>
 							<td colspan="2"><b>' . __( 'Resources Assignment', 'wp-travel' ) .'</b>
 								'; //self::resources_assignment( $itineraries, $x ).
+								$yy=0;
 								if (isset($itineraries[$x]['assignment'])) {
-								echo '<table style="width:100%;margin-left:0">
-								<tr>
-								<td>
-									<select id="itinerary_item_robots" name="itinerary_item_robots-' . $x . '">
-										<option value="">Stay ...</option>
-										<option value="index,follow"' . selected( 'index,follow', $itineraries[$x]['label'], false ) . '>Lunch ...</option>
-										<option value="noindex,nofollow"' . selected( 'noindex,nofollow', $itineraries[$x]['label'], false ) . '>Dinner ...</option>
-									</select>
-								</td>
-								<td>
-									<select id="itinerary_item_robots" name="itinerary_item_robots-' . $x . '">
-										<option value="">背包客棧1</option>
-										<option value="index,follow"' . selected( 'index,follow', $itineraries[$x]['label'], false ) . '>背包客棧2</option>
-										<option value="noindex,nofollow"' . selected( 'noindex,nofollow', $itineraries[$x]['label'], false ) . '>背包客棧3</option>
-									</select>
-								</td>
-								</tr>
-								</table>';
+									foreach ( $itineraries[$x]['assignment'] as $assignment ) {
+										$yy++;
+									}															
 								} else {
 									echo '<br>';
 									esc_html_e( 'No Assignment found. ', 'wp-travel' );
 									echo '<span id="first-assignment">' . __( 'Add Assignment', 'wp-travel' ) . '</span>';
 					
 								}
+								echo '<table class="resources" display="none" style="width:100%;margin-left:0">';
+								for ($y = 0; $y < 10; $y++) {
+									echo '<li class="itinerary-li" id="itinerary-li-' . $y . '">';
+									if ($yy<=0) {
+										$itinerary_label = DEFAULT_ITINERARY_LABEL;
+										$itinerary_title = DEFAULT_ITINERARY_TITLE;
+										echo '<p style="display:none"></p>';
+									} else {
+										echo '<tr>
+										<td>
+											<select id="itinerary_item_robots" name="itinerary_item_robots-' . $x . '">
+												<option value="">Stay ...</option>
+												<option value="index,follow"' . selected( 'index,follow', $itineraries[$x]['label'], false ) . '>Lunch ...</option>
+												<option value="noindex,nofollow"' . selected( 'noindex,nofollow', $itineraries[$x]['label'], false ) . '>Dinner ...</option>
+											</select>
+										</td>
+										<td>
+											<select id="itinerary_item_robots" name="itinerary_item_robots-' . $x . '">
+												<option value="">背包客棧1</option>
+												<option value="index,follow"' . selected( 'index,follow', $itineraries[$x]['label'], false ) . '>背包客棧2</option>
+												<option value="noindex,nofollow"' . selected( 'noindex,nofollow', $itineraries[$x]['label'], false ) . '>背包客棧3</option>
+											</select>
+										</td>
+										</tr>';
+										$itinerary_label = esc_attr( $itineraries[$x]['label'] );
+										$itinerary_title = esc_attr( $itineraries[$x]['title'] );
+										echo '<p style="display:none">' . $x . '</p>';
+									}
+									$yy--;
+								}				
+								echo '</table>';
 							echo '</td>
 						</tr>
 						<tr>
