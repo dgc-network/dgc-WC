@@ -368,6 +368,7 @@ class Trip_Options_Edit_Metabox {
 								}
 								echo '<table class="resources" display="none" style="width:100%;margin-left:0">';
 								for ($y = 0; $y < 10; $y++) {
+/*
 									echo '<li class="itinerary-li" id="itinerary-li-' . $y . '">';
 									if ($yy<=0) {
 										$itinerary_label = DEFAULT_ITINERARY_LABEL;
@@ -394,6 +395,7 @@ class Trip_Options_Edit_Metabox {
 										$itinerary_title = esc_attr( $itineraries[$x]['title'] );
 										echo '<p style="display:none">' . $x . '</p>';
 									}
+*/									
 									$yy--;
 								}				
 								echo '</table>';
