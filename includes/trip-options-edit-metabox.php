@@ -282,6 +282,18 @@ class Trip_Options_Edit_Metabox {
 		if ( ! $post ) {
 			global $post;
 		}
+		// since wordpress 4.5.0
+$args = array(
+    'taxonomy'   => "product_cat",
+    'number'     => $number,
+    'orderby'    => $orderby,
+    'order'      => $order,
+    'hide_empty' => $hide_empty,
+    'include'    => $ids
+);
+$product_categories = get_terms($args);
+foreach( $product_categories as $cat ) { echo $cat->name; }
+
 		$trip_code = wp_travel_get_trip_code( $post->ID );
 		$trip_outline = get_post_meta( $post->ID, 'wp_travel_outline', true );
 		$itineraries = get_post_meta( $post->ID, 'wp_travel_trip_itinerary_data', true );
@@ -368,6 +380,20 @@ class Trip_Options_Edit_Metabox {
 								}
 								echo '<table class="resources" display="none" style="width:100%;margin-left:0">';
 								for ($y = 0; $y < 10; $y++) {
+									if ($yy>0) {
+										echo '<tr>
+										<td>
+											<select id="itinerary_item_assignment" name="itinerary_item_assignment-' . $x . '-category-' . $y . '">
+												<option value="">Stay ...</option>
+												<option value="index,follow"' . selected( 'index,follow', $itineraries[$x]['label'], false ) . '>Lunch ...</option>
+												<option value="noindex,nofollow"' . selected( 'noindex,nofollow', $itineraries[$x]['label'], false ) . '>Dinner ...</option>
+											</select>
+										</td>
+										<td>
+										</td>
+										</tr>';
+
+									}
 /*
 									echo '<li class="itinerary-li" id="itinerary-li-' . $y . '">';
 									if ($yy<=0) {
