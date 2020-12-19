@@ -296,6 +296,7 @@ class Trip_Options_Edit_Metabox {
 		//echo '<option value="noindex,nofollow"' . selected( 'noindex,nofollow', $itineraries[$x]['label'], false ) . '>Dinner ...</option>';
 		//echo '</select>';
 
+		echo '<option value="">' .  __( "- Select Category -", "wp-travel" ) . '</option>';
 		foreach( $product_categories as $cat ) {
 			echo '<option value="' . $cat->name . '">' . $cat->name . '</option>';
 		}
