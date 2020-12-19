@@ -393,19 +393,23 @@ class Trip_Options_Edit_Metabox {
 									echo '<div class="no-assignments">';
 									esc_html_e( 'No Assignments found. ', 'wp-travel' );
 									echo '<span class="first-assignment">' . __( 'Add Assignment', 'wp-travel' ) . '</span>';
-									echo '</div >';					
+									echo '</div >';
 								}
+								echo '<div class="resources-assignment" display="none">';
 								//echo '<table class="resources-assignment-' . $x . '" display="none" style="width:100%;margin-left:0">';
-								echo '<table class="resources-assignment" display="none" style="width:100%;margin-left:0">';
+								echo '<table style="width:100%;margin-left:0">';
 								for ($y = 0; $y < 10; $y++) {
 									//if ($yy>0) {
-										echo '<tr>
+										echo '<tr class="assignment-rows" id="assignment-row-' . $x . '">
 										<td>
 											<select id="itinerary_item_assignment" name="itinerary_item_assignment-' . $x . '-category-' . $y . '">';
 												self::product_categories_name_options();
 											echo '</select>
 										</td>
 										<td>
+											<select id="itinerary_item_assignment" name="itinerary_item_assignment-' . $x . '-category-' . $y . '">';
+												self::product_categories_name_options();
+											echo '</select>
 										</td>
 										</tr>';
 
@@ -441,6 +445,7 @@ class Trip_Options_Edit_Metabox {
 									$yy--;
 								}				
 								echo '</table>';
+								echo '</div >';
 							echo '</td>
 						</tr>
 						<tr>
@@ -509,6 +514,8 @@ class Trip_Options_Edit_Metabox {
 					$( element ).delegate( '.first-assignment', 'click', function() {
 						$( '.no-assignments', element ).hide();
 						$( '.resources-assignment', element ).show();
+						$( '.assignment-rows', element ).hide();
+						$( '#assignment-row-0', element ).show();
 					});
 				});
 
