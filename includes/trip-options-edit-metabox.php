@@ -276,23 +276,39 @@ class Trip_Options_Edit_Metabox {
 
 
 	/**
+	 * Product Categories List
+	 */
+	function product_categories_name_options() {
+		// since wordpress 4.5.0
+		$args = array(
+			'taxonomy'   => "product_cat",
+			'number'     => $number,
+			'orderby'    => $orderby,
+			'order'      => $order,
+			'hide_empty' => $hide_empty,
+			'include'    => $ids
+		);
+		$product_categories = get_terms($args);
+
+		//echo '<select id="itinerary_item_assignment" name="itinerary_item_assignment-' . $x . '-category-' . $y . '">';
+		//echo '<option value="">Stay ...</option>';
+		//echo '<option value="index,follow"' . selected( 'index,follow', $itineraries[$x]['label'], false ) . '>Lunch ...</option>';
+		//echo '<option value="noindex,nofollow"' . selected( 'noindex,nofollow', $itineraries[$x]['label'], false ) . '>Dinner ...</option>';
+		//echo '</select>';
+
+		foreach( $product_categories as $cat ) {
+			echo '<option value="' . $cat->name . '">' . $cat->name . '</option>';
+		}
+	}
+
+
+	/**
 	 * Itinerary metabox callback
 	 */
 	function trip_options_callback_itinerary( $post ) {
 		if ( ! $post ) {
 			global $post;
 		}
-		// since wordpress 4.5.0
-$args = array(
-    'taxonomy'   => "product_cat",
-    'number'     => $number,
-    'orderby'    => $orderby,
-    'order'      => $order,
-    'hide_empty' => $hide_empty,
-    'include'    => $ids
-);
-$product_categories = get_terms($args);
-foreach( $product_categories as $cat ) { echo $cat->name; }
 
 		$trip_code = wp_travel_get_trip_code( $post->ID );
 		$trip_outline = get_post_meta( $post->ID, 'wp_travel_outline', true );
@@ -383,11 +399,9 @@ foreach( $product_categories as $cat ) { echo $cat->name; }
 									if ($yy>0) {
 										echo '<tr>
 										<td>
-											<select id="itinerary_item_assignment" name="itinerary_item_assignment-' . $x . '-category-' . $y . '">
-												<option value="">Stay ...</option>
-												<option value="index,follow"' . selected( 'index,follow', $itineraries[$x]['label'], false ) . '>Lunch ...</option>
-												<option value="noindex,nofollow"' . selected( 'noindex,nofollow', $itineraries[$x]['label'], false ) . '>Dinner ...</option>
-											</select>
+											<select id="itinerary_item_assignment" name="itinerary_item_assignment-' . $x . '-category-' . $y . '">'
+												. product_categories_name_options() .
+											'</select>
 										</td>
 										<td>
 										</td>
