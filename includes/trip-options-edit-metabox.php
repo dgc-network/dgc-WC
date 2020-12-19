@@ -400,7 +400,7 @@ class Trip_Options_Edit_Metabox {
 										echo '<tr>
 										<td>
 											<select id="itinerary_item_assignment" name="itinerary_item_assignment-' . $x . '-category-' . $y . '">'
-												. //product_categories_name_options() .
+												. self::product_categories_name_options() .
 											'</select>
 										</td>
 										<td>
