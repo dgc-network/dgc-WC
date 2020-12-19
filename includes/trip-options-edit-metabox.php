@@ -389,10 +389,10 @@ class Trip_Options_Edit_Metabox {
 										$yy++;
 									}															
 								} else {
-									echo '<br>';
-									esc_html_e( 'No Assignment found. ', 'wp-travel' );
-									echo '<span id="first-assignment">' . __( 'Add Assignment', 'wp-travel' ) . '</span>';
-					
+									echo '<div class="no-assignments">';
+									esc_html_e( 'No Assignments found. ', 'wp-travel' );
+									echo '<span class="first-assignment">' . __( 'Add Assignment', 'wp-travel' ) . '</span>';
+									echo '</div >';					
 								}
 								echo '<table class="resources" display="none" style="width:100%;margin-left:0">';
 								for ($y = 0; $y < 10; $y++) {
@@ -521,6 +521,13 @@ class Trip_Options_Edit_Metabox {
 				$( '.remove-itinerary' ).each( function( index, element ) {
 					$( element ).delegate( 'button', 'click', function() {
 						$( this ).closest( '.itinerary-li' ).remove();
+					});					
+				});
+
+				$( '.first-assignment' ).each( function( index, element ) {
+					$( element ).delegate( 'span', 'click', function() {
+						$( '.no-assignments' ).hide();
+						$( '.resources' ).show();
 					});					
 				});
 
