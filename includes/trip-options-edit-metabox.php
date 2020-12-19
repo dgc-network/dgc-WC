@@ -382,7 +382,7 @@ class Trip_Options_Edit_Metabox {
 							<textarea rows="3" name="itinerary_item_desc-' . $x . '">' . esc_attr( $itineraries[$x]['desc'] ) . '</textarea></td>
 						</tr>
 						<tr>
-							<td colspan="2"><b>' . __( 'Resources Assignment', 'wp-travel' ) .'</b>';
+							<td colspan="2">';
 								//self::resources_assignment( $itineraries, $x ).
 								$yy=0;
 								if (isset($itineraries[$x]['assignment'])) {
@@ -396,12 +396,17 @@ class Trip_Options_Edit_Metabox {
 									echo '<span class="first-assignment">' . __( 'Add Assignment', 'wp-travel' ) . '</span>';
 									echo '</div >';
 								}
-								echo '<div class="resources-assignment" display="none">';
+								//echo '<div class="resources-assignment" display="none">';
 								//echo '<table class="resources-assignment-' . $x . '" display="none" style="width:100%;margin-left:0">';
-								echo '<table style="width:100%;margin-left:0">';
+								echo '<table class="resources-assignment" style="width:100%;margin-left:0">';
+									echo '<tr>';
+										echo '<th>' . __( 'Resources Assignment', 'wp-travel' ) .'</td>';
+										echo '<td style="text-align:right"><button id="add-assignment" type="button">' . __( 'Add Assignment', 'wp-travel' ) .'</button></td>';
+									echo '</tr>';
+							
 								for ($y = 0; $y < 10; $y++) {
 									//if ($yy>0) {
-										echo '<tr class="assignment-rows" id="assignment-row-' . $x . '">
+										echo '<tr class="assignment-rows" id="assignment-row-' . $y . '">
 										<td>
 											<select id="itinerary_item_assignment" name="itinerary_item_assignment-' . $x . '-category-' . $y . '">';
 												self::product_categories_name_options();
@@ -413,40 +418,10 @@ class Trip_Options_Edit_Metabox {
 											echo '</select>
 										</td>
 										</tr>';
-
-									//}
-/*
-									echo '<li class="itinerary-li" id="itinerary-li-' . $y . '">';
-									if ($yy<=0) {
-										$itinerary_label = DEFAULT_ITINERARY_LABEL;
-										$itinerary_title = DEFAULT_ITINERARY_TITLE;
-										echo '<p style="display:none"></p>';
-									} else {
-										echo '<tr>
-										<td>
-											<select id="itinerary_item_robots" name="itinerary_item_robots-' . $x . '">
-												<option value="">Stay ...</option>
-												<option value="index,follow"' . selected( 'index,follow', $itineraries[$x]['label'], false ) . '>Lunch ...</option>
-												<option value="noindex,nofollow"' . selected( 'noindex,nofollow', $itineraries[$x]['label'], false ) . '>Dinner ...</option>
-											</select>
-										</td>
-										<td>
-											<select id="itinerary_item_robots" name="itinerary_item_robots-' . $x . '">
-												<option value="">背包客棧1</option>
-												<option value="index,follow"' . selected( 'index,follow', $itineraries[$x]['label'], false ) . '>背包客棧2</option>
-												<option value="noindex,nofollow"' . selected( 'noindex,nofollow', $itineraries[$x]['label'], false ) . '>背包客棧3</option>
-											</select>
-										</td>
-										</tr>';
-										$itinerary_label = esc_attr( $itineraries[$x]['label'] );
-										$itinerary_title = esc_attr( $itineraries[$x]['title'] );
-										echo '<p style="display:none">' . $x . '</p>';
-									}
-*/									
 									$yy--;
 								}				
 								echo '</table>';
-								echo '</div >';
+								//echo '</div >';
 							echo '</td>
 						</tr>
 						<tr>
