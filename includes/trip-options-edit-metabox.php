@@ -381,8 +381,8 @@ class Trip_Options_Edit_Metabox {
 							<textarea rows="3" name="itinerary_item_desc-' . $x . '">' . esc_attr( $itineraries[$x]['desc'] ) . '</textarea></td>
 						</tr>
 						<tr>
-							<td colspan="2"><b>' . __( 'Resources Assignment', 'wp-travel' ) .'</b>
-								'; //self::resources_assignment( $itineraries, $x ).
+							<td colspan="2"><b>' . __( 'Resources Assignment', 'wp-travel' ) .'</b>';
+								//self::resources_assignment( $itineraries, $x ).
 								$yy=0;
 								if (isset($itineraries[$x]['assignment'])) {
 									foreach ( $itineraries[$x]['assignment'] as $assignment ) {
@@ -396,7 +396,7 @@ class Trip_Options_Edit_Metabox {
 								}
 								echo '<table class="resources-assignment-' . $x . '" display="none" style="width:100%;margin-left:0">';
 								for ($y = 0; $y < 10; $y++) {
-									if ($yy>0) {
+									//if ($yy>0) {
 										echo '<tr>
 										<td>
 											<select id="itinerary_item_assignment" name="itinerary_item_assignment-' . $x . '-category-' . $y . '">'
@@ -407,7 +407,7 @@ class Trip_Options_Edit_Metabox {
 										</td>
 										</tr>';
 
-									}
+									//}
 /*
 									echo '<li class="itinerary-li" id="itinerary-li-' . $y . '">';
 									if ($yy<=0) {
