@@ -511,6 +511,8 @@ class Trip_Options_Edit_Metabox {
 					$( element ).delegate( '.item-title', 'keyup', function() {
 						$( '.span-title', element ).text($(this).val());
 					});
+
+					$( '.resources-assignment', element ).hide();
 					$( element ).delegate( '.first-assignment', 'click', function() {
 						$( '.no-assignments', element ).hide();
 						$( '.resources-assignment', element ).show();
