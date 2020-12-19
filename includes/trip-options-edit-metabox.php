@@ -399,9 +399,9 @@ class Trip_Options_Edit_Metabox {
 									//if ($yy>0) {
 										echo '<tr>
 										<td>
-											<select id="itinerary_item_assignment" name="itinerary_item_assignment-' . $x . '-category-' . $y . '">'
-												. self::product_categories_name_options() .
-											'</select>
+											<select id="itinerary_item_assignment" name="itinerary_item_assignment-' . $x . '-category-' . $y . '">';
+												self::product_categories_name_options();
+											echo '</select>
 										</td>
 										<td>
 										</td>
@@ -525,13 +525,6 @@ class Trip_Options_Edit_Metabox {
 				$( '.remove-itinerary' ).each( function( index, element ) {
 					$( element ).delegate( 'button', 'click', function() {
 						$( this ).closest( '.itinerary-li' ).remove();
-					});					
-				});
-
-				$( '.first-assignment' ).each( function( index, element ) {
-					$( element ).delegate( 'span', 'click', function() {
-						$( '.no-assignments' ).hide();
-						$( '.resources' ).show();
 					});					
 				});
 
