@@ -393,15 +393,16 @@ class Trip_Options_Edit_Metabox {
 									//echo '<div class="no-assignments-' . $x . '">';
 									echo '<div class="no-assignments">';
 									esc_html_e( 'No Assignments found. ', 'wp-travel' );
-									echo '<span class="first-assignment">' . __( 'Add Assignment', 'wp-travel' ) . '</span>';
+									//echo '<span class="first-assignment">' . __( 'Add Assignment', 'wp-travel' ) . '</span>';
+									echo '<button class="first-assignment" type="button">' . __( 'Add Assignment', 'wp-travel' ) . '</button>';
 									echo '</div >';
 								}
 								//echo '<div class="resources-assignment" display="none">';
 								//echo '<table class="resources-assignment-' . $x . '" display="none" style="width:100%;margin-left:0">';
 								echo '<table class="resources-assignment" style="width:100%;margin-left:0">';
 									echo '<tr>';
-										echo '<th>' . __( 'Resources Assignment', 'wp-travel' ) .'</td>';
-										echo '<td style="text-align:right"><button id="add-assignment" type="button">' . __( 'Add Assignment', 'wp-travel' ) .'</button></td>';
+										echo '<th width="50%">' . __( 'Resources Assignment', 'wp-travel' ) .'</td>';
+										echo '<td style="text-align:right"><button id="add-assignment" type="button">' . __( '+ Add Assignment', 'wp-travel' ) .'</button></td>';
 									echo '</tr>';
 							
 								for ($y = 0; $y < 10; $y++) {
