@@ -389,12 +389,12 @@ class Trip_Options_Edit_Metabox {
 										$yy++;
 									}															
 								} else {
-									echo '<div class="no-assignments">';
+									echo '<div class="no-assignments-' . $x . '">';
 									esc_html_e( 'No Assignments found. ', 'wp-travel' );
 									echo '<span class="first-assignment">' . __( 'Add Assignment', 'wp-travel' ) . '</span>';
 									echo '</div >';					
 								}
-								echo '<table class="resources" display="none" style="width:100%;margin-left:0">';
+								echo '<table class="resources-assignment-' . $x . '" display="none" style="width:100%;margin-left:0">';
 								for ($y = 0; $y < 10; $y++) {
 									if ($yy>0) {
 										echo '<tr>
@@ -503,6 +503,10 @@ class Trip_Options_Edit_Metabox {
 					});
 					$( element ).delegate( '.item-title', 'keyup', function() {
 						$( '.span-title', element ).text($(this).val());
+					});
+					$( element ).delegate( '.first-assignment', 'click', function() {
+						$( '.no-assignments-0' ).hide();
+						$( '.resources-assignment-0' ).show();
 					});
 				});
 
