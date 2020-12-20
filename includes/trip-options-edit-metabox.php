@@ -401,7 +401,7 @@ class Trip_Options_Edit_Metabox {
 								//echo '<table class="resources-assignment-' . $x . '" display="none" style="width:100%;margin-left:0">';
 								echo '<table class="resources-assignment" style="width:100%;margin-left:0">';
 									echo '<tr>';
-										echo '<th width="50%">' . __( 'Resources Assignment', 'wp-travel' ) .'</td>';
+										echo '<th class="assignment-row-head">' . __( 'Resources Assignment', 'wp-travel' ) .'</td>';
 										echo '<td style="text-align:right"><button id="add-assignment" type="button">' . __( '+ Add Assignment', 'wp-travel' ) .'</button></td>';
 									echo '</tr>';
 							
@@ -496,6 +496,14 @@ class Trip_Options_Edit_Metabox {
 						$( '.assignment-rows', element ).hide();
 						$( '#assignment-row-0', element ).show();
 					});
+					$( element ).delegate( '.add-assignment', 'click', function() {
+						$( '.assignment-rows' ).each( function( sub_index, sub_element ) {
+							if ( $( sub_element ).is( ':hidden' ) ) {
+								$( sub_element ).show();
+								return false;
+							};
+						});
+					});
 				});
 
 				$( '#add-itinerary' ).click( function() {
@@ -524,16 +532,20 @@ class Trip_Options_Edit_Metabox {
 		<style>
   			#itineraries-ul { list-style-type:none; margin:0; padding:0; width:100%; }
   			#itineraries-ul li { background:#f2f2f2; border:1px solid #ccc; margin:0 3px 3px 3px; padding:0.4em; padding-left:1.5em; font-size:1.4em; }
+			#itineraries-ul li button { font-size:1.0em; }
 			#itineraries-ul li span { cursor:pointer; }
 			#itineraries-ul li .fas.fa-bars { margin-left:-1.3em; }
+			#itineraries-ul li .fas.fa-bars:before { content: "\f0c9"; }
 			#itineraries-ul li table { background:#ffffff; border:1px solid #ccc; width:100%; display:none; margin-left:-1.3em; }
 			#itineraries-ul li .toggle-access { display:block; }
 			#itineraries-ul li th { width:20%; }
 			#itineraries-ul li input { width:100%; }
 			#itineraries-ul li textarea { width:100%; }
 			#first-itinerary { color:blue; text-decoration:underline; cursor:pointer; }
-			#first-assignment { color:blue; text-decoration:underline; cursor:pointer; }
-			.fa-bars:before { content: "\f0c9"; }
+			/*#itineraries-ul li th .assignment-row-head{ width:50%; }*/
+			.assignment-row-head { width:50%; }
+			.first-assignment { color:blue; text-decoration:underline; cursor:pointer; }
+			/*.fa-bars:before { content: "\f0c9"; }*/
   		</style>
 		<?php
 	}
