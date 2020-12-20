@@ -318,7 +318,9 @@ class Trip_Options_Edit_Metabox {
 		echo '<option value="">' .  __( "- Select Resource -", "wp-travel" ) . '</option>';
 		while ( $products->have_posts() ) {
 			$products->the_post();
-			echo '<option value="' . the_permalink() . '">' . the_title() . '</option>';
+			$permalink = the_permalink();
+			$title = the_title();
+			echo '<option value="' . $permalink . '">' . $title . '</option>';
 		}
 		//echo "</ul>";
 /*
