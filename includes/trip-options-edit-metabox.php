@@ -314,6 +314,21 @@ class Trip_Options_Edit_Metabox {
 			'orderby' => 'title,'
 		);
 		$products = new WP_Query( $args );
+/*
+		$query = new WC_Product_Query( array(
+			'limit' => 10,
+			'orderby' => 'date',
+			'order' => 'DESC'
+		) );
+	   
+		$products = $query->get_products();
+*/
+		
+		echo '<option value="">' .  __( "- Select Resource -", "wp-travel" ) . '</option>';
+		foreach( $products as $product ) {
+			echo '<option value="' . $product->get_title() . '">' . $product->get_title() . '</option>';
+		}		
+/*
 		//echo "<ul>";
 		echo '<option value="">' .  __( "- Select Resource -", "wp-travel" ) . '</option>';
 		while ( $products->have_posts() ) {
@@ -323,11 +338,6 @@ class Trip_Options_Edit_Metabox {
 			echo '<option value="' . $permalink . '">' . $title . '</option>';
 		}
 		//echo "</ul>";
-/*
-		echo '<option value="">' .  __( "- Select Resource -", "wp-travel" ) . '</option>';
-		foreach( $product_categories as $cat ) {
-			echo '<option value="' . $cat->name . '">' . $cat->name . '</option>';
-		}
 */		
 	}
 
