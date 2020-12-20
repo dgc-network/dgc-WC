@@ -403,7 +403,7 @@ class Trip_Options_Edit_Metabox {
 									echo '</tr>';
 							
 								for ($y = 0; $y < 10; $y++) {
-									echo '<tr class="assignment-rows">
+									echo '<tr class="assignment-rows" id="assignment-row-' . $y . '">
 										<td>
 											<select style="width:100%" id="itinerary_item_assignment" name="itinerary_item_assignment-' . $x . '-category-' . $y . '">';
 												self::product_categories_name_options();
@@ -540,7 +540,7 @@ class Trip_Options_Edit_Metabox {
 			#itineraries-ul li th .assignment-row-head { width:50%; }
 			/*.assignment-row-head { width:50%; }*/
 			/*.first-assignment { color:blue; text-decoration:underline; cursor:pointer; }*/
-			.first-assignment { color:blue; border: none; }
+			.first-assignment { background:#ffffff; color:blue; border: none; cursor:pointer; }
 			/*.fa-bars:before { content: "\f0c9"; }*/
   		</style>
 		<?php
