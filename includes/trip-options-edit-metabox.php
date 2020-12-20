@@ -390,39 +390,34 @@ class Trip_Options_Edit_Metabox {
 										$yy++;
 									}															
 								} else {
-									//echo '<div class="no-assignments-' . $x . '">';
 									echo '<div class="no-assignments">';
 									esc_html_e( 'No Assignments found. ', 'wp-travel' );
-									//echo '<span class="first-assignment">' . __( 'Add Assignment', 'wp-travel' ) . '</span>';
-									echo '<button class="first-assignment" type="button">' . __( 'Add Assignment', 'wp-travel' ) . '</button>';
+									echo '<span class="first-assignment">' . __( 'Add Assignment', 'wp-travel' ) . '</span>';
+									//echo '<button class="first-assignment" type="button">' . __( 'Add Assignment', 'wp-travel' ) . '</button>';
 									echo '</div >';
 								}
-								//echo '<div class="resources-assignment" display="none">';
-								//echo '<table class="resources-assignment-' . $x . '" display="none" style="width:100%;margin-left:0">';
 								echo '<table class="resources-assignment" style="width:100%;margin-left:0">';
 									echo '<tr>';
 										echo '<th class="assignment-row-head">' . __( 'Resources Assignment', 'wp-travel' ) .'</td>';
-										echo '<td style="text-align:right"><button id="add-assignment" type="button">' . __( '+ Add Assignment', 'wp-travel' ) .'</button></td>';
+										echo '<td style="text-align:right"><button class="add-assignment" type="button">' . __( '+ Add Assignment', 'wp-travel' ) .'</button></td>';
 									echo '</tr>';
 							
 								for ($y = 0; $y < 10; $y++) {
-									//if ($yy>0) {
-										echo '<tr class="assignment-rows" id="assignment-row-' . $y . '">
+									echo '<tr class="assignment-rows" id="assignment-row-' . $y . '">
 										<td>
-											<select id="itinerary_item_assignment" name="itinerary_item_assignment-' . $x . '-category-' . $y . '">';
+											<select style="width:100%" id="itinerary_item_assignment" name="itinerary_item_assignment-' . $x . '-category-' . $y . '">';
 												self::product_categories_name_options();
 											echo '</select>
 										</td>
 										<td>
-											<select id="itinerary_item_assignment" name="itinerary_item_assignment-' . $x . '-category-' . $y . '">';
+											<select style="width:100%" id="itinerary_item_assignment" name="itinerary_item_assignment-' . $x . '-category-' . $y . '">';
 												self::product_categories_name_options();
 											echo '</select>
 										</td>
-										</tr>';
+									</tr>';
 									$yy--;
 								}				
 								echo '</table>';
-								//echo '</div >';
 							echo '</td>
 						</tr>
 						<tr>
@@ -542,8 +537,8 @@ class Trip_Options_Edit_Metabox {
 			#itineraries-ul li input { width:100%; }
 			#itineraries-ul li textarea { width:100%; }
 			#first-itinerary { color:blue; text-decoration:underline; cursor:pointer; }
-			/*#itineraries-ul li th .assignment-row-head{ width:50%; }*/
-			.assignment-row-head { width:50%; }
+			#itineraries-ul li th .assignment-row-head { width:50%; }
+			/*.assignment-row-head { width:50%; }*/
 			.first-assignment { color:blue; text-decoration:underline; cursor:pointer; }
 			/*.fa-bars:before { content: "\f0c9"; }*/
   		</style>
