@@ -290,16 +290,43 @@ class Trip_Options_Edit_Metabox {
 		);
 		$product_categories = get_terms($args);
 
-		//echo '<select id="itinerary_item_assignment" name="itinerary_item_assignment-' . $x . '-category-' . $y . '">';
-		//echo '<option value="">Stay ...</option>';
-		//echo '<option value="index,follow"' . selected( 'index,follow', $itineraries[$x]['label'], false ) . '>Lunch ...</option>';
-		//echo '<option value="noindex,nofollow"' . selected( 'noindex,nofollow', $itineraries[$x]['label'], false ) . '>Dinner ...</option>';
-		//echo '</select>';
-
 		echo '<option value="">' .  __( "- Select Category -", "wp-travel" ) . '</option>';
 		foreach( $product_categories as $cat ) {
 			echo '<option value="' . $cat->name . '">' . $cat->name . '</option>';
 		}
+	}
+
+	/**
+	 * Product List by Category
+	 */
+	function product_name_options_by_category( $product_category_slug ) {
+		$args = array(
+			'posts_per_page' => -1,
+			'tax_query' => array(
+				'relation' => 'AND',
+				array(
+					'taxonomy' => 'product_cat',
+					'field' => 'slug',
+					'terms' => $product_category_slug
+				)
+			),
+			'post_type' => 'product',
+			'orderby' => 'title,'
+		);
+		$products = new WP_Query( $args );
+		//echo "<ul>";
+		echo '<option value="">' .  __( "- Select Resource -", "wp-travel" ) . '</option>';
+		while ( $products->have_posts() ) {
+			$products->the_post();
+			echo '<option value="' . the_permalink() . '">' . the_title() . '</option>';
+		}
+		//echo "</ul>";
+/*
+		echo '<option value="">' .  __( "- Select Resource -", "wp-travel" ) . '</option>';
+		foreach( $product_categories as $cat ) {
+			echo '<option value="' . $cat->name . '">' . $cat->name . '</option>';
+		}
+*/		
 	}
 
 
@@ -383,7 +410,6 @@ class Trip_Options_Edit_Metabox {
 						</tr>
 						<tr>
 							<td colspan="2">';
-								//self::resources_assignment( $itineraries, $x ).
 								$yy=0;
 								if (isset($itineraries[$x]['assignment'])) {
 									foreach ( $itineraries[$x]['assignment'] as $assignment ) {
@@ -392,7 +418,6 @@ class Trip_Options_Edit_Metabox {
 								} else {
 									echo '<div class="no-assignments">';
 									esc_html_e( 'No Assignments found. ', 'wp-travel' );
-									//echo '<span class="first-assignment">' . __( 'Add Assignment', 'wp-travel' ) . '</span>';
 									echo '<button class="first-assignment" type="button">' . __( 'Add Assignment', 'wp-travel' ) . '</button>';
 									echo '</div >';
 								}
