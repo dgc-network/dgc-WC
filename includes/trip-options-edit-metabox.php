@@ -392,8 +392,8 @@ class Trip_Options_Edit_Metabox {
 								} else {
 									echo '<div class="no-assignments">';
 									esc_html_e( 'No Assignments found. ', 'wp-travel' );
-									echo '<span class="first-assignment">' . __( 'Add Assignment', 'wp-travel' ) . '</span>';
-									//echo '<button class="first-assignment" type="button">' . __( 'Add Assignment', 'wp-travel' ) . '</button>';
+									//echo '<span class="first-assignment">' . __( 'Add Assignment', 'wp-travel' ) . '</span>';
+									echo '<button class="first-assignment" type="button">' . __( 'Add Assignment', 'wp-travel' ) . '</button>';
 									echo '</div >';
 								}
 								echo '<table class="resources-assignment" style="width:100%;margin-left:0">';
@@ -403,7 +403,7 @@ class Trip_Options_Edit_Metabox {
 									echo '</tr>';
 							
 								for ($y = 0; $y < 10; $y++) {
-									echo '<tr class="assignment-rows" id="assignment-row-' . $y . '">
+									echo '<tr class="assignment-rows">
 										<td>
 											<select style="width:100%" id="itinerary_item_assignment" name="itinerary_item_assignment-' . $x . '-category-' . $y . '">';
 												self::product_categories_name_options();
@@ -492,7 +492,7 @@ class Trip_Options_Edit_Metabox {
 						$( '#assignment-row-0', element ).show();
 					});
 					$( element ).delegate( '.add-assignment', 'click', function() {
-						$( '.assignment-rows' ).each( function( sub_index, sub_element ) {
+						$( '.assignment-rows', element ).each( function( sub_index, sub_element ) {
 							if ( $( sub_element ).is( ':hidden' ) ) {
 								$( sub_element ).show();
 								return false;
@@ -531,7 +531,7 @@ class Trip_Options_Edit_Metabox {
 			#itineraries-ul li span { cursor:pointer; }
 			#itineraries-ul li .fas.fa-bars { margin-left:-1.3em; }
 			#itineraries-ul li .fas.fa-bars:before { content: "\f0c9"; }
-			#itineraries-ul li table { background:#ffffff; border:1px solid #ccc; width:100%; display:none; margin-left:-1.3em; }
+			#itineraries-ul li table { background:#ffffff; border:1px solid #ccc; width:100%; display:none; margin-left:-1.3em; font-size:1.0em; }
 			#itineraries-ul li .toggle-access { display:block; }
 			#itineraries-ul li th { width:20%; }
 			#itineraries-ul li input { width:100%; }
@@ -539,7 +539,8 @@ class Trip_Options_Edit_Metabox {
 			#first-itinerary { color:blue; text-decoration:underline; cursor:pointer; }
 			#itineraries-ul li th .assignment-row-head { width:50%; }
 			/*.assignment-row-head { width:50%; }*/
-			.first-assignment { color:blue; text-decoration:underline; cursor:pointer; }
+			/*.first-assignment { color:blue; text-decoration:underline; cursor:pointer; }*/
+			.first-assignment { color:blue; border: none; }
 			/*.fa-bars:before { content: "\f0c9"; }*/
   		</style>
 		<?php
