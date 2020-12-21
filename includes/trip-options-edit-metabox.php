@@ -179,48 +179,6 @@ class Trip_Options_Edit_Metabox {
 				
 				$("#save-changes").click( function(){
 					$.ajax({
-                		type: 'POST',
-                		url: ajax_url,
-                		data: {
-                    		action:         'wpt_query_table_load_by_args',
-                    		temp_number:    temp_number,
-                    		targetTableArgs:targetTableArgs,
-                    		pageNumber:     pageNumber,
-                    		load_type:      load_type,
-                		},
-                		complete: function() {
-                    		$( document ).trigger( 'wc_fragments_refreshed' );
-                    		arrangingTDContentForMobile(); //@Since 5.2
-                    		loadMiniFilter(); //@Since 4.8                    
-                    		fixAfterAjaxLoad();
-                		},
-                		success: function(data) {
-                    		targetTableBody.html(data);
-                    		targetTableBody.css('opacity','1');
-                    
-                    		var $data = {
-                        		action:         'wpt_ajax_paginate_links_load',
-                        		temp_number:    temp_number,
-                        		targetTableArgs:targetTableArgs, 
-                        		pageNumber:     pageNumber,
-                        		load_type:      load_type,
-                    		};
-                    
-                    		loadPaginationLinks($data,temp_number);
-
-                    		removeCatTagLings();//Removing Cat,tag link, if eanabled from configure page
-                    		updateCheckBoxCount(temp_number); //Selection reArrange 
-                    		uncheckAllCheck(temp_number);//Uncheck All CheckBox after getting New pagination
-                    		emptyInstanceSearchBox(temp_number);//CleanUp or do empty Instant Search
-
-                    		pageNumber++; //Page Number Increasing 1 Plus
-                    		targetTable.attr('data-page_number',pageNumber);
-                		},
-                		error: function() {
-                    		console.log("Error On Ajax Query Load. Please check console.");
-                		},
-            		});
-					$.ajax({
             			url:"test.php",    //the page containing php script
             			type: "post",    //request type,
             			dataType: 'json',
@@ -274,7 +232,6 @@ class Trip_Options_Edit_Metabox {
  
 	}
 
-
 	/**
 	 * Product Categories List
 	 */
@@ -300,22 +257,6 @@ class Trip_Options_Edit_Metabox {
 	 * Product List by Category
 	 */
 	function product_name_options_by_category( $product_category_slug ) {
-/*
-		$args = array(
-			'posts_per_page' => -1,
-			'tax_query' => array(
-				'relation' => 'AND',
-				array(
-					'taxonomy' => 'product_cat',
-					'field' => 'slug',
-					'terms' => $product_category_slug
-				)
-			),
-			'post_type' => 'product',
-			'orderby' => 'title,'
-		);
-		$products = new WP_Query( $args );
-*/
 		$query = new WC_Product_Query( array(
 			'category' => array( $product_category_slug ),
 			'limit' => 10,
@@ -324,24 +265,12 @@ class Trip_Options_Edit_Metabox {
 		) );
 	   
 		$products = $query->get_products();
-
 		
 		echo '<option value="">' .  __( "- Select Resource -", "wp-travel" ) . '</option>';
 		foreach( $products as $product ) {
 			$title = $product->get_title();
 			echo '<option value="' . $title . '">' . $title . '</option>';
 		}		
-/*
-		//echo "<ul>";
-		echo '<option value="">' .  __( "- Select Resource -", "wp-travel" ) . '</option>';
-		while ( $products->have_posts() ) {
-			$products->the_post();
-			$permalink = the_permalink();
-			$title = the_title();
-			echo '<option value="' . $permalink . '">' . $title . '</option>';
-		}
-		//echo "</ul>";
-*/		
 	}
 
 
@@ -561,6 +490,54 @@ class Trip_Options_Edit_Metabox {
 
 				$( '.item_date' ).datepicker();
 				$( '.item_time' ).timepicker({format: 'HH:mm'});
+
+				var ajax_url,ajax_url_additional = '/wp-admin/admin-ajax.php';
+				$('select').on('change', function (e) {
+    				var optionSelected = $("option:selected", this);
+    				var valueSelected = this.value;
+					$.ajax({
+                		type: 'POST',
+                		url: ajax_url,
+                		data: {
+                    		action:         'wpt_query_table_load_by_args',
+                    		temp_number:    temp_number,
+                    		targetTableArgs:targetTableArgs,
+                    		pageNumber:     pageNumber,
+                    		load_type:      load_type,
+                		},
+                		complete: function() {
+                    		$( document ).trigger( 'wc_fragments_refreshed' );
+                    		arrangingTDContentForMobile(); //@Since 5.2
+                    		loadMiniFilter(); //@Since 4.8                    
+                    		fixAfterAjaxLoad();
+                		},
+                		success: function(data) {
+                    		targetTableBody.html(data);
+                    		targetTableBody.css('opacity','1');
+                    
+                    		var $data = {
+                        		action:         'wpt_ajax_paginate_links_load',
+                        		temp_number:    temp_number,
+                        		targetTableArgs:targetTableArgs, 
+                        		pageNumber:     pageNumber,
+                        		load_type:      load_type,
+                    		};
+                    
+                    		loadPaginationLinks($data,temp_number);
+
+                    		removeCatTagLings();//Removing Cat,tag link, if eanabled from configure page
+                    		updateCheckBoxCount(temp_number); //Selection reArrange 
+                    		uncheckAllCheck(temp_number);//Uncheck All CheckBox after getting New pagination
+                    		emptyInstanceSearchBox(temp_number);//CleanUp or do empty Instant Search
+
+                    		pageNumber++; //Page Number Increasing 1 Plus
+                    		targetTable.attr('data-page_number',pageNumber);
+                		},
+                		error: function() {
+                    		console.log("Error On Ajax Query Load. Please check console.");
+                		},
+            		});
+				});
 			} );
 		</script>
 	
@@ -577,11 +554,8 @@ class Trip_Options_Edit_Metabox {
 			#itineraries-ul li input { width:100%; }
 			#itineraries-ul li textarea { width:100%; }
 			#first-itinerary { color:blue; text-decoration:underline; cursor:pointer; }
-			#itineraries-ul li th .assignment-row-head { width:50%; }
-			/*.assignment-row-head { width:50%; }*/
-			/*.first-assignment { color:blue; text-decoration:underline; cursor:pointer; }*/
+			/*#itineraries-ul li th .assignment-row-head { width:50%; }*/
 			.first-assignment { background:#ffffff; color:blue; border: none; cursor:pointer; }
-			/*.fa-bars:before { content: "\f0c9"; }*/
   		</style>
 		<?php
 	}
