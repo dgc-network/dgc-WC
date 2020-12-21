@@ -300,7 +300,7 @@ class Trip_Options_Edit_Metabox {
 	 * Product List by Category
 	 */
 	function product_name_options_by_category( $product_category_slug ) {
-/*		
+
 		$args = array(
 			'posts_per_page' => -1,
 			'tax_query' => array(
@@ -315,7 +315,7 @@ class Trip_Options_Edit_Metabox {
 			'orderby' => 'title,'
 		);
 		$products = new WP_Query( $args );
-*/
+/*
 		$query = new WC_Product_Query( array(
 			'limit' => 10,
 			'orderby' => 'date',
@@ -323,7 +323,7 @@ class Trip_Options_Edit_Metabox {
 		) );
 	   
 		$products = $query->get_products();
-
+*/
 		
 		echo '<option value="">' .  __( "- Select Resource -", "wp-travel" ) . '</option>';
 		foreach( $products as $product ) {
