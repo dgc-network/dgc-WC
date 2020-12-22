@@ -14,6 +14,10 @@ class Trip_Options_Edit_Metabox {
 		add_action( 'woocommerce_product_data_panels', array( __CLASS__, 'trip_options_callback_includes_excludes' ) );
 		add_action( 'woocommerce_product_data_panels', array( __CLASS__, 'trip_options_callback_faqs' ) );
 		add_action( 'admin_head', array( __CLASS__, 'dgc_custom_style' ) );
+
+		add_action( 'wp_ajax_get_resources_by_category', array( __CLASS__, 'ajax_get_resources_by_category' ) );
+		add_action( 'wp_ajax_nopriv_get_resources_by_category', array( __CLASS__, 'ajax_get_resources_by_category' ) );
+		
 	}
 
 	/**
@@ -497,6 +501,47 @@ class Trip_Options_Edit_Metabox {
     				var valueSelected = this.value;
 					$.ajax({
                 		type: 'POST',
+                		url: ajax_url,// + get_data,
+                		data: {
+                    		action:         'ajax_get_resources_by_category',
+                    		variation:      variation, 
+                    		variation_id:   variation_id,
+                    		product_id:     product_id,
+                    		quantity:       quantity,
+                    		custom_message: custom_message,
+                		},
+                		complete: function(){
+                    		$( document ).trigger( 'wc_fragment_refresh' );
+                    		$( document ).trigger( 'cart_page_refreshed' );
+                    		$( document ).trigger( 'cart_totals_refreshed' );
+                    		$( document ).trigger( 'wc_fragments_refreshed' );
+                		},
+                		success: function(response) {
+                    		//$('body').append(response);
+                    		//WPT_MiniCart();
+                    		$( document.body ).trigger( 'added_to_cart', [ response. fragments, response.cart_hash, thisButton ] ); //Trigger and sent added_to_cart event
+                    		thisButton.removeClass('disabled');
+                    		thisButton.removeClass('loading');
+                    		thisButton.addClass('added');
+                    		qtyElement.val(min_quantity);
+                    		thisButton.attr('data-quantity',min_quantity);
+
+                    		if(config_json.popup_notice === '1'){
+                        		WPT_NoticeBoard();//Gettince Notice
+                    		}
+                    		//Quick Button Active here and it will go Directly to checkout Page
+                    		if(config_json.product_direct_checkout === 'yes'){
+                        		window.location.href = checkoutURL;
+                    		}                    
+                    		//******************/
+                		},
+                		error: function() {
+                    		alert('Failed - Unable to add by ajax');
+                		},
+					});
+					
+					$.ajax({
+                		type: 'POST',
                 		url: ajax_url,
                 		data: {
                     		action:         'wpt_query_table_load_by_args',
@@ -559,6 +604,46 @@ class Trip_Options_Edit_Metabox {
   		</style>
 		<?php
 	}
+
+/**
+ * Adding Item by Ajax. This Function is not for using to any others whee.
+ * But we will use this function for Ajax
+ * 
+ * @since 1.0.4
+ * @date 28.04.2018 (D.M.Y)
+ * @updated 04.05.2018
+ */
+function ajax_get_resources_by_category() {
+    
+    $product_id     = ( isset($_POST['product_id']) && !empty( $_POST['product_id']) ? $_POST['product_id'] : false );
+    $quantity       = ( isset($_POST['quantity']) && !empty( $_POST['quantity']) && is_numeric($_POST['quantity']) ? $_POST['quantity'] : 1 );
+    $variation_id   = ( isset($_POST['variation_id']) && !empty( $_POST['variation_id']) ? $_POST['variation_id'] : false );
+    $variation      = ( isset($_POST['variation']) && !empty( $_POST['variation']) ? $_POST['variation'] : false );
+    $custom_message = ( isset($_POST['custom_message']) && !empty( $_POST['custom_message']) ? $_POST['custom_message'] : false );
+    
+    //$string_for_var = '_var' . implode('_', $variation) . '_';
+    
+    $cart_item_data = array(); //Set default value array
+    
+    if( $custom_message && !empty( $custom_message ) ){
+        $custom_message = htmlspecialchars( $custom_message ); //$custom_message is Generating for tag and charecter
+    
+        /**
+         * Custom Message for Product Adding
+         * 
+         * @since 1.9
+         */
+        $cart_item_data[ 'wpt_custom_message' ] = $custom_message;
+            // below statement make sure every add to cart action as unique line item
+        $cart_item_data['unique_key'] = md5( $product_id . $variation_id . '_' .$custom_message );
+    }
+    
+    wpt_adding_to_cart( $product_id, $quantity, $variation_id, $variation, $cart_item_data );
+   
+    die();
+}
+//add_action( 'wp_ajax_wpt_ajax_add_to_cart', 'wpt_ajax_add_to_cart' );
+//add_action( 'wp_ajax_nopriv_wpt_ajax_add_to_cart', 'wpt_ajax_add_to_cart' );
 
 	/**
 	 * Resources Assignment
