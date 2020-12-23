@@ -496,6 +496,34 @@ class Trip_Options_Edit_Metabox {
 				$( '.item_date' ).datepicker();
 				$( '.item_time' ).timepicker({format: 'HH:mm'});
 
+
+				$("#opt-categorias").change(function () {
+        			var opt_categorias = $("#opt-categorias").val();
+        			$.ajax({
+            			type: "POST",
+            			url: clocal.ajaxurl,
+            			contentType: "application/json; charset=utf-8",
+            			dataType: "json",
+            			data: {
+                			'action': 'cortez_get_terms',
+                			'nonce': clocal.nonce,
+                			'term_chosen': opt_categorias,
+            			},
+            			success: function (data) {
+                			$("#opt_tipo").empty();
+                			$("#opt_tipo").append("<option value=''> Tipo de produto</option>");
+                			$.each(data, function (i, item) {
+                    			$("#opt_tipo").append('<option value="' + data[i].slug + '">' + data[i].name + '</option>');
+
+                			});
+            			},
+            			error: function(error){
+            			},
+            			complete: function () {
+            			}
+        			});
+    			});
+
 				var ajax_url,ajax_url_additional = '/wp-admin/admin-ajax.php';
 				$('select').on('change', function (e) {
     				var optionSelected = $("option:selected", this);
@@ -559,6 +587,65 @@ class Trip_Options_Edit_Metabox {
   		</style>
 		<?php
 	}
+
+/*
+ * File: functions.php
+ * This function will enqueue (insert) the script into the WordPress header or footer the proper way, instead of adding it directly to the header.php
+ * We use wp_localize_script to inject a javascript object, clocal, into our custom.js to gain access to the variables ajaxurl and nonce.
+ *
+ * Source:
+ * https://developer.wordpress.org/reference/functions/wp_enqueue_script/
+ * https://codex.wordpress.org/Function_Reference/wp_localize_script
+ * https://codex.wordpress.org/Function_Reference/wp_create_nonce
+ */
+
+//add_action( 'wp_enqueue_scripts', 'cortez_enqueue_script' );
+function cortez_enqueue_script() {
+    wp_enqueue_script( 'cortez_custom_js', get_stylesheet_directory_uri() . '/custom.js', array( 'jQuery' ), '1.0', true );
+    wp_localize_script( 'cortez_custom_js', 'clocal', array(
+        'ajaxurl' => admin_url( 'admin-ajax.php' ),
+        'nonce'   => wp_create_nonce( 'cortez_nonce_security_key' ),
+    ) );
+}
+
+
+/*
+ * File: functions.php
+ * Add this to your functions.php to enable the ajax call to be called from custom.js. The two actions are required if you want logged in and non-logged in users to be able to use the ajax function.
+ *
+ * Source:
+ * https://codex.wordpress.org/AJAX_in_Plugins
+ * https://codex.wordpress.org/Plugin_API/Action_Reference/wp_ajax_(action)
+ * https://codex.wordpress.org/Plugin_API/Action_Reference/wp_ajax_nopriv_(action)
+ * https://codex.wordpress.org/Function_Reference/wp_verify_nonce
+ */
+//add_action( 'wp_ajax_cortez_get_terms', 'cortez_get_terms' );
+//add_action( 'wp_ajax_nopriv_cortez_get_terms', 'cortez_get_terms' );
+function cortez_get_terms() {
+    $data = esc_sql( $_POST );
+    if ( ! wp_verify_nonce( $data['nonce'], 'cortez_nonce_security_key' ) ) {
+        wp_die( 'Security check' );
+    }
+    if ( ! isset( $data['term_chosen'] ) || empty( $data['term_chosen'] ) ) {
+        wp_die( 'No Term Chosen' );
+    }
+
+    $tipos_bicicletas       = 'tipos_bicicletas';
+    $modelos_bicicletas     = 'modelos_bicicletas';
+    $marcas_bicicletas      = 'marcas_bicicletas';
+    $tax_tipos_bicicletas   = get_terms( $tipos_bicicletas, array( 'hide_empty' => false ) );
+    $tax_modelos_bicicletas = get_terms( $modelos_bicicletas, array( 'hide_empty' => false ) );
+    $tax_marcas_bicicletas  = get_terms( $marcas_bicicletas, array( 'hide_empty' => false ) );
+
+    $json = json_encode( $tax_tipos_bicicletas );
+    if ( $data['term_chosen'] == 'bicicleta' ) {
+        echo $json;
+    }
+
+
+    wp_die(); //stop function once you've echoed (returned) what you need.
+}
+
 
 /**
  * Adding Item by Ajax. This Function is not for using to any others whee.
