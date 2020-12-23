@@ -379,7 +379,7 @@ class Trip_Options_Edit_Metabox {
 								for ($y = 0; $y < 10; $y++) {
 									echo '<tr class="assignment-rows" id="assignment-row-' . $y . '">
 										<td>
-											<select style="width:100%" id="itinerary_item_assignment" name="itinerary_item_assignment-' . $x . '-category-' . $y . '">';
+											<select style="width:100%" id="itinerary_item_category" name="itinerary_item_assignment-' . $x . '-category-' . $y . '">';
 												self::product_categories_name_options();
 											echo '</select>
 										</td>
@@ -503,36 +503,40 @@ class Trip_Options_Edit_Metabox {
 					
 					var minicart_type = $('div.tables_cart_message_box').attr('data-type');
                         
-						$.ajax({
-							type: 'POST',
-							url: ajax_url,
-							data: {
-								action: 'ajax_get_resources_by_category'
-							},
-							success: function(response){
-								console.log(response);
-								setFragmentsRefresh( response );
-								var cart_hash = response.cart_hash;
-								var fragments = response.fragments;
-								var html = '';
-								var supportedElement = ['div.widget_shopping_cart_content','a.cart-contents','a.footer-cart-contents'];
-								if ( fragments && cart_hash !== '' ) {
-									if(minicart_type === 'load'){
-										$.each( fragments, function( key, value ) {
-											if($.inArray(key, supportedElement) != -1) {
-												html += value;
-											}                                
-										});
-										$('div.tables_cart_message_box').attr('data-type','refresh');//Set
-										$('div.tables_cart_message_box').html(html);
-									}                        
-								}
-							},
-							error: function(){
-								console.log("Unable to Load Minicart");
-								return false;
+					$.ajax({
+						type: 'POST',
+						url: ajax_url,
+						data: {
+							action: 'ajax_get_resources_by_category'
+						},
+						success: function(response){
+							$('select#itinerary_item_assignment').html('it is me');
+							
+/*
+							console.log(response);
+							setFragmentsRefresh( response );
+							var cart_hash = response.cart_hash;
+							var fragments = response.fragments;
+							var html = '';
+							var supportedElement = ['div.widget_shopping_cart_content','a.cart-contents','a.footer-cart-contents'];
+							if ( fragments && cart_hash !== '' ) {
+								if(minicart_type === 'load'){
+									$.each( fragments, function( key, value ) {
+										if($.inArray(key, supportedElement) != -1) {
+											html += value;
+										}                                
+									});
+									$('div.tables_cart_message_box').attr('data-type','refresh');//Set
+									$('div.tables_cart_message_box').html(html);
+								}                        
 							}
-						});					
+*/							
+						},
+						error: function(){
+							console.log("Unable to Load Minicart");
+							return false;
+						}
+					});					
 				});
 			} );
 		</script>
