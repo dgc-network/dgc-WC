@@ -261,6 +261,7 @@ class Trip_Options_Edit_Metabox {
 	 * Product List by Category
 	 */
 	function product_name_options_by_category( $product_category_slug ) {
+	//function ajax_get_resources_by_category() {
 		$query = new WC_Product_Query( array(
 			'category' => array( $product_category_slug ),
 			'limit' => 10,
@@ -498,90 +499,40 @@ class Trip_Options_Edit_Metabox {
 				var ajax_url,ajax_url_additional = '/wp-admin/admin-ajax.php';
 				$('select').on('change', function (e) {
     				var optionSelected = $("option:selected", this);
-    				var valueSelected = this.value;
-					$.ajax({
-                		type: 'POST',
-                		url: ajax_url,// + get_data,
-                		data: {
-                    		action:         'ajax_get_resources_by_category',
-                    		variation:      variation, 
-                    		variation_id:   variation_id,
-                    		product_id:     product_id,
-                    		quantity:       quantity,
-                    		custom_message: custom_message,
-                		},
-                		complete: function(){
-                    		$( document ).trigger( 'wc_fragment_refresh' );
-                    		$( document ).trigger( 'cart_page_refreshed' );
-                    		$( document ).trigger( 'cart_totals_refreshed' );
-                    		$( document ).trigger( 'wc_fragments_refreshed' );
-                		},
-                		success: function(response) {
-                    		//$('body').append(response);
-                    		//WPT_MiniCart();
-                    		$( document.body ).trigger( 'added_to_cart', [ response. fragments, response.cart_hash, thisButton ] ); //Trigger and sent added_to_cart event
-                    		thisButton.removeClass('disabled');
-                    		thisButton.removeClass('loading');
-                    		thisButton.addClass('added');
-                    		qtyElement.val(min_quantity);
-                    		thisButton.attr('data-quantity',min_quantity);
-
-                    		if(config_json.popup_notice === '1'){
-                        		WPT_NoticeBoard();//Gettince Notice
-                    		}
-                    		//Quick Button Active here and it will go Directly to checkout Page
-                    		if(config_json.product_direct_checkout === 'yes'){
-                        		window.location.href = checkoutURL;
-                    		}                    
-                    		//******************/
-                		},
-                		error: function() {
-                    		alert('Failed - Unable to add by ajax');
-                		},
-					});
+					var valueSelected = this.value;
 					
-					$.ajax({
-                		type: 'POST',
-                		url: ajax_url,
-                		data: {
-                    		action:         'wpt_query_table_load_by_args',
-                    		temp_number:    temp_number,
-                    		targetTableArgs:targetTableArgs,
-                    		pageNumber:     pageNumber,
-                    		load_type:      load_type,
-                		},
-                		complete: function() {
-                    		$( document ).trigger( 'wc_fragments_refreshed' );
-                    		arrangingTDContentForMobile(); //@Since 5.2
-                    		loadMiniFilter(); //@Since 4.8                    
-                    		fixAfterAjaxLoad();
-                		},
-                		success: function(data) {
-                    		targetTableBody.html(data);
-                    		targetTableBody.css('opacity','1');
-                    
-                    		var $data = {
-                        		action:         'wpt_ajax_paginate_links_load',
-                        		temp_number:    temp_number,
-                        		targetTableArgs:targetTableArgs, 
-                        		pageNumber:     pageNumber,
-                        		load_type:      load_type,
-                    		};
-                    
-                    		loadPaginationLinks($data,temp_number);
-
-                    		removeCatTagLings();//Removing Cat,tag link, if eanabled from configure page
-                    		updateCheckBoxCount(temp_number); //Selection reArrange 
-                    		uncheckAllCheck(temp_number);//Uncheck All CheckBox after getting New pagination
-                    		emptyInstanceSearchBox(temp_number);//CleanUp or do empty Instant Search
-
-                    		pageNumber++; //Page Number Increasing 1 Plus
-                    		targetTable.attr('data-page_number',pageNumber);
-                		},
-                		error: function() {
-                    		console.log("Error On Ajax Query Load. Please check console.");
-                		},
-            		});
+					var minicart_type = $('div.tables_cart_message_box').attr('data-type');
+                        
+						$.ajax({
+							type: 'POST',
+							url: ajax_url,
+							data: {
+								action: 'ajax_get_resources_by_category'
+							},
+							success: function(response){
+								console.log(response);
+								setFragmentsRefresh( response );
+								var cart_hash = response.cart_hash;
+								var fragments = response.fragments;
+								var html = '';
+								var supportedElement = ['div.widget_shopping_cart_content','a.cart-contents','a.footer-cart-contents'];
+								if ( fragments && cart_hash !== '' ) {
+									if(minicart_type === 'load'){
+										$.each( fragments, function( key, value ) {
+											if($.inArray(key, supportedElement) != -1) {
+												html += value;
+											}                                
+										});
+										$('div.tables_cart_message_box').attr('data-type','refresh');//Set
+										$('div.tables_cart_message_box').html(html);
+									}                        
+								}
+							},
+							error: function(){
+								console.log("Unable to Load Minicart");
+								return false;
+							}
+						});					
 				});
 			} );
 		</script>
@@ -614,7 +565,7 @@ class Trip_Options_Edit_Metabox {
  * @updated 04.05.2018
  */
 function ajax_get_resources_by_category() {
-    
+/*    
     $product_id     = ( isset($_POST['product_id']) && !empty( $_POST['product_id']) ? $_POST['product_id'] : false );
     $quantity       = ( isset($_POST['quantity']) && !empty( $_POST['quantity']) && is_numeric($_POST['quantity']) ? $_POST['quantity'] : 1 );
     $variation_id   = ( isset($_POST['variation_id']) && !empty( $_POST['variation_id']) ? $_POST['variation_id'] : false );
@@ -628,18 +579,30 @@ function ajax_get_resources_by_category() {
     if( $custom_message && !empty( $custom_message ) ){
         $custom_message = htmlspecialchars( $custom_message ); //$custom_message is Generating for tag and charecter
     
-        /**
-         * Custom Message for Product Adding
-         * 
-         * @since 1.9
-         */
         $cart_item_data[ 'wpt_custom_message' ] = $custom_message;
             // below statement make sure every add to cart action as unique line item
         $cart_item_data['unique_key'] = md5( $product_id . $variation_id . '_' .$custom_message );
     }
     
-    wpt_adding_to_cart( $product_id, $quantity, $variation_id, $variation, $cart_item_data );
+	wpt_adding_to_cart( $product_id, $quantity, $variation_id, $variation, $cart_item_data );
+*/	
+    $product_id     = ( isset($_POST['product_id']) && !empty( $_POST['product_id']) ? $_POST['product_id'] : false );
+
+	$query = new WC_Product_Query( array(
+		'category' => array( $product_category_slug ),
+		'limit' => 10,
+		'orderby' => 'date',
+		'order' => 'DESC'
+	) );
    
+	$products = $query->get_products();
+	
+	echo '<option value="">' .  __( "- Select Resource -", "wp-travel" ) . '</option>';
+	foreach( $products as $product ) {
+		$title = $product->get_title();
+		echo '<option value="' . $title . '">' . $title . '</option>';
+	}		
+
     die();
 }
 //add_action( 'wp_ajax_wpt_ajax_add_to_cart', 'wpt_ajax_add_to_cart' );
