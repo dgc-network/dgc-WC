@@ -390,14 +390,20 @@ class Trip_Options_Edit_Metabox {
 									echo '<tr class="assignment-rows" id="assignment-row-' . $y . '">
 										<td>
 											<select style="width:100%" id="opt-categorias" name="itinerary_item_assignment-' . $x . '-category-' . $y . '">';
+											if ($yy <= 0) {
 												self::product_categories_name_options();
+											} else {
+												self::product_categories_name_options( $itineraries[$x]['assignment'][$y]['category'] );
+											}
 											echo '</select>
 										</td>
-										<td>
-											<select style="width:100%" id="opt_tipo" name="itinerary_item_assignment-' . $x . '-category-' . $y . '">';
+										<td>';
+											if ($yy > 0) {
+												echo '<select style="width:100%" id="opt_tipo" name="itinerary_item_assignment-' . $x . '-category-' . $y . '">';
 												self::product_name_options_by_category('Itinerary');
-											echo '</select>
-										</td>
+												echo '</select>';
+											}
+										echo '</td>
 									</tr>';
 									$yy--;
 								}				
