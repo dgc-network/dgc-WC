@@ -437,8 +437,8 @@ class Trip_Options_Edit_Metabox {
 
 				$( '#first-itinerary' ).click( function() {
 					$( '.no-itineraries' ).hide();
-					/*
 					$( '.init-rows' ).show();
+					/*
 					$( '.itinerary-li' ).hide();
 					$( '#itinerary-li-0' ).show();
 					$( 'span', '#itinerary-li-0' ).on( 'click', function() {
@@ -481,7 +481,8 @@ class Trip_Options_Edit_Metabox {
 				});
 
 				$( '.add-itinerary' ).each( function( index, element ) {
-				$( element ).delegate( 'click', function() {
+				//$( element ).delegate( 'click', function() {
+				$( '.add-itinerary' ).on( 'click', function() {
 				//$( '#add-itinerary' ).click( function() {
 					$( '.itinerary-li' ).each( function( index, element ) {
 						if ( $( element ).is( ':hidden' ) ) {
