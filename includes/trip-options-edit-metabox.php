@@ -474,16 +474,12 @@ class Trip_Options_Edit_Metabox {
 					$( '.init-rows' ).show();
 					$( '.itinerary-li' ).hide();
 					$( '#itinerary-li-0' ).show();
-					/*
 					$( 'span', '#itinerary-li-0' ).on( 'click', function() {
 						$( 'table', '#itinerary-li-0' ).toggleClass( 'toggle-access' );
-					});*/
+					});
 				} );
 
-				//$( '.add-itinerary' ).each( function( index, element ) {
-				//$( element ).delegate( 'button', 'click', function() {
 				$( '.add-itinerary' ).on( 'click', function() {
-				//$( '#add-itinerary' ).click( function() {
 					$( '.itinerary-li' ).each( function( index, element ) {
 						if ( $( element ).is( ':hidden' ) ) {
 							$( element ).show();
@@ -494,7 +490,6 @@ class Trip_Options_Edit_Metabox {
 						};
 					});
 				} );
-				//} );
 
 				$( '.remove-itinerary' ).each( function( index, element ) {
 					$( element ).delegate( 'button', 'click', function() {
@@ -506,8 +501,8 @@ class Trip_Options_Edit_Metabox {
 				$( '.item_time' ).timepicker({format: 'HH:mm'});
 
 
-				$("#opt-categorias").change(function () {
-        			var opt_categorias = $("#opt-categorias").val();
+				$(".opt-categorias").change(function () {
+        			var opt_categorias = $(".opt-categorias").val();
         			$.ajax({
             			type: "POST",
             			url: clocal.ajaxurl,
@@ -519,10 +514,10 @@ class Trip_Options_Edit_Metabox {
                 			'term_chosen': opt_categorias,
             			},
             			success: function (data) {
-                			$("#opt_tipo").empty();
-                			$("#opt_tipo").append("<option value=''> Tipo de produto</option>");
+                			$(".opt_tipo").empty();
+                			$(".opt_tipo").append("<option value=''> Tipo de produto</option>");
                 			$.each(data, function (i, item) {
-                    			$("#opt_tipo").append('<option value="' + data[i].slug + '">' + data[i].name + '</option>');
+                    			$(".opt_tipo").append('<option value="' + data[i].slug + '">' + data[i].name + '</option>');
 
                 			});
             			},
