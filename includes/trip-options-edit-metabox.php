@@ -257,7 +257,7 @@ class Trip_Options_Edit_Metabox {
 
 		echo '<option value="" selected disabled hidden>' .  __( "- Select Category -", "wp-travel" ) . '</option>';
 		foreach( $product_categories as $cat ) {
-			if ($cat->name != 'uncategorized') {
+			if ($cat->name != 'Uncategorized') {
 				if ($cat->name == $category) {
 					echo '<option value="' . $cat->name . '" selected="selected">' . $cat->name . '</option>';
 				} else {
@@ -270,7 +270,7 @@ class Trip_Options_Edit_Metabox {
 	/**
 	 * Product List by Category
 	 */
-	function product_name_options_by_category( $product_category_slug ) {
+	function product_name_options_by_category( $product_category_slug, $resource = false ) {
 	//function ajax_get_resources_by_category() {
 		$query = new WC_Product_Query( array(
 			'category' => array( $product_category_slug ),
@@ -281,10 +281,14 @@ class Trip_Options_Edit_Metabox {
 	   
 		$products = $query->get_products();
 		
-		echo '<option value="">' .  __( "- Select Resource -", "wp-travel" ) . '</option>';
+		echo '<option value="" selected disabled hidden>' .  __( "- Select Resource -", "wp-travel" ) . '</option>';
 		foreach( $products as $product ) {
 			$title = $product->get_title();
-			echo '<option value="' . $title . '">' . $title . '</option>';
+			if ($title == $resource) {
+				echo '<option value="' . $title . '" selected>' . $title . '</option>';
+			} else {
+				echo '<option value="' . $title . '">' . $title . '</option>';
+			}
 		}		
 	}
 
@@ -398,9 +402,12 @@ class Trip_Options_Edit_Metabox {
 											echo '</select>
 										</td>
 										<td>';
-											if ($yy > 0) {
-												echo '<select style="width:100%" id="opt_tipo" name="itinerary_item_assignment-' . $x . '-category-' . $y . '">';
-												self::product_name_options_by_category('Itinerary');
+											if ($yy <= 0) {
+												echo '<select display="none" style="width:100%" id="opt_tipo" name="itinerary_item_assignment-' . $x . '-resource-' . $y . '">';
+												echo '</select>';
+											} else {
+												echo '<select style="width:100%" id="opt_tipo" name="itinerary_item_assignment-' . $x . '-resource-' . $y . '">';
+												self::product_name_options_by_category( $itineraries[$x]['assignment'][$y]['category'], $itineraries[$x]['assignment'][$y]['resource'] );
 												echo '</select>';
 											}
 										echo '</td>
