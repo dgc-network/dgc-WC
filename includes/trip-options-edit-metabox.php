@@ -595,7 +595,7 @@ class Trip_Options_Edit_Metabox {
 		<style>
   			#itineraries-ul { list-style-type:none; margin:0; padding:0; width:100%; }
   			#itineraries-ul li { background:#f2f2f2; border:1px solid #ccc; margin:0 3px 3px 3px; padding:0.4em; padding-left:1.5em; font-size:1.4em; }
-			#itineraries-ul li td.remove-itinerary { font-size:1.0em; }
+			#itineraries-ul li td.remove-itinerary button { font-size:1.0em; }
 			#itineraries-ul li span { cursor:pointer; }
 			#itineraries-ul li .fas.fa-bars { margin-left:-1.3em; }
 			#itineraries-ul li .fas.fa-bars:before { content: "\f0c9"; }
