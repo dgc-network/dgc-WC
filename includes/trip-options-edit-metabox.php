@@ -18,6 +18,10 @@ class Trip_Options_Edit_Metabox {
 		add_action( 'wp_ajax_get_resources_by_category', array( __CLASS__, 'ajax_get_resources_by_category' ) );
 		add_action( 'wp_ajax_nopriv_get_resources_by_category', array( __CLASS__, 'ajax_get_resources_by_category' ) );
 		
+		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'cortez_enqueue_script' ) );
+		add_action( 'wp_ajax_cortez_get_terms', array( __CLASS__, 'cortez_get_terms' ) );
+		add_action( 'wp_ajax_nopriv_cortez_get_terms', array( __CLASS__, 'cortez_get_terms' ) );
+
 	}
 
 	/**
@@ -379,12 +383,12 @@ class Trip_Options_Edit_Metabox {
 								for ($y = 0; $y < 10; $y++) {
 									echo '<tr class="assignment-rows" id="assignment-row-' . $y . '">
 										<td>
-											<select style="width:100%" id="itinerary_item_category" name="itinerary_item_assignment-' . $x . '-category-' . $y . '">';
+											<select style="width:100%" id="opt-categorias" name="itinerary_item_assignment-' . $x . '-category-' . $y . '">';
 												self::product_categories_name_options();
 											echo '</select>
 										</td>
 										<td>
-											<select style="width:100%" id="itinerary_item_assignment" name="itinerary_item_assignment-' . $x . '-category-' . $y . '">';
+											<select style="width:100%" id="opt_tipo" name="itinerary_item_assignment-' . $x . '-category-' . $y . '">';
 												self::product_name_options_by_category('Itinerary');
 											echo '</select>
 										</td>
@@ -641,7 +645,6 @@ function cortez_get_terms() {
     if ( $data['term_chosen'] == 'bicicleta' ) {
         echo $json;
     }
-
 
     wp_die(); //stop function once you've echoed (returned) what you need.
 }
