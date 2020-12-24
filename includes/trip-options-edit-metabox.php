@@ -243,7 +243,7 @@ class Trip_Options_Edit_Metabox {
 	/**
 	 * Product Categories List
 	 */
-	function product_categories_name_options() {
+	function product_categories_name_options( $category = false ) {
 		// since wordpress 4.5.0
 		$args = array(
 			'taxonomy'   => "product_cat",
@@ -255,9 +255,13 @@ class Trip_Options_Edit_Metabox {
 		);
 		$product_categories = get_terms($args);
 
-		echo '<option value="">' .  __( "- Select Category -", "wp-travel" ) . '</option>';
+		echo '<option value="" selected disabled hidden>' .  __( "- Select Category -", "wp-travel" ) . '</option>';
 		foreach( $product_categories as $cat ) {
-			echo '<option value="' . $cat->name . '">' . $cat->name . '</option>';
+			if ($cat->name == $category) {
+				echo '<option value="' . $cat->name . '" selected="selected">' . $cat->name . '</option>';
+			} else {
+				echo '<option value="' . $cat->name . '">' . $cat->name . '</option>';
+			}
 		}
 	}
 
@@ -1162,6 +1166,13 @@ function ajax_get_resources_by_category() {
 				$itineraries[$xx]['date'] = sanitize_text_field( $_POST['itinerary_item_date-' . $x] );
 				$itineraries[$xx]['time'] = sanitize_text_field( $_POST['itinerary_item_time-' . $x] );
 				$itineraries[$xx]['desc'] = sanitize_text_field( $_POST['itinerary_item_desc-' . $x] );
+				$yy = 0;
+				for ($y = 0; $y < 10; $y++) {
+					if ($_POST['itinerary_item_assignment-' . $x . '-category-' . $y]!="") {
+						$itineraries[$xx]['assignment'][$yy]['category'] = sanitize_text_field( $_POST['itinerary_item_assignment-' . $x . '-category-' . $y] );
+						$yy++;
+					}
+				}
 				$xx++;
 			}
 		}
