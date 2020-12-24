@@ -403,7 +403,7 @@ class Trip_Options_Edit_Metabox {
 										</td>
 										<td>';
 											if ($yy <= 0) {
-												echo '<select display="none" style="width:100%" id="opt_tipo" name="itinerary_item_assignment-' . $x . '-resource-' . $y . '">';
+												echo '<select style="width:100%; display:none" id="opt_tipo" name="itinerary_item_assignment-' . $x . '-resource-' . $y . '">';
 												echo '</select>';
 											} else {
 												echo '<select style="width:100%" id="opt_tipo" name="itinerary_item_assignment-' . $x . '-resource-' . $y . '">';
