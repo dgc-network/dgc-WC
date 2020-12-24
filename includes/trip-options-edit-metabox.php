@@ -472,17 +472,17 @@ class Trip_Options_Edit_Metabox {
 				$( '#first-itinerary' ).click( function() {
 					$( '.no-itineraries' ).hide();
 					$( '.init-rows' ).show();
-					/*
 					$( '.itinerary-li' ).hide();
 					$( '#itinerary-li-0' ).show();
+					/*
 					$( 'span', '#itinerary-li-0' ).on( 'click', function() {
 						$( 'table', '#itinerary-li-0' ).toggleClass( 'toggle-access' );
 					});*/
 				} );
 
-				$( '.add-itinerary' ).each( function( index, element ) {
-				$( element ).delegate( 'button', 'click', function() {
-				//$( '.add-itinerary' ).on( 'click', function() {
+				//$( '.add-itinerary' ).each( function( index, element ) {
+				//$( element ).delegate( 'button', 'click', function() {
+				$( '.add-itinerary' ).on( 'click', function() {
 				//$( '#add-itinerary' ).click( function() {
 					$( '.itinerary-li' ).each( function( index, element ) {
 						if ( $( element ).is( ':hidden' ) ) {
@@ -494,7 +494,7 @@ class Trip_Options_Edit_Metabox {
 						};
 					});
 				} );
-				} );
+				//} );
 
 				$( '.remove-itinerary' ).each( function( index, element ) {
 					$( element ).delegate( 'button', 'click', function() {
