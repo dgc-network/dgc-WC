@@ -243,7 +243,7 @@ class Trip_Options_Edit_Metabox {
 	/**
 	 * Product Categories List
 	 */
-	function product_categories_name_options( $category ) {
+	function product_categories_name_options( $product_category_slug ) {
 		// since wordpress 4.5.0
 		$args = array(
 			'taxonomy'   => "product_cat",
@@ -258,7 +258,7 @@ class Trip_Options_Edit_Metabox {
 		echo '<option value="" selected disabled hidden>' .  __( "- Select Category -", "wp-travel" ) . '</option>';
 		foreach( $product_categories as $cat ) {
 			//if ($cat->name != 'Uncategorized') {
-				if ($cat->name == $category) {
+				if ($cat->name == $product_category_slug) {
 					echo '<option value="' . $cat->name . '" selected="selected">' . $cat->name . '</option>';
 				} else {
 					echo '<option value="' . $cat->name . '">' . $cat->name . '</option>';
