@@ -284,7 +284,9 @@ class Trip_Options_Edit_Metabox {
 	   
 		$products = $query->get_products();
 		
-		echo '<option value="" selected disabled hidden>' .  __( "- Select Resource -", "wp-travel" ) . '</option>';
+		if (isset($resource)) {
+			echo '<option value="" selected disabled hidden>' .  __( "- Select Resource -", "wp-travel" ) . '</option>';
+		}
 		foreach( $products as $product ) {
 			$title = $product->get_title();
 			if ($title == $resource) {
@@ -1220,8 +1222,11 @@ function ajax_get_resources_by_category() {
 				for ($y = 0; $y < 10; $y++) {
 					if ($_POST['itinerary_item_assignment-' . $x . '-category-' . $y]!="") {
 						$itineraries[$xx]['assignment'][$yy]['category'] = sanitize_text_field( $_POST['itinerary_item_assignment-' . $x . '-category-' . $y] );
-						$yy++;
 					}
+					if ($_POST['itinerary_item_assignment-' . $x . '-resource-' . $y]!="") {
+						$itineraries[$xx]['assignment'][$yy]['resource'] = sanitize_text_field( $_POST['itinerary_item_assignment-' . $x . '-resource-' . $y] );
+					}
+					$yy++;
 				}
 				$xx++;
 			}
