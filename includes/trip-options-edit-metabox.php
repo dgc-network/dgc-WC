@@ -400,18 +400,18 @@ class Trip_Options_Edit_Metabox {
 								}
 								echo '<table class="resources-assignment" style="width:100%;margin-left:0">';
 									echo '<tr>';
-										echo '<th>' . __( 'Resources Assignment', 'wp-travel' ) .'</th>';
-										echo '<td style="text-align:right"><button class="add-assignment" type="button">' . __( '+ Add Assignment', 'wp-travel' ) .'</button></td>';
+										echo '<th>' . __( 'Resources Assignment', 'wp-travel' );
+										if ($yy <= 0) {
+											echo '<p style="display:none"></p>' .'</th>';
+										} else {
+											echo '<p style="display:none">' . $yy . '</p>' .'</th>';
+										}
+									echo '<td style="text-align:right"><button class="add-assignment" type="button">' . __( '+ Add Assignment', 'wp-travel' ) .'</button></td>';
 									echo '</tr>';
 							/*
 								for ($y = 0; $y < 10; $y++) {
 									echo '<tr class="assignment-rows" id="assignment-row-' . $y . '">
 										<td>';
-											if ($yy <= 0) {
-												echo '<p style="display:none"></p>';
-											} else {
-												echo '<p style="display:none">' . $y . '</p>';
-											}
 											echo '<select style="width:100%" id="opt-categorias" name="itinerary_item_assignment-' . $x . '-category-' . $y . '">';
 											if ($yy <= 0) {
 												self::product_categories_name_options();
