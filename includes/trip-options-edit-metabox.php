@@ -495,7 +495,7 @@ class Trip_Options_Edit_Metabox {
 
 					$( '.resources-assignment', element ).hide();
 					$( '.assignment-rows', element ).each( function( sub_index, sub_element ) {
-						if ( !$( 'p', sub_element ).is( ':empty' ) ) {
+						if ( !$( 'span', sub_element ).is( ':empty' ) ) {
 							$( '.resources-assignment', element ).show();
 							$( '.assignment-rows', element ).hide();
 							$( sub_element ).show();
