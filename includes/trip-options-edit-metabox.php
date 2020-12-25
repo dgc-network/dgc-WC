@@ -243,7 +243,7 @@ class Trip_Options_Edit_Metabox {
 	/**
 	 * Product Categories List
 	 */
-	function product_categories_name_options(  ) {
+	function product_categories_name_options( $product_category_slug ) {
 		// since wordpress 4.5.0
 		$args = array(
 			'taxonomy'   => "product_cat",
@@ -254,7 +254,7 @@ class Trip_Options_Edit_Metabox {
 			'include'    => $ids
 		);
 		$product_categories = get_terms($args);
-		$product_category_slug='Itinerary';
+		//$product_category_slug='Itinerary';
 		echo '<option value="" selected disabled hidden>' .  __( "- Select Category -", "wp-travel" ) . '</option>';
 		foreach( $product_categories as $cat ) {
 			//if ($cat->name != 'Uncategorized') {
@@ -414,9 +414,9 @@ class Trip_Options_Edit_Metabox {
 											if ($yy <= 0) {
 												self::product_categories_name_options();
 											} else {
-												$category = $itineraries[$x]['assignment'][$y]['category'];
-												//self::product_categories_name_options( $itineraries[$x]['assignment'][$y]['category'] );
-												self::product_categories_name_options( 'Itinerary' );
+												//$category = $itineraries[$x]['assignment'][$y]['category'];
+												self::product_categories_name_options( $itineraries[$x]['assignment'][$y]['category'] );
+												//self::product_categories_name_options( 'Itinerary' );
 											}
 											echo '</select>
 										</td>
