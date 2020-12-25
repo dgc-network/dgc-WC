@@ -378,6 +378,7 @@ class Trip_Options_Edit_Metabox {
 									foreach ( $itineraries[$x]['assignment'] as $assignment ) {
 										echo ' key:'.$yy.', value:'.$itineraries[$x]['assignment'][$yy];
 										foreach ($itineraries[$x]['assignment'][$yy] as $key=>$value) {
+											echo ', key:category, value:'.$itineraries[$x]['assignment'][$yy]['category'];
 											echo ', key:'.$key.', value:'.$value;
 										}
 /*
