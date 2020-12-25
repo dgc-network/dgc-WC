@@ -243,7 +243,7 @@ class Trip_Options_Edit_Metabox {
 	/**
 	 * Product Categories List
 	 */
-	function product_categories_name_options() {
+	function product_categories_name_options( $product_category_slug ) {
 		// since wordpress 4.5.0
 		$args = array(
 			'taxonomy'   => "product_cat",
@@ -424,8 +424,8 @@ class Trip_Options_Edit_Metabox {
 												self::product_categories_name_options();
 											} else {
 												//$category = $itineraries[$x]['assignment'][$y]['category'];
-												self::product_categories_name_options();
-												//self::product_categories_name_options( $itineraries[$x]['assignment'][$y]['category'] );
+												//self::product_categories_name_options();
+												self::product_categories_name_options( $itineraries[$x]['assignment'][$y]['category'] );
 												//self::product_categories_name_options( 'Itinerary' );
 											}
 											echo '</select>
