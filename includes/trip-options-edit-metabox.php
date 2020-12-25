@@ -265,6 +265,7 @@ class Trip_Options_Edit_Metabox {
 					echo '<option value="' . $cat->name . '">' . $cat->name . '</option>';
 				}*/
 			//}
+			echo '<option value="' . $cat->name . '">' . $cat->name . '</option>';
 		}
 	}
 
