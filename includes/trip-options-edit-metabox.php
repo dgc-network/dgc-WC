@@ -309,11 +309,13 @@ class Trip_Options_Edit_Metabox {
 		$itineraries = get_post_meta( $post->ID, 'wp_travel_trip_itinerary_data', true );
 		$remove_itinerary = __( "- Remove Itinerary", "wp-travel" );
 		$product_categories = get_terms( array( 'taxonomy' => 'product_cat' ) );
+		?>
+		<div id='itinerary_panel' class='panel woocommerce_options_panel'>
+<?php
 		foreach ($product_categories as $category) {
 			echo $category;
 		}
-		?>
-		<div id='itinerary_panel' class='panel woocommerce_options_panel'>
+?>		
 		<table style="width:100%;">
 			<tr>
 				<td><h3><?php esc_html_e( 'Trip Code : ', 'wp-travel' ); ?></h3></td>
