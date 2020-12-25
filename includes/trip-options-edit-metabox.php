@@ -402,9 +402,9 @@ class Trip_Options_Edit_Metabox {
 									echo '<tr>';
 										echo '<th>' . __( 'Resources Assignment', 'wp-travel' );
 										if ($yy <= 0) {
-											echo '<p style="display:none"></p>' .'</th>';
+											echo '<span style="display:none"></span>' .'</th>';
 										} else {
-											echo '<p style="display:none">' . $yy . '</p>' .'</th>';
+											echo '<span style="display:none">' . $yy . '</span>' .'</th>';
 										}
 									echo '<td style="text-align:right"><button class="add-assignment" type="button">' . __( '+ Add Assignment', 'wp-travel' ) .'</button></td>';
 									echo '</tr>';
