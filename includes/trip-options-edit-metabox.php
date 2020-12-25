@@ -313,7 +313,7 @@ class Trip_Options_Edit_Metabox {
 		<div id='itinerary_panel' class='panel woocommerce_options_panel'>
 <?php
 		foreach ($product_categories as $category) {
-			echo $category;
+			echo $category->name;
 		}
 ?>		
 		<table style="width:100%;">
