@@ -243,7 +243,7 @@ class Trip_Options_Edit_Metabox {
 	/**
 	 * Product Categories List
 	 */
-	function product_categories_name_options(  ) {
+	function product_categories_name_options( $product_category_slug=false ) {
 		// since wordpress 4.5.0
 		$args = array(
 			'taxonomy'   => "product_cat",
@@ -258,14 +258,13 @@ class Trip_Options_Edit_Metabox {
 		echo '<option value="" selected disabled hidden>' .  __( "- Select Category -", "wp-travel" ) . '</option>';
 		foreach( $product_categories as $cat ) {
 			//if ($cat->name != 'Uncategorized') {
-				/*
 				if ($cat->name == $product_category_slug) {
 					echo '<option value="' . $cat->name . '" selected="selected">' . $cat->name . '</option>';
 				} else {
 					echo '<option value="' . $cat->name . '">' . $cat->name . '</option>';
-				}*/
+				}
 			//}
-			echo '<option value="' . $cat->name . '">' . $cat->name . '</option>';
+			//echo '<option value="' . $cat->name . '">' . $cat->name . '</option>';
 		}
 	}
 
@@ -378,12 +377,13 @@ class Trip_Options_Edit_Metabox {
 								$yy=0;
 								if (isset($itineraries[$x]['assignment'])) {
 									foreach ( $itineraries[$x]['assignment'] as $assignment ) {
+/*										
 										echo ' key:'.$yy.', value:'.$itineraries[$x]['assignment'][$yy];
 										foreach ($itineraries[$x]['assignment'][$yy] as $key=>$value) {
 											echo ', key:category, value:'.$itineraries[$x]['assignment'][$yy]['category'];
 											echo ', key:'.$key.', value:'.$value;
 										}
-/*
+
 										foreach ($assignment as $key=>$value) {
 											echo ', key:'.$key.', value:'.$value;
 										}
@@ -404,8 +404,13 @@ class Trip_Options_Edit_Metabox {
 							
 								for ($y = 0; $y < 10; $y++) {
 									echo '<tr class="assignment-rows" id="assignment-row-' . $y . '">
-										<td>
-											<select style="width:100%" id="opt-categorias" name="itinerary_item_assignment-' . $x . '-category-' . $y . '">';
+										<td>';
+											if ($yy <= 0) {
+												echo '<p style="display:none"></p>';
+											} else {
+												echo '<p style="display:none">' . $y . '</p>';
+											}
+											echo '<select style="width:100%" id="opt-categorias" name="itinerary_item_assignment-' . $x . '-category-' . $y . '">';
 											if ($yy <= 0) {
 												self::product_categories_name_options();
 											} else {
@@ -486,6 +491,11 @@ class Trip_Options_Edit_Metabox {
 					});
 
 					$( '.resources-assignment', element ).hide();
+					$( '.assignment-rows', element ).each( function( sub_index, sub_element ) {
+						if ( !$( 'p', sub_element ).is( ':empty' ) ) {
+							$( sub_element ).show();
+						};
+					});
 					$( element ).delegate( '.first-assignment', 'click', function() {
 						$( '.no-assignments', element ).hide();
 						$( '.resources-assignment', element ).show();
