@@ -377,8 +377,8 @@ class Trip_Options_Edit_Metabox {
 								if (isset($itineraries[$x]['assignment'])) {
 									foreach ( $itineraries[$x]['assignment'] as $assignment ) {
 										$yy++;
-										foreach ($assignment as $key->$value) {
-											echo 'key:'.$key.', value:'.$value;
+										foreach ($assignment as $key=>$value) {
+											echo ' key:'.$key.', value:'.$value;
 										}
 									}															
 								} else {
