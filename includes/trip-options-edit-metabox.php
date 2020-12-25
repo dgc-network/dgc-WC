@@ -509,7 +509,8 @@ class Trip_Options_Edit_Metabox {
 							$( sub_element ).show();
 						};
 
-						$( ".opt-categorias", sub_element ).on( 'change', function () {
+						//$( ".opt-categorias", sub_element ).on( 'change', function () {
+						$( sub_element ).delegate( '.opt-categorias', 'change', function() {
         					var opt_categorias = $(".opt-categorias").val();
 							$( sub_element ).show();
         					$.ajax({
