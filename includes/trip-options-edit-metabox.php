@@ -243,7 +243,7 @@ class Trip_Options_Edit_Metabox {
 	/**
 	 * Product Categories List
 	 */
-	function product_categories_name_options( $product_category_slug ) {
+	function product_categories_name_options(  ) {
 		// since wordpress 4.5.0
 		$args = array(
 			'taxonomy'   => "product_cat",
