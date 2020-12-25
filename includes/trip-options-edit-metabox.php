@@ -243,7 +243,7 @@ class Trip_Options_Edit_Metabox {
 	/**
 	 * Product Categories List
 	 */
-	function product_categories_name_options( $category = false ) {
+	function product_categories_name_options( $category ) {
 		// since wordpress 4.5.0
 		$args = array(
 			'taxonomy'   => "product_cat",
@@ -270,7 +270,7 @@ class Trip_Options_Edit_Metabox {
 	/**
 	 * Product List by Category
 	 */
-	function product_name_options_by_category( $product_category_slug, $resource = false ) {
+	function product_name_options_by_category( $product_category_slug, $resource ) {
 	//function ajax_get_resources_by_category() {
 		$query = new WC_Product_Query( array(
 			'category' => array( $product_category_slug ),
