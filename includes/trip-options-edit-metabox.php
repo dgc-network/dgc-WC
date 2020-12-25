@@ -258,11 +258,11 @@ class Trip_Options_Edit_Metabox {
 		echo '<option value="" selected disabled hidden>' .  __( "- Select Category -", "wp-travel" ) . '</option>';
 		foreach( $product_categories as $cat ) {
 			//if ($cat->name != 'Uncategorized') {
-				//if ($cat->name == $category) {
-				//	echo '<option value="' . $cat->name . '" selected="selected">' . $cat->name . '</option>';
-				//} else {
+				if ($cat->name == $category) {
+					echo '<option value="' . $cat->name . '" selected="selected">' . $cat->name . '</option>';
+				} else {
 					echo '<option value="' . $cat->name . '">' . $cat->name . '</option>';
-				//}
+				}
 			//}
 		}
 	}
@@ -407,8 +407,9 @@ class Trip_Options_Edit_Metabox {
 											if ($yy <= 0) {
 												self::product_categories_name_options();
 											} else {
-												self::product_categories_name_options( $itineraries[$x]['assignment'][$y]['category'] );
-												//self::product_categories_name_options( $itineraries[$x]['assignment']['category'] );
+												$category = $itineraries[$x]['assignment'][$y]['category'];
+												//self::product_categories_name_options( $itineraries[$x]['assignment'][$y]['category'] );
+												self::product_categories_name_options( $category );
 											}
 											echo '</select>
 										</td>
