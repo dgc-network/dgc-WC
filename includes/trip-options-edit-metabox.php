@@ -370,7 +370,7 @@ class Trip_Options_Edit_Metabox {
 						</tr>
 						<tr>
 							<td colspan="2"><b>' . __( 'Description', 'wp-travel' ) .'</b><br>
-							<textarea rows="3" name="itinerary_item_desc-' . $x . '">' . esc_attr( $itineraries[$x]['desc'] ) . '</textarea></td>
+							<textarea rows="5" name="itinerary_item_desc-' . $x . '">' . esc_attr( $itineraries[$x]['desc'] ) . '</textarea></td>
 						</tr>
 						<tr>
 							<td colspan="2">';
@@ -415,7 +415,8 @@ class Trip_Options_Edit_Metabox {
 												self::product_categories_name_options();
 											} else {
 												//$category = $itineraries[$x]['assignment'][$y]['category'];
-												self::product_categories_name_options( $itineraries[$x]['assignment'][$y]['category'] );
+												self::product_categories_name_options();
+												//self::product_categories_name_options( $itineraries[$x]['assignment'][$y]['category'] );
 												//self::product_categories_name_options( 'Itinerary' );
 											}
 											echo '</select>
