@@ -432,7 +432,8 @@ class Trip_Options_Edit_Metabox {
 										</td>
 										<td>';
 											if ($yy <= 0) {
-												echo '<select style="width:100%; display:none" class="opt_tipo" name="itinerary_item_assignment-' . $x . '-resource-' . $y . '">';
+												echo '<select style="width:100%" class="opt_tipo" name="itinerary_item_assignment-' . $x . '-resource-' . $y . '">';
+												self::product_name_options_by_category();
 												echo '</select>';
 											} else {
 												echo '<select style="width:100%" class="opt_tipo" name="itinerary_item_assignment-' . $x . '-resource-' . $y . '">';
