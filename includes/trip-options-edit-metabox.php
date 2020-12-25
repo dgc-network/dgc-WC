@@ -409,7 +409,7 @@ class Trip_Options_Edit_Metabox {
 											} else {
 												echo '<span style="display:none">' . $yy . '</span>' .'</th>';
 											}
-											echo '<select style="width:100%" id="opt-categorias" name="itinerary_item_assignment-' . $x . '-category-' . $y . '">';
+											echo '<select style="width:100%" class="opt-categorias" name="itinerary_item_assignment-' . $x . '-category-' . $y . '">';
 											if ($yy <= 0) {
 												echo '<option value="" selected disabled hidden>' .  __( "- Select Category -", "wp-travel" ) . '</option>';
 												foreach( $product_categories as $cat ) {
@@ -432,10 +432,10 @@ class Trip_Options_Edit_Metabox {
 										</td>
 										<td>';
 											if ($yy <= 0) {
-												echo '<select style="width:100%; display:none" id="opt_tipo" name="itinerary_item_assignment-' . $x . '-resource-' . $y . '">';
+												echo '<select style="width:100%; display:none" class="opt_tipo" name="itinerary_item_assignment-' . $x . '-resource-' . $y . '">';
 												echo '</select>';
 											} else {
-												echo '<select style="width:100%" id="opt_tipo" name="itinerary_item_assignment-' . $x . '-resource-' . $y . '">';
+												echo '<select style="width:100%" class="opt_tipo" name="itinerary_item_assignment-' . $x . '-resource-' . $y . '">';
 												self::product_name_options_by_category( $itineraries[$x]['assignment'][$y]['category'], $itineraries[$x]['assignment'][$y]['resource'] );
 												echo '</select>';
 											}
@@ -510,6 +510,7 @@ class Trip_Options_Edit_Metabox {
 
 						$( ".opt-categorias", sub_element ).on( 'change', function () {
         					var opt_categorias = $(".opt-categorias").val();
+							$( sub_element ).show();
         					$.ajax({
             					type: "POST",
             					url: clocal.ajaxurl,
