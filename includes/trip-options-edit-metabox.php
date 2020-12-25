@@ -379,17 +379,6 @@ class Trip_Options_Edit_Metabox {
 								$yy=0;
 								if (isset($itineraries[$x]['assignment'])) {
 									foreach ( $itineraries[$x]['assignment'] as $assignment ) {
-/*										
-										echo ' key:'.$yy.', value:'.$itineraries[$x]['assignment'][$yy];
-										foreach ($itineraries[$x]['assignment'][$yy] as $key=>$value) {
-											echo ', key:category, value:'.$itineraries[$x]['assignment'][$yy]['category'];
-											echo ', key:'.$key.', value:'.$value;
-										}
-
-										foreach ($assignment as $key=>$value) {
-											echo ', key:'.$key.', value:'.$value;
-										}
-*/										
 										$yy++;
 									}															
 								} else {
@@ -400,14 +389,7 @@ class Trip_Options_Edit_Metabox {
 								}
 								echo '<table class="resources-assignment" style="width:100%;margin-left:0">';
 									echo '<tr>';
-										echo '<th>' . __( 'Resources Assignment', 'wp-travel' );
-/*										
-										if ($yy <= 0) {
-											echo '<span style="display:none"></span>' .'</th>';
-										} else {
-											echo '<span style="display:none">' . $yy . '</span>' .'</th>';
-										}
-*/										
+									echo '<th>' . __( 'Resources Assignment', 'wp-travel' ) . '</th>';
 									echo '<td style="text-align:right"><button class="add-assignment" type="button">' . __( '+ Add Assignment', 'wp-travel' ) .'</button></td>';
 									echo '</tr>';
 							
@@ -420,20 +402,10 @@ class Trip_Options_Edit_Metabox {
 												echo '<span style="display:none">' . $yy . '</span>' .'</th>';
 											}
 											echo '<select style="width:100%" id="opt-categorias" name="itinerary_item_assignment-' . $x . '-category-' . $y . '">';
-/*
-											$args = array(
-												'taxonomy'   => "product_cat",
-												'number'     => $number,
-												'orderby'    => $orderby,
-												'order'      => $order,
-												'hide_empty' => $hide_empty,
-												'include'    => $ids
-											);
-											$product_categories = get_terms($args);
-*/
 											$product_categories = get_terms(array('taxonomy'   => "product_cat"));
-											//$product_category_slug='Itinerary';
-											echo '<option value="" selected disabled hidden>' .  __( "- Select Category -", "wp-travel" ) . '</option>';
+											if ($yy > 0) {
+												echo '<option value="" selected disabled hidden>' .  __( "- Select Category -", "wp-travel" ) . '</option>';
+											}
 											foreach( $product_categories as $cat ) {
 												//if ($cat->name != 'Uncategorized') {
 									/*				
@@ -444,7 +416,11 @@ class Trip_Options_Edit_Metabox {
 													}
 									*/				
 												//}
-												echo '<option value="' . $cat->name . '">' . $cat->name . '</option>';
+												if ($yy <= 0) {
+													echo '<option value="' . $cat->name . '">' . $cat->name . '</option>';
+												} else {
+													echo '<option value="' . $cat->name . '" selected>' . $cat->name . '</option>';
+												}
 											}
 									
 /*
