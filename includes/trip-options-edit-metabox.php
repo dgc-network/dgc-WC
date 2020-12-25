@@ -420,6 +420,34 @@ class Trip_Options_Edit_Metabox {
 												echo '<span style="display:none">' . $yy . '</span>' .'</th>';
 											}
 											echo '<select style="width:100%" id="opt-categorias" name="itinerary_item_assignment-' . $x . '-category-' . $y . '">';
+/*
+											$args = array(
+												'taxonomy'   => "product_cat",
+												'number'     => $number,
+												'orderby'    => $orderby,
+												'order'      => $order,
+												'hide_empty' => $hide_empty,
+												'include'    => $ids
+											);
+											$product_categories = get_terms($args);
+*/
+											$product_categories = get_terms(array('taxonomy'   => "product_cat"));
+											//$product_category_slug='Itinerary';
+											echo '<option value="" selected disabled hidden>' .  __( "- Select Category -", "wp-travel" ) . '</option>';
+											foreach( $product_categories as $cat ) {
+												//if ($cat->name != 'Uncategorized') {
+									/*				
+													if ($cat->name == $product_category_slug) {
+														echo '<option value="' . $cat->name . '" selected="selected">' . $cat->name . '</option>';
+													} else {
+														echo '<option value="' . $cat->name . '">' . $cat->name . '</option>';
+													}
+									*/				
+												//}
+												echo '<option value="' . $cat->name . '">' . $cat->name . '</option>';
+											}
+									
+/*
 											if ($yy <= 0) {
 												self::product_categories_name_options();
 											} else {
@@ -428,6 +456,7 @@ class Trip_Options_Edit_Metabox {
 												self::product_categories_name_options( $itineraries[$x]['assignment'][$y]['category'] );
 												//self::product_categories_name_options( 'Itinerary' );
 											}
+*/											
 											echo '</select>
 										</td>
 										<td>';
