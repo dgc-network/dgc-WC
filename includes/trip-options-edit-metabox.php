@@ -273,7 +273,7 @@ class Trip_Options_Edit_Metabox {
 	/**
 	 * Product List by Category
 	 */
-	function product_name_options_by_category( $product_category_slug, $resource ) {
+	function product_name_options_by_category( $product_category_slug=false, $resource=false ) {
 	//function ajax_get_resources_by_category() {
 		$query = new WC_Product_Query( array(
 			'category' => array( $product_category_slug ),
@@ -433,7 +433,7 @@ class Trip_Options_Edit_Metabox {
 										<td>';
 											if ($yy <= 0) {
 												echo '<select style="width:100%" class="opt_tipo" name="itinerary_item_assignment-' . $x . '-resource-' . $y . '">';
-												//self::product_name_options_by_category();
+												self::product_name_options_by_category();
 												echo '</select>';
 											} else {
 												echo '<select style="width:100%" class="opt_tipo" name="itinerary_item_assignment-' . $x . '-resource-' . $y . '">';
