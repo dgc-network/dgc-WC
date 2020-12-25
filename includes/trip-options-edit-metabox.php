@@ -400,7 +400,8 @@ class Trip_Options_Edit_Metabox {
 											if ($yy <= 0) {
 												self::product_categories_name_options();
 											} else {
-												self::product_categories_name_options( $itineraries[$x]['assignment'][$y]['category'] );
+												//self::product_categories_name_options( $itineraries[$x]['assignment'][$y]['category'] );
+												self::product_categories_name_options( $itineraries[$x]['assignment']['category'] );
 											}
 											echo '</select>
 										</td>
