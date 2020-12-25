@@ -403,7 +403,7 @@ class Trip_Options_Edit_Metabox {
 										echo '<th>' . __( 'Resources Assignment', 'wp-travel' ) .'</th>';
 										echo '<td style="text-align:right"><button class="add-assignment" type="button">' . __( '+ Add Assignment', 'wp-travel' ) .'</button></td>';
 									echo '</tr>';
-							
+							/*
 								for ($y = 0; $y < 10; $y++) {
 									echo '<tr class="assignment-rows" id="assignment-row-' . $y . '">
 										<td>';
@@ -435,7 +435,7 @@ class Trip_Options_Edit_Metabox {
 										echo '</td>
 									</tr>';
 									$yy--;
-								}				
+								}	*/			
 								echo '</table>';
 							echo '</td>
 						</tr>
