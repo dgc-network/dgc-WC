@@ -409,7 +409,7 @@ class Trip_Options_Edit_Metabox {
 											} else {
 												$category = $itineraries[$x]['assignment'][$y]['category'];
 												//self::product_categories_name_options( $itineraries[$x]['assignment'][$y]['category'] );
-												self::product_categories_name_options( $category );
+												self::product_categories_name_options( 'Itinerary' );
 											}
 											echo '</select>
 										</td>
