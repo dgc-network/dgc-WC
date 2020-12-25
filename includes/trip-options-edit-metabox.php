@@ -258,11 +258,11 @@ class Trip_Options_Edit_Metabox {
 		echo '<option value="" selected disabled hidden>' .  __( "- Select Category -", "wp-travel" ) . '</option>';
 		foreach( $product_categories as $cat ) {
 			//if ($cat->name != 'Uncategorized') {
-				if ($cat->name == $category) {
-					echo '<option value="' . $cat->name . '" selected="selected">' . $cat->name . '</option>';
-				} else {
+				//if ($cat->name == $category) {
+				//	echo '<option value="' . $cat->name . '" selected="selected">' . $cat->name . '</option>';
+				//} else {
 					echo '<option value="' . $cat->name . '">' . $cat->name . '</option>';
-				}
+				//}
 			//}
 		}
 	}
