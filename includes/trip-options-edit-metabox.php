@@ -308,6 +308,7 @@ class Trip_Options_Edit_Metabox {
 		$trip_outline = get_post_meta( $post->ID, 'wp_travel_outline', true );
 		$itineraries = get_post_meta( $post->ID, 'wp_travel_trip_itinerary_data', true );
 		$remove_itinerary = __( "- Remove Itinerary", "wp-travel" );
+		$product_categories = get_terms( array( 'taxonomy' => 'product_cat' ) );
 		?>
 		<div id='itinerary_panel' class='panel woocommerce_options_panel'>
 		<table style="width:100%;">
@@ -402,8 +403,7 @@ class Trip_Options_Edit_Metabox {
 												echo '<span style="display:none">' . $yy . '</span>' .'</th>';
 											}
 											echo '<select style="width:100%" id="opt-categorias" name="itinerary_item_assignment-' . $x . '-category-' . $y . '">';
-											$product_categories = get_terms(array('taxonomy'   => "product_cat"));
-											if ($yy > 0) {
+											if ($yy <= 0) {
 												echo '<option value="" selected disabled hidden>' .  __( "- Select Category -", "wp-travel" ) . '</option>';
 											}
 											foreach( $product_categories as $cat ) {
