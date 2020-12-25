@@ -376,10 +376,11 @@ class Trip_Options_Edit_Metabox {
 								$yy=0;
 								if (isset($itineraries[$x]['assignment'])) {
 									foreach ( $itineraries[$x]['assignment'] as $assignment ) {
-										$yy++;
+										echo ' key:'.$yy.', value:'.$itineraries[$x]['assignment'][$yy];
 										foreach ($assignment as $key=>$value) {
-											echo ' key:'.$key.', value:'.$value;
+											echo ', key:'.$key.', value:'.$value;
 										}
+										$yy++;
 									}															
 								} else {
 									echo '<div class="no-assignments">';
@@ -400,8 +401,8 @@ class Trip_Options_Edit_Metabox {
 											if ($yy <= 0) {
 												self::product_categories_name_options();
 											} else {
-												//self::product_categories_name_options( $itineraries[$x]['assignment'][$y]['category'] );
-												self::product_categories_name_options( $itineraries[$x]['assignment']['category'] );
+												self::product_categories_name_options( $itineraries[$x]['assignment'][$y]['category'] );
+												//self::product_categories_name_options( $itineraries[$x]['assignment']['category'] );
 											}
 											echo '</select>
 										</td>
