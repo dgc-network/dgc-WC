@@ -400,7 +400,7 @@ class Trip_Options_Edit_Metabox {
 								}
 								echo '<table class="resources-assignment" style="width:100%;margin-left:0">';
 									echo '<tr>';
-										echo '<th class="assignment-row-head">' . __( 'Resources Assignment', 'wp-travel' ) .'</td>';
+										echo '<th>' . __( 'Resources Assignment', 'wp-travel' ) .'</th>';
 										echo '<td style="text-align:right"><button class="add-assignment" type="button">' . __( '+ Add Assignment', 'wp-travel' ) .'</button></td>';
 									echo '</tr>';
 							
@@ -494,13 +494,13 @@ class Trip_Options_Edit_Metabox {
 					});
 
 					$( '.resources-assignment', element ).hide();
-					/*
 					$( '.assignment-rows', element ).each( function( sub_index, sub_element ) {
 						if ( !$( 'p', sub_element ).is( ':empty' ) ) {
+							$( '.resources-assignment', element ).show();
+							$( '.assignment-rows', element ).hide();
 							$( sub_element ).show();
 						};
 					});
-					*/
 					$( element ).delegate( '.first-assignment', 'click', function() {
 						$( '.no-assignments', element ).hide();
 						$( '.resources-assignment', element ).show();
