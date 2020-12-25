@@ -494,11 +494,13 @@ class Trip_Options_Edit_Metabox {
 					});
 
 					$( '.resources-assignment', element ).hide();
+					/*
 					$( '.assignment-rows', element ).each( function( sub_index, sub_element ) {
 						if ( !$( 'p', sub_element ).is( ':empty' ) ) {
 							$( sub_element ).show();
 						};
 					});
+					*/
 					$( element ).delegate( '.first-assignment', 'click', function() {
 						$( '.no-assignments', element ).hide();
 						$( '.resources-assignment', element ).show();
