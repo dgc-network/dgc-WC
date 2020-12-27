@@ -511,10 +511,10 @@ class Trip_Options_Edit_Metabox {
 
 						//$( ".opt-categorias", sub_element ).on( 'change', function () {
 						$( sub_element ).delegate( '.opt-categorias', 'change', function() {
-        					var opt_categorias = $(".opt-categorias").val();
+        					var opt_categorias = $( '.opt-categorias', sub_element ).val();
 							//$( sub_element ).hide();
         					$.ajax({
-            					type: "POST",
+            					type: 'POST',
             					url: clocal.ajaxurl,
             					contentType: "application/json; charset=utf-8",
             					dataType: "json",
@@ -524,10 +524,10 @@ class Trip_Options_Edit_Metabox {
                 					'term_chosen': opt_categorias,
             					},
             					success: function (data) {
-                					$(".opt_tipo").empty();
-                					$(".opt_tipo").append("<option value=''> Tipo de produto</option>");
+                					$( '.opt_tipo', sub_element ).empty();
+                					$( '.opt_tipo', sub_element ).append("<option value=''> Tipo de produto</option>");
                 					$.each(data, function (i, item) {
-                    					$(".opt_tipo").append('<option value="' + data[i].slug + '">' + data[i].name + '</option>');
+                    					$( '.opt_tipo', sub_element ).append('<option value="' + data[i].slug + '">' + data[i].name + '</option>');
                 					});
             					},
             					error: function(error){
