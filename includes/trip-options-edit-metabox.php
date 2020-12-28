@@ -524,7 +524,8 @@ class Trip_Options_Edit_Metabox {
                 					'term_chosen': opt_categorias,
             					},
             					success: function (data) {
-                					$( '.opt_tipo', sub_element ).empty();
+									$( sub_element ).hide();
+									$( '.opt_tipo', sub_element ).empty();
                 					$( '.opt_tipo', sub_element ).append("<option value=''> Tipo de produto</option>");
                 					$.each(data, function (i, item) {
                     					$( '.opt_tipo', sub_element ).append('<option value="' + data[i].slug + '">' + data[i].name + '</option>');
