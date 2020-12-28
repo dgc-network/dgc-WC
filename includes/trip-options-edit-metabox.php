@@ -220,6 +220,9 @@ class Trip_Options_Edit_Metabox {
 				$( '.item_time' ).timepicker({format: 'HH:mm'});
 
 
+				/*
+				 * ajax example
+				 */
 
 				var ajax_url,ajax_url_additional = '/wp-admin/admin-ajax.php';
 				$('select').on('change', function (e) {
@@ -263,8 +266,6 @@ class Trip_Options_Edit_Metabox {
 						}
 					});					
 				});
-			} );
-
 
 
 				/*
@@ -308,11 +309,15 @@ class Trip_Options_Edit_Metabox {
 						};
 					});
 				} );
-
+/*
 				$( ".remove-faq" ).each( function( index, element ) {
 					$( element ).delegate("button", "click", function(){
 						$( this ).closest('.faq-li').remove();
 					});						
+				});
+*/
+				$( '.remove-faq' ).on( 'click', function() {
+					$( this ).closest('.faq-li').remove();
 				});
 
 				$( '.faq_item_date' ).datepicker();
