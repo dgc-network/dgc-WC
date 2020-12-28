@@ -27,8 +27,8 @@ class Trip_Options_Edit_Metabox {
 	}
 
 	/**
-	 * Add 'Itinerary' product options
 	 * Remove 'Virtual','Downloadable' product options
+	 * Add 'Itinerary' product options
 	 */
 	function add_remove_product_options( $options ) {
 
@@ -121,6 +121,23 @@ class Trip_Options_Edit_Metabox {
 	function dgc_custom_style() {
 		?>
 		<style>
+
+			#itineraries-ul { list-style-type:none; margin:0; padding:0; width:100%; }
+  			#itineraries-ul li { background:#f2f2f2; border:1px solid #ccc; margin:0 3px 3px 3px; padding:0.4em; padding-left:1.5em; font-size:1.4em; }
+			#itineraries-ul li td.remove-itinerary button { font-size:0.5em; }
+			#itineraries-ul li span { cursor:pointer; }
+			#itineraries-ul li .fas.fa-bars { margin-left:-1.3em; }
+			#itineraries-ul li .fas.fa-bars:before { content: "\f0c9"; }
+			#itineraries-ul li table { background:#ffffff; border:1px solid #ccc; width:100%; display:none; margin-left:-1.3em; font-size:1.0em; }
+			#itineraries-ul li .toggle-access { display:block; }
+			#itineraries-ul li th { width:20%; }
+			#itineraries-ul li input { width:100%; }
+			#itineraries-ul li textarea { width:100%; }
+			#first-itinerary { color:blue; text-decoration:underline; cursor:pointer; }
+			/*#itineraries-ul li th .assignment-row-head { width:50%; }*/
+			.first-assignment { background:#ffffff; color:blue; border: none; cursor:pointer; }
+
+
 			#woocommerce-product-data ul.wc-tabs li.itinerary_panel a:before { font-family: WooCommerce; content: '\e900'; }
 			#woocommerce-product-data ul.wc-tabs li.include_exclude_panel a:before { font-family: WooCommerce; content: '\e604'; }
 			#woocommerce-product-data ul.wc-tabs li.faq_panel a:before { font-family: WooCommerce; content: '\e000'; }
@@ -663,6 +680,7 @@ class Trip_Options_Edit_Metabox {
 		</script>
 	
 		<style>
+		/*
   			#itineraries-ul { list-style-type:none; margin:0; padding:0; width:100%; }
   			#itineraries-ul li { background:#f2f2f2; border:1px solid #ccc; margin:0 3px 3px 3px; padding:0.4em; padding-left:1.5em; font-size:1.4em; }
 			#itineraries-ul li td.remove-itinerary button { font-size:1.0em; }
@@ -675,8 +693,8 @@ class Trip_Options_Edit_Metabox {
 			#itineraries-ul li input { width:100%; }
 			#itineraries-ul li textarea { width:100%; }
 			#first-itinerary { color:blue; text-decoration:underline; cursor:pointer; }
-			/*#itineraries-ul li th .assignment-row-head { width:50%; }*/
 			.first-assignment { background:#ffffff; color:blue; border: none; cursor:pointer; }
+		*/
   		</style>
 		<?php
 	}
