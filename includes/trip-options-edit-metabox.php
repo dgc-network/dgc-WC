@@ -116,6 +116,154 @@ class Trip_Options_Edit_Metabox {
 				/*
 				 * Itinerary Tab
 				 */
+				//$( '.itinerary-li' ).hide();
+				$( '.itinerary-li' ).each( function( index, element ) {
+					if ( !$( 'p', element ).is( ':empty' ) ) {
+						$( '.init-rows' ).show();
+						$( element ).show();
+						$( element ).delegate( 'span', 'click', function() {
+							$( 'table', element ).toggleClass( 'toggle-access' );
+						});
+					};
+
+					$( element ).delegate( '.item-label', 'keyup', function() {
+						$( '.span-label', element ).text($(this).val());
+					});
+					$( element ).delegate( '.item-title', 'keyup', function() {
+						$( '.span-title', element ).text($(this).val());
+					});
+
+					$( '.resources-assignment', element ).hide();
+					$( '.assignment-rows', element ).each( function( sub_index, sub_element ) {
+						if ( !$( 'span', sub_element ).is( ':empty' ) ) {
+							$( '.resources-assignment', element ).show();
+							$( '.assignment-rows', element ).hide();
+							$( sub_element ).show();
+						};
+
+						//$( ".opt-categorias", sub_element ).on( 'change', function () {
+						$( sub_element ).delegate( '.opt-categorias', 'change', function() {
+        					var opt_categorias = $( '.opt-categorias', sub_element ).val();
+							//$( sub_element ).hide();
+        					$.ajax({
+            					type: 'POST',
+            					url: clocal.ajaxurl,
+            					contentType: "application/json; charset=utf-8",
+            					dataType: "json",
+            					data: {
+									//'action': 'cortez_get_terms',
+									'action': array( __CLASS__, 'cortez_get_terms' ),									
+                					'nonce': clocal.nonce,
+                					'term_chosen': opt_categorias,
+            					},
+            					success: function (data) {
+									$( sub_element ).hide();
+									$( '.opt_tipo', sub_element ).empty();
+                					$( '.opt_tipo', sub_element ).append("<option value=''> Tipo de produto</option>");
+                					$.each(data, function (i, item) {
+                    					$( '.opt_tipo', sub_element ).append('<option value="' + data[i].slug + '">' + data[i].name + '</option>');
+                					});
+            					},
+            					error: function(error){
+            					},
+            					complete: function () {
+            					}
+        					});
+    					});
+
+					});
+					$( element ).delegate( '.first-assignment', 'click', function() {
+						$( '.no-assignments', element ).hide();
+						$( '.resources-assignment', element ).show();
+						$( '.assignment-rows', element ).hide();
+						$( '#assignment-row-0', element ).show();
+					});
+					$( element ).delegate( '.add-assignment', 'click', function() {
+						$( '.assignment-rows', element ).each( function( sub_index, sub_element ) {
+							if ( $( sub_element ).is( ':hidden' ) ) {
+								$( sub_element ).show();
+								return false;
+							};
+						});
+					});
+				});
+
+				$( '#first-itinerary' ).click( function() {
+					$( '.no-itineraries' ).hide();
+					$( '.init-rows' ).show();
+					$( '.itinerary-li' ).hide();
+					$( '#itinerary-li-0' ).show();
+					$( 'span', '#itinerary-li-0' ).on( 'click', function() {
+						$( 'table', '#itinerary-li-0' ).toggleClass( 'toggle-access' );
+					});
+				} );
+
+				$( '.add-itinerary' ).on( 'click', function() {
+					$( '.itinerary-li' ).each( function( index, element ) {
+						if ( $( element ).is( ':hidden' ) ) {
+							$( element ).show();
+							$( element ).delegate( 'span', 'click', function() {
+								$( 'table', element ).toggleClass( 'toggle-access' );
+							});
+							return false;
+						};
+					});
+				} );
+
+				$( '.remove-itinerary' ).each( function( index, element ) {
+					$( element ).delegate( 'button', 'click', function() {
+						$( this ).closest( '.itinerary-li' ).remove();
+					});					
+				});
+
+				$( '.item_date' ).datepicker();
+				$( '.item_time' ).timepicker({format: 'HH:mm'});
+
+
+
+				var ajax_url,ajax_url_additional = '/wp-admin/admin-ajax.php';
+				$('select').on('change', function (e) {
+    				var optionSelected = $("option:selected", this);
+					var valueSelected = this.value;
+					
+					var minicart_type = $('div.tables_cart_message_box').attr('data-type');
+                        
+					$.ajax({
+						type: 'POST',
+						url: ajax_url,
+						data: {
+							action: 'ajax_get_resources_by_category'
+						},
+						success: function(response){
+							$('select#itinerary_item_assignment').html('it is me');
+							
+/*
+							console.log(response);
+							setFragmentsRefresh( response );
+							var cart_hash = response.cart_hash;
+							var fragments = response.fragments;
+							var html = '';
+							var supportedElement = ['div.widget_shopping_cart_content','a.cart-contents','a.footer-cart-contents'];
+							if ( fragments && cart_hash !== '' ) {
+								if(minicart_type === 'load'){
+									$.each( fragments, function( key, value ) {
+										if($.inArray(key, supportedElement) != -1) {
+											html += value;
+										}                                
+									});
+									$('div.tables_cart_message_box').attr('data-type','refresh');//Set
+									$('div.tables_cart_message_box').html(html);
+								}                        
+							}
+*/							
+						},
+						error: function(){
+							console.log("Unable to Load Minicart");
+							return false;
+						}
+					});					
+				});
+			} );
 
 
 
@@ -148,7 +296,8 @@ class Trip_Options_Edit_Metabox {
 					});
 				} );
 
-				$( "#add-faq" ).click( function(){
+				//$( "#add-faq" ).click( function(){
+				$( '.add-faq' ).on( 'click', function() {
 					$( ".faq-li" ).each( function( index, element ) {
 						if ( $( element ).is(":hidden") ) {
 							$( element ).show();
@@ -181,12 +330,11 @@ class Trip_Options_Edit_Metabox {
 		?>
 		<style>
 			.fa-bars:before { content: "\f0c9"; }
-			
+
 			#first-itinerary { color:blue; text-decoration:underline; cursor:pointer; }
-			button.add-itinerary { font-size:0.8em; color:blue; }
+			/*button.add-itinerary { font-size:0.8em; color:blue; }*/
 			#itineraries-ul { list-style-type:none; margin:0; padding:0; width:100%; }
   			#itineraries-ul li { background:#f2f2f2; border:1px solid #ccc; margin:0 3px 3px 3px; padding:0.4em; padding-left:1.5em; font-size:1.4em; }
-			#itineraries-ul li button.remove-itinerary { font-size:0.8em; color:red; }
 			#itineraries-ul li span { cursor:pointer; }
 			#itineraries-ul li span.fas.fa-bars { margin-left:-1.3em; }
 			/*#itineraries-ul li span.fas.fa-bars:before { content: "\f0c9"; }*/
@@ -195,12 +343,13 @@ class Trip_Options_Edit_Metabox {
 			#itineraries-ul li th { width:20%; }
 			#itineraries-ul li input { width:100%; }
 			#itineraries-ul li textarea { width:100%; }
-			/*#itineraries-ul li th .assignment-row-head { width:50%; }*/
+			#itineraries-ul li button.remove-itinerary { font-size:0.8em; color:red; }
+			#itineraries-ul li th.assignment-row-head { width:30%; }
 			#itineraries-ul li button.first-assignment { background:#ffffff; color:blue; border: none; cursor:pointer; }
 			#itineraries-ul li button.add-assignment { font-size:0.8em; color:blue; }
 
 			#first-faq { color:blue; text-decoration:underline; cursor:pointer; }
-			button.add-faq { font-size:0.8em; color:blue; }
+			/*button.add-faq { font-size:0.8em; color:blue; }*/
 			#faqs-ul { list-style-type:none; margin:0; padding:0; width:100%; }
   			#faqs-ul li { background:#f2f2f2; border:1px solid #ccc; margin:0 3px 3px 3px; padding:0.4em; padding-left:1.5em; font-size:1.4em; }
 			#faqs-ul li span { margin-left:-1.3em; cursor:pointer; }
@@ -209,6 +358,7 @@ class Trip_Options_Edit_Metabox {
 			#faqs-ul li th { width:25%; }
 			#faqs-ul li input { width:100%; }
 			#faqs-ul li textarea { width:100%; }
+			#faqs-ul li button.remove-faq { font-size:0.8em; color:red; }
 
 			#woocommerce-product-data ul.wc-tabs li.itinerary_panel a:before { font-family: WooCommerce; content: '\e900'; }
 			#woocommerce-product-data ul.wc-tabs li.include_exclude_panel a:before { font-family: WooCommerce; content: '\e604'; }
@@ -361,7 +511,7 @@ class Trip_Options_Edit_Metabox {
 			<tr style="display:none" class="init-rows"><td colspan="2">
 				<ul id="itineraries-ul"><?php			  
 				for ($x = 0; $x < 100; $x++) {
-					echo '<li class="itinerary-li" id="itinerary-li-' . $x . '">';
+					echo '<li style="display:none" class="itinerary-li" id="itinerary-li-' . $x . '">';
 					if ($xx<=0) {
 						$itinerary_label = DEFAULT_ITINERARY_LABEL;
 						$itinerary_title = DEFAULT_ITINERARY_TITLE;
@@ -498,7 +648,7 @@ class Trip_Options_Edit_Metabox {
 */
     			//$( "#itineraries-ul" ).sortable();
 				//$( "#itineraries-ul" ).disableSelection();
-
+/*
 				$( '.itinerary-li' ).hide();
 				$( '.itinerary-li' ).each( function( index, element ) {
 					if ( !$( 'p', element ).is( ':empty' ) ) {
@@ -620,7 +770,7 @@ class Trip_Options_Edit_Metabox {
 						success: function(response){
 							$('select#itinerary_item_assignment').html('it is me');
 							
-/*
+
 							console.log(response);
 							setFragmentsRefresh( response );
 							var cart_hash = response.cart_hash;
@@ -638,7 +788,7 @@ class Trip_Options_Edit_Metabox {
 									$('div.tables_cart_message_box').html(html);
 								}                        
 							}
-*/							
+					
 						},
 						error: function(){
 							console.log("Unable to Load Minicart");
@@ -647,6 +797,7 @@ class Trip_Options_Edit_Metabox {
 					});					
 				});
 			} );
+*/			
 		</script>
 	
 		<style>
@@ -986,7 +1137,7 @@ function ajax_get_resources_by_category() {
 		<table style="width:100%">
 			<tr style="display:none" class="faq-init-rows">
 				<td><h3><?php esc_html_e( 'FAQ', 'wp-travel' ); ?></h3></td>
-				<td style="text-align:right"><button id="add-faq" type="button"><?php esc_html_e( '+ Add FAQ', 'wp-travel' ); ?></button></td>
+				<td style="text-align:right"><button class="add-faq" type="button"><?php esc_html_e( '+ Add FAQ', 'wp-travel' ); ?></button></td>
 			</tr>
 
 		<?php
@@ -1006,7 +1157,7 @@ function ajax_get_resources_by_category() {
 			<tr style="display:none" class="faq-init-rows"><td colspan="2">
 				<ul id="faqs-ul"><?php			  
 				for ($x = 0; $x < 100; $x++) {
-					echo '<li class="faq-li" id="faq-li-' . $x . '"><span class="fas fa-bars"> ';
+					echo '<li style="display:none" class="faq-li" id="faq-li-' . $x . '"><span class="fas fa-bars"> ';
 					if ($xx<=0) {
 						$faq_question = DEFAULT_FAQ_QUESTION;
 						echo $faq_question . '</span><p style="display:none"></p>';
@@ -1027,7 +1178,7 @@ function ajax_get_resources_by_category() {
 						</tr>
 						<tr>
 							<td></td>
-							<td class="remove-faq" style="text-align:right"><button id="remove-faq-' . $x . '" style="color:red" type="button">' . $remove_faq . '</button></td>
+							<td style="text-align:right"><button  class="remove-faq" type="button">' . $remove_faq . '</button></td>
 						</tr>
 					</table>
 			  		</li>';
@@ -1037,7 +1188,7 @@ function ajax_get_resources_by_category() {
 
 			<tr style="display:none" class="faq-init-rows">
 				<td></td>
-				<td style="text-align:right"><button id="add-faq" type="button"><?php esc_html_e( "+ Add FAQ", "wp-travel" ); ?></button></td>
+				<td style="text-align:right"><button class="add-faq" type="button"><?php esc_html_e( "+ Add FAQ", "wp-travel" ); ?></button></td>
 			</tr>
 		</table>
 		</div>
