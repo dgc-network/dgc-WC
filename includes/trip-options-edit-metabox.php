@@ -13,6 +13,8 @@ class Trip_Options_Edit_Metabox {
 		add_action( 'woocommerce_product_data_panels', array( __CLASS__, 'trip_options_callback_itinerary' ) );
 		add_action( 'woocommerce_product_data_panels', array( __CLASS__, 'trip_options_callback_includes_excludes' ) );
 		add_action( 'woocommerce_product_data_panels', array( __CLASS__, 'trip_options_callback_faqs' ) );
+
+		add_action( 'admin_head', array( __CLASS__, 'dgc_custom_script' ) );
 		add_action( 'admin_head', array( __CLASS__, 'dgc_custom_style' ) );
 
 		add_action( 'wp_ajax_get_resources_by_category', array( __CLASS__, 'ajax_get_resources_by_category' ) );
@@ -88,16 +90,42 @@ class Trip_Options_Edit_Metabox {
 	}
 
 	/**
+	 * Add a bit of script.
+	 */
+	function dgc_custom_script() {
+		?>
+		<script>
+			jQuery(document).ready(function($) {
+				$( 'input#_itinerary' ).change( function() {
+					var is_itinerary = $( 'input#_itinerary:checked' ).size();
+					$( '.show_if_itinerary' ).hide();
+					$( '.hide_if_itinerary' ).hide();
+
+					if ( is_itinerary ) {
+						$( '.hide_if_itinerary' ).hide();
+					}
+					if ( is_itinerary ) {
+						$( '.show_if_itinerary' ).show();
+					}
+				});
+				$( 'input#_itinerary' ).trigger( 'change' );
+			});
+
+		</script>
+		<?php
+	}
+
+	/**
 	 * Add a bit of style.
 	 */
 	function dgc_custom_style() {
-
-		?><style>
+		?>
+		<style>
 			#woocommerce-product-data ul.wc-tabs li.itinerary_panel a:before { font-family: WooCommerce; content: '\e900'; }
 			#woocommerce-product-data ul.wc-tabs li.include_exclude_panel a:before { font-family: WooCommerce; content: '\e604'; }
 			#woocommerce-product-data ul.wc-tabs li.faq_panel a:before { font-family: WooCommerce; content: '\e000'; }
-		</style><?php
-
+		</style>
+		<?php
 	}
 
 	/**
@@ -466,7 +494,7 @@ class Trip_Options_Edit_Metabox {
 
 		<script>
 			jQuery(document).ready(function($) {
-
+/*
 				$( 'input#_itinerary' ).change( function() {
 					var is_itinerary = $( 'input#_itinerary:checked' ).size();
 					$( '.show_if_itinerary' ).hide();
@@ -480,7 +508,7 @@ class Trip_Options_Edit_Metabox {
 					}
 				});
 				$( 'input#_itinerary' ).trigger( 'change' );
-
+*/
     			//$( "#itineraries-ul" ).sortable();
 				//$( "#itineraries-ul" ).disableSelection();
 
