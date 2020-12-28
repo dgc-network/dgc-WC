@@ -568,7 +568,7 @@ class Trip_Options_Edit_Metabox {
 								}
 								echo '<table class="resources-assignment" style="width:100%;margin-left:0">';
 									echo '<tr>';
-									echo '<th>' . __( 'Resources Assignment', 'wp-travel' ) . '</th>';
+									echo '<th class="assignment-row-head">' . __( 'Resources Assignment', 'wp-travel' ) . '</th>';
 									echo '<td style="text-align:right"><button class="add-assignment" type="button">' . __( '+ Add Assignment', 'wp-travel' ) .'</button></td>';
 									echo '</tr>';
 							
@@ -981,7 +981,7 @@ function ajax_get_resources_by_category() {
 			<tr style="display:none" class="init-rows"><td colspan="2">
 				<ul id="pricings-ul"><?php
 				for ($x = 0; $x < 100; $x++) {
-					echo '<li class="pricing-li" id="pricing-li-' . $x . '"><span><i class="fas fa-bars"></i>';
+					echo '<li style="display:none" class="pricing-li" id="pricing-li-' . $x . '"><span><i class="fas fa-bars"></i>';
 					if ($xx<=0) {
 						$pricing_title = DEFAULT_PRICING;
 						echo $pricing_title . '</span><p style="display:none"></p>';
