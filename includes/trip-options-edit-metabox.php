@@ -271,7 +271,7 @@ class Trip_Options_Edit_Metabox {
 				/*
 				 * FAQs Tab
 				 */
-				$( ".faq-li" ).hide();
+				//$( ".faq-li" ).hide();
 
 				$( ".faq-li" ).each( function( index, element ) {
 					if ( !$( 'p', element ).is(":empty") ) {
@@ -287,7 +287,8 @@ class Trip_Options_Edit_Metabox {
 					});
 				});
 
-				$("#first-faq").click( function(){
+				//$("#first-faq").click( function(){
+				$( '#first-faq' ).on( 'click', function() {
 					$(".no-faqs").hide();
 					$(".faq-init-rows").show();
 					$(".faq-li").hide();
@@ -801,8 +802,8 @@ class Trip_Options_Edit_Metabox {
 						}
 					});					
 				});
-			} );
 */			
+			} );
 		</script>
 	
 		<style>
@@ -934,12 +935,6 @@ function ajax_get_resources_by_category() {
 }
 //add_action( 'wp_ajax_wpt_ajax_add_to_cart', 'wpt_ajax_add_to_cart' );
 //add_action( 'wp_ajax_nopriv_wpt_ajax_add_to_cart', 'wpt_ajax_add_to_cart' );
-
-	/**
-	 * Resources Assignment
-	 */
-	function resources_assignment( $itineraries, $x ) {
-	}
 
 	/**
 	 * Prices & Dates metabox callback
