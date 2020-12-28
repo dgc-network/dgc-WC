@@ -519,7 +519,8 @@ class Trip_Options_Edit_Metabox {
             					contentType: "application/json; charset=utf-8",
             					dataType: "json",
             					data: {
-                					'action': 'cortez_get_terms',
+									//'action': 'cortez_get_terms',
+									'action': array( __CLASS__, 'cortez_get_terms' ),									
                 					'nonce': clocal.nonce,
                 					'term_chosen': opt_categorias,
             					},
