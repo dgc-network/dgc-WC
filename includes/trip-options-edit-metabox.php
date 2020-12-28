@@ -109,6 +109,9 @@ class Trip_Options_Edit_Metabox {
 					}
 				});
 				$( 'input#_itinerary' ).trigger( 'change' );
+
+
+
 			});
 
 		</script>
@@ -121,10 +124,9 @@ class Trip_Options_Edit_Metabox {
 	function dgc_custom_style() {
 		?>
 		<style>
-
 			#itineraries-ul { list-style-type:none; margin:0; padding:0; width:100%; }
   			#itineraries-ul li { background:#f2f2f2; border:1px solid #ccc; margin:0 3px 3px 3px; padding:0.4em; padding-left:1.5em; font-size:1.4em; }
-			#itineraries-ul li td.remove-itinerary button { font-size:0.5em; }
+			#itineraries-ul li button.remove-itinerary { font-size:0.8em; color:red;}
 			#itineraries-ul li span { cursor:pointer; }
 			#itineraries-ul li .fas.fa-bars { margin-left:-1.3em; }
 			#itineraries-ul li .fas.fa-bars:before { content: "\f0c9"; }
@@ -137,6 +139,16 @@ class Trip_Options_Edit_Metabox {
 			/*#itineraries-ul li th .assignment-row-head { width:50%; }*/
 			.first-assignment { background:#ffffff; color:blue; border: none; cursor:pointer; }
 
+			#faqs-ul { list-style-type:none; margin:0; padding:0; width:100%; }
+  			#faqs-ul li { background:#f2f2f2; border:1px solid #ccc; margin:0 3px 3px 3px; padding:0.4em; padding-left:1.5em; font-size:1.4em; }
+			#faqs-ul li span { margin-left:-1.3em; cursor:pointer; }
+			#faqs-ul li table { background:#ffffff; border:1px solid #ccc; width:100%; display:none; margin-left:-1.3em; padding-left:1.3em; }
+			#faqs-ul li .toggle-access { display:block; }
+			#faqs-ul li th { width:25%; }
+			#faqs-ul li input { width:100%; }
+			#faqs-ul li textarea { width:100%; }
+			#first-faq { color:blue; text-decoration:underline; cursor:pointer; }
+			.fa-bars:before { content: "\f0c9"; }
 
 			#woocommerce-product-data ul.wc-tabs li.itinerary_panel a:before { font-family: WooCommerce; content: '\e900'; }
 			#woocommerce-product-data ul.wc-tabs li.include_exclude_panel a:before { font-family: WooCommerce; content: '\e604'; }
@@ -319,7 +331,7 @@ class Trip_Options_Edit_Metabox {
 	 * Product List by Category
 	 */
 	function product_name_options_by_category( $product_category_slug=false, $resource=false ) {
-	//function ajax_get_resources_by_category() {
+
 		$query = new WC_Product_Query( array(
 			'category' => array( $product_category_slug ),
 			'limit' => 10,
@@ -350,12 +362,11 @@ class Trip_Options_Edit_Metabox {
 		if ( ! $post ) {
 			global $post;
 		}
-
 		$trip_code = wp_travel_get_trip_code( $post->ID );
 		$trip_outline = get_post_meta( $post->ID, 'wp_travel_outline', true );
 		$itineraries = get_post_meta( $post->ID, 'wp_travel_trip_itinerary_data', true );
 		$remove_itinerary = __( "- Remove Itinerary", "wp-travel" );
-		$product_categories = get_terms( array( 'taxonomy' => 'product_cat' ) );
+		$product_categories = get_terms( array( 'taxonomy' => 'product_cat', 'number' => $number ) );
 		?>
 		<div id='itinerary_panel' class='panel woocommerce_options_panel'>
 <?php
@@ -494,7 +505,7 @@ class Trip_Options_Edit_Metabox {
 						</tr>
 						<tr>
 							<td></td>
-							<td class="remove-itinerary" style="text-align:right"><button id="remove-itinerary-' . $x . '" style="color:red" type="button">' . $remove_itinerary . '</button></td>
+							<td style="text-align:right"><button class="remove-itinerary" type="button">' . $remove_itinerary . '</button></td>
 						</tr>
 					</table>
 			  		</li>';
@@ -1126,6 +1137,7 @@ function ajax_get_resources_by_category() {
 		</script>
 	
 		<style>
+/*		
   			#faqs-ul { list-style-type:none; margin:0; padding:0; width:100%; }
   			#faqs-ul li { background:#f2f2f2; border:1px solid #ccc; margin:0 3px 3px 3px; padding:0.4em; padding-left:1.5em; font-size:1.4em; }
 			#faqs-ul li span { margin-left:-1.3em; cursor:pointer; }
@@ -1136,6 +1148,7 @@ function ajax_get_resources_by_category() {
 			#faqs-ul li textarea { width:100%; }
 			#first-faq { color:blue; text-decoration:underline; cursor:pointer; }
 			.fa-bars:before { content: "\f0c9"; }
+*/			
   		</style>
 		<?php		
 	}
