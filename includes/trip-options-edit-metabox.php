@@ -65,9 +65,9 @@ class Trip_Options_Edit_Metabox {
 			unset( $tabs[ 'shipping' ] );
 		}
 
-		// remove "Get more options" tab
-		if( isset( $tabs[ 'marketplace-suggestions' ] ) ) {
-			unset( $tabs[ 'marketplace-suggestions' ] );
+		// remove "Attributes" tab
+		if( isset( $tabs[ 'attributes' ] ) ) {
+			unset( $tabs[ 'attributes' ] );
 		}
 
     	$tabs['itinerary'] = array(
@@ -224,54 +224,6 @@ class Trip_Options_Edit_Metabox {
 
 
 				/*
-				 * ajax example
-				 */
-
-				var ajax_url,ajax_url_additional = '/wp-admin/admin-ajax.php';
-				$('select').on('change', function (e) {
-    				var optionSelected = $("option:selected", this);
-					var valueSelected = this.value;
-					
-					var minicart_type = $('div.tables_cart_message_box').attr('data-type');
-                        
-					$.ajax({
-						type: 'POST',
-						url: ajax_url,
-						data: {
-							action: 'ajax_get_resources_by_category'
-						},
-						success: function(response){
-							$('select#itinerary_item_assignment').html('it is me');
-							
-/*
-							console.log(response);
-							setFragmentsRefresh( response );
-							var cart_hash = response.cart_hash;
-							var fragments = response.fragments;
-							var html = '';
-							var supportedElement = ['div.widget_shopping_cart_content','a.cart-contents','a.footer-cart-contents'];
-							if ( fragments && cart_hash !== '' ) {
-								if(minicart_type === 'load'){
-									$.each( fragments, function( key, value ) {
-										if($.inArray(key, supportedElement) != -1) {
-											html += value;
-										}                                
-									});
-									$('div.tables_cart_message_box').attr('data-type','refresh');//Set
-									$('div.tables_cart_message_box').html(html);
-								}                        
-							}
-*/							
-						},
-						error: function(){
-							console.log("Unable to Load Minicart");
-							return false;
-						}
-					});					
-				});
-
-
-				/*
 				 * FAQs Tab
 				 */
 				//$( ".faq-li" ).hide();
@@ -290,7 +242,7 @@ class Trip_Options_Edit_Metabox {
 					});
 				});
 
-				$("span#first-faq").click( function(){
+				$("#first-faq").click( function(){
 				//$( '#first-faq' ).on( 'click', function() {
 					$(".no-faqs").hide();
 					$(".faq-init-rows").show();
