@@ -114,7 +114,7 @@ class Trip_Options_Edit_Metabox {
 					}
 				});
 				$( 'input#_itinerary' ).trigger( 'change' );
-
+/*
 				$("#first-faq").click( function(){
 				//$( '#first-faq' ).on( 'click', function() {
 					$(".no-faqs").hide();
@@ -125,7 +125,7 @@ class Trip_Options_Edit_Metabox {
 						$('table','#faq-li-0').toggleClass('toggle-access');
 					});
 				} );
-
+*/
 				/*
 				 * Itinerary Tab
 				 */
@@ -252,7 +252,7 @@ class Trip_Options_Edit_Metabox {
 						$( 'span', element ).text($(this).val());
 					});
 				});
-/*
+
 				$("#first-faq").click( function(){
 				//$( '#first-faq' ).on( 'click', function() {
 					$(".no-faqs").hide();
@@ -262,8 +262,8 @@ class Trip_Options_Edit_Metabox {
 					$('span','#faq-li-0').on('click', function() {
 						$('table','#faq-li-0').toggleClass('toggle-access');
 					});
-				} );
-*/
+				});
+
 				//$( "#add-faq" ).click( function(){
 				$( '.add-faq' ).on( 'click', function() {
 					$( ".faq-li" ).each( function( index, element ) {
@@ -275,14 +275,14 @@ class Trip_Options_Edit_Metabox {
 							return false;
 						};
 					});
-				} );
-/*
+				});
+
 				$( ".remove-faq" ).each( function( index, element ) {
 					$( element ).delegate("button", "click", function(){
 						$( this ).closest('.faq-li').remove();
 					});						
 				});
-
+/*
 				$( '.remove-faq' ).on( 'click', function() {
 					$( this ).closest('.faq-li').remove();
 				});
@@ -301,6 +301,9 @@ class Trip_Options_Edit_Metabox {
 	function dgc_custom_style() {
 		?>
 		<style>
+			#woocommerce-product-data ul.wc-tabs li.itinerary_tab a:before { font-family: WooCommerce; content: '\e900'; }
+			#woocommerce-product-data ul.wc-tabs li.include_exclude_tab a:before { font-family: WooCommerce; content: '\e604'; }
+			#woocommerce-product-data ul.wc-tabs li.faq_tab a:before { font-family: WooCommerce; content: '\e000'; }
 			.fa-bars:before { content: "\f0c9"; }
 
 			#first-itinerary { color:blue; text-decoration:underline; cursor:pointer; }
@@ -334,9 +337,6 @@ class Trip_Options_Edit_Metabox {
 			#faqs-ul li textarea { width:100%; }
 			#faqs-ul li button.remove-faq { font-size:0.8em; color:red; width:100% }
 
-			#woocommerce-product-data ul.wc-tabs li.itinerary_tab a:before { font-family: WooCommerce; content: '\e900'; }
-			#woocommerce-product-data ul.wc-tabs li.include_exclude_tab a:before { font-family: WooCommerce; content: '\e604'; }
-			#woocommerce-product-data ul.wc-tabs li.faq_tab a:before { font-family: WooCommerce; content: '\e000'; }
 		</style>
 		<?php
 	}
@@ -1190,7 +1190,7 @@ function ajax_get_resources_by_category() {
 						$( 'span', element ).text($(this).val());
 					});
 				});
-*/
+
 				//$( "#add-faq" ).click( function(){
 				$( ".add-faq" ).click( function(){
 					$( ".faq-li" ).each( function( index, element ) {
@@ -1210,7 +1210,7 @@ function ajax_get_resources_by_category() {
 						$( element ).closest('.faq-li').remove();
 					});						
 				});
-/*
+
 				$( '.faq_item_date' ).datepicker();
 */				
 			} );
