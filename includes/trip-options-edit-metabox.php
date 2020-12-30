@@ -1180,8 +1180,8 @@ function ajax_get_resources_by_category() {
 							<td><textarea rows="3" name="faq_item_answer-' . $x . '" class="regular-text">' . esc_attr( $faqs[$x]['answer'] ) . '</textarea></td>
 						</tr>
 						<tr>
-							<td></td>
-							<td style="text-align:right"><button class="remove-faq" type="button">' . $remove_faq . '</button></td>
+							<td><button class="remove-faq" type="button">' . $remove_faq . '</button></td>
+							<td style="text-align:right"></td>
 						</tr>
 					</table>
 			  		</li>';
