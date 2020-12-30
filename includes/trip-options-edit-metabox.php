@@ -287,8 +287,8 @@ class Trip_Options_Edit_Metabox {
 					});
 				});
 
-				//$("#first-faq").click( function(){
-				$( '#first-faq' ).on( 'click', function() {
+				$("#first-faq").click( function(){
+				//$( '#first-faq' ).on( 'click', function() {
 					$(".no-faqs").hide();
 					$(".faq-init-rows").show();
 					$(".faq-li").hide();
