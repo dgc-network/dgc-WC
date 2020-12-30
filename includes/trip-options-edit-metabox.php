@@ -135,8 +135,8 @@ class Trip_Options_Edit_Metabox {
 					});
 				});
 
-				$("#first-faq").click( function(){
-				//$( '#first-faq' ).on( 'click', function() {
+				//$("#first-faq").click( function(){
+				$( '#first-faq' ).on( 'click', function() {
 					$(".no-faqs").hide();
 					$(".faq-init-rows").show();
 					$(".faq-li").hide();
@@ -198,14 +198,16 @@ class Trip_Options_Edit_Metabox {
 							$( '.assignment-rows', element ).hide();
 							$( sub_element ).show();
 						};
-/*
+
 						//$( ".opt-categorias", sub_element ).on( 'change', function () {
 						$( sub_element ).delegate( '.opt-categorias', 'change', function() {
         					var opt_categorias = $( '.opt-categorias', sub_element ).val();
+							var ajax_url = '/wp-admin/admin-ajax.php';
 							//$( sub_element ).hide();
         					$.ajax({
             					type: 'POST',
-            					url: clocal.ajaxurl,
+            					//url: clocal.ajaxurl,
+            					url: ajax_url,
             					contentType: "application/json; charset=utf-8",
             					dataType: "json",
             					data: {
@@ -228,7 +230,7 @@ class Trip_Options_Edit_Metabox {
             					}
         					});
     					});
-*/
+
 					});
 					$( element ).delegate( '.first-assignment', 'click', function() {
 						$( '.no-assignments', element ).hide();
@@ -254,7 +256,7 @@ class Trip_Options_Edit_Metabox {
 					$( 'span', '#itinerary-li-0' ).on( 'click', function() {
 						$( 'table', '#itinerary-li-0' ).toggleClass( 'toggle-access' );
 					});
-				} );
+				});
 
 				$( '.add-itinerary' ).on( 'click', function() {
 					$( '.itinerary-li' ).each( function( index, element ) {
@@ -266,7 +268,7 @@ class Trip_Options_Edit_Metabox {
 							return false;
 						};
 					});
-				} );
+				});
 
 				$( '.remove-itinerary' ).each( function( index, element ) {
 					$( element ).delegate( 'button', 'click', function() {
