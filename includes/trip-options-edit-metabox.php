@@ -494,7 +494,7 @@ class Trip_Options_Edit_Metabox {
 		<table style="width:100%;">
 			<tr>
 				<td colspan="2"><h3><?php esc_html_e( 'Trip Code : ', 'wp-travel' ); ?></h3>
-				<input type="text" disabled="disabled" value="<?php echo esc_attr( $trip_code ); ?>" /></td>
+				<span><input type="text" disabled="disabled" value="<?php echo esc_attr( $trip_code ); ?>" /></span></td>
 			</tr>
 
 		<?php
@@ -1177,11 +1177,10 @@ function ajax_get_resources_by_category() {
 						</tr>
 						<tr>
 							<th>' . __( 'Your answer', 'wp-travel' ) . '</th>
-							<td><textarea rows="3" name="faq_item_answer-' . $x . '" class="regular-text">' . esc_attr( $faqs[$x]['answer'] ) . '</textarea></td>
+							<td><textarea rows="5" name="faq_item_answer-' . $x . '" class="regular-text">' . esc_attr( $faqs[$x]['answer'] ) . '</textarea></td>
 						</tr>
 						<tr>
-							<td><button class="remove-faq" type="button">' . $remove_faq . '</button></td>
-							<td style="text-align:right"></td>
+							<td colspan="2"><button class="remove-faq" type="button">' . $remove_faq . '</button></td>
 						</tr>
 					</table>
 			  		</li>';
