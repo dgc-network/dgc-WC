@@ -1157,14 +1157,16 @@ function ajax_get_resources_by_category() {
 			<tr style="display:none" class="faq-init-rows"><td colspan="2">
 				<ul id="faqs-ul"><?php			  
 				for ($x = 0; $x < 100; $x++) {
-					echo '<li style="display:none" class="faq-li" id="faq-li-' . $x . '"><span class="fas fa-bars"> ';
+					echo '<li style="display:none" class="faq-li" id="faq-li-' . $x . '">';
+						echo '<span class="fas fa-bars"> </span>';
 					if ($xx<=0) {
 						$faq_question = DEFAULT_FAQ_QUESTION;
-						echo $faq_question . '</span><p style="display:none"></p>';
+						echo '<span class="title">' . $faq_question . '</span><p style="display:none"></p>';
 					} else {
 						$faq_question = esc_attr( $faqs[$x]['question'] );
-						echo $faq_question . '</span><p style="display:none">' . $x . '</p>';
+						echo '<span class="title">' . $faq_question . '</span><p style="display:none">' . $x . '</p>';
 					}
+						echo '<span style="text-align:right"><button class="remove-faq" type="button">' . $remove_faq . '</button></span>';
 					$xx--;
 					echo '
 					<table>
@@ -1178,7 +1180,7 @@ function ajax_get_resources_by_category() {
 						</tr>
 						<tr>
 							<td></td>
-							<td style="text-align:right"><button  class="remove-faq" type="button">' . $remove_faq . '</button></td>
+							<td style="text-align:right"><button class="remove-faq" type="button">' . $remove_faq . '</button></td>
 						</tr>
 					</table>
 			  		</li>';
@@ -1236,13 +1238,13 @@ function ajax_get_resources_by_category() {
 						};
 					});
 				} );
-/*
+
 				$( ".remove-faq" ).each( function( index, element ) {
 					$( element ).delegate("button", "click", function(){
 						$( this ).closest('.faq-li').remove();
 					});						
 				});
-
+/*
 				$( '.faq_item_date' ).datepicker();
 */				
 			} );
