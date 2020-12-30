@@ -10,6 +10,8 @@ class Trip_Options_Edit_Metabox {
 
 		add_filter( 'product_type_options', array( __CLASS__, 'add_remove_product_options' ) );
 		add_filter( 'woocommerce_product_data_tabs', array( __CLASS__, 'custom_product_data_tabs' ), 10, 1 );
+		add_filter( 'woocommerce_allow_marketplace_suggestions', '__return_false' );
+
 		add_action( 'woocommerce_product_data_panels', array( __CLASS__, 'trip_options_callback_itinerary' ) );
 		add_action( 'woocommerce_product_data_panels', array( __CLASS__, 'trip_options_callback_includes_excludes' ) );
 		add_action( 'woocommerce_product_data_panels', array( __CLASS__, 'trip_options_callback_faqs' ) );
