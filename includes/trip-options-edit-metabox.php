@@ -212,7 +212,8 @@ class Trip_Options_Edit_Metabox {
 
 				$( '.remove-itinerary' ).each( function( index, element ) {
 					$( element ).delegate( 'button', 'click', function() {
-						$( this ).closest( '.itinerary-li' ).remove();
+						//$( this ).closest( '.itinerary-li' ).remove();
+						$( element ).closest( '.itinerary-li' ).remove();
 					});					
 				});
 
@@ -349,7 +350,7 @@ class Trip_Options_Edit_Metabox {
 			#itineraries-ul li th { width:20%; }
 			#itineraries-ul li input { width:100%; }
 			#itineraries-ul li textarea { width:100%; }
-			#itineraries-ul li button.remove-itinerary { font-size:0.8em; color:red; }
+			#itineraries-ul li button.remove-itinerary { font-size:0.8em; color:red; width:100% }
 
 			#itineraries-ul li th.assignment-row-head { width:30%; }
 			#itineraries-ul li button.first-assignment { background:#ffffff; color:blue; border: none; cursor:pointer; }
@@ -366,7 +367,7 @@ class Trip_Options_Edit_Metabox {
 			#faqs-ul li th { width:25%; }
 			#faqs-ul li input { width:100%; }
 			#faqs-ul li textarea { width:100%; }
-			#faqs-ul li button.remove-faq { font-size:0.8em; color:red; }
+			#faqs-ul li button.remove-faq { font-size:0.8em; color:red; width:100% }
 
 			#woocommerce-product-data ul.wc-tabs li.itinerary_panel a:before { font-family: WooCommerce; content: '\e900'; }
 			#woocommerce-product-data ul.wc-tabs li.include_exclude_panel a:before { font-family: WooCommerce; content: '\e604'; }
@@ -621,8 +622,7 @@ class Trip_Options_Edit_Metabox {
 							echo '</td>
 						</tr>
 						<tr>
-							<td></td>
-							<td style="text-align:right"><button class="remove-itinerary" type="button">' . $remove_itinerary . '</button></td>
+							<td colspan ="2"><button class="remove-itinerary" type="button">' . $remove_itinerary . '</button></td>
 						</tr>
 					</table>
 			  		</li>';
@@ -1199,7 +1199,7 @@ function ajax_get_resources_by_category() {
 			jQuery(document).ready(function($) {
     			//$( "#faqs-ul" ).sortable();
 				//$( "#faqs-ul" ).disableSelection();
-
+/*
 				$("#first-faq").click( function(){
 					$(".no-faqs").hide();
 					$(".faq-init-rows").show();
@@ -1209,7 +1209,7 @@ function ajax_get_resources_by_category() {
 						$('table','#faq-li-0').toggleClass('toggle-access');
 					});
 				} );
-/*			
+			
 				$( ".faq-li" ).hide();
 
 				$( ".faq-li" ).each( function( index, element ) {
@@ -1241,7 +1241,8 @@ function ajax_get_resources_by_category() {
 
 				$( ".remove-faq" ).each( function( index, element ) {
 					$( element ).delegate("button", "click", function(){
-						$( this ).closest('.faq-li').remove();
+						//$( this ).closest('.faq-li').remove();
+						$( element ).closest('.faq-li').remove();
 					});						
 				});
 /*
