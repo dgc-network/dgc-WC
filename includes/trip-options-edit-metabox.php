@@ -1197,7 +1197,7 @@ function ajax_get_resources_by_category() {
 			jQuery(document).ready(function($) {
     			//$( "#faqs-ul" ).sortable();
 				//$( "#faqs-ul" ).disableSelection();
-/*
+
 				$("#first-faq").click( function(){
 					$(".no-faqs").hide();
 					$(".faq-init-rows").show();
@@ -1207,7 +1207,7 @@ function ajax_get_resources_by_category() {
 						$('table','#faq-li-0').toggleClass('toggle-access');
 					});
 				} );
-			
+/*			
 				$( ".faq-li" ).hide();
 
 				$( ".faq-li" ).each( function( index, element ) {
