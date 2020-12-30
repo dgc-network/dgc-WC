@@ -64,23 +64,23 @@ class Trip_Options_Edit_Metabox {
 		}
 
 		// remove "Get more options" tab
-		if( isset( $tabs[ 'get_more_options' ] ) ) {
-			unset( $tabs[ 'get_more_options' ] );
+		if( isset( $tabs[ 'marketplace-suggestions' ] ) ) {
+			unset( $tabs[ 'marketplace-suggestions' ] );
 		}
 
-    	$tabs['itinerary_tab'] = array(
+    	$tabs['itinerary'] = array(
         	'label'   =>  __( 'Itinerary', 'dgc-domain' ),
         	'target'  =>  'itinerary_panel',
         	'priority' => 60,
         	'class'   => array( 'show_if_itinerary')
     	);
-    	$tabs['include_exclude_tab'] = array(
+    	$tabs['include_exclude'] = array(
         	'label'   =>  __( 'Includes/Excludes', 'dgc-domain' ),
         	'target'  =>  'include_exclude_panel',
         	'priority' => 60,
         	'class'   => array( 'show_if_itinerary')
     	);
-    	$tabs['faq_tab'] = array(
+    	$tabs['faq'] = array(
         	'label'   =>  __( 'FAQs', 'dgc-domain' ),
         	'target'  =>  'faq_panel',
         	'priority' => 60,
@@ -288,7 +288,7 @@ class Trip_Options_Edit_Metabox {
 					});
 				});
 
-				$("#first-faq").click( function(){
+				$("span#first-faq").click( function(){
 				//$( '#first-faq' ).on( 'click', function() {
 					$(".no-faqs").hide();
 					$(".faq-init-rows").show();
@@ -369,9 +369,9 @@ class Trip_Options_Edit_Metabox {
 			#faqs-ul li textarea { width:100%; }
 			#faqs-ul li button.remove-faq { font-size:0.8em; color:red; width:100% }
 
-			#woocommerce-product-data ul.wc-tabs li.itinerary_panel a:before { font-family: WooCommerce; content: '\e900'; }
-			#woocommerce-product-data ul.wc-tabs li.include_exclude_panel a:before { font-family: WooCommerce; content: '\e604'; }
-			#woocommerce-product-data ul.wc-tabs li.faq_panel a:before { font-family: WooCommerce; content: '\e000'; }
+			#woocommerce-product-data ul.wc-tabs li.itinerary_tab a:before { font-family: WooCommerce; content: '\e900'; }
+			#woocommerce-product-data ul.wc-tabs li.include_exclude_tab a:before { font-family: WooCommerce; content: '\e604'; }
+			#woocommerce-product-data ul.wc-tabs li.faq_tab a:before { font-family: WooCommerce; content: '\e000'; }
 		</style>
 		<?php
 	}
