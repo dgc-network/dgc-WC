@@ -115,6 +115,17 @@ class Trip_Options_Edit_Metabox {
 				});
 				$( 'input#_itinerary' ).trigger( 'change' );
 
+				$("#first-faq").click( function(){
+				//$( '#first-faq' ).on( 'click', function() {
+					$(".no-faqs").hide();
+					$(".faq-init-rows").show();
+					$(".faq-li").hide();
+					$("#faq-li-0").show();
+					$('span','#faq-li-0').on('click', function() {
+						$('table','#faq-li-0').toggleClass('toggle-access');
+					});
+				} );
+
 				/*
 				 * Itinerary Tab
 				 */
@@ -241,10 +252,9 @@ class Trip_Options_Edit_Metabox {
 						$( 'span', element ).text($(this).val());
 					});
 				});
-
+/*
 				$("#first-faq").click( function(){
 				//$( '#first-faq' ).on( 'click', function() {
-					$("#first-faq").hide();
 					$(".no-faqs").hide();
 					$(".faq-init-rows").show();
 					$(".faq-li").hide();
@@ -253,7 +263,7 @@ class Trip_Options_Edit_Metabox {
 						$('table','#faq-li-0').toggleClass('toggle-access');
 					});
 				} );
-
+*/
 				//$( "#add-faq" ).click( function(){
 				$( '.add-faq' ).on( 'click', function() {
 					$( ".faq-li" ).each( function( index, element ) {
