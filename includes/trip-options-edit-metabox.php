@@ -218,6 +218,7 @@ class Trip_Options_Edit_Metabox {
             					error: function(error){
             					},
             					complete: function () {
+									$( sub_element ).hide();
             					}
         					});
     					});
