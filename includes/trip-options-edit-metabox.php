@@ -66,8 +66,8 @@ class Trip_Options_Edit_Metabox {
 		}
 
 		// remove "Attributes" tab
-		if( isset( $tabs[ 'attributes' ] ) ) {
-			unset( $tabs[ 'attributes' ] );
+		if( isset( $tabs[ 'attribute' ] ) ) {
+			unset( $tabs[ 'attribute' ] );
 		}
 
     	$tabs['itinerary'] = array(
@@ -244,6 +244,7 @@ class Trip_Options_Edit_Metabox {
 
 				$("#first-faq").click( function(){
 				//$( '#first-faq' ).on( 'click', function() {
+					$("#first-faq").hide();
 					$(".no-faqs").hide();
 					$(".faq-init-rows").show();
 					$(".faq-li").hide();
