@@ -102,7 +102,8 @@ class Trip_Options_Edit_Metabox {
 				 * Woocommerce Product Data Metabox Options
 				 */
 				$( 'input#_itinerary' ).change( function() {
-					var is_itinerary = $( 'input#_itinerary:checked' ).size();
+					//var is_itinerary = $( 'input#_itinerary:checked' ).size();
+					var is_itinerary = $( 'input#_itinerary:checked' ).length;
 					$( '.show_if_itinerary' ).hide();
 					$( '.hide_if_itinerary' ).hide();
 
@@ -153,7 +154,7 @@ class Trip_Options_Edit_Metabox {
 							$( '.assignment-rows', element ).hide();
 							$( sub_element ).show();
 						};
-
+/*
 						//$( ".opt-categorias", sub_element ).on( 'change', function () {
 						$( sub_element ).delegate( '.opt-categorias', 'change', function() {
         					var opt_categorias = $( '.opt-categorias', sub_element ).val();
@@ -183,7 +184,7 @@ class Trip_Options_Edit_Metabox {
             					}
         					});
     					});
-
+*/
 					});
 					$( element ).delegate( '.first-assignment', 'click', function() {
 						$( '.no-assignments', element ).hide();
