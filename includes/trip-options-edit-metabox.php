@@ -194,6 +194,7 @@ class Trip_Options_Edit_Metabox {
 						$( sub_element ).delegate( '.opt-categorias', 'change', function() {
         					var opt_categorias = $( '.opt-categorias', sub_element ).val();
 							var ajax_url = '/wp-admin/admin-ajax.php';
+							$( '.opt_tipo', sub_element ).empty();
 							//$( sub_element ).hide();
         					$.ajax({
             					type: 'POST',
