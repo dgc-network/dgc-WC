@@ -1223,8 +1223,9 @@ function ajax_get_resources_by_category() {
 						$( 'span', element ).text($(this).val());
 					});
 				});
-
-				$( "#add-faq" ).click( function(){
+*/
+				//$( "#add-faq" ).click( function(){
+				$( ".add-faq" ).click( function(){
 					$( ".faq-li" ).each( function( index, element ) {
 						if ( $( element ).is(":hidden") ) {
 							$( element ).show();
@@ -1235,7 +1236,7 @@ function ajax_get_resources_by_category() {
 						};
 					});
 				} );
-
+/*
 				$( ".remove-faq" ).each( function( index, element ) {
 					$( element ).delegate("button", "click", function(){
 						$( this ).closest('.faq-li').remove();
