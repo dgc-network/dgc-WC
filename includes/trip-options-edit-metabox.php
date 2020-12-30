@@ -310,18 +310,18 @@ class Trip_Options_Edit_Metabox {
 						};
 					});
 				} );
-
+/*
 				$( ".remove-faq" ).each( function( index, element ) {
 					$( element ).delegate("button", "click", function(){
 						$( this ).closest('.faq-li').remove();
 					});						
 				});
-/*
+
 				$( '.remove-faq' ).on( 'click', function() {
 					$( this ).closest('.faq-li').remove();
 				});
 */
-				$( '.faq_item_date' ).datepicker();
+				//$( '.faq_item_date' ).datepicker();
 
 			});
 
@@ -350,6 +350,7 @@ class Trip_Options_Edit_Metabox {
 			#itineraries-ul li input { width:100%; }
 			#itineraries-ul li textarea { width:100%; }
 			#itineraries-ul li button.remove-itinerary { font-size:0.8em; color:red; }
+
 			#itineraries-ul li th.assignment-row-head { width:30%; }
 			#itineraries-ul li button.first-assignment { background:#ffffff; color:blue; border: none; cursor:pointer; }
 			#itineraries-ul li button.add-assignment { font-size:0.8em; color:blue; }
