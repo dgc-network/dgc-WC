@@ -56,7 +56,8 @@ class Trip_Options_Edit_Metabox {
 	}
 
 	/**
-	 * Add/Remove custom Product Data tabs
+	 * Remove "Shipping","Attributes" Product Data tabs
+	 * Add "Itinerary","Includes/Excludes","FAQs" Product Data tabs
  	 */
 	function custom_product_data_tabs( $tabs ) {
 
@@ -158,17 +159,17 @@ class Trip_Options_Edit_Metabox {
 						};
 					});
 				});
-
+/*
 				$( ".remove-faq" ).each( function( index, element ) {
 					$( element ).delegate("button", "click", function(){
 						$( this ).closest('.faq-li').remove();
 					});						
 				});
-/*
+*/
 				$( '.remove-faq' ).on( 'click', function() {
 					$( this ).closest('.faq-li').remove();
 				});
-*/
+
 				//$( '.faq_item_date' ).datepicker();
 
 				/*
