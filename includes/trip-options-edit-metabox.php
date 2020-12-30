@@ -115,7 +115,26 @@ class Trip_Options_Edit_Metabox {
 					}
 				});
 				$( 'input#_itinerary' ).trigger( 'change' );
-/*
+
+				/*
+				 * FAQs Tab
+				 */
+				//$( ".faq-li" ).hide();
+
+				$( ".faq-li" ).each( function( index, element ) {
+					if ( !$( 'p', element ).is(":empty") ) {
+						$( ".faq-init-rows" ).show();
+						$( element ).show();
+						$( element ).delegate("span", "click", function(){
+							$( 'table', element ).toggleClass('toggle-access');
+						});
+					};
+
+					$( element ).delegate(".item-title", "keyup", function(){
+						$( 'span', element ).text($(this).val());
+					});
+				});
+
 				$("#first-faq").click( function(){
 				//$( '#first-faq' ).on( 'click', function() {
 					$(".no-faqs").hide();
@@ -125,8 +144,33 @@ class Trip_Options_Edit_Metabox {
 					$('span','#faq-li-0').on('click', function() {
 						$('table','#faq-li-0').toggleClass('toggle-access');
 					});
-				} );
+				});
+
+				//$( "#add-faq" ).click( function(){
+				$( '.add-faq' ).on( 'click', function() {
+					$( ".faq-li" ).each( function( index, element ) {
+						if ( $( element ).is(":hidden") ) {
+							$( element ).show();
+							$( element ).delegate("span", "click", function(){
+								$( 'table', element ).toggleClass('toggle-access');
+							});
+							return false;
+						};
+					});
+				});
+
+				$( ".remove-faq" ).each( function( index, element ) {
+					$( element ).delegate("button", "click", function(){
+						$( this ).closest('.faq-li').remove();
+					});						
+				});
+/*
+				$( '.remove-faq' ).on( 'click', function() {
+					$( this ).closest('.faq-li').remove();
+				});
 */
+				//$( '.faq_item_date' ).datepicker();
+
 				/*
 				 * Itinerary Tab
 				 */
@@ -234,61 +278,6 @@ class Trip_Options_Edit_Metabox {
 				$( '.item_date' ).datepicker();
 				$( '.item_time' ).timepicker({format: 'HH:mm'});
 
-
-				/*
-				 * FAQs Tab
-				 */
-				//$( ".faq-li" ).hide();
-
-				$( ".faq-li" ).each( function( index, element ) {
-					if ( !$( 'p', element ).is(":empty") ) {
-						$( ".faq-init-rows" ).show();
-						$( element ).show();
-						$( element ).delegate("span", "click", function(){
-							$( 'table', element ).toggleClass('toggle-access');
-						});
-					};
-
-					$( element ).delegate(".item-title", "keyup", function(){
-						$( 'span', element ).text($(this).val());
-					});
-				});
-
-				$("#first-faq").click( function(){
-				//$( '#first-faq' ).on( 'click', function() {
-					$(".no-faqs").hide();
-					$(".faq-init-rows").show();
-					$(".faq-li").hide();
-					$("#faq-li-0").show();
-					$('span','#faq-li-0').on('click', function() {
-						$('table','#faq-li-0').toggleClass('toggle-access');
-					});
-				});
-
-				//$( "#add-faq" ).click( function(){
-				$( '.add-faq' ).on( 'click', function() {
-					$( ".faq-li" ).each( function( index, element ) {
-						if ( $( element ).is(":hidden") ) {
-							$( element ).show();
-							$( element ).delegate("span", "click", function(){
-								$( 'table', element ).toggleClass('toggle-access');
-							});
-							return false;
-						};
-					});
-				});
-
-				$( ".remove-faq" ).each( function( index, element ) {
-					$( element ).delegate("button", "click", function(){
-						$( this ).closest('.faq-li').remove();
-					});						
-				});
-/*
-				$( '.remove-faq' ).on( 'click', function() {
-					$( this ).closest('.faq-li').remove();
-				});
-*/
-				//$( '.faq_item_date' ).datepicker();
 
 			});
 
