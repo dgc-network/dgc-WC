@@ -272,7 +272,22 @@ class Trip_Options_Edit_Metabox {
 				});
 */
 				$( '.remove-itinerary' ).on( 'click', function() {
-					$( this ).closest('.itinerary-li').remove();
+					$( "#dialog-confirm" ).dialog({
+      					resizable: false,
+      					height: "auto",
+      					width: 400,
+      					modal: true,
+      					buttons: {
+        					"Delete": function() {
+								$( this ).closest('.itinerary-li').remove();
+          						$( this ).dialog( "close" );
+        					},
+        					Cancel: function() {
+          						$( this ).dialog( "close" );
+        					}
+      					}
+    				});
+					//$( this ).closest('.itinerary-li').remove();
 				});
 
 				$( '.item_date' ).datepicker();
@@ -440,11 +455,10 @@ class Trip_Options_Edit_Metabox {
 		$product_categories = get_terms( array( 'taxonomy' => 'product_cat', 'hide_empty' => false ) );
 		?>
 		<div id='itinerary_panel' class='panel woocommerce_options_panel'>
-<?php
-		foreach ($product_categories as $category) {
-			echo $category->name;
-		}
-?>		
+			<div id="dialog-confirm" title="Empty the recycle bin?">
+  				<p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>These items will be permanently deleted and cannot be recovered. Are you sure?</p>
+			</div>
+  
 		<table style="width:100%;">
 			<tr>
 				<td><h3><?php esc_html_e( 'Trip Code : ', 'wp-travel' ); ?></h3></td>
@@ -540,19 +554,19 @@ class Trip_Options_Edit_Metabox {
 											if ($yy <= 0) {
 												echo '<option value="" selected disabled hidden>' .  __( "- Select Category -", "wp-travel" ) . '</option>';
 												foreach( $product_categories as $cat ) {
-													//if ($cat->name != 'Uncategorized') {
+													if ($cat->name != 'Uncategorized') {
 														echo '<option value="' . $cat->name . '">' . $cat->name . '</option>';
-													//}
+													}
 												}
 											} else {
 												foreach( $product_categories as $cat ) {
-													//if ($cat->name != 'Uncategorized') {
+													if ($cat->name != 'Uncategorized') {
 														if ($cat->name == $itineraries[$x]['assignment'][$y]['category']) {
 															echo '<option value="' . $cat->name . '" selected>' . $cat->name . '</option>';
 														} else {
 															echo '<option value="' . $cat->name . '">' . $cat->name . '</option>';
 														}
-													//}
+													}
 												}
 											}
 											echo '</select>
