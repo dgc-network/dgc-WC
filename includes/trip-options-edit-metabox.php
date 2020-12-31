@@ -197,7 +197,7 @@ class Trip_Options_Edit_Metabox {
 							var optionSelected = $("option:selected", this);
 							var valueSelected = this.value;
 							var opt_categorias = $( '.opt-categorias', sub_element ).val();
-							var opt_tipo = $( '.opt_tipo', sub_element );
+							var opt_tipo = $( '.opt_tipo', sub_element ).value;
 							alert(opt_tipo);
 							$( '.opt_tipo', sub_element ).empty();
                 			$( '.opt_tipo', sub_element ).append("<option value=''>- Select Resource -</option>");
@@ -448,7 +448,7 @@ class Trip_Options_Edit_Metabox {
 		$product_categories = get_terms( array( 'taxonomy' => 'product_cat', 'hide_empty' => false ) );
 		?>
 		<div id='itinerary_panel' class='panel woocommerce_options_panel'>
-		<table style="width:100%;">
+		<table style="width:100%; padding:1em">
 			<tr>
 				<td><h3><?php esc_html_e( 'Trip Code : ', 'wp-travel' ); ?></h3></td>
 				<td><input type="text" disabled="disabled" value="<?php echo esc_attr( $trip_code ); ?>" /></td>
@@ -1092,7 +1092,7 @@ function ajax_get_resources_by_category() {
 		$remove_faq = __( "- Remove FAQ", "wp-travel" );
 		?>
 		<div id='faq_panel' class='panel woocommerce_options_panel'>
-		<table style="width:100%">
+		<table style="width:100%; padding:1em">
 			<tr style="display:none" class="faq-init-rows">
 				<td><h3><?php esc_html_e( 'FAQ', 'wp-travel' ); ?></h3></td>
 				<td style="text-align:right"><button class="add-faq" type="button"><?php esc_html_e( '+ Add FAQ', 'wp-travel' ); ?></button></td>
