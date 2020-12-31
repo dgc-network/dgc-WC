@@ -194,6 +194,7 @@ class Trip_Options_Edit_Metabox {
 
 						//$( ".opt-categorias", sub_element ).on( 'change', function () {
 						$( sub_element ).delegate( '.opt-categorias', 'change', function() {
+							/*
 							var optionSelected = $("option:selected", this);
 							var valueSelected = this.value;
 							var opt_categorias = $( '.opt-categorias', sub_element ).val();
@@ -204,7 +205,8 @@ class Trip_Options_Edit_Metabox {
                 			$( '.opt_tipo', sub_element ).append("<option value=''>- Select Resource -</option>");
                 			$.each(data, function (i, item) {
                     			$( '.opt_tipo', sub_element ).append('<option value="' + data[i].slug + '">' + data[i].name + '</option>');
-                			});
+							});
+							*/
 							var ajax_url = '/wp-admin/admin-ajax.php';
 							//$( '.opt_tipo', sub_element ).empty();
 							//$( sub_element ).hide();
@@ -212,16 +214,16 @@ class Trip_Options_Edit_Metabox {
             					type: 'POST',
             					//url: clocal.ajaxurl,
             					url: ajax_url,
-            					contentType: "application/json; charset=utf-8",
-            					dataType: "json",
+            					//contentType: "application/json; charset=utf-8",
+            					//dataType: "json",
             					data: {
-									//'action': 'cortez_get_terms',
-									'action': array( __CLASS__, 'cortez_get_terms' ),									
-                					'nonce': clocal.nonce,
-                					'term_chosen': opt_categorias,
+									'action': 'cortez_get_terms',
+									//'action': array( __CLASS__, 'cortez_get_terms' ),									
+                					//'nonce': clocal.nonce,
+                					//'term_chosen': opt_categorias,
             					},
             					success: function (data) {
-									$( sub_element ).hide();
+									//$( sub_element ).hide();
 									$( '.opt_tipo', sub_element ).empty();
                 					$( '.opt_tipo', sub_element ).append("<option value=''> Tipo de produto</option>");
                 					$.each(data, function (i, item) {
