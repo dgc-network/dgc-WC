@@ -288,9 +288,17 @@ class Trip_Options_Edit_Metabox {
         					}
       					}
 					});
+					var txt;
+					var r = confirm("Press a button!");
+					if (r == true) {
+  						txt = "You pressed OK!";
+					} else {
+  						txt = "You pressed Cancel!";
+					}
 					*/
-					confirm('Are you sure?');
-					$( this ).closest('.itinerary-li').remove();
+					if (confirm('Are you sure?') == true) {
+						$( this ).closest('.itinerary-li').remove();
+					};
 				});
 
 				$( '.item_date' ).datepicker();
