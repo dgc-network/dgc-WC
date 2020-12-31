@@ -194,9 +194,13 @@ class Trip_Options_Edit_Metabox {
 
 						//$( ".opt-categorias", sub_element ).on( 'change', function () {
 						$( sub_element ).delegate( '.opt-categorias', 'change', function() {
-        					var opt_categorias = $( '.opt-categorias', sub_element ).val();
+							var optionSelected = $("option:selected", this);
+							var valueSelected = this.value;
+							var opt_categorias = $( '.opt-categorias', sub_element ).val();
+							var opt_tipo = $( '.opt_tipo', sub_element );
+							alert(opt_tipo);
 							$( '.opt_tipo', sub_element ).empty();
-                			$( '.opt_tipo', sub_element ).append("<option value=''> Tipo de produto</option>");
+                			$( '.opt_tipo', sub_element ).append("<option value=''>- Select Resource -</option>");
                 			$.each(data, function (i, item) {
                     			$( '.opt_tipo', sub_element ).append('<option value="' + data[i].slug + '">' + data[i].name + '</option>');
                 			});
@@ -303,7 +307,8 @@ class Trip_Options_Edit_Metabox {
   			#itineraries-ul li { background:#f2f2f2; border:1px solid #ccc; margin:0 3px 3px 3px; padding:0.4em; padding-left:1.5em; font-size:1.4em; }
 			#itineraries-ul li span { cursor:pointer; }
 			#itineraries-ul li span.fas.fa-bars { margin-left:-1.3em; }
-			#itineraries-ul li table { background:#ffffff; border:1px solid #ccc; width:100%; display:none; margin-left:-1.3em; font-size:1.0em; }
+			/*#itineraries-ul li table { background:#ffffff; border:1px solid #ccc; width:100%; display:none; margin-left:-1.3em; font-size:1.0em; }*/
+			#itineraries-ul li table { display:none; background:#ffffff; border:1px solid #ccc; margin-left:-1.3em; margin-top:0.3em; padding:0.5em; font-size:1.0em; }
 			#itineraries-ul li table.toggle-access { display:block; }
 			#itineraries-ul li th { width:20%; }
 			#itineraries-ul li input { width:100%; }
@@ -320,7 +325,8 @@ class Trip_Options_Edit_Metabox {
   			#faqs-ul li { background:#f2f2f2; border:1px solid #ccc; margin:0 3px 3px 3px; padding:0.4em; padding-left:1.5em; font-size:1.4em; }
 			#faqs-ul li span { cursor:pointer; }
 			#faqs-ul li span.fas.fa-bars { margin-left:-1.3em; }
-			#faqs-ul li table { background:#ffffff; border:1px solid #ccc; width:100%; display:none; margin-left:-1.3em; padding-left:1.3em; }
+			/*#faqs-ul li table { background:#ffffff; border:1px solid #ccc; width:100%; display:none; margin-left:-1.3em; padding-left:1.3em; }*/
+			#faqs-ul li table { display:none; background:#ffffff; border:1px solid #ccc; margin-left:-1.3em;  margin-top:0.3em; padding:0.5em; font-size:1.0em; }
 			#faqs-ul li .toggle-access { display:block; }
 			#faqs-ul li th { width:25%; }
 			#faqs-ul li input { width:100%; }
