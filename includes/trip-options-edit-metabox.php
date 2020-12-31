@@ -272,6 +272,7 @@ class Trip_Options_Edit_Metabox {
 				});
 */
 				$( '.remove-itinerary' ).on( 'click', function() {
+					/*
 					$( "#dialog-confirm" ).dialog({
       					resizable: false,
       					height: "auto",
@@ -286,8 +287,10 @@ class Trip_Options_Edit_Metabox {
           						$( this ).dialog( "close" );
         					}
       					}
-    				});
-					//$( this ).closest('.itinerary-li').remove();
+					});
+					*/
+					alert('Are you sure?');
+					$( this ).closest('.itinerary-li').remove();
 				});
 
 				$( '.item_date' ).datepicker();
@@ -455,10 +458,6 @@ class Trip_Options_Edit_Metabox {
 		$product_categories = get_terms( array( 'taxonomy' => 'product_cat', 'hide_empty' => false ) );
 		?>
 		<div id='itinerary_panel' class='panel woocommerce_options_panel'>
-			<div id="dialog-confirm" title="Empty the recycle bin?">
-  				<p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>These items will be permanently deleted and cannot be recovered. Are you sure?</p>
-			</div>
-  
 		<table style="width:100%;">
 			<tr>
 				<td><h3><?php esc_html_e( 'Trip Code : ', 'wp-travel' ); ?></h3></td>
