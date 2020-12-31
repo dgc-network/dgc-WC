@@ -159,7 +159,9 @@ class Trip_Options_Edit_Metabox {
 				});
 
 				$( '.remove-faq' ).on( 'click', function() {
-					$( this ).closest('.faq-li').remove();
+					if (confirm('Are you sure?') == true) {
+						$( this ).closest('.faq-li').remove();
+					};
 				});
 
 				/*
@@ -193,6 +195,11 @@ class Trip_Options_Edit_Metabox {
 						//$( ".opt-categorias", sub_element ).on( 'change', function () {
 						$( sub_element ).delegate( '.opt-categorias', 'change', function() {
         					var opt_categorias = $( '.opt-categorias', sub_element ).val();
+							$( '.opt_tipo', sub_element ).empty();
+                			$( '.opt_tipo', sub_element ).append("<option value=''> Tipo de produto</option>");
+                			$.each(data, function (i, item) {
+                    			$( '.opt_tipo', sub_element ).append('<option value="' + data[i].slug + '">' + data[i].name + '</option>');
+                			});
 							var ajax_url = '/wp-admin/admin-ajax.php';
 							//$( '.opt_tipo', sub_element ).empty();
 							//$( sub_element ).hide();
@@ -263,39 +270,8 @@ class Trip_Options_Edit_Metabox {
 						};
 					});
 				});
-/*
-				$( '.remove-itinerary' ).each( function( index, element ) {
-					$( element ).delegate( 'button', 'click', function() {
-						//$( this ).closest( '.itinerary-li' ).remove();
-						$( element ).closest( '.itinerary-li' ).remove();
-					});					
-				});
-*/
+
 				$( '.remove-itinerary' ).on( 'click', function() {
-					/*
-					$( "#dialog-confirm" ).dialog({
-      					resizable: false,
-      					height: "auto",
-      					width: 400,
-      					modal: true,
-      					buttons: {
-        					"Delete": function() {
-								$( this ).closest('.itinerary-li').remove();
-          						$( this ).dialog( "close" );
-        					},
-        					Cancel: function() {
-          						$( this ).dialog( "close" );
-        					}
-      					}
-					});
-					var txt;
-					var r = confirm("Press a button!");
-					if (r == true) {
-  						txt = "You pressed OK!";
-					} else {
-  						txt = "You pressed Cancel!";
-					}
-					*/
 					if (confirm('Are you sure?') == true) {
 						$( this ).closest('.itinerary-li').remove();
 					};
