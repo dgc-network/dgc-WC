@@ -289,7 +289,7 @@ class Trip_Options_Edit_Metabox {
       					}
 					});
 					*/
-					alert('Are you sure?');
+					confirm('Are you sure?');
 					$( this ).closest('.itinerary-li').remove();
 				});
 
