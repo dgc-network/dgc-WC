@@ -225,7 +225,7 @@ class Trip_Options_Edit_Metabox {
             					success: function (data) {
 									//$( sub_element ).hide();
 									$( '.opt_tipo', sub_element ).empty();
-                					$( '.opt_tipo', sub_element ).append("<option value=''> Tipo de produto</option>");
+                					$( '.opt_tipo', sub_element ).append("<option value=''>- Select Resource -</option>");
                 					$.each(data, function (i, item) {
                     					$( '.opt_tipo', sub_element ).append('<option value="' + data[i].slug + '">' + data[i].name + '</option>');
                 					});
@@ -821,6 +821,7 @@ function cortez_enqueue_script() {
 //add_action( 'wp_ajax_cortez_get_terms', 'cortez_get_terms' );
 //add_action( 'wp_ajax_nopriv_cortez_get_terms', 'cortez_get_terms' );
 function cortez_get_terms() {
+/*	
     $data = esc_sql( $_POST );
     if ( ! wp_verify_nonce( $data['nonce'], 'cortez_nonce_security_key' ) ) {
         wp_die( 'Security check' );
@@ -841,7 +842,27 @@ function cortez_get_terms() {
         echo $json;
     }
 
-    wp_die(); //stop function once you've echoed (returned) what you need.
+	wp_die(); //stop function once you've echoed (returned) what you need.
+*/
+$product_category_slug = ( isset($_POST['product_category_slug']) && !empty( $_POST['product_category_slug']) ? $_POST['product_category_slug'] : false );
+
+$query = new WC_Product_Query( array(
+	'category' => array( $product_category_slug ),
+	'limit' => 10,
+	'orderby' => 'date',
+	'order' => 'DESC'
+) );
+
+$products = $query->get_products();
+
+echo '<option value="">' .  __( "- Select Resource -", "wp-travel" ) . '</option>';
+foreach( $products as $product ) {
+	$title = $product->get_title();
+	echo '<option value="' . $title . '">' . $title . '</option>';
+}		
+
+die();
+
 }
 
 
