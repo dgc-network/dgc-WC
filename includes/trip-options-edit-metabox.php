@@ -194,7 +194,7 @@ class Trip_Options_Edit_Metabox {
 						$( sub_element ).delegate( '.opt-categorias', 'change', function() {
         					var opt_categorias = $( '.opt-categorias', sub_element ).val();
 							var ajax_url = '/wp-admin/admin-ajax.php';
-							$( '.opt_tipo', sub_element ).empty();
+							//$( '.opt_tipo', sub_element ).empty();
 							//$( sub_element ).hide();
         					$.ajax({
             					type: 'POST',
@@ -203,8 +203,8 @@ class Trip_Options_Edit_Metabox {
             					contentType: "application/json; charset=utf-8",
             					dataType: "json",
             					data: {
-									'action': 'cortez_get_terms',
-									//'action': array( __CLASS__, 'cortez_get_terms' ),									
+									//'action': 'cortez_get_terms',
+									'action': array( __CLASS__, 'cortez_get_terms' ),									
                 					'nonce': clocal.nonce,
                 					'term_chosen': opt_categorias,
             					},
@@ -437,7 +437,7 @@ class Trip_Options_Edit_Metabox {
 		$trip_outline = get_post_meta( $post->ID, 'wp_travel_outline', true );
 		$itineraries = get_post_meta( $post->ID, 'wp_travel_trip_itinerary_data', true );
 		$remove_itinerary = __( "- Remove Itinerary", "wp-travel" );
-		$product_categories = get_terms( array( 'taxonomy' => 'product_cat', 'number' => $number ) );
+		$product_categories = get_terms( array( 'taxonomy' => 'product_cat', 'hide_empty' => false ) );
 		?>
 		<div id='itinerary_panel' class='panel woocommerce_options_panel'>
 <?php
@@ -447,8 +447,8 @@ class Trip_Options_Edit_Metabox {
 ?>		
 		<table style="width:100%;">
 			<tr>
-				<td colspan="2"><h3><?php esc_html_e( 'Trip Code : ', 'wp-travel' ); ?></h3>
-				<span><input type="text" disabled="disabled" value="<?php echo esc_attr( $trip_code ); ?>" /></span></td>
+				<td><h3><?php esc_html_e( 'Trip Code : ', 'wp-travel' ); ?></h3></td>
+				<td><input type="text" disabled="disabled" value="<?php echo esc_attr( $trip_code ); ?>" /></td>
 			</tr>
 
 		<?php
