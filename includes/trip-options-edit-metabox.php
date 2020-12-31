@@ -197,7 +197,7 @@ class Trip_Options_Edit_Metabox {
 							var optionSelected = $("option:selected", this);
 							var valueSelected = this.value;
 							var opt_categorias = $( '.opt-categorias', sub_element ).val();
-							var opt_tipo = $( '.opt_tipo', sub_element ).data();
+							var opt_tipo = $( '.opt_tipo', sub_element ).val();
 							alert(opt_tipo);
 							$( '.opt_tipo', sub_element ).empty();
                 			$( '.opt_tipo', sub_element ).append("<option value=''>- Select Resource -</option>");
