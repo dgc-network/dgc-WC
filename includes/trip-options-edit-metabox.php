@@ -193,9 +193,7 @@ class Trip_Options_Edit_Metabox {
 						};
 
 						$( sub_element ).delegate( '.opt-categorias', 'change', function() {
-							/*
-							var valueSelected = this.value;
-							*/
+							var opt_categorias = this.value;
 							var ajax_url = '/wp-admin/admin-ajax.php';
         					$.ajax({
             					type: 'POST',
@@ -204,7 +202,7 @@ class Trip_Options_Edit_Metabox {
             					//dataType: "json",
             					data: {
 									'action': 'cortez_get_terms',
-                					//'term_chosen': opt_categorias,
+                					'term_chosen': opt_categorias,
             					},
             					success: function (data) {
 									$( '.opt_tipo', sub_element ).empty();
@@ -593,8 +591,7 @@ class Trip_Options_Edit_Metabox {
 							action: 'get_resources_by_category'
 						},
 						success: function(response){
-							$('select#itinerary_item_assignment').html('it is me');
-							
+							$('select#itinerary_item_assignment').html('it is me');							
 
 							console.log(response);
 							setFragmentsRefresh( response );
@@ -660,8 +657,8 @@ function cortez_enqueue_script() {
  */
 //add_action( 'wp_ajax_cortez_get_terms', 'cortez_get_terms' );
 //add_action( 'wp_ajax_nopriv_cortez_get_terms', 'cortez_get_terms' );
-//function cortez_get_terms() {
-/*	
+function cortez_get_terms() {
+	
     $data = esc_sql( $_POST );
     if ( ! wp_verify_nonce( $data['nonce'], 'cortez_nonce_security_key' ) ) {
         wp_die( 'Security check' );
@@ -683,9 +680,20 @@ function cortez_enqueue_script() {
     }
 
 	wp_die(); //stop function once you've echoed (returned) what you need.
-*/
+}
+
 	function get_resources_by_category() {
-		$product_category_slug = ( isset($_POST['product_category_slug']) && !empty( $_POST['product_category_slug']) ? $_POST['product_category_slug'] : false );
+/*
+		$data = esc_sql( $_POST );
+		if ( ! wp_verify_nonce( $data['nonce'], 'cortez_nonce_security_key' ) ) {
+			wp_die( 'Security check' );
+		}
+		if ( ! isset( $data['term_chosen'] ) || empty( $data['term_chosen'] ) ) {
+			wp_die( 'No Term Chosen' );
+		}
+*/
+		//$product_category_slug = ( isset($_POST['product_category_slug']) && !empty( $_POST['product_category_slug']) ? $_POST['product_category_slug'] : false );
+		$product_category_slug = ( isset($_POST['term_chosen']) && !empty( $_POST['term_chosen']) ? $_POST['term_chosen'] : false );
 
 		$query = new WC_Product_Query( array(
 			'category' => array( $product_category_slug ),
