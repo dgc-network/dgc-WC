@@ -19,8 +19,8 @@ class Trip_Options_Edit_Metabox {
 		add_action( 'admin_head', array( __CLASS__, 'dgc_custom_script' ) );
 		add_action( 'admin_head', array( __CLASS__, 'dgc_custom_style' ) );
 
-		add_action( 'wp_ajax_get_resources_by_category', array( __CLASS__, 'ajax_get_resources_by_category' ) );
-		add_action( 'wp_ajax_nopriv_get_resources_by_category', array( __CLASS__, 'ajax_get_resources_by_category' ) );
+		add_action( 'wp_ajax_get_resources_by_category', array( __CLASS__, 'get_resources_by_category' ) );
+		add_action( 'wp_ajax_nopriv_get_resources_by_category', array( __CLASS__, 'get_resources_by_category' ) );
 		
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'cortez_enqueue_script' ) );
 		add_action( 'wp_ajax_cortez_get_terms', array( __CLASS__, 'cortez_get_terms' ) );
@@ -192,38 +192,21 @@ class Trip_Options_Edit_Metabox {
 							$( sub_element ).show();
 						};
 
-						//$( ".opt-categorias", sub_element ).on( 'change', function () {
 						$( sub_element ).delegate( '.opt-categorias', 'change', function() {
 							/*
-							var optionSelected = $("option:selected", this);
 							var valueSelected = this.value;
-							var opt_categorias = $( '.opt-categorias', sub_element ).val();
-							var opt_tipo = $( '.opt_tipo', sub_element ).val();
-							//alert(opt_tipo);
-							alert(valueSelected);
-							$( '.opt_tipo', sub_element ).empty();
-                			$( '.opt_tipo', sub_element ).append("<option value=''>- Select Resource -</option>");
-                			$.each(data, function (i, item) {
-                    			$( '.opt_tipo', sub_element ).append('<option value="' + data[i].slug + '">' + data[i].name + '</option>');
-							});
 							*/
 							var ajax_url = '/wp-admin/admin-ajax.php';
-							//$( '.opt_tipo', sub_element ).empty();
-							//$( sub_element ).hide();
         					$.ajax({
             					type: 'POST',
-            					//url: clocal.ajaxurl,
             					url: ajax_url,
             					//contentType: "application/json; charset=utf-8",
             					//dataType: "json",
             					data: {
 									'action': 'cortez_get_terms',
-									//'action': array( __CLASS__, 'cortez_get_terms' ),									
-                					//'nonce': clocal.nonce,
                 					//'term_chosen': opt_categorias,
             					},
             					success: function (data) {
-									//$( sub_element ).hide();
 									$( '.opt_tipo', sub_element ).empty();
                 					$( '.opt_tipo', sub_element ).append("<option value=''>- Select Resource -</option>");
                 					$.each(data, function (i, item) {
@@ -231,10 +214,8 @@ class Trip_Options_Edit_Metabox {
                 					});
             					},
             					error: function(error){
-									$( sub_element ).hide();
             					},
             					complete: function () {
-									$( sub_element ).hide();
             					}
         					});
     					});
@@ -598,129 +579,6 @@ class Trip_Options_Edit_Metabox {
 
 		<script>
 			jQuery(document).ready(function($) {
-/*
-				$( 'input#_itinerary' ).change( function() {
-					var is_itinerary = $( 'input#_itinerary:checked' ).size();
-					$( '.show_if_itinerary' ).hide();
-					$( '.hide_if_itinerary' ).hide();
-
-					if ( is_itinerary ) {
-						$( '.hide_if_itinerary' ).hide();
-					}
-					if ( is_itinerary ) {
-						$( '.show_if_itinerary' ).show();
-					}
-				});
-				$( 'input#_itinerary' ).trigger( 'change' );
-*/
-    			//$( "#itineraries-ul" ).sortable();
-				//$( "#itineraries-ul" ).disableSelection();
-/*
-				$( '.itinerary-li' ).hide();
-				$( '.itinerary-li' ).each( function( index, element ) {
-					if ( !$( 'p', element ).is( ':empty' ) ) {
-						$( '.init-rows' ).show();
-						$( element ).show();
-						$( element ).delegate( 'span', 'click', function() {
-							$( 'table', element ).toggleClass( 'toggle-access' );
-						});
-					};
-
-					$( element ).delegate( '.item-label', 'keyup', function() {
-						$( '.span-label', element ).text($(this).val());
-					});
-					$( element ).delegate( '.item-title', 'keyup', function() {
-						$( '.span-title', element ).text($(this).val());
-					});
-
-					$( '.resources-assignment', element ).hide();
-					$( '.assignment-rows', element ).each( function( sub_index, sub_element ) {
-						if ( !$( 'span', sub_element ).is( ':empty' ) ) {
-							$( '.resources-assignment', element ).show();
-							$( '.assignment-rows', element ).hide();
-							$( sub_element ).show();
-						};
-
-						//$( ".opt-categorias", sub_element ).on( 'change', function () {
-						$( sub_element ).delegate( '.opt-categorias', 'change', function() {
-        					var opt_categorias = $( '.opt-categorias', sub_element ).val();
-							//$( sub_element ).hide();
-        					$.ajax({
-            					type: 'POST',
-            					url: clocal.ajaxurl,
-            					contentType: "application/json; charset=utf-8",
-            					dataType: "json",
-            					data: {
-									//'action': 'cortez_get_terms',
-									'action': array( __CLASS__, 'cortez_get_terms' ),									
-                					'nonce': clocal.nonce,
-                					'term_chosen': opt_categorias,
-            					},
-            					success: function (data) {
-									$( sub_element ).hide();
-									$( '.opt_tipo', sub_element ).empty();
-                					$( '.opt_tipo', sub_element ).append("<option value=''> Tipo de produto</option>");
-                					$.each(data, function (i, item) {
-                    					$( '.opt_tipo', sub_element ).append('<option value="' + data[i].slug + '">' + data[i].name + '</option>');
-                					});
-            					},
-            					error: function(error){
-            					},
-            					complete: function () {
-            					}
-        					});
-    					});
-
-					});
-					$( element ).delegate( '.first-assignment', 'click', function() {
-						$( '.no-assignments', element ).hide();
-						$( '.resources-assignment', element ).show();
-						$( '.assignment-rows', element ).hide();
-						$( '#assignment-row-0', element ).show();
-					});
-					$( element ).delegate( '.add-assignment', 'click', function() {
-						$( '.assignment-rows', element ).each( function( sub_index, sub_element ) {
-							if ( $( sub_element ).is( ':hidden' ) ) {
-								$( sub_element ).show();
-								return false;
-							};
-						});
-					});
-				});
-
-				$( '#first-itinerary' ).click( function() {
-					$( '.no-itineraries' ).hide();
-					$( '.init-rows' ).show();
-					$( '.itinerary-li' ).hide();
-					$( '#itinerary-li-0' ).show();
-					$( 'span', '#itinerary-li-0' ).on( 'click', function() {
-						$( 'table', '#itinerary-li-0' ).toggleClass( 'toggle-access' );
-					});
-				} );
-
-				$( '.add-itinerary' ).on( 'click', function() {
-					$( '.itinerary-li' ).each( function( index, element ) {
-						if ( $( element ).is( ':hidden' ) ) {
-							$( element ).show();
-							$( element ).delegate( 'span', 'click', function() {
-								$( 'table', element ).toggleClass( 'toggle-access' );
-							});
-							return false;
-						};
-					});
-				} );
-
-				$( '.remove-itinerary' ).each( function( index, element ) {
-					$( element ).delegate( 'button', 'click', function() {
-						$( this ).closest( '.itinerary-li' ).remove();
-					});					
-				});
-
-				$( '.item_date' ).datepicker();
-				$( '.item_time' ).timepicker({format: 'HH:mm'});
-
-
-
 				var ajax_url,ajax_url_additional = '/wp-admin/admin-ajax.php';
 				$('select').on('change', function (e) {
     				var optionSelected = $("option:selected", this);
@@ -732,7 +590,7 @@ class Trip_Options_Edit_Metabox {
 						type: 'POST',
 						url: ajax_url,
 						data: {
-							action: 'ajax_get_resources_by_category'
+							action: 'get_resources_by_category'
 						},
 						success: function(response){
 							$('select#itinerary_item_assignment').html('it is me');
@@ -762,28 +620,10 @@ class Trip_Options_Edit_Metabox {
 							return false;
 						}
 					});					
-				});
-*/			
+				});		
 			} );
 		</script>
 	
-		<style>
-		/*
-  			#itineraries-ul { list-style-type:none; margin:0; padding:0; width:100%; }
-  			#itineraries-ul li { background:#f2f2f2; border:1px solid #ccc; margin:0 3px 3px 3px; padding:0.4em; padding-left:1.5em; font-size:1.4em; }
-			#itineraries-ul li td.remove-itinerary button { font-size:1.0em; }
-			#itineraries-ul li span { cursor:pointer; }
-			#itineraries-ul li .fas.fa-bars { margin-left:-1.3em; }
-			#itineraries-ul li .fas.fa-bars:before { content: "\f0c9"; }
-			#itineraries-ul li table { background:#ffffff; border:1px solid #ccc; width:100%; display:none; margin-left:-1.3em; font-size:1.0em; }
-			#itineraries-ul li .toggle-access { display:block; }
-			#itineraries-ul li th { width:20%; }
-			#itineraries-ul li input { width:100%; }
-			#itineraries-ul li textarea { width:100%; }
-			#first-itinerary { color:blue; text-decoration:underline; cursor:pointer; }
-			.first-assignment { background:#ffffff; color:blue; border: none; cursor:pointer; }
-		*/
-  		</style>
 		<?php
 	}
 
@@ -820,7 +660,7 @@ function cortez_enqueue_script() {
  */
 //add_action( 'wp_ajax_cortez_get_terms', 'cortez_get_terms' );
 //add_action( 'wp_ajax_nopriv_cortez_get_terms', 'cortez_get_terms' );
-function cortez_get_terms() {
+//function cortez_get_terms() {
 /*	
     $data = esc_sql( $_POST );
     if ( ! wp_verify_nonce( $data['nonce'], 'cortez_nonce_security_key' ) ) {
@@ -844,79 +684,27 @@ function cortez_get_terms() {
 
 	wp_die(); //stop function once you've echoed (returned) what you need.
 */
-$product_category_slug = ( isset($_POST['product_category_slug']) && !empty( $_POST['product_category_slug']) ? $_POST['product_category_slug'] : false );
+	function get_resources_by_category() {
+		$product_category_slug = ( isset($_POST['product_category_slug']) && !empty( $_POST['product_category_slug']) ? $_POST['product_category_slug'] : false );
 
-$query = new WC_Product_Query( array(
-	'category' => array( $product_category_slug ),
-	'limit' => 10,
-	'orderby' => 'date',
-	'order' => 'DESC'
-) );
+		$query = new WC_Product_Query( array(
+			'category' => array( $product_category_slug ),
+			'limit' => 10,
+			'orderby' => 'date',
+			'order' => 'DESC'
+		) );
 
-$products = $query->get_products();
+		$products = $query->get_products();
 
-echo '<option value="">' .  __( "- Select Resource -", "wp-travel" ) . '</option>';
-foreach( $products as $product ) {
-	$title = $product->get_title();
-	echo '<option value="' . $title . '">' . $title . '</option>';
-}		
+		echo '<option value="">' .  __( "- Select Resource -", "wp-travel" ) . '</option>';
+		foreach( $products as $product ) {
+			$title = $product->get_title();
+			echo '<option value="' . $title . '">' . $title . '</option>';
+		}		
 
-die();
+		die();
 
-}
-
-
-/**
- * Adding Item by Ajax. This Function is not for using to any others whee.
- * But we will use this function for Ajax
- * 
- * @since 1.0.4
- * @date 28.04.2018 (D.M.Y)
- * @updated 04.05.2018
- */
-function ajax_get_resources_by_category() {
-/*    
-    $product_id     = ( isset($_POST['product_id']) && !empty( $_POST['product_id']) ? $_POST['product_id'] : false );
-    $quantity       = ( isset($_POST['quantity']) && !empty( $_POST['quantity']) && is_numeric($_POST['quantity']) ? $_POST['quantity'] : 1 );
-    $variation_id   = ( isset($_POST['variation_id']) && !empty( $_POST['variation_id']) ? $_POST['variation_id'] : false );
-    $variation      = ( isset($_POST['variation']) && !empty( $_POST['variation']) ? $_POST['variation'] : false );
-    $custom_message = ( isset($_POST['custom_message']) && !empty( $_POST['custom_message']) ? $_POST['custom_message'] : false );
-    
-    //$string_for_var = '_var' . implode('_', $variation) . '_';
-    
-    $cart_item_data = array(); //Set default value array
-    
-    if( $custom_message && !empty( $custom_message ) ){
-        $custom_message = htmlspecialchars( $custom_message ); //$custom_message is Generating for tag and charecter
-    
-        $cart_item_data[ 'wpt_custom_message' ] = $custom_message;
-            // below statement make sure every add to cart action as unique line item
-        $cart_item_data['unique_key'] = md5( $product_id . $variation_id . '_' .$custom_message );
-    }
-    
-	wpt_adding_to_cart( $product_id, $quantity, $variation_id, $variation, $cart_item_data );
-*/	
-    $product_id     = ( isset($_POST['product_id']) && !empty( $_POST['product_id']) ? $_POST['product_id'] : false );
-
-	$query = new WC_Product_Query( array(
-		'category' => array( $product_category_slug ),
-		'limit' => 10,
-		'orderby' => 'date',
-		'order' => 'DESC'
-	) );
-   
-	$products = $query->get_products();
-	
-	echo '<option value="">' .  __( "- Select Resource -", "wp-travel" ) . '</option>';
-	foreach( $products as $product ) {
-		$title = $product->get_title();
-		echo '<option value="' . $title . '">' . $title . '</option>';
-	}		
-
-    die();
-}
-//add_action( 'wp_ajax_wpt_ajax_add_to_cart', 'wpt_ajax_add_to_cart' );
-//add_action( 'wp_ajax_nopriv_wpt_ajax_add_to_cart', 'wpt_ajax_add_to_cart' );
+	}
 
 	/**
 	 * Prices & Dates metabox callback
