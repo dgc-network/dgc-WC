@@ -198,10 +198,11 @@ class Trip_Options_Edit_Metabox {
         					$.ajax({
             					type: 'POST',
             					url: ajax_url,
-            					//contentType: "application/json; charset=utf-8",
-            					//dataType: "json",
+            					contentType: "application/json; charset=utf-8",
+            					dataType: "json",
             					data: {
-									'action': 'cortez_get_terms',
+									//'action': 'cortez_get_terms',
+									'action': 'get_resources_by_category',
                 					'term_chosen': opt_categorias,
             					},
             					success: function (data) {
@@ -703,13 +704,16 @@ function cortez_get_terms() {
 		) );
 
 		$products = $query->get_products();
+		$json = json_encode( $query->get_products() );
+		echo $json;
 
+/*
 		echo '<option value="">' .  __( "- Select Resource -", "wp-travel" ) . '</option>';
 		foreach( $products as $product ) {
 			$title = $product->get_title();
 			echo '<option value="' . $title . '">' . $title . '</option>';
 		}		
-
+*/
 		die();
 
 	}
