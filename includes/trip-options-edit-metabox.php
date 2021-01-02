@@ -694,7 +694,7 @@ function cortez_get_terms() {
 */
 		//$product_category_slug = ( isset($_POST['product_category_slug']) && !empty( $_POST['product_category_slug']) ? $_POST['product_category_slug'] : false );
 		$product_category_slug = ( isset($_POST['term_chosen']) && !empty( $_POST['term_chosen']) ? $_POST['term_chosen'] : false );
-
+/*
 		$query = new WC_Product_Query( array(
 			'category' => array( $product_category_slug ),
 			'limit' => 10,
@@ -712,6 +712,8 @@ function cortez_get_terms() {
 		}	
 		$json = json_encode( $titles );
 		echo $json;
+*/
+		echo $product_category_slug;
 
 		die();
 
