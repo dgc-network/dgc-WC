@@ -227,7 +227,7 @@ class Trip_Options_Edit_Metabox {
                 					$( '.opt_tipo', sub_element ).append("<option value=''>- Select Resource -</option>");
 
                 					$.each(data, function (i, item) {
-                    					$( '.opt_tipo', sub_element ).append('<option value="' + data[i].title + '">' + data[i].title + '</option>');
+                    					$( '.opt_tipo', sub_element ).append('<option value="' + data[i].name + '">' + data[i].name + '</option>');
                 					});
 									
             					},
@@ -294,27 +294,17 @@ class Trip_Options_Edit_Metabox {
 	}
 
 	function get_resources_by_category() {
-		/*
-				$data = esc_sql( $_POST );
-				if ( ! wp_verify_nonce( $data['nonce'], 'cortez_nonce_security_key' ) ) {
-					wp_die( 'Security check' );
-				}
-				if ( ! isset( $data['term_chosen'] ) || empty( $data['term_chosen'] ) ) {
-					wp_die( 'No Term Chosen' );
-				}
-		*/
-				//$product_category_slug = ( isset($_POST['product_category_slug']) && !empty( $_POST['product_category_slug']) ? $_POST['product_category_slug'] : false );
+
 		$product_category_slug = ( isset($_POST['term_chosen']) && !empty( $_POST['term_chosen']) ? $_POST['term_chosen'] : false );
 		
-				$query = new WC_Product_Query( array(
-					'category' => array( $product_category_slug ),
-					'limit' => 10,
-					'orderby' => 'date',
-					'order' => 'DESC'
-				) );
+		$query = new WC_Product_Query( array(
+			'category' => array( $product_category_slug ),
+			'limit' => 10,
+			'orderby' => 'date',
+			'order' => 'DESC'
+		) );
 		
-				$products = $query->get_products();
-				//$tax_tipos_bicicletas   = get_terms( $tipos_bicicletas, array( 'hide_empty' => false ) );
+		$products = $query->get_products();
 		
 				$titles = array();
 				//echo '<option value="">' .  __( "- Select Resource -", "wp-travel" ) . '</option>';
@@ -323,8 +313,8 @@ class Trip_Options_Edit_Metabox {
 					//echo '<option value="' . $title . '">' . $title . '</option>';
 				}	
 				//$json = json_encode( $titles );
-				$json = json_encode( $products );
-				echo $json;
+		$json = json_encode( $products );
+		echo $json;
 				//echo $titles;
 		
 		//echo $product_category_slug;
