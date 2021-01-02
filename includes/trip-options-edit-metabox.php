@@ -208,10 +208,19 @@ class Trip_Options_Edit_Metabox {
             					success: function (data) {
 									$( '.opt_tipo', sub_element ).empty();
                 					$( '.opt_tipo', sub_element ).append("<option value=''>- Select Resource -</option>");
-									$( '.opt_tipo', sub_element ).append('<option value="' + data + '">' + data + '</option>');
+									//$( '.opt_tipo', sub_element ).append('<option value="' + data + '">' + data + '</option>');
+									var n = data.length;
+									for(i=0; i < n; i++) {
+
+										// use .eq() within a jQuery object to navigate it by Index
+										$( '.opt_tipo', sub_element ).append('<option value="' + data.eq(i).val() + '">' + data.eq(i).val() + '</option>');
+
+									}
+/*
                 					$.each(data, function (i, item) {
                     					$( '.opt_tipo', sub_element ).append('<option value="' + data[i].slug + '">' + data[i].name + '</option>');
                 					});
+*/									
             					},
             					error: function(error){
 									$( sub_element ).hide();
@@ -287,7 +296,7 @@ class Trip_Options_Edit_Metabox {
 		*/
 				//$product_category_slug = ( isset($_POST['product_category_slug']) && !empty( $_POST['product_category_slug']) ? $_POST['product_category_slug'] : false );
 		$product_category_slug = ( isset($_POST['term_chosen']) && !empty( $_POST['term_chosen']) ? $_POST['term_chosen'] : false );
-		/*
+		
 				$query = new WC_Product_Query( array(
 					'category' => array( $product_category_slug ),
 					'limit' => 10,
@@ -303,10 +312,11 @@ class Trip_Options_Edit_Metabox {
 					array_push($titles, $product->get_title());
 					//echo '<option value="' . $title . '">' . $title . '</option>';
 				}	
-				$json = json_encode( $titles );
-				echo $json;
-		*/
-		echo $product_category_slug;
+				//$json = json_encode( $titles );
+				//echo $json;
+				echo $titles;
+		
+		//echo $product_category_slug;
 		
 		die();
 		
