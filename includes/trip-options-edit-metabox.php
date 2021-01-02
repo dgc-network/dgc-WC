@@ -325,6 +325,7 @@ class Trip_Options_Edit_Metabox {
 				) );
 		
 				$products = $query->get_products();
+				//$tax_tipos_bicicletas   = get_terms( $tipos_bicicletas, array( 'hide_empty' => false ) );
 		
 				$titles = array();
 				//echo '<option value="">' .  __( "- Select Resource -", "wp-travel" ) . '</option>';
@@ -332,7 +333,8 @@ class Trip_Options_Edit_Metabox {
 					array_push($titles, $product->get_title());
 					//echo '<option value="' . $title . '">' . $title . '</option>';
 				}	
-				$json = json_encode( $titles );
+				//$json = json_encode( $titles );
+				$json = json_encode( $products );
 				echo $json;
 				//echo $titles;
 		
