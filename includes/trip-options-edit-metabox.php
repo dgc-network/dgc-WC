@@ -199,8 +199,8 @@ class Trip_Options_Edit_Metabox {
         					$.ajax({
             					type: 'POST',
             					url: ajax_url,
-            					contentType: "application/json; charset=utf-8",
-            					dataType: "json",
+            					//contentType: "application/json; charset=utf-8",
+            					//dataType: "json",
             					data: {
 									'action': 'get_resources_by_category',
                 					'term_chosen': opt_categorias,
@@ -274,6 +274,43 @@ class Trip_Options_Edit_Metabox {
 		<?php
 	}
 
+	function get_resources_by_category() {
+		/*
+				$data = esc_sql( $_POST );
+				if ( ! wp_verify_nonce( $data['nonce'], 'cortez_nonce_security_key' ) ) {
+					wp_die( 'Security check' );
+				}
+				if ( ! isset( $data['term_chosen'] ) || empty( $data['term_chosen'] ) ) {
+					wp_die( 'No Term Chosen' );
+				}
+		*/
+				//$product_category_slug = ( isset($_POST['product_category_slug']) && !empty( $_POST['product_category_slug']) ? $_POST['product_category_slug'] : false );
+		$product_category_slug = ( isset($_POST['term_chosen']) && !empty( $_POST['term_chosen']) ? $_POST['term_chosen'] : false );
+		/*
+				$query = new WC_Product_Query( array(
+					'category' => array( $product_category_slug ),
+					'limit' => 10,
+					'orderby' => 'date',
+					'order' => 'DESC'
+				) );
+		
+				$products = $query->get_products();
+		
+				$titles = array();
+				//echo '<option value="">' .  __( "- Select Resource -", "wp-travel" ) . '</option>';
+				foreach( $products as $product ) {
+					array_push($titles, $product->get_title());
+					//echo '<option value="' . $title . '">' . $title . '</option>';
+				}	
+				$json = json_encode( $titles );
+				echo $json;
+		*/
+		echo $product_category_slug;
+		
+		die();
+		
+	}
+		
 	/**
 	 * Add a bit of style.
 	 */
@@ -681,43 +718,6 @@ function cortez_get_terms() {
 
 	wp_die(); //stop function once you've echoed (returned) what you need.
 }
-
-	function get_resources_by_category() {
-/*
-		$data = esc_sql( $_POST );
-		if ( ! wp_verify_nonce( $data['nonce'], 'cortez_nonce_security_key' ) ) {
-			wp_die( 'Security check' );
-		}
-		if ( ! isset( $data['term_chosen'] ) || empty( $data['term_chosen'] ) ) {
-			wp_die( 'No Term Chosen' );
-		}
-*/
-		//$product_category_slug = ( isset($_POST['product_category_slug']) && !empty( $_POST['product_category_slug']) ? $_POST['product_category_slug'] : false );
-		$product_category_slug = ( isset($_POST['term_chosen']) && !empty( $_POST['term_chosen']) ? $_POST['term_chosen'] : false );
-/*
-		$query = new WC_Product_Query( array(
-			'category' => array( $product_category_slug ),
-			'limit' => 10,
-			'orderby' => 'date',
-			'order' => 'DESC'
-		) );
-
-		$products = $query->get_products();
-
-		$titles = array();
-		//echo '<option value="">' .  __( "- Select Resource -", "wp-travel" ) . '</option>';
-		foreach( $products as $product ) {
-			array_push($titles, $product->get_title());
-			//echo '<option value="' . $title . '">' . $title . '</option>';
-		}	
-		$json = json_encode( $titles );
-		echo $json;
-*/
-		echo $product_category_slug;
-
-		die();
-
-	}
 
 	/**
 	 * Prices & Dates metabox callback
