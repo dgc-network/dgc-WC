@@ -222,12 +222,13 @@ class Trip_Options_Edit_Metabox {
                 					'term_chosen': opt_categorias,
             					},
             					success: function (data) {
-									alert(data.length);
+									//alert(data.length);
 									$( '.opt_tipo', sub_element ).empty();
                 					$( '.opt_tipo', sub_element ).append("<option value=''>- Select Resource -</option>");
 									//$( '.opt_tipo', sub_element ).append('<option value="' + data + '">' + data + '</option>');
 									var n = data.length;
 									for(i=0; i < n; i++) {
+										alert(data.eq(i).val());
 
 										// use .eq() within a jQuery object to navigate it by Index
 										$( '.opt_tipo', sub_element ).append('<option value="' + data.eq(i).val() + '">' + data.eq(i).val() + '</option>');
