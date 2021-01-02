@@ -225,20 +225,9 @@ class Trip_Options_Edit_Metabox {
 									alert(data.length);
 									$( '.opt_tipo', sub_element ).empty();
                 					$( '.opt_tipo', sub_element ).append("<option value=''>- Select Resource -</option>");
-									//$( '.opt_tipo', sub_element ).append('<option value="' + data + '">' + data + '</option>');
-/*									
-									alert(data.eq(0).val());
-									var n = data.length;
-									for(i=0; i < n; i++) {
-										alert(data.eq(i).val());
 
-										// use .eq() within a jQuery object to navigate it by Index
-										$( '.opt_tipo', sub_element ).append('<option value="' + data.eq(i).val() + '">' + data.eq(i).val() + '</option>');
-
-									}
-*/
                 					$.each(data, function (i, item) {
-                    					$( '.opt_tipo', sub_element ).append('<option value="' + data[i].slug + '">' + data[i].name + '</option>');
+                    					$( '.opt_tipo', sub_element ).append('<option value="' + data[i].title + '">' + data[i].title + '</option>');
                 					});
 									
             					},
