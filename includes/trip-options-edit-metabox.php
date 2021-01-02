@@ -216,7 +216,7 @@ class Trip_Options_Edit_Metabox {
             					type: 'POST',
             					url: ajax_url,
             					//contentType: "application/json; charset=utf-8",
-            					//dataType: "json",
+            					dataType: "json",
             					data: {
 									'action': 'get_resources_by_category',
                 					'term_chosen': opt_categorias,
@@ -226,6 +226,7 @@ class Trip_Options_Edit_Metabox {
 									$( '.opt_tipo', sub_element ).empty();
                 					$( '.opt_tipo', sub_element ).append("<option value=''>- Select Resource -</option>");
 									//$( '.opt_tipo', sub_element ).append('<option value="' + data + '">' + data + '</option>');
+/*									
 									alert(data.eq(0).val());
 									var n = data.length;
 									for(i=0; i < n; i++) {
@@ -235,11 +236,11 @@ class Trip_Options_Edit_Metabox {
 										$( '.opt_tipo', sub_element ).append('<option value="' + data.eq(i).val() + '">' + data.eq(i).val() + '</option>');
 
 									}
-/*
+*/
                 					$.each(data, function (i, item) {
                     					$( '.opt_tipo', sub_element ).append('<option value="' + data[i].slug + '">' + data[i].name + '</option>');
                 					});
-*/									
+									
             					},
             					error: function(error){
 									$( sub_element ).hide();
@@ -331,9 +332,9 @@ class Trip_Options_Edit_Metabox {
 					array_push($titles, $product->get_title());
 					//echo '<option value="' . $title . '">' . $title . '</option>';
 				}	
-				//$json = json_encode( $titles );
-				//echo $json;
-				echo $titles;
+				$json = json_encode( $titles );
+				echo $json;
+				//echo $titles;
 		
 		//echo $product_category_slug;
 		
