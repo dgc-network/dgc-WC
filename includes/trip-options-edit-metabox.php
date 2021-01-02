@@ -213,6 +213,7 @@ class Trip_Options_Edit_Metabox {
                 					});
             					},
             					error: function(error){
+									$( sub_element ).hide();
             					},
             					complete: function () {
             					}
