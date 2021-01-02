@@ -703,9 +703,10 @@ function cortez_get_terms() {
 			'order' => 'DESC'
 		) );
 
-		$products = $query->get_products();
-		$json = json_encode( $query->get_products() );
-		echo $json;
+		//$products = $query->get_products();
+		//$json = json_encode( $query->get_products() );
+		//echo $json;
+		echo $query->get_products();
 
 /*
 		echo '<option value="">' .  __( "- Select Resource -", "wp-travel" ) . '</option>';
