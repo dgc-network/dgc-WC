@@ -194,6 +194,7 @@ class Trip_Options_Edit_Metabox {
 
 						$( sub_element ).delegate( '.opt-categorias', 'change', function() {
 							var opt_categorias = this.value;
+							alert(opt_categorias);
 							var ajax_url = '/wp-admin/admin-ajax.php';
         					$.ajax({
             					type: 'POST',
@@ -201,7 +202,6 @@ class Trip_Options_Edit_Metabox {
             					contentType: "application/json; charset=utf-8",
             					dataType: "json",
             					data: {
-									//'action': 'cortez_get_terms',
 									'action': 'get_resources_by_category',
                 					'term_chosen': opt_categorias,
             					},
@@ -291,7 +291,6 @@ class Trip_Options_Edit_Metabox {
   			#itineraries-ul li { background:#f2f2f2; border:1px solid #ccc; margin:0 3px 3px 3px; padding:0.4em; padding-left:1.5em; font-size:1.4em; }
 			#itineraries-ul li span { cursor:pointer; }
 			#itineraries-ul li span.fas.fa-bars { margin-left:-1.3em; }
-			/*#itineraries-ul li table { background:#ffffff; border:1px solid #ccc; width:100%; display:none; margin-left:-1.3em; font-size:1.0em; }*/
 			#itineraries-ul li table { display:none; background:#ffffff; border:1px solid #ccc; margin-left:-1.3em; margin-top:0.3em; padding:0.5em; font-size:1.0em; }
 			#itineraries-ul li table.toggle-access { display:block; }
 			#itineraries-ul li th { width:20%; }
@@ -309,7 +308,6 @@ class Trip_Options_Edit_Metabox {
   			#faqs-ul li { background:#f2f2f2; border:1px solid #ccc; margin:0 3px 3px 3px; padding:0.4em; padding-left:1.5em; font-size:1.4em; }
 			#faqs-ul li span { cursor:pointer; }
 			#faqs-ul li span.fas.fa-bars { margin-left:-1.3em; }
-			/*#faqs-ul li table { background:#ffffff; border:1px solid #ccc; width:100%; display:none; margin-left:-1.3em; padding-left:1.3em; }*/
 			#faqs-ul li table { display:none; background:#ffffff; border:1px solid #ccc; margin-left:-1.3em;  margin-top:0.3em; padding:0.5em; font-size:1.0em; }
 			#faqs-ul li .toggle-access { display:block; }
 			#faqs-ul li th { width:25%; }
@@ -704,18 +702,17 @@ function cortez_get_terms() {
 			'order' => 'DESC'
 		) );
 
-		//$products = $query->get_products();
-		//$json = json_encode( $query->get_products() );
-		//echo $json;
-		echo $query->get_products();
+		$products = $query->get_products();
 
-/*
-		echo '<option value="">' .  __( "- Select Resource -", "wp-travel" ) . '</option>';
+		$titles = array();
+		//echo '<option value="">' .  __( "- Select Resource -", "wp-travel" ) . '</option>';
 		foreach( $products as $product ) {
-			$title = $product->get_title();
-			echo '<option value="' . $title . '">' . $title . '</option>';
-		}		
-*/
+			array_push($titles, $product->get_title());
+			//echo '<option value="' . $title . '">' . $title . '</option>';
+		}	
+		$json = json_encode( $titles );
+		echo $json;
+
 		die();
 
 	}
