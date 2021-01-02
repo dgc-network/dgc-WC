@@ -210,7 +210,7 @@ class Trip_Options_Edit_Metabox {
 
 						$( sub_element ).delegate( '.opt-categorias', 'change', function() {
 							var opt_categorias = this.value;
-							alert(opt_categorias);
+							//alert(opt_categorias);
 							var ajax_url = '/wp-admin/admin-ajax.php';
         					$.ajax({
             					type: 'POST',
@@ -222,6 +222,7 @@ class Trip_Options_Edit_Metabox {
                 					'term_chosen': opt_categorias,
             					},
             					success: function (data) {
+									alert(data);
 									$( '.opt_tipo', sub_element ).empty();
                 					$( '.opt_tipo', sub_element ).append("<option value=''>- Select Resource -</option>");
 									//$( '.opt_tipo', sub_element ).append('<option value="' + data + '">' + data + '</option>');
