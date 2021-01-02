@@ -44,6 +44,22 @@ class Trip_Options_Edit_Metabox {
 			unset( $options[ 'downloadable' ] );
 		}
 
+		// Create Category
+		wp_insert_term(
+			__( "Itinerary", "wp-travel" ), // the term 
+			'product_cat', // the taxonomy
+			array(
+	  			'description'=> __( "Category of Itinerary", "wp-travel" ),
+	  			'slug' => 'itinerary'
+			)
+  		);
+
+		// Gets term object from Category in the database. 
+/*
+		$term = get_term_by('name', __( "Itinerary", "wp-travel" ), 'product_cat');
+		wp_set_object_terms( $post_id, $term->term_id, 'product_cat' );
+*/
+
 		$options['itinerary'] = array(
 			'id'            => '_itinerary',
 			'wrapper_class' => 'show_if_simple show_if_variable',
@@ -1239,20 +1255,6 @@ function cortez_get_terms() {
 		$answer   = isset( $faqs['answer'] ) ? $faqs['answer'] : array();
 		update_post_meta( $post_id, 'wp_travel_faq_question', $question );
 		update_post_meta( $post_id, 'wp_travel_faq_answer', $answer );
-
-		// Create Category
-		wp_insert_term(
-			__( "Itinerary", "wp-travel" ), // the term 
-			'product_cat', // the taxonomy
-			array(
-	  			'description'=> __( "Category of Itinerary", "wp-travel" ),
-	  			'slug' => 'itinerary'
-			)
-  		);
-
-		// Gets term object from Category in the database. 
-		$term = get_term_by('name', __( "Itinerary", "wp-travel" ), 'product_cat');
-		wp_set_object_terms( $post_id, $term->term_id, 'product_cat' );
 
 /*
 		if( isset( $_POST[ 'seo_robots' ] ) ) {
