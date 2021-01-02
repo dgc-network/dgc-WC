@@ -208,6 +208,7 @@ class Trip_Options_Edit_Metabox {
             					success: function (data) {
 									$( '.opt_tipo', sub_element ).empty();
                 					$( '.opt_tipo', sub_element ).append("<option value=''>- Select Resource -</option>");
+									$( '.opt_tipo', sub_element ).append('<option value="' + data + '">' + data + '</option>');
                 					$.each(data, function (i, item) {
                     					$( '.opt_tipo', sub_element ).append('<option value="' + data[i].slug + '">' + data[i].name + '</option>');
                 					});
