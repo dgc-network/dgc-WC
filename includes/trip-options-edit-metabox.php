@@ -314,8 +314,8 @@ class Trip_Options_Edit_Metabox {
 					array_push($titles, $product->get_title());
 					//echo '<option value="' . $title . '">' . $title . '</option>';
 				}	
-				//$json = json_encode( $titles );
-		$json = json_encode( $products );
+				$json = json_encode( $titles );
+		//$json = json_encode( $products );
 		echo $json;
 				//echo $titles;
 		
