@@ -1056,9 +1056,6 @@ class Trip_Options_Edit_Metabox {
   		</style>
 		<?php
 	}
-}
-new Trip_Options_Edit_Metabox;
-
 
 
 function trip_options_metabox_callback( $post ) {
@@ -1120,6 +1117,10 @@ function trip_options_add_metabox() {
 	wp_enqueue_script( 'mytabs', 'mytabs.js', array( 'jquery-ui-tabs' ) );
 	//wp_enqueue_script( 'mytabs', '', array( 'jquery-ui-tabs' ) );
 }
+
+}
+new Trip_Options_Edit_Metabox;
+
 
 function horizontal_tabs_metabox( $post ) {
 	?>
