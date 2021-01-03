@@ -5,7 +5,7 @@ class Trip_Options_Edit_Metabox {
 	 * Constructor.
 	 */
 	function __construct() {
-		add_action( 'admin_menu', array( __CLASS__, 'trip_options_add_metabox' ) );
+		//add_action( 'admin_menu', array( __CLASS__, 'trip_options_add_metabox' ) );
 		add_action( 'save_post', array( __CLASS__, 'trip_options_save_metabox' ), 10, 2 );
 
 		add_filter( 'product_type_options', array( __CLASS__, 'add_remove_product_options' ) );
@@ -22,9 +22,9 @@ class Trip_Options_Edit_Metabox {
 		add_action( 'wp_ajax_get_resources_by_category', array( __CLASS__, 'get_resources_by_category' ) );
 		add_action( 'wp_ajax_nopriv_get_resources_by_category', array( __CLASS__, 'get_resources_by_category' ) );
 		
-		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'cortez_enqueue_script' ) );
-		add_action( 'wp_ajax_cortez_get_terms', array( __CLASS__, 'cortez_get_terms' ) );
-		add_action( 'wp_ajax_nopriv_cortez_get_terms', array( __CLASS__, 'cortez_get_terms' ) );
+		//add_action( 'wp_enqueue_scripts', array( __CLASS__, 'cortez_enqueue_script' ) );
+		//add_action( 'wp_ajax_cortez_get_terms', array( __CLASS__, 'cortez_get_terms' ) );
+		//add_action( 'wp_ajax_nopriv_cortez_get_terms', array( __CLASS__, 'cortez_get_terms' ) );
 
 	}
 
@@ -44,13 +44,49 @@ class Trip_Options_Edit_Metabox {
 			unset( $options[ 'downloadable' ] );
 		}
 
-		// Create Category
+		// Create Categories
 		wp_insert_term(
 			__( "Itinerary", "wp-travel" ), // the term 
 			'product_cat', // the taxonomy
 			array(
 	  			'description'=> __( "Category of Itinerary", "wp-travel" ),
 	  			'slug' => 'itinerary'
+			)
+  		);
+
+		wp_insert_term(
+			__( "Stay", "wp-travel" ), // the term 
+			'product_cat', // the taxonomy
+			array(
+	  			'description'=> __( "Category of Stay", "wp-travel" ),
+	  			'slug' => 'stay'
+			)
+  		);
+
+		wp_insert_term(
+			__( "Dinner", "wp-travel" ), // the term 
+			'product_cat', // the taxonomy
+			array(
+	  			'description'=> __( "Category of Dinner", "wp-travel" ),
+	  			'slug' => 'dinner'
+			)
+  		);
+
+		wp_insert_term(
+			__( "Lunch", "wp-travel" ), // the term 
+			'product_cat', // the taxonomy
+			array(
+	  			'description'=> __( "Category of Lunch", "wp-travel" ),
+	  			'slug' => 'lunch'
+			)
+  		);
+
+		  wp_insert_term(
+			__( "Breakfast", "wp-travel" ), // the term 
+			'product_cat', // the taxonomy
+			array(
+	  			'description'=> __( "Category of Breakfast", "wp-travel" ),
+	  			'slug' => 'breakfast'
 			)
   		);
 
@@ -119,7 +155,6 @@ class Trip_Options_Edit_Metabox {
 				 * Woocommerce Product Data Metabox Options
 				 */
 				$( 'input#_itinerary' ).change( function() {
-					//var is_itinerary = $( 'input#_itinerary:checked' ).size();
 					var is_itinerary = $( 'input#_itinerary:checked' ).length;
 					$( '.show_if_itinerary' ).hide();
 					$( '.hide_if_itinerary' ).hide();
@@ -215,21 +250,17 @@ class Trip_Options_Edit_Metabox {
         					$.ajax({
             					type: 'POST',
             					url: ajax_url,
-            					//contentType: "application/json; charset=utf-8",
             					dataType: "json",
             					data: {
 									'action': 'get_resources_by_category',
                 					'term_chosen': opt_categorias,
             					},
             					success: function (data) {
-									alert(data.length);
+									//alert(data.length);
 									$( '.opt_tipo', sub_element ).empty();
                 					$( '.opt_tipo', sub_element ).append("<option value=''>- Select Resource -</option>");
 
                 					$.each(data, function (i, item) {
-
-                    					$( '.opt_tipo', sub_element ).append('<option value="' + data[i].name + '">' + JSON.stringify(data[i]) + '</option>');
-                    					$( '.opt_tipo', sub_element ).append('<option value="' + data[i].name + '">' + JSON.stringify(item) + '</option>');
                     					$( '.opt_tipo', sub_element ).append('<option value="' + item + '">' + item + '</option>');
                 					});
 									
@@ -309,18 +340,12 @@ class Trip_Options_Edit_Metabox {
 		
 		$products = $query->get_products();
 		
-				$titles = array();
-				//echo '<option value="">' .  __( "- Select Resource -", "wp-travel" ) . '</option>';
-				foreach( $products as $product ) {
-					array_push($titles, $product->get_title());
-					//echo '<option value="' . $title . '">' . $title . '</option>';
-				}	
-				$json = json_encode( $titles );
-		//$json = json_encode( $products );
+		$titles = array();
+		foreach( $products as $product ) {
+			array_push($titles, $product->get_title());
+		}	
+		$json = json_encode( $titles );
 		echo $json;
-				//echo $titles;
-		
-		//echo $product_category_slug;
 		
 		die();
 		
@@ -369,45 +394,6 @@ class Trip_Options_Edit_Metabox {
 
 		</style>
 		<?php
-	}
-
-	function trip_options_metabox_callback( $post ) {
-
-		echo "<h3>Add Your Content Here</h3>";
-		$content = get_post_meta($post->ID, 'custom_editor', true);
-		
-		//This function adds the WYSIWYG Editor 
-		wp_editor ( $content , 'custom_editor', array ( "media_buttons" => true ) );
-		
-		/**
-		 * Retrieves a post meta field for the given post ID.
-		 * get_post_meta( int $post_id, string $key = '', bool $single = false )
-		 */
-		$seo_title = get_post_meta( $post->ID, 'seo_title', true );
-		$seo_robots = get_post_meta( $post->ID, 'seo_robots', true );
- 
-		// nonce, actually I think it is not necessary here
-		wp_nonce_field( 'somerandomstr', '_tripnonce' );
- 
-		echo '<table class="form-table">
-			<tbody>
-				<tr>
-					<th><label for="seo_title">SEO title</label></th>
-					<td><input type="text" id="seo_title" name="seo_title" value="' . esc_attr( $seo_title ) . '" class="regular-text"></td>
-				</tr>
-				<tr>
-					<th><label for="seo_tobots">SEO robots</label></th>
-					<td>
-						<select id="seo_robots" name="seo_robots">
-							<option value="">Select...</option>
-							<option value="index,follow"' . selected( 'index,follow', $seo_robots, false ) . '>Show for search engines</option>
-							<option value="noindex,nofollow"' . selected( 'noindex,nofollow', $seo_robots, false ) . '>Hide for search engines</option>
-						</select>
-					</td>
-				</tr>
-			</tbody>
-		</table>';
- 
 	}
 
 	/**
@@ -626,113 +612,291 @@ class Trip_Options_Edit_Metabox {
 			</tr>
 		</table>
 		</div>
-
-		<script>
-			jQuery(document).ready(function($) {
-				var ajax_url,ajax_url_additional = '/wp-admin/admin-ajax.php';
-				$('select').on('change', function (e) {
-    				var optionSelected = $("option:selected", this);
-					var valueSelected = this.value;
-					
-					var minicart_type = $('div.tables_cart_message_box').attr('data-type');
-                        
-					$.ajax({
-						type: 'POST',
-						url: ajax_url,
-						data: {
-							action: 'get_resources_by_category'
-						},
-						success: function(response){
-							$('select#itinerary_item_assignment').html('it is me');							
-
-							console.log(response);
-							setFragmentsRefresh( response );
-							var cart_hash = response.cart_hash;
-							var fragments = response.fragments;
-							var html = '';
-							var supportedElement = ['div.widget_shopping_cart_content','a.cart-contents','a.footer-cart-contents'];
-							if ( fragments && cart_hash !== '' ) {
-								if(minicart_type === 'load'){
-									$.each( fragments, function( key, value ) {
-										if($.inArray(key, supportedElement) != -1) {
-											html += value;
-										}                                
-									});
-									$('div.tables_cart_message_box').attr('data-type','refresh');//Set
-									$('div.tables_cart_message_box').html(html);
-								}                        
-							}
-					
-						},
-						error: function(){
-							console.log("Unable to Load Minicart");
-							return false;
-						}
-					});					
-				});		
-			} );
-		</script>
-	
 		<?php
 	}
 
-/*
- * File: functions.php
- * This function will enqueue (insert) the script into the WordPress header or footer the proper way, instead of adding it directly to the header.php
- * We use wp_localize_script to inject a javascript object, clocal, into our custom.js to gain access to the variables ajaxurl and nonce.
- *
- * Source:
- * https://developer.wordpress.org/reference/functions/wp_enqueue_script/
- * https://codex.wordpress.org/Function_Reference/wp_localize_script
- * https://codex.wordpress.org/Function_Reference/wp_create_nonce
- */
+	/**
+	 * Includes/Excludes metabox callback
+	 */
+	function trip_options_callback_includes_excludes( $post ) {
+		if ( ! $post ) {
+			global $post;
+		}
+		$trip_include = get_post_meta( $post->ID, 'wp_travel_trip_include', true );
+		$trip_exclude = get_post_meta( $post->ID, 'wp_travel_trip_exclude', true );
+		$settings = array ( 
+			"media_buttons" => true, 
+			'textarea_rows' => 10
+		);
+		?>
+		<div id='include_exclude_panel' class='panel woocommerce_options_panel'>
+			<h3><?php esc_html_e( 'Trip Includes', 'wp-travel' );?></h3>
+			<?php wp_editor ( $trip_include , 'wp_travel_trip_include', $settings );?>
+			<br><br>
+			<h3><?php esc_html_e( 'Trip Excludes', 'wp-travel' );?></h3>
+			<?php wp_editor ( $trip_exclude , 'wp_travel_trip_exclude', array ( "media_buttons" => true ) );?>
+			<br><br>
+		</div>
+		<?php		
+	}
 
-//add_action( 'wp_enqueue_scripts', 'cortez_enqueue_script' );
-function cortez_enqueue_script() {
-    wp_enqueue_script( 'cortez_custom_js', get_stylesheet_directory_uri() . '/custom.js', array( 'jQuery' ), '1.0', true );
-    wp_localize_script( 'cortez_custom_js', 'clocal', array(
-        'ajaxurl' => admin_url( 'admin-ajax.php' ),
-        'nonce'   => wp_create_nonce( 'cortez_nonce_security_key' ),
-    ) );
-}
 
+	/**
+	 * FAQs metabox callback
+	 *
+	 * @param  Object $post Post object.
+	 */
+	function trip_options_callback_faqs( $post ) {
+		if ( ! $post ) {
+			global $post;
+		}
+		$faqs = wp_travel_get_faqs( $post->ID );
+		$remove_faq = __( "- Remove FAQ", "wp-travel" );
+		?>
+		<div id='faq_panel' class='panel woocommerce_options_panel'>
+		<table style="width:100%; padding:1em">
+			<tr style="display:none" class="faq-init-rows">
+				<td><h3><?php esc_html_e( 'FAQ', 'wp-travel' ); ?></h3></td>
+				<td style="text-align:right"><button class="add-faq" type="button"><?php esc_html_e( '+ Add FAQ', 'wp-travel' ); ?></button></td>
+			</tr>
 
-/*
- * File: functions.php
- * Add this to your functions.php to enable the ajax call to be called from custom.js. The two actions are required if you want logged in and non-logged in users to be able to use the ajax function.
- *
- * Source:
- * https://codex.wordpress.org/AJAX_in_Plugins
- * https://codex.wordpress.org/Plugin_API/Action_Reference/wp_ajax_(action)
- * https://codex.wordpress.org/Plugin_API/Action_Reference/wp_ajax_nopriv_(action)
- * https://codex.wordpress.org/Function_Reference/wp_verify_nonce
- */
-//add_action( 'wp_ajax_cortez_get_terms', 'cortez_get_terms' );
-//add_action( 'wp_ajax_nopriv_cortez_get_terms', 'cortez_get_terms' );
-function cortez_get_terms() {
+		<?php
+		$xx = 0;
+		if ( is_array( $faqs ) && count( $faqs ) > 0 ) {
+			foreach ( $faqs as $faq ) {
+				$xx++;
+			}
+		} else {?>
+			<tr class="no-faqs"><td colspan="2">
+				<span><h3><?php esc_html_e( 'FAQ', 'wp-travel' ); ?></h3></span><br>
+				<span><?php esc_html_e( 'Please add new FAQ here.', 'wp-travel' ); ?></span>
+				<span id="first-faq"><?php esc_html_e( 'Add FAQ', 'wp-travel' ); ?></span>
+			</td></tr><?php
+		}?>
+
+			<tr style="display:none" class="faq-init-rows"><td colspan="2">
+				<ul id="faqs-ul"><?php			  
+				for ($x = 0; $x < 100; $x++) {
+					echo '<li style="display:none" class="faq-li" id="faq-li-' . $x . '">';
+						echo '<span class="fas fa-bars"> </span>';
+					if ($xx<=0) {
+						$faq_question = DEFAULT_FAQ_QUESTION;
+						echo '<span class="title">' . $faq_question . '</span><p style="display:none"></p>';
+					} else {
+						$faq_question = esc_attr( $faqs[$x]['question'] );
+						echo '<span class="title">' . $faq_question . '</span><p style="display:none">' . $x . '</p>';
+					}
+					$xx--;
+					echo '
+					<table>
+						<tr>
+							<th>' . __( 'Your question', 'wp-travel' ) . '</th>
+							<td><input type="text" width="100%" class="item-title" name="faq_item_question-' . $x . '" value="' . $faq_question . '" class="regular-text"></td>
+						</tr>
+						<tr>
+							<th>' . __( 'Your answer', 'wp-travel' ) . '</th>
+							<td><textarea rows="5" name="faq_item_answer-' . $x . '" class="regular-text">' . esc_attr( $faqs[$x]['answer'] ) . '</textarea></td>
+						</tr>
+						<tr>
+							<td colspan="2"><button class="remove-faq" type="button">' . $remove_faq . '</button></td>
+						</tr>
+					</table>
+			  		</li>';
+				}?>			
+				</ul>
+			</td></tr>
+
+			<tr style="display:none" class="faq-init-rows">
+				<td></td>
+				<td style="text-align:right"><button class="add-faq" type="button"><?php esc_html_e( "+ Add FAQ", "wp-travel" ); ?></button></td>
+			</tr>
+		</table>
+		</div>
+		<?php		
+	}
+
+	function trip_options_save_metabox( $post_id, $post ) {
 	
-    $data = esc_sql( $_POST );
-    if ( ! wp_verify_nonce( $data['nonce'], 'cortez_nonce_security_key' ) ) {
-        wp_die( 'Security check' );
-    }
-    if ( ! isset( $data['term_chosen'] ) || empty( $data['term_chosen'] ) ) {
-        wp_die( 'No Term Chosen' );
-    }
+		// nonce check
+		if ( ! isset( $_POST[ '_tripnonce' ] ) || ! wp_verify_nonce( $_POST[ '_tripnonce' ], 'somerandomstr' ) ) {
+			return $post_id;
+		}
 
-    $tipos_bicicletas       = 'tipos_bicicletas';
-    $modelos_bicicletas     = 'modelos_bicicletas';
-    $marcas_bicicletas      = 'marcas_bicicletas';
-    $tax_tipos_bicicletas   = get_terms( $tipos_bicicletas, array( 'hide_empty' => false ) );
-    $tax_modelos_bicicletas = get_terms( $modelos_bicicletas, array( 'hide_empty' => false ) );
-    $tax_marcas_bicicletas  = get_terms( $marcas_bicicletas, array( 'hide_empty' => false ) );
+		// check current use permissions
+		$post_type = get_post_type_object( $post->post_type );
 
-    $json = json_encode( $tax_tipos_bicicletas );
-    if ( $data['term_chosen'] == 'bicicleta' ) {
-        echo $json;
-    }
+		if ( ! current_user_can( $post_type->cap->edit_post, $post_id ) ) {
+			return $post_id;
+		}
 
-	wp_die(); //stop function once you've echoed (returned) what you need.
-}
+		// Do not save the data if autosave
+		if ( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE ) {
+			return $post_id;
+		}
+
+		// define your own post type here
+		if( $post->post_type != 'product' ) {
+			return $post_id;
+		}
+
+		// save the checkbox of product data option
+		$is_itinerary = isset( $_POST['_itinerary'] ) ? 'yes' : 'no';
+		update_post_meta( $post_id, '_itinerary', $is_itinerary );
+
+		/**
+		 * Updates a post meta field based on the given post ID.
+		 * update_post_meta( int $post_id, string $meta_key, mixed $meta_value, mixed $prev_value = '' )
+		 */
+
+		$itineraries = array();
+		$xx = 0;
+		for ($x = 0; $x < 100; $x++) {
+			//if ($_POST['itinerary_item_label-' . $x]!="" && $_POST['itinerary_item_label-' . $x] != DEFAULT_ITINERARY_LABEL && $_POST['itinerary_item_title-' . $x]!="" && $_POST['itinerary_item_title-' . $x] != DEFAULT_ITINERARY_TITLE) {
+			if ($_POST['itinerary_item_label-' . $x]!="" && $_POST['itinerary_item_label-' . $x] != DEFAULT_ITINERARY_LABEL) {
+				$itineraries[$xx]['label'] = sanitize_text_field( $_POST['itinerary_item_label-' . $x] );
+				$itineraries[$xx]['title'] = sanitize_text_field( $_POST['itinerary_item_title-' . $x] );
+				$itineraries[$xx]['date'] = sanitize_text_field( $_POST['itinerary_item_date-' . $x] );
+				$itineraries[$xx]['time'] = sanitize_text_field( $_POST['itinerary_item_time-' . $x] );
+				$itineraries[$xx]['desc'] = sanitize_text_field( $_POST['itinerary_item_desc-' . $x] );
+				$yy = 0;
+				for ($y = 0; $y < 10; $y++) {
+					if ($_POST['itinerary_item_assignment-' . $x . '-category-' . $y]!="") {
+						$itineraries[$xx]['assignment'][$yy]['category'] = sanitize_text_field( $_POST['itinerary_item_assignment-' . $x . '-category-' . $y] );
+					}
+					if ($_POST['itinerary_item_assignment-' . $x . '-resource-' . $y]!="") {
+						$itineraries[$xx]['assignment'][$yy]['resource'] = sanitize_text_field( $_POST['itinerary_item_assignment-' . $x . '-resource-' . $y] );
+					}
+					$yy++;
+				}
+				$xx++;
+			}
+		}
+		//delete_post_meta( $post_id, 'wp_travel_trip_itinerary_data' );
+		update_post_meta( $post_id, 'wp_travel_trip_itinerary_data', $itineraries );
+
+		$pricings = array();
+		$xx = 0;
+		for ($x = 0; $x < 100; $x++) {
+			if ($_POST['pricing_item_title-' . $x]!="" && $_POST['pricing_item_title-' . $x] != DEFAULT_PRICING) {
+				$pricings[$xx]['title'] = sanitize_text_field( $_POST['pricing_item_title-' . $x] );
+				$pricings[$xx]['min_pax'] = sanitize_text_field( $_POST['pricing_min_pax-' . $x] );
+				$pricings[$xx]['max_pax'] = sanitize_text_field( $_POST['pricing_max_pax-' . $x] );
+				$xx++;
+			}
+		}
+
+		if (!empty($_POST['wp_travel_trip_include'])) {
+			$includes = sanitize_text_field( $_POST['wp_travel_trip_include'] );
+			update_post_meta($post_id, 'wp_travel_trip_include', $includes);
+		}
+
+		if (!empty($_POST['wp_travel_trip_exclude'])) {
+			$excludes = sanitize_text_field( $_POST['wp_travel_trip_exclude'] );
+			update_post_meta($post_id, 'wp_travel_trip_exclude', $excludes);
+		}
+
+		$faqs = array();
+		$xx = 0;
+		for ($x = 0; $x < 100; $x++) {
+			if ($_POST['faq_item_question-' . $x] != "" && $_POST['faq_item_question-' . $x] != DEFAULT_FAQ_QUESTION) {
+				$faqs['question'][$xx] = sanitize_text_field( $_POST['faq_item_question-' . $x] );
+				$faqs['answer'][$xx] = sanitize_text_field( $_POST['faq_item_answer-' . $x] );
+				$xx++;
+			}
+		}
+		$question = isset( $faqs['question'] ) ? $faqs['question'] : array();
+		$answer   = isset( $faqs['answer'] ) ? $faqs['answer'] : array();
+		update_post_meta( $post_id, 'wp_travel_faq_question', $question );
+		update_post_meta( $post_id, 'wp_travel_faq_answer', $answer );
+
+		return $post_id;
+	}
+
+	/**
+	 * Tabs metabox callback
+	 */
+	function trip_options_callback_tabs( $post ) {
+		if ( ! $post ) {
+			return;
+		}
+		$trip_tabs = wp_travel_get_admin_trip_tabs( $post->ID );
+
+		echo '$post->ID = ' . $post->ID;
+		echo '{';
+			foreach ( $trip_tabs as $key=>$values ) {
+				echo $key.':{';
+				foreach ( $values as $key=>$value ) {
+					echo '{'.$key.':'.$value.'},';
+				}
+				echo '},';
+			}
+		echo '}';
+
+		?>
+		<ul id="tabs-ul" style="width:100%" >
+		<?php
+		if ( is_array( $trip_tabs ) && count( $trip_tabs ) > 0 ) {
+			foreach ( $trip_tabs as $key=>$value ) {
+				echo '<li class="tab-li" id="tab-li-' . $key . '"><span class="fas fa-bars">';
+				$tab_label = esc_attr( $trip_tabs[$key]['label'] );
+				echo $tab_label . '</span><p style="display:none">' . $key . '</p>';
+
+				echo '
+				<table class="update-tab" style="width:100%">
+					<tbody>
+					<tr>
+						<th>Default Trip Title</th>
+						<td><input type="text" name="tab_item_default-' . $key . '" value="' . esc_attr( $trip_tabs[$key]['label'] ) . '"></td>
+					</tr>
+					<tr>
+						<th>Custom Trip Title</th>
+						<td><input type="text" class="item-title" name="tab_item_custom-' . $key . '" value="' . $tab_label . '"></td>
+					</tr>
+					<tr>
+						<th>Display</th>
+						<td><input type="checkbox" checked name="tab_item_show_in_menu-' . $key . '" value="' . esc_attr( $trip_tabs[$key]['show_in_menu'] ) . '"></td>
+					</tr>
+					</tbody>
+				</table>
+				</li>';
+
+			}
+		}?>			
+		</ul>
+
+		<script>
+			jQuery(document).ready(function($) {
+    			$( "#tabs-ul" ).sortable();
+				$( "#tabs-ul" ).disableSelection();
+				$( ".tab-li" ).hide();
+
+				$( ".tab-li" ).each( function( index, element ) {
+					if ( !$( 'p', element ).is(":empty") ) {
+						$( ".init-rows" ).show();
+						$( element ).show();
+						$( element ).delegate("span", "click", function(){
+							$( 'table', element ).toggleClass('toggle-access');
+						});
+					};
+
+					$( element ).delegate(".item-title", "keyup", function(){
+						$( 'span', element ).text($(this).val());
+					});
+				});
+			} );
+		</script>
+	
+		<style>
+  			#tabs-ul { list-style-type:none; margin:0; padding:0; width:100%; }
+  			#tabs-ul li { background:#f2f2f2; border:1px solid #ccc; margin:0 3px 3px 3px; padding:0.4em; padding-left:1.5em; font-size:1.4em; }
+			#tabs-ul li span { margin-left:-1.3em; cursor:pointer; }
+			#tabs-ul li table { background:#ffffff; border:1px solid #ccc; width:100%; display:none; margin-left:-1.2em; padding-left:1.5em; }
+			#tabs-ul li .toggle-access { display:block; }
+			/*#first-tab { color:blue; text-decoration:underline; cursor:pointer;}*/
+			/*.fa-bars:before { content: "\f0c9"; }*/
+  		</style>
+		<?php
+	}
 
 	/**
 	 * Prices & Dates metabox callback
@@ -892,494 +1056,150 @@ function cortez_get_terms() {
   		</style>
 		<?php
 	}
-
-	/**
-	 * Includes/Excludes metabox callback
-	 */
-	function trip_options_callback_includes_excludes( $post ) {
-		if ( ! $post ) {
-			global $post;
-		}
-		$trip_include = get_post_meta( $post->ID, 'wp_travel_trip_include', true );
-		$trip_exclude = get_post_meta( $post->ID, 'wp_travel_trip_exclude', true );
-		$settings = array ( 
-			"media_buttons" => true, 
-			'textarea_rows' => 10
-		);
-		?>
-		<div id='include_exclude_panel' class='panel woocommerce_options_panel'>
-			<h3><?php esc_html_e( 'Trip Includes', 'wp-travel' );?></h3>
-			<?php wp_editor ( $trip_include , 'wp_travel_trip_include', $settings );?>
-			<br><br>
-			<h3><?php esc_html_e( 'Trip Excludes', 'wp-travel' );?></h3>
-			<?php wp_editor ( $trip_exclude , 'wp_travel_trip_exclude', array ( "media_buttons" => true ) );?>
-			<br><br>
-		</div>
-		<?php		
-	}
-
-
-	/**
-	 * FAQs metabox callback
-	 *
-	 * @param  Object $post Post object.
-	 */
-	function trip_options_callback_faqs( $post ) {
-		if ( ! $post ) {
-			global $post;
-		}
-		$faqs = wp_travel_get_faqs( $post->ID );
-		$remove_faq = __( "- Remove FAQ", "wp-travel" );
-		?>
-		<div id='faq_panel' class='panel woocommerce_options_panel'>
-		<table style="width:100%; padding:1em">
-			<tr style="display:none" class="faq-init-rows">
-				<td><h3><?php esc_html_e( 'FAQ', 'wp-travel' ); ?></h3></td>
-				<td style="text-align:right"><button class="add-faq" type="button"><?php esc_html_e( '+ Add FAQ', 'wp-travel' ); ?></button></td>
-			</tr>
-
-		<?php
-		$xx = 0;
-		if ( is_array( $faqs ) && count( $faqs ) > 0 ) {
-			foreach ( $faqs as $faq ) {
-				$xx++;
-			}
-		} else {?>
-			<tr class="no-faqs"><td colspan="2">
-				<span><h3><?php esc_html_e( 'FAQ', 'wp-travel' ); ?></h3></span><br>
-				<span><?php esc_html_e( 'Please add new FAQ here.', 'wp-travel' ); ?></span>
-				<span id="first-faq"><?php esc_html_e( 'Add FAQ', 'wp-travel' ); ?></span>
-			</td></tr><?php
-		}?>
-
-			<tr style="display:none" class="faq-init-rows"><td colspan="2">
-				<ul id="faqs-ul"><?php			  
-				for ($x = 0; $x < 100; $x++) {
-					echo '<li style="display:none" class="faq-li" id="faq-li-' . $x . '">';
-						echo '<span class="fas fa-bars"> </span>';
-					if ($xx<=0) {
-						$faq_question = DEFAULT_FAQ_QUESTION;
-						echo '<span class="title">' . $faq_question . '</span><p style="display:none"></p>';
-					} else {
-						$faq_question = esc_attr( $faqs[$x]['question'] );
-						echo '<span class="title">' . $faq_question . '</span><p style="display:none">' . $x . '</p>';
-					}
-					$xx--;
-					echo '
-					<table>
-						<tr>
-							<th>' . __( 'Your question', 'wp-travel' ) . '</th>
-							<td><input type="text" width="100%" class="item-title" name="faq_item_question-' . $x . '" value="' . $faq_question . '" class="regular-text"></td>
-						</tr>
-						<tr>
-							<th>' . __( 'Your answer', 'wp-travel' ) . '</th>
-							<td><textarea rows="5" name="faq_item_answer-' . $x . '" class="regular-text">' . esc_attr( $faqs[$x]['answer'] ) . '</textarea></td>
-						</tr>
-						<tr>
-							<td colspan="2"><button class="remove-faq" type="button">' . $remove_faq . '</button></td>
-						</tr>
-					</table>
-			  		</li>';
-				}?>			
-				</ul>
-			</td></tr>
-
-			<tr style="display:none" class="faq-init-rows">
-				<td></td>
-				<td style="text-align:right"><button class="add-faq" type="button"><?php esc_html_e( "+ Add FAQ", "wp-travel" ); ?></button></td>
-			</tr>
-		</table>
-		</div>
-
-		<script>
-			jQuery(document).ready(function($) {
-    			//$( "#faqs-ul" ).sortable();
-				//$( "#faqs-ul" ).disableSelection();
-/*
-				$("#first-faq").click( function(){
-					$(".no-faqs").hide();
-					$(".faq-init-rows").show();
-					$(".faq-li").hide();
-					$("#faq-li-0").show();
-					$('span','#faq-li-0').on('click', function() {
-						$('table','#faq-li-0').toggleClass('toggle-access');
-					});
-				} );
-			
-				$( ".faq-li" ).hide();
-
-				$( ".faq-li" ).each( function( index, element ) {
-					if ( !$( 'p', element ).is(":empty") ) {
-						$( ".faq-init-rows" ).show();
-						$( element ).show();
-						$( element ).delegate("span", "click", function(){
-							$( 'table', element ).toggleClass('toggle-access');
-						});
-					};
-
-					$( element ).delegate(".item-title", "keyup", function(){
-						$( 'span', element ).text($(this).val());
-					});
-				});
-
-				//$( "#add-faq" ).click( function(){
-				$( ".add-faq" ).click( function(){
-					$( ".faq-li" ).each( function( index, element ) {
-						if ( $( element ).is(":hidden") ) {
-							$( element ).show();
-							$( element ).delegate("span", "click", function(){
-								$( 'table', element ).toggleClass('toggle-access');
-							});
-							return false;
-						};
-					});
-				} );
-
-				$( ".remove-faq" ).each( function( index, element ) {
-					$( element ).delegate("button", "click", function(){
-						//$( this ).closest('.faq-li').remove();
-						$( element ).closest('.faq-li').remove();
-					});						
-				});
-
-				$( '.faq_item_date' ).datepicker();
-*/				
-			} );
-		</script>
-	
-		<style>
-/*		
-  			#faqs-ul { list-style-type:none; margin:0; padding:0; width:100%; }
-  			#faqs-ul li { background:#f2f2f2; border:1px solid #ccc; margin:0 3px 3px 3px; padding:0.4em; padding-left:1.5em; font-size:1.4em; }
-			#faqs-ul li span { margin-left:-1.3em; cursor:pointer; }
-			#faqs-ul li table { background:#ffffff; border:1px solid #ccc; width:100%; display:none; margin-left:-1.3em; padding-left:1.3em; }
-			#faqs-ul li .toggle-access { display:block; }
-			#faqs-ul li th { width:25%; }
-			#faqs-ul li input { width:100%; }
-			#faqs-ul li textarea { width:100%; }
-			#first-faq { color:blue; text-decoration:underline; cursor:pointer; }
-			.fa-bars:before { content: "\f0c9"; }
-*/			
-  		</style>
-		<?php		
-	}
-
-	/**
-	 * Tabs metabox callback
-	 */
-	function trip_options_callback_tabs( $post ) {
-		if ( ! $post ) {
-			return;
-		}
-		$trip_tabs = wp_travel_get_admin_trip_tabs( $post->ID );
-
-		echo '$post->ID = ' . $post->ID;
-		echo '{';
-			foreach ( $trip_tabs as $key=>$values ) {
-				echo $key.':{';
-				foreach ( $values as $key=>$value ) {
-					echo '{'.$key.':'.$value.'},';
-				}
-				echo '},';
-			}
-		echo '}';
-
-		?>
-		<ul id="tabs-ul" style="width:100%" >
-		<?php
-		if ( is_array( $trip_tabs ) && count( $trip_tabs ) > 0 ) {
-			foreach ( $trip_tabs as $key=>$value ) {
-				echo '<li class="tab-li" id="tab-li-' . $key . '"><span class="fas fa-bars">';
-				$tab_label = esc_attr( $trip_tabs[$key]['label'] );
-				echo $tab_label . '</span><p style="display:none">' . $key . '</p>';
-
-				echo '
-				<table class="update-tab" style="width:100%">
-					<tbody>
-					<tr>
-						<th>Default Trip Title</th>
-						<td><input type="text" name="tab_item_default-' . $key . '" value="' . esc_attr( $trip_tabs[$key]['label'] ) . '"></td>
-					</tr>
-					<tr>
-						<th>Custom Trip Title</th>
-						<td><input type="text" class="item-title" name="tab_item_custom-' . $key . '" value="' . $tab_label . '"></td>
-					</tr>
-					<tr>
-						<th>Display</th>
-						<td><input type="checkbox" checked name="tab_item_show_in_menu-' . $key . '" value="' . esc_attr( $trip_tabs[$key]['show_in_menu'] ) . '"></td>
-					</tr>
-					</tbody>
-				</table>
-				</li>';
-
-			}
-		}?>			
-		</ul>
-
-		<script>
-			jQuery(document).ready(function($) {
-    			$( "#tabs-ul" ).sortable();
-				$( "#tabs-ul" ).disableSelection();
-				$( ".tab-li" ).hide();
-
-				$( ".tab-li" ).each( function( index, element ) {
-					if ( !$( 'p', element ).is(":empty") ) {
-						$( ".init-rows" ).show();
-						$( element ).show();
-						$( element ).delegate("span", "click", function(){
-							$( 'table', element ).toggleClass('toggle-access');
-						});
-					};
-
-					$( element ).delegate(".item-title", "keyup", function(){
-						$( 'span', element ).text($(this).val());
-					});
-				});
-			} );
-		</script>
-	
-		<style>
-  			#tabs-ul { list-style-type:none; margin:0; padding:0; width:100%; }
-  			#tabs-ul li { background:#f2f2f2; border:1px solid #ccc; margin:0 3px 3px 3px; padding:0.4em; padding-left:1.5em; font-size:1.4em; }
-			#tabs-ul li span { margin-left:-1.3em; cursor:pointer; }
-			#tabs-ul li table { background:#ffffff; border:1px solid #ccc; width:100%; display:none; margin-left:-1.2em; padding-left:1.5em; }
-			#tabs-ul li .toggle-access { display:block; }
-			/*#first-tab { color:blue; text-decoration:underline; cursor:pointer;}*/
-			/*.fa-bars:before { content: "\f0c9"; }*/
-  		</style>
-		<?php
-	}
-
-	function trip_options_save_metabox( $post_id, $post ) {
-	
-		// nonce check
-		if ( ! isset( $_POST[ '_tripnonce' ] ) || ! wp_verify_nonce( $_POST[ '_tripnonce' ], 'somerandomstr' ) ) {
-			return $post_id;
-		}
-
-		// check current use permissions
-		$post_type = get_post_type_object( $post->post_type );
-
-		if ( ! current_user_can( $post_type->cap->edit_post, $post_id ) ) {
-			return $post_id;
-		}
-
-		// Do not save the data if autosave
-		if ( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE ) {
-			return $post_id;
-		}
-
-		// define your own post type here
-		if( $post->post_type != 'product' ) {
-			return $post_id;
-		}
-
-		// save the checkbox of product data option
-		$is_itinerary = isset( $_POST['_itinerary'] ) ? 'yes' : 'no';
-		update_post_meta( $post_id, '_itinerary', $is_itinerary );
-
-		/**
-		 * Updates a post meta field based on the given post ID.
-		 * update_post_meta( int $post_id, string $meta_key, mixed $meta_value, mixed $prev_value = '' )
-		 */
-
-		$itineraries = array();
-		$xx = 0;
-		for ($x = 0; $x < 100; $x++) {
-			//if ($_POST['itinerary_item_label-' . $x]!="" && $_POST['itinerary_item_label-' . $x] != DEFAULT_ITINERARY_LABEL && $_POST['itinerary_item_title-' . $x]!="" && $_POST['itinerary_item_title-' . $x] != DEFAULT_ITINERARY_TITLE) {
-			if ($_POST['itinerary_item_label-' . $x]!="" && $_POST['itinerary_item_label-' . $x] != DEFAULT_ITINERARY_LABEL) {
-				$itineraries[$xx]['label'] = sanitize_text_field( $_POST['itinerary_item_label-' . $x] );
-				$itineraries[$xx]['title'] = sanitize_text_field( $_POST['itinerary_item_title-' . $x] );
-				$itineraries[$xx]['date'] = sanitize_text_field( $_POST['itinerary_item_date-' . $x] );
-				$itineraries[$xx]['time'] = sanitize_text_field( $_POST['itinerary_item_time-' . $x] );
-				$itineraries[$xx]['desc'] = sanitize_text_field( $_POST['itinerary_item_desc-' . $x] );
-				$yy = 0;
-				for ($y = 0; $y < 10; $y++) {
-					if ($_POST['itinerary_item_assignment-' . $x . '-category-' . $y]!="") {
-						$itineraries[$xx]['assignment'][$yy]['category'] = sanitize_text_field( $_POST['itinerary_item_assignment-' . $x . '-category-' . $y] );
-					}
-					if ($_POST['itinerary_item_assignment-' . $x . '-resource-' . $y]!="") {
-						$itineraries[$xx]['assignment'][$yy]['resource'] = sanitize_text_field( $_POST['itinerary_item_assignment-' . $x . '-resource-' . $y] );
-					}
-					$yy++;
-				}
-				$xx++;
-			}
-		}
-		//delete_post_meta( $post_id, 'wp_travel_trip_itinerary_data' );
-		update_post_meta( $post_id, 'wp_travel_trip_itinerary_data', $itineraries );
-
-		$pricings = array();
-		$xx = 0;
-		for ($x = 0; $x < 100; $x++) {
-			if ($_POST['pricing_item_title-' . $x]!="" && $_POST['pricing_item_title-' . $x] != DEFAULT_PRICING) {
-				$pricings[$xx]['title'] = sanitize_text_field( $_POST['pricing_item_title-' . $x] );
-				$pricings[$xx]['min_pax'] = sanitize_text_field( $_POST['pricing_min_pax-' . $x] );
-				$pricings[$xx]['max_pax'] = sanitize_text_field( $_POST['pricing_max_pax-' . $x] );
-				$xx++;
-			}
-		}
-
-		if (!empty($_POST['wp_travel_trip_include'])) {
-			$includes = sanitize_text_field( $_POST['wp_travel_trip_include'] );
-			update_post_meta($post_id, 'wp_travel_trip_include', $includes);
-		}
-
-		if (!empty($_POST['wp_travel_trip_exclude'])) {
-			$excludes = sanitize_text_field( $_POST['wp_travel_trip_exclude'] );
-			update_post_meta($post_id, 'wp_travel_trip_exclude', $excludes);
-		}
-
-		$faqs = array();
-		$xx = 0;
-		for ($x = 0; $x < 100; $x++) {
-			if ($_POST['faq_item_question-' . $x] != "" && $_POST['faq_item_question-' . $x] != DEFAULT_FAQ_QUESTION) {
-				$faqs['question'][$xx] = sanitize_text_field( $_POST['faq_item_question-' . $x] );
-				$faqs['answer'][$xx] = sanitize_text_field( $_POST['faq_item_answer-' . $x] );
-				$xx++;
-			}
-		}
-		$question = isset( $faqs['question'] ) ? $faqs['question'] : array();
-		$answer   = isset( $faqs['answer'] ) ? $faqs['answer'] : array();
-		update_post_meta( $post_id, 'wp_travel_faq_question', $question );
-		update_post_meta( $post_id, 'wp_travel_faq_answer', $answer );
-
-/*
-		if( isset( $_POST[ 'seo_robots' ] ) ) {
-			update_post_meta( $post_id, 'seo_robots', sanitize_text_field( $_POST[ 'seo_robots' ] ) );
-		} else {
-			delete_post_meta( $post_id, 'seo_robots' );
-		}
-*/
-		return $post_id;
-	}
-
-	/**
-	 * Add a new meta box for product
-	 * Step 1. add_meta_box()
-	 * Step 2. Callback function with meta box HTML
-	 * Step 3. Save meta box data
-	 */
-	function trip_options_add_metabox() {
-		add_meta_box(
-			'trip-options', // metabox ID
-			esc_html__( 'Trip Options', 'dgc-domain' ), // title
-			array( __CLASS__, 'trip_options_metabox_callback' ), // callback function
-			//array( __CLASS__, 'horizontal_tabs_metabox' ), // callback function
-			//array( __CLASS__, 'vertical_example_metabox' ), // callback function
-			'product', // post type or post types in array
-			'normal', // position (normal, side, advanced)
-			'default' // priority (default, low, high, core)
-		);
-		//wp_enqueue_script( 'mytabs', get_bloginfo( 'stylesheet_directory' ). '/mytabs.js', array( 'jquery-ui-tabs' ) );
-		wp_enqueue_script( 'mytabs', 'mytabs.js', array( 'jquery-ui-tabs' ) );
-		//wp_enqueue_script( 'mytabs', '', array( 'jquery-ui-tabs' ) );
-	}
- 
-	function horizontal_tabs_metabox( $post ) {
-		?>
-		<div id="mytabs">
-			<ul class="category-tabs">
-				<li><a href="#tab_itinerary"><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></a></li>
-<!--			<li><a href="#tab_prices_dates"><?php //esc_html_e( 'Prices & Dates', 'wp-travel' ); ?></a></li>  -->
-				<li><a href="#tab_includes_excludes"><?php esc_html_e( 'Includes/Excludes', 'wp-travel' ); ?></a></li>
-				<li><a href="#tab_facts"><?php esc_html_e( 'Facts', 'wp-travel' ); ?></a></li>
-				<li><a href="#tab_gallery"><?php esc_html_e( 'Gallery', 'wp-travel' ); ?></a></li>
-				<li><a href="#tab_locations"><?php esc_html_e( 'Locations', 'wp-travel' ); ?></a></li>
-				<li><a href="#tab_faqs"><?php esc_html_e( 'FAQs', 'wp-travel' ); ?></a></li>
-				<li><a href="#tab_misc"><?php esc_html_e( 'Misc. Options', 'wp-travel' ); ?></a></li>
-				<li><a href="#tab_tabs"><?php esc_html_e( 'Tabs', 'wp-travel' ); ?></a></li>
-			</ul>
-			<br class="clear" />
-			<div id="tab_itinerary">
-				<?php self::trip_options_callback_itinerary( $post )?>
-			</div>
-
-			<div class="hidden" id="tab_prices_dates">
-				<?php //self::trip_options_callback_prices_dates( $post )?>
-			</div>
-
-			<div class="hidden" id="tab_includes_excludes">
-				<?php self::trip_options_callback_includes_excludes( $post )?>
-			</div>
-			
-			<div class="hidden" id="tab_facts">
-				<?php self::trip_options_metabox_callback( $post )?>
-			</div>
-			
-			<div class="hidden" id="tab_gallery">
-				<?php self::trip_options_metabox_callback( $post )?>
-			</div>
-			
-			<div class="hidden" id="tab_locations">
-				<?php self::trip_options_metabox_callback( $post )?>
-			</div>
-			
-			<div class="hidden" id="tab_faqs">
-				<?php self::trip_options_callback_faqs( $post )?>
-			</div>
-			
-			<div class="hidden" id="tab_misc">
-				<?php self::trip_options_metabox_callback( $post )?>
-			</div>
-			
-			<div class="hidden" id="tab_tabs">
-				<?php self::trip_options_callback_tabs( $post )?>
-			</div>
-		</div>
-		<table style="width:100%">
-			<tr>
-				<td><?php esc_html_e( '* Please save the changes', 'wp-travel' ); ?></td>
-				<td style="text-align:right"><button id="save-changes" style="background:blue;color:white" type="button"><?php esc_html_e( 'Save Changes', 'wp-travel' ); ?></button></td>
-			</tr>
-		</table>
-
-		<script>
-			jQuery(document).ready(function($) {
-    			$("#mytabs .hidden").removeClass('hidden');
-				$("#mytabs").tabs();
-				
-				$("#save-changes").click( function(){
-					$.ajax({
-            			url:"test.php",    //the page containing php script
-            			type: "post",    //request type,
-            			dataType: 'json',
-            			data: {registration: "success", name: "xyz", email: "abc@gmail.com"},
-            			success:function(result){
-                			console.log(result.abc);
-            			}
-        			});
-				});
-			});
-		</script>
-		<?php
-	}
-
 }
 new Trip_Options_Edit_Metabox;
 
 
-/**
- * Add a custom Product Data tab
- */
-/*
-add_filter( 'woocommerce_product_data_tabs', 'wk_custom_product_tab', 10, 1 );
-function wk_custom_product_tab( $default_tabs ) {
-    $default_tabs['custom_tab'] = array(
-        'label'   =>  __( 'Itineraries', 'domain' ),
-        'target'  =>  'wk_custom_tab_data',
-        'priority' => 60,
-        'class'   => array()
-    );
-    return $default_tabs;
+
+function trip_options_metabox_callback( $post ) {
+
+	echo "<h3>Add Your Content Here</h3>";
+	$content = get_post_meta($post->ID, 'custom_editor', true);
+	
+	//This function adds the WYSIWYG Editor 
+	wp_editor ( $content , 'custom_editor', array ( "media_buttons" => true ) );
+	
+	/**
+	 * Retrieves a post meta field for the given post ID.
+	 * get_post_meta( int $post_id, string $key = '', bool $single = false )
+	 */
+	$seo_title = get_post_meta( $post->ID, 'seo_title', true );
+	$seo_robots = get_post_meta( $post->ID, 'seo_robots', true );
+
+	// nonce, actually I think it is not necessary here
+	wp_nonce_field( 'somerandomstr', '_tripnonce' );
+
+	echo '<table class="form-table">
+		<tbody>
+			<tr>
+				<th><label for="seo_title">SEO title</label></th>
+				<td><input type="text" id="seo_title" name="seo_title" value="' . esc_attr( $seo_title ) . '" class="regular-text"></td>
+			</tr>
+			<tr>
+				<th><label for="seo_tobots">SEO robots</label></th>
+				<td>
+					<select id="seo_robots" name="seo_robots">
+						<option value="">Select...</option>
+						<option value="index,follow"' . selected( 'index,follow', $seo_robots, false ) . '>Show for search engines</option>
+						<option value="noindex,nofollow"' . selected( 'noindex,nofollow', $seo_robots, false ) . '>Hide for search engines</option>
+					</select>
+				</td>
+			</tr>
+		</tbody>
+	</table>'; 
 }
 
-add_action( 'woocommerce_product_data_panels', 'wk_custom_tab_data' );
-function wk_custom_tab_data() {
-   echo '<div id="wk_custom_tab_data" class="panel woocommerce_options_panel">// add content here</div>';
-   //Trip_Options_Edit_Metabox::trip_options_callback_itinerary();
+/**
+ * Add a new meta box for product
+ * Step 1. add_meta_box()
+ * Step 2. Callback function with meta box HTML
+ * Step 3. Save meta box data
+ */
+function trip_options_add_metabox() {
+	add_meta_box(
+		'trip-options', // metabox ID
+		esc_html__( 'Trip Options', 'dgc-domain' ), // title
+		array( __CLASS__, 'trip_options_metabox_callback' ), // callback function
+		//array( __CLASS__, 'horizontal_tabs_metabox' ), // callback function
+		//array( __CLASS__, 'vertical_example_metabox' ), // callback function
+		'product', // post type or post types in array
+		'normal', // position (normal, side, advanced)
+		'default' // priority (default, low, high, core)
+	);
+	//wp_enqueue_script( 'mytabs', get_bloginfo( 'stylesheet_directory' ). '/mytabs.js', array( 'jquery-ui-tabs' ) );
+	wp_enqueue_script( 'mytabs', 'mytabs.js', array( 'jquery-ui-tabs' ) );
+	//wp_enqueue_script( 'mytabs', '', array( 'jquery-ui-tabs' ) );
 }
-*/
+
+function horizontal_tabs_metabox( $post ) {
+	?>
+	<div id="mytabs">
+		<ul class="category-tabs">
+			<li><a href="#tab_itinerary"><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></a></li>
+<!--			<li><a href="#tab_prices_dates"><?php //esc_html_e( 'Prices & Dates', 'wp-travel' ); ?></a></li>  -->
+			<li><a href="#tab_includes_excludes"><?php esc_html_e( 'Includes/Excludes', 'wp-travel' ); ?></a></li>
+			<li><a href="#tab_facts"><?php esc_html_e( 'Facts', 'wp-travel' ); ?></a></li>
+			<li><a href="#tab_gallery"><?php esc_html_e( 'Gallery', 'wp-travel' ); ?></a></li>
+			<li><a href="#tab_locations"><?php esc_html_e( 'Locations', 'wp-travel' ); ?></a></li>
+			<li><a href="#tab_faqs"><?php esc_html_e( 'FAQs', 'wp-travel' ); ?></a></li>
+			<li><a href="#tab_misc"><?php esc_html_e( 'Misc. Options', 'wp-travel' ); ?></a></li>
+			<li><a href="#tab_tabs"><?php esc_html_e( 'Tabs', 'wp-travel' ); ?></a></li>
+		</ul>
+		<br class="clear" />
+		<div id="tab_itinerary">
+			<?php //self::trip_options_callback_itinerary( $post )?>
+		</div>
+
+		<div class="hidden" id="tab_prices_dates">
+			<?php //self::trip_options_callback_prices_dates( $post )?>
+		</div>
+
+		<div class="hidden" id="tab_includes_excludes">
+			<?php //self::trip_options_callback_includes_excludes( $post )?>
+		</div>
+		
+		<div class="hidden" id="tab_facts">
+			<?php //self::trip_options_metabox_callback( $post )?>
+		</div>
+		
+		<div class="hidden" id="tab_gallery">
+			<?php //self::trip_options_metabox_callback( $post )?>
+		</div>
+		
+		<div class="hidden" id="tab_locations">
+			<?php //self::trip_options_metabox_callback( $post )?>
+		</div>
+		
+		<div class="hidden" id="tab_faqs">
+			<?php //self::trip_options_callback_faqs( $post )?>
+		</div>
+		
+		<div class="hidden" id="tab_misc">
+			<?php //self::trip_options_metabox_callback( $post )?>
+		</div>
+		
+		<div class="hidden" id="tab_tabs">
+			<?php //self::trip_options_callback_tabs( $post )?>
+		</div>
+	</div>
+	<table style="width:100%">
+		<tr>
+			<td><?php esc_html_e( '* Please save the changes', 'wp-travel' ); ?></td>
+			<td style="text-align:right"><button id="save-changes" style="background:blue;color:white" type="button"><?php esc_html_e( 'Save Changes', 'wp-travel' ); ?></button></td>
+		</tr>
+	</table>
+
+	<script>
+		jQuery(document).ready(function($) {
+			$("#mytabs .hidden").removeClass('hidden');
+			$("#mytabs").tabs();
+			
+			$("#save-changes").click( function(){
+				$.ajax({
+					url:"test.php",    //the page containing php script
+					type: "post",    //request type,
+					dataType: 'json',
+					data: {registration: "success", name: "xyz", email: "abc@gmail.com"},
+					success:function(result){
+						console.log(result.abc);
+					}
+				});
+			});
+		});
+	</script>
+	<?php
+}
+
 function vertical_example_metabox( $post ) {
 	?>
 	<div id="tabs">
