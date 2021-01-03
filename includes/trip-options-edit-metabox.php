@@ -230,6 +230,7 @@ class Trip_Options_Edit_Metabox {
 
                     					$( '.opt_tipo', sub_element ).append('<option value="' + data[i].name + '">' + JSON.stringify(data[i]) + '</option>');
                     					$( '.opt_tipo', sub_element ).append('<option value="' + data[i].name + '">' + JSON.stringify(item) + '</option>');
+                    					$( '.opt_tipo', sub_element ).append('<option value="' + data[i].name + '">' + item + '</option>');
                 					});
 									
             					},
