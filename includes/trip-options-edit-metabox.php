@@ -5,7 +5,7 @@ class Trip_Options_Edit_Metabox {
 	 * Constructor.
 	 */
 	function __construct() {
-		//add_action( 'admin_menu', array( __CLASS__, 'trip_options_add_metabox' ) );
+		add_action( 'admin_menu', array( __CLASS__, 'trip_options_add_metabox' ) );
 		add_action( 'save_post', array( __CLASS__, 'trip_options_save_metabox' ), 10, 2 );
 
 		add_filter( 'product_type_options', array( __CLASS__, 'add_remove_product_options' ) );
