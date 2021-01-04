@@ -285,7 +285,7 @@ class Trip_Options_Edit_Metabox {
 					add_assignment += '<option>- Select Category -</option>';
 					add_assignment += '</select></td><td>';
 					//add_assignment += '<select style="width:100%" class="opt-tipo" name="itinerary_item_assignment-'+ index +'-resource-'+ index +'">';
-					add_assignment += '<select style="width:100%" class="opt-tipo" name="itinerary_item_assignment-">';
+					add_assignment += '<select style="width:100%" class="opt-tipo" name="itinerary_item_assignment-'+ index +'">';
 					add_assignment += '<option>- Select Resource -</option>';
 					add_assignment += '</select></td></tr>';
 					$( element ).delegate( '.add-assignment', 'click', function() {
