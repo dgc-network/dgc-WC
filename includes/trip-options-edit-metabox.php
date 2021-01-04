@@ -281,7 +281,7 @@ class Trip_Options_Edit_Metabox {
 						$( '#assignment-row-0', element ).show();
 					});
 					$( element ).delegate( '.add-assignment', 'click', function() {
-						$( '.assignment-rows', element ).after('<tr class="assignment-rows"><td><select><option>-Select-</select></td><td></td></tr>');
+						$( '#end-of-assignment', element ).before('<tr class="assignment-rows"><td><select><option>-Select-</select></td><td></td></tr>');
 						//echo '<select style="width:100%" class="opt-categorias" name="itinerary_item_assignment-' . $x . '-category-' . $y . '">';
 /*
 						$( '.assignment-rows', element ).each( function( sub_index, sub_element ) {
@@ -598,7 +598,7 @@ class Trip_Options_Edit_Metabox {
 									</tr>';
 									$yy--;
 								}		
-								echo '</table>';
+								echo '</table id="end-of-assignment">';
 							echo '</td>
 						</tr>
 						<tr>
