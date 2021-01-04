@@ -280,13 +280,15 @@ class Trip_Options_Edit_Metabox {
 						$( '.assignment-rows', element ).hide();
 						$( '#assignment-row-0', element ).show();
 					});
-					var add_assignment = '<tr class="assignment-rows">';
-					add_assignment += '<td><select><option>-Select-'+ index +'</select></td>';
-					add_assignment += '<td><select><option>-Select-'+ element +'</select></td></tr>';
+					var add_assignment = '<tr class="assignment-rows"><td>';
+					add_assignment += '<select style="width:100%" class="opt-categorias" name="itinerary_item_assignment-'+ index +'-category-'+ index +'>';
+					add_assignment += '<option value="" selected disabled hidden>- Select Category -</option>'
+					add_assignment += '</select></td><td>';
+					add_assignment += '<select style="width:100%" class="opt-tipo" name="itinerary_item_assignment-'+ index +'-resource-'+ index +'>';
+					add_assignment += '<option value="" selected disabled hidden>- Select Resource -</option>'
+					add_assignment += '</select></td></tr>';
 					$( element ).delegate( '.add-assignment', 'click', function() {
-						//$( '#end-of-assignment', element ).before('<tr class="assignment-rows"><td><select><option>-Select-</select></td><td></td></tr>');
 						$( '#end-of-assignment', element ).before(add_assignment);
-						//echo '<select style="width:100%" class="opt-categorias" name="itinerary_item_assignment-' . $x . '-category-' . $y . '">';
 /*
 						$( '.assignment-rows', element ).each( function( sub_index, sub_element ) {
 							if ( $( sub_element ).is( ':hidden' ) ) {
