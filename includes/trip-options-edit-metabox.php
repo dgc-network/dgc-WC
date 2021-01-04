@@ -282,19 +282,8 @@ class Trip_Options_Edit_Metabox {
 						$( '.assignment-rows', element ).hide();
 						$( '#assignment-row-0', element ).show();
 					});
-/*
-					var add_assignment = '<tr class="assignment-rows"><td>';
-					add_assignment += '<select style="width:100%" class="opt-categorias" name="itinerary_item_assignment-'+ index +'-category-'+ index +'">';
-					add_assignment += '<option>- Select Category -</option>';
-					add_assignment += '</select></td><td>';
-					add_assignment += '<select style="width:100%" class="opt-tipo" name="itinerary_item_assignment-'+ index +'-resource-'+ index +'">';
-					add_assignment += '<option>- Select Resource -</option>';
-					add_assignment += '</select></td></tr>';
-*/
+
 					$( element ).delegate( '.add-assignment', 'click', function() {
-						//var add_assignment = '<tr class="assignment-rows"><td>';
-						var opt_categorias = this.value;
-							//alert(opt_categorias);
 						var ajax_url = '/wp-admin/admin-ajax.php';
         				$.ajax({
             				type: 'POST',
@@ -307,18 +296,16 @@ class Trip_Options_Edit_Metabox {
             				success: function (data) {
 								//alert(data.length);
 								var add_assignment = '<tr class="assignment-rows"><td>';
-					add_assignment += '<select style="width:100%" class="opt-categorias" name="itinerary_item_assignment-'+ index +'-category-'+ index +'">';
-					add_assignment += '<option>- Select Category -</option>';
+								add_assignment += '<select style="width:100%" class="opt-categorias" name="itinerary_item_assignment-'+ index +'-category-'+ index +'">';
+								add_assignment += '<option>- Select Category -</option>';
 								$.each(data, function (i, item) {
 									add_assignment += '<option value="' + item + '">' + item + '</option>';
                 				});
-					add_assignment += '</select></td><td>';
-					add_assignment += '<select style="width:100%" class="opt-tipo" name="itinerary_item_assignment-'+ index +'-resource-'+ index +'">';
-					add_assignment += '<option>- Select Resource -</option>';
-					add_assignment += '</select></td></tr>';
-					$( '#end-of-assignment', element ).before(add_assignment);
-
-									
+								add_assignment += '</select></td><td>';
+								add_assignment += '<select style="width:100%" class="opt-tipo" name="itinerary_item_assignment-'+ index +'-resource-'+ index +'">';
+								add_assignment += '<option>- Select Resource -</option>';
+								add_assignment += '</select></td></tr>';
+								$( '#end-of-assignment', element ).before(add_assignment);									
             				},
             				error: function(error){
 								//$( sub_element ).hide();
@@ -326,6 +313,38 @@ class Trip_Options_Edit_Metabox {
             				complete: function () {
             				}
         				});
+
+						$( '.assignment-rows' ).delegate( '.opt-categorias', 'change', function() {
+							var opt_categorias = this.value;
+							//alert(opt_categorias);
+							var ajax_url = '/wp-admin/admin-ajax.php';
+        					$.ajax({
+            					type: 'POST',
+            					url: ajax_url,
+            					dataType: "json",
+            					data: {
+									'action': 'get_resources_by_category',
+                					'term_chosen': opt_categorias,
+            					},
+            					success: function (data) {
+									//alert(data.length);
+									$( '.opt_tipo', '.assignment-rows' ).empty();
+                					$( '.opt_tipo', '.assignment-rows' ).append("<option value=''>- Select Resource -</option>");
+
+                					$.each(data, function (i, item) {
+                    					$( '.opt_tipo', '.assignment-rows' ).append('<option value="' + item + '">' + item + '</option>');
+                					});
+									
+            					},
+            					error: function(error){
+									//$( sub_element ).hide();
+            					},
+            					complete: function () {
+            					}
+        					});
+    					});
+
+
 /*
 						$( '.assignment-rows', element ).each( function( sub_index, sub_element ) {
 							if ( $( sub_element ).is( ':hidden' ) ) {
