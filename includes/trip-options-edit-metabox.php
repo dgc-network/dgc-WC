@@ -598,7 +598,8 @@ class Trip_Options_Edit_Metabox {
 									</tr>';
 									$yy--;
 								}		
-								echo '</table id="end-of-assignment">';
+								echo '<tr id="end-of-assignment"></tr>';
+								echo '</table>';
 							echo '</td>
 						</tr>
 						<tr>
