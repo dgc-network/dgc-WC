@@ -280,8 +280,9 @@ class Trip_Options_Edit_Metabox {
 						$( '.assignment-rows', element ).hide();
 						$( '#assignment-row-0', element ).show();
 					});
-					var add_assignment = '<tr class="assignment-rows"><td><select><option>-Select-</select></td>';
-					add_assignment += '<td><select><option>-Select-</select></td></tr>';
+					var add_assignment = '<tr class="assignment-rows">';
+					add_assignment += '<td><select><option>-Select-'+ index +'</select></td>';
+					add_assignment += '<td><select><option>-Select-'+ element +'</select></td></tr>';
 					$( element ).delegate( '.add-assignment', 'click', function() {
 						//$( '#end-of-assignment', element ).before('<tr class="assignment-rows"><td><select><option>-Select-</select></td><td></td></tr>');
 						$( '#end-of-assignment', element ).before(add_assignment);
