@@ -19,6 +19,8 @@ class Trip_Options_Edit_Metabox {
 		add_action( 'admin_head', array( __CLASS__, 'dgc_custom_script' ) );
 		add_action( 'admin_head', array( __CLASS__, 'dgc_custom_style' ) );
 
+		add_action( 'wp_ajax_get_categories', array( __CLASS__, 'get_categories' ) );
+		add_action( 'wp_ajax_nopriv_get_categories', array( __CLASS__, 'get_categories' ) );
 		add_action( 'wp_ajax_get_resources_by_category', array( __CLASS__, 'get_resources_by_category' ) );
 		add_action( 'wp_ajax_nopriv_get_resources_by_category', array( __CLASS__, 'get_resources_by_category' ) );
 		
@@ -280,17 +282,50 @@ class Trip_Options_Edit_Metabox {
 						$( '.assignment-rows', element ).hide();
 						$( '#assignment-row-0', element ).show();
 					});
+/*
 					var add_assignment = '<tr class="assignment-rows"><td>';
-					//add_assignment += '<select style="width:100%" class="opt-categorias" name="itinerary_item_assignment-'+ index +'-category-'+ index +'">';
 					add_assignment += '<select style="width:100%" class="opt-categorias" name="itinerary_item_assignment-'+ index +'-category-'+ index +'">';
 					add_assignment += '<option>- Select Category -</option>';
 					add_assignment += '</select></td><td>';
-					//add_assignment += '<select style="width:100%" class="opt-tipo" name="itinerary_item_assignment-'+ index +'-resource-'+ index +'">';
 					add_assignment += '<select style="width:100%" class="opt-tipo" name="itinerary_item_assignment-'+ index +'-resource-'+ index +'">';
 					add_assignment += '<option>- Select Resource -</option>';
 					add_assignment += '</select></td></tr>';
+*/
 					$( element ).delegate( '.add-assignment', 'click', function() {
-						$( '#end-of-assignment', element ).before(add_assignment);
+						//var add_assignment = '<tr class="assignment-rows"><td>';
+						var opt_categorias = this.value;
+							//alert(opt_categorias);
+						var ajax_url = '/wp-admin/admin-ajax.php';
+        				$.ajax({
+            				type: 'POST',
+            				url: ajax_url,
+            				dataType: "json",
+            				data: {
+								'action': 'get_categories',
+            					'term_chosen': opt_categorias,
+        					},
+            				success: function (data) {
+								//alert(data.length);
+								var add_assignment = '<tr class="assignment-rows"><td>';
+					add_assignment += '<select style="width:100%" class="opt-categorias" name="itinerary_item_assignment-'+ index +'-category-'+ index +'">';
+					add_assignment += '<option>- Select Category -</option>';
+								$.each(data, function (i, item) {
+									add_assignment += '<option value="' + item + '">' + item + '</option>';
+                				});
+					add_assignment += '</select></td><td>';
+					add_assignment += '<select style="width:100%" class="opt-tipo" name="itinerary_item_assignment-'+ index +'-resource-'+ index +'">';
+					add_assignment += '<option>- Select Resource -</option>';
+					add_assignment += '</select></td></tr>';
+					$( '#end-of-assignment', element ).before(add_assignment);
+
+									
+            				},
+            				error: function(error){
+								//$( sub_element ).hide();
+            				},
+            				complete: function () {
+            				}
+        				});
 /*
 						$( '.assignment-rows', element ).each( function( sub_index, sub_element ) {
 							if ( $( sub_element ).is( ':hidden' ) ) {
@@ -339,6 +374,29 @@ class Trip_Options_Edit_Metabox {
 		<?php
 	}
 
+	function get_categories() {
+		$args = array(
+			'taxonomy'   => "product_cat",
+			'number'     => $number,
+			'orderby'    => $orderby,
+			'order'      => $order,
+			'hide_empty' => $hide_empty,
+			'include'    => $ids
+		);
+		$product_categories = get_terms($args);
+
+		$titles = array();
+		foreach( $product_categories as $cat ) {
+			if ($cat->name != 'Uncategorized') {
+				array_push($titles, $cat->name);
+			}
+		}
+		$json = json_encode( $titles );
+		echo $json;
+		
+		die();		
+	}
+		
 	function get_resources_by_category() {
 
 		$product_category_slug = ( isset($_POST['term_chosen']) && !empty( $_POST['term_chosen']) ? $_POST['term_chosen'] : false );
