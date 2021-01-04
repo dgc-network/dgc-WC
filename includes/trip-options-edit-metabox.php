@@ -313,7 +313,7 @@ class Trip_Options_Edit_Metabox {
             				complete: function () {
             				}
         				});
-
+/*
 						$( '.assignment-rows' ).delegate( '.opt-categorias', 'change', function() {
 							var opt_categorias = this.value;
 							//alert(opt_categorias);
@@ -341,9 +341,9 @@ class Trip_Options_Edit_Metabox {
             					},
             					complete: function () {
             					}
-        					});
+        					});							
     					});
-
+*/
 
 /*
 						$( '.assignment-rows', element ).each( function( sub_index, sub_element ) {
