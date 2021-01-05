@@ -662,6 +662,10 @@ class Trip_Options_Edit_Metabox {
 										$y++;
 									}															
 								} else {
+									echo '<tr style="display:none" class="assignment-rows">';
+									echo '<th class="assignment-row-head">' . __( 'Resources Assignment', 'wp-travel' ) . '</th>';
+									echo '<td style="text-align:right"><button class="add-assignment" type="button">' . __( '+ Add Assignment', 'wp-travel' ) .'</button></td>';
+									echo '</tr>';
 									//echo '<div class="no-assignments">';
 									echo '<tr class="no-assignments"><td colspan="2">';
 									esc_html_e( 'No Assignments found. ', 'wp-travel' );
