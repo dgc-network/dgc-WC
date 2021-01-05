@@ -277,11 +277,12 @@ class Trip_Options_Edit_Metabox {
 
 					});
 
-					$( element ).delegate( '.first-assignment', 'click', function() {
+					$( element ).delegate( '#first-assignment', 'click', function() {
 						$( '.no-assignments', element ).hide();
-						$( '.resources-assignment', element ).show();
-						$( '.assignment-rows', element ).hide();
-						$( '#assignment-row-0', element ).show();
+						//$( '.resources-assignment', element ).show();
+						$( '.assignment-rows', element ).show();
+						//$( '.assignment-rows', element ).hide();
+						//$( '#assignment-row-0', element ).show();
 					});
 
 					$( element ).delegate( '.add-assignment', 'click', function() {
@@ -321,7 +322,7 @@ class Trip_Options_Edit_Metabox {
 
 							$( sub_element ).delegate( '.opt-categorias', 'change', function() {
 								var opt_categorias = this.value;
-								alert(opt_categorias);
+								alert(opt_categorias+'-'+sub_index+'-'+sub_element);
 						
 								var ajax_url = '/wp-admin/admin-ajax.php';
         						$.ajax({
@@ -664,7 +665,7 @@ class Trip_Options_Edit_Metabox {
 									//echo '<div class="no-assignments">';
 									echo '<tr class="no-assignments"><td colspan="2">';
 									esc_html_e( 'No Assignments found. ', 'wp-travel' );
-									echo '<button class="first-assignment" type="button">' . __( 'Add Assignment', 'wp-travel' ) . '</button>';
+									echo '<button class="add-assignment" id="first-assignment" type="button">' . __( 'Add Assignment', 'wp-travel' ) . '</button>';
 									echo '</td></tr>';
 									//echo '</div>';
 								}
