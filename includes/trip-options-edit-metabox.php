@@ -314,10 +314,14 @@ class Trip_Options_Edit_Metabox {
             				}
         				});
 
-						$( '.assignment-rows' ).delegate( '.opt-categorias', 'change', function() {
+
+
+						$( '.assignment-rows', element ).each( function( sub_index, sub_element ) {
+
+							$( sub_element ).delegate( '.opt-categorias', 'change', function() {
 							var opt_categorias = this.value;
 							alert(opt_categorias);
-/*							
+						
 							var ajax_url = '/wp-admin/admin-ajax.php';
         					$.ajax({
             					type: 'POST',
@@ -343,18 +347,18 @@ class Trip_Options_Edit_Metabox {
             					complete: function () {
             					}
         					});
-*/												
+											
     					});
 
 
-/*
-						$( '.assignment-rows', element ).each( function( sub_index, sub_element ) {
+/*							
 							if ( $( sub_element ).is( ':hidden' ) ) {
 								$( sub_element ).show();
 								return false;
 							};
+*/							
 						});
-*/
+
 					});
 				});
 
