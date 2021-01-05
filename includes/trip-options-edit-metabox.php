@@ -233,70 +233,26 @@ class Trip_Options_Edit_Metabox {
 					$( element ).delegate( '.item-label', 'keyup', function() {
 						$( '.span-label', element ).text($(this).val());
 					});
+
 					$( element ).delegate( '.item-title', 'keyup', function() {
 						$( '.span-title', element ).text($(this).val());
 					});
-/*
-					$( '.resources-assignment', element ).hide();
-					$( '.assignment-rows', element ).each( function( sub_index, sub_element ) {
-						if ( !$( 'span', sub_element ).is( ':empty' ) ) {
-							$( '.resources-assignment', element ).show();
-							$( '.assignment-rows', element ).hide();
-							$( sub_element ).show();
-						};
 
-						$( sub_element ).delegate( '.opt-categorias', 'change', function() {
-							var opt_categorias = this.value;
-							//alert(opt_categorias);
-							var ajax_url = '/wp-admin/admin-ajax.php';
-        					$.ajax({
-            					type: 'POST',
-            					url: ajax_url,
-            					dataType: "json",
-            					data: {
-									'action': 'get_resources_by_category',
-                					'term_chosen': opt_categorias,
-            					},
-            					success: function (data) {
-									//alert(data.length);
-									$( '.opt_tipo', sub_element ).empty();
-                					$( '.opt_tipo', sub_element ).append("<option value=''>- Select Resource -</option>");
-
-                					$.each(data, function (i, item) {
-                    					$( '.opt_tipo', sub_element ).append('<option value="' + item + '">' + item + '</option>');
-                					});
-									
-            					},
-            					error: function(error){
-									$( sub_element ).hide();
-            					},
-            					complete: function () {
-            					}
-        					});
-    					});
-
-					});
-*/
 					$( element ).delegate( '#first-assignment', 'click', function() {
 						$( '.no-assignments', element ).hide();
-						//$( '.resources-assignment', element ).show();
 						$( '.assignment-rows', element ).show();
-						//$( '.assignment-rows', element ).hide();
-						//$( '#assignment-row-0', element ).show();
 					});
 
 					$( element ).delegate( '.add-assignment', 'click', function() {
-						var ajax_url = '/wp-admin/admin-ajax.php';
+						//var ajax_url = '/wp-admin/admin-ajax.php';
         				$.ajax({
             				type: 'POST',
-            				url: ajax_url,
+            				url: '/wp-admin/admin-ajax.php',
             				dataType: "json",
             				data: {
 								'action': 'get_categories',
-            					//'term_chosen': opt_categorias,
         					},
             				success: function (data) {
-								//alert(data.length);
 								var add_assignment = '<tr class="assignment-rows"><td>';
 								add_assignment += '<select style="width:100%" class="opt-categorias" name="itinerary_item_assignment-'+ index +'-category-'+ index +'">';
 								add_assignment += '<option>- Select Category -</option>';
@@ -310,13 +266,10 @@ class Trip_Options_Edit_Metabox {
 								$( '#end-of-assignment', element ).before(add_assignment);									
             				},
             				error: function(error){
-								//$( sub_element ).hide();
-            				},
-            				complete: function () {
-            				}
+								alert(error);
+							},
+            				complete: function () {}
         				});
-
-
 
 						$( '.assignment-rows', element ).each( function( sub_index, sub_element ) {
 
@@ -666,64 +619,12 @@ class Trip_Options_Edit_Metabox {
 									echo '<th class="assignment-row-head">' . __( 'Resources Assignment', 'wp-travel' ) . '</th>';
 									echo '<td style="text-align:right"><button class="add-assignment" type="button">' . __( '+ Add Assignment', 'wp-travel' ) .'</button></td>';
 									echo '</tr>';
-									//echo '<div class="no-assignments">';
 									echo '<tr class="no-assignments"><td colspan="2">';
 									esc_html_e( 'No Assignments found. ', 'wp-travel' );
 									echo '<button class="add-assignment" id="first-assignment" type="button">' . __( 'Add Assignment', 'wp-travel' ) . '</button>';
 									echo '</td></tr>';
-									//echo '</div>';
 								}
-/*
-								echo '<table class="resources-assignment" style="width:100%;margin-left:0">';
-									echo '<tr>';
-									echo '<th class="assignment-row-head">' . __( 'Resources Assignment', 'wp-travel' ) . '</th>';
-									echo '<td style="text-align:right"><button class="add-assignment" type="button">' . __( '+ Add Assignment', 'wp-travel' ) .'</button></td>';
-									echo '</tr>';
-							
-								for ($y = 0; $y < 10; $y++) {
-									echo '<tr class="assignment-rows" id="assignment-row-' . $y . '">
-										<td>';
-											if ($yy <= 0) {
-												echo '<span style="display:none"></span>' .'</th>';
-											} else {
-												echo '<span style="display:none">' . $yy . '</span>' .'</th>';
-											}
-											echo '<select style="width:100%" class="opt-categorias" name="itinerary_item_assignment-' . $x . '-category-' . $y . '">';
-											if ($yy <= 0) {
-												echo '<option value="" selected disabled hidden>' .  __( "- Select Category -", "wp-travel" ) . '</option>';
-												foreach( $product_categories as $cat ) {
-													if ($cat->name != 'Uncategorized') {
-														echo '<option value="' . $cat->name . '">' . $cat->name . '</option>';
-													}
-												}
-											} else {
-												foreach( $product_categories as $cat ) {
-													if ($cat->name != 'Uncategorized') {
-														if ($cat->name == $itineraries[$x]['assignment'][$y]['category']) {
-															echo '<option value="' . $cat->name . '" selected>' . $cat->name . '</option>';
-														} else {
-															echo '<option value="' . $cat->name . '">' . $cat->name . '</option>';
-														}
-													}
-												}
-											}
-											echo '</select>
-										</td>
-										<td>';
-											if ($yy <= 0) {
-												echo '<select style="width:100%" class="opt_tipo" name="itinerary_item_assignment-' . $x . '-resource-' . $y . '">';
-												self::product_name_options_by_category();
-												echo '</select>';
-											} else {
-												echo '<select style="width:100%" class="opt_tipo" name="itinerary_item_assignment-' . $x . '-resource-' . $y . '">';
-												self::product_name_options_by_category( $itineraries[$x]['assignment'][$y]['category'], $itineraries[$x]['assignment'][$y]['resource'] );
-												echo '</select>';
-											}
-										echo '</td>
-									</tr>';
-									$yy--;
-								}		
-*/								
+
 								echo '<tr id="end-of-assignment"></tr>';
 								echo '</table>';
 							echo '</td>
@@ -736,6 +637,7 @@ class Trip_Options_Edit_Metabox {
 				}?>			
 				</ul>
 			</td></tr>
+			<tr id="end-of-itinerary"></tr>
 
 			<tr style="display:none" class="init-rows">
 				<td></td>
