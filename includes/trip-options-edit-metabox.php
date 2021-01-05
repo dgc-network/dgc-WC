@@ -630,10 +630,10 @@ class Trip_Options_Edit_Metabox {
 						</tr>
 						<tr>
 							<td colspan="2">';
-								$yy=0;
-								echo '<table class="resources-assignment" style="width:100%;margin-left:0">';
+								$y=0;
+								echo '<table style="width:100%;margin-left:0">';
 								if (isset($itineraries[$x]['assignment'])) {
-									echo '<tr>';
+									echo '<tr class="assignment-rows">';
 									echo '<th class="assignment-row-head">' . __( 'Resources Assignment', 'wp-travel' ) . '</th>';
 									echo '<td style="text-align:right"><button class="add-assignment" type="button">' . __( '+ Add Assignment', 'wp-travel' ) .'</button></td>';
 									echo '</tr>';
@@ -658,13 +658,15 @@ class Trip_Options_Edit_Metabox {
 										echo '</select>';
 										echo '</td>
 										</tr>';
-										$yy++;
+										$y++;
 									}															
 								} else {
-									echo '<div class="no-assignments">';
+									//echo '<div class="no-assignments">';
+									echo '<tr class="no-assignments"><td colspan="2">';
 									esc_html_e( 'No Assignments found. ', 'wp-travel' );
 									echo '<button class="first-assignment" type="button">' . __( 'Add Assignment', 'wp-travel' ) . '</button>';
-									echo '</div >';
+									echo '</td></tr>';
+									//echo '</div>';
 								}
 /*
 								echo '<table class="resources-assignment" style="width:100%;margin-left:0">';
