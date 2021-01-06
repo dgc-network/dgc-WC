@@ -254,17 +254,17 @@ class Trip_Options_Edit_Metabox {
         					},
             				success: function (data) {
 								var add_assignment = '<tr class="assignment-rows"><td>';
-								add_assignment += '<select style="width:100%" class="opt-categorias" name="itinerary_item_assignment-'+ index +'-category-'+ index +'">';
+								add_assignment += '<select style="width:100%" class="opt-categorias" id="opt-category-'+ index +'" name="itinerary_item_assignment-'+ index +'-category-'+ index +'">';
 								add_assignment += '<option>- Select Category -</option>';
 								$.each(data, function (i, item) {
 									add_assignment += '<option value="' + item + '">' + item + '</option>';
                 				});
 								add_assignment += '</select></td><td>';
 								//add_assignment += '<select style="width:100%" class="opt-tipo" name="itinerary_item_assignment-'+ index +'-resource-'+ index +'">';
-								//add_assignment += '<option>- Select Resource -</option>';
-								add_assignment += '</select></td></tr>';
+								//add_assignment += '<option>- Select Resource -</option></select>';
+								add_assignment += '</td></tr>';
 								$( '#end-of-assignment', element ).before(add_assignment);									
-								$( '.opt-categorias' ).on( 'change', function() {
+								$( '#opt-category-'+index ).on( 'change', function() {
 									alert(this.value);
 								});
             				},
