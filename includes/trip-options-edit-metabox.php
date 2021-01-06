@@ -358,6 +358,7 @@ class Trip_Options_Edit_Metabox {
 					$( 'span', '#itinerary-li-'+x ).on( 'click', function() {
 						$( 'table', '#itinerary-li-'+x ).toggleClass( 'toggle-access' );
 					});
+					x = x + 1;
 
 					/*
 					$( '.itinerary-li' ).each( function( index, element ) {
@@ -444,7 +445,8 @@ class Trip_Options_Edit_Metabox {
 			#woocommerce-product-data ul.wc-tabs li.faq_tab a:before { font-family: WooCommerce; content: '\e000'; }
 			.fa-bars:before { content: "\f0c9"; }
 
-			#first-itinerary { color:blue; text-decoration:underline; cursor:pointer; }
+			/*#first-itinerary { color:blue; text-decoration:underline; cursor:pointer; }*/
+			#first-itinerary { background:#ffffff; color:blue; border: none; cursor:pointer; text-decoration:underline; }
 			/*button.add-itinerary { font-size:0.8em; color:blue; }*/
 			#itineraries-ul { list-style-type:none; margin:0; padding:0; width:100%; }
   			#itineraries-ul li { background:#f2f2f2; border:1px solid #ccc; margin:0 3px 3px 3px; padding:0.4em; padding-left:1.5em; font-size:1.4em; }
@@ -665,6 +667,10 @@ class Trip_Options_Edit_Metabox {
 			</ul>
 			</td>
 			</tr>
+			<tr class="itinerary-header">
+				<td></td>
+				<td style="text-align:right"><button class="add-itinerary" type="button"><?php esc_html_e( "+ Add Itinerary", "wp-travel" ); ?></button></td>
+			</tr>
 
 		<?php
 		} else {?>
@@ -675,16 +681,16 @@ class Trip_Options_Edit_Metabox {
 			<tr class="no-itineraries"><td colspan="2">
 				<h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3><br>
 				<span><?php esc_html_e( 'No Itineraries found.', 'wp-travel' ); ?></span>
-				<span id="first-itinerary" class="add-itinerary"><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></span>
+				<button id="first-itinerary" class="add-itinerary" type="button"><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></span>
 			</td></tr><?php
 		}?>
-
-			
 
 			<tr style="display:none" class="itinerary-header">
 				<td></td>
 				<td style="text-align:right"><button class="add-itinerary" type="button"><?php esc_html_e( "+ Add Itinerary", "wp-travel" ); ?></button></td>
 			</tr>
+			
+
 		</table>
 		</div>
 		<?php
