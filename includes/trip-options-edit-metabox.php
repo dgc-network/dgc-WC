@@ -358,7 +358,8 @@ class Trip_Options_Edit_Metabox {
 					var element = '#itinerary-li-' + x ;		
 					$( element ).delegate( 'span', 'click', function() {
 					//$( 'span', '#itinerary-li-'+x ).on( 'click', function() {
-						$( 'table', '#itinerary-li-'+x ).toggleClass( 'toggle-access' );
+						$( 'table', element ).toggleClass( 'toggle-access' );
+						//$( 'table', '#itinerary-li-'+x ).toggleClass( 'toggle-access' );
 					});
 					x = x + 1;
 
