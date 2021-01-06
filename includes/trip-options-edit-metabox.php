@@ -563,10 +563,11 @@ class Trip_Options_Edit_Metabox {
 				<td><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></td>
 				<td style="text-align:right"><button class="add-itinerary" type="button"><?php esc_html_e( '+ Add Itinerary', 'wp-travel' ); ?></button></td>
 			</tr>
+			<tr class="itinerary-rows"><td colspan="2">
+				<ul id="itineraries-ul">
 			<?php
 			foreach ( $itineraries as $itinerary ) {?>
-			<tr class="itinerary-rows"><td colspan="2">
-				<ul id="itineraries-ul"><?php			  
+				<?php			  
 				//for ($x = 0; $x < 100; $x++) {
 					//echo '<li style="display:none" class="itinerary-li" id="itinerary-li-' . $x . '">';
 					echo '<li class="itinerary-li" id="itinerary-li-' . $x . '">';
@@ -657,13 +658,15 @@ class Trip_Options_Edit_Metabox {
 						</tr>
 					</table>
 			  		</li>';
-				//}?>			
-				</ul>
-			</td></tr>
-
-				<?php
+				//}
 				$x++;
-			}
+			}?>			
+				<li id="end-of-itinerary" style="display:none"></li>
+			</ul>
+			</td>
+			</tr>
+
+		<?php
 		} else {?>
 			<tr style="display:none" class="itinerary-header">
 				<td><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></td>
@@ -677,7 +680,6 @@ class Trip_Options_Edit_Metabox {
 		}?>
 
 			
-			<tr id="end-of-itinerary"></tr>
 
 			<tr style="display:none" class="itinerary-header">
 				<td></td>
