@@ -240,7 +240,7 @@ class Trip_Options_Edit_Metabox {
 
 					$( element ).delegate( '#first-assignment', 'click', function() {
 						$( '.no-assignments', element ).hide();
-						$( '.assignment-rows', element ).show();
+						$( '.assignment-header', element ).show();
 					});
 
 					$( element ).delegate( '.add-assignment', 'click', function() {
@@ -273,14 +273,15 @@ class Trip_Options_Edit_Metabox {
 
 						$( '.assignment-rows', element ).each( function( sub_index, sub_element ) {
 
+							//$( '.opt-categorias' ).on( 'change', function() {
 							$( sub_element ).delegate( '.opt-categorias', 'change', function() {
 								var opt_categorias = this.value;
 								alert(opt_categorias+'-'+sub_index+'-'+sub_element);
 						
-								var ajax_url = '/wp-admin/admin-ajax.php';
+								//var ajax_url = '/wp-admin/admin-ajax.php';
         						$.ajax({
             						type: 'POST',
-            						url: ajax_url,
+            						url: '/wp-admin/admin-ajax.php',
             						dataType: "json",
             						data: {
 										'action': 'get_resources_by_category',
@@ -297,23 +298,13 @@ class Trip_Options_Edit_Metabox {
 									
             						},
             						error: function(error){
-										//$( sub_element ).hide();
+										alert(error);
             						},
             						complete: function () {
             						}
-        						});
-											
+        						});											
     						});
-
-
-/*							
-							if ( $( sub_element ).is( ':hidden' ) ) {
-								$( sub_element ).show();
-								return false;
-							};
-*/							
 						});
-
 					});
 				});
 
@@ -587,7 +578,7 @@ class Trip_Options_Edit_Metabox {
 								$y=0;
 								echo '<table style="width:100%;margin-left:0">';
 								if (isset($itineraries[$x]['assignment'])) {
-									echo '<tr class="assignment-rows">';
+									echo '<tr class="assignment-header">';
 									echo '<th class="assignment-row-head">' . __( 'Resources Assignment', 'wp-travel' ) . '</th>';
 									echo '<td style="text-align:right"><button class="add-assignment" type="button">' . __( '+ Add Assignment', 'wp-travel' ) .'</button></td>';
 									echo '</tr>';
