@@ -535,18 +535,19 @@ class Trip_Options_Edit_Metabox {
 			foreach ( $itineraries as $itinerary ) {?>
 			<tr class="itinerary-rows"><td colspan="2">
 				<ul id="itineraries-ul"><?php			  
-				for ($x = 0; $x < 100; $x++) {
-					echo '<li style="display:none" class="itinerary-li" id="itinerary-li-' . $x . '">';
-					if ($xx<=0) {
+				//for ($x = 0; $x < 100; $x++) {
+					//echo '<li style="display:none" class="itinerary-li" id="itinerary-li-' . $x . '">';
+					echo '<li class="itinerary-li" id="itinerary-li-' . $x . '">';
+					/*if ($xx<=0) {
 						$itinerary_label = DEFAULT_ITINERARY_LABEL;
 						$itinerary_title = DEFAULT_ITINERARY_TITLE;
 						echo '<p style="display:none"></p>';
-					} else {
+					} else {*/
 						$itinerary_label = esc_attr( $itineraries[$x]['label'] );
 						$itinerary_title = esc_attr( $itineraries[$x]['title'] );
-						echo '<p style="display:none">' . $x . '</p>';
+						/*echo '<p style="display:none">' . $x . '</p>';
 					}
-					$xx--;
+					$xx--;*/
 					echo '<span class="fas fa-bars"> </span>';
 					echo '<span class="span-label">' . $itinerary_label . '</span>, ';
 					echo '<span class="span-title">' . $itinerary_title . '</span>';
@@ -624,7 +625,7 @@ class Trip_Options_Edit_Metabox {
 						</tr>
 					</table>
 			  		</li>';
-				}?>			
+				//}?>			
 				</ul>
 			</td></tr>
 
