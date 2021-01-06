@@ -260,17 +260,20 @@ class Trip_Options_Edit_Metabox {
 									add_assignment += '<option value="' + item + '">' + item + '</option>';
                 				});
 								add_assignment += '</select></td><td>';
-								add_assignment += '<select style="width:100%" class="opt-tipo" name="itinerary_item_assignment-'+ index +'-resource-'+ index +'">';
-								add_assignment += '<option>- Select Resource -</option>';
+								//add_assignment += '<select style="width:100%" class="opt-tipo" name="itinerary_item_assignment-'+ index +'-resource-'+ index +'">';
+								//add_assignment += '<option>- Select Resource -</option>';
 								add_assignment += '</select></td></tr>';
 								$( '#end-of-assignment', element ).before(add_assignment);									
+								$( '.opt-categorias' ).on( 'change', function() {
+									alert(this.value);
+								});
             				},
             				error: function(error){
 								alert(error);
 							},
             				complete: function () {}
         				});
-
+/*
 						$( '.assignment-rows', element ).each( function( sub_index, sub_element ) {
 
 							//$( '.opt-categorias' ).on( 'change', function() {
@@ -305,6 +308,7 @@ class Trip_Options_Edit_Metabox {
         						});											
     						});
 						});
+*/						
 					});
 				});
 
@@ -606,7 +610,7 @@ class Trip_Options_Edit_Metabox {
 										$y++;
 									}															
 								} else {
-									echo '<tr style="display:none" class="assignment-rows">';
+									echo '<tr style="display:none" class="assignment-header">';
 									echo '<th class="assignment-row-head">' . __( 'Resources Assignment', 'wp-travel' ) . '</th>';
 									echo '<td style="text-align:right"><button class="add-assignment" type="button">' . __( '+ Add Assignment', 'wp-travel' ) .'</button></td>';
 									echo '</tr>';
