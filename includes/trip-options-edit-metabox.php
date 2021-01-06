@@ -221,7 +221,10 @@ class Trip_Options_Edit_Metabox {
 				 * Itinerary Tab
 				 */
 				//$( '.itinerary-li' ).hide();
+				var x = 0;
 				$( '.itinerary-li' ).each( function( index, element ) {
+					x = x + 1;
+
 					if ( !$( 'p', element ).is( ':empty' ) ) {
 						$( '.itinerary-rows' ).show();
 						$( element ).show();
@@ -263,7 +266,7 @@ class Trip_Options_Edit_Metabox {
 								//add_assignment += '<select style="width:100%" class="opt-tipo" name="itinerary_item_assignment-'+ index +'-resource-'+ index +'">';
 								//add_assignment += '<option>- Select Resource -</option></select>';
 								add_assignment += '</td></tr>';
-								$( '#end-of-assignment', element ).before(add_assignment);							
+								$( '#end-of-assignment', element ).before(add_assignment);				
 								$( '#opt-category-'+index, element ).on( 'change', function() {
 									alert(this.value);
 									add_resource = '<select style="width:100%" class="opt-tipo" name="itinerary_item_assignment-'+ index +'-resource-'+ index +'">';
@@ -328,6 +331,32 @@ class Trip_Options_Edit_Metabox {
 				});
 
 				$( '.add-itinerary' ).on( 'click', function() {
+					//var itinerary_label = DEFAULT_ITINERARY_LABEL;
+					//var itinerary_title = DEFAULT_ITINERARY_TITLE;
+					var itinerary_label = 'Day X';
+					var itinerary_title = 'My Plan';
+					var add_itinerary = '<li class="itinerary-li" id="itinerary-li-' + x + '">';
+					add_itinerary += '<span class="fas fa-bars"> </span>';
+					add_itinerary += '<span class="span-label">' + itinerary_label + '</span>, ';
+					add_itinerary += '<span class="span-title">' + itinerary_title + '</span>';
+					add_itinerary += '<table>';
+					add_itinerary += '<tr>';
+					add_itinerary += '<th>Itinerary label</th>';
+					add_itinerary += '<td><input type="text" class="item-label" name="itinerary_item_label-' + x + '" value="' + itinerary_label + '"></td>';
+					add_itinerary += '</tr>';
+					add_itinerary += '<tr>';
+					add_itinerary += '<th>Itinerary title</th>';
+					add_itinerary += '<td><input type="text" class="item-title" name="itinerary_item_title-' + x + '" value="' + itinerary_title + '"></td>';
+					add_itinerary += '</tr>';
+					add_itinerary += '<tr>';
+					add_itinerary += '<th>Itinerary date</th>';
+					add_itinerary += '<td><input type="text" class="item-date" name="itinerary_item_date-' + x + '"></td>';
+					add_itinerary += '</tr>';
+					add_itinerary += '</table>';
+
+					$( '#end-of-itinerary' ).before(add_assignment);				
+
+					/*
 					$( '.itinerary-li' ).each( function( index, element ) {
 						if ( $( element ).is( ':hidden' ) ) {
 							$( element ).show();
@@ -336,7 +365,7 @@ class Trip_Options_Edit_Metabox {
 							});
 							return false;
 						};
-					});
+					});*/
 				});
 
 				$( '.remove-itinerary' ).on( 'click', function() {
