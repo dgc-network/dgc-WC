@@ -354,7 +354,7 @@ class Trip_Options_Edit_Metabox {
 					add_itinerary += '</tr>';
 					add_itinerary += '</table>';
 
-					$( '#end-of-itinerary' ).before(add_assignment);				
+					$( '#end-of-itinerary' ).before(add_itinerary);				
 
 					/*
 					$( '.itinerary-li' ).each( function( index, element ) {
