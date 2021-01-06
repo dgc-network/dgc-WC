@@ -355,7 +355,9 @@ class Trip_Options_Edit_Metabox {
 					add_itinerary += '</table>';
 
 					$( '#end-of-itinerary' ).before(add_itinerary);
-					var element = '#itinerary-li-' + x ;		
+
+					var element = '#itinerary-li-' + x ;
+					alert(element);
 					$( element ).delegate( 'span', 'click', function() {
 					//$( 'span', '#itinerary-li-'+x ).on( 'click', function() {
 						$( 'table', element ).toggleClass( 'toggle-access' );
