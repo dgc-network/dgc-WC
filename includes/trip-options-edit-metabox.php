@@ -259,13 +259,16 @@ class Trip_Options_Edit_Metabox {
 								$.each(data, function (i, item) {
 									add_assignment += '<option value="' + item + '">' + item + '</option>';
                 				});
-								add_assignment += '</select></td><td>';
+								add_assignment += '</select></td><td id="td-resource-'+ index +'">';
 								//add_assignment += '<select style="width:100%" class="opt-tipo" name="itinerary_item_assignment-'+ index +'-resource-'+ index +'">';
 								//add_assignment += '<option>- Select Resource -</option></select>';
 								add_assignment += '</td></tr>';
-								$( '#end-of-assignment', element ).before(add_assignment);									
-								$( '#opt-category-'+index ).on( 'change', function() {
+								$( '#end-of-assignment', element ).before(add_assignment);							
+								$( '#opt-category-'+index, element ).on( 'change', function() {
 									alert(this.value);
+									add_resource = '<select style="width:100%" class="opt-tipo" name="itinerary_item_assignment-'+ index +'-resource-'+ index +'">';
+									add_resource += '<option>- Select Resource -</option></select>';
+									$( '#td-resource-'+index, element ).append(add_resource);						
 								});
             				},
             				error: function(error){
