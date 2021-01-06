@@ -355,7 +355,8 @@ class Trip_Options_Edit_Metabox {
 					add_itinerary += '</table>';
 
 					$( '#end-of-itinerary' ).before(add_itinerary);				
-					$( 'span', '#itinerary-li-'+x ).on( 'click', function() {
+					$( '#itinerary-li-'+x ).delegate( 'span', 'click', function() {
+					//$( 'span', '#itinerary-li-'+x ).on( 'click', function() {
 						$( 'table', '#itinerary-li-'+x ).toggleClass( 'toggle-access' );
 					});
 					x = x + 1;
@@ -568,26 +569,14 @@ class Trip_Options_Edit_Metabox {
 			<tr class="itinerary-rows"><td colspan="2">
 				<ul id="itineraries-ul">
 			<?php
-			foreach ( $itineraries as $itinerary ) {?>
-				<?php			  
-				//for ($x = 0; $x < 100; $x++) {
-					//echo '<li style="display:none" class="itinerary-li" id="itinerary-li-' . $x . '">';
-					echo '<li class="itinerary-li" id="itinerary-li-' . $x . '">';
-					/*if ($xx<=0) {
-						$itinerary_label = DEFAULT_ITINERARY_LABEL;
-						$itinerary_title = DEFAULT_ITINERARY_TITLE;
-						echo '<p style="display:none"></p>';
-					} else {*/
-						$itinerary_label = esc_attr( $itineraries[$x]['label'] );
-						$itinerary_title = esc_attr( $itineraries[$x]['title'] );
-						/*echo '<p style="display:none">' . $x . '</p>';
-					}
-					$xx--;*/
-					echo '<span class="fas fa-bars"> </span>';
-					echo '<span class="span-label">' . $itinerary_label . '</span>, ';
-					echo '<span class="span-title">' . $itinerary_title . '</span>';
-					echo '
-					<table>
+			foreach ( $itineraries as $itinerary ) {
+				echo '<li class="itinerary-li" id="itinerary-li-' . $x . '">';
+				$itinerary_label = esc_attr( $itineraries[$x]['label'] );
+				$itinerary_title = esc_attr( $itineraries[$x]['title'] );
+				echo '<span class="fas fa-bars"> </span>';
+				echo '<span class="span-label">' . $itinerary_label . '</span>, ';
+				echo '<span class="span-title">' . $itinerary_title . '</span>';
+				echo '<table>					
 						<tr>
 							<th>' . __( 'Itinerary label', 'wp-travel' ) .'</th>
 							<td><input type="text" class="item-label" name="itinerary_item_label-' . $x . '" value="' . $itinerary_label . '"></td>
@@ -660,7 +649,6 @@ class Trip_Options_Edit_Metabox {
 						</tr>
 					</table>
 			  		</li>';
-				//}
 				$x++;
 			}?>			
 				<li id="end-of-itinerary" style="display:none"></li>
@@ -681,7 +669,7 @@ class Trip_Options_Edit_Metabox {
 			<tr class="no-itineraries"><td colspan="2">
 				<h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3><br>
 				<span><?php esc_html_e( 'No Itineraries found.', 'wp-travel' ); ?></span>
-				<button id="first-itinerary" class="add-itinerary" type="button"><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></span>
+				<button class="add-itinerary" id="first-itinerary" type="button"><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></span>
 			</td></tr><?php
 		}?>
 
