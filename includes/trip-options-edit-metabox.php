@@ -223,7 +223,7 @@ class Trip_Options_Edit_Metabox {
 				//$( '.itinerary-li' ).hide();
 				$( '.itinerary-li' ).each( function( index, element ) {
 					if ( !$( 'p', element ).is( ':empty' ) ) {
-						$( '.init-rows' ).show();
+						$( '.itinerary-rows' ).show();
 						$( element ).show();
 						$( element ).delegate( 'span', 'click', function() {
 							$( 'table', element ).toggleClass( 'toggle-access' );
@@ -317,12 +317,14 @@ class Trip_Options_Edit_Metabox {
 
 				$( '#first-itinerary' ).click( function() {
 					$( '.no-itineraries' ).hide();
-					$( '.init-rows' ).show();
+					$( '.itinerary-header' ).show();
+					/*
+					$( '.itinerary-rows' ).show();					
 					$( '.itinerary-li' ).hide();
 					$( '#itinerary-li-0' ).show();
 					$( 'span', '#itinerary-li-0' ).on( 'click', function() {
 						$( 'table', '#itinerary-li-0' ).toggleClass( 'toggle-access' );
-					});
+					});*/
 				});
 
 				$( '.add-itinerary' ).on( 'click', function() {
@@ -523,25 +525,15 @@ class Trip_Options_Edit_Metabox {
 			</tr>
 
 		<?php
-		$xx = 0;
-		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) {
-			foreach ( $itineraries as $itinerary ) {
-				$xx++;
-			}
-		} else {?>
-			<tr class="no-itineraries"><td colspan="2">
-				<h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3><br>
-				<span><?php esc_html_e( 'No Itineraries found.', 'wp-travel' ); ?></span>
-				<span id="first-itinerary"><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></span>
-			</td></tr><?php
-		}?>
-
-			<tr style="display:none" class="init-rows">
+		$x = 0;
+		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) {?>
+			<tr class="itinerary-header">
 				<td><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></td>
 				<td style="text-align:right"><button class="add-itinerary" type="button"><?php esc_html_e( '+ Add Itinerary', 'wp-travel' ); ?></button></td>
 			</tr>
-			
-			<tr style="display:none" class="init-rows"><td colspan="2">
+			<?php
+			foreach ( $itineraries as $itinerary ) {?>
+			<tr class="itinerary-rows"><td colspan="2">
 				<ul id="itineraries-ul"><?php			  
 				for ($x = 0; $x < 100; $x++) {
 					echo '<li style="display:none" class="itinerary-li" id="itinerary-li-' . $x . '">';
@@ -635,9 +627,26 @@ class Trip_Options_Edit_Metabox {
 				}?>			
 				</ul>
 			</td></tr>
+
+				<?php
+				$x++;
+			}
+		} else {?>
+			<tr style="display:none" class="itinerary-header">
+				<td><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></td>
+				<td style="text-align:right"><button class="add-itinerary" type="button"><?php esc_html_e( '+ Add Itinerary', 'wp-travel' ); ?></button></td>
+			</tr>
+			<tr class="no-itineraries"><td colspan="2">
+				<h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3><br>
+				<span><?php esc_html_e( 'No Itineraries found.', 'wp-travel' ); ?></span>
+				<span id="first-itinerary"><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></span>
+			</td></tr><?php
+		}?>
+
+			
 			<tr id="end-of-itinerary"></tr>
 
-			<tr style="display:none" class="init-rows">
+			<tr style="display:none" class="itinerary-header">
 				<td></td>
 				<td style="text-align:right"><button class="add-itinerary" type="button"><?php esc_html_e( "+ Add Itinerary", "wp-travel" ); ?></button></td>
 			</tr>
@@ -686,7 +695,7 @@ class Trip_Options_Edit_Metabox {
 		?>
 		<div id='faq_panel' class='panel woocommerce_options_panel'>
 		<table style="width:100%; padding:1em">
-			<tr style="display:none" class="faq-init-rows">
+			<tr style="display:none" class="faq-itinerary-rows">
 				<td><h3><?php esc_html_e( 'FAQ', 'wp-travel' ); ?></h3></td>
 				<td style="text-align:right"><button class="add-faq" type="button"><?php esc_html_e( '+ Add FAQ', 'wp-travel' ); ?></button></td>
 			</tr>
@@ -705,7 +714,7 @@ class Trip_Options_Edit_Metabox {
 			</td></tr><?php
 		}?>
 
-			<tr style="display:none" class="faq-init-rows"><td colspan="2">
+			<tr style="display:none" class="faq-itinerary-rows"><td colspan="2">
 				<ul id="faqs-ul"><?php			  
 				for ($x = 0; $x < 100; $x++) {
 					echo '<li style="display:none" class="faq-li" id="faq-li-' . $x . '">';
@@ -737,7 +746,7 @@ class Trip_Options_Edit_Metabox {
 				</ul>
 			</td></tr>
 
-			<tr style="display:none" class="faq-init-rows">
+			<tr style="display:none" class="faq-itinerary-rows">
 				<td></td>
 				<td style="text-align:right"><button class="add-faq" type="button"><?php esc_html_e( "+ Add FAQ", "wp-travel" ); ?></button></td>
 			</tr>
@@ -903,7 +912,7 @@ class Trip_Options_Edit_Metabox {
 
 				$( ".tab-li" ).each( function( index, element ) {
 					if ( !$( 'p', element ).is(":empty") ) {
-						$( ".init-rows" ).show();
+						$( ".itinerary-rows" ).show();
 						$( element ).show();
 						$( element ).delegate("span", "click", function(){
 							$( 'table', element ).toggleClass('toggle-access');
@@ -966,12 +975,12 @@ class Trip_Options_Edit_Metabox {
 			</td></tr><?php
 		}?>
 
-			<tr style="display:none" class="init-rows">
+			<tr style="display:none" class="itinerary-rows">
 				<td></td>
 				<td style="text-align:right"><button id="add-pricing" type="button"><?php esc_html_e( '+ Add Price', 'wp-travel' ); ?></button></td>
 			</tr>
 			
-			<tr style="display:none" class="init-rows"><td colspan="2">
+			<tr style="display:none" class="itinerary-rows"><td colspan="2">
 				<ul id="pricings-ul"><?php
 				for ($x = 0; $x < 100; $x++) {
 					echo '<li style="display:none" class="pricing-li" id="pricing-li-' . $x . '"><span><i class="fas fa-bars"></i>';
@@ -1032,7 +1041,7 @@ class Trip_Options_Edit_Metabox {
 
 				$( ".pricing-li" ).each( function( index, element ) {
 					if ( !$( 'p', element ).is(":empty") ) {
-						$( ".init-rows" ).show();
+						$( ".itinerary-rows" ).show();
 						$( element ).show();
 						$( element ).delegate("span", "click", function(){
 							$( 'table', element ).toggleClass('toggle-access');
@@ -1052,7 +1061,7 @@ class Trip_Options_Edit_Metabox {
 
 				$("#first-pricing").click( function(){
 					$(".no-pricings").hide();
-					$(".init-rows").show();
+					$(".itinerary-rows").show();
 					$(".pricing-li").hide();
 					$("#pricing-li-0").show();
 					$('span','#pricing-li-0').on('click', function() {
