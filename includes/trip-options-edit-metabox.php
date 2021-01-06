@@ -339,7 +339,7 @@ class Trip_Options_Edit_Metabox {
 					add_itinerary += '<span class="fas fa-bars"> </span>';
 					add_itinerary += '<span class="span-label">' + itinerary_label + '</span>, ';
 					add_itinerary += '<span class="span-title">' + itinerary_title + '</span>';
-					add_itinerary += '<table>';
+					add_itinerary += '<table style="display:none">';
 					add_itinerary += '<tr>';
 					add_itinerary += '<th>Itinerary label</th>';
 					add_itinerary += '<td><input type="text" class="item-label" name="itinerary_item_label-' + x + '" value="' + itinerary_label + '"></td>';
@@ -355,6 +355,9 @@ class Trip_Options_Edit_Metabox {
 					add_itinerary += '</table>';
 
 					$( '#end-of-itinerary' ).before(add_itinerary);				
+					$( 'span', '#itinerary-li-'+x ).on( 'click', function() {
+						$( 'table', '#itinerary-li-'+x ).toggleClass( 'toggle-access' );
+					});
 
 					/*
 					$( '.itinerary-li' ).each( function( index, element ) {
@@ -669,7 +672,7 @@ class Trip_Options_Edit_Metabox {
 			<tr class="no-itineraries"><td colspan="2">
 				<h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3><br>
 				<span><?php esc_html_e( 'No Itineraries found.', 'wp-travel' ); ?></span>
-				<span id="first-itinerary"><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></span>
+				<span id="first-itinerary" class="add-itinerary"><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></span>
 			</td></tr><?php
 		}?>
 
