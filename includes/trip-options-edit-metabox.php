@@ -319,9 +319,9 @@ class Trip_Options_Edit_Metabox {
                 					'term_chosen': opt_categorias,
             					},
             					success: function (data) {
-									alert(this.value);
+									alert(sub_element);
 									$( '.opt_tipo', sub_element ).empty();
-            						$( '.opt_tipo', sub_element ).append("<option value=''>- Select Resource -</option>");
+            						$( '.opt_tipo', sub_element ).append('<option value="">- Select Resource -</option>');
 
                 					$.each(data, function (i, item) {
                     					$( '.opt_tipo', sub_element ).append('<option value="' + item + '">' + item + '</option>');
