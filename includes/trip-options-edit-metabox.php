@@ -333,7 +333,7 @@ class Trip_Options_Edit_Metabox {
 
 				$( '.add-itinerary' ).on( 'click', function() {
 					// alerts 'Some string to translate'
-					//alert( object_name.remove_itinerary );
+					alert( object_name.remove_itinerary );
 					//var itinerary_label = DEFAULT_ITINERARY_LABEL;
 					//var itinerary_title = DEFAULT_ITINERARY_TITLE;
 					var itinerary_label = 'Day X';
@@ -355,10 +355,10 @@ class Trip_Options_Edit_Metabox {
 					add_itinerary += '<th>Itinerary date</th>';
 					add_itinerary += '<td><input type="text" class="item-date" name="itinerary_item_date-' + x + '"></td>';
 					add_itinerary += '</tr>';
-					<tr>
-							<td colspan="2"><b>' . __( 'Description', 'wp-travel' ) .'</b><br>
-							<textarea rows="5" name="itinerary_item_desc-' . $x . '">' . esc_attr( $itineraries[$x]['desc'] ) . '</textarea></td>
-						</tr>
+					add_itinerary += '<tr>';
+					add_itinerary += '<td colspan="2"><b>Description</b><br>';
+					add_itinerary += '<textarea rows="5" name="itinerary_item_desc-' + x + '"></textarea></td>';
+					add_itinerary += '</tr>';
 					add_itinerary += '</table>';
 
 					$( '#end-of-itinerary' ).before(add_itinerary);
