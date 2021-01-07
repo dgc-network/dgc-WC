@@ -246,21 +246,17 @@ class Trip_Options_Edit_Metabox {
 					$( element ).delegate( 'span', 'click', function() {
 						$( 'table', element ).toggleClass( 'toggle-access' );
 					});
-
 					$( element ).delegate( '.item-label', 'keyup', function() {
 						$( '.span-label', element ).text($(this).val());
 					});
-
 					$( element ).delegate( '.item-title', 'keyup', function() {
 						$( '.span-title', element ).text($(this).val());
 					});
-
 					$( '.remove-itinerary', element ).on( 'click', function() {
 						if (confirm('Are you sure?') == true) {
 							$( this ).closest('.itinerary-li').remove();
 						};
 					});
-
 					$( '.item_date', element ).datepicker();
 
 					var y = 0;
@@ -300,17 +296,16 @@ class Trip_Options_Edit_Metabox {
 
 					$( element ).delegate( '.add-assignment', 'click', function() {
 
-							//alert(this.value);
-						var new_assignment = '<tr class="assignment-rows" id="assignment-row-'+ x +'-'+ y +'"><td>';
+						var new_assignment = '<tr class="assignment-rows" id="assignment-row-'+ index +'-'+ y +'"><td>';
 						//new_assignment += '<select style="width:100%" class="opt-categorias" id="opt-category-'+ x +'-'+ y +'" name="itinerary_item_assignment-'+ x +'-category-'+ y +'">';
-						new_assignment += '<select style="width:100%" class="opt-categorias" name="itinerary_item_assignment-'+ x +'-category-'+ y +'">';
+						new_assignment += '<select style="width:100%" class="opt-categorias" name="itinerary_item_assignment-'+ index +'-category-'+ y +'">';
 						new_assignment += '<option>- Select Category -</option>';
 						$.each(categories, function (i, item) {
 							new_assignment += '<option value="' + item + '">' + item + '</option>';
                 		});
 						new_assignment += '</select></td><td>';
 						//new_assignment += '<select style="width:100%" class="opt-tipo" id="opt-tipo-'+ x +'-'+ y +'" name="itinerary_item_assignment-'+ x +'-resource-'+ y +'"></select>';
-						new_assignment += '<select style="width:100%" class="opt-tipo" name="itinerary_item_assignment-'+ x +'-resource-'+ y +'"></select>';
+						new_assignment += '<select style="width:100%" class="opt-tipo" name="itinerary_item_assignment-'+ index +'-resource-'+ y +'"></select>';
 							//new_assignment += '<option>- Select Resource -</option></select>';
 						new_assignment += '</td></tr>';
 							//var add_resource = '<select style="width:100%" class="opt-tipo" name="itinerary_item_assignment-'+ index +'-resource-'+ index +'">';
@@ -319,7 +314,7 @@ class Trip_Options_Edit_Metabox {
 									
 
 						$( '#end-of-assignment', element ).before(new_assignment);
-						var sub_element = '#assignment-row-' + x +'-'+ y;
+						var sub_element = '#assignment-row-' + index +'-'+ y;
 						$( '.opt-categorias', sub_element ).on( 'change', function() {
 							var opt_categorias = this.value;
         					$.ajax({
