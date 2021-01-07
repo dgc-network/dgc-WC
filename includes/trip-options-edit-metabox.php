@@ -339,7 +339,7 @@ class Trip_Options_Edit_Metabox {
 					add_itinerary += '<span class="fas fa-bars"> </span>';
 					add_itinerary += '<span class="span-label">' + itinerary_label + '</span>, ';
 					add_itinerary += '<span class="span-title">' + itinerary_title + '</span>';
-					add_itinerary += '<table style="display:none">';
+					add_itinerary += '<table>';
 					add_itinerary += '<tr>';
 					add_itinerary += '<th>Itinerary label</th>';
 					add_itinerary += '<td><input type="text" class="item-label" name="itinerary_item_label-' + x + '" value="' + itinerary_label + '"></td>';
@@ -361,7 +361,7 @@ class Trip_Options_Edit_Metabox {
 						//$( 'table', element ).toggleClass( 'toggle-access' );
 						
 					$( 'span', element ).on( 'click', function() {
-						alert(element);
+						//alert(element);
 						$( 'table', element ).toggleClass( 'toggle-access' );
 					});
 					x = x + 1;
