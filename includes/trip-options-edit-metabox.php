@@ -319,7 +319,6 @@ class Trip_Options_Edit_Metabox {
                 					'term_chosen': opt_categorias,
             					},
             					success: function (data) {
-									alert(sub_element);
 									$( '.opt_tipo', sub_element ).empty();
             						$( '.opt_tipo', sub_element ).append('<option value="">- Select Resource -</option>');
 
@@ -407,6 +406,53 @@ class Trip_Options_Edit_Metabox {
 						};
 					});
 					$( '.item_date', element ).datepicker();
+
+					$( element ).delegate( '#first-assignment', 'click', function() {
+						$( '.no-assignments', element ).hide();
+						$( '.assignment-header', element ).show();
+					});
+					var y = 0;
+					$( element ).delegate( '.add-assignment', 'click', function() {
+
+						var new_assignment = '<tr class="assignment-rows" id="assignment-row-'+ x +'-'+ y +'"><td>';
+						new_assignment += '<select style="width:100%" class="opt_categorias" name="itinerary_item_assignment-'+ x +'-category-'+ y +'">';
+						new_assignment += '<option>- Select Category -</option>';
+						$.each(categories, function (i, item) {
+							new_assignment += '<option value="' + item + '">' + item + '</option>';
+                		});
+						new_assignment += '</select></td><td>';
+						new_assignment += '<select style="width:100%" class="opt_tipo" name="itinerary_item_assignment-'+ x +'-resource-'+ y +'"></select>';
+						new_assignment += '</td></tr>';
+
+						$( '#end-of-assignment', element ).before(new_assignment);
+						var sub_element = '#assignment-row-' + x +'-'+ y;
+						$( '.opt_categorias', sub_element ).on( 'change', function() {
+							var opt_categorias = this.value;
+        					$.ajax({
+								type: 'POST',
+								url: '/wp-admin/admin-ajax.php',
+            					dataType: "json",
+            					data: {
+									'action': 'get_resources_by_category',
+                					'term_chosen': opt_categorias,
+            					},
+            					success: function (data) {
+									$( '.opt_tipo', sub_element ).empty();
+            						$( '.opt_tipo', sub_element ).append('<option value="">- Select Resource -</option>');
+
+                					$.each(data, function (i, item) {
+                    					$( '.opt_tipo', sub_element ).append('<option value="' + item + '">' + item + '</option>');
+                					});									
+            					},
+            					error: function(error){
+									alert(error);
+            					},
+            					complete: function () {
+            					}
+        					});											
+						});
+						y = y + 1;
+					});
 					x = x + 1;
 				});
 /*
