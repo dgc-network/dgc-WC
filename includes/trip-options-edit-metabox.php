@@ -384,14 +384,15 @@ class Trip_Options_Edit_Metabox {
 				$( '#first-itinerary' ).on( 'click', function() {
 					$( '.no-itineraries' ).hide();
 					$( '.itinerary-header' ).show();
-					/*
 					$( '.itinerary-rows' ).show();					
+					/*
 					$( '.itinerary-li' ).hide();
 					$( '#itinerary-li-0' ).show();*/
 					$( '#end-of-itinerary' ).before(new_itinerary);
 					$( 'span', '#itinerary-li-0' ).on( 'click', function() {
 						$( 'table', '#itinerary-li-0' ).toggleClass( 'toggle-access' );
 					});
+					x = x + 1;
 				});
 
 				//$( '#first-itinerary' ).on( 'click', function() {
@@ -717,10 +718,13 @@ wp_enqueue_script( 'some_handle' );
 				<h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3><br>
 				<span><?php esc_html_e( 'No Itineraries found.', 'wp-travel' ); ?></span>
 				<button class="add-itinerary" id="first-itinerary" type="button"><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></span>
+			</td></tr>
+			<tr style="display:none" class="itinerary-rows"><td colspan="2">
 				<ul id="itineraries-ul">
 					<li id="end-of-itinerary" style="display:none"></li>
 				</ul>
-			</td></tr><?php
+			</td></tr>
+			<?php
 		}?>
 
 			<tr style="display:none" class="itinerary-header">
