@@ -387,6 +387,7 @@ class Trip_Options_Edit_Metabox {
 					$( '#end-of-itinerary' ).before(new_itinerary);
 					var element = '#itinerary-li-' + x ;
 					x = x + 1;
+					alert(x);
 					$( 'span', element ).on( 'click', function() {
 						$( 'table', element ).toggleClass( 'toggle-access' );
 					});
@@ -395,6 +396,11 @@ class Trip_Options_Edit_Metabox {
 					});
 					$( element ).delegate( '.item-title', 'keyup', function() {
 						$( '.span-title', element ).text($(this).val());
+					});
+					$( '.remove-itinerary', element ).on( 'click', function() {
+						if (confirm('Are you sure?') == true) {
+							$( this ).closest('.itinerary-li').remove();
+						};
 					});
 				});
 
