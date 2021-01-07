@@ -223,10 +223,25 @@ class Trip_Options_Edit_Metabox {
 					// alerts 'Some string to translate'
 					//alert( object_name.remove_itinerary );
 
+				var categories = '';
+				$.ajax({
+            		type: 'POST',
+            		url: '/wp-admin/admin-ajax.php',
+            		dataType: "json",
+            		data: {
+						'action': 'get_categories',
+        			},
+            		success: function (data) {
+						categories = data;
+            		},
+            		error: function(error){
+						alert(error);
+					}
+            		//, complete: function () {}
+        		});
+
 				var x = 0;
 				$( '.itinerary-li' ).each( function( index, element ) {
-					x = x + 1;
-
 					if ( !$( 'p', element ).is( ':empty' ) ) {
 						$( '.itinerary-rows' ).show();
 						$( element ).show();
@@ -248,29 +263,37 @@ class Trip_Options_Edit_Metabox {
 						$( '.assignment-header', element ).show();
 					});
 
+					var y = 0;
+					$( '.assignment-rows', element ).each( function( sub_index, sub_element ) {
+						$( '.opt-categorias', sub_element ).on( 'change', function() {
+							//var add_resource = '<select style="width:100%" class="opt-tipo" name="itinerary_item_assignment-'+ index +'-resource-'+ index +'">';
+							//add_resource += '<option>- Select Resource -</option></select>';
+							//$( '#td-resource-'+index, element ).append(add_resource);						
+						});
+						y = y + 1;
+					});
+
+					var new_assignment = '<tr class="assignment-rows"><td>';
+					new_assignment += '<select style="width:100%" class="opt-categorias" id="opt-'+ x +'category-'+ y +'" name="itinerary_item_assignment-'+ x +'-category-'+ y +'">';
+					new_assignment += '<option>- Select Category -</option>';
+					$.each(categories, function (i, item) {
+						new_assignment += '<option value="' + item + '">' + item + '</option>';
+                	});
+					new_assignment += '</select></td><td id="td-resource-'+ x +'">';
+					//new_assignment += '<select style="width:100%" class="opt-tipo" name="itinerary_item_assignment-'+ index +'-resource-'+ index +'">';
+					//new_assignment += '<option>- Select Resource -</option></select>';
+					new_assignment += '</td></tr>';
+
 					$( element ).delegate( '.add-assignment', 'click', function() {
-						//var ajax_url = '/wp-admin/admin-ajax.php';
-        				$.ajax({
-            				type: 'POST',
-            				url: '/wp-admin/admin-ajax.php',
-            				dataType: "json",
-            				data: {
-								'action': 'get_categories',
-        					},
-            				success: function (data) {
-								$( '#end-of-assignment', element ).before(add_assignment);				
-								$( '#opt-category-'+index, element ).on( 'change', function() {
+
+						$( '#end-of-assignment', element ).before(new_assignment);
+
+								$( '#opt'+x+'-category-'+y, element ).on( 'change', function() {
 									alert(this.value);
 									var add_resource = '<select style="width:100%" class="opt-tipo" name="itinerary_item_assignment-'+ index +'-resource-'+ index +'">';
 									add_resource += '<option>- Select Resource -</option></select>';
 									$( '#td-resource-'+index, element ).append(add_resource);						
 								});
-            				},
-            				error: function(error){
-								alert(error);
-							},
-            				complete: function () {}
-        				});
 /*
 						$( '.assignment-rows', element ).each( function( sub_index, sub_element ) {
 
@@ -308,18 +331,9 @@ class Trip_Options_Edit_Metabox {
 						});
 */						
 					});
+					x = x + 1;
 				});
 /*
-				var add_assignment = '<tr class="assignment-rows"><td>';
-					add_assignment += '<select style="width:100%" class="opt-categorias" id="opt-category-'+ index +'" name="itinerary_item_assignment-'+ index +'-category-'+ index +'">';
-					add_assignment += '<option>- Select Category -</option>';
-					$.each(data, function (i, item) {
-						add_assignment += '<option value="' + item + '">' + item + '</option>';
-                	});
-					add_assignment += '</select></td><td id="td-resource-'+ index +'">';
-					//add_assignment += '<select style="width:100%" class="opt-tipo" name="itinerary_item_assignment-'+ index +'-resource-'+ index +'">';
-					//add_assignment += '<option>- Select Resource -</option></select>';
-					add_assignment += '</td></tr>';
 */
 					//var itinerary_label = DEFAULT_ITINERARY_LABEL;
 					//var itinerary_title = DEFAULT_ITINERARY_TITLE;
