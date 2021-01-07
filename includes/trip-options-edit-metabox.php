@@ -184,7 +184,7 @@ class Trip_Options_Edit_Metabox {
 						});
 					};
 
-					$( element ).delegate(".item-title", "keyup", function(){
+					$( element ).delegate(".item_title", "keyup", function(){
 						$( 'span', element ).text($(this).val());
 					});
 				});
@@ -246,10 +246,10 @@ class Trip_Options_Edit_Metabox {
 					$( element ).delegate( 'span', 'click', function() {
 						$( 'table', element ).toggleClass( 'toggle-access' );
 					});
-					$( element ).delegate( '.item-label', 'keyup', function() {
+					$( element ).delegate( '.item_label', 'keyup', function() {
 						$( '.span-label', element ).text($(this).val());
 					});
-					$( element ).delegate( '.item-title', 'keyup', function() {
+					$( element ).delegate( '.item_title', 'keyup', function() {
 						$( '.span-title', element ).text($(this).val());
 					});
 					$( '.remove-itinerary', element ).on( 'click', function() {
@@ -356,15 +356,15 @@ class Trip_Options_Edit_Metabox {
 					new_itinerary += '<table>';
 					new_itinerary += '<tr>';
 					new_itinerary +=  '<th>Itinerary label</th>';
-					new_itinerary +=  '<td><input type="text" class="item-label" name="itinerary_item_label-' + x + '" value="' + itinerary_label + '"></td>';
+					new_itinerary +=  '<td><input type="text" class="item_label" name="itinerary_item_label-' + x + '" value="' + itinerary_label + '"></td>';
 					new_itinerary += '</tr>';
 					new_itinerary += '<tr>';
 					new_itinerary +=  '<th>Itinerary title</th>';
-					new_itinerary +=  '<td><input type="text" class="item-title" name="itinerary_item_title-' + x + '" value="' + itinerary_title + '"></td>';
+					new_itinerary +=  '<td><input type="text" class="item_title" name="itinerary_item_title-' + x + '" value="' + itinerary_title + '"></td>';
 					new_itinerary += '</tr>';
 					new_itinerary += '<tr>';
 					new_itinerary +=  '<th>Itinerary date</th>';
-					new_itinerary +=  '<td><input type="text" class="item-date" name="itinerary_item_date-' + x + '"></td>';
+					new_itinerary +=  '<td><input type="text" class="item_date" name="itinerary_item_date-' + x + '"></td>';
 					new_itinerary += '</tr>';
 					new_itinerary += '<tr>';
 					new_itinerary +=  '<td colspan="2"><b>Description</b><br>';
@@ -394,10 +394,10 @@ class Trip_Options_Edit_Metabox {
 					$( 'span', element ).on( 'click', function() {
 						$( 'table', element ).toggleClass( 'toggle-access' );
 					});
-					$( element ).delegate( '.item-label', 'keyup', function() {
+					$( element ).delegate( '.item_label', 'keyup', function() {
 						$( '.span-label', element ).text($(this).val());
 					});
-					$( element ).delegate( '.item-title', 'keyup', function() {
+					$( element ).delegate( '.item_title', 'keyup', function() {
 						$( '.span-title', element ).text($(this).val());
 					});
 					$( '.remove-itinerary', element ).on( 'click', function() {
@@ -455,16 +455,6 @@ class Trip_Options_Edit_Metabox {
 					});
 					x = x + 1;
 				});
-/*
-				$( '.remove-itinerary' ).on( 'click', function() {
-					if (confirm('Are you sure?') == true) {
-						$( this ).closest('.itinerary-li').remove();
-					};
-				});
-
-				$( '.item_date' ).datepicker();
-				$( '.item_time' ).timepicker({format: 'HH:mm'});
-*/
 			});
 
 		</script>
@@ -677,19 +667,15 @@ wp_enqueue_script( 'some_handle' );
 				echo '<table>					
 						<tr>
 							<th>' . __( 'Itinerary label', 'wp-travel' ) .'</th>
-							<td><input type="text" class="item-label" name="itinerary_item_label-' . $x . '" value="' . $itinerary_label . '"></td>
+							<td><input type="text" class="item_label" name="itinerary_item_label-' . $x . '" value="' . $itinerary_label . '"></td>
 						</tr>
 						<tr>
 							<th>' . __( 'Itinerary title', 'wp-travel' ) .'</th>
-							<td><input type="text" class="item-title" name="itinerary_item_title-' . $x . '" value="' . $itinerary_title . '"></td>
+							<td><input type="text" class="item_title" name="itinerary_item_title-' . $x . '" value="' . $itinerary_title . '"></td>
 						</tr>
 						<tr>
 							<th>' . __( 'Itinerary date', 'wp-travel' ) .'</th>
 							<td><input type="text" class="item_date" name="itinerary_item_date-' . $x . '" value="' . esc_attr( $itineraries[$x]['date'] ) . '"></td>
-						</tr>
-						<tr>
-							<th>' . __( 'Itinerary time', 'wp-travel' ) .'</th>
-							<td><input type="text" class="item_time" name="itinerary_item_time-' . $x . '" value="' . esc_attr( $itineraries[$x]['time'] ) . '"></td>
 						</tr>
 						<tr>
 							<td colspan="2"><b>' . __( 'Description', 'wp-travel' ) .'</b><br>
@@ -697,50 +683,50 @@ wp_enqueue_script( 'some_handle' );
 						</tr>
 						<tr>
 							<td colspan="2">';
-								$y=0;
-								echo '<table style="width:100%;margin-left:0">';
-								if (isset($itineraries[$x]['assignment'])) {
-									echo '<tr class="assignment-header">';
-									echo '<th class="assignment-row-head">' . __( 'Resources Assignment', 'wp-travel' ) . '</th>';
-									echo '<td style="text-align:right"><button class="add-assignment" type="button">' . __( '+ Add Assignment', 'wp-travel' ) .'</button></td>';
-									echo '</tr>';
-									foreach ( $itineraries[$x]['assignment'] as $assignment ) {
-										echo '<tr class="assignment-rows" id="assignment-row-' . $y . '">
-										<td>';
-										echo '<select style="width:100%" class="opt-categorias" name="itinerary_item_assignment-' . $x . '-category-' . $y . '">';
-										foreach( $product_categories as $cat ) {
-											if ($cat->name != 'Uncategorized') {
-												if ($cat->name == $itineraries[$x]['assignment'][$y]['category']) {
-													echo '<option value="' . $cat->name . '" selected>' . $cat->name . '</option>';
-												} else {
-													echo '<option value="' . $cat->name . '">' . $cat->name . '</option>';
-												}
+							$y=0;
+							echo '<table style="width:100%;margin-left:0">';
+							if (isset($itineraries[$x]['assignment'])) {
+								echo '<tr class="assignment-header">';
+								echo '<th class="assignment-row-head">' . __( 'Resources Assignment', 'wp-travel' ) . '</th>';
+								echo '<td style="text-align:right"><button class="add-assignment" type="button">' . __( '+ Add Assignment', 'wp-travel' ) .'</button></td>';
+								echo '</tr>';
+								foreach ( $itineraries[$x]['assignment'] as $assignment ) {
+									echo '<tr class="assignment-rows" id="assignment-row-' . $y . '">
+									<td>';
+									echo '<select style="width:100%" class="opt-categorias" name="itinerary_item_assignment-' . $x . '-category-' . $y . '">';
+									foreach( $product_categories as $cat ) {
+										if ($cat->name != 'Uncategorized') {
+											if ($cat->name == $itineraries[$x]['assignment'][$y]['category']) {
+												echo '<option value="' . $cat->name . '" selected>' . $cat->name . '</option>';
+											} else {
+												echo '<option value="' . $cat->name . '">' . $cat->name . '</option>';
 											}
 										}
-										echo '</select>
-										</td>
-										<td>';
-										echo '<select style="width:100%" class="opt_tipo" name="itinerary_item_assignment-' . $x . '-resource-' . $y . '">';
+									}
+									echo '</select>
+									</td>
+									<td>';
+									echo '<select style="width:100%" class="opt_tipo" name="itinerary_item_assignment-' . $x . '-resource-' . $y . '">';
 										self::product_name_options_by_category( $itineraries[$x]['assignment'][$y]['category'], $itineraries[$x]['assignment'][$y]['resource'] );
-										echo '</select>';
-										echo '</td>
-										</tr>';
-										$y++;
-									}															
-								} else {
-									echo '<tr style="display:none" class="assignment-header">';
+									echo '</select>';
+									echo '</td>
+									</tr>';
+									$y++;
+								}															
+							} else {
+								echo '<tr style="display:none" class="assignment-header">';
 									echo '<th class="assignment-row-head">' . __( 'Resources Assignment', 'wp-travel' ) . '</th>';
 									echo '<td style="text-align:right"><button class="add-assignment" type="button">' . __( '+ Add Assignment', 'wp-travel' ) .'</button></td>';
-									echo '</tr>';
-									echo '<tr class="no-assignments"><td colspan="2">';
+								echo '</tr>';
+								echo '<tr class="no-assignments"><td colspan="2">';
 									esc_html_e( 'No Assignments found. ', 'wp-travel' );
 									echo '<button class="add-assignment" id="first-assignment" type="button">' . __( 'Add Assignment', 'wp-travel' ) . '</button>';
-									echo '</td></tr>';
-								}
+								echo '</td></tr>';
+							}
 
 								echo '<tr id="end-of-assignment"></tr>';
-								echo '</table>';
-							echo '</td>
+							echo '</table>';
+						echo '</td>
 						</tr>
 						<tr>
 							<td colspan ="2"><button class="remove-itinerary" type="button">' . $remove_itinerary . '</button></td>
@@ -864,7 +850,7 @@ wp_enqueue_script( 'some_handle' );
 					<table>
 						<tr>
 							<th>' . __( 'Your question', 'wp-travel' ) . '</th>
-							<td><input type="text" width="100%" class="item-title" name="faq_item_question-' . $x . '" value="' . $faq_question . '" class="regular-text"></td>
+							<td><input type="text" width="100%" class="item_title" name="faq_item_question-' . $x . '" value="' . $faq_question . '" class="regular-text"></td>
 						</tr>
 						<tr>
 							<th>' . __( 'Your answer', 'wp-travel' ) . '</th>
@@ -932,7 +918,7 @@ wp_enqueue_script( 'some_handle' );
 				$itineraries[$xx]['time'] = sanitize_text_field( $_POST['itinerary_item_time-' . $x] );
 				$itineraries[$xx]['desc'] = sanitize_text_field( $_POST['itinerary_item_desc-' . $x] );
 				$yy = 0;
-				for ($y = 0; $y < 10; $y++) {
+				for ($y = 0; $y < 100; $y++) {
 					if ($_POST['itinerary_item_assignment-' . $x . '-category-' . $y]!="") {
 						$itineraries[$xx]['assignment'][$yy]['category'] = sanitize_text_field( $_POST['itinerary_item_assignment-' . $x . '-category-' . $y] );
 					}
@@ -1023,7 +1009,7 @@ wp_enqueue_script( 'some_handle' );
 					</tr>
 					<tr>
 						<th>Custom Trip Title</th>
-						<td><input type="text" class="item-title" name="tab_item_custom-' . $key . '" value="' . $tab_label . '"></td>
+						<td><input type="text" class="item_title" name="tab_item_custom-' . $key . '" value="' . $tab_label . '"></td>
 					</tr>
 					<tr>
 						<th>Display</th>
@@ -1052,7 +1038,7 @@ wp_enqueue_script( 'some_handle' );
 						});
 					};
 
-					$( element ).delegate(".item-title", "keyup", function(){
+					$( element ).delegate(".item_title", "keyup", function(){
 						$( 'span', element ).text($(this).val());
 					});
 				});
@@ -1130,7 +1116,7 @@ wp_enqueue_script( 'some_handle' );
 				  	  <tbody>
 						<tr>
 							<th>Pricing Name</th>
-							<td><input type="text" class="item-title" name="pricing_item_title-' . $x . '" value="' . $pricing_title . '"></td>
+							<td><input type="text" class="item_title" name="pricing_item_title-' . $x . '" value="' . $pricing_title . '"></td>
 						</tr>
 						<tr>
 							<th>Min. Pax</th>
@@ -1181,7 +1167,7 @@ wp_enqueue_script( 'some_handle' );
 						});
 					};
 
-					$( element ).delegate(".item-title", "keyup", function(){
+					$( element ).delegate(".item_title", "keyup", function(){
 						$( 'span', element ).text($(this).val());
 					});
 				});
