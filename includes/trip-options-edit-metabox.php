@@ -560,7 +560,7 @@ $translation_array = array(
 wp_localize_script( 'some_handle', 'object_name', $translation_array );
  
 // Enqueued script with localized data.
-//wp_enqueue_script( 'some_handle' );
+wp_enqueue_script( 'some_handle' );
 
 		$product_categories = get_terms( array( 'taxonomy' => 'product_cat', 'hide_empty' => false ) );
 		?>
