@@ -318,19 +318,22 @@ class Trip_Options_Edit_Metabox {
 					});
 				});
 
-				$( '#first-itinerary' ).click( function() {
+				//$( '#first-itinerary' ).click( function() {
+				$( '#first-itinerary' ).on( 'click', function() {
 					$( '.no-itineraries' ).hide();
 					$( '.itinerary-header' ).show();
 					/*
 					$( '.itinerary-rows' ).show();					
-					$( '.itinerary-li' ).hide();*/
+					$( '.itinerary-li' ).hide();
 					$( '#itinerary-li-0' ).show();
 					$( 'span', '#itinerary-li-0' ).on( 'click', function() {
 						$( 'table', '#itinerary-li-0' ).toggleClass( 'toggle-access' );
-					});
+					});*/
 				});
 
 				$( '.add-itinerary' ).on( 'click', function() {
+					// alerts 'Some string to translate'
+					alert( object_name.remove_itinerary );
 					//var itinerary_label = DEFAULT_ITINERARY_LABEL;
 					//var itinerary_title = DEFAULT_ITINERARY_TITLE;
 					var itinerary_label = 'Day X';
@@ -352,6 +355,10 @@ class Trip_Options_Edit_Metabox {
 					add_itinerary += '<th>Itinerary date</th>';
 					add_itinerary += '<td><input type="text" class="item-date" name="itinerary_item_date-' + x + '"></td>';
 					add_itinerary += '</tr>';
+					<tr>
+							<td colspan="2"><b>' . __( 'Description', 'wp-travel' ) .'</b><br>
+							<textarea rows="5" name="itinerary_item_desc-' . $x . '">' . esc_attr( $itineraries[$x]['desc'] ) . '</textarea></td>
+						</tr>
 					add_itinerary += '</table>';
 
 					$( '#end-of-itinerary' ).before(add_itinerary);
@@ -540,6 +547,21 @@ class Trip_Options_Edit_Metabox {
 		$trip_outline = get_post_meta( $post->ID, 'wp_travel_outline', true );
 		$itineraries = get_post_meta( $post->ID, 'wp_travel_trip_itinerary_data', true );
 		$remove_itinerary = __( "- Remove Itinerary", "wp-travel" );
+
+// Register the script
+//wp_register_script( 'some_handle', 'path/to/myscript.js' );
+ 
+// Localize the script with new data
+$translation_array = array(
+	'some_string' => __( 'Some string to translate', 'plugin-domain' ),
+	'remove_itinerary' => __( "- Remove Itinerary", "wp-travel" ),
+    'a_value' => '10'
+);
+wp_localize_script( 'some_handle', 'object_name', $translation_array );
+ 
+// Enqueued script with localized data.
+//wp_enqueue_script( 'some_handle' );
+
 		$product_categories = get_terms( array( 'taxonomy' => 'product_cat', 'hide_empty' => false ) );
 		?>
 		<div id='itinerary_panel' class='panel woocommerce_options_panel'>
@@ -659,7 +681,7 @@ class Trip_Options_Edit_Metabox {
 			<tr class="no-itineraries"><td colspan="2">
 				<h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3><br>
 				<span><?php esc_html_e( 'No Itineraries found.', 'wp-travel' ); ?></span>
-				<button id="first-itinerary" type="button"><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></span>
+				<button class="add-itinerary" id="first-itinerary" type="button"><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></span>
 			</td></tr><?php
 		}?>
 
