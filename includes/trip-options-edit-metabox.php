@@ -355,14 +355,14 @@ class Trip_Options_Edit_Metabox {
 					add_itinerary += '</table>';
 
 					$( '#end-of-itinerary' ).before(add_itinerary);
-/*
+
 					var element = '#itinerary-li-' + x ;
 					//$( element ).delegate( 'span', 'click', function() {
 						//$( 'table', element ).toggleClass( 'toggle-access' );
-*/						
-					$( 'span', '#itinerary-li-4' ).on( 'click', function() {
-						alert('I am here');
-						$( 'table', '#itinerary-li-4' ).toggleClass( 'toggle-access' );
+						
+					$( 'span', element ).on( 'click', function() {
+						alert(element);
+						$( 'table', element ).toggleClass( 'toggle-access' );
 					});
 					x = x + 1;
 
