@@ -309,7 +309,7 @@ class Trip_Options_Edit_Metabox {
 */						
 					});
 				});
-
+/*
 				var add_assignment = '<tr class="assignment-rows"><td>';
 					add_assignment += '<select style="width:100%" class="opt-categorias" id="opt-category-'+ index +'" name="itinerary_item_assignment-'+ index +'-category-'+ index +'">';
 					add_assignment += '<option>- Select Category -</option>';
@@ -320,7 +320,7 @@ class Trip_Options_Edit_Metabox {
 					//add_assignment += '<select style="width:100%" class="opt-tipo" name="itinerary_item_assignment-'+ index +'-resource-'+ index +'">';
 					//add_assignment += '<option>- Select Resource -</option></select>';
 					add_assignment += '</td></tr>';
-
+*/
 					//var itinerary_label = DEFAULT_ITINERARY_LABEL;
 					//var itinerary_title = DEFAULT_ITINERARY_TITLE;
 					var itinerary_label = 'Day X';
