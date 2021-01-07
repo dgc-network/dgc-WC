@@ -265,7 +265,39 @@ class Trip_Options_Edit_Metabox {
 
 					var y = 0;
 					$( '.assignment-rows', element ).each( function( sub_index, sub_element ) {
+
+							//$( sub_element ).delegate( '.opt-categorias', 'change', function() {
+    						//});
+
 						$( '.opt-categorias', sub_element ).on( 'change', function() {
+							var opt_categorias = this.value;
+								//alert(opt_categorias+'-'+sub_index+'-'+sub_element);
+						
+								//var ajax_url = '/wp-admin/admin-ajax.php';
+        					$.ajax({
+								type: 'POST',
+								url: '/wp-admin/admin-ajax.php',
+            					dataType: "json",
+            					data: {
+									'action': 'get_resources_by_category',
+                					'term_chosen': opt_categorias,
+            					},
+            					success: function (data) {
+									//alert(data.length);
+									$( '.opt_tipo', sub_element ).empty();
+            						$( '.opt_tipo', sub_element ).append("<option value=''>- Select Resource -</option>");
+
+                					$.each(data, function (i, item) {
+                    					$( '.opt_tipo', sub_element ).append('<option value="' + item + '">' + item + '</option>');
+                					});									
+            					},
+            					error: function(error){
+									alert(error);
+            					},
+            					complete: function () {
+            					}
+        					});											
+/*
 							alert(this.value);
 							var new_assignment = '<tr class="assignment-rows"><td>';
 							new_assignment += '<select style="width:100%" class="opt-categorias" id="opt-'+ x +'category-'+ y +'" name="itinerary_item_assignment-'+ x +'-category-'+ y +'">';
@@ -279,7 +311,8 @@ class Trip_Options_Edit_Metabox {
 							new_assignment += '</td></tr>';
 							//var add_resource = '<select style="width:100%" class="opt-tipo" name="itinerary_item_assignment-'+ index +'-resource-'+ index +'">';
 							//add_resource += '<option>- Select Resource -</option></select>';
-							//$( '#td-resource-'+index, element ).append(add_resource);						
+							//$( '#td-resource-'+index, element ).append(add_resource);		
+*/											
 						});
 						y = y + 1;
 					});
@@ -304,36 +337,6 @@ class Trip_Options_Edit_Metabox {
 						$( '.assignment-rows', element ).each( function( sub_index, sub_element ) {
 
 							//$( '.opt-categorias' ).on( 'change', function() {
-							$( sub_element ).delegate( '.opt-categorias', 'change', function() {
-								var opt_categorias = this.value;
-								alert(opt_categorias+'-'+sub_index+'-'+sub_element);
-						
-								//var ajax_url = '/wp-admin/admin-ajax.php';
-        						$.ajax({
-            						type: 'POST',
-            						url: '/wp-admin/admin-ajax.php',
-            						dataType: "json",
-            						data: {
-										'action': 'get_resources_by_category',
-                						'term_chosen': opt_categorias,
-            						},
-            						success: function (data) {
-										//alert(data.length);
-										$( '.opt_tipo', '.assignment-rows' ).empty();
-                						$( '.opt_tipo', '.assignment-rows' ).append("<option value=''>- Select Resource -</option>");
-
-                						$.each(data, function (i, item) {
-                    						$( '.opt_tipo', '.assignment-rows' ).append('<option value="' + item + '">' + item + '</option>');
-                						});
-									
-            						},
-            						error: function(error){
-										alert(error);
-            						},
-            						complete: function () {
-            						}
-        						});											
-    						});
 						});
 */						
 					});
@@ -410,7 +413,6 @@ class Trip_Options_Edit_Metabox {
 					});
 					$( '.item_date', element ).datepicker();
 					x = x + 1;
-					//alert(x);
 				});
 /*
 				$( '.remove-itinerary' ).on( 'click', function() {
