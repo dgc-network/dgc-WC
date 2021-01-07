@@ -242,7 +242,6 @@ class Trip_Options_Edit_Metabox {
 
 				var x = 0;
 				$( '.itinerary-li' ).each( function( index, element ) {
-					x = x + 1;
 
 					$( element ).delegate( 'span', 'click', function() {
 						$( 'table', element ).toggleClass( 'toggle-access' );
@@ -330,9 +329,17 @@ class Trip_Options_Edit_Metabox {
 						});
 */						
 					});
+					x = x + 1;
 				});
 /*
 */
+				$( '#first-itinerary' ).on( 'click', function() {
+					$( '.no-itineraries' ).hide();
+					$( '.itinerary-header' ).show();
+					$( '.itinerary-rows' ).show();					
+				});
+
+				$( '.add-itinerary' ).on( 'click', function() {
 					//var itinerary_label = DEFAULT_ITINERARY_LABEL;
 					//var itinerary_title = DEFAULT_ITINERARY_TITLE;
 					var itinerary_label = 'Day X';
@@ -377,17 +384,8 @@ class Trip_Options_Edit_Metabox {
 					new_itinerary += '</tr>';
 					new_itinerary += '</table>';
 
-				$( '#first-itinerary' ).on( 'click', function() {
-					$( '.no-itineraries' ).hide();
-					$( '.itinerary-header' ).show();
-					$( '.itinerary-rows' ).show();					
-				});
-
-				$( '.add-itinerary' ).on( 'click', function() {
 					$( '#end-of-itinerary' ).before(new_itinerary);
 					var element = '#itinerary-li-' + x ;
-					x = x + 1;
-					alert(x);
 					$( 'span', element ).on( 'click', function() {
 						$( 'table', element ).toggleClass( 'toggle-access' );
 					});
@@ -402,6 +400,9 @@ class Trip_Options_Edit_Metabox {
 							$( this ).closest('.itinerary-li').remove();
 						};
 					});
+					$( '.item_date', element ).datepicker();
+					x = x + 1;
+					//alert(x);
 				});
 
 				$( '.remove-itinerary' ).on( 'click', function() {
