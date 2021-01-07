@@ -242,20 +242,12 @@ class Trip_Options_Edit_Metabox {
 
 				var x = 0;
 				$( '.itinerary-li' ).each( function( index, element ) {
+					x = x + 1;
 
 					$( element ).delegate( 'span', 'click', function() {
 						$( 'table', element ).toggleClass( 'toggle-access' );
 					});
 
-/*
-					if ( !$( 'p', element ).is( ':empty' ) ) {
-						$( '.itinerary-rows' ).show();
-						$( element ).show();
-						$( element ).delegate( 'span', 'click', function() {
-							$( 'table', element ).toggleClass( 'toggle-access' );
-						});
-					};
-*/
 					$( element ).delegate( '.item-label', 'keyup', function() {
 						$( '.span-label', element ).text($(this).val());
 					});
@@ -338,7 +330,6 @@ class Trip_Options_Edit_Metabox {
 						});
 */						
 					});
-					x = x + 1;
 				});
 /*
 */
@@ -386,30 +377,25 @@ class Trip_Options_Edit_Metabox {
 					new_itinerary += '</tr>';
 					new_itinerary += '</table>';
 
-				//$( '#first-itinerary' ).click( function() {
 				$( '#first-itinerary' ).on( 'click', function() {
 					$( '.no-itineraries' ).hide();
 					$( '.itinerary-header' ).show();
 					$( '.itinerary-rows' ).show();					
-					/*
-					$( '.itinerary-li' ).hide();
-					$( '#itinerary-li-0' ).show();
-					$( '#end-of-itinerary' ).before(new_itinerary);
-					$( 'span', '#itinerary-li-0' ).on( 'click', function() {
-						$( 'table', '#itinerary-li-0' ).toggleClass( 'toggle-access' );
-					});
-					x = x + 1;*/
 				});
 
-				//$( '#first-itinerary' ).on( 'click', function() {
 				$( '.add-itinerary' ).on( 'click', function() {
 					$( '#end-of-itinerary' ).before(new_itinerary);
-
 					var element = '#itinerary-li-' + x ;
+					x = x + 1;
 					$( 'span', element ).on( 'click', function() {
 						$( 'table', element ).toggleClass( 'toggle-access' );
 					});
-					x = x + 1;
+					$( element ).delegate( '.item-label', 'keyup', function() {
+						$( '.span-label', element ).text($(this).val());
+					});
+					$( element ).delegate( '.item-title', 'keyup', function() {
+						$( '.span-title', element ).text($(this).val());
+					});
 				});
 
 				$( '.remove-itinerary' ).on( 'click', function() {
@@ -588,7 +574,7 @@ class Trip_Options_Edit_Metabox {
 		$trip_code = wp_travel_get_trip_code( $post->ID );
 		$trip_outline = get_post_meta( $post->ID, 'wp_travel_outline', true );
 		$itineraries = get_post_meta( $post->ID, 'wp_travel_trip_itinerary_data', true );
-		$remove_itinerary = __( "- Remove Itinerary", "wp-travel" );
+		$remove_itinerary = __( "- Remove Itinerary -", "wp-travel" );
 
 // Register the script
 //wp_register_script( 'some_handle', 'path/to/myscript.js' );
@@ -596,7 +582,7 @@ class Trip_Options_Edit_Metabox {
 // Localize the script with new data
 $translation_array = array(
 	'some_string' => __( 'Some string to translate', 'plugin-domain' ),
-	'remove_itinerary' => __( "- Remove Itinerary", "wp-travel" ),
+	'remove_itinerary' => __( "- Remove Itinerary -", "wp-travel" ),
     'a_value' => '10'
 );
 wp_localize_script( 'some_handle', 'object_name', $translation_array );
