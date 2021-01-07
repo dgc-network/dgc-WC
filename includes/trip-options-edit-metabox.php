@@ -316,6 +316,7 @@ class Trip_Options_Edit_Metabox {
 						$( '#end-of-assignment', element ).before(new_assignment);
 						var sub_element = '#assignment-row-' + index +'-'+ y;
 						$( '.opt-categorias', sub_element ).on( 'change', function() {
+							alert(this.value);
 							var opt_categorias = this.value;
         					$.ajax({
 								type: 'POST',
