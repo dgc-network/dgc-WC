@@ -242,6 +242,11 @@ class Trip_Options_Edit_Metabox {
 
 				var x = 0;
 				$( '.itinerary-li' ).each( function( index, element ) {
+
+					$( element ).delegate( 'span', 'click', function() {
+						$( 'table', element ).toggleClass( 'toggle-access' );
+					});
+
 /*
 					if ( !$( 'p', element ).is( ':empty' ) ) {
 						$( '.itinerary-rows' ).show();
@@ -259,21 +264,17 @@ class Trip_Options_Edit_Metabox {
 						$( '.span-title', element ).text($(this).val());
 					});
 
-					$( element ).delegate( '#first-assignment', 'click', function() {
-						$( '.no-assignments', element ).hide();
-						$( '.assignment-header', element ).show();
-					});
-
 					var y = 0;
 					$( '.assignment-rows', element ).each( function( sub_index, sub_element ) {
 						$( '.opt-categorias', sub_element ).on( 'change', function() {
+							alert(this.value);
 							//var add_resource = '<select style="width:100%" class="opt-tipo" name="itinerary_item_assignment-'+ index +'-resource-'+ index +'">';
 							//add_resource += '<option>- Select Resource -</option></select>';
 							//$( '#td-resource-'+index, element ).append(add_resource);						
 						});
 						y = y + 1;
 					});
-
+/*
 					var new_assignment = '<tr class="assignment-rows"><td>';
 					new_assignment += '<select style="width:100%" class="opt-categorias" id="opt-'+ x +'category-'+ y +'" name="itinerary_item_assignment-'+ x +'-category-'+ y +'">';
 					new_assignment += '<option>- Select Category -</option>';
@@ -284,6 +285,11 @@ class Trip_Options_Edit_Metabox {
 					//new_assignment += '<select style="width:100%" class="opt-tipo" name="itinerary_item_assignment-'+ index +'-resource-'+ index +'">';
 					//new_assignment += '<option>- Select Resource -</option></select>';
 					new_assignment += '</td></tr>';
+*/
+					$( element ).delegate( '#first-assignment', 'click', function() {
+						$( '.no-assignments', element ).hide();
+						$( '.assignment-header', element ).show();
+					});
 
 					$( element ).delegate( '.add-assignment', 'click', function() {
 
