@@ -357,15 +357,16 @@ class Trip_Options_Edit_Metabox {
 					$( '#end-of-itinerary' ).before(add_itinerary);
 /*
 					var element = '#itinerary-li-' + x ;
-					//alert(element);
 					//$( element ).delegate( 'span', 'click', function() {
 						//$( 'table', element ).toggleClass( 'toggle-access' );
+*/						
 					$( 'span', '#itinerary-li-4' ).on( 'click', function() {
+						alert('I am here');
 						$( 'table', '#itinerary-li-4' ).toggleClass( 'toggle-access' );
 					});
 					x = x + 1;
-*/
-					
+
+/*					
 					$( '.itinerary-li' ).each( function( index, element ) {
 						//if ( $( element ).is( ':hidden' ) ) {
 						//	$( element ).show();
@@ -375,6 +376,7 @@ class Trip_Options_Edit_Metabox {
 						//	return false;
 						//};
 					});
+*/					
 				});
 
 				$( '.remove-itinerary' ).on( 'click', function() {
