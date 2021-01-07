@@ -242,6 +242,7 @@ class Trip_Options_Edit_Metabox {
 
 				var x = 0;
 				$( '.itinerary-li' ).each( function( index, element ) {
+/*
 					if ( !$( 'p', element ).is( ':empty' ) ) {
 						$( '.itinerary-rows' ).show();
 						$( element ).show();
@@ -249,7 +250,7 @@ class Trip_Options_Edit_Metabox {
 							$( 'table', element ).toggleClass( 'toggle-access' );
 						});
 					};
-
+*/
 					$( element ).delegate( '.item-label', 'keyup', function() {
 						$( '.span-label', element ).text($(this).val());
 					});
@@ -374,9 +375,10 @@ class Trip_Options_Edit_Metabox {
 					new_itinerary +=  '<tr id="end-of-assignment"></tr>';
 					new_itinerary +=  '</table>';
 					new_itinerary += '</tr>';
+					new_itinerary += '<tr>';
+					new_itinerary += '<td colspan ="2"><button class="remove-itinerary" type="button">- Remove Itinerary -</button></td>';
+					new_itinerary += '</tr>';
 					new_itinerary += '</table>';
-
-
 
 				//$( '#first-itinerary' ).click( function() {
 				$( '#first-itinerary' ).on( 'click', function() {
@@ -715,6 +717,9 @@ wp_enqueue_script( 'some_handle' );
 				<h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3><br>
 				<span><?php esc_html_e( 'No Itineraries found.', 'wp-travel' ); ?></span>
 				<button class="add-itinerary" id="first-itinerary" type="button"><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></span>
+				<ul id="itineraries-ul">
+					<li id="end-of-itinerary" style="display:none"></li>
+				</ul>
 			</td></tr><?php
 		}?>
 
