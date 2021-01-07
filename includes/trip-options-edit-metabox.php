@@ -387,12 +387,12 @@ class Trip_Options_Edit_Metabox {
 					$( '.itinerary-rows' ).show();					
 					/*
 					$( '.itinerary-li' ).hide();
-					$( '#itinerary-li-0' ).show();*/
+					$( '#itinerary-li-0' ).show();
 					$( '#end-of-itinerary' ).before(new_itinerary);
 					$( 'span', '#itinerary-li-0' ).on( 'click', function() {
 						$( 'table', '#itinerary-li-0' ).toggleClass( 'toggle-access' );
 					});
-					x = x + 1;
+					x = x + 1;*/
 				});
 
 				//$( '#first-itinerary' ).on( 'click', function() {
