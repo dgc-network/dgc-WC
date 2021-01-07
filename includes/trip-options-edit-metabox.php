@@ -297,18 +297,18 @@ class Trip_Options_Edit_Metabox {
 					$( element ).delegate( '.add-assignment', 'click', function() {
 
 						var new_assignment = '<tr class="assignment-rows" id="assignment-row-'+ index +'-'+ y +'"><td>';
-						new_assignment += '<select style="width:100%" class="opt-categorias" name="itinerary_item_assignment-'+ index +'-category-'+ y +'">';
+						new_assignment += '<select style="width:100%" class="opt_categorias" name="itinerary_item_assignment-'+ index +'-category-'+ y +'">';
 						new_assignment += '<option>- Select Category -</option>';
 						$.each(categories, function (i, item) {
 							new_assignment += '<option value="' + item + '">' + item + '</option>';
                 		});
 						new_assignment += '</select></td><td>';
-						new_assignment += '<select style="width:100%" class="opt-tipo" name="itinerary_item_assignment-'+ index +'-resource-'+ y +'"></select>';
+						new_assignment += '<select style="width:100%" class="opt_tipo" name="itinerary_item_assignment-'+ index +'-resource-'+ y +'"></select>';
 						new_assignment += '</td></tr>';
 
 						$( '#end-of-assignment', element ).before(new_assignment);
 						var sub_element = '#assignment-row-' + index +'-'+ y;
-						$( '.opt-categorias', sub_element ).on( 'change', function() {
+						$( '.opt_categorias', sub_element ).on( 'change', function() {
 							var opt_categorias = this.value;
         					$.ajax({
 								type: 'POST',
