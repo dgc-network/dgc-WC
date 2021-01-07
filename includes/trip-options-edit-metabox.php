@@ -331,7 +331,8 @@ class Trip_Options_Edit_Metabox {
 					});*/
 				});
 
-				$( '.add-itinerary' ).on( 'click', function() {
+				$( '#first-itinerary' ).on( 'click', function() {
+				//$( '.add-itinerary' ).on( 'click', function() {
 					// alerts 'Some string to translate'
 					//alert( object_name.remove_itinerary );
 					//var itinerary_label = DEFAULT_ITINERARY_LABEL;
