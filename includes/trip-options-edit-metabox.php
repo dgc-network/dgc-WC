@@ -333,7 +333,7 @@ class Trip_Options_Edit_Metabox {
 
 				$( '.add-itinerary' ).on( 'click', function() {
 					// alerts 'Some string to translate'
-					alert( object_name.remove_itinerary );
+					//alert( object_name.remove_itinerary );
 					//var itinerary_label = DEFAULT_ITINERARY_LABEL;
 					//var itinerary_title = DEFAULT_ITINERARY_TITLE;
 					var itinerary_label = 'Day X';
