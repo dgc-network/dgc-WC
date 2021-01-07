@@ -220,7 +220,9 @@ class Trip_Options_Edit_Metabox {
 				/*
 				 * Itinerary Tab
 				 */
-				//$( '.itinerary-li' ).hide();
+					// alerts 'Some string to translate'
+					//alert( object_name.remove_itinerary );
+
 				var x = 0;
 				$( '.itinerary-li' ).each( function( index, element ) {
 					x = x + 1;
@@ -256,20 +258,10 @@ class Trip_Options_Edit_Metabox {
 								'action': 'get_categories',
         					},
             				success: function (data) {
-								var add_assignment = '<tr class="assignment-rows"><td>';
-								add_assignment += '<select style="width:100%" class="opt-categorias" id="opt-category-'+ index +'" name="itinerary_item_assignment-'+ index +'-category-'+ index +'">';
-								add_assignment += '<option>- Select Category -</option>';
-								$.each(data, function (i, item) {
-									add_assignment += '<option value="' + item + '">' + item + '</option>';
-                				});
-								add_assignment += '</select></td><td id="td-resource-'+ index +'">';
-								//add_assignment += '<select style="width:100%" class="opt-tipo" name="itinerary_item_assignment-'+ index +'-resource-'+ index +'">';
-								//add_assignment += '<option>- Select Resource -</option></select>';
-								add_assignment += '</td></tr>';
 								$( '#end-of-assignment', element ).before(add_assignment);				
 								$( '#opt-category-'+index, element ).on( 'change', function() {
 									alert(this.value);
-									add_resource = '<select style="width:100%" class="opt-tipo" name="itinerary_item_assignment-'+ index +'-resource-'+ index +'">';
+									var add_resource = '<select style="width:100%" class="opt-tipo" name="itinerary_item_assignment-'+ index +'-resource-'+ index +'">';
 									add_resource += '<option>- Select Resource -</option></select>';
 									$( '#td-resource-'+index, element ).append(add_resource);						
 								});
@@ -318,6 +310,60 @@ class Trip_Options_Edit_Metabox {
 					});
 				});
 
+				var add_assignment = '<tr class="assignment-rows"><td>';
+					add_assignment += '<select style="width:100%" class="opt-categorias" id="opt-category-'+ index +'" name="itinerary_item_assignment-'+ index +'-category-'+ index +'">';
+					add_assignment += '<option>- Select Category -</option>';
+					$.each(data, function (i, item) {
+						add_assignment += '<option value="' + item + '">' + item + '</option>';
+                	});
+					add_assignment += '</select></td><td id="td-resource-'+ index +'">';
+					//add_assignment += '<select style="width:100%" class="opt-tipo" name="itinerary_item_assignment-'+ index +'-resource-'+ index +'">';
+					//add_assignment += '<option>- Select Resource -</option></select>';
+					add_assignment += '</td></tr>';
+
+					//var itinerary_label = DEFAULT_ITINERARY_LABEL;
+					//var itinerary_title = DEFAULT_ITINERARY_TITLE;
+					var itinerary_label = 'Day X';
+					var itinerary_title = 'My Plan';
+					var new_itinerary = '<li class="itinerary-li" id="itinerary-li-' + x + '">';
+					new_itinerary += '<span class="fas fa-bars"> </span>';
+					new_itinerary += '<span class="span-label">' + itinerary_label + '</span>, ';
+					new_itinerary += '<span class="span-title">' + itinerary_title + '</span>';
+					new_itinerary += '<table>';
+					new_itinerary += '<tr>';
+					new_itinerary +=  '<th>Itinerary label</th>';
+					new_itinerary +=  '<td><input type="text" class="item-label" name="itinerary_item_label-' + x + '" value="' + itinerary_label + '"></td>';
+					new_itinerary += '</tr>';
+					new_itinerary += '<tr>';
+					new_itinerary +=  '<th>Itinerary title</th>';
+					new_itinerary +=  '<td><input type="text" class="item-title" name="itinerary_item_title-' + x + '" value="' + itinerary_title + '"></td>';
+					new_itinerary += '</tr>';
+					new_itinerary += '<tr>';
+					new_itinerary +=  '<th>Itinerary date</th>';
+					new_itinerary +=  '<td><input type="text" class="item-date" name="itinerary_item_date-' + x + '"></td>';
+					new_itinerary += '</tr>';
+					new_itinerary += '<tr>';
+					new_itinerary +=  '<td colspan="2"><b>Description</b><br>';
+					new_itinerary +=  '<textarea rows="5" name="itinerary_item_desc-' + x + '"></textarea></td>';
+					new_itinerary += '</tr>';
+					new_itinerary += '<tr>';
+					new_itinerary +=  '<td colspan="2">';
+					new_itinerary +=  '<table style="width:100%;margin-left:0">';
+					new_itinerary +=  '<tr style="display:none" class="assignment-header">';
+					new_itinerary +=   '<th class="assignment-row-head">Resources Assignment</th>';
+					new_itinerary +=   '<td style="text-align:right"><button class="add-assignment" type="button">+ Add Assignment</button></td>';
+					new_itinerary +=  '</tr>';
+					new_itinerary +=  '<tr class="no-assignments">';
+					new_itinerary +=   '<td colspan="2">No Assignments found. ';
+					new_itinerary +=   '<button class="add-assignment" id="first-assignment" type="button">+ Add Assignment</button></td>';
+					new_itinerary +=  '</tr>';
+					new_itinerary +=  '<tr id="end-of-assignment"></tr>';
+					new_itinerary +=  '</table>';
+					new_itinerary += '</tr>';
+					new_itinerary += '</table>';
+
+
+
 				//$( '#first-itinerary' ).click( function() {
 				$( '#first-itinerary' ).on( 'click', function() {
 					$( '.no-itineraries' ).hide();
@@ -325,44 +371,16 @@ class Trip_Options_Edit_Metabox {
 					/*
 					$( '.itinerary-rows' ).show();					
 					$( '.itinerary-li' ).hide();
-					$( '#itinerary-li-0' ).show();
+					$( '#itinerary-li-0' ).show();*/
+					$( '#end-of-itinerary' ).before(new_itinerary);
 					$( 'span', '#itinerary-li-0' ).on( 'click', function() {
 						$( 'table', '#itinerary-li-0' ).toggleClass( 'toggle-access' );
-					});*/
+					});
 				});
 
-				$( '#first-itinerary' ).on( 'click', function() {
-				//$( '.add-itinerary' ).on( 'click', function() {
-					// alerts 'Some string to translate'
-					//alert( object_name.remove_itinerary );
-					//var itinerary_label = DEFAULT_ITINERARY_LABEL;
-					//var itinerary_title = DEFAULT_ITINERARY_TITLE;
-					var itinerary_label = 'Day X';
-					var itinerary_title = 'My Plan';
-					var add_itinerary = '<li class="itinerary-li" id="itinerary-li-' + x + '">';
-					add_itinerary += '<span class="fas fa-bars"> </span>';
-					add_itinerary += '<span class="span-label">' + itinerary_label + '</span>, ';
-					add_itinerary += '<span class="span-title">' + itinerary_title + '</span>';
-					add_itinerary += '<table>';
-					add_itinerary += '<tr>';
-					add_itinerary += '<th>Itinerary label</th>';
-					add_itinerary += '<td><input type="text" class="item-label" name="itinerary_item_label-' + x + '" value="' + itinerary_label + '"></td>';
-					add_itinerary += '</tr>';
-					add_itinerary += '<tr>';
-					add_itinerary += '<th>Itinerary title</th>';
-					add_itinerary += '<td><input type="text" class="item-title" name="itinerary_item_title-' + x + '" value="' + itinerary_title + '"></td>';
-					add_itinerary += '</tr>';
-					add_itinerary += '<tr>';
-					add_itinerary += '<th>Itinerary date</th>';
-					add_itinerary += '<td><input type="text" class="item-date" name="itinerary_item_date-' + x + '"></td>';
-					add_itinerary += '</tr>';
-					add_itinerary += '<tr>';
-					add_itinerary += '<td colspan="2"><b>Description</b><br>';
-					add_itinerary += '<textarea rows="5" name="itinerary_item_desc-' + x + '"></textarea></td>';
-					add_itinerary += '</tr>';
-					add_itinerary += '</table>';
-
-					$( '#end-of-itinerary' ).before(add_itinerary);
+				//$( '#first-itinerary' ).on( 'click', function() {
+				$( '.add-itinerary' ).on( 'click', function() {
+					$( '#end-of-itinerary' ).before(new_itinerary);
 
 					var element = '#itinerary-li-' + x ;
 					$( 'span', element ).on( 'click', function() {
