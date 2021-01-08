@@ -191,7 +191,7 @@ class Trip_Options_View_Metabox {
 			<ul class='itinerary-li'><?php
 			foreach ( $itineraries as $x=>$itinerary ) { ?>
 				<li><?php 
-				echo '<span style="color:red"></span>';
+				echo '<span style="color:blue"></span>';
 				echo esc_attr( $itineraries[$x]['label'] ) . ', ' . 
 				esc_attr( $itineraries[$x]['title'] ); ?><br><?php
 				echo esc_attr( $itineraries[$x]['desc'] ); ?></li><?php
