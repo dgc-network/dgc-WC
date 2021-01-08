@@ -5,6 +5,7 @@ class Trip_Options_View_Metabox {
 	 */
 	function __construct() {
 		add_filter( 'woocommerce_product_tabs', array( __CLASS__, 'woo_new_product_tab' ) );
+		add_action( 'woocommerce_single_product_summary', array( __CLASS__, 'custom_action_after_single_product_title' ), 6 );
 		add_action( 'woocommerce_before_add_to_cart_form', array( __CLASS__, 'action_woocommerce_before_add_to_cart_button' ), 10, 0 );	
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'custom_datepicker' ) );
 		add_action( 'wp_ajax_nopriv_mxp_ajax_get_next_page_data', array( __CLASS__, 'mxp_ajax_get_next_page_data' ) );
@@ -55,6 +56,19 @@ class Trip_Options_View_Metabox {
 		wp_send_json_success(array('code' => 200, 'data' => $str));
 	}
 
+	//add_action( 'woocommerce_single_product_summary', 'custom_action_after_single_product_title', 6 );
+	function custom_action_after_single_product_title() { 
+		global $product; 
+	
+		$product_id = $product->get_id(); // The product ID
+	
+		// Your custom field "Book author"
+		$book_author = get_post_meta($product_id, "product_author", true);
+	
+		// Displaying your custom field under the title
+		echo '<p class="book-author">' . $book_author . '</p>';
+	}
+	
 	// define the woocommerce_before_add_to_cart_button callback 
 	function action_woocommerce_before_add_to_cart_button() {
 		echo '<label for="start_date">' . esc_html_e( 'Start Date : ', 'wp-travel' ) . '</label>';
