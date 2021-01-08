@@ -237,7 +237,6 @@ class Trip_Options_Edit_Metabox {
             		error: function(error){
 						alert(error);
 					}
-            		//, complete: function () {}
         		});
 
 				var x = 0;
@@ -284,7 +283,10 @@ class Trip_Options_Edit_Metabox {
             					},
             					complete: function () {
             					}
-        					});											
+							});
+							if (this.value=='_delete_assignment') {
+								alert(this.value);
+							}							
 						});
 						y = y + 1;
 					});
@@ -302,6 +304,7 @@ class Trip_Options_Edit_Metabox {
 						$.each(categories, function (i, item) {
 							new_assignment += '<option value="' + item + '">' + item + '</option>';
                 		});
+						new_assignment += '<option style="color:red" value="_delete_assignment">- Remove Assignment -</option>';
 						new_assignment += '</select></td><td>';
 						new_assignment += '<select style="width:100%" class="opt_tipo" name="itinerary_item_assignment-'+ index +'-resource-'+ y +'"></select>';
 						new_assignment += '</td></tr>';
@@ -420,6 +423,7 @@ class Trip_Options_Edit_Metabox {
 						$.each(categories, function (i, item) {
 							new_assignment += '<option value="' + item + '">' + item + '</option>';
                 		});
+						new_assignment += '<option style="color:red" value="_delete_assignment">- Remove Assignment -</option>';
 						new_assignment += '</select></td><td>';
 						new_assignment += '<select style="width:100%" class="opt_tipo" name="itinerary_item_assignment-'+ x +'-resource-'+ y +'"></select>';
 						new_assignment += '</td></tr>';
@@ -578,24 +582,7 @@ class Trip_Options_Edit_Metabox {
 			}
 		}
 		$remove_assignment = __( "- Remove Assignment -", "wp-travel" );
-		echo '<option value="_delete_assignment">' . $remove_assignment . '</option>';
-
-/*
-		//$product_category_slug='Itinerary';
-		echo '<option value="" selected disabled hidden>' .  __( "- Select Category -", "wp-travel" ) . '</option>';
-		foreach( $product_categories as $cat ) {
-			//if ($cat->name != 'Uncategorized') {
-			
-				if ($cat->name == $product_category_slug) {
-					echo '<option value="' . $cat->name . '" selected="selected">' . $cat->name . '</option>';
-				} else {
-					echo '<option value="' . $cat->name . '">' . $cat->name . '</option>';
-				}
-		
-			//}
-			echo '<option value="' . $cat->name . '">' . $cat->name . '</option>';
-		}
-*/		
+		echo '<option style="color:red" value="_delete_assignment">' . $remove_assignment . '</option>';
 	}
 
 	/**
