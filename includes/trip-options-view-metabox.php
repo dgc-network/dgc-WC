@@ -80,12 +80,39 @@ class Trip_Options_View_Metabox {
 	function action_woocommerce_before_add_to_cart_button() {
 		echo '<table><tr><td>';
 		esc_html_e( 'Start Date : ', 'wp-travel' );
+		echo '</td><td>';
 		echo '<input type="text" class="start_date" name="start_date" />';
 		echo '</td></tr></table>';
 		?>
 		<script>
 			jQuery(document).ready(function($) {
 				$( '.start_date' ).datepicker();
+				$( '.start_date' ).on( 'change', function() {
+					var start_date = this.value;
+					$( '.itinerary-li' ).each( function( index, element ) {
+						$( '.span', element ).append(start_date);
+						$( '.span', element ).append(' ');
+					});
+				});
+/*				
+					var categories = '';
+					$.ajax({
+            			type: 'POST',
+            			url: '/wp-admin/admin-ajax.php',
+            			dataType: "json",
+            			data: {
+							'action': 'update_start_date',
+        				},
+            			success: function (data) {
+							categories = data;
+            			},
+            			error: function(error){
+							alert(error);
+						}
+        			});
+*/
+
+/*				
 				$( '.start_time' ).datetimepicker({
 					format: 'HH:mm'
 				});
@@ -124,7 +151,8 @@ class Trip_Options_View_Metabox {
             		}).fail(function() {
                 		alert('Oops! Sorry error occurred! Internet issue.');
             		});
-        		});				
+				});	
+*/							
 			});
 		</script>
 		<?php
@@ -150,29 +178,36 @@ class Trip_Options_View_Metabox {
 		return $tabs;
 	}
 	
-	function overview_tab_content($start_date = false) {
+	//function overview_tab_content($start_date = false) {
+	function overview_tab_content() {
 		$post_id = get_the_ID();
-		$trip_code = wp_travel_get_trip_code( $post_id );
 		$itineraries = get_post_meta( $post_id, 'wp_travel_trip_itinerary_data', true );
+/*
 		echo '<div align="left"><h4>';
 		esc_html_e( 'Trip Code : ', 'wp-travel' );
 		echo esc_attr( $trip_code ); ?><br><?php
 		esc_html_e( 'Itinerary', 'wp-travel' );
 		echo '</h4></div>';
-		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) { ?>
-			<ul><?php
-			$x = 0;
+*/
+		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) {
+			echo esc_html_e( 'Itinerary', 'wp-travel' );
+			?>
+			<ul class='itinerary-li'><?php
+			//$x = 0;
 			foreach ( $itineraries as $x=>$itinerary ) { ?>
 				<li><?php 
+				/*
 				if ($start_date != false) {
 					$start_date = $start_date + $x;
 					echo $start_date . ' ';
-				}
+				}*/
+				echo '<span></span>';
 				echo esc_attr( $itineraries[$x]['label'] ) . ', ' . 
 				esc_attr( $itineraries[$x]['title'] ); ?><br><?php
 				echo esc_attr( $itineraries[$x]['desc'] ); ?></li><?php
-				$x++;
-			} ?></ul><?php
+				//$x++;
+			} ?>
+			</ul><?php
 		} else { ?>
 			<span><?php esc_html_e( 'No Itineraries found.', 'wp-travel' ); ?></span><?php
 		}
