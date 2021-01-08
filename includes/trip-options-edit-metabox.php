@@ -557,7 +557,7 @@ class Trip_Options_Edit_Metabox {
 	/**
 	 * Product Categories List
 	 */
-	function product_categories_name_options( $product_category_slug ) {
+	function product_category_name_options( $product_category_slug=false ) {
 		// since wordpress 4.5.0
 		$args = array(
 			'taxonomy'   => "product_cat",
@@ -568,20 +568,34 @@ class Trip_Options_Edit_Metabox {
 			'include'    => $ids
 		);
 		$product_categories = get_terms($args);
+		foreach( $product_categories as $cat ) {
+			if ($cat->name != 'Uncategorized') {
+				if ($cat->name == $product_category_slug) {
+					echo '<option value="' . $cat->name . '" selected>' . $cat->name . '</option>';
+				} else {
+					echo '<option value="' . $cat->name . '">' . $cat->name . '</option>';
+				}
+			}
+		}
+		$remove_assignment = __( "- Remove Assignment -", "wp-travel" );
+		echo '<option value="_delete_assignment">' . $remove_assignment . '</option>';
+
+/*
 		//$product_category_slug='Itinerary';
 		echo '<option value="" selected disabled hidden>' .  __( "- Select Category -", "wp-travel" ) . '</option>';
 		foreach( $product_categories as $cat ) {
 			//if ($cat->name != 'Uncategorized') {
-/*				
+			
 				if ($cat->name == $product_category_slug) {
 					echo '<option value="' . $cat->name . '" selected="selected">' . $cat->name . '</option>';
 				} else {
 					echo '<option value="' . $cat->name . '">' . $cat->name . '</option>';
 				}
-*/				
+		
 			//}
 			echo '<option value="' . $cat->name . '">' . $cat->name . '</option>';
 		}
+*/		
 	}
 
 	/**
@@ -623,6 +637,7 @@ class Trip_Options_Edit_Metabox {
 		$trip_outline = get_post_meta( $post->ID, 'wp_travel_outline', true );
 		$itineraries = get_post_meta( $post->ID, 'wp_travel_trip_itinerary_data', true );
 		$remove_itinerary = __( "- Remove Itinerary -", "wp-travel" );
+		$remove_assignment = __( "- Remove Assignment -", "wp-travel" );
 
 // Register the script
 //wp_register_script( 'some_handle', 'path/to/myscript.js' );
@@ -691,9 +706,11 @@ wp_enqueue_script( 'some_handle' );
 								echo '<td style="text-align:right"><button class="add-assignment" type="button">' . __( '+ Add Assignment', 'wp-travel' ) .'</button></td>';
 								echo '</tr>';
 								foreach ( $itineraries[$x]['assignment'] as $assignment ) {
-									echo '<tr class="assignment-rows" id="assignment-row-' . $y . '">
+									echo '<tr class="assignment-rows" id="assignment-row-' . $x . '-' . $y . '">
 									<td>';
 									echo '<select style="width:100%" class="opt-categorias" name="itinerary_item_assignment-' . $x . '-category-' . $y . '">';
+										self::product_category_name_options( $itineraries[$x]['assignment'][$y]['category'] );
+/*										
 									foreach( $product_categories as $cat ) {
 										if ($cat->name != 'Uncategorized') {
 											if ($cat->name == $itineraries[$x]['assignment'][$y]['category']) {
@@ -703,6 +720,7 @@ wp_enqueue_script( 'some_handle' );
 											}
 										}
 									}
+*/									
 									echo '</select>
 									</td>
 									<td>';
