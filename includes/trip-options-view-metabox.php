@@ -90,8 +90,8 @@ class Trip_Options_View_Metabox {
 				$( '.start_date' ).on( 'change', function() {
 					var start_date = this.value;
 					$( '.itinerary-li' ).each( function( index, element ) {
-						$( '.span', element ).append(start_date);
-						$( '.span', element ).append(' ');
+						$( 'span', element ).append(start_date);
+						$( 'span', element ).append(' ');
 					});
 				});
 /*				
@@ -190,7 +190,9 @@ class Trip_Options_View_Metabox {
 		echo '</h4></div>';
 */
 		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) {
-			echo esc_html_e( 'Itinerary', 'wp-travel' );
+			echo '<h4>';
+			esc_html_e( 'Itinerary', 'wp-travel' );
+			echo '</h4>';
 			?>
 			<ul class='itinerary-li'><?php
 			//$x = 0;
