@@ -203,6 +203,7 @@ class Trip_Options_Edit_Metabox {
 
 				$( '#first-faq' ).on( 'click', function() {
 					$(".no-faqs").hide();
+					$(".faq-header").show();
 					$(".faq-rows").show();
 /*					
 					$(".faq-li").hide();
@@ -234,7 +235,7 @@ class Trip_Options_Edit_Metabox {
 					new_faq += '</li>';
 
 					$( '#end-of-faq' ).before(new_faq);
-					var element = '#faq-li-' + x ;
+					var element = '#faq-li-' + faq_x ;
 					$( 'span', element ).on( 'click', function() {
 						$( 'table', element ).toggleClass( 'toggle-access' );
 					});
