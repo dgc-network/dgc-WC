@@ -78,10 +78,10 @@ class Trip_Options_View_Metabox {
 	
 	// define the woocommerce_before_add_to_cart_button callback 
 	function action_woocommerce_before_add_to_cart_button() {
-		echo '<div align="left"><h4>';
+		echo '<table><tr><td>';
 		esc_html_e( 'Start Date : ', 'wp-travel' );
 		echo '<input type="text" class="start_date" name="start_date" />';
-		echo '</h4></div>';
+		echo '</td></tr></table>';
 		?>
 		<script>
 			jQuery(document).ready(function($) {
