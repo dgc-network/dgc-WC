@@ -78,11 +78,15 @@ class Trip_Options_View_Metabox {
 	
 	// define the woocommerce_before_add_to_cart_button callback 
 	function action_woocommerce_before_add_to_cart_button() {
+		echo esc_html_e( 'Start Date : ', 'wp-travel' );
+		echo '<div id="datepicker"></div>';
+/*		
 		echo '<table><tr><td>';
 		esc_html_e( 'Start Date : ', 'wp-travel' );
 		echo '</td><td>';
 		echo '<input type="text" class="start_date" name="start_date" />';
 		echo '</td></tr></table>';
+*/		
 		?>
 		<script>
 			jQuery(document).ready(function($) {
@@ -94,6 +98,7 @@ class Trip_Options_View_Metabox {
 					$( '.itinerary-li' ).each( function( index, element ) {
 						$( 'span', element ).append(start_date);
 						$( 'span', element ).append(' ');
+						start_date.setDate(start_date.getDate() + 1);
 					});
 				});
 /*				
