@@ -280,12 +280,11 @@ class Trip_Options_Edit_Metabox {
             					},
             					error: function(error){
 									alert(error);
-            					},
-            					complete: function () {
             					}
 							});
 							if (this.value=='_delete_assignment') {
-								alert(this.value);
+								$( this ).closest( sub_element ).remove();
+								//alert(this.value);
 							}							
 						});
 						y = y + 1;
@@ -331,10 +330,12 @@ class Trip_Options_Edit_Metabox {
             					},
             					error: function(error){
 									alert(error);
-            					},
-            					complete: function () {
             					}
         					});											
+							if (this.value=='_delete_assignment') {
+								$( this ).closest( sub_element ).remove();
+								//alert(this.value);
+							}							
 						});
 						y = y + 1;
 					});
@@ -416,7 +417,6 @@ class Trip_Options_Edit_Metabox {
 					});
 					var y = 0;
 					$( element ).delegate( '.add-assignment', 'click', function() {
-
 						var new_assignment = '<tr class="assignment-rows" id="assignment-row-'+ x +'-'+ y +'"><td>';
 						new_assignment += '<select style="width:100%" class="opt_categorias" name="itinerary_item_assignment-'+ x +'-category-'+ y +'">';
 						new_assignment += '<option>- Select Category -</option>';
@@ -450,17 +450,18 @@ class Trip_Options_Edit_Metabox {
             					},
             					error: function(error){
 									alert(error);
-            					},
-            					complete: function () {
             					}
-        					});											
+        					});									
+							if (this.value=='_delete_assignment') {
+								$( this ).closest( sub_element ).remove();
+								//alert(this.value);
+							}							
 						});
 						y = y + 1;
 					});
 					x = x + 1;
 				});
 			});
-
 		</script>
 		<?php
 	}
