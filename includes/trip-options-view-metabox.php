@@ -79,7 +79,7 @@ class Trip_Options_View_Metabox {
 	// define the woocommerce_before_add_to_cart_button callback 
 	function action_woocommerce_before_add_to_cart_button() {
 		echo esc_html_e( 'Start Date : ', 'wp-travel' );
-		echo '<div id="datepicker"></div>';
+		echo '<div class="start_date"></div>';
 /*		
 		echo '<table><tr><td>';
 		esc_html_e( 'Start Date : ', 'wp-travel' );
@@ -90,9 +90,7 @@ class Trip_Options_View_Metabox {
 		?>
 		<script>
 			jQuery(document).ready(function($) {
-				$( '.start_date' ).datepicker({
-					showButtonPanel: true
-				});
+				$( '.start_date' ).datepicker();
 				$( '.start_date' ).on( 'change', function() {
 					var start_date = this.value;
 					$( '.itinerary-li' ).each( function( index, element ) {
@@ -191,7 +189,7 @@ class Trip_Options_View_Metabox {
 		$itineraries = get_post_meta( $post_id, 'wp_travel_trip_itinerary_data', true );
 
 		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) {
-			echo '<h4 style="text-align:right">';
+			echo '<h4 style="text-align:left">';
 			esc_html_e( 'Itinerary', 'wp-travel' );
 			echo '</h4>';
 			?>
@@ -212,9 +210,9 @@ class Trip_Options_View_Metabox {
 	function trip_includes_tab_content() {
 		$post_id = get_the_ID();
 		$trip_include = get_post_meta( $post_id, 'wp_travel_trip_include', true );
-		echo '<h3 style="text-align:right">';
+		echo '<h4 style="text-align:left">';
 		esc_html_e( 'Trip Includes', 'wp-travel' );
-		echo '</h3>';
+		echo '</h4>';
 		echo '<br>';
 		if (!empty($trip_include)) {
 			echo esc_attr( $trip_include );
@@ -227,9 +225,9 @@ class Trip_Options_View_Metabox {
 	function trip_excludes_tab_content() {
 		$post_id = get_the_ID();
 		$trip_exclude = get_post_meta( $post_id, 'wp_travel_trip_exclude', true );
-		echo '<h3 style="text-align:right">';
+		echo '<h4 style="text-align:left">';
 		esc_html_e( 'Trip Excludes', 'wp-travel' );
-		echo '</h3>';
+		echo '</h4>';
 		echo '<br>';
 		if (!empty($trip_exclude)) {
 			echo esc_attr( $trip_exclude );
@@ -241,10 +239,11 @@ class Trip_Options_View_Metabox {
 	function faq_tab_content() {
 		$post_id = get_the_ID();
 		$faqs = wp_travel_get_faqs( $post_id );
-		echo '<h3>';
-		esc_html_e( 'FAQ : ', 'wp-travel' );
-		echo '</h3>';
-		if ( is_array( $faqs ) && count( $faqs ) > 0 ) { ?>
+		if ( is_array( $faqs ) && count( $faqs ) > 0 ) { 
+			echo '<h4 style="text-align:left">';
+			esc_html_e( 'FAQ : ', 'wp-travel' );
+			echo '</h4>';
+			?>
 			<ul><?php
 			foreach ( $faqs as $key=>$value ) { ?>
 				<li><?php echo esc_attr( $faqs[$key]['question'] ); ?><br><?php
