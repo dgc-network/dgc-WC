@@ -80,84 +80,21 @@ class Trip_Options_View_Metabox {
 	function action_woocommerce_before_add_to_cart_button() {
 		echo esc_html_e( 'Start Date : ', 'wp-travel' );
 		echo '<div class="start_date"></div>';
-/*		
-		echo '<table><tr><td>';
-		esc_html_e( 'Start Date : ', 'wp-travel' );
-		echo '</td><td>';
-		echo '<input type="text" class="start_date" name="start_date" />';
-		echo '</td></tr></table>';
-*/		
 		?>
 		<script>
 			jQuery(document).ready(function($) {
-				$( '.start_date' ).datepicker();
+				$( '.start_date' ).datepicker({
+					showButtonPanel: true
+				});
 				$( '.start_date' ).on( 'change', function() {
 					var start_date = this.value;
 					$( '.itinerary-li' ).each( function( index, element ) {
+						$( 'span', element ).empty();
 						$( 'span', element ).append(start_date);
 						$( 'span', element ).append(' ');
 						start_date.setDate(start_date.getDate() + 1);
 					});
 				});
-/*				
-					var categories = '';
-					$.ajax({
-            			type: 'POST',
-            			url: '/wp-admin/admin-ajax.php',
-            			dataType: "json",
-            			data: {
-							'action': 'update_start_date',
-        				},
-            			success: function (data) {
-							categories = data;
-            			},
-            			error: function(error){
-							alert(error);
-						}
-        			});
-*/
-
-/*				
-				$( '.start_time' ).datetimepicker({
-					format: 'HH:mm'
-				});
-
-				$('.more_posts').click(function() {
-            		$(this).attr('disabled', true);
-            		var that = $(this);
-            		if (WCTPE.posts.max_num_pages == WCTPE.posts.current_page) {
-                		$(this).text('The END! / 最後一頁');
-                		$(this).unbind('click');
-                		return;
-            		}
-            		$("body").waitMe({
-                		effect: "bounce",
-                		text: "Loading...",
-            		});
-            		var data = {
-                		'action': 'mxp_ajax_get_next_page_data',
-                		'nonce': WCTPE.nonce,
-                		'max_num_pages': WCTPE.posts.max_num_pages,
-                		'current_page': WCTPE.posts.current_page,
-                		'found_posts': WCTPE.posts.found_posts,
-            		};
-
-            		$.post(WCTPE.ajaxurl, data, function(res) {
-                		if (res.success) {
-                    		$('.tattoo_posts_lists').append(res.data.data);
-                    		history.pushState(null, null, '/page/' + (WCTPE.posts.current_page + 1) + '/');
-                    		WCTPE.posts.current_page += 1;
-                    		that.attr('disabled', false);
-                		} else {
-                    		alert('Oops! Sorry error occurred!');
-                    		location.reload();
-                		}
-                		$("body").waitMe('hide');
-            		}).fail(function() {
-                		alert('Oops! Sorry error occurred! Internet issue.');
-            		});
-				});	
-*/							
 			});
 		</script>
 		<?php
