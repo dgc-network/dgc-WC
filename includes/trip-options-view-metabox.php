@@ -182,32 +182,19 @@ class Trip_Options_View_Metabox {
 	function overview_tab_content() {
 		$post_id = get_the_ID();
 		$itineraries = get_post_meta( $post_id, 'wp_travel_trip_itinerary_data', true );
-/*
-		echo '<div align="left"><h4>';
-		esc_html_e( 'Trip Code : ', 'wp-travel' );
-		echo esc_attr( $trip_code ); ?><br><?php
-		esc_html_e( 'Itinerary', 'wp-travel' );
-		echo '</h4></div>';
-*/
+
 		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) {
-			echo '<h4>';
+			echo '<h4 style="text-align:right">';
 			esc_html_e( 'Itinerary', 'wp-travel' );
 			echo '</h4>';
 			?>
 			<ul class='itinerary-li'><?php
-			//$x = 0;
 			foreach ( $itineraries as $x=>$itinerary ) { ?>
 				<li><?php 
-				/*
-				if ($start_date != false) {
-					$start_date = $start_date + $x;
-					echo $start_date . ' ';
-				}*/
-				echo '<span></span>';
+				echo '<span style="color:red"></span>';
 				echo esc_attr( $itineraries[$x]['label'] ) . ', ' . 
 				esc_attr( $itineraries[$x]['title'] ); ?><br><?php
 				echo esc_attr( $itineraries[$x]['desc'] ); ?></li><?php
-				//$x++;
 			} ?>
 			</ul><?php
 		} else { ?>
@@ -218,7 +205,7 @@ class Trip_Options_View_Metabox {
 	function trip_includes_tab_content() {
 		$post_id = get_the_ID();
 		$trip_include = get_post_meta( $post_id, 'wp_travel_trip_include', true );
-		echo '<h3>';
+		echo '<h3 style="text-align:right">';
 		esc_html_e( 'Trip Includes', 'wp-travel' );
 		echo '</h3>';
 		echo '<br>';
@@ -233,7 +220,7 @@ class Trip_Options_View_Metabox {
 	function trip_excludes_tab_content() {
 		$post_id = get_the_ID();
 		$trip_exclude = get_post_meta( $post_id, 'wp_travel_trip_exclude', true );
-		echo '<h3>';
+		echo '<h3 style="text-align:right">';
 		esc_html_e( 'Trip Excludes', 'wp-travel' );
 		echo '</h3>';
 		echo '<br>';
