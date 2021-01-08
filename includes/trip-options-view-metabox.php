@@ -86,7 +86,9 @@ class Trip_Options_View_Metabox {
 		?>
 		<script>
 			jQuery(document).ready(function($) {
-				$( '.start_date' ).datepicker();
+				$( '.start_date' ).datepicker({
+					showButtonPanel: true
+				});
 				$( '.start_date' ).on( 'change', function() {
 					var start_date = this.value;
 					$( '.itinerary-li' ).each( function( index, element ) {
