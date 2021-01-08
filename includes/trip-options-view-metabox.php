@@ -67,12 +67,13 @@ class Trip_Options_View_Metabox {
 	
 		// Displaying your custom field under the title
 		echo '<p class="book-author">' . $book_author . '</p>';
+		echo '<label for="start_date">' . esc_html_e( 'Start Date : ', 'wp-travel' ) . '</label>';
 	}
 	
 	// define the woocommerce_before_add_to_cart_button callback 
 	function action_woocommerce_before_add_to_cart_button() {
-		echo '<label for="start_date">' . esc_html_e( 'Start Date : ', 'wp-travel' ) . '</label>';
-		echo '<span><input type="text" class="start_date" name="start_date" /></span><br>';
+		echo esc_html_e( 'Start Date : ', 'wp-travel' );
+		echo '<input type="text" class="start_date" name="start_date" />';
 		?>
 		<script>
 			jQuery(document).ready(function($) {
