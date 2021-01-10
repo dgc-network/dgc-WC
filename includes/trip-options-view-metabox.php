@@ -97,7 +97,8 @@ class Trip_Options_View_Metabox {
 				$( '.start_date' ).on( 'change', function() {
 					var start_date = this.value;
 					$( '.itinerary-li' ).each( function( index, element ) {
-						start_date.setDate(start_date.getDate() + index);
+						//start_date.setDate(start_date.getDate() + index);
+						start_date.setDate(start_date.getDate() + 1);
 						$( 'span', element ).empty();
 						$( 'span', element ).append(start_date);
 						$( 'span', element ).append(' ');
