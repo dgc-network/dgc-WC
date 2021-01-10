@@ -173,18 +173,9 @@ class Trip_Options_Edit_Metabox {
 				/*
 				 * FAQs Tab
 				 */
-
 				var faq_x = 0;
 				$( ".faq-li" ).each( function( index, element ) {
-/*
-					if ( !$( 'p', element ).is(":empty") ) {
-						$( ".faq-rows" ).show();
-						$( element ).show();
-						$( element ).delegate("span", "click", function(){
-							$( 'table', element ).toggleClass('toggle-access');
-						});
-					};
-*/
+
 					$( element ).delegate("span", "click", function(){
 						$( 'table', element ).toggleClass('toggle-access');
 					});
@@ -205,24 +196,18 @@ class Trip_Options_Edit_Metabox {
 					$(".no-faqs").hide();
 					$(".faq-header").show();
 					$(".faq-rows").show();
-/*					
-					$(".faq-li").hide();
-					$("#faq-li-0").show();
-					$('span','#faq-li-0').on('click', function() {
-						$('table','#faq-li-0').toggleClass('toggle-access');
-					});
-*/					
 				});
 
 				$( '.add-faq' ).on( 'click', function() {
 
+					var default_faq = 'FAQ Questions';
 					var new_faq = '<li class="faq-li" id="faq-li-' + faq_x + '">';
 					new_faq += '<span class="fas fa-bars"> </span>';
-					new_faq += '<span>FAQ Questions</span>';
+					new_faq += '<span>'+ default_faq +'</span>';
 					new_faq += '<table>';
 					new_faq += '<tr>';
 					new_faq += '<th>Your question</th>';
-					new_faq += '<td><input type="text" width="100%" class="item_title" name="faq_item_question-' + faq_x + '"></td>';
+					new_faq += '<td><input type="text" width="100%" class="item_title" value="'+ default_faq +'" name="faq_item_question-' + faq_x + '"></td>';
 					new_faq += '</tr>';
 					new_faq += '<tr>';
 					new_faq += '<th>Your answer</th>';
@@ -248,18 +233,6 @@ class Trip_Options_Edit_Metabox {
 						};
 					});
 					faq_x += 1;
-
-/*
-					$( ".faq-li" ).each( function( index, element ) {
-						if ( $( element ).is(":hidden") ) {
-							$( element ).show();
-							$( element ).delegate("span", "click", function(){
-								$( 'table', element ).toggleClass('toggle-access');
-							});
-							return false;
-						};
-					});
-*/					
 				});
 
 
