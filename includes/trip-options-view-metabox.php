@@ -13,7 +13,7 @@ class Trip_Options_View_Metabox {
 
 	function custom_datepicker() {
 		wp_enqueue_script('jquery-ui-datepicker');
-		wp_enqueue_style('jquery-ui','href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css',array());
+		//wp_enqueue_style('jquery-ui','href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css',array());
 /*		
 		wp_enqueue_script('jquery-ui-core');
 		wp_enqueue_script('jquery-ui-timepicker-addon',get_stylesheet_directory_uri().'/js/jquery-ui-timepicker-addon.js',array());
@@ -97,15 +97,24 @@ class Trip_Options_View_Metabox {
 				$( '.start_date' ).on( 'change', function() {
 					var start_date = this.value;
 					$( '.itinerary-li' ).each( function( index, element ) {
-						//start_date.setDate(start_date.getDate() + index);
+						start_date.setDate(start_date.getDate() + index);
 						$( 'span', element ).empty();
 						$( 'span', element ).append(start_date);
 						$( 'span', element ).append(' ');
-						start_date.setDate(start_date.getDate() + 1);
+						//start_date.setDate(start_date.getDate() + 1);
 					});
 				});
 			});
 		</script>
+		<style>
+			#ui-datepicker-div {
+				background: #fff !important;
+			}
+
+			.ui-datepicker .ui-datepicker-header {
+				background: #ccc !important;
+			}
+		</style>
 		<?php
 	}
          
