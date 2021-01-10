@@ -7,25 +7,34 @@ class Trip_Options_View_Metabox {
 		add_filter( 'woocommerce_product_tabs', array( __CLASS__, 'woo_new_product_tab' ) );
 		add_action( 'woocommerce_single_product_summary', array( __CLASS__, 'custom_action_after_single_product_title' ), 6 );
 		add_action( 'woocommerce_before_add_to_cart_form', array( __CLASS__, 'action_woocommerce_before_add_to_cart_button' ), 10, 0 );	
-		//add_action( 'wp_enqueue_scripts', array( __CLASS__, 'custom_datepicker' ) );
+		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'custom_datepicker' ) );
 		//add_action( 'wp_ajax_nopriv_mxp_ajax_get_next_page_data', array( __CLASS__, 'mxp_ajax_get_next_page_data' ) );
 	}
-/*
+
 	function custom_datepicker() {
 		wp_enqueue_script('jquery-ui-datepicker');
-		wp_enqueue_script('jquery-ui-core');          
+/*		
+		wp_enqueue_script('jquery-ui-core');
 		wp_enqueue_script('jquery-ui-timepicker-addon',get_stylesheet_directory_uri().'/js/jquery-ui-timepicker-addon.js',array());
 		wp_enqueue_style('jquery-ui-timepicker-addon',get_stylesheet_directory_uri().'/css/jquery-ui-timepicker-addon.css',array());
 		wp_enqueue_style('jquery-ui',get_stylesheet_directory_uri().'/css/jquery-ui.css',array());
 		wp_enqueue_style('jquery-ui','https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css',array());
+
+
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<link rel="stylesheet" href="/resources/demos/style.css">
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+ 
 		//<link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css">
 		wp_enqueue_script('main', get_template_directory_uri() . '/js/main.js');
 		wp_localize_script('main', 'WCTPE', array(
 			'ajaxurl' => admin_url('admin-ajax.php'),
 			'nonce' => wp_create_nonce('mxp-ajax-nonce'),
 		));	
+*/		
 	}
-	
+/*	
 	function mxp_ajax_get_next_page_data() {
 		$max_num_pages = $_POST['max_num_pages'];
 		$current_page = $_POST['current_page'];
@@ -87,7 +96,7 @@ class Trip_Options_View_Metabox {
 				$( '.start_date' ).on( 'change', function() {
 					var start_date = this.value;
 					$( '.itinerary-li' ).each( function( index, element ) {
-						//start_date.setDate(start_date.getDate() + index);
+						start_date.setDate(start_date.getDate() + index);
 						$( 'span', element ).empty();
 						$( 'span', element ).append(start_date);
 						$( 'span', element ).append(' ');

@@ -181,7 +181,7 @@ class Trip_Options_Edit_Metabox {
 					});
 
 					$( element ).delegate(".item_title", "keyup", function(){
-						$( '.title', element ).text($(this).val());
+						$( '.faq-title', element ).text($(this).val());
 					});
 
 					$( '.remove-faq', element ).on( 'click', function() {
@@ -203,7 +203,7 @@ class Trip_Options_Edit_Metabox {
 					var default_faq = 'FAQ Questions';
 					var new_faq = '<li class="faq-li" id="faq-li-' + faq_x + '">';
 					new_faq += '<span class="fas fa-bars"> </span>';
-					new_faq += '<span>'+ default_faq +'</span>';
+					new_faq += '<span class="faq-title">'+ default_faq +'</span>';
 					new_faq += '<table>';
 					new_faq += '<tr>';
 					new_faq += '<th>Your question</th>';
@@ -225,7 +225,7 @@ class Trip_Options_Edit_Metabox {
 						$( 'table', element ).toggleClass( 'toggle-access' );
 					});
 					$( element ).delegate( '.item_title', 'keyup', function() {
-						$( '.title', element ).text($(this).val());
+						$( '.faq-title', element ).text($(this).val());
 					});
 					$( '.remove-faq', element ).on( 'click', function() {
 						if (confirm('Are you sure?') == true) {
@@ -841,7 +841,7 @@ wp_enqueue_script( 'some_handle' );
 				$faq_question = esc_attr( $faqs[$x]['question'] );
 				echo '<li class="faq-li" id="faq-li-' . $x . '">';
 				echo '<span class="fas fa-bars"> </span>';
-				echo '<span class="title">' . $faq_question . '</span>';
+				echo '<span class="faq-title">' . $faq_question . '</span>';
 				echo '
 				<table>
 					<tr>
