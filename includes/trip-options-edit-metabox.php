@@ -181,7 +181,7 @@ class Trip_Options_Edit_Metabox {
 					});
 
 					$( element ).delegate(".item_title", "keyup", function(){
-						$( 'span.title', element ).text($(this).val());
+						$( '.title', element ).text($(this).val());
 					});
 
 					$( '.remove-faq', element ).on( 'click', function() {
@@ -225,7 +225,7 @@ class Trip_Options_Edit_Metabox {
 						$( 'table', element ).toggleClass( 'toggle-access' );
 					});
 					$( element ).delegate( '.item_title', 'keyup', function() {
-						$( 'span.title', element ).text($(this).val());
+						$( '.title', element ).text($(this).val());
 					});
 					$( '.remove-faq', element ).on( 'click', function() {
 						if (confirm('Are you sure?') == true) {
