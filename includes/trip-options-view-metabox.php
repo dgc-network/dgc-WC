@@ -102,10 +102,10 @@ class Trip_Options_View_Metabox {
 					$( '.itinerary-li' ).each( function( index, element ) {
 						//alert(start_date.getDate() + index);
 						//start_date.setDate(start_date.getDate() + 1);
-						//start_date.setDate(start_date.getDate() + index);
+						start_date = start_date.setDate(start_date.getDate() + index);
 						$( 'span', element ).empty();
-						//$( 'span', element ).append(start_date);
-						$( 'span', element ).append(start_date.setDate(start_date.getDate() + index));
+						$( 'span', element ).append(start_date);
+						//$( 'span', element ).append(start_date.setDate(start_date.getDate() + index));
 						$( 'span', element ).append(' ');
 						//start_date.setDate(start_date.getDate() + 1);
 					});
