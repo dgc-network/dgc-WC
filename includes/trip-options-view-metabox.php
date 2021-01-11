@@ -105,6 +105,7 @@ class Trip_Options_View_Metabox {
 						//alert(start_date.getDate() + index);
 						start_date.setDate(start_date.getDate() + x);
 						//start_date = start_date.setDate(start_date.getDate() + index);
+						$( 'p', element ).append(x);
 /*						
 						$( 'span', element ).empty();
 						$( 'span', element ).append(index);
