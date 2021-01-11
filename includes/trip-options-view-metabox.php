@@ -103,8 +103,9 @@ class Trip_Options_View_Metabox {
 					$( '.itinerary-li' ).each( function( index, element ) {
 						//alert(start_date.getDate() + index);
 						start_date.setDate(start_date.getDate() + x);
+						//id="itinerary-li-'.$x.'"
 						//start_date = start_date.setDate(start_date.getDate() + index);
-						$( 'p', element ).text(x);
+						$( '#itinerary-li-'+x, element ).text(x);
 						//$( 'p', element ).append(x);
 /*						
 						$( 'span', element ).empty();
@@ -164,8 +165,8 @@ class Trip_Options_View_Metabox {
 			?>
 			<ul class='itinerary-li'><?php
 			foreach ( $itineraries as $x=>$itinerary ) {
-				echo '<li id="itinerary-li-'.$x.'">';
-				echo '<p style="color:blue"></p>';
+				echo '<li>';
+				echo '<p style="color:blue" id="itinerary-li-'.$x.'"></p>';
 				echo esc_attr( $itineraries[$x]['label'] ) . ', ' . 
 				esc_attr( $itineraries[$x]['title'] ); ?><br><?php
 				echo esc_attr( $itineraries[$x]['desc'] ); ?></li><?php
