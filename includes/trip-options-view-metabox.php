@@ -12,7 +12,15 @@ class Trip_Options_View_Metabox {
 	}
 
 	function custom_datepicker() {
-		wp_enqueue_script('jquery-ui-datepicker');
+
+		// Load the datepicker script (pre-registered in WordPress).
+		wp_enqueue_script( 'jquery-ui-datepicker' );
+
+		// You need styling for the datepicker. For simplicity I've linked to the jQuery UI CSS on a CDN.
+		wp_register_style( 'jquery-ui', 'https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css' );
+		wp_enqueue_style( 'jquery-ui' );  
+		
+		//wp_enqueue_script('jquery-ui-datepicker');
 		//wp_enqueue_style('jquery-ui','href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css',array());
 /*		
 		wp_enqueue_script('jquery-ui-core');
