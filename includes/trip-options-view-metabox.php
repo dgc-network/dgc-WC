@@ -54,7 +54,8 @@ class Trip_Options_View_Metabox {
 						start_date.setDate(start_date.getDate() + index);
 						//$( 'p', element ).empty();
 						//$( 'p', element ).append(start_date.toLocaleDateString());
-						$( 'input', element ).value = start_date.toLocaleDateString();
+						//$( 'input', element ).value = start_date.toLocaleDateString();
+						document.getElementById('itinerary-li-'+index).value = start_date.toLocaleDateString();
 					});
 				});
 			});
@@ -95,7 +96,7 @@ class Trip_Options_View_Metabox {
 			foreach ( $itineraries as $x=>$itinerary ) {
 				echo '<li class="itinerary-li">';
 				//echo '<p style="color:blue"></p>';
-				echo '<input type="text" style="color:blue" value="">';
+				echo '<input type="text" style="color:blue" id="itinerary-li"'.$x.'>';
 				echo esc_attr( $itineraries[$x]['label'] ) . ', ' . esc_attr( $itineraries[$x]['title'] );
 				echo esc_attr( $itineraries[$x]['desc'] );
 				echo '</li>';
