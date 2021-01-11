@@ -206,7 +206,12 @@ function add_cart_item_data( $cart_item_data, $product_id ) {
     foreach( self::custom_checkboxes() as $key => $value ){
         if( isset( $_POST[$key] ) )
             $cart_item_data['custom_data'][$key] = $data[$key] = $value;
-    }
+	}
+	
+    foreach( self::overview_tab_content() as $key => $value ){
+        if( isset( $_POST[$key] ) )
+            $cart_item_data['custom_data'][$key] = $data[$key] = $value;
+	}
     // Add the data to session and generate a unique ID
     if( count($data > 0 ) ){
         $cart_item_data['custom_data']['unique_key'] = md5( microtime().rand() );
