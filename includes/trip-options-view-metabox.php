@@ -8,7 +8,6 @@ class Trip_Options_View_Metabox {
 		add_action( 'woocommerce_single_product_summary', array( __CLASS__, 'custom_action_after_single_product_title' ), 6 );
 		add_action( 'woocommerce_before_add_to_cart_form', array( __CLASS__, 'action_woocommerce_before_add_to_cart_button' ), 10, 0 );	
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'custom_datepicker' ) );
-		//add_action( 'wp_ajax_nopriv_mxp_ajax_get_next_page_data', array( __CLASS__, 'mxp_ajax_get_next_page_data' ) );
 	}
 
 	function custom_datepicker() {
@@ -20,61 +19,8 @@ class Trip_Options_View_Metabox {
 		wp_register_style( 'jquery-ui', 'https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css' );
 		wp_enqueue_style( 'jquery-ui' );  
 		
-		//wp_enqueue_script('jquery-ui-datepicker');
-		//wp_enqueue_style('jquery-ui','href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css',array());
-/*		
-		wp_enqueue_script('jquery-ui-core');
-		wp_enqueue_script('jquery-ui-timepicker-addon',get_stylesheet_directory_uri().'/js/jquery-ui-timepicker-addon.js',array());
-		wp_enqueue_style('jquery-ui-timepicker-addon',get_stylesheet_directory_uri().'/css/jquery-ui-timepicker-addon.css',array());
-		wp_enqueue_style('jquery-ui',get_stylesheet_directory_uri().'/css/jquery-ui.css',array());
-		wp_enqueue_style('jquery-ui','https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css',array());
-
-
-		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-		<link rel="stylesheet" href="/resources/demos/style.css">
-		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
- 
-		//<link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css">
-		wp_enqueue_script('main', get_template_directory_uri() . '/js/main.js');
-		wp_localize_script('main', 'WCTPE', array(
-			'ajaxurl' => admin_url('admin-ajax.php'),
-			'nonce' => wp_create_nonce('mxp-ajax-nonce'),
-		));	
-*/		
 	}
-/*	
-	function mxp_ajax_get_next_page_data() {
-		$max_num_pages = $_POST['max_num_pages'];
-		$current_page = $_POST['current_page'];
-		$found_posts = $_POST['found_posts'];
-		$nonce = $_POST['nonce'];
-		if (!wp_verify_nonce($nonce, 'mxp-ajax-nonce')) {
-			wp_send_json_error(array('code' => 500, 'data' => '', 'msg' => '錯誤的請求'));
-		}
-		if (!isset($max_num_pages) || $max_num_pages == "" ||
-			!isset($current_page) || $current_page == "" ||
-			!isset($found_posts) || $found_posts == "") {
-			wp_send_json_error(array('code' => 500, 'data' => '', 'msg' => '錯誤的請求'));
-		}
-		$ids = get_posts(array(
-			'fields' => 'ids', // Only get post IDs
-			'posts_per_page' => get_option('posts_per_page'),
-			'post_type' => 'post',
-			'paged' => intval($current_page) + 1,
-		));
-		$str = '';
-		foreach ($ids as $key => $id) {
-			$name = get_post_meta($id, 'wctp2018-author-name', true);
-			$title = mb_substr(get_post_meta($id, 'wctp2018-post-title', true), 0, 20);
-			$content = mb_substr(get_post_meta($id, 'wctp2018-post-content', true), 0, 40) . "...";
-			$image_large = get_post_meta($id, 'wctp2018-post-image-large', true);
-			$str .= '<div class="col-md-3 m_b_20 post"><div class="box"><div class=" post_img"><a href="' . get_permalink($id) . '"><img src="' . $image_large . '"/></a></div><a href="' . get_permalink($id) . '" class="name"><h2 >' . $content . ' - ' . $name . '</h2></a></div></div>';
-		}
-		wp_send_json_success(array('code' => 200, 'data' => $str));
-	}
-*/
-	//add_action( 'woocommerce_single_product_summary', 'custom_action_after_single_product_title', 6 );
+
 	function custom_action_after_single_product_title() { 
 		global $product; 
 	
@@ -106,21 +52,13 @@ class Trip_Options_View_Metabox {
 					var start_date = new Date(this.value);
 					$( '.itinerary-li' ).each( function( index, element ) {
 						start_date.setDate(start_date.getDate() + index);
-						$( 'p', element ).empty();
-						$( 'p', element ).append(start_date.toLocaleDateString());
+						//$( 'p', element ).empty();
+						//$( 'p', element ).append(start_date.toLocaleDateString());
+						$( 'input', element ).value = start_date.toLocaleDateString();
 					});
 				});
 			});
 		</script>
-		<style>
-			#ui-datepicker-div {
-				background: #fff !important;
-			}
-
-			.ui-datepicker .ui-datepicker-header {
-				background: #ccc !important;
-			}
-		</style>
 		<?php
 	}
          
@@ -144,7 +82,6 @@ class Trip_Options_View_Metabox {
 		return $tabs;
 	}
 	
-	//function overview_tab_content($start_date = false) {
 	function overview_tab_content() {
 		$post_id = get_the_ID();
 		$itineraries = get_post_meta( $post_id, 'wp_travel_trip_itinerary_data', true );
@@ -157,9 +94,9 @@ class Trip_Options_View_Metabox {
 			<ul><?php
 			foreach ( $itineraries as $x=>$itinerary ) {
 				echo '<li class="itinerary-li">';
-				echo '<p style="color:blue"></p>';
-				echo esc_attr( $itineraries[$x]['label'] ) . ', ' . 
-				esc_attr( $itineraries[$x]['title'] ); ?><br><?php
+				//echo '<p style="color:blue"></p>';
+				echo '<input type="text" style="color:blue" value="">';
+				echo esc_attr( $itineraries[$x]['label'] ) . ', ' . esc_attr( $itineraries[$x]['title'] );
 				echo esc_attr( $itineraries[$x]['desc'] );
 				echo '</li>';
 			} ?>
