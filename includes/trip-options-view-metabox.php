@@ -57,6 +57,13 @@ class Trip_Options_View_Metabox {
 						$( 'input', element ).val(start_date.toLocaleDateString());
 						$( '#itinerary-li-'+index ).datepicker();
 						$( '#itinerary-li-'+index ).on( 'change', function() {
+							var trip_date = new Date(this.value);
+							$( '.itinerary-li' ).each( function( index2, element2 ) {
+								if (index2 > index) {
+									trip_date.setDate(trip_date.getDate() + index2 - index);
+									$( 'input', element2 ).val(trip_date.toLocaleDateString());
+								}
+							});
 							alert(index);
 						});
 					});
