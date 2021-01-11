@@ -96,7 +96,7 @@ class Trip_Options_View_Metabox {
 			foreach ( $itineraries as $x=>$itinerary ) {
 				echo '<li class="itinerary-li">';
 				//echo '<p style="color:blue"></p>';
-				echo '<input type="text" style="color:blue" id="itinerary-li"'.$x.'>';
+				echo '<input type="text" style="color:blue" id="itinerary-li-'.$x.'">';
 				echo esc_attr( $itineraries[$x]['label'] ) . ', ' . esc_attr( $itineraries[$x]['title'] );
 				echo esc_attr( $itineraries[$x]['desc'] );
 				echo '</li>';
