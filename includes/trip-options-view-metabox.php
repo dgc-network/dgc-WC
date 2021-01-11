@@ -105,7 +105,6 @@ class Trip_Options_View_Metabox {
 						start_date.setDate(start_date.getDate() + x);
 						//id="itinerary-li-'.$x.'"
 						//start_date = start_date.setDate(start_date.getDate() + index);
-						$( '#itinerary-li-'+x, element ).text(x);
 						//$( 'p', element ).append(x);
 /*						
 						$( 'span', element ).empty();
@@ -116,8 +115,12 @@ class Trip_Options_View_Metabox {
 */						
 						//start_date.setDate(start_date.getDate() + 1);
 						x = x + 1;
-						//alert(x);
 					});
+						alert(x);
+						var i;
+for (i = 0; i < x; i++) {
+	$( '#itinerary-li-'+i ).text(i);
+}
 				});
 			});
 		</script>
