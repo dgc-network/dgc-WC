@@ -180,7 +180,7 @@ function custom_checkboxes(){
 //add_action( 'woocommerce_before_add_to_cart_button', 'add_fields_before_add_to_cart' );
 function add_fields_before_add_to_cart( ) {
     global $product;
-    if( $product->get_id() != 2 ) return; // Only for product ID "2"
+    //if( $product->get_id() != 2 ) return; // Only for product ID "2"
 
     ?>
     <div class="simple-selects">
@@ -198,7 +198,7 @@ function add_fields_before_add_to_cart( ) {
 // Add data to cart item
 //add_filter( 'woocommerce_add_cart_item_data', 'add_cart_item_data', 25, 2 );
 function add_cart_item_data( $cart_item_data, $product_id ) {
-    if( $product_id != 2 ) return $cart_item_data; // Only for product ID "2"
+    //if( $product_id != 2 ) return $cart_item_data; // Only for product ID "2"
 
     // Set the data for the cart item in cart object
     $data = array() ;
@@ -219,7 +219,7 @@ function add_cart_item_data( $cart_item_data, $product_id ) {
 // Display custom data on cart and checkout page.
 //add_filter( 'woocommerce_get_item_data', 'get_item_data' , 25, 2 );
 function get_item_data ( $cart_data, $cart_item ) {
-    if( $cart_item['product_id'] != 2 ) return $cart_data; // Only for product ID "2"
+    //if( $cart_item['product_id'] != 2 ) return $cart_data; // Only for product ID "2"
 
     if( ! empty( $cart_item['custom_data'] ) ){
         $values =  array();
