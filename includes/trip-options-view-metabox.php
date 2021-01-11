@@ -102,7 +102,8 @@ class Trip_Options_View_Metabox {
 					var x = 0;
 					$( '.itinerary-li' ).each( function( index, element ) {
 						//alert(start_date.getDate() + index);
-						start_date.setDate(start_date.getDate() + x);
+						start_date.setDate(start_date.getDate() + index);
+						$( 'p', element ).append(start_date);
 						//id="itinerary-li-'.$x.'"
 						//start_date = start_date.setDate(start_date.getDate() + index);
 						//$( 'p', element ).append(x);
@@ -166,13 +167,14 @@ for (i = 0; i < x; i++) {
 			esc_html_e( 'Itinerary', 'wp-travel' );
 			echo '</h4>';
 			?>
-			<ul class='itinerary-li'><?php
+			<ul><?php
 			foreach ( $itineraries as $x=>$itinerary ) {
-				echo '<li>';
-				echo '<p style="color:blue" id="itinerary-li-'.$x.'"></p>';
+				echo '<li class="itinerary-li">';
+				echo '<p style="color:blue"></p>';
 				echo esc_attr( $itineraries[$x]['label'] ) . ', ' . 
 				esc_attr( $itineraries[$x]['title'] ); ?><br><?php
-				echo esc_attr( $itineraries[$x]['desc'] ); ?></li><?php
+				echo esc_attr( $itineraries[$x]['desc'] );
+				echo '</li>';
 			} ?>
 			</ul><?php
 		} else { ?>
