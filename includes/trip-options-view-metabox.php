@@ -95,33 +95,12 @@ class Trip_Options_View_Metabox {
 			jQuery(document).ready(function($) {
 				$( '.start_date' ).datepicker();
 				$( '.start_date' ).on( 'change', function() {
-					//var start_date = this.value;
 					var start_date = new Date(this.value);
-
-					//alert(start_date.getDate() + 1)
-					var x = 0;
 					$( '.itinerary-li' ).each( function( index, element ) {
-						//alert(start_date.getDate() + index);
 						start_date.setDate(start_date.getDate() + index);
-						$( 'p', element ).append(start_date);
-						//id="itinerary-li-'.$x.'"
-						//start_date = start_date.setDate(start_date.getDate() + index);
-						//$( 'p', element ).append(x);
-/*						
-						$( 'span', element ).empty();
-						$( 'span', element ).append(index);
-						$( 'span', element ).append(' ');
-						$( 'span', element ).append(start_date);
-						$( 'span', element ).append(' ');
-*/						
-						//start_date.setDate(start_date.getDate() + 1);
-						x = x + 1;
+						$( 'p', element ).empty();
+						$( 'p', element ).append(start_date.toLocaleDateString());
 					});
-						alert(x);
-						var i;
-for (i = 0; i < x; i++) {
-	$( '#itinerary-li-'+i ).text(i);
-}
 				});
 			});
 		</script>
