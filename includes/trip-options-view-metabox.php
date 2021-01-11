@@ -8,6 +8,11 @@ class Trip_Options_View_Metabox {
 		add_action( 'woocommerce_single_product_summary', array( __CLASS__, 'custom_action_after_single_product_title' ), 6 );
 		add_action( 'woocommerce_before_add_to_cart_form', array( __CLASS__, 'action_woocommerce_before_add_to_cart_button' ), 10, 0 );	
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'custom_datepicker' ) );
+
+		add_action( 'woocommerce_before_add_to_cart_button', array( __CLASS__, 'add_fields_before_add_to_cart' ) );
+		add_filter( 'woocommerce_add_cart_item_data', array( __CLASS__, 'add_cart_item_data' ), 25, 2 );
+		add_filter( 'woocommerce_get_item_data', array( __CLASS__, 'get_item_data' ), 25, 2 );
+		add_action( 'woocommerce_add_order_item_meta', array( __CLASS__, 'add_order_item_meta' ), 10, 3 );
 	}
 
 	function custom_datepicker() {
@@ -64,7 +69,6 @@ class Trip_Options_View_Metabox {
 									$( 'input', element2 ).val(trip_date.toLocaleDateString());
 								}
 							});
-							alert(index);
 						});
 					});
 				});
@@ -163,5 +167,89 @@ class Trip_Options_View_Metabox {
 			<span><?php esc_html_e( 'No FAQs found.', 'wp-travel' ); ?></span><?php
 		}
 	}
+
+// HERE set the array of pairs keys/values for your checkboxes
+function custom_checkboxes(){
+    return array(
+        'mm_chicken_cutlet_bento'       => __( "Chicken Cutlet Bento", "aoim"),
+        'mm_roasted_pork_rib_bento'     => __( "Roasted Pork Rib Bento", "aoim"),
+    );
+}
+
+// Displaying the checkboxes
+//add_action( 'woocommerce_before_add_to_cart_button', 'add_fields_before_add_to_cart' );
+function add_fields_before_add_to_cart( ) {
+    global $product;
+    if( $product->get_id() != 2 ) return; // Only for product ID "2"
+
+    ?>
+    <div class="simple-selects">
+        <div class="col-md-6">
+            <h3><?php _e("Main meals", "aoim"); ?></h3>
+            <?php foreach( custom_checkboxes() as $key => $value ): ?>
+                <p><input type="checkbox" name="<?php echo $key; ?>" id="<?php echo $key; ?>"><?php echo ' ' . $value; ?></p>
+            <?php endforeach; ?>
+        </div>
+    </div>
+    <?php
+}
+
+
+// Add data to cart item
+//add_filter( 'woocommerce_add_cart_item_data', 'add_cart_item_data', 25, 2 );
+function add_cart_item_data( $cart_item_data, $product_id ) {
+    if( $product_id != 2 ) return $cart_item_data; // Only for product ID "2"
+
+    // Set the data for the cart item in cart object
+    $data = array() ;
+
+    foreach( custom_checkboxes() as $key => $value ){
+        if( isset( $_POST[$key] ) )
+            $cart_item_data['custom_data'][$key] = $data[$key] = $value;
+    }
+    // Add the data to session and generate a unique ID
+    if( count($data > 0 ) ){
+        $cart_item_data['custom_data']['unique_key'] = md5( microtime().rand() );
+        WC()->session->set( 'custom_data', $data );
+    }
+    return $cart_item_data;
+}
+
+
+// Display custom data on cart and checkout page.
+//add_filter( 'woocommerce_get_item_data', 'get_item_data' , 25, 2 );
+function get_item_data ( $cart_data, $cart_item ) {
+    if( $cart_item['product_id'] != 2 ) return $cart_data; // Only for product ID "2"
+
+    if( ! empty( $cart_item['custom_data'] ) ){
+        $values =  array();
+        foreach( $cart_item['custom_data'] as $key => $value )
+            if( $key != 'unique_key' ){
+                $values[] = $value;
+            }
+        $values = implode( ', ', $values );
+        $cart_data[] = array(
+            'name'    => __( "Option", "aoim"),
+            'display' => $values
+        );
+    }
+
+    return $cart_data;
+}
+
+// Add order item meta.
+//add_action( 'woocommerce_add_order_item_meta', 'add_order_item_meta' , 10, 3 );
+function add_order_item_meta ( $item_id, $cart_item, $cart_item_key ) {
+    if ( isset( $cart_item[ 'custom_data' ] ) ) {
+        $values =  array();
+        foreach( $cart_item[ 'custom_data' ] as $key => $value )
+            if( $key != 'unique_key' ){
+                $values[] = $value;
+            }
+        $values = implode( ', ', $values );
+        wc_add_order_item_meta( $item_id, __( "Option", "aoim"), $values );
+    }
+}
+
 }
 new Trip_Options_View_Metabox;
