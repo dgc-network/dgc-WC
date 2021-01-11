@@ -54,8 +54,8 @@ class Trip_Options_View_Metabox {
 						start_date.setDate(start_date.getDate() + index);
 						//$( 'p', element ).empty();
 						//$( 'p', element ).append(start_date.toLocaleDateString());
-						//$( 'input', element ).value = start_date.toLocaleDateString();
-						document.getElementById('itinerary-li-'+index).value = start_date.toLocaleDateString();
+						$( 'input', element ).val(start_date.toLocaleDateString());
+						//document.getElementById('itinerary-li-'+index).value = start_date.toLocaleDateString();
 					});
 				});
 			});
