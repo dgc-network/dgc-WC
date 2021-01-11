@@ -186,7 +186,7 @@ function add_fields_before_add_to_cart( ) {
     <div class="simple-selects">
         <div class="col-md-6">
             <h3><?php _e("Main meals", "aoim"); ?></h3>
-            <?php foreach( custom_checkboxes() as $key => $value ): ?>
+            <?php foreach( self::custom_checkboxes() as $key => $value ): ?>
                 <p><input type="checkbox" name="<?php echo $key; ?>" id="<?php echo $key; ?>"><?php echo ' ' . $value; ?></p>
             <?php endforeach; ?>
         </div>
@@ -203,7 +203,7 @@ function add_cart_item_data( $cart_item_data, $product_id ) {
     // Set the data for the cart item in cart object
     $data = array() ;
 
-    foreach( custom_checkboxes() as $key => $value ){
+    foreach( self::custom_checkboxes() as $key => $value ){
         if( isset( $_POST[$key] ) )
             $cart_item_data['custom_data'][$key] = $data[$key] = $value;
     }
