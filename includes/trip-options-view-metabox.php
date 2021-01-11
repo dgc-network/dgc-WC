@@ -101,12 +101,11 @@ class Trip_Options_View_Metabox {
 					//alert(start_date.getDate() + 1)
 					var x = 0;
 					$( '.itinerary-li' ).each( function( index, element ) {
+						alert(element);
 						//alert(start_date.getDate() + index);
 						start_date.setDate(start_date.getDate() + x);
 						//start_date = start_date.setDate(start_date.getDate() + index);
 						$( 'span', element ).empty();
-						$( 'span', element ).append(element);
-						$( 'span', element ).append(' ');
 						$( 'span', element ).append(index);
 						$( 'span', element ).append(' ');
 						$( 'span', element ).append(start_date);
