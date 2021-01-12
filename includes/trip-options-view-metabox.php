@@ -212,8 +212,10 @@ function add_cart_item_data( $cart_item_data, $product_id ) {
 
     foreach( $itineraries as $x=>$itinerary ){
         //if( isset( $_POST['itinerary-date-'.$x] ) )
-	        $cart_item_data['custom_data']['itinerary-date-'.$x] = $data['itinerary-date-'.$x] = $_POST['itinerary-date-'.$x];
+		$cart_item_data['custom_data']['itinerary-date-'.$x] = $data['itinerary-date-'.$x] = $_POST['itinerary-date-'.$x];
+		$cart_item_data['custom_data']['itinerary-title-'.$x] = $data['itinerary-title-'.$x] = $itineraries[$x]['title'];
 	}
+	
     // Add the data to session and generate a unique ID
     if( count($data > 0 ) ){
         $cart_item_data['custom_data']['unique_key'] = md5( microtime().rand() );
