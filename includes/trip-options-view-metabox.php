@@ -212,7 +212,7 @@ function add_cart_item_data( $cart_item_data, $product_id ) {
 
     foreach( $itineraries as $x=>$itinerary ){
         if( isset( $_POST['itinerary-date-'.$x] ) )
-	        $cart_item_data['custom_data']['itinerary-date-'.$x] = $data['itinerary-date-'.$x] = $value;
+	        $cart_item_data['custom_data']['itinerary-date-'.$x] = $data['itinerary-date-'.$x] = $_POST['itinerary-date-'.$x];
 	}
     // Add the data to session and generate a unique ID
     if( count($data > 0 ) ){
