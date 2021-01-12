@@ -199,7 +199,7 @@ function add_fields_before_add_to_cart( ) {
 //add_filter( 'woocommerce_add_cart_item_data', 'add_cart_item_data', 25, 2 );
 function add_cart_item_data( $cart_item_data, $product_id ) {
     //if( $product_id != 2 ) return $cart_item_data; // Only for product ID "2"
-	$post_id = get_the_ID();
+	$post_id = $product_id;
 	$itineraries = get_post_meta( $post_id, 'wp_travel_trip_itinerary_data', true );
 
     // Set the data for the cart item in cart object
