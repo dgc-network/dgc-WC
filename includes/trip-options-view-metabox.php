@@ -181,7 +181,7 @@ function custom_checkboxes(){
 function add_fields_before_add_to_cart( ) {
     global $product;
     //if( $product->get_id() != 2 ) return; // Only for product ID "2"
-
+/*
     ?>
     <div class="simple-selects">
         <div class="col-md-6">
@@ -191,7 +191,8 @@ function add_fields_before_add_to_cart( ) {
             <?php endforeach; ?>
         </div>
     </div>
-    <?php
+	<?php 
+*/
 }
 
 
@@ -236,12 +237,13 @@ function get_item_data ( $cart_data, $cart_item ) {
             if( $key != 'unique_key' ){
                 $values[] = $value;
             }
-		$values = implode( ', ', $values );
+		//$values = implode( ', ', $values );
         $cart_data[] = array(
-            //'name'    => __( "Option", "aoim"),
-            'name'    => '',
+            'name'    => __( "Option", "aoim"),
+            //'name'    => '',
+            'value' => $values
             //'display' => $values
-            'display' => '<ul><li>Itinerary1</li><li>Itinerary2</li><li>Itinerary3</li></ul>'
+            //'display' => '<ul><li>Itinerary1</li><li>Itinerary2</li><li>Itinerary3</li></ul>'
         );
     }
 
