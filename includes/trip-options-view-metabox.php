@@ -210,9 +210,11 @@ function add_cart_item_data( $cart_item_data, $product_id ) {
 	
 	$itineraries = get_post_meta( $product_id, 'wp_travel_trip_itinerary_data', true );
 
-    foreach( $itineraries as $key => $value ){
-        if( isset( $_POST[$key] ) )
-            $cart_item_data['custom_data'][$key] = $data[$key] = $value;
+    foreach( $itineraries as $index => $values ){
+		foreach( $values as $key => $value ){
+        	if( isset( $_POST[$key] ) )
+            	$cart_item_data['custom_data'][$index.$key] = $data[$index.$key] = $value;
+		}
 	}
     // Add the data to session and generate a unique ID
     if( count($data > 0 ) ){
