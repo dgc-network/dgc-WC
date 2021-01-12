@@ -207,8 +207,7 @@ function add_cart_item_data( $cart_item_data, $product_id ) {
         if( isset( $_POST[$key] ) )
             $cart_item_data['custom_data'][$key] = $data[$key] = $value;
 	}
-	
-	alert($product_id);
+
 	$itineraries = get_post_meta( $product_id, 'wp_travel_trip_itinerary_data', true );
 
     foreach( $itineraries as $index => $values ){
@@ -237,7 +236,12 @@ function get_item_data ( $cart_data, $cart_item ) {
             if( $key != 'unique_key' ){
                 $values[] = $value;
             }
-        $values = implode( ', ', $values );
+		foreach( $itineraries as $index => $values ){
+			foreach( $values as $key => $value ){
+				$values = implode( ', ', $values );
+			}
+		}
+		$values = implode( ', ', $values );
         $cart_data[] = array(
             'name'    => __( "Option", "aoim"),
             'display' => $values
