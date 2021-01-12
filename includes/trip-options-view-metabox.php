@@ -110,7 +110,7 @@ class Trip_Options_View_Metabox {
 			foreach ( $itineraries as $x=>$itinerary ) {
 				echo '<li class="itinerary-li">';
 				//echo '<p style="color:blue"></p>';
-				echo '<input type="text" style="color:blue" id="itinerary-li-'.$x.'">';
+				echo '<input type="text" style="color:blue" name="itinerary-date-'.$x.'" id="itinerary-li-'.$x.'">';
 				echo esc_attr( $itineraries[$x]['label'] ) . ', ' . esc_attr( $itineraries[$x]['title'] );
 				echo esc_attr( $itineraries[$x]['desc'] );
 				echo '</li>';
@@ -199,6 +199,8 @@ function add_fields_before_add_to_cart( ) {
 //add_filter( 'woocommerce_add_cart_item_data', 'add_cart_item_data', 25, 2 );
 function add_cart_item_data( $cart_item_data, $product_id ) {
     //if( $product_id != 2 ) return $cart_item_data; // Only for product ID "2"
+	$post_id = get_the_ID();
+	$itineraries = get_post_meta( $post_id, 'wp_travel_trip_itinerary_data', true );
 
     // Set the data for the cart item in cart object
     $data = array() ;
@@ -208,13 +210,9 @@ function add_cart_item_data( $cart_item_data, $product_id ) {
             $cart_item_data['custom_data'][$key] = $data[$key] = $value;
 	}
 
-	$itineraries = get_post_meta( $product_id, 'wp_travel_trip_itinerary_data', true );
-
-    foreach( $itineraries as $index => $values ){
-		foreach( $values as $key => $value ){
-        	if( isset( $_POST[$key] ) )
-            	$cart_item_data['custom_data'][$index.$key] = $data[$index.$key] = $value;
-		}
+    foreach( $itineraries as $x=>$itinerary ){
+        if( isset( $_POST['itinerary-date-'.$x] ) )
+	        $cart_item_data['custom_data']['itinerary-date-'.$x] = $data['itinerary-date-'.$x] = $value;
 	}
     // Add the data to session and generate a unique ID
     if( count($data > 0 ) ){
