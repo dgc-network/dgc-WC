@@ -232,17 +232,26 @@ function get_item_data ( $cart_data, $cart_item ) {
     //if( $cart_item['product_id'] != 2 ) return $cart_data; // Only for product ID "2"
 
     if( ! empty( $cart_item['custom_data'] ) ){
+/*
         $values =  array();
         foreach( $cart_item['custom_data'] as $key => $value )
             if( $key != 'unique_key' ){
                 $values[] = $value;
             }
-		//$values = implode( ', ', $values );
-        $cart_data[] = array(
-            'name'    => __( "Option", "aoim"),
+		$values = implode( ', ', $values );
+*/		
+
+		$values = '<ul>';
+        foreach( $cart_item['custom_data'] as $key => $value )
+            if( $key != 'unique_key' ){
+                $values .= '<li>'.$value.'</li>';
+            }
+		$values .= '</ul>';
+		$cart_data[] = array(
+            'name'    => __( "Itinerary", "aoim"),
             //'name'    => '',
-            'value' => $cart_item['custom_data']
-            //'display' => $values
+            //'value' => $cart_item['custom_data']
+            'display' => $values
             //'display' => '<ul><li>Itinerary1</li><li>Itinerary2</li><li>Itinerary3</li></ul>'
         );
     }
