@@ -204,18 +204,18 @@ function add_cart_item_data( $cart_item_data, $product_id ) {
 
     // Set the data for the cart item in cart object
     $data = array() ;
-
+/*
     foreach( self::custom_checkboxes() as $key => $value ){
         if( isset( $_POST[$key] ) )
             $cart_item_data['custom_data'][$key] = $data[$key] = $value;
 	}
-
+*/
     foreach( $itineraries as $x=>$itinerary ){
         //if( isset( $_POST['itinerary-date-'.$x] ) )
 		$cart_item_data['custom_data']['itinerary-date-'.$x] = $data['itinerary-date-'.$x] = $_POST['itinerary-date-'.$x];
 		$cart_item_data['custom_data']['itinerary-title-'.$x] = $data['itinerary-title-'.$x] = $itineraries[$x]['title'];
 	}
-	
+
     // Add the data to session and generate a unique ID
     if( count($data > 0 ) ){
         $cart_item_data['custom_data']['unique_key'] = md5( microtime().rand() );
@@ -238,8 +238,10 @@ function get_item_data ( $cart_data, $cart_item ) {
             }
 		$values = implode( ', ', $values );
         $cart_data[] = array(
-            'name'    => __( "Option", "aoim"),
-            'display' => $values
+            //'name'    => __( "Option", "aoim"),
+            'name'    => '',
+            //'display' => $values
+            'display' => '<ul><li>Itinerary1</li><li>Itinerary2</li><li>Itinerary3</li></ul>'
         );
     }
 
