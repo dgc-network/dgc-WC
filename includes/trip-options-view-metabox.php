@@ -236,8 +236,8 @@ function get_item_data ( $cart_data, $cart_item ) {
             if( $key != 'unique_key' ){
                 $values[] = $value;
             }
-		foreach( $itineraries as $index => $values ){
-			foreach( $values as $key => $value ){
+		foreach( $itineraries as $index => $valuess ){
+			foreach( $valuess as $key => $value ){
 				$values = implode( ', ', $values );
 			}
 		}
