@@ -241,7 +241,7 @@ function get_item_data ( $cart_data, $cart_item ) {
         $cart_data[] = array(
             'name'    => __( "Option", "aoim"),
             //'name'    => '',
-            'value' => $values
+            'value' => $cart_item['custom_data']
             //'display' => $values
             //'display' => '<ul><li>Itinerary1</li><li>Itinerary2</li><li>Itinerary3</li></ul>'
         );
