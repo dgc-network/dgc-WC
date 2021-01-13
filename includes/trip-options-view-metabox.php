@@ -9,6 +9,10 @@ class Trip_Options_View_Metabox {
 		add_action( 'woocommerce_before_add_to_cart_form', array( __CLASS__, 'action_woocommerce_before_add_to_cart_button' ), 10, 0 );	
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'custom_datepicker' ) );
 
+		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'dgc_custom_script' ) );
+		add_action( 'wp_ajax_woocommerce_ajax_add_to_cart', array( __CLASS__, 'woocommerce_ajax_add_to_cart' ) );
+		add_action( 'wp_ajax_nopriv_woocommerce_ajax_add_to_cart', array( __CLASS__, 'woocommerce_ajax_add_to_cart' ) );
+
 		add_action( 'woocommerce_before_add_to_cart_button', array( __CLASS__, 'add_fields_before_add_to_cart' ) );
 		add_filter( 'woocommerce_add_cart_item_data', array( __CLASS__, 'add_cart_item_data' ), 25, 2 );
 		add_filter( 'woocommerce_get_item_data', array( __CLASS__, 'get_item_data' ), 25, 2 );
@@ -26,6 +30,103 @@ class Trip_Options_View_Metabox {
 		
 	}
 
+	/**
+	 * Add a bit of script.
+	 */
+	function dgc_custom_script() {
+		?>
+		<script>
+			jQuery(document).ready(function($) {
+				/*
+				 * AJAX for Woocommerce Add To Cart button
+				 */
+				$( document ).on( 'click', '.single_add_to_cart_button', function(e) {
+					e.preventDefault();
+
+					var $thisbutton = $(this),
+                	$form = $thisbutton.closest('form.cart'),
+					id = $thisbutton.val(),
+                	product_qty = $form.find('input[name=quantity]').val() || 1,
+                	product_id = $form.find('input[name=product_id]').val() || id,
+                	variation_id = $form.find('input[name=variation_id]').val() || 0;
+
+					var itinerary_date_array = [];
+					$( '.itinerary-li' ).each( function( index, element ) {
+						itinerary_date_array.push($( 'input', element ).value);
+					})
+
+        			var data = {
+            			action: 'woocommerce_ajax_add_to_cart',
+            			product_id: product_id,
+            			product_sku: '',
+            			quantity: product_qty,
+						variation_id: variation_id,
+						itinerary_date_array: itinerary_date_array,
+        			};
+
+        			$(document.body).trigger('adding_to_cart', [$thisbutton, data]);
+
+        			$.ajax({
+            			type: 'post',
+            			//url: wc_add_to_cart_params.ajax_url,
+						url: '/wp-admin/admin-ajax.php',
+            			data: data,
+            			beforeSend: function (response) {
+                			$thisbutton.removeClass('added').addClass('loading');
+            			},
+            			complete: function (response) {
+                			$thisbutton.addClass('added').removeClass('loading');
+            			},
+            			success: function (response) {
+
+                			if (response.error && response.product_url) {
+                    			window.location = response.product_url;
+                    			return;
+                			} else {
+                    			$(document.body).trigger('added_to_cart', [response.fragments, response.cart_hash, $thisbutton]);
+                			}
+            			},
+        			});
+
+        			return false;
+				});
+			})
+		</script>
+		<?php
+	}
+
+	//add_action('wp_ajax_woocommerce_ajax_add_to_cart', 'woocommerce_ajax_add_to_cart');
+	//add_action('wp_ajax_nopriv_woocommerce_ajax_add_to_cart', 'woocommerce_ajax_add_to_cart');			
+	function woocommerce_ajax_add_to_cart() {
+	
+		$product_id = apply_filters('woocommerce_add_to_cart_product_id', absint($_POST['product_id']));
+		$quantity = empty($_POST['quantity']) ? 1 : wc_stock_amount($_POST['quantity']);
+		$variation_id = absint($_POST['variation_id']);
+		$passed_validation = apply_filters('woocommerce_add_to_cart_validation', true, $product_id, $quantity);
+		$product_status = get_post_status($product_id);
+		$itinerary_date_array = $_POST['itinerary_date_array'];
+	
+		if ($passed_validation && WC()->cart->add_to_cart($product_id, $quantity, $variation_id, $itinerary_date_array) && 'publish' === $product_status) {
+	
+			do_action('woocommerce_ajax_added_to_cart', $product_id);
+	
+			if ('yes' === get_option('woocommerce_cart_redirect_after_add')) {
+				wc_add_to_cart_message(array($product_id => $quantity), true);
+			}
+	
+			WC_AJAX :: get_refreshed_fragments();
+		} else {
+	
+			$data = array(
+				'error' => true,
+				'product_url' => apply_filters('woocommerce_cart_redirect_after_error', get_permalink($product_id), $product_id));
+	
+			echo wp_send_json($data);
+		}
+	
+		wp_die();
+	}
+	
 	function custom_action_after_single_product_title() { 
 		global $product; 
 	
@@ -206,18 +307,21 @@ function add_cart_item_data( $cart_item_data, $product_id ) {
     // Set the data for the cart item in cart object
     $data = array() ;
 	$cart_item_data['custom_data']['itineraries'] = $data['itineraries'] = $itineraries;
+    if( isset( $_POST['itinerary_date_array'] ) )
+		$cart_item_data['custom_data']['itinerary_date_array'] = $data['itinerary_date_array'] = $_POST['itinerary_date_array'];
 /*
     foreach( self::custom_checkboxes() as $key => $value ){
         if( isset( $_POST[$key] ) )
             $cart_item_data['custom_data'][$key] = $data[$key] = $value;
 	}
 */
+/*
     foreach( $itineraries as $x=>$itinerary ){
         //if( isset( $_POST['itinerary-date-'.$x] ) )
 		$cart_item_data['custom_data']['itinerary-date-'.$x] = $data['itinerary-date-'.$x] = $_POST['itinerary-date-'.$x];
 		$cart_item_data['custom_data']['itinerary-title-'.$x] = $data['itinerary-title-'.$x] = $itineraries[$x]['title'];
 	}
-
+*/
     // Add the data to session and generate a unique ID
     if( count($data > 0 ) ){
         $cart_item_data['custom_data']['unique_key'] = md5( microtime().rand() );
@@ -249,18 +353,22 @@ foreach( $cart_item['custom_data'] as $key => $value )
 	}
 $values .= '</ul>';
 */
+		foreach( $cart_item['custom_data']['itinerary_date_array'] as $x => $itinerary_date ) {
+			$cart_item['custom_data']['itineraries'][$x]['itinerary_date'] = $itinerary_date;
+		}
 		$values = '<ul>';
         foreach( $cart_item['custom_data']['itineraries'] as $x => $itinerary ) {
 			$label = $cart_item['custom_data']['itineraries'][$x]['label'];
 			$title = $cart_item['custom_data']['itineraries'][$x]['title'];
 			$assignments = $cart_item['custom_data']['itineraries'][$x]['assignment'];
+			$itinerary_date = $cart_item['custom_data']['itineraries'][$x]['itinerary_date'];
 			$values .= '<li>'.$label.', '.$title.'</li>';
 			if( ! empty( $assignments ) ){
 				$values .= '<ul>';
 				foreach( $assignments as $y => $assignment ) {
 					$category = $assignments[$y]['category'];
 					$resource = $assignments[$y]['resource'];
-					$values .= '<li>'.$category.', '.$resource.'</li>';
+					$values .= '<li>'.$itinerary_date.', '.$category.', '.$resource.'</li>';
 				}
 				$values .= '</ul>';
 			}
@@ -268,7 +376,7 @@ $values .= '</ul>';
 		$values .= '</ul>';
 
 		$cart_data[] = array(
-            'name'    => __( "I", "aoim"),
+            'name'    => __( "Item", "dgc-domain"),
             'display' => $values
         );
     }
