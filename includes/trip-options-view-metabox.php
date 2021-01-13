@@ -268,7 +268,7 @@ $values .= '</ul>';
 		$values .= '</ul>';
 
 		$cart_data[] = array(
-            'name'    => __( "Itinerary", "aoim"),
+            'name'    => __( "Item", "aoim"),
             'display' => $values
         );
     }
