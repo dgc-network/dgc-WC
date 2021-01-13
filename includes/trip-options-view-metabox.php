@@ -161,8 +161,8 @@ class Trip_Options_View_Metabox {
 		<script>
 			jQuery(document).ready(function($) {
 				$( '.start_date' ).datepicker();
-				//$( '.start_date' ).on( 'change', function() {
-				$( '.start_date' ).on( 'select', function() {
+				$( '.start_date' ).on( 'change', function() {
+				//$( '.start_date' ).on( 'select', function() {
 					var start_date = new Date(this.value);
 					$( '.itinerary-li' ).each( function( index, element ) {
 						start_date.setDate(start_date.getDate() + index);
