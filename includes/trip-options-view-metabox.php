@@ -82,6 +82,7 @@ class Trip_Options_View_Metabox {
                 			$thisbutton.addClass('added').removeClass('loading');
             			},
             			success: function (response) {
+							alert('I am here');
 
                 			if (response.error && response.product_url) {
                     			window.location = response.product_url;
