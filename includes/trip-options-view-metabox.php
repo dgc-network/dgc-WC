@@ -42,7 +42,7 @@ class Trip_Options_View_Metabox {
 				 * AJAX for Woocommerce Add To Cart button
 				 */
 				$( '.single_add_to_cart_button' ).on( 'click', function(e) {
-					alert('I am here');
+					//alert('I am here');
 					e.preventDefault();
 
 					var $thisbutton = $(this),
@@ -55,6 +55,7 @@ class Trip_Options_View_Metabox {
 					var itinerary_date_array = [];
 					$( '.itinerary-li' ).each( function( index, element ) {
 						itinerary_date_array.push($( 'input', element ).value);
+						alert($( 'input', element ).value);
 					})
 
         			var data = {
