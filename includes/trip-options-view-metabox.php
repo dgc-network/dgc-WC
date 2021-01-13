@@ -41,6 +41,7 @@ class Trip_Options_View_Metabox {
 				 * AJAX for Woocommerce Add To Cart button
 				 */
 				$( document ).on( 'click', '.single_add_to_cart_button', function(e) {
+					alert('I am here');
 					e.preventDefault();
 
 					var $thisbutton = $(this),
@@ -269,120 +270,70 @@ class Trip_Options_View_Metabox {
 		}
 	}
 
-// HERE set the array of pairs keys/values for your checkboxes
-function custom_checkboxes(){
-    return array(
-        'mm_chicken_cutlet_bento'       => __( "Chicken Cutlet Bento", "aoim"),
-        'mm_roasted_pork_rib_bento'     => __( "Roasted Pork Rib Bento", "aoim"),
-    );
-}
+	/*
+	 * Add data to cart item
+	 */
+	//add_filter( 'woocommerce_add_cart_item_data', 'add_cart_item_data', 25, 2 );
+	function add_cart_item_data( $cart_item_data, $product_id ) {
+		$post_id = $product_id;
+		$itineraries = get_post_meta( $post_id, 'wp_travel_trip_itinerary_data', true );
 
-// Displaying the checkboxes
-//add_action( 'woocommerce_before_add_to_cart_button', 'add_fields_before_add_to_cart' );
-function add_fields_before_add_to_cart( ) {
-    global $product;
-    //if( $product->get_id() != 2 ) return; // Only for product ID "2"
-/*
-    ?>
-    <div class="simple-selects">
-        <div class="col-md-6">
-            <h3><?php _e("Main meals", "aoim"); ?></h3>
-            <?php foreach( self::custom_checkboxes() as $key => $value ): ?>
-                <p><input type="checkbox" name="<?php echo $key; ?>" id="<?php echo $key; ?>"><?php echo ' ' . $value; ?></p>
-            <?php endforeach; ?>
-        </div>
-    </div>
-	<?php 
-*/
-}
-
-
-// Add data to cart item
-//add_filter( 'woocommerce_add_cart_item_data', 'add_cart_item_data', 25, 2 );
-function add_cart_item_data( $cart_item_data, $product_id ) {
-    //if( $product_id != 2 ) return $cart_item_data; // Only for product ID "2"
-	$post_id = $product_id;
-	$itineraries = get_post_meta( $post_id, 'wp_travel_trip_itinerary_data', true );
-
-    // Set the data for the cart item in cart object
-    $data = array() ;
-	$cart_item_data['custom_data']['itineraries'] = $data['itineraries'] = $itineraries;
-    if( isset( $_POST['itinerary_date_array'] ) )
-		$cart_item_data['custom_data']['itinerary_date_array'] = $data['itinerary_date_array'] = $_POST['itinerary_date_array'];
-/*
-    foreach( self::custom_checkboxes() as $key => $value ){
-        if( isset( $_POST[$key] ) )
-            $cart_item_data['custom_data'][$key] = $data[$key] = $value;
-	}
-*/
-/*
-    foreach( $itineraries as $x=>$itinerary ){
-        //if( isset( $_POST['itinerary-date-'.$x] ) )
-		$cart_item_data['custom_data']['itinerary-date-'.$x] = $data['itinerary-date-'.$x] = $_POST['itinerary-date-'.$x];
-		$cart_item_data['custom_data']['itinerary-title-'.$x] = $data['itinerary-title-'.$x] = $itineraries[$x]['title'];
-	}
-*/
-    // Add the data to session and generate a unique ID
-    if( count($data > 0 ) ){
-        $cart_item_data['custom_data']['unique_key'] = md5( microtime().rand() );
-        WC()->session->set( 'custom_data', $data );
-    }
-    return $cart_item_data;
-}
-
-
-// Display custom data on cart and checkout page.
-//add_filter( 'woocommerce_get_item_data', 'get_item_data' , 25, 2 );
-function get_item_data ( $cart_data, $cart_item ) {
-    //if( $cart_item['product_id'] != 2 ) return $cart_data; // Only for product ID "2"
-
-    if( ! empty( $cart_item['custom_data'] ) ){
-/*
-        $values =  array();
-        foreach( $cart_item['custom_data'] as $key => $value )
-            if( $key != 'unique_key' ){
-                $values[] = $value;
-            }
-		$values = implode( ', ', $values );
-*/		
-/*
-$values = '<ul>';
-foreach( $cart_item['custom_data'] as $key => $value )
-	if( $key != 'unique_key' ){
-		$values .= '<li>'.$value.'</li>';
-	}
-$values .= '</ul>';
-*/
-		foreach( $cart_item['custom_data']['itinerary_date_array'] as $x => $itinerary_date ) {
-			$cart_item['custom_data']['itineraries'][$x]['itinerary_date'] = $itinerary_date;
-		}
-		$values = '<ul>';
-        foreach( $cart_item['custom_data']['itineraries'] as $x => $itinerary ) {
-			$label = $cart_item['custom_data']['itineraries'][$x]['label'];
-			$title = $cart_item['custom_data']['itineraries'][$x]['title'];
-			$assignments = $cart_item['custom_data']['itineraries'][$x]['assignment'];
-			$itinerary_date = $cart_item['custom_data']['itineraries'][$x]['itinerary_date'];
-			$values .= '<li>'.$label.', '.$title.'</li>';
-			if( ! empty( $assignments ) ){
-				$values .= '<ul>';
-				foreach( $assignments as $y => $assignment ) {
-					$category = $assignments[$y]['category'];
-					$resource = $assignments[$y]['resource'];
-					$values .= '<li>'.$itinerary_date.', '.$category.', '.$resource.'</li>';
-				}
-				$values .= '</ul>';
+    	// Set the data for the cart item in cart object
+    	$data = array() ;
+		$cart_item_data['custom_data']['itineraries'] = $data['itineraries'] = $itineraries;
+    	if( isset( $_POST['itinerary_date_array'] ) )
+			//$cart_item_data['custom_data']['itinerary_date_array'] = $data['itinerary_date_array'] = $_POST['itinerary_date_array'];
+			foreach( $_POST['itinerary_date_array'] as $x => $itinerary_date ) {
+				$cart_item['custom_data']['itineraries'][$x]['itinerary_date'] = $itinerary_date;
 			}
-		}
-		$values .= '</ul>';
 
-		$cart_data[] = array(
-            'name'    => __( "Item", "dgc-domain"),
-            'display' => $values
-        );
-    }
+		// Add the data to session and generate a unique ID
+    	if( count($data > 0 ) ){
+        	$cart_item_data['custom_data']['unique_key'] = md5( microtime().rand() );
+        	WC()->session->set( 'custom_data', $data );
+    	}
+    	return $cart_item_data;
+	}
 
-    return $cart_data;
-}
+	/*
+	 * Display custom data on cart and checkout page.
+	 */
+	//add_filter( 'woocommerce_get_item_data', 'get_item_data' , 25, 2 );
+	function get_item_data ( $cart_data, $cart_item ) {
+
+    	if( ! empty( $cart_item['custom_data'] ) ){
+/*
+			foreach( $cart_item['custom_data']['itinerary_date_array'] as $x => $itinerary_date ) {
+				$cart_item['custom_data']['itineraries'][$x]['itinerary_date'] = $itinerary_date;
+			}
+*/
+			$values = '<ul>';
+        	foreach( $cart_item['custom_data']['itineraries'] as $x => $itinerary ) {
+				$label = $cart_item['custom_data']['itineraries'][$x]['label'];
+				$title = $cart_item['custom_data']['itineraries'][$x]['title'];
+				$assignments = $cart_item['custom_data']['itineraries'][$x]['assignment'];
+				$itinerary_date = $cart_item['custom_data']['itineraries'][$x]['itinerary_date'];
+				$values .= '<li>'.$label.', '.$title.'</li>';
+				if( ! empty( $assignments ) ){
+					$values .= '<ul>';
+					foreach( $assignments as $y => $assignment ) {
+						$category = $assignments[$y]['category'];
+						$resource = $assignments[$y]['resource'];
+						$values .= '<li>'.$itinerary_date.', '.$category.', '.$resource.'</li>';
+					}
+					$values .= '</ul>';
+				}
+			}
+			$values .= '</ul>';
+
+			$cart_data[] = array(
+            	'name'    => __( "Item", "dgc-domain"),
+            	'display' => $values
+        	);
+    	}
+
+    	return $cart_data;
+	}
 
 // Add order item meta.
 //add_action( 'woocommerce_add_order_item_meta', 'add_order_item_meta' , 10, 3 );
