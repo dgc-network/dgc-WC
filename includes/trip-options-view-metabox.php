@@ -54,7 +54,7 @@ class Trip_Options_View_Metabox {
 
 					var itinerary_date_array = [];
 					$( '.itinerary-li' ).each( function( index, element ) {
-						temp = $( '#itinerary-date-'+index ).val();
+						var temp = $( '#itinerary-date-'+index ).val();
 						itinerary_date_array.push( temp );
 						alert(temp);
 					})
