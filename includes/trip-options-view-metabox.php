@@ -255,7 +255,15 @@ $values .= '</ul>';
 			$title = $cart_item['custom_data']['itineraries'][$x]['title'];
 			$assignment = $cart_item['custom_data']['itineraries'][$x]['assignment'];
 			$values .= '<li>'.$label.', '.$title.'</li>';
-
+			if( ! empty( $assignments ) ){
+				$values = '<ul>';
+				foreach( $assignment as $y => $value ) {
+					$category = $assignment[$y]['category'];
+					$resource = $assignment[$y]['resource'];
+					$values .= '<li>'.$category.', '.$resource.'</li>';
+				}
+				$values .= '</ul>';
+			}
 		}
 		$values .= '</ul>';
 
