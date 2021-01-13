@@ -253,13 +253,13 @@ $values .= '</ul>';
         foreach( $cart_item['custom_data']['itineraries'] as $x => $itinerary ) {
 			$label = $cart_item['custom_data']['itineraries'][$x]['label'];
 			$title = $cart_item['custom_data']['itineraries'][$x]['title'];
-			$assignment = $cart_item['custom_data']['itineraries'][$x]['assignment'];
+			$assignments = $cart_item['custom_data']['itineraries'][$x]['assignment'];
 			$values .= '<li>'.$label.', '.$title.'</li>';
 			if( ! empty( $assignments ) ){
 				$values = '<ul>';
-				foreach( $assignment as $y => $value ) {
-					$category = $assignment[$y]['category'];
-					$resource = $assignment[$y]['resource'];
+				foreach( $assignments as $y => $assignment ) {
+					$category = $assignments[$y]['category'];
+					$resource = $assignments[$y]['resource'];
 					$values .= '<li>'.$category.', '.$resource.'</li>';
 				}
 				$values .= '</ul>';
