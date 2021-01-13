@@ -9,7 +9,8 @@ class Trip_Options_View_Metabox {
 		add_action( 'woocommerce_before_add_to_cart_form', array( __CLASS__, 'action_woocommerce_before_add_to_cart_button' ), 10, 0 );	
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'custom_datepicker' ) );
 
-		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'dgc_custom_script' ) );
+		//add_action( 'wp_enqueue_scripts', array( __CLASS__, 'dgc_custom_script' ) );
+		add_action( 'woocommerce_before_single_product', array( __CLASS__, 'dgc_custom_script' ), 10 );
 		add_action( 'wp_ajax_woocommerce_ajax_add_to_cart', array( __CLASS__, 'woocommerce_ajax_add_to_cart' ) );
 		add_action( 'wp_ajax_nopriv_woocommerce_ajax_add_to_cart', array( __CLASS__, 'woocommerce_ajax_add_to_cart' ) );
 
