@@ -54,8 +54,9 @@ class Trip_Options_View_Metabox {
 
 					var itinerary_date_array = [];
 					$( '.itinerary-li' ).each( function( index, element ) {
-						itinerary_date_array.push($( '#itinerary-li-'+index ).value);
-						alert($( '#itinerary-li-'+index ).value);
+						temp = $( '#itinerary-date-'+index ).value;
+						itinerary_date_array.push( temp );
+						alert(temp);
 					})
 
         			var data = {
@@ -164,8 +165,8 @@ class Trip_Options_View_Metabox {
 						//$( 'p', element ).empty();
 						//$( 'p', element ).append(start_date.toLocaleDateString());
 						$( 'input', element ).val(start_date.toLocaleDateString());
-						$( '#itinerary-li-'+index ).datepicker();
-						$( '#itinerary-li-'+index ).on( 'change', function() {
+						$( '#itinerary-date-'+index ).datepicker();
+						$( '#itinerary-date-'+index ).on( 'change', function() {
 							var trip_date = new Date(this.value);
 							$( '.itinerary-li' ).each( function( index2, element2 ) {
 								if (index2 > index) {
@@ -214,7 +215,7 @@ class Trip_Options_View_Metabox {
 			foreach ( $itineraries as $x=>$itinerary ) {
 				echo '<li class="itinerary-li">';
 				//echo '<p style="color:blue"></p>';
-				echo '<input type="text" style="color:blue" name="itinerary-date-'.$x.'" id="itinerary-li-'.$x.'">';
+				echo '<input type="text" style="color:blue" name="itinerary-date-'.$x.'" id="itinerary-date-'.$x.'">';
 				echo esc_attr( $itineraries[$x]['label'] ) . ', ' . esc_attr( $itineraries[$x]['title'] );
 				echo esc_attr( $itineraries[$x]['desc'] );
 				echo '</li>';
