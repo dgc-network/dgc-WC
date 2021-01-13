@@ -40,7 +40,7 @@ class Trip_Options_View_Metabox {
 				/*
 				 * AJAX for Woocommerce Add To Cart button
 				 */
-				$( document ).on( 'click', '.single_add_to_cart_button', function(e) {
+				$( '.single_add_to_cart_button' ).on( 'click', function(e) {
 					alert('I am here');
 					e.preventDefault();
 
