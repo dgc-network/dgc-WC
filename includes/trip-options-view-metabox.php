@@ -104,13 +104,27 @@ class Trip_Options_View_Metabox {
 	//add_action('wp_ajax_nopriv_woocommerce_ajax_add_to_cart', 'woocommerce_ajax_add_to_cart');			
 	function woocommerce_ajax_add_to_cart() {
 	
+		//$itinerary_date_array = $_POST['itinerary_date_array'];
+		$post_id = $product_id;
+		$itineraries = get_post_meta( $post_id, 'wp_travel_trip_itinerary_data', true );
+
+    	// Set the data for the cart item in cart object
+    	$data = array() ;
+		$cart_item_data['custom_data']['itineraries'] = $data['itineraries'] = $itineraries;
+    	if( isset( $_POST['itinerary_date_array'] ) )
+			//$cart_item_data['custom_data']['itinerary_date_array'] = $data['itinerary_date_array'] = $_POST['itinerary_date_array'];
+			foreach( $_POST['itinerary_date_array'] as $x => $itinerary_date ) {
+				$itineraries[$x]['itinerary_date'] = $itinerary_date;
+			}
+		update_post_meta( $post_id, 'wp_travel_trip_itinerary_data', $itineraries );
+
+/*	
 		$product_id = apply_filters('woocommerce_add_to_cart_product_id', absint($_POST['product_id']));
 		$quantity = empty($_POST['quantity']) ? 1 : wc_stock_amount($_POST['quantity']);
 		$variation_id = absint($_POST['variation_id']);
 		$passed_validation = apply_filters('woocommerce_add_to_cart_validation', true, $product_id, $quantity);
 		$product_status = get_post_status($product_id);
-		$itinerary_date_array = $_POST['itinerary_date_array'];
-	
+
 		if ($passed_validation && WC()->cart->add_to_cart($product_id, $quantity, $variation_id, $itinerary_date_array) && 'publish' === $product_status) {
 	
 			do_action('woocommerce_ajax_added_to_cart', $product_id);
@@ -130,7 +144,7 @@ class Trip_Options_View_Metabox {
 	
 			echo wp_send_json($data);
 		}
-	
+*/	
 		wp_die();
 	}
 	
@@ -170,8 +184,8 @@ class Trip_Options_View_Metabox {
 						//$( 'p', element ).append(start_date.toLocaleDateString());
 						$( 'input', element ).val(start_date.toLocaleDateString());
 						$( '#itinerary-date-'+index ).datepicker();
-						//$( '#itinerary-date-'+index ).on( 'change', function() {
-						$( '#itinerary-date-'+index ).on( 'select', function() {
+						$( '#itinerary-date-'+index ).on( 'click', function() {
+						$( '#itinerary-date-'+index ).on( 'change', function() {
 							var trip_date = new Date(this.value);
 							$( '.itinerary-li' ).each( function( index2, element2 ) {
 								if (index2 > index) {
@@ -179,6 +193,7 @@ class Trip_Options_View_Metabox {
 									$( 'input', element2 ).val(trip_date.toLocaleDateString());
 								}
 							});
+						});
 						});
 					});
 				});
@@ -289,12 +304,13 @@ class Trip_Options_View_Metabox {
     	// Set the data for the cart item in cart object
     	$data = array() ;
 		$cart_item_data['custom_data']['itineraries'] = $data['itineraries'] = $itineraries;
+/*		
     	if( isset( $_POST['itinerary_date_array'] ) )
 			//$cart_item_data['custom_data']['itinerary_date_array'] = $data['itinerary_date_array'] = $_POST['itinerary_date_array'];
 			foreach( $_POST['itinerary_date_array'] as $x => $itinerary_date ) {
 				$cart_item['custom_data']['itineraries'][$x]['itinerary_date'] = $itinerary_date;
 			}
-
+*/
 		// Add the data to session and generate a unique ID
     	if( count($data > 0 ) ){
         	$cart_item_data['custom_data']['unique_key'] = md5( microtime().rand() );
