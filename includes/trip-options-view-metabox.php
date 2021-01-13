@@ -119,12 +119,14 @@ class Trip_Options_View_Metabox {
 				wc_add_to_cart_message(array($product_id => $quantity), true);
 			}
 	
-			//WC_AJAX :: get_refreshed_fragments();
+			echo wp_send_json($itinerary_date_array);
+			WC_AJAX :: get_refreshed_fragments();
 		} else {
 	
 			$data = array(
 				'error' => true,
-				'product_url' => apply_filters('woocommerce_cart_redirect_after_error', get_permalink($product_id), $product_id));
+				'product_url' => apply_filters('woocommerce_cart_redirect_after_error', get_permalink($product_id), $product_id)
+			);
 	
 			echo wp_send_json($data);
 		}
@@ -159,7 +161,8 @@ class Trip_Options_View_Metabox {
 		<script>
 			jQuery(document).ready(function($) {
 				$( '.start_date' ).datepicker();
-				$( '.start_date' ).on( 'change', function() {
+				//$( '.start_date' ).on( 'change', function() {
+				$( '.start_date' ).on( 'select', function() {
 					var start_date = new Date(this.value);
 					$( '.itinerary-li' ).each( function( index, element ) {
 						start_date.setDate(start_date.getDate() + index);
@@ -167,7 +170,8 @@ class Trip_Options_View_Metabox {
 						//$( 'p', element ).append(start_date.toLocaleDateString());
 						$( 'input', element ).val(start_date.toLocaleDateString());
 						$( '#itinerary-date-'+index ).datepicker();
-						$( '#itinerary-date-'+index ).on( 'change', function() {
+						//$( '#itinerary-date-'+index ).on( 'change', function() {
+						$( '#itinerary-date-'+index ).on( 'select', function() {
 							var trip_date = new Date(this.value);
 							$( '.itinerary-li' ).each( function( index2, element2 ) {
 								if (index2 > index) {
