@@ -205,6 +205,7 @@ function add_cart_item_data( $cart_item_data, $product_id ) {
 
     // Set the data for the cart item in cart object
     $data = array() ;
+	$cart_item_data['custom_data']['itineraries'] = $data['itineraries'] = $itineraries;
 /*
     foreach( self::custom_checkboxes() as $key => $value ){
         if( isset( $_POST[$key] ) )
@@ -240,19 +241,27 @@ function get_item_data ( $cart_data, $cart_item ) {
             }
 		$values = implode( ', ', $values );
 */		
-
+/*
+$values = '<ul>';
+foreach( $cart_item['custom_data'] as $key => $value )
+	if( $key != 'unique_key' ){
+		$values .= '<li>'.$value.'</li>';
+	}
+$values .= '</ul>';
+*/
 		$values = '<ul>';
-        foreach( $cart_item['custom_data'] as $key => $value )
-            if( $key != 'unique_key' ){
-                $values .= '<li>'.$value.'</li>';
-            }
+        foreach( $cart_item['custom_data']['itineraries'] as $x => $itinerary ) {
+			$label = $cart_item['custom_data']['itineraries'][$x]['label'];
+			$title = $cart_item['custom_data']['itineraries'][$x]['title'];
+			$assignment = $cart_item['custom_data']['itineraries'][$x]['assignment'];
+			$values .= '<li>'.$label.', '.$title.'</li>';
+
+		}
 		$values .= '</ul>';
+
 		$cart_data[] = array(
             'name'    => __( "Itinerary", "aoim"),
-            //'name'    => '',
-            //'value' => $cart_item['custom_data']
             'display' => $values
-            //'display' => '<ul><li>Itinerary1</li><li>Itinerary2</li><li>Itinerary3</li></ul>'
         );
     }
 
