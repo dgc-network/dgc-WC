@@ -82,7 +82,7 @@ class Trip_Options_View_Metabox {
                 			$thisbutton.addClass('added').removeClass('loading');
             			},
             			success: function (response) {
-							alert('I am here');
+							alert(response);
 
                 			if (response.error && response.product_url) {
                     			window.location = response.product_url;
@@ -119,7 +119,7 @@ class Trip_Options_View_Metabox {
 				wc_add_to_cart_message(array($product_id => $quantity), true);
 			}
 	
-			WC_AJAX :: get_refreshed_fragments();
+			//WC_AJAX :: get_refreshed_fragments();
 		} else {
 	
 			$data = array(
