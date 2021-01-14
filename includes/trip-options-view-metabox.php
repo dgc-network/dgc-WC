@@ -179,6 +179,7 @@ class Trip_Options_View_Metabox {
 				$( '.start_date' ).on( 'change', function() {
 				//$( '.start_date' ).on( 'select', function() {
 					var start_date = new Date(this.value);
+					var updated_start_date = new Date(this.value);
 					$( '.itinerary-li' ).each( function( index, element ) {
 						updated_start_date.setDate(start_date.getDate() + index);
 						//$( 'p', element ).empty();
@@ -189,6 +190,7 @@ class Trip_Options_View_Metabox {
 						//$( '#itinerary-date-'+index ).on( 'click', function() {
 						$( '#itinerary-date-'+index ).on( 'change', function() {
 							var trip_date = new Date(this.value);
+							var updated_trip_date = new Date(this.value);
 							$( '.itinerary-li' ).each( function( index2, element2 ) {
 								if (index2 > index) {
 									updated_trip_date.setDate(trip_date.getDate() + index2 - index);
