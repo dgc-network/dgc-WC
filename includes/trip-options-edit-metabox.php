@@ -793,7 +793,7 @@ wp_enqueue_script( 'some_handle' );
 	 * Includes/Excludes metabox callback
 	 */
 	function trip_options_callback_includes_excludes( $post ) {
-		echo $_POST['_itinerary'];
+		echo '_itinerary:'.$_POST['_itinerary'].':';
 		if ( ! $post ) {
 			global $post;
 		}
