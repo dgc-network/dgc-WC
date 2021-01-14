@@ -41,6 +41,7 @@ class Trip_Options_View_Metabox {
 				/*
 				 * AJAX for Woocommerce Add To Cart button
 				 */
+/*
 				$( '.single_add_to_cart_button' ).on( 'click', function(e) {
 				//$( '.single_add_to_cart_button' ).on( 'click', function() {
 					//alert('I am here');
@@ -96,6 +97,7 @@ class Trip_Options_View_Metabox {
 
         			return false;
 				});
+*/				
 			})
 		</script>
 		<?php
@@ -177,17 +179,12 @@ class Trip_Options_View_Metabox {
 			jQuery(document).ready(function($) {
 				$( '.start_date' ).datepicker();
 				$( '.start_date' ).on( 'change', function() {
-				//$( '.start_date' ).on( 'select', function() {
 					var start_date = new Date(this.value);
 					var updated_start_date = new Date(this.value);
 					$( '.itinerary-li' ).each( function( index, element ) {
 						updated_start_date.setDate(start_date.getDate() + index);
-						//$( 'p', element ).empty();
-						//$( 'p', element ).append(start_date.toLocaleDateString());
 						$( 'input', element ).val(updated_start_date.toLocaleDateString());
 						$( '#itinerary-date-'+index ).datepicker();
-
-						//$( '#itinerary-date-'+index ).on( 'click', function() {
 						$( '#itinerary-date-'+index ).on( 'change', function() {
 							var trip_date = new Date(this.value);
 							var updated_trip_date = new Date(this.value);
@@ -198,8 +195,6 @@ class Trip_Options_View_Metabox {
 								}
 							});
 						});
-						//});
-
 					});
 				});
 			});
