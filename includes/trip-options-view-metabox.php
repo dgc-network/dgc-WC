@@ -164,7 +164,8 @@ class Trip_Options_View_Metabox {
 		echo '<p class="book-author">' . $book_author . '</p>';
 */
 		//$is_itinerary = isset( $_POST['_itinerary'] ) ? 'yes' : 'no';
-		$post_id = get_the_ID();
+		global $post;
+		$post_id = $post->ID;
 		$is_itinerary = get_post_meta( $post_id, '_itinerary' );
 		if ($is_itinerary=='yes') {
 			$trip_code = wp_travel_get_trip_code( $post_id );
@@ -213,7 +214,9 @@ class Trip_Options_View_Metabox {
 	function woo_new_product_tab() {
 
 		//$is_itinerary = isset( $_POST['_itinerary'] ) ? 'yes' : 'no';
-		$post_id = get_the_ID();
+		//$post_id = get_the_ID();
+		global $post;
+		$post_id = $post->ID;
 		$is_itinerary = get_post_meta( $post_id, '_itinerary' );
 		if ($is_itinerary=='yes') {
 			$tabs = array();
@@ -336,7 +339,9 @@ class Trip_Options_View_Metabox {
 	function get_item_data ( $cart_data, $cart_item ) {
 
     	//if( ! empty( $cart_item['custom_data'] ) ){
-		$post_id = get_the_ID();
+		//$post_id = get_the_ID();
+		global $post;
+		$post_id = $post->ID;
 		$is_itinerary = get_post_meta( $post_id, '_itinerary' );
 		if( ! empty( $cart_item['custom_data'] ) && $is_itinerary=='yes'){
 			$values = '<ul>';
