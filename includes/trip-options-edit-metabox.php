@@ -5,7 +5,7 @@ class Trip_Options_Edit_Metabox {
 	 * Constructor.
 	 */
 	function __construct() {
-		add_action( 'admin_menu', array( __CLASS__, 'trip_options_add_metabox' ) );
+		//add_action( 'admin_menu', array( __CLASS__, 'trip_options_add_metabox' ) );
 		add_action( 'save_post', array( __CLASS__, 'trip_options_save_metabox' ), 10, 2 );
 
 		add_filter( 'product_type_options', array( __CLASS__, 'add_remove_product_options' ) );
@@ -33,6 +33,7 @@ class Trip_Options_Edit_Metabox {
 	/**
 	 * Remove 'Virtual','Downloadable' product options
 	 * Add 'Itinerary' product options
+	 * Create Categories
 	 */
 	function add_remove_product_options( $options ) {
 
@@ -92,12 +93,6 @@ class Trip_Options_Edit_Metabox {
 			)
   		);
 
-		// Gets term object from Category in the database. 
-/*
-		$term = get_term_by('name', __( "Itinerary", "wp-travel" ), 'product_cat');
-		wp_set_object_terms( $post_id, $term->term_id, 'product_cat' );
-*/
-
 		$options['itinerary'] = array(
 			'id'            => '_itinerary',
 			'wrapper_class' => 'show_if_simple show_if_variable',
@@ -125,25 +120,31 @@ class Trip_Options_Edit_Metabox {
 			unset( $tabs[ 'attribute' ] );
 		}
 
+		// add "Itinerary" tab
     	$tabs['itinerary'] = array(
         	'label'   =>  __( 'Itinerary', 'dgc-domain' ),
         	'target'  =>  'itinerary_panel',
         	'priority' => 60,
         	'class'   => array( 'show_if_itinerary')
     	);
-    	$tabs['include_exclude'] = array(
+
+		// add "Includes/Excludes" tab
+		$tabs['include_exclude'] = array(
         	'label'   =>  __( 'Includes/Excludes', 'dgc-domain' ),
         	'target'  =>  'include_exclude_panel',
         	'priority' => 60,
         	'class'   => array( 'show_if_itinerary')
     	);
-    	$tabs['faq'] = array(
+
+		// add "FAQs" tab
+		$tabs['faq'] = array(
         	'label'   =>  __( 'FAQs', 'dgc-domain' ),
         	'target'  =>  'faq_panel',
         	'priority' => 60,
         	'class'   => array( 'show_if_itinerary')
     	);
-    	return $tabs;
+
+		return $tabs;
 	}
 
 	/**
@@ -579,15 +580,14 @@ class Trip_Options_Edit_Metabox {
 		$json = json_encode( $titles );
 		echo $json;
 		
-		die();
-		
+		die();		
 	}
 		
 	/**
 	 * Product Categories List
 	 */
 	function product_category_name_options( $product_category_slug=false ) {
-		// since wordpress 4.5.0
+		
 		$args = array(
 			'taxonomy'   => "product_cat",
 			'number'     => $number,
@@ -886,19 +886,7 @@ wp_enqueue_script( 'some_handle' );
 				<td style="text-align:right"><button class="add-faq" type="button"><?php esc_html_e( "+ Add FAQ", "wp-travel" ); ?></button></td>
 			</tr>
 			<?php
-		}	  
-/*
-				for ($x = 0; $x < 100; $x++) {
-					if ($xx<=0) {
-						$faq_question = DEFAULT_FAQ_QUESTION;
-						echo '<span class="title">' . $faq_question . '</span><p style="display:none"></p>';
-					} else {
-					}
-					$xx--;
-				}
-*/				
-				?>			
-
+		}?>
 		</table>
 		</div>
 		<?php		
@@ -1000,6 +988,8 @@ wp_enqueue_script( 'some_handle' );
 
 		return $post_id;
 	}
+}
+new Trip_Options_Edit_Metabox;
 
 	/**
 	 * Tabs metabox callback
@@ -1307,8 +1297,6 @@ function trip_options_add_metabox() {
 	//wp_enqueue_script( 'mytabs', '', array( 'jquery-ui-tabs' ) );
 }
 
-}
-new Trip_Options_Edit_Metabox;
 
 
 function horizontal_tabs_metabox( $post ) {

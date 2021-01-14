@@ -152,6 +152,7 @@ class Trip_Options_View_Metabox {
 	}
 	
 	function custom_action_after_single_product_title() { 
+/*
 		global $product; 
 	
 		$product_id = $product->get_id(); // The product ID
@@ -161,13 +162,15 @@ class Trip_Options_View_Metabox {
 	
 		// Displaying your custom field under the title
 		echo '<p class="book-author">' . $book_author . '</p>';
-
-		$trip_code = wp_travel_get_trip_code( $post_id );
-		echo '<div align="left"><h4>';
-		esc_html_e( 'Trip Code : ', 'wp-travel' );
-		echo esc_attr( $trip_code );
-		echo '</h4></div>';
-
+*/
+		$is_itinerary = isset( $_POST['_itinerary'] ) ? 'yes' : 'no';
+		if ($is_itinerary=='yes') {
+			$trip_code = wp_travel_get_trip_code( $post_id );
+			echo '<div align="left"><h4>';
+			esc_html_e( 'Trip Code : ', 'wp-travel' );
+			echo esc_attr( $trip_code );
+			echo '</h4></div>';	
+		}
 	}
 	
 	// define the woocommerce_before_add_to_cart_button callback 
@@ -207,19 +210,22 @@ class Trip_Options_View_Metabox {
  	*/
 	function woo_new_product_tab() {
 
-		$tabs = array();
-		$post_id = get_the_ID();
-		$trip_tabs = wp_travel_get_admin_trip_tabs( $post_id );
-		if ( is_array( $trip_tabs ) && count( $trip_tabs ) > 0 ) {
-			foreach ( $trip_tabs as $key=>$value ) {
-				$tabs[$key] = array(
-					'title' 	=> __( $trip_tabs[$key]['label'], 'wp-travel' ),
-					'priority' 	=> 20,
-					'callback' 	=> array( __CLASS__, $key . '_tab_content' )
-				);		
+		$is_itinerary = isset( $_POST['_itinerary'] ) ? 'yes' : 'no';
+		if ($is_itinerary=='yes') {
+			$tabs = array();
+			$post_id = get_the_ID();
+			$trip_tabs = wp_travel_get_admin_trip_tabs( $post_id );
+			if ( is_array( $trip_tabs ) && count( $trip_tabs ) > 0 ) {
+				foreach ( $trip_tabs as $key=>$value ) {
+					$tabs[$key] = array(
+						'title' 	=> __( $trip_tabs[$key]['label'], 'wp-travel' ),
+						'priority' 	=> 20,
+						'callback' 	=> array( __CLASS__, $key . '_tab_content' )
+					);		
+				}
 			}
+			return $tabs;
 		}
-		return $tabs;
 	}
 	
 	function overview_tab_content() {
