@@ -180,25 +180,24 @@ class Trip_Options_View_Metabox {
 				//$( '.start_date' ).on( 'select', function() {
 					var start_date = new Date(this.value);
 					$( '.itinerary-li' ).each( function( index, element ) {
-						start_date.setDate(start_date.getDate() + index);
+						updated_start_date.setDate(start_date.getDate() + index);
 						//$( 'p', element ).empty();
 						//$( 'p', element ).append(start_date.toLocaleDateString());
-						//$( 'input', element ).val(start_date.toLocaleDateString());
-						$( 'input', element ).val(index);
+						$( 'input', element ).val(updated_start_date.toLocaleDateString());
 						$( '#itinerary-date-'+index ).datepicker();
-/*
-						$( '#itinerary-date-'+index ).on( 'click', function() {
+
+						//$( '#itinerary-date-'+index ).on( 'click', function() {
 						$( '#itinerary-date-'+index ).on( 'change', function() {
 							var trip_date = new Date(this.value);
 							$( '.itinerary-li' ).each( function( index2, element2 ) {
 								if (index2 > index) {
-									trip_date.setDate(trip_date.getDate() + index2 - index);
-									$( 'input', element2 ).val(trip_date.toLocaleDateString());
+									updated_trip_date.setDate(trip_date.getDate() + index2 - index);
+									$( 'input', element2 ).val(updated_trip_date.toLocaleDateString());
 								}
 							});
 						});
-						});
-*/
+						//});
+
 					});
 				});
 			});
