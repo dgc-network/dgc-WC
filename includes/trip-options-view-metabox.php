@@ -163,7 +163,9 @@ class Trip_Options_View_Metabox {
 		// Displaying your custom field under the title
 		echo '<p class="book-author">' . $book_author . '</p>';
 */
-		$is_itinerary = isset( $_POST['_itinerary'] ) ? 'yes' : 'no';
+		//$is_itinerary = isset( $_POST['_itinerary'] ) ? 'yes' : 'no';
+		$post_id = get_the_ID();
+		$is_itinerary = get_post_meta( $post_id, '_itinerary' );
 		if ($is_itinerary=='yes') {
 			$trip_code = wp_travel_get_trip_code( $post_id );
 			echo '<div align="left"><h4>';
@@ -210,7 +212,9 @@ class Trip_Options_View_Metabox {
  	*/
 	function woo_new_product_tab() {
 
-		$is_itinerary = isset( $_POST['_itinerary'] ) ? 'yes' : 'no';
+		//$is_itinerary = isset( $_POST['_itinerary'] ) ? 'yes' : 'no';
+		$post_id = get_the_ID();
+		$is_itinerary = get_post_meta( $post_id, '_itinerary' );
 		if ($is_itinerary=='yes') {
 			$tabs = array();
 			$post_id = get_the_ID();
@@ -331,12 +335,10 @@ class Trip_Options_View_Metabox {
 	//add_filter( 'woocommerce_get_item_data', 'get_item_data' , 25, 2 );
 	function get_item_data ( $cart_data, $cart_item ) {
 
-    	if( ! empty( $cart_item['custom_data'] ) ){
-/*
-			foreach( $cart_item['custom_data']['itinerary_date_array'] as $x => $itinerary_date ) {
-				$cart_item['custom_data']['itineraries'][$x]['itinerary_date'] = $itinerary_date;
-			}
-*/
+    	//if( ! empty( $cart_item['custom_data'] ) ){
+		$post_id = get_the_ID();
+		$is_itinerary = get_post_meta( $post_id, '_itinerary' );
+		if( ! empty( $cart_item['custom_data'] ) && $is_itinerary=='yes'){
 			$values = '<ul>';
         	foreach( $cart_item['custom_data']['itineraries'] as $x => $itinerary ) {
 				$label = $cart_item['custom_data']['itineraries'][$x]['label'];
@@ -356,10 +358,13 @@ class Trip_Options_View_Metabox {
 			}
 			$values .= '</ul>';
 
-			$cart_data[] = array(
-            	'name'    => __( "Item", "dgc-domain"),
-            	'display' => $values
-        	);
+			//$is_itinerary = isset( $_POST['_itinerary'] ) ? 'yes' : 'no';
+			//if ($is_itinerary=='yes') {
+				$cart_data[] = array(
+	            	'name'    => __( "Item", "dgc-domain"),
+					'display' => $values				
+				);
+			//}
     	}
 
     	return $cart_data;
