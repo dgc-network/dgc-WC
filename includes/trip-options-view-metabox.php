@@ -41,7 +41,7 @@ class Trip_Options_View_Metabox {
 				/*
 				 * AJAX for Woocommerce Add To Cart button
 				 */
-/*
+
 				$( '.single_add_to_cart_button' ).on( 'click', function(e) {
 				//$( '.single_add_to_cart_button' ).on( 'click', function() {
 					//alert('I am here');
@@ -97,7 +97,7 @@ class Trip_Options_View_Metabox {
 
         			return false;
 				});
-*/				
+		
 			})
 		</script>
 		<?php
@@ -107,7 +107,14 @@ class Trip_Options_View_Metabox {
 	//add_action('wp_ajax_nopriv_woocommerce_ajax_add_to_cart', 'woocommerce_ajax_add_to_cart');			
 	function woocommerce_ajax_add_to_cart() {
 	
+		$product_id = apply_filters('woocommerce_add_to_cart_product_id', absint($_POST['product_id']));
+		$quantity = empty($_POST['quantity']) ? 1 : wc_stock_amount($_POST['quantity']);
+		$variation_id = absint($_POST['variation_id']);
+		$passed_validation = apply_filters('woocommerce_add_to_cart_validation', true, $product_id, $quantity);
+		$product_status = get_post_status($product_id);
+
 		//$itinerary_date_array = $_POST['itinerary_date_array'];
+		//$post_id = get_the_ID();
 		$post_id = $product_id;
 		$itineraries = get_post_meta( $post_id, 'wp_travel_trip_itinerary_data', true );
 
@@ -121,14 +128,8 @@ class Trip_Options_View_Metabox {
 			}
 		update_post_meta( $post_id, 'wp_travel_trip_itinerary_data', $itineraries );
 
-/*	
-		$product_id = apply_filters('woocommerce_add_to_cart_product_id', absint($_POST['product_id']));
-		$quantity = empty($_POST['quantity']) ? 1 : wc_stock_amount($_POST['quantity']);
-		$variation_id = absint($_POST['variation_id']);
-		$passed_validation = apply_filters('woocommerce_add_to_cart_validation', true, $product_id, $quantity);
-		$product_status = get_post_status($product_id);
 
-		if ($passed_validation && WC()->cart->add_to_cart($product_id, $quantity, $variation_id, $itinerary_date_array) && 'publish' === $product_status) {
+		if ($passed_validation && WC()->cart->add_to_cart($product_id, $quantity, $variation_id) && 'publish' === $product_status) {
 	
 			do_action('woocommerce_ajax_added_to_cart', $product_id);
 	
@@ -136,7 +137,6 @@ class Trip_Options_View_Metabox {
 				wc_add_to_cart_message(array($product_id => $quantity), true);
 			}
 	
-			echo wp_send_json($itinerary_date_array);
 			WC_AJAX :: get_refreshed_fragments();
 		} else {
 	
@@ -147,7 +147,7 @@ class Trip_Options_View_Metabox {
 	
 			echo wp_send_json($data);
 		}
-*/	
+
 		wp_die();
 	}
 	
