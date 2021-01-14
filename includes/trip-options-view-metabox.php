@@ -41,9 +41,10 @@ class Trip_Options_View_Metabox {
 				/*
 				 * AJAX for Woocommerce Add To Cart button
 				 */
-				$( '.single_add_to_cart_button' ).on( 'click', function(e) {
+				//$( '.single_add_to_cart_button' ).on( 'click', function(e) {
+				$( '.single_add_to_cart_button' ).on( 'click', function() {
 					//alert('I am here');
-					e.preventDefault();
+					//e.preventDefault();
 
 					var $thisbutton = $(this),
                 	$form = $thisbutton.closest('form.cart'),
@@ -184,6 +185,7 @@ class Trip_Options_View_Metabox {
 						//$( 'p', element ).append(start_date.toLocaleDateString());
 						$( 'input', element ).val(start_date.toLocaleDateString());
 						$( '#itinerary-date-'+index ).datepicker();
+/*
 						$( '#itinerary-date-'+index ).on( 'click', function() {
 						$( '#itinerary-date-'+index ).on( 'change', function() {
 							var trip_date = new Date(this.value);
@@ -195,6 +197,7 @@ class Trip_Options_View_Metabox {
 							});
 						});
 						});
+*/
 					});
 				});
 			});
