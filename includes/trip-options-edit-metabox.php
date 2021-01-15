@@ -919,16 +919,16 @@ wp_enqueue_script( 'some_handle' );
 				$xx++;
 			}
 		}
-		$product->update_post_meta( 'wp_travel_trip_itinerary_data', $itineraries );
+		$product->update_meta_data( 'wp_travel_trip_itinerary_data', $itineraries );
 
 		if (!empty($_POST['wp_travel_trip_include'])) {
 			$includes = sanitize_text_field( $_POST['wp_travel_trip_include'] );
-			$product->update_post_meta( 'wp_travel_trip_include', $includes );
+			$product->update_meta_data( 'wp_travel_trip_include', $includes );
 		}
 
 		if (!empty($_POST['wp_travel_trip_exclude'])) {
 			$excludes = sanitize_text_field( $_POST['wp_travel_trip_exclude'] );
-			$product->update_post_meta( 'wp_travel_trip_exclude', $excludes );
+			$product->update_meta_data( 'wp_travel_trip_exclude', $excludes );
 		}
 
 		$faqs = array();
@@ -942,8 +942,8 @@ wp_enqueue_script( 'some_handle' );
 		}
 		$question = isset( $faqs['question'] ) ? $faqs['question'] : array();
 		$answer   = isset( $faqs['answer'] ) ? $faqs['answer'] : array();
-		$product->update_post_meta( 'wp_travel_faq_question', $question );
-		$product->update_post_meta( 'wp_travel_faq_answer', $answer );
+		$product->update_meta_data( 'wp_travel_faq_question', $question );
+		$product->update_meta_data( 'wp_travel_faq_answer', $answer );
 
 		$product->save();
 	}		
