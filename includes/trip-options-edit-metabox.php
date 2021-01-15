@@ -887,6 +887,10 @@ wp_enqueue_script( 'some_handle' );
 		<?php		
 	}
 
+	/*
+	 * Updates a post meta field based on the given post ID.
+	 * update_post_meta( int $post_id, string $meta_key, mixed $meta_value, mixed $prev_value = '' )
+	 */
 	function trip_options_save_metabox( $post_id, $post ) {
 	
 		// nonce check
@@ -915,10 +919,6 @@ wp_enqueue_script( 'some_handle' );
 		$is_itinerary = isset( $_POST['_itinerary'] ) ? 'yes' : 'no';
 		update_post_meta( $post_id, '_itinerary', $is_itinerary );
 
-		/**
-		 * Updates a post meta field based on the given post ID.
-		 * update_post_meta( int $post_id, string $meta_key, mixed $meta_value, mixed $prev_value = '' )
-		 */
 
 		$itineraries = array();
 		$xx = 0;
@@ -945,7 +945,7 @@ wp_enqueue_script( 'some_handle' );
 		}
 		//delete_post_meta( $post_id, 'wp_travel_trip_itinerary_data' );
 		update_post_meta( $post_id, 'wp_travel_trip_itinerary_data', $itineraries );
-
+/*
 		$pricings = array();
 		$xx = 0;
 		for ($x = 0; $x < 100; $x++) {
@@ -956,7 +956,7 @@ wp_enqueue_script( 'some_handle' );
 				$xx++;
 			}
 		}
-
+*/
 		if (!empty($_POST['wp_travel_trip_include'])) {
 			$includes = sanitize_text_field( $_POST['wp_travel_trip_include'] );
 			update_post_meta($post_id, 'wp_travel_trip_include', $includes);
