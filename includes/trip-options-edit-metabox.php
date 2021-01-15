@@ -161,7 +161,11 @@ class Trip_Options_Edit_Metabox {
 					var is_itinerary = $( 'input#_itinerary:checked' ).length;
 					$( '.show_if_itinerary' ).hide();
 					$( '.hide_if_itinerary' ).hide();
+					this.val('no');
 
+					if ( is_itinerary ) {
+						this.val('yes');
+					}
 					if ( is_itinerary ) {
 						$( '.hide_if_itinerary' ).hide();
 					}
