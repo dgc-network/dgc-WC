@@ -169,7 +169,7 @@ class Trip_Options_View_Metabox {
 		global $product;
 		$product_id = $product->get_id();
 		$post_id = $product_id;
-		$is_itinerary = get_post_meta( $post_id, '_itinerary' );
+		$is_itinerary = get_post_meta( $post_id, '_itinerary', true );
 		echo '_itinerary : ' . $is_itinerary . '<br/>';
 
 		$myvals = get_post_meta($post_id);
