@@ -114,11 +114,11 @@ class Trip_Options_View_Metabox {
 		$product_status = get_post_status($product_id);
 
 		$post_id = $product_id;
+		$is_itinerary = get_post_meta( $post_id, '_itinerary', true );
 		$itineraries = get_post_meta( $post_id, 'wp_travel_trip_itinerary_data', true );
 
     	// Set the data for the cart item in cart object
-    	//$data = array() ;
-		//$cart_item_data['custom_data']['itineraries'] = $data['itineraries'] = $itineraries;
+		$cart_item_data['custom_data']['_itinerary'] = $is_itinerary;
 		$cart_item_data['custom_data']['itineraries'] = $itineraries;
     	if( isset( $_POST['itinerary_date_array'] ) )
 			foreach( $_POST['itinerary_date_array'] as $x => $itinerary_date ) {
@@ -329,11 +329,12 @@ class Trip_Options_View_Metabox {
 	 */
 	//add_filter( 'woocommerce_get_item_data', 'get_item_data' , 25, 2 );
 	function get_item_data ( $cart_data, $cart_item ) {
-
+/*
 		global $post;
 		$post_id = $post->ID;
 		$is_itinerary = get_post_meta( $post_id, '_itinerary', true );
-		if( ! empty( $cart_item['custom_data'] ) && ($is_itinerary=='yes') ){
+*/		
+		if( ! empty( $cart_item['custom_data'] ) && ($cart_item['custom_data']['_itinerary']=='yes') ){
 			$values = '<ul>';
         	foreach( $cart_item['custom_data']['itineraries'] as $x => $itinerary ) {
 				$label = $cart_item['custom_data']['itineraries'][$x]['label'];
