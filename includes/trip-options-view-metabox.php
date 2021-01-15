@@ -18,6 +18,7 @@ class Trip_Options_View_Metabox {
 		add_filter( 'woocommerce_add_cart_item_data', array( __CLASS__, 'add_cart_item_data' ), 25, 2 );
 		add_filter( 'woocommerce_get_item_data', array( __CLASS__, 'get_item_data' ), 25, 2 );
 		add_action( 'woocommerce_add_order_item_meta', array( __CLASS__, 'add_order_item_meta' ), 10, 3 );
+		add_action( 'woocommerce_checkout_process', array( __CLASS__, 'create_vip_order' ) );
 	}
 
 	function custom_datepicker() {
@@ -363,50 +364,71 @@ class Trip_Options_View_Metabox {
     	return $cart_data;
 	}
 
-// Add order item meta.
-//add_action( 'woocommerce_add_order_item_meta', 'add_order_item_meta' , 10, 3 );
-function add_order_item_meta ( $item_id, $cart_item, $cart_item_key ) {
-/*	
-    if ( isset( $cart_item[ 'custom_data' ] ) ) {
-        $values =  array();
-        foreach( $cart_item[ 'custom_data' ] as $key => $value )
-            if( $key != 'unique_key' ){
-                $values[] = $value;
-            }
-        $values = implode( ', ', $values );
-        wc_add_order_item_meta( $item_id, __( "Option", "aoim"), $values );
-	}
-*/	
-	if( ! empty( $cart_item['custom_data'] ) && ($cart_item['custom_data']['_itinerary']=='yes') ){
-		$values = '<span>';
-		foreach( $cart_item['custom_data']['itineraries'] as $x => $itinerary ) {
-			$itinerary_date = $cart_item['custom_data']['itineraries'][$x]['itinerary_date'];
-			$values .= $itinerary_date.', ';
-		}
-		$values .= '</span>';
-		$values .= '<ul>';
-		foreach( $cart_item['custom_data']['itineraries'] as $x => $itinerary ) {
-			$label = $cart_item['custom_data']['itineraries'][$x]['label'];
-			$title = $cart_item['custom_data']['itineraries'][$x]['title'];
-			$assignments = $cart_item['custom_data']['itineraries'][$x]['assignment'];
-			$itinerary_date = $cart_item['custom_data']['itineraries'][$x]['itinerary_date'];
-			$values .= '<li>'.$label.', '.$title.'</li>';
-			if( ! empty( $assignments ) ){
-				$values .= '<ul>';
-				foreach( $assignments as $y => $assignment ) {
-					$category = $assignments[$y]['category'];
-					$resource = $assignments[$y]['resource'];
-					$values .= '<li>'.$itinerary_date.', '.$category.', '.$resource.'</li>';
-				}
-				$values .= '</ul>';
+	// Add order item meta.
+	//add_action( 'woocommerce_add_order_item_meta', 'add_order_item_meta' , 10, 3 );
+	function add_order_item_meta ( $item_id, $cart_item, $cart_item_key ) {
+
+		if( ! empty( $cart_item['custom_data'] ) && ($cart_item['custom_data']['_itinerary']=='yes') ){
+			$values = '<span>';
+			foreach( $cart_item['custom_data']['itineraries'] as $x => $itinerary ) {
+				$itinerary_date = $cart_item['custom_data']['itineraries'][$x]['itinerary_date'];
+				$values .= $itinerary_date.', ';
 			}
-		}
-		$values .= '</ul>';
+			$values .= '</span>';
+			$values .= '<ul>';
+			foreach( $cart_item['custom_data']['itineraries'] as $x => $itinerary ) {
+				$label = $cart_item['custom_data']['itineraries'][$x]['label'];
+				$title = $cart_item['custom_data']['itineraries'][$x]['title'];
+				$assignments = $cart_item['custom_data']['itineraries'][$x]['assignment'];
+				$itinerary_date = $cart_item['custom_data']['itineraries'][$x]['itinerary_date'];
+				$values .= '<li>'.$label.', '.$title.'</li>';
+				if( ! empty( $assignments ) ){
+					$values .= '<ul>';
+					foreach( $assignments as $y => $assignment ) {
+						$category = $assignments[$y]['category'];
+						$resource = $assignments[$y]['resource'];
+						$values .= '<li>'.$itinerary_date.', '.$category.', '.$resource.'</li>';
+					}
+					$values .= '</ul>';
+					self::create_vip_order();
+				}
+			}
+			$values .= '</ul>';
 
-        wc_add_order_item_meta( $item_id, __( "Date", "dgc-domain" ), $values );
+        	wc_add_order_item_meta( $item_id, __( "Date", "dgc-domain" ), $values );
+		}	
 	}
 
-}
+	//add_action('woocommerce_checkout_process', 'create_vip_order');
+	function create_vip_order() {
+	
+	  	global $woocommerce;
+	
+	  	$address = array(
+			'first_name' => '111Joe',
+		  	'last_name'  => 'Conlin',
+		  	'company'    => 'Speed Society',
+		  	'email'      => 'joe@testing.com',
+		  	'phone'      => '760-555-1212',
+		  	'address_1'  => '123 Main st.',
+		  	'address_2'  => '104',
+		  	'city'       => 'San Diego',
+		  	'state'      => 'Ca',
+		  	'postcode'   => '92121',
+		  	'country'    => 'US'
+	  	);
+	
+	  	// Now we create the order
+	  	$order = wc_create_order();
+	
+	  	// The add_product() function below is located in /plugins/woocommerce/includes/abstracts/abstract_wc_order.php
+	  	$order->add_product( get_product('275962'), 1); // This is an existing SIMPLE product
+	  	$order->set_address( $address, 'billing' );
+	  	//
+	  	$order->calculate_totals();
+	  	$order->update_status("Completed", 'Imported order', TRUE);  
+	}
+	
 
 }
 new Trip_Options_View_Metabox;
