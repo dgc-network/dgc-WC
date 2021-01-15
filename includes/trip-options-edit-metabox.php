@@ -757,8 +757,7 @@ wp_enqueue_script( 'some_handle' );
 				<td></td>
 				<td style="text-align:right"><button class="add-itinerary" type="button"><?php esc_html_e( "+ Add Itinerary", "wp-travel" ); ?></button></td>
 			</tr>
-
-		<?php
+			<?php
 		} else {?>
 			<tr style="display:none" class="itinerary-header">
 				<td><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></td>
@@ -918,7 +917,8 @@ wp_enqueue_script( 'some_handle' );
 				$xx++;
 			}
 		}
-		$product->update_meta_data( 'wp_travel_trip_itinerary_data', $itineraries );
+		//$product->update_meta_data( 'wp_travel_trip_itinerary_data', $itineraries );
+		update_post_meta( $post_id, 'wp_travel_trip_itinerary_data', $itineraries );
 
 		if (!empty($_POST['wp_travel_trip_include'])) {
 			$includes = sanitize_text_field( $_POST['wp_travel_trip_include'] );
@@ -941,8 +941,10 @@ wp_enqueue_script( 'some_handle' );
 		}
 		$question = isset( $faqs['question'] ) ? $faqs['question'] : array();
 		$answer   = isset( $faqs['answer'] ) ? $faqs['answer'] : array();
-		$product->update_meta_data( 'wp_travel_faq_question', $question );
-		$product->update_meta_data( 'wp_travel_faq_answer', $answer );
+		//$product->update_meta_data( 'wp_travel_faq_question', $question );
+		//$product->update_meta_data( 'wp_travel_faq_answer', $answer );
+		update_post_meta( $post_id, 'wp_travel_faq_question', $question );
+		update_post_meta( $post_id, 'wp_travel_faq_answer', $answer );
 
 		$product->save();
 	}		
