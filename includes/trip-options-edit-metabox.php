@@ -892,16 +892,59 @@ wp_enqueue_script( 'some_handle' );
 	 * Updates a post meta field based on the given post ID.
 	 * update_post_meta( int $post_id, string $meta_key, mixed $meta_value, mixed $prev_value = '' )
 	 */
-	function save_woocommerce_product_custom_fields($post_id)
-	{
+	function save_woocommerce_product_custom_fields($post_id) {
 		$product = wc_get_product($post_id);
-		//$custom_fields_woocommerce_title = isset($_POST['woocommerce_custom_fields']) ? $_POST['woocommerce_custom_fields'] : '';
-		// save the checkbox of product data option
 		$is_itinerary = isset( $_POST['_itinerary'] ) ? 'yes' : 'no';
-		//update_post_meta( $post_id, '_itinerary', $is_itinerary );
-
 		$product->update_meta_data('_itinerary', sanitize_text_field($is_itinerary));
-		//$product->update_meta_data('woocommerce_custom_fields', sanitize_text_field($custom_fields_woocommerce_title));
+
+		$itineraries = array();
+		$xx = 0;
+		for ($x = 0; $x < 100; $x++) {
+			if ($_POST['itinerary_item_label-' . $x]!="" && $_POST['itinerary_item_label-' . $x] != DEFAULT_ITINERARY_LABEL) {
+				$itineraries[$xx]['label'] = sanitize_text_field( $_POST['itinerary_item_label-' . $x] );
+				$itineraries[$xx]['title'] = sanitize_text_field( $_POST['itinerary_item_title-' . $x] );
+				$itineraries[$xx]['date'] = sanitize_text_field( $_POST['itinerary_item_date-' . $x] );
+				$itineraries[$xx]['time'] = sanitize_text_field( $_POST['itinerary_item_time-' . $x] );
+				$itineraries[$xx]['desc'] = sanitize_text_field( $_POST['itinerary_item_desc-' . $x] );
+				$yy = 0;
+				for ($y = 0; $y < 100; $y++) {
+					if ($_POST['itinerary_item_assignment-' . $x . '-category-' . $y]!="") {
+						$itineraries[$xx]['assignment'][$yy]['category'] = sanitize_text_field( $_POST['itinerary_item_assignment-' . $x . '-category-' . $y] );
+					}
+					if ($_POST['itinerary_item_assignment-' . $x . '-resource-' . $y]!="") {
+						$itineraries[$xx]['assignment'][$yy]['resource'] = sanitize_text_field( $_POST['itinerary_item_assignment-' . $x . '-resource-' . $y] );
+					}
+					$yy++;
+				}
+				$xx++;
+			}
+		}
+		$product->update_post_meta( 'wp_travel_trip_itinerary_data', $itineraries );
+
+		if (!empty($_POST['wp_travel_trip_include'])) {
+			$includes = sanitize_text_field( $_POST['wp_travel_trip_include'] );
+			$product->update_post_meta( 'wp_travel_trip_include', $includes );
+		}
+
+		if (!empty($_POST['wp_travel_trip_exclude'])) {
+			$excludes = sanitize_text_field( $_POST['wp_travel_trip_exclude'] );
+			$product->update_post_meta( 'wp_travel_trip_exclude', $excludes );
+		}
+
+		$faqs = array();
+		$xx = 0;
+		for ($x = 0; $x < 100; $x++) {
+			if ($_POST['faq_item_question-' . $x] != "" && $_POST['faq_item_question-' . $x] != DEFAULT_FAQ_QUESTION) {
+				$faqs['question'][$xx] = sanitize_text_field( $_POST['faq_item_question-' . $x] );
+				$faqs['answer'][$xx] = sanitize_text_field( $_POST['faq_item_answer-' . $x] );
+				$xx++;
+			}
+		}
+		$question = isset( $faqs['question'] ) ? $faqs['question'] : array();
+		$answer   = isset( $faqs['answer'] ) ? $faqs['answer'] : array();
+		$product->update_post_meta( 'wp_travel_faq_question', $question );
+		$product->update_post_meta( 'wp_travel_faq_answer', $answer );
+
 		$product->save();
 	}		
 	//add_action('woocommerce_process_product_meta', 'save_woocommerce_product_custom_fields');
