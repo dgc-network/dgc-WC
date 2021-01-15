@@ -42,10 +42,10 @@ class Trip_Options_View_Metabox {
 				 * AJAX for Woocommerce Add To Cart button
 				 */
 
-				$( '.single_add_to_cart_button' ).on( 'click', function(e) {
-				//$( '.single_add_to_cart_button' ).on( 'click', function() {
+				//$( '.single_add_to_cart_button' ).on( 'click', function(e) {
+				$( '.single_add_to_cart_button' ).on( 'click', function() {
 					//alert('I am here');
-					e.preventDefault();
+					//e.preventDefault();
 
 					var $thisbutton = $(this),
                 	$form = $thisbutton.closest('form.cart'),
@@ -113,16 +113,14 @@ class Trip_Options_View_Metabox {
 		$passed_validation = apply_filters('woocommerce_add_to_cart_validation', true, $product_id, $quantity);
 		$product_status = get_post_status($product_id);
 
-		//$itinerary_date_array = $_POST['itinerary_date_array'];
-		//$post_id = get_the_ID();
 		$post_id = $product_id;
 		$itineraries = get_post_meta( $post_id, 'wp_travel_trip_itinerary_data', true );
 
     	// Set the data for the cart item in cart object
-    	$data = array() ;
-		$cart_item_data['custom_data']['itineraries'] = $data['itineraries'] = $itineraries;
+    	//$data = array() ;
+		//$cart_item_data['custom_data']['itineraries'] = $data['itineraries'] = $itineraries;
+		$cart_item_data['custom_data']['itineraries'] = $itineraries;
     	if( isset( $_POST['itinerary_date_array'] ) )
-			//$cart_item_data['custom_data']['itinerary_date_array'] = $data['itinerary_date_array'] = $_POST['itinerary_date_array'];
 			foreach( $_POST['itinerary_date_array'] as $x => $itinerary_date ) {
 				$itineraries[$x]['itinerary_date'] = $itinerary_date;
 			}
@@ -152,29 +150,11 @@ class Trip_Options_View_Metabox {
 	}
 	
 	function custom_action_after_single_product_title() { 
-/*
-		global $product; 
-	
-		$product_id = $product->get_id(); // The product ID
-	
-		// Your custom field "Book author"
-		$book_author = get_post_meta($product_id, "product_author", true);
-	
-		// Displaying your custom field under the title
-		echo '<p class="book-author">' . $book_author . '</p>';
-*/
-		//$is_itinerary = isset( $_POST['_itinerary'] ) ? 'yes' : 'no';
+
 		global $post;
 		$post_id = $post->ID;
-		//global $product;
-		//$product_id = $product->get_id();
-		//$post_id = $product_id;
 		$is_itinerary = get_post_meta( $post_id, '_itinerary', true );
 /*		
-		$is_itinerary_false = get_post_meta( $post_id, '_itinerary', false );
-		echo '_itinerary : ' . $is_itinerary . '<br/>';
-		echo '_itinerary_false : ' . $is_itinerary_false . '<br/>';
-
 		$myvals = get_post_meta($post_id);
 		foreach($myvals as $key=>$val) {
     		echo $key . ' : ' . $val[0] . '<br/>';
@@ -226,13 +206,8 @@ class Trip_Options_View_Metabox {
  	*/
 	function woo_new_product_tab() {
 
-		//$is_itinerary = isset( $_POST['_itinerary'] ) ? 'yes' : 'no';
-		//$post_id = get_the_ID();
 		global $post;
 		$post_id = $post->ID;
-		//global $product;
-		//$product_id = $product->get_id();
-		//$post_id = $product_id;
 		$is_itinerary = get_post_meta( $post_id, '_itinerary', true );
 		if ($is_itinerary=='yes') {
 			$tabs = array();
@@ -252,7 +227,7 @@ class Trip_Options_View_Metabox {
 	}
 	
 	function overview_tab_content() {
-		//$post_id = get_the_ID();
+
 		global $post;
 		$post_id = $post->ID;
 		$itineraries = get_post_meta( $post_id, 'wp_travel_trip_itinerary_data', true );
@@ -265,7 +240,6 @@ class Trip_Options_View_Metabox {
 			<ul><?php
 			foreach ( $itineraries as $x=>$itinerary ) {
 				echo '<li class="itinerary-li">';
-				//echo '<p style="color:blue"></p>';
 				echo '<input type="text" style="color:blue" name="itinerary-date-'.$x.'" id="itinerary-date-'.$x.'">';
 				echo esc_attr( $itineraries[$x]['label'] ) . ', ' . esc_attr( $itineraries[$x]['title'] );
 				echo esc_attr( $itineraries[$x]['desc'] );
@@ -278,7 +252,7 @@ class Trip_Options_View_Metabox {
 	}
 
 	function trip_includes_tab_content() {
-		//$post_id = get_the_ID();
+
 		global $post;
 		$post_id = $post->ID;
 		$trip_include = get_post_meta( $post_id, 'wp_travel_trip_include', true );
@@ -295,7 +269,7 @@ class Trip_Options_View_Metabox {
 	}	
 
 	function trip_excludes_tab_content() {
-		//$post_id = get_the_ID();
+
 		global $post;
 		$post_id = $post->ID;
 		$trip_exclude = get_post_meta( $post_id, 'wp_travel_trip_exclude', true );
@@ -311,7 +285,7 @@ class Trip_Options_View_Metabox {
 	}	
 
 	function faq_tab_content() {
-		//$post_id = get_the_ID();
+
 		global $post;
 		$post_id = $post->ID;
 		$faqs = wp_travel_get_faqs( $post_id );
@@ -341,13 +315,7 @@ class Trip_Options_View_Metabox {
     	// Set the data for the cart item in cart object
     	$data = array() ;
 		$cart_item_data['custom_data']['itineraries'] = $data['itineraries'] = $itineraries;
-/*		
-    	if( isset( $_POST['itinerary_date_array'] ) )
-			//$cart_item_data['custom_data']['itinerary_date_array'] = $data['itinerary_date_array'] = $_POST['itinerary_date_array'];
-			foreach( $_POST['itinerary_date_array'] as $x => $itinerary_date ) {
-				$cart_item['custom_data']['itineraries'][$x]['itinerary_date'] = $itinerary_date;
-			}
-*/
+
 		// Add the data to session and generate a unique ID
     	if( count($data > 0 ) ){
         	$cart_item_data['custom_data']['unique_key'] = md5( microtime().rand() );
@@ -362,15 +330,10 @@ class Trip_Options_View_Metabox {
 	//add_filter( 'woocommerce_get_item_data', 'get_item_data' , 25, 2 );
 	function get_item_data ( $cart_data, $cart_item ) {
 
-    	//if( ! empty( $cart_item['custom_data'] ) ){
-		//$post_id = get_the_ID();
 		global $post;
 		$post_id = $post->ID;
-		//global $product;
-		//$product_id = $product->get_id();
-		//$post_id = $product_id;
 		$is_itinerary = get_post_meta( $post_id, '_itinerary', true );
-		if( ! empty( $cart_item['custom_data'] ) && $is_itinerary=='yes'){
+		if( ! empty( $cart_item['custom_data'] ) && ($is_itinerary=='yes') ){
 			$values = '<ul>';
         	foreach( $cart_item['custom_data']['itineraries'] as $x => $itinerary ) {
 				$label = $cart_item['custom_data']['itineraries'][$x]['label'];
@@ -390,13 +353,10 @@ class Trip_Options_View_Metabox {
 			}
 			$values .= '</ul>';
 
-			//$is_itinerary = isset( $_POST['_itinerary'] ) ? 'yes' : 'no';
-			//if ($is_itinerary=='yes') {
-				$cart_data[] = array(
-	            	'name'    => __( "Item", "dgc-domain"),
-					'display' => $values				
-				);
-			//}
+			$cart_data[] = array(
+				'name'    => __( "Item", "dgc-domain"),
+				'display' => $values				
+			);
     	}
 
     	return $cart_data;

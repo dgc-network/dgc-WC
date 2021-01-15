@@ -890,7 +890,6 @@ wp_enqueue_script( 'some_handle' );
 
 	/*
 	 * Updates a post meta field based on the given post ID.
-	 * update_post_meta( int $post_id, string $meta_key, mixed $meta_value, mixed $prev_value = '' )
 	 */
 	function save_woocommerce_product_custom_fields($post_id) {
 		$product = wc_get_product($post_id);
@@ -948,6 +947,9 @@ wp_enqueue_script( 'some_handle' );
 		$product->save();
 	}		
 	//add_action('woocommerce_process_product_meta', 'save_woocommerce_product_custom_fields');
+}
+new Trip_Options_Edit_Metabox;
+
 
 	function trip_options_save_metabox( $post_id, $post ) {
 	
@@ -1041,8 +1043,6 @@ wp_enqueue_script( 'some_handle' );
 
 		return $post_id;
 	}
-}
-new Trip_Options_Edit_Metabox;
 
 	/**
 	 * Tabs metabox callback
