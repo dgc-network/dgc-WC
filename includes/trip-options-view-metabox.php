@@ -164,12 +164,13 @@ class Trip_Options_View_Metabox {
 		echo '<p class="book-author">' . $book_author . '</p>';
 */
 		//$is_itinerary = isset( $_POST['_itinerary'] ) ? 'yes' : 'no';
-		//global $post;
-		//$post_id = $post->ID;
-		global $product;
-		$product_id = $product->get_id();
-		$post_id = $product_id;
+		global $post;
+		$post_id = $post->ID;
+		//global $product;
+		//$product_id = $product->get_id();
+		//$post_id = $product_id;
 		$is_itinerary = get_post_meta( $post_id, '_itinerary', true );
+/*		
 		$is_itinerary_false = get_post_meta( $post_id, '_itinerary', false );
 		echo '_itinerary : ' . $is_itinerary . '<br/>';
 		echo '_itinerary_false : ' . $is_itinerary_false . '<br/>';
@@ -178,7 +179,7 @@ class Trip_Options_View_Metabox {
 		foreach($myvals as $key=>$val) {
     		echo $key . ' : ' . $val[0] . '<br/>';
 		}
-
+*/
 		if ($is_itinerary=='yes') {
 			$trip_code = wp_travel_get_trip_code( $post_id );
 			echo '<div align="left"><h4>';
@@ -227,12 +228,12 @@ class Trip_Options_View_Metabox {
 
 		//$is_itinerary = isset( $_POST['_itinerary'] ) ? 'yes' : 'no';
 		//$post_id = get_the_ID();
-		//global $post;
-		//$post_id = $post->ID;
-		global $product;
-		$product_id = $product->get_id();
-		$post_id = $product_id;
-		$is_itinerary = get_post_meta( $post_id, '_itinerary' );
+		global $post;
+		$post_id = $post->ID;
+		//global $product;
+		//$product_id = $product->get_id();
+		//$post_id = $product_id;
+		$is_itinerary = get_post_meta( $post_id, '_itinerary', true );
 		if ($is_itinerary=='yes') {
 			$tabs = array();
 			$post_id = get_the_ID();
@@ -251,7 +252,9 @@ class Trip_Options_View_Metabox {
 	}
 	
 	function overview_tab_content() {
-		$post_id = get_the_ID();
+		//$post_id = get_the_ID();
+		global $post;
+		$post_id = $post->ID;
 		$itineraries = get_post_meta( $post_id, 'wp_travel_trip_itinerary_data', true );
 
 		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) {
@@ -275,7 +278,9 @@ class Trip_Options_View_Metabox {
 	}
 
 	function trip_includes_tab_content() {
-		$post_id = get_the_ID();
+		//$post_id = get_the_ID();
+		global $post;
+		$post_id = $post->ID;
 		$trip_include = get_post_meta( $post_id, 'wp_travel_trip_include', true );
 		echo '<h4 style="text-align:left">';
 		esc_html_e( 'Trip Includes', 'wp-travel' );
@@ -290,7 +295,9 @@ class Trip_Options_View_Metabox {
 	}	
 
 	function trip_excludes_tab_content() {
-		$post_id = get_the_ID();
+		//$post_id = get_the_ID();
+		global $post;
+		$post_id = $post->ID;
 		$trip_exclude = get_post_meta( $post_id, 'wp_travel_trip_exclude', true );
 		echo '<h4 style="text-align:left">';
 		esc_html_e( 'Trip Excludes', 'wp-travel' );
@@ -304,7 +311,9 @@ class Trip_Options_View_Metabox {
 	}	
 
 	function faq_tab_content() {
-		$post_id = get_the_ID();
+		//$post_id = get_the_ID();
+		global $post;
+		$post_id = $post->ID;
 		$faqs = wp_travel_get_faqs( $post_id );
 		if ( is_array( $faqs ) && count( $faqs ) > 0 ) { 
 			echo '<h4 style="text-align:left">';
@@ -355,12 +364,12 @@ class Trip_Options_View_Metabox {
 
     	//if( ! empty( $cart_item['custom_data'] ) ){
 		//$post_id = get_the_ID();
-		//global $post;
-		//$post_id = $post->ID;
-		global $product;
-		$product_id = $product->get_id();
-		$post_id = $product_id;
-		$is_itinerary = get_post_meta( $post_id, '_itinerary' );
+		global $post;
+		$post_id = $post->ID;
+		//global $product;
+		//$product_id = $product->get_id();
+		//$post_id = $product_id;
+		$is_itinerary = get_post_meta( $post_id, '_itinerary', true );
 		if( ! empty( $cart_item['custom_data'] ) && $is_itinerary=='yes'){
 			$values = '<ul>';
         	foreach( $cart_item['custom_data']['itineraries'] as $x => $itinerary ) {

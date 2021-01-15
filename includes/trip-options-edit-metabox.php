@@ -23,11 +23,6 @@ class Trip_Options_Edit_Metabox {
 		add_action( 'wp_ajax_nopriv_get_categories', array( __CLASS__, 'get_categories' ) );
 		add_action( 'wp_ajax_get_resources_by_category', array( __CLASS__, 'get_resources_by_category' ) );
 		add_action( 'wp_ajax_nopriv_get_resources_by_category', array( __CLASS__, 'get_resources_by_category' ) );
-		
-		//add_action( 'wp_enqueue_scripts', array( __CLASS__, 'cortez_enqueue_script' ) );
-		//add_action( 'wp_ajax_cortez_get_terms', array( __CLASS__, 'cortez_get_terms' ) );
-		//add_action( 'wp_ajax_nopriv_cortez_get_terms', array( __CLASS__, 'cortez_get_terms' ) );
-
 	}
 
 	/**
@@ -161,14 +156,7 @@ class Trip_Options_Edit_Metabox {
 					var is_itinerary = $( 'input#_itinerary:checked' ).length;
 					$( '.show_if_itinerary' ).hide();
 					$( '.hide_if_itinerary' ).hide();
-					//this.val('no');
-					//$('.input#_itinerary').prop('checked', false);
-					$('.input#_itinerary').prop('checked', 'no');
-					if ( is_itinerary ) {
-						//$('.input#_itinerary').prop('checked', true);
-						$('.input#_itinerary').prop('checked', 'yes');
-						//this.val('yes');
-					}
+
 					if ( is_itinerary ) {
 						$( '.hide_if_itinerary' ).hide();
 					}
@@ -800,7 +788,6 @@ wp_enqueue_script( 'some_handle' );
 	 * Includes/Excludes metabox callback
 	 */
 	function trip_options_callback_includes_excludes( $post ) {
-		//echo '_itinerary:'.$_POST['_itinerary'].':';
 		if ( ! $post ) {
 			global $post;
 		}
