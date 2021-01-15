@@ -6,7 +6,8 @@ class Trip_Options_Edit_Metabox {
 	 */
 	function __construct() {
 		//add_action( 'admin_menu', array( __CLASS__, 'trip_options_add_metabox' ) );
-		add_action( 'save_post', array( __CLASS__, 'trip_options_save_metabox' ), 10, 2 );
+		//add_action( 'save_post', array( __CLASS__, 'trip_options_save_metabox' ), 10, 2 );
+		add_action( 'woocommerce_process_product_meta', array( __CLASS__, 'save_woocommerce_product_custom_fields' ) );
 
 		add_filter( 'product_type_options', array( __CLASS__, 'add_remove_product_options' ) );
 		add_filter( 'woocommerce_product_data_tabs', array( __CLASS__, 'custom_product_data_tabs' ), 10, 1 );
@@ -891,6 +892,20 @@ wp_enqueue_script( 'some_handle' );
 	 * Updates a post meta field based on the given post ID.
 	 * update_post_meta( int $post_id, string $meta_key, mixed $meta_value, mixed $prev_value = '' )
 	 */
+	function save_woocommerce_product_custom_fields($post_id)
+	{
+		$product = wc_get_product($post_id);
+		//$custom_fields_woocommerce_title = isset($_POST['woocommerce_custom_fields']) ? $_POST['woocommerce_custom_fields'] : '';
+		// save the checkbox of product data option
+		$is_itinerary = isset( $_POST['_itinerary'] ) ? 'yes' : 'no';
+		//update_post_meta( $post_id, '_itinerary', $is_itinerary );
+
+		$product->update_meta_data('_itinerary', sanitize_text_field($is_itinerary));
+		//$product->update_meta_data('woocommerce_custom_fields', sanitize_text_field($custom_fields_woocommerce_title));
+		$product->save();
+	}		
+	//add_action('woocommerce_process_product_meta', 'save_woocommerce_product_custom_fields');
+
 	function trip_options_save_metabox( $post_id, $post ) {
 	
 		// nonce check
