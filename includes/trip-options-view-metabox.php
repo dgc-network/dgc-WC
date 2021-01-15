@@ -170,6 +170,12 @@ class Trip_Options_View_Metabox {
 		$product_id = $product->get_id();
 		$post_id = $product_id;
 		$is_itinerary = get_post_meta( $post_id, '_itinerary' );
+
+		$myvals = get_post_meta($post_id);
+		foreach($myvals as $key=>$val) {
+    		echo $key . ' : ' . $val[0] . '<br/>';
+		}
+
 		if ($is_itinerary=='yes') {
 			$trip_code = wp_travel_get_trip_code( $post_id );
 			echo '<div align="left"><h4>';
