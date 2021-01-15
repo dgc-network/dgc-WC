@@ -329,7 +329,13 @@ class Trip_Options_View_Metabox {
 	function get_item_data ( $cart_data, $cart_item ) {
 
 		if( ! empty( $cart_item['custom_data'] ) && ($cart_item['custom_data']['_itinerary']=='yes') ){
-			$values = '<ul>';
+			$values = '<span>';
+        	foreach( $cart_item['custom_data']['itineraries'] as $x => $itinerary ) {
+				$itinerary_date = $cart_item['custom_data']['itineraries'][$x]['itinerary_date'];
+				$values .= $itinerary_date.', ';
+			}
+			$values .= '</span>';
+			$values .= '<ul>';
         	foreach( $cart_item['custom_data']['itineraries'] as $x => $itinerary ) {
 				$label = $cart_item['custom_data']['itineraries'][$x]['label'];
 				$title = $cart_item['custom_data']['itineraries'][$x]['title'];
@@ -349,7 +355,7 @@ class Trip_Options_View_Metabox {
 			$values .= '</ul>';
 
 			$cart_data[] = array(
-				'name'    => __( "Item", "dgc-domain"),
+				'name'    => __( "Date", "dgc-domain"),
 				'display' => $values				
 			);
     	}
