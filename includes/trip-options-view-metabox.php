@@ -355,7 +355,7 @@ class Trip_Options_View_Metabox {
 			$values .= '</ul>';
 
 			$cart_data[] = array(
-				'name'    => __( "Date", "dgc-domain"),
+				'name'    => __( "Date", "dgc-domain" ),
 				'display' => $values				
 			);
     	}
@@ -366,6 +366,7 @@ class Trip_Options_View_Metabox {
 // Add order item meta.
 //add_action( 'woocommerce_add_order_item_meta', 'add_order_item_meta' , 10, 3 );
 function add_order_item_meta ( $item_id, $cart_item, $cart_item_key ) {
+/*	
     if ( isset( $cart_item[ 'custom_data' ] ) ) {
         $values =  array();
         foreach( $cart_item[ 'custom_data' ] as $key => $value )
@@ -374,7 +375,37 @@ function add_order_item_meta ( $item_id, $cart_item, $cart_item_key ) {
             }
         $values = implode( ', ', $values );
         wc_add_order_item_meta( $item_id, __( "Option", "aoim"), $values );
-    }
+	}
+*/	
+	if( ! empty( $cart_item['custom_data'] ) && ($cart_item['custom_data']['_itinerary']=='yes') ){
+		$values = '<span>';
+		foreach( $cart_item['custom_data']['itineraries'] as $x => $itinerary ) {
+			$itinerary_date = $cart_item['custom_data']['itineraries'][$x]['itinerary_date'];
+			$values .= $itinerary_date.', ';
+		}
+		$values .= '</span>';
+		$values .= '<ul>';
+		foreach( $cart_item['custom_data']['itineraries'] as $x => $itinerary ) {
+			$label = $cart_item['custom_data']['itineraries'][$x]['label'];
+			$title = $cart_item['custom_data']['itineraries'][$x]['title'];
+			$assignments = $cart_item['custom_data']['itineraries'][$x]['assignment'];
+			$itinerary_date = $cart_item['custom_data']['itineraries'][$x]['itinerary_date'];
+			$values .= '<li>'.$label.', '.$title.'</li>';
+			if( ! empty( $assignments ) ){
+				$values .= '<ul>';
+				foreach( $assignments as $y => $assignment ) {
+					$category = $assignments[$y]['category'];
+					$resource = $assignments[$y]['resource'];
+					$values .= '<li>'.$itinerary_date.', '.$category.', '.$resource.'</li>';
+				}
+				$values .= '</ul>';
+			}
+		}
+		$values .= '</ul>';
+
+        wc_add_order_item_meta( $item_id, __( "Date", "dgc-domain" ), $values );
+	}
+
 }
 
 }
