@@ -394,7 +394,7 @@ class Trip_Options_View_Metabox {
 						$product_title = get_the_title( $assignments[$y]['resource'] );
 						//$values .= '<li>'.$itinerary_date.', '.$category.', '.$resource.'</li>';
 						$values .= '<li>'.$itinerary_date.', '.$category.', '.$product_title.'</li>';
-					
+/*					
 						$customer_id = get_post_field( 'post_author', $product_id );
 						$customer = new WC_Customer( $customer_id );
 						$first_name = $customer->get_first_name();
@@ -405,7 +405,7 @@ class Trip_Options_View_Metabox {
 						foreach ($customer->get_billing() as $key => $value) {
 							$values .= '<li> '.$key.': '.$value.'</li>';
 						}
-					
+*/					
 						self::create_vip_order($product_id);
 					}
 					//$values .= '</ul>';
@@ -433,7 +433,7 @@ class Trip_Options_View_Metabox {
 
 		// Get an instance of the WC_Customer Object
 		$customer = new WC_Customer( $customer_id );
-
+/*
 		// Get the first name and the last name from WC_Customer Object 
 		$first_name = $customer->get_first_name();
 		$last_name  = $customer->get_last_name();
@@ -451,11 +451,11 @@ class Trip_Options_View_Metabox {
 		  	'postcode'   => '92121',
 		  	'country'    => 'US'
 	  	);
-				
+*/				
 	  	// The add_product() function below is located in /plugins/woocommerce/includes/abstracts/abstract_wc_order.php
 	  	$order->add_product( get_product($product_id), 1); // This is an existing SIMPLE product
 	  	//$order->set_address( $address, 'billing' );
-	  	$order->set_address( $customer, 'billing' );
+	  	$order->set_address( $customer->get_billing(), 'billing' );
 	  	//
 	  	$order->calculate_totals();
 	  	$order->update_status("Completed", 'Imported order', TRUE);  
