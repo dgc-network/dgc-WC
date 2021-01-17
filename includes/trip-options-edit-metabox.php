@@ -291,24 +291,22 @@ class Trip_Options_Edit_Metabox {
                 					'term_chosen': opt_categorias,
             					},
             					success: function (data) {
-									alert(data);
+									//alert(data);
 									$( '.opt_tipo', sub_element ).empty();
             						$( '.opt_tipo', sub_element ).append("<option value=''>- Select Resource -</option>");
 
-                					$.each(data, function (i, items) {
-										var product_id = '';
-										var product_title = '';
-										$.each(items, function (j, item) {
-											alert('items:'+items+', item:'+item);
-											if (j == 0) {
-												product_id = item;
-											} else {
-												product_title = item;
-											}
-										});
-                    					$( '.opt_tipo', sub_element ).append('<option value="' + product_id + '">' + product_title + '</option>');
-                    					//$( '.opt_tipo', sub_element ).append('<option value="' + items + '">' + items + '</option>');
-                					});
+									var product_id;
+									var product_title;
+                					$.each(data, function (n, item) {
+										if (n % 2 == 0) {
+											product_id = item;
+										}
+										if (Math.abs(n % 2) == 1) {
+											product_title = item;
+											$( '.opt_tipo', sub_element ).append('<option value="' + product_id + '">' + product_title + '</option>');
+										}
+                    					//$( '.opt_tipo', sub_element ).append('<option value="' + item + '">' + item + '</option>');
+                					});									
             					},
             					error: function(error){
 									alert(error);
@@ -352,22 +350,20 @@ class Trip_Options_Edit_Metabox {
                 					'term_chosen': opt_categorias,
             					},
             					success: function (data) {
-									alert(data);
+									//alert(data);
 									$( '.opt_tipo', sub_element ).empty();
             						$( '.opt_tipo', sub_element ).append('<option value="">- Select Resource -</option>');
 
-                					$.each(data, function (i, item) {
-										var product_id = '';
-										var product_title = '';
-										$.each(items, function (j, item) {
-											alert('items:'+items+', item:'+item);
-											if (j == 0) {
-												product_id = item;
-											} else {
-												product_title = item;
-											}
-										});
-                    					$( '.opt_tipo', sub_element ).append('<option value="' + product_id + '">' + product_title + '</option>');
+									var product_id;
+									var product_title;
+                					$.each(data, function (n, item) {
+										if (n % 2 == 0) {
+											product_id = item;
+										}
+										if (Math.abs(n % 2) == 1) {
+											product_title = item;
+											$( '.opt_tipo', sub_element ).append('<option value="' + product_id + '">' + product_title + '</option>');
+										}
                     					//$( '.opt_tipo', sub_element ).append('<option value="' + item + '">' + item + '</option>');
                 					});									
             					},
@@ -483,22 +479,20 @@ class Trip_Options_Edit_Metabox {
                 					'term_chosen': opt_categorias,
             					},
             					success: function (data) {
-									alert(data);
+									//alert(data);
 									$( '.opt_tipo', sub_element ).empty();
             						$( '.opt_tipo', sub_element ).append('<option value="">- Select Resource -</option>');
 
-                					$.each(data, function (i, item) {
-										var product_id = '';
-										var product_title = '';
-										$.each(items, function (j, item) {
-											alert('items:'+items+', item:'+item);
-											if (j == 0) {
-												product_id = item;
-											} else {
-												product_title = item;
-											}
-										});
-                    					$( '.opt_tipo', sub_element ).append('<option value="' + product_id + '">' + product_title + '</option>');
+									var product_id;
+									var product_title;
+                					$.each(data, function (n, item) {
+										if (n % 2 == 0) {
+											product_id = item;
+										}
+										if (Math.abs(n % 2) == 1) {
+											product_title = item;
+											$( '.opt_tipo', sub_element ).append('<option value="' + product_id + '">' + product_title + '</option>');
+										}
                     					//$( '.opt_tipo', sub_element ).append('<option value="' + item + '">' + item + '</option>');
                 					});									
             					},
