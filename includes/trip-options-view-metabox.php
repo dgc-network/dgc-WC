@@ -394,7 +394,9 @@ class Trip_Options_View_Metabox {
 						$product_title = get_the_title( $assignments[$y]['resource'] );
 						//$values .= '<li>'.$itinerary_date.', '.$category.', '.$resource.'</li>';
 						$values .= '<li>'.$itinerary_date.', '.$category.', '.$product_title.'</li>';
-						self::create_vip_order($product_id);
+						$customer_id = get_post_field( 'post_author', $product_id );
+						$values .= '<li> customer_id: '.$customer_id.'</li>';
+						//self::create_vip_order($product_id);
 					}
 					//$values .= '</ul>';
 				}
