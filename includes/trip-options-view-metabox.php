@@ -19,7 +19,9 @@ class Trip_Options_View_Metabox {
 		add_filter( 'woocommerce_get_item_data', array( __CLASS__, 'get_item_data' ), 25, 2 );
 		add_action( 'woocommerce_add_order_item_meta', array( __CLASS__, 'add_order_item_meta' ), 10, 3 );
 		add_action( 'woocommerce_checkout_process', array( __CLASS__, 'create_vip_order' ) );
-	}
+		add_filter( 'woocommerce_email_recipient_new_booking', array( __CLASS__, 'additional_customer_email_recipient' ), 10, 2 ); 
+		add_filter( 'woocommerce_email_recipient_new_order', array( __CLASS__, 'additional_customer_email_recipient' ), 10, 2 ); // Optional (testing)
+		}
 
 	function custom_datepicker() {
 
@@ -43,10 +45,10 @@ class Trip_Options_View_Metabox {
 				 * AJAX for Woocommerce Add To Cart button
 				 */
 
-				//$( '.single_add_to_cart_button' ).on( 'click', function(e) {
-				$( '.single_add_to_cart_button' ).on( 'click', function() {
+				$( '.single_add_to_cart_button' ).on( 'click', function(e) {
+				//$( '.single_add_to_cart_button' ).on( 'click', function() {
 					//alert('I am here');
-					//e.preventDefault();
+					e.preventDefault();
 
 					var $thisbutton = $(this),
                 	$form = $thisbutton.closest('form.cart'),
@@ -387,10 +389,11 @@ class Trip_Options_View_Metabox {
 					foreach( $assignments as $y => $assignment ) {
 						$category = $assignments[$y]['category'];
 						$resource = $assignments[$y]['resource'];
+						$product_id = $assignments[$y]['product_id'];
 						$values .= '<li>'.$itinerary_date.', '.$category.', '.$resource.'</li>';
+						self::create_vip_order($product_id);
 					}
 					$values .= '</ul>';
-					self::create_vip_order();
 				}
 			}
 			$values .= '</ul>';
@@ -400,7 +403,7 @@ class Trip_Options_View_Metabox {
 	}
 
 	//add_action('woocommerce_checkout_process', 'create_vip_order');
-	function create_vip_order() {
+	function create_vip_order( $product_id ) {
 	
 	  	global $woocommerce;
 	
@@ -420,15 +423,58 @@ class Trip_Options_View_Metabox {
 	
 	  	// Now we create the order
 	  	$order = wc_create_order();
-	
+
+		$customer_id = get_post_field( 'post_author', $product_id );
+		$vendor_id = get_post_field( 'post_author', $product_id );
+		$vendor = get_userdata( $vendor_id );
+		$email = $vendor->user_email;
+
+		// Get an instance of the WC_Customer Object
+		$customer = new WC_Customer( $customer_id );
+
+		// Get the first name and the last name from WC_Customer Object 
+		$first_name = $customer->get_first_name();
+		$last_name  = $customer->get_last_name();
+			
 	  	// The add_product() function below is located in /plugins/woocommerce/includes/abstracts/abstract_wc_order.php
-	  	$order->add_product( get_product('275962'), 1); // This is an existing SIMPLE product
-	  	$order->set_address( $address, 'billing' );
+	  	$order->add_product( get_product($product_id), 1); // This is an existing SIMPLE product
+	  	//$order->set_address( $address, 'billing' );
+	  	$order->set_address( $customer, 'billing' );
 	  	//
 	  	$order->calculate_totals();
 	  	$order->update_status("Completed", 'Imported order', TRUE);  
 	}
 	
+	//add_filter( 'woocommerce_email_recipient_new_booking', 'additional_customer_email_recipient', 10, 2 ); 
+	//add_filter( 'woocommerce_email_recipient_new_order', 'additional_customer_email_recipient', 10, 2 ); // Optional (testing)
+function additional_customer_email_recipient( $recipient, $order ) {
+    if ( ! is_a( $order, 'WC_Order' ) ) return $recipient;
+
+    $additional_recipients = array(); // Initializing…
+
+    // Iterating though each order item
+    foreach( $order->get_items() as $item_id => $line_item ){
+        // Get the vendor ID
+        $vendor_id = get_post_field( 'post_author', $line_item->get_product_id());
+        $vendor = get_userdata( $vendor_id );
+        $email = $vendor->user_email;
+
+        // Avoiding duplicates (if many items with many emails)
+        // or an existing email in the recipient
+        if( ! in_array( $email, $additional_recipients ) && strpos( $recipient, $email ) === false )
+            $additional_recipients[] = $email;
+    }
+
+    // Convert the array in a coma separated string
+    $additional_recipients = implode( ',', $additional_recipients);
+
+    // If an additional recipient exist, we add it
+    if( count($additional_recipients) > 0 )
+        $recipient .= ','.$additional_recipients;
+
+    return $recipient;
+}
+
 
 }
 new Trip_Options_View_Metabox;

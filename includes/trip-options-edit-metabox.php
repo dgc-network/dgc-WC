@@ -294,9 +294,19 @@ class Trip_Options_Edit_Metabox {
 									$( '.opt_tipo', sub_element ).empty();
             						$( '.opt_tipo', sub_element ).append("<option value=''>- Select Resource -</option>");
 
-                					$.each(data, function (i, item) {
-                    					$( '.opt_tipo', sub_element ).append('<option value="' + item + '">' + item + '</option>');
-                					});									
+                					$.each(data, function (i, items) {
+										var product_id = '';
+										var product_title = '';
+										$.each(items, function (j, item) {
+											if j == 0 {
+												product_id = item;
+											} else {
+												product_title = item;
+											}
+										});
+                    					//$( '.opt_tipo', sub_element ).append('<option value="' + item + '">' + item + '</option>');
+                    					$( '.opt_tipo', sub_element ).append('<option value="' + product_id + '">' + product_title + '</option>');
+                					});
             					},
             					error: function(error){
 									alert(error);
@@ -571,7 +581,10 @@ class Trip_Options_Edit_Metabox {
 		
 		$titles = array();
 		foreach( $products as $product ) {
-			array_push($titles, $product->get_title());
+			$title = array();
+			array_push($title, $product->get_id());
+			array_push($title, $product->get_title());
+			array_push($titles, $title);
 		}	
 		$json = json_encode( $titles );
 		echo $json;
@@ -624,11 +637,12 @@ class Trip_Options_Edit_Metabox {
 			echo '<option value="" selected disabled hidden>' .  __( "- Select Resource -", "wp-travel" ) . '</option>';
 		}
 		foreach( $products as $product ) {
+			$id = $product->get_id();
 			$title = $product->get_title();
 			if ($title == $resource) {
-				echo '<option value="' . $title . '" selected>' . $title . '</option>';
+				echo '<option value="' . $id . '" selected>' . $title . '</option>';
 			} else {
-				echo '<option value="' . $title . '">' . $title . '</option>';
+				echo '<option value="' . $id . '">' . $title . '</option>';
 			}
 		}		
 	}
