@@ -401,6 +401,9 @@ class Trip_Options_View_Metabox {
 						$values .= '<li> customer_id: '.$customer_id.'</li>';
 						$values .= '<li> first_name: '.$first_name.'</li>';
 						$values .= '<li> last_name: '.$last_name.'</li>';
+						foreach ($customer as $key => $value) {
+							$values .= '<li> '.$key.': '.$value.'</li>';
+						}
 						//self::create_vip_order($product_id);
 					}
 					//$values .= '</ul>';
