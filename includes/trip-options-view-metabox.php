@@ -431,7 +431,7 @@ class Trip_Options_View_Metabox {
 		$vendor_id = get_post_field( 'post_author', $product_id );
 		$vendor = get_userdata( $vendor_id );
 		$email = $vendor->user_email;
-		echo 'product_id: '.$product_id;
+		echo 'customer_id: '.$customer_id;
 
 		// Get an instance of the WC_Customer Object
 		$customer = new WC_Customer( $customer_id );
