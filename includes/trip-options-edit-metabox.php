@@ -298,15 +298,15 @@ class Trip_Options_Edit_Metabox {
 										var product_id = '';
 										var product_title = '';
 										$.each(items, function (j, item) {
-											alert('items:'+items+', item:'+item);
+											//alert('items:'+items+', item:'+item);
 											if (j == 0) {
 												product_id = item;
 											} else {
 												product_title = item;
 											}
 										});
-                    					//$( '.opt_tipo', sub_element ).append('<option value="' + item + '">' + item + '</option>');
                     					$( '.opt_tipo', sub_element ).append('<option value="' + product_id + '">' + product_title + '</option>');
+                    					//$( '.opt_tipo', sub_element ).append('<option value="' + items + '">' + items + '</option>');
                 					});
             					},
             					error: function(error){
@@ -355,7 +355,18 @@ class Trip_Options_Edit_Metabox {
             						$( '.opt_tipo', sub_element ).append('<option value="">- Select Resource -</option>');
 
                 					$.each(data, function (i, item) {
-                    					$( '.opt_tipo', sub_element ).append('<option value="' + item + '">' + item + '</option>');
+										var product_id = '';
+										var product_title = '';
+										$.each(items, function (j, item) {
+											//alert('items:'+items+', item:'+item);
+											if (j == 0) {
+												product_id = item;
+											} else {
+												product_title = item;
+											}
+										});
+                    					$( '.opt_tipo', sub_element ).append('<option value="' + product_id + '">' + product_title + '</option>');
+                    					//$( '.opt_tipo', sub_element ).append('<option value="' + item + '">' + item + '</option>');
                 					});									
             					},
             					error: function(error){
@@ -474,7 +485,18 @@ class Trip_Options_Edit_Metabox {
             						$( '.opt_tipo', sub_element ).append('<option value="">- Select Resource -</option>');
 
                 					$.each(data, function (i, item) {
-                    					$( '.opt_tipo', sub_element ).append('<option value="' + item + '">' + item + '</option>');
+										var product_id = '';
+										var product_title = '';
+										$.each(items, function (j, item) {
+											//alert('items:'+items+', item:'+item);
+											if (j == 0) {
+												product_id = item;
+											} else {
+												product_title = item;
+											}
+										});
+                    					$( '.opt_tipo', sub_element ).append('<option value="' + product_id + '">' + product_title + '</option>');
+                    					//$( '.opt_tipo', sub_element ).append('<option value="' + item + '">' + item + '</option>');
                 					});									
             					},
             					error: function(error){
