@@ -298,7 +298,7 @@ class Trip_Options_Edit_Metabox {
 										var product_id = '';
 										var product_title = '';
 										$.each(items, function (j, item) {
-											if j == 0 {
+											if (j == 0) {
 												product_id = item;
 											} else {
 												product_title = item;
