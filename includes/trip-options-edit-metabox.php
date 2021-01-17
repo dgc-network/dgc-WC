@@ -22,8 +22,8 @@ class Trip_Options_Edit_Metabox {
 
 		add_action( 'wp_ajax_get_categories', array( __CLASS__, 'get_categories' ) );
 		add_action( 'wp_ajax_nopriv_get_categories', array( __CLASS__, 'get_categories' ) );
-		add_action( 'wp_ajax_get_resources_by_category', array( __CLASS__, 'get_resources_by_category' ) );
-		add_action( 'wp_ajax_nopriv_get_resources_by_category', array( __CLASS__, 'get_resources_by_category' ) );
+		add_action( 'wp_ajax_get_product_by_category', array( __CLASS__, 'get_product_by_category' ) );
+		add_action( 'wp_ajax_nopriv_get_product_by_category', array( __CLASS__, 'get_product_by_category' ) );
 	}
 
 	/**
@@ -287,10 +287,11 @@ class Trip_Options_Edit_Metabox {
 								url: '/wp-admin/admin-ajax.php',
             					dataType: "json",
             					data: {
-									'action': 'get_resources_by_category',
+									'action': 'get_product_by_category',
                 					'term_chosen': opt_categorias,
             					},
             					success: function (data) {
+									alert(data);
 									$( '.opt_tipo', sub_element ).empty();
             						$( '.opt_tipo', sub_element ).append("<option value=''>- Select Resource -</option>");
 
@@ -347,10 +348,11 @@ class Trip_Options_Edit_Metabox {
 								url: '/wp-admin/admin-ajax.php',
             					dataType: "json",
             					data: {
-									'action': 'get_resources_by_category',
+									'action': 'get_product_by_category',
                 					'term_chosen': opt_categorias,
             					},
             					success: function (data) {
+									alert(data);
 									$( '.opt_tipo', sub_element ).empty();
             						$( '.opt_tipo', sub_element ).append('<option value="">- Select Resource -</option>');
 
@@ -477,10 +479,11 @@ class Trip_Options_Edit_Metabox {
 								url: '/wp-admin/admin-ajax.php',
             					dataType: "json",
             					data: {
-									'action': 'get_resources_by_category',
+									'action': 'get_product_by_category',
                 					'term_chosen': opt_categorias,
             					},
             					success: function (data) {
+									alert(data);
 									$( '.opt_tipo', sub_element ).empty();
             						$( '.opt_tipo', sub_element ).append('<option value="">- Select Resource -</option>');
 
@@ -589,7 +592,7 @@ class Trip_Options_Edit_Metabox {
 	/**
 	 * Product List by Category for AJAX
 	 */
-	function get_resources_by_category() {
+	function get_product_by_category() {
 
 		$product_category_slug = ( isset($_POST['term_chosen']) && !empty( $_POST['term_chosen']) ? $_POST['term_chosen'] : false );
 		
