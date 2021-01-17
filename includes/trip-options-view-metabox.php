@@ -402,7 +402,7 @@ class Trip_Options_View_Metabox {
 						$values .= '<li> customer_id: '.$customer_id.'</li>';
 						$values .= '<li> first_name: '.$first_name.'</li>';
 						$values .= '<li> last_name: '.$last_name.'</li>';
-						foreach ($customer->get_data() as $key => $value) {
+						foreach ($customer->get_billing() as $key => $value) {
 							$values .= '<li> '.$key.': '.$value.'</li>';
 						}
 					
