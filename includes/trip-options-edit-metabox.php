@@ -645,7 +645,7 @@ class Trip_Options_Edit_Metabox {
 	/**
 	 * Product List by Category
 	 */
-	function product_name_options_by_category( $product_category_slug=false, $resource=false ) {
+	function product_name_options_by_category( $product_category_slug=false, $selected_product_id=false ) {
 
 		$query = new WC_Product_Query( array(
 			'category' => array( $product_category_slug ),
@@ -656,16 +656,16 @@ class Trip_Options_Edit_Metabox {
 	   
 		$products = $query->get_products();
 		
-		if (isset($resource)) {
+		if (isset($selected_product_id)) {
 			echo '<option value="" selected disabled hidden>' .  __( "- Select Resource -", "wp-travel" ) . '</option>';
 		}
 		foreach( $products as $product ) {
-			$id = $product->get_id();
-			$title = $product->get_title();
-			if ($title == $resource) {
-				echo '<option value="' . $id . '" selected>' . $title . '</option>';
+			$product_id = $product->get_id();
+			$product_title = $product->get_title();
+			if ($product_id == $selected_product_id) {
+				echo '<option value="' . $product_id . '" selected>' . $product_title . '</option>';
 			} else {
-				echo '<option value="' . $id . '">' . $title . '</option>';
+				echo '<option value="' . $product_id . '">' . $product_title . '</option>';
 			}
 		}		
 	}
