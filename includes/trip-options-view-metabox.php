@@ -395,7 +395,12 @@ class Trip_Options_View_Metabox {
 						//$values .= '<li>'.$itinerary_date.', '.$category.', '.$resource.'</li>';
 						$values .= '<li>'.$itinerary_date.', '.$category.', '.$product_title.'</li>';
 						$customer_id = get_post_field( 'post_author', $product_id );
+						$customer = new WC_Customer( $customer_id );
+						$first_name = $customer->get_first_name();
+						$last_name  = $customer->get_last_name();
 						$values .= '<li> customer_id: '.$customer_id.'</li>';
+						$values .= '<li> first_name: '.$first_name.'</li>';
+						$values .= '<li> last_name: '.$last_name.'</li>';
 						//self::create_vip_order($product_id);
 					}
 					//$values .= '</ul>';
@@ -433,7 +438,7 @@ class Trip_Options_View_Metabox {
 		$vendor_id = get_post_field( 'post_author', $product_id );
 		$vendor = get_userdata( $vendor_id );
 		$email = $vendor->user_email;
-		echo 'customer_id: '.$customer_id;
+		//echo 'customer_id: '.$customer_id;
 
 		// Get an instance of the WC_Customer Object
 		$customer = new WC_Customer( $customer_id );
