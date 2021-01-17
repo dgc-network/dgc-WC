@@ -297,7 +297,9 @@ class Trip_Options_Edit_Metabox {
 
 									var product_id;
 									var product_title;
-                					$.each(data, function (n, item) {
+                					$.each(data, function (m, items) {
+                					$.each(items, function (n, item) {
+										//alert(item);
 										if (n % 2 == 0) {
 											product_id = item;
 										}
@@ -306,7 +308,8 @@ class Trip_Options_Edit_Metabox {
 											$( '.opt_tipo', sub_element ).append('<option value="' + product_id + '">' + product_title + '</option>');
 										}
                     					//$( '.opt_tipo', sub_element ).append('<option value="' + item + '">' + item + '</option>');
-                					});									
+                					});
+                					});
             					},
             					error: function(error){
 									alert(error);
@@ -356,7 +359,9 @@ class Trip_Options_Edit_Metabox {
 
 									var product_id;
 									var product_title;
-                					$.each(data, function (n, item) {
+                					$.each(data, function (m, items) {
+                					$.each(items, function (n, item) {
+										//alert(item);
 										if (n % 2 == 0) {
 											product_id = item;
 										}
@@ -365,12 +370,13 @@ class Trip_Options_Edit_Metabox {
 											$( '.opt_tipo', sub_element ).append('<option value="' + product_id + '">' + product_title + '</option>');
 										}
                     					//$( '.opt_tipo', sub_element ).append('<option value="' + item + '">' + item + '</option>');
-                					});									
+                					});
+                					});
             					},
             					error: function(error){
 									alert(error);
             					}
-        					});											
+        					});					
 							if (this.value=='_delete_assignment') {
 								$( this ).closest( sub_element ).remove();
 							}							
@@ -485,7 +491,11 @@ class Trip_Options_Edit_Metabox {
 
 									var product_id;
 									var product_title;
-                					$.each(data, function (n, item) {
+									var product_id;
+									var product_title;
+                					$.each(data, function (m, items) {
+                					$.each(items, function (n, item) {
+										//alert(item);
 										if (n % 2 == 0) {
 											product_id = item;
 										}
@@ -494,7 +504,8 @@ class Trip_Options_Edit_Metabox {
 											$( '.opt_tipo', sub_element ).append('<option value="' + product_id + '">' + product_title + '</option>');
 										}
                     					//$( '.opt_tipo', sub_element ).append('<option value="' + item + '">' + item + '</option>');
-                					});									
+                					});
+                					});
             					},
             					error: function(error){
 									alert(error);
