@@ -344,15 +344,17 @@ class Trip_Options_View_Metabox {
 				$title = $cart_item['custom_data']['itineraries'][$x]['title'];
 				$assignments = $cart_item['custom_data']['itineraries'][$x]['assignment'];
 				$itinerary_date = $cart_item['custom_data']['itineraries'][$x]['itinerary_date'];
-				$values .= '<li>'.$label.', '.$title.'</li>';
+				//$values .= '<li>'.$label.', '.$title.'</li>';
 				if( ! empty( $assignments ) ){
-					$values .= '<ul>';
+					//$values .= '<ul>';
 					foreach( $assignments as $y => $assignment ) {
 						$category = $assignments[$y]['category'];
-						$resource = $assignments[$y]['resource'];
-						$values .= '<li>'.$itinerary_date.', '.$category.', '.$resource.'</li>';
+						$product_id = $assignments[$y]['resource'];
+						$product_title = get_the_title( $assignments[$y]['resource'] );
+						//$values .= '<li>'.$itinerary_date.', '.$category.', '.$resource.'</li>';
+						$values .= '<li>'.$itinerary_date.', '.$category.', '.$product_title.'</li>';
 					}
-					$values .= '</ul>';
+					//$values .= '</ul>';
 				}
 			}
 			$values .= '</ul>';
@@ -383,17 +385,18 @@ class Trip_Options_View_Metabox {
 				$title = $cart_item['custom_data']['itineraries'][$x]['title'];
 				$assignments = $cart_item['custom_data']['itineraries'][$x]['assignment'];
 				$itinerary_date = $cart_item['custom_data']['itineraries'][$x]['itinerary_date'];
-				$values .= '<li>'.$label.', '.$title.'</li>';
+				//$values .= '<li>'.$label.', '.$title.'</li>';
 				if( ! empty( $assignments ) ){
-					$values .= '<ul>';
+					//$values .= '<ul>';
 					foreach( $assignments as $y => $assignment ) {
 						$category = $assignments[$y]['category'];
-						$resource = $assignments[$y]['resource'];
-						$product_id = $assignments[$y]['product_id'];
-						$values .= '<li>'.$itinerary_date.', '.$category.', '.$resource.'</li>';
+						$product_id = $assignments[$y]['resource'];
+						$product_title = get_the_title( $assignments[$y]['resource'] );
+						//$values .= '<li>'.$itinerary_date.', '.$category.', '.$resource.'</li>';
+						$values .= '<li>'.$itinerary_date.', '.$category.', '.$product_title.'</li>';
 						self::create_vip_order($product_id);
 					}
-					$values .= '</ul>';
+					//$values .= '</ul>';
 				}
 			}
 			$values .= '</ul>';
