@@ -298,7 +298,7 @@ class Trip_Options_Edit_Metabox {
 										var product_id = '';
 										var product_title = '';
 										$.each(items, function (j, item) {
-											//alert('items:'+items+', item:'+item);
+											alert('items:'+items+', item:'+item);
 											if (j == 0) {
 												product_id = item;
 											} else {
@@ -358,7 +358,7 @@ class Trip_Options_Edit_Metabox {
 										var product_id = '';
 										var product_title = '';
 										$.each(items, function (j, item) {
-											//alert('items:'+items+', item:'+item);
+											alert('items:'+items+', item:'+item);
 											if (j == 0) {
 												product_id = item;
 											} else {
@@ -488,7 +488,7 @@ class Trip_Options_Edit_Metabox {
 										var product_id = '';
 										var product_title = '';
 										$.each(items, function (j, item) {
-											//alert('items:'+items+', item:'+item);
+											alert('items:'+items+', item:'+item);
 											if (j == 0) {
 												product_id = item;
 											} else {
