@@ -1,5 +1,5 @@
 <?php
-class Trip_Options_View_Metabox {
+class Trip_Options_View {
 	/**
 	 * Constructor.
 	 */
@@ -392,20 +392,7 @@ class Trip_Options_View_Metabox {
 						$category = $assignments[$y]['category'];
 						$product_id = $assignments[$y]['resource'];
 						$product_title = get_the_title( $assignments[$y]['resource'] );
-						//$values .= '<li>'.$itinerary_date.', '.$category.', '.$resource.'</li>';
 						$values .= '<li>'.$itinerary_date.', '.$category.', '.$product_title.'</li>';
-/*					
-						$customer_id = get_post_field( 'post_author', $product_id );
-						$customer = new WC_Customer( $customer_id );
-						$first_name = $customer->get_first_name();
-						$last_name  = $customer->get_last_name();
-						$values .= '<li> customer_id: '.$customer_id.'</li>';
-						$values .= '<li> first_name: '.$first_name.'</li>';
-						$values .= '<li> last_name: '.$last_name.'</li>';
-						foreach ($customer->get_billing() as $key => $value) {
-							$values .= '<li> '.$key.': '.$value.'</li>';
-						}
-*/					
 						self::create_vip_order($product_id);
 					}
 					//$values .= '</ul>';
@@ -433,26 +420,8 @@ class Trip_Options_View_Metabox {
 
 		// Get an instance of the WC_Customer Object
 		$customer = new WC_Customer( $customer_id );
-/*
-		// Get the first name and the last name from WC_Customer Object 
-		$first_name = $customer->get_first_name();
-		$last_name  = $customer->get_last_name();
 
-		$address = array(
-			'first_name' => $first_name,
-		  	'last_name'  => $last_name,
-		  	'company'    => 'Speed Society',
-		  	'email'      => 'joe@testing.com',
-		  	'phone'      => '760-555-1212',
-		  	'address_1'  => '123 Main st.',
-		  	'address_2'  => '104',
-		  	'city'       => 'San Diego',
-		  	'state'      => 'Ca',
-		  	'postcode'   => '92121',
-		  	'country'    => 'US'
-	  	);
-*/				
-	  	// The add_product() function below is located in /plugins/woocommerce/includes/abstracts/abstract_wc_order.php
+		// The add_product() function below is located in /plugins/woocommerce/includes/abstracts/abstract_wc_order.php
 	  	$order->add_product( get_product($product_id), 1); // This is an existing SIMPLE product
 	  	//$order->set_address( $address, 'billing' );
 	  	$order->set_address( $customer->get_billing(), 'billing' );
@@ -493,4 +462,4 @@ function additional_customer_email_recipient( $recipient, $order ) {
 
 
 }
-new Trip_Options_View_Metabox;
+new Trip_Options_View;

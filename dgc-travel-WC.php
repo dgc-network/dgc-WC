@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: dgc-WC
+ * Plugin Name: dgc-travel-WC
  * Description: WooCommerce all products display as a table in one page by shortcode. Fully responsive and mobile friendly. Easily customizable - color,background,title,text color etc.
  * Author: dgc.network
  * Author URI: https://dgc.network
@@ -60,12 +60,16 @@ include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
  * Load these bellow file, Only woocommerce installed
  */
 if ( is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
+    require_once BASE_DIR . 'includes/trip-options-edit.php';
+    require_once BASE_DIR . 'includes/trip-options-view.php';
+/*
     require_once BASE_DIR . 'includes/trip-options-edit-metabox.php';
-    require_once BASE_DIR . 'includes/trip-options-view-metabox.php';
+    require_once BASE_DIR . 'includes/trip-options-view-metabox.php';    
     require_once BASE_DIR . 'wp-travel/inc/helpers.php';
     require_once BASE_DIR . 'wp-travel/inc/class-itinerary.php';
     require_once BASE_DIR . 'wp-travel/inc/email-template-functions.php';
     require_once BASE_DIR . 'wp-travel/inc/payments/wp-travel-payments.php';
+*/    
 /*    
     require_once BASE_DIR . 'wp-travel/wp-travel.php';
     require_once BASE_DIR . 'wp-travel/inc/class-assets.php';
@@ -86,7 +90,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
 } else {
     //require_once $this->path('BASE_DIR','includes/no_woocommerce.php');
 }
-
+/*
 function wpx_add_fontawesome() {
     wp_enqueue_style( 'font-awesome-5', 'https://use.fontawesome.com/releases/v5.0.0/css/all.css', false );
 }
@@ -144,7 +148,7 @@ if ( count( $itineraries ) > 0 ) {
         }
     }
 }
-
+*/
 
 
 
