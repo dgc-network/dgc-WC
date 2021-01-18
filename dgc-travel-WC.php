@@ -64,6 +64,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
     require_once BASE_DIR . 'includes/trip-options-view.php';
     require_once BASE_DIR . 'includes/helpers.php';
     require_once BASE_DIR . 'wp-travel/inc/email-template-functions.php';
+    require_once BASE_DIR . 'wp-travel/inc/payments/wp-travel-payments.php';
 /*
     require_once BASE_DIR . 'includes/trip-options-edit-metabox.php';
     require_once BASE_DIR . 'includes/trip-options-view-metabox.php';    
