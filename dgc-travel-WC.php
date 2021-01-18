@@ -173,8 +173,8 @@ register_activation_hook(__FILE__, array( 'WOO_Product_Table','install' ) );
 register_deactivation_hook( __FILE__, array( 'WOO_Product_Table','uninstall' ) );
 
 
-function get_trip_code( $post_id=false ) {
-    if ($post_id==false) {
+function get_trip_code( $post_id ) {
+    if ( ! $post_id ) {
         global $post;
         $post_id = $post->ID;
     }
