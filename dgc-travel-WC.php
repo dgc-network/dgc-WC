@@ -171,3 +171,16 @@ define( "WPT_PLUGIN_FILE_NAME", __FILE__ ); //aDDED TO NEW VERSION
 */
 register_activation_hook(__FILE__, array( 'WOO_Product_Table','install' ) );
 register_deactivation_hook( __FILE__, array( 'WOO_Product_Table','uninstall' ) );
+
+
+function get_trip_code( $post_id=false ) {
+    if ($post_id==false) {
+        global $post;
+        $post_id = $post->ID;
+    }
+    if ( (int) $post_id < 10 ) {
+        $post_id = '0' . $post_id;
+    }
+    return apply_filters( 'wp_travel_trip_code', 'WT-CODE ' . $post_id, $post_id );
+}
+

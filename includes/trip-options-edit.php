@@ -685,7 +685,8 @@ class Trip_Options_Edit {
 		if ( ! $post ) {
 			global $post;
 		}
-		$trip_code = wp_travel_get_trip_code( $post->ID );
+		//$trip_code = wp_travel_get_trip_code( $post->ID );
+		$trip_code = get_trip_code( $post->ID );
 		$trip_outline = get_post_meta( $post->ID, 'wp_travel_outline', true );
 		$itineraries = get_post_meta( $post->ID, 'wp_travel_trip_itinerary_data', true );
 		$remove_itinerary = __( "- Remove Itinerary -", "wp-travel" );
