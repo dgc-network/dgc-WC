@@ -160,7 +160,8 @@ class Trip_Options_View {
 		}
 */
 		if ($is_itinerary=='yes') {
-			$trip_code = wp_travel_get_trip_code( $post_id );
+			//$trip_code = wp_travel_get_trip_code( $post_id );
+			$trip_code = get_trip_code( $post->ID );
 			echo '<div align="left"><h4>';
 			esc_html_e( 'Trip Code : ', 'wp-travel' );
 			echo esc_attr( $trip_code );
