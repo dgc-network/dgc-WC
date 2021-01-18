@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: dgc-travel-WC
+ * Plugin Name: dgc-travel
  * Description: WooCommerce all products display as a table in one page by shortcode. Fully responsive and mobile friendly. Easily customizable - color,background,title,text color etc.
  * Author: dgc.network
  * Author URI: https://dgc.network
