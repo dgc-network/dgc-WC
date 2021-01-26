@@ -56,8 +56,8 @@ function wp_travel_payment_field_list() {
  */
 function wp_travel_payment_gateway_lists() {
 	$gateway = array(
-		'paypal' => __( 'Standard Paypal', 'wp-travel' ),
-		'bank_deposit' => __( 'Bank Deposit', 'wp-travel' ),
+		'paypal' => __( 'Standard Paypal', 'text-domain' ),
+		'bank_deposit' => __( 'Bank Deposit', 'text-domain' ),
 	);
 	return apply_filters( 'wp_travel_payment_gateway_lists', $gateway );
 
@@ -577,11 +577,11 @@ function wp_travel_payment_booking_message( $message ) {
 	$booking_id = $_GET['booking_id'];
 	if ( isset( $_GET['status'] ) && 'cancel' === $_GET['status'] ) {
 		update_post_meta( $booking_id, 'wp_travel_payment_status', 'canceled' );
-		$message = esc_html__( 'Your booking has been canceled', 'wp-travel' );
+		$message = esc_html__( 'Your booking has been canceled', 'text-domain' );
 	}
 	if ( isset( $_GET['status'] ) && 'success' === $_GET['status'] ) {
 		// already upadted status.
-		$message = esc_html__( "We've received your booking and payment details. We'll contact you soon.", 'wp-travel' );
+		$message = esc_html__( "We've received your booking and payment details. We'll contact you soon.", 'text-domain' );
 	}
 	return $message;
 }
@@ -590,7 +590,7 @@ function wp_travel_payment_booking_message( $message ) {
 function wp_travel_get_total_amount() {
 	$response = array(
 		'status'  => 'fail',
-		'message' => __( 'Invalid', 'wp-travel' ),
+		'message' => __( 'Invalid', 'text-domain' ),
 	);
 	if ( ! isset( $_GET['wt_query_amount'] ) ) {
 		return;
@@ -609,7 +609,7 @@ function wp_travel_get_total_amount() {
 
 	if ( $total > 0 ) {
 		$response['status']  = 'success';
-		$response['message'] = __( 'Success', 'wp-travel' );
+		$response['message'] = __( 'Success', 'text-domain' );
 		$response['total']   = $total;
 	}
 	wp_send_json( $response );

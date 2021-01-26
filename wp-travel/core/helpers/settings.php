@@ -25,19 +25,19 @@ class WP_Travel_Helpers_Settings {
 		// currency position option.
 		$currency_positions                     = array(
 			array(
-				'label' => __( 'Left', 'wp-travel' ),
+				'label' => __( 'Left', 'text-domain' ),
 				'value' => 'left',
 			),
 			array(
-				'label' => __( 'Right', 'wp-travel' ),
+				'label' => __( 'Right', 'text-domain' ),
 				'value' => 'right',
 			),
 			array(
-				'label' => __( 'Left with space', 'wp-travel' ),
+				'label' => __( 'Left with space', 'text-domain' ),
 				'value' => 'left_with_space',
 			),
 			array(
-				'label' => __( 'Right with space', 'wp-travel' ),
+				'label' => __( 'Right with space', 'text-domain' ),
 				'value' => 'right_with_space',
 			),
 		);
@@ -151,15 +151,15 @@ class WP_Travel_Helpers_Settings {
 		// fact options.
 		$settings_options['fact_options'] = array(
 			array(
-				'label' => __( 'Plain Text', 'wp-travel' ),
+				'label' => __( 'Plain Text', 'text-domain' ),
 				'value' => 'text',
 			),
 			array(
-				'label' => __( 'Single Select', 'wp-travel' ),
+				'label' => __( 'Single Select', 'text-domain' ),
 				'value' => 'single',
 			),
 			array(
-				'label' => __( 'Multiple Select', 'wp-travel' ),
+				'label' => __( 'Multiple Select', 'text-domain' ),
 				'value' => 'multiple',
 			),
 		);

@@ -22,7 +22,7 @@ class WP_Travel_Admin_Dashboard_Widgets {
         $bookings = wp_count_posts( 'itinerary-booking' );
         // latest Bookings Widget.
         if( 0 !== $bookings->publish )
-            add_meta_box('wp-travel-recent-bookings',  __( 'WP Travel: Bookings', 'wp-travel' ), array( $this, 'new_booking_callback' ), 'dashboard', 'side', 'high');
+            add_meta_box('wp-travel-recent-bookings',  __( 'WP Travel: Bookings', 'text-domain' ), array( $this, 'new_booking_callback' ), 'dashboard', 'side', 'high');
     }
 
     public function enqueue_scripts() {
@@ -46,11 +46,11 @@ class WP_Travel_Admin_Dashboard_Widgets {
             <table class="wp_travel_booking_dashboard_widget">
                 <thead>
                     <tr>
-                        <th><?php esc_html_e( 'ID', 'wp-travel' ); ?></th>
-                        <th><?php esc_html_e( 'Contact Name', 'wp-travel' ); ?></th>
-                        <th><?php esc_html_e( 'Status', 'wp-travel' ); ?></th>
-                        <th><?php esc_html_e( 'Payment', 'wp-travel' ); ?></th>
-                        <th><?php esc_html_e( 'Date', 'wp-travel' ); ?></th>
+                        <th><?php esc_html_e( 'ID', 'text-domain' ); ?></th>
+                        <th><?php esc_html_e( 'Contact Name', 'text-domain' ); ?></th>
+                        <th><?php esc_html_e( 'Status', 'text-domain' ); ?></th>
+                        <th><?php esc_html_e( 'Payment', 'text-domain' ); ?></th>
+                        <th><?php esc_html_e( 'Date', 'text-domain' ); ?></th>
                     </tr>
             </thead>
             <tbody>
@@ -88,7 +88,7 @@ class WP_Travel_Admin_Dashboard_Widgets {
                         <td><a href="<?php echo esc_url( get_edit_post_link( $id ) ); ?>"><?php echo esc_html( $booking_id ); ?></a></td>
                         <td><?php echo esc_html( $name ); ?></td>
                         <td><?php echo '<span class="wp-travel-status wp-travel-booking-status" style="background: ' . esc_attr( $status[ $label_key ]['color'] ) . ' ">' . esc_attr( $status[ $label_key ]['text'] ) . '</span>'; ?></td>
-                        <td><?php echo '<span class="wp-travel-status wp-travel-payment-status" style="background: ' . esc_attr( $Pmt_status[ $pmt_label_key ]['color'], 'wp-travel' ) . ' ">' . esc_attr( $Pmt_status[ $pmt_label_key ]['text'], 'wp-travel' ) . '</span>'; ?></td>
+                        <td><?php echo '<span class="wp-travel-status wp-travel-payment-status" style="background: ' . esc_attr( $Pmt_status[ $pmt_label_key ]['color'], 'text-domain' ) . ' ">' . esc_attr( $Pmt_status[ $pmt_label_key ]['text'], 'text-domain' ) . '</span>'; ?></td>
                         <td><?php echo esc_html( $date ); ?></td>
                     </tr>
 
@@ -98,7 +98,7 @@ class WP_Travel_Admin_Dashboard_Widgets {
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="5"><a href="<?php echo esc_url( admin_url( 'edit.php?post_type=itinerary-booking' ) ); ?>" class="button button-primary"><?php esc_html_e( 'View All Bookings', 'wp-travel' ); ?></a></td>
+                    <td colspan="5"><a href="<?php echo esc_url( admin_url( 'edit.php?post_type=itinerary-booking' ) ); ?>" class="button button-primary"><?php esc_html_e( 'View All Bookings', 'text-domain' ); ?></a></td>
                 </tr>
             <tfoot>
             </table>

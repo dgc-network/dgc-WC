@@ -163,7 +163,7 @@ class Trip_Options_View {
 			//$trip_code = wp_travel_get_trip_code( $post_id );
 			$trip_code = get_trip_code( $post->ID );
 			echo '<div align="left"><h4>';
-			esc_html_e( 'Trip Code : ', 'wp-travel' );
+			esc_html_e( 'Trip Code : ', 'text-domain' );
 			echo esc_attr( $trip_code );
 			echo '</h4></div>';	
 		}
@@ -171,7 +171,7 @@ class Trip_Options_View {
 	
 	// define the woocommerce_before_add_to_cart_button callback 
 	function action_woocommerce_before_add_to_cart_button() {
-		echo esc_html_e( 'Start Date : ', 'wp-travel' );
+		echo esc_html_e( 'Start Date : ', 'text-domain' );
 		echo '<div class="start_date"></div>';
 		?>
 		<script>
@@ -216,7 +216,7 @@ class Trip_Options_View {
 			if ( is_array( $trip_tabs ) && count( $trip_tabs ) > 0 ) {
 				foreach ( $trip_tabs as $key=>$value ) {
 					$tabs[$key] = array(
-						'title' 	=> __( $trip_tabs[$key]['label'], 'wp-travel' ),
+						'title' 	=> __( $trip_tabs[$key]['label'], 'text-domain' ),
 						'priority' 	=> 20,
 						'callback' 	=> array( __CLASS__, $key . '_tab_content' )
 					);		
@@ -234,7 +234,7 @@ class Trip_Options_View {
 
 		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) {
 			echo '<h4 style="text-align:left">';
-			esc_html_e( 'Itinerary', 'wp-travel' );
+			esc_html_e( 'Itinerary', 'text-domain' );
 			echo '</h4>';
 			?>
 			<ul><?php
@@ -247,7 +247,7 @@ class Trip_Options_View {
 			} ?>
 			</ul><?php
 		} else { ?>
-			<span><?php esc_html_e( 'No Itineraries found.', 'wp-travel' ); ?></span><?php
+			<span><?php esc_html_e( 'No Itineraries found.', 'text-domain' ); ?></span><?php
 		}
 	}
 
@@ -257,13 +257,13 @@ class Trip_Options_View {
 		$post_id = $post->ID;
 		$trip_include = get_post_meta( $post_id, 'wp_travel_trip_include', true );
 		echo '<h4 style="text-align:left">';
-		esc_html_e( 'Trip Includes', 'wp-travel' );
+		esc_html_e( 'Trip Includes', 'text-domain' );
 		echo '</h4>';
 		echo '<br>';
 		if (!empty($trip_include)) {
 			echo esc_attr( $trip_include );
 		} else {
-			esc_html_e( 'No Trip Include found.', 'wp-travel' );
+			esc_html_e( 'No Trip Include found.', 'text-domain' );
 		}
 		echo '<br>';
 	}	
@@ -274,13 +274,13 @@ class Trip_Options_View {
 		$post_id = $post->ID;
 		$trip_exclude = get_post_meta( $post_id, 'wp_travel_trip_exclude', true );
 		echo '<h4 style="text-align:left">';
-		esc_html_e( 'Trip Excludes', 'wp-travel' );
+		esc_html_e( 'Trip Excludes', 'text-domain' );
 		echo '</h4>';
 		echo '<br>';
 		if (!empty($trip_exclude)) {
 			echo esc_attr( $trip_exclude );
 		} else {
-			esc_html_e( 'No Trip Exclude found.', 'wp-travel' );
+			esc_html_e( 'No Trip Exclude found.', 'text-domain' );
 		}
 	}	
 
@@ -291,7 +291,7 @@ class Trip_Options_View {
 		$faqs = wp_travel_get_faqs( $post_id );
 		if ( is_array( $faqs ) && count( $faqs ) > 0 ) { 
 			echo '<h4 style="text-align:left">';
-			esc_html_e( 'FAQ : ', 'wp-travel' );
+			esc_html_e( 'FAQ : ', 'text-domain' );
 			echo '</h4>';
 			?>
 			<ul><?php
@@ -300,7 +300,7 @@ class Trip_Options_View {
 				echo esc_attr( $faqs[$key]['answer'] ); ?></li><?php
 			} ?></ul><?php
 		} else { ?>
-			<span><?php esc_html_e( 'No FAQs found.', 'wp-travel' ); ?></span><?php
+			<span><?php esc_html_e( 'No FAQs found.', 'text-domain' ); ?></span><?php
 		}
 	}
 

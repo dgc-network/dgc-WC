@@ -60,12 +60,12 @@ class WP_TRAVEL_TERM_META {
 	*/
 	public function add_category_image ( $taxonomy ) { ?>
 	<div class="form-field term-group">
-		<label for="category-image-id"><?php _e('Image', 'wp-travel'); ?></label>
+		<label for="category-image-id"><?php _e('Image', 'text-domain'); ?></label>
 		<input type="hidden" id="category-image-id" name="wp_travel_trip_type_image_id" class="custom_media_url" value="">
 		<div id="category-image-wrapper"></div>
 		<p>
-		<input type="button" class="button button-secondary wp_travel_tax_media_button" id="wp_travel_tax_media_button" name="wp_travel_tax_media_button" value="<?php _e( 'Add Image', 'wp-travel' ); ?>" />
-		<input type="button" class="button button-secondary wp_travel_tax_media_remove" id="wp_travel_tax_media_remove" name="wp_travel_tax_media_remove" value="<?php _e( 'Remove Image', 'wp-travel' ); ?>" />
+		<input type="button" class="button button-secondary wp_travel_tax_media_button" id="wp_travel_tax_media_button" name="wp_travel_tax_media_button" value="<?php _e( 'Add Image', 'text-domain' ); ?>" />
+		<input type="button" class="button button-secondary wp_travel_tax_media_remove" id="wp_travel_tax_media_remove" name="wp_travel_tax_media_remove" value="<?php _e( 'Remove Image', 'text-domain' ); ?>" />
 		</p>
 	</div>
 	<?php
@@ -89,7 +89,7 @@ class WP_TRAVEL_TERM_META {
 	public function update_category_image ( $term, $taxonomy ) { ?>
 	<tr class="form-field term-group-wrap">
 		<th scope="row">
-		<label for="category-image-id"><?php _e( 'Image', 'wp-travel' ); ?></label>
+		<label for="category-image-id"><?php _e( 'Image', 'text-domain' ); ?></label>
 		</th>
 		<td>
 		<?php $image_id = get_term_meta ( $term ->term_id, 'wp_travel_trip_type_image_id', true ); ?>
@@ -100,8 +100,8 @@ class WP_TRAVEL_TERM_META {
 			<?php } ?>
 		</div>
 		<p>
-			<input type="button" class="button button-secondary wp_travel_tax_media_button" id="wp_travel_tax_media_button" name="wp_travel_tax_media_button" value="<?php _e( 'Add Image', 'wp-travel' ); ?>" />
-			<input type="button" class="button button-secondary wp_travel_tax_media_remove" id="wp_travel_tax_media_remove" name="wp_travel_tax_media_remove" value="<?php _e( 'Remove Image', 'wp-travel' ); ?>" />
+			<input type="button" class="button button-secondary wp_travel_tax_media_button" id="wp_travel_tax_media_button" name="wp_travel_tax_media_button" value="<?php _e( 'Add Image', 'text-domain' ); ?>" />
+			<input type="button" class="button button-secondary wp_travel_tax_media_remove" id="wp_travel_tax_media_remove" name="wp_travel_tax_media_remove" value="<?php _e( 'Remove Image', 'text-domain' ); ?>" />
 		</p>
 		</td>
 	</tr>

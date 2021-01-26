@@ -150,7 +150,7 @@ class Wp_Travel_Extras_Frontend {
 				<div class="wp_travel_tour_extras">
 					<h3>
 					<?php
-						$trip_extras_heading = apply_filters( 'wp_travel_trip_extras_heading', __( 'Trip Extras:', 'wp-travel' ) );
+						$trip_extras_heading = apply_filters( 'wp_travel_trip_extras_heading', __( 'Trip Extras:', 'text-domain' ) );
 						echo esc_html( $trip_extras_heading );
 					?>
 					</h3>

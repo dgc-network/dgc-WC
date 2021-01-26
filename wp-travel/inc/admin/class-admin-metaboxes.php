@@ -39,92 +39,92 @@ class WP_Travel_Admin_Metaboxes {
 	public function add_tabs( $tabs ) {
 		$trips = array(
 			'detail'              => array(
-				'tab_label'     => __( 'General', 'wp-travel' ),
-				'content_title' => __( 'General', 'wp-travel' ),
+				'tab_label'     => __( 'General', 'text-domain' ),
+				'content_title' => __( 'General', 'text-domain' ),
 				'priority'      => 10,
 				'callback'      => 'wp_travel_trip_callback_detail',
 				'icon'          => 'fa-sticky-note',
 			),
 			'itineraries_content' => array(
-				'tab_label'     => __( 'Itinerary', 'wp-travel' ),
-				'content_title' => __( 'Outline', 'wp-travel' ),
+				'tab_label'     => __( 'Itinerary', 'text-domain' ),
+				'content_title' => __( 'Outline', 'text-domain' ),
 				'priority'      => 20,
 				'callback'      => 'wp_travel_trip_callback_itineraries_content',
 				'icon'          => 'fa-clipboard-list',
 			),
 			'price'               => array(
-				'tab_label'     => __( 'Dates and Prices', 'wp-travel' ),
-				'content_title' => __( 'Dates and Prices', 'wp-travel' ),
+				'tab_label'     => __( 'Dates and Prices', 'text-domain' ),
+				'content_title' => __( 'Dates and Prices', 'text-domain' ),
 				'priority'      => 30,
 				'callback'      => 'wp_travel_trip_callback_price',
 				'icon'          => 'fa-tag',
 			),
 			'trip_includes'       => array(
-				'tab_label'     => __( 'Includes/ Excludes', 'wp-travel' ),
-				'content_title' => __( 'Trip Includes and Excludes', 'wp-travel' ),
+				'tab_label'     => __( 'Includes/ Excludes', 'text-domain' ),
+				'content_title' => __( 'Trip Includes and Excludes', 'text-domain' ),
 				'priority'      => 40,
 				'callback'      => 'wp_travel_trip_callback_trip_includes',
 				'icon'          => 'fa-sliders-h',
 			),
 			'trip_facts'          => array(
-				'tab_label'     => __( 'Facts', 'wp-travel' ),
-				'content_title' => __( 'Trip Facts', 'wp-travel' ),
+				'tab_label'     => __( 'Facts', 'text-domain' ),
+				'content_title' => __( 'Trip Facts', 'text-domain' ),
 				'priority'      => 50,
 				'callback'      => 'wp_travel_trip_callback_trip_facts',
 				'icon'          => 'fa-industry',
 			),
 			'images_gallery'      => array(
-				'tab_label'     => __( 'Gallery', 'wp-travel' ),
-				'content_title' => __( 'Gallery', 'wp-travel' ),
+				'tab_label'     => __( 'Gallery', 'text-domain' ),
+				'content_title' => __( 'Gallery', 'text-domain' ),
 				'priority'      => 60,
 				'callback'      => 'wp_travel_trip_callback_images_gallery',
 				'icon'          => 'fa-images',
 			),
 			'locations'           => array(
-				'tab_label'     => __( 'Locations', 'wp-travel' ),
-				'content_title' => __( 'Locations', 'wp-travel' ),
+				'tab_label'     => __( 'Locations', 'text-domain' ),
+				'content_title' => __( 'Locations', 'text-domain' ),
 				'priority'      => 70,
 				'callback'      => 'wp_travel_trip_callback_locations',
 				'icon'          => 'fa-map-marked-alt',
 			),
 			'cart_checkout'       => array(
-				'tab_label'     => __( 'Cart & Checkout', 'wp-travel' ),
-				'content_title' => __( 'Cart & Checkout Options', 'wp-travel' ),
+				'tab_label'     => __( 'Cart & Checkout', 'text-domain' ),
+				'content_title' => __( 'Cart & Checkout Options', 'text-domain' ),
 				'priority'      => 80,
 				'callback'      => 'wp_travel_trip_callback_cart_checkout',
 				'icon'          => 'fa-shopping-cart',
 			),
 			'inventory'           => array(
-				'tab_label'     => __( 'Inventory Options', 'wp-travel' ),
-				'content_title' => __( 'Trip Inventory', 'wp-travel' ),
+				'tab_label'     => __( 'Inventory Options', 'text-domain' ),
+				'content_title' => __( 'Trip Inventory', 'text-domain' ),
 				'priority'      => 90,
 				'callback'      => 'wp_travel_trip_callback_inventory',
 				'icon'          => 'fa-truck-moving',
 			),
 			'faq'                 => array(
-				'tab_label'     => __( 'FAQs', 'wp-travel' ),
-				'content_title' => __( 'FAQs', 'wp-travel' ),
+				'tab_label'     => __( 'FAQs', 'text-domain' ),
+				'content_title' => __( 'FAQs', 'text-domain' ),
 				'priority'      => 100,
 				'callback'      => 'wp_travel_trip_callback_faq',
 				'icon'          => 'fa-question-circle',
 			),
 			'downloads'           => array(
-				'tab_label'     => __( 'Downloads', 'wp-travel' ),
-				'content_title' => __( 'Downloads', 'wp-travel' ),
+				'tab_label'     => __( 'Downloads', 'text-domain' ),
+				'content_title' => __( 'Downloads', 'text-domain' ),
 				'priority'      => 110,
 				'callback'      => 'wp_travel_trip_callback_downloads',
 				'icon'          => 'fa-download',
 			),
 			'tabs'                => array(
-				'tab_label'     => __( 'Tabs', 'wp-travel' ),
-				'content_title' => __( 'Tabs', 'wp-travel' ),
+				'tab_label'     => __( 'Tabs', 'text-domain' ),
+				'content_title' => __( 'Tabs', 'text-domain' ),
 				'priority'      => 120,
 				'callback'      => 'wp_travel_trip_callback_tabs',
 				'icon'          => 'fa-folder-open',
 			),
 			'misc_options'        => array(
-				'tab_label'     => __( 'Misc. Options', 'wp-travel' ),
-				'content_title' => __( 'Miscellanaous Options', 'wp-travel' ),
+				'tab_label'     => __( 'Misc. Options', 'text-domain' ),
+				'content_title' => __( 'Miscellanaous Options', 'text-domain' ),
 				'priority'      => 120,
 				'callback'      => 'wp_travel_trip_callback_misc_options',
 				// 'icon'          => 'fa-images',
@@ -143,11 +143,11 @@ class WP_Travel_Admin_Metaboxes {
 		$settings        = wp_travel_get_settings();
 		$switch_to_react = $settings['wp_travel_switch_to_react'];
 		if ( 'no' === $switch_to_react ) {
-			add_meta_box( 'wp-travel-' . WP_TRAVEL_POST_TYPE . '-detail', __( 'Trip Detail', 'wp-travel' ), array( $this, 'load_tab_template' ), WP_TRAVEL_POST_TYPE, 'normal', 'high' );
+			add_meta_box( 'wp-travel-' . WP_TRAVEL_POST_TYPE . '-detail', __( 'Trip Detail', 'text-domain' ), array( $this, 'load_tab_template' ), WP_TRAVEL_POST_TYPE, 'normal', 'high' );
 			remove_meta_box( 'travel_locationsdiv', WP_TRAVEL_POST_TYPE, 'side' );
 		}
-		add_meta_box( 'wp-travel-itinerary-payment-detail', __( 'Payment Detail', 'wp-travel' ), array( $this, 'wp_travel_payment_info' ), 'itinerary-booking', 'normal', 'low' );
-		add_meta_box( 'wp-travel-itinerary-single-payment-detail', __( 'Payment Info', 'wp-travel' ), array( $this, 'wp_travel_single_payment_info' ), 'itinerary-booking', 'side', 'low' );
+		add_meta_box( 'wp-travel-itinerary-payment-detail', __( 'Payment Detail', 'text-domain' ), array( $this, 'wp_travel_payment_info' ), 'itinerary-booking', 'normal', 'low' );
+		add_meta_box( 'wp-travel-itinerary-single-payment-detail', __( 'Payment Info', 'text-domain' ), array( $this, 'wp_travel_single_payment_info' ), 'itinerary-booking', 'side', 'low' );
 	}
 
 	/**
@@ -170,19 +170,19 @@ class WP_Travel_Admin_Metaboxes {
 					<table>
 						<?php if ( isset( $payment_args['payment_id'] ) ) : ?>
 							<tr>
-								<th align="right"><?php esc_html_e( 'Payment ID : ', 'wp-travel' ); ?></th>
+								<th align="right"><?php esc_html_e( 'Payment ID : ', 'text-domain' ); ?></th>
 								<td><?php echo esc_html( $payment_args['payment_id'] ); ?></td>
 							</tr>
 						<?php endif; ?>
 						<?php if ( isset( $payment_args['payment_method'] ) ) : ?>
 							<tr>
-								<th align="right"><?php esc_html_e( 'Payment Method : ', 'wp-travel' ); ?></th>
+								<th align="right"><?php esc_html_e( 'Payment Method : ', 'text-domain' ); ?></th>
 								<td><?php echo esc_html( $payment_args['payment_method'] ); ?></td>
 							</tr>
 						<?php endif; ?>
 						<?php if ( isset( $payment_args['payment_date'] ) ) : ?>
 							<tr>
-								<th align="right"><?php esc_html_e( 'Payment Date : ', 'wp-travel' ); ?></th>
+								<th align="right"><?php esc_html_e( 'Payment Date : ', 'text-domain' ); ?></th>
 								<td><?php echo esc_html( $payment_args['payment_date'] ); ?></td>
 							</tr>
 						<?php endif; ?>
@@ -248,7 +248,7 @@ class WP_Travel_Admin_Metaboxes {
 		?>
 		<table>
 			<tr>
-				<td><strong><?php esc_html_e( 'Status', 'wp-travel' ); ?></strong></td>
+				<td><strong><?php esc_html_e( 'Status', 'text-domain' ); ?></strong></td>
 				<td>
 				<select id="wp_travel_payment_status" name="wp_travel_payment_status" >
 				<?php foreach ( $status as $value => $st ) : ?>
@@ -267,19 +267,19 @@ class WP_Travel_Admin_Metaboxes {
 				$due_amount  = $details['due_amount'];
 				?>
 				<tr>
-					<td><strong><?php esc_html_e( 'Payment Mode', 'wp-travel' ); ?></strong></td>
+					<td><strong><?php esc_html_e( 'Payment Mode', 'text-domain' ); ?></strong></td>
 					<td><?php echo esc_html( $details['payment_mode'] ); ?></td>
 				</tr>
 				<tr>
-					<td><strong><?php esc_html_e( 'Total Price', 'wp-travel' ); ?></strong></td>
+					<td><strong><?php esc_html_e( 'Total Price', 'text-domain' ); ?></strong></td>
 					<td><?php echo wp_travel_get_formated_price_currency( $total_price ); ?></td>
 				</tr>
 				<tr>
-					<td><strong><?php esc_html_e( 'Paid Amount', 'wp-travel' ); ?></strong></td>
+					<td><strong><?php esc_html_e( 'Paid Amount', 'text-domain' ); ?></strong></td>
 					<td><?php echo wp_travel_get_formated_price_currency( $paid_amount ); ?></td>
 				</tr>
 				<tr>
-					<td><strong><?php esc_html_e( 'Due Amount', 'wp-travel' ); ?></strong></td>
+					<td><strong><?php esc_html_e( 'Due Amount', 'text-domain' ); ?></strong></td>
 					<td><?php echo wp_travel_get_formated_price_currency( $due_amount ); ?></td>
 				</tr>
 			<?php endif; ?>
@@ -323,8 +323,8 @@ class WP_Travel_Admin_Metaboxes {
 			#>
 			<li data-attachmentid="{{val.id}}" id="wp-travel-gallery-image-list-{{val.id}}">
 				<!-- <a href=""> -->
-					<img src="{{val.url}}" width="100" title="<?php esc_html_e( 'Click to make featured image.', 'wp-travel' ); ?>"/>
-					<span><?php esc_html_e( 'Delete', 'wp-travel' ); ?></span>
+					<img src="{{val.url}}" width="100" title="<?php esc_html_e( 'Click to make featured image.', 'text-domain' ); ?>"/>
+					<span><?php esc_html_e( 'Delete', 'text-domain' ); ?></span>
 				<!-- </a> -->
 			</li>
 			<#
@@ -358,19 +358,19 @@ class WP_Travel_Admin_Metaboxes {
 		?>
 		<table class="form-table trip-info-sidebar">
 			<tr>
-				<td><label for="wp-travel-detail"><?php esc_html_e( 'Trip Code', 'wp-travel' ); ?></label></td>
+				<td><label for="wp-travel-detail"><?php esc_html_e( 'Trip Code', 'text-domain' ); ?></label></td>
 				<td><input type="text" id="wp-travel-trip-code" disabled="disabled" value="<?php echo esc_attr( $trip_code ); ?>" /></td>
 			</tr>
 		</table>
 		<?php
 		if ( ! class_exists( 'WP_Travel_Utilities_Core' ) ) :
 			$args = array(
-				'title'       => __( 'Need Custom Trip Code ?', 'wp-travel' ),
-				'content'     => __( 'By upgrading to Pro, you can get Trip Code Customization and removal features and more !', 'wp-travel' ),
+				'title'       => __( 'Need Custom Trip Code ?', 'text-domain' ),
+				'content'     => __( 'By upgrading to Pro, you can get Trip Code Customization and removal features and more !', 'text-domain' ),
 				'link'        => 'https://wptravel.io/wp-travel-pro/',
-				'link_label'  => __( 'Get WP Travel Pro', 'wp-travel' ),
+				'link_label'  => __( 'Get WP Travel Pro', 'text-domain' ),
 				'link2'       => 'https://wptravel.io/downloads/wp-travel-utilities/',
-				'link2_label' => __( 'Get WP Travel Utilities Addon', 'wp-travel' ),
+				'link2_label' => __( 'Get WP Travel Utilities Addon', 'text-domain' ),
 			);
 			wp_travel_upsell_message( $args );
 		endif;

@@ -38,8 +38,8 @@ class WP_Travel_Admin_Uploader {
 
 			?>
 			<!-- Add from Media Library -->
-			<a href="#" class="wp-travel-open-uploader button" title="<?php esc_html_e( 'Click Here to Insert from Media Library', 'wp-travel' ); ?>" style="vertical-align: baseline;">
-					<?php esc_html_e( 'Select Files from Media Library', 'wp-travel' ); ?>
+			<a href="#" class="wp-travel-open-uploader button" title="<?php esc_html_e( 'Click Here to Insert from Media Library', 'text-domain' ); ?>" style="vertical-align: baseline;">
+					<?php esc_html_e( 'Select Files from Media Library', 'text-domain' ); ?>
 			</a>
 
 			<!-- Progress Bar -->
@@ -47,13 +47,13 @@ class WP_Travel_Admin_Uploader {
 					<div class="wp-travel-upload-progress-bar-inner"></div>
 					<div class="wp-travel-upload-progress-bar-status">
 							<span class="uploading">
-									<?php esc_html_e( 'Uploading Image', 'wp-travel' ); ?>
+									<?php esc_html_e( 'Uploading Image', 'text-domain' ); ?>
 									<span class="current">1</span>
-									<?php esc_html_e( 'of', 'wp-travel' ); ?>
+									<?php esc_html_e( 'of', 'text-domain' ); ?>
 									<span class="total">3</span>
 							</span>
 
-							<span class="done"><?php esc_html_e( 'All images uploaded.', 'wp-travel' ); ?></span>
+							<span class="done"><?php esc_html_e( 'All images uploaded.', 'text-domain' ); ?></span>
 					</div>
 			</div>
 			<?php

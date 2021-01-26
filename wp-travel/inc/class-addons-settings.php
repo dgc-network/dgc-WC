@@ -89,7 +89,7 @@ if ( ! class_exists( 'WP_Travel_Addons_Settings' ) ) {
 			$plugin_name_replaced = str_replace( ' ', '_', $plugin_name_lower );
 
 			$field_name  = 'show_' . $plugin_name_replaced;
-			$field_label = __( $plugin_name_ucfirst, 'wp-travel' );
+			$field_label = __( $plugin_name_ucfirst, 'text-domain' );
 
 			$field_value = isset( $settings[ $field_name ] ) ? $settings[ $field_name ] : 'yes'; ?>
 			<table class="form-table">
@@ -105,7 +105,7 @@ if ( ! class_exists( 'WP_Travel_Addons_Settings' ) ) {
 								<span class="switch"></span>
 							</label>
 						</span>
-						<p class="description"><label for="<?php echo esc_attr( $field_name ); ?>"><?php esc_html_e( sprintf( 'Show all your "%s" settings and enable its feature.', $field_label ), 'wp-travel', 'wp-travel-pro' ); ?></label></p>
+						<p class="description"><label for="<?php echo esc_attr( $field_name ); ?>"><?php esc_html_e( sprintf( 'Show all your "%s" settings and enable its feature.', $field_label ), 'text-domain', 'wp-travel-pro' ); ?></label></p>
 					</td>
 				</tr>
 			</table>

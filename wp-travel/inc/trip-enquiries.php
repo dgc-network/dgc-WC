@@ -30,14 +30,14 @@ function wp_travel_enquiries_form_fields() {
 			'label'   => '',
 			'name'    => 'wp_travel_label_submit_enquiry',
 			'id'      => 'wp_travel_label_submit_enquiry',
-			'default' => __( 'SUBMIT ENQUIRY', 'wp-travel' ),
+			'default' => __( 'SUBMIT ENQUIRY', 'text-domain' ),
 		);
 		$enquiry_fields['label_processing']     = array(
 			'type'    => 'hidden',
 			'label'   => '',
 			'name'    => 'wp_travel_label_processing',
 			'id'      => 'wp_travel_label_processing',
-			'default' => __( 'PROCESSING...', 'wp-travel' ),
+			'default' => __( 'PROCESSING...', 'text-domain' ),
 		);
 		$enquiry_fields['action']               = array(
 			'type'    => 'hidden',
@@ -61,7 +61,7 @@ function wp_travel_get_enquiries_form( $trips_dropdown = false ) {
 
 	$settings = wp_travel_get_settings();
 
-	$gdpr_msg = isset( $settings['wp_travel_gdpr_message'] ) ? esc_html( $settings['wp_travel_gdpr_message'] ) : __( 'By contacting us, you agree to our ', 'wp-travel' );
+	$gdpr_msg = isset( $settings['wp_travel_gdpr_message'] ) ? esc_html( $settings['wp_travel_gdpr_message'] ) : __( 'By contacting us, you agree to our ', 'text-domain' );
 
 	$privacy_policy_url = false;
 
@@ -80,7 +80,7 @@ function wp_travel_get_enquiries_form( $trips_dropdown = false ) {
 		'submit_button' => array(
 			'name'  => 'wp_travel_enquiry_submit',
 			'id'    => 'wp-travel-enquiry-submit',
-			'value' => apply_filters( 'wp_travel_enquiry_submit_button_label', __( 'SUBMIT ENQUIRY', 'wp-travel' ) ),
+			'value' => apply_filters( 'wp_travel_enquiry_submit_button_label', __( 'SUBMIT ENQUIRY', 'text-domain' ) ),
 		),
 		'nonce'         => array(
 			'action' => 'wp_travel_security_action',
@@ -106,7 +106,7 @@ function wp_travel_get_enquiries_form( $trips_dropdown = false ) {
 			$options[ $trip->ID ] = $trip->{'post_title'};
 		}
 		$fields['wp_travel_enquiry_post_id'] = array(
-			'label'   => __( 'Trips', 'wp-travel' ),
+			'label'   => __( 'Trips', 'text-domain' ),
 			'type'    => 'select',
 			'name'    => 'wp_travel_enquiry_post_id',
 			'id'      => 'wp-travel-enquiry-post-id',
@@ -125,7 +125,7 @@ function wp_travel_get_enquiries_form( $trips_dropdown = false ) {
 		// GDPR Compatibility for enquiry.
 		$fields['wp_travel_enquiry_gdpr'] = array(
 			'type'              => 'checkbox',
-			'label'             => __( 'Privacy Policy', 'wp-travel' ),
+			'label'             => __( 'Privacy Policy', 'text-domain' ),
 			'options'           => array( 'gdpr_agree' => sprintf( '%1s %2s', $gdpr_msg, $policy_link ) ),
 			'name'              => 'wp_travel_enquiry_gdpr_msg',
 			'id'                => 'wp-travel-enquiry-gdpr-msg',
@@ -156,7 +156,7 @@ function wp_travel_add_enquiries_data_metaboxes() {
 
 	$wp_travel_post_id = get_post_meta( $post->ID, 'wp_travel_post_id', true );
 
-	add_meta_box( 'wp-travel-enquiries-info', __( 'Enquiry Details <span class="wp-travel-view-enquiries"><a href="edit.php?post_type=itinerary-enquiries&wp_travel_post_id=' . $wp_travel_post_id . '">View All ' . get_the_title( $wp_travel_post_id ) . ' enquiries</a></span>', 'wp-travel' ), 'wp_travel_enquiries_info', 'itinerary-enquiries', 'normal', 'default' );
+	add_meta_box( 'wp-travel-enquiries-info', __( 'Enquiry Details <span class="wp-travel-view-enquiries"><a href="edit.php?post_type=itinerary-enquiries&wp_travel_post_id=' . $wp_travel_post_id . '">View All ' . get_the_title( $wp_travel_post_id ) . ' enquiries</a></span>', 'text-domain' ), 'wp_travel_enquiries_info', 'itinerary-enquiries', 'normal', 'default' );
 
 }
 
@@ -223,10 +223,10 @@ add_filter( 'manage_edit-itinerary-enquiries_columns', 'wp_travel_enquiries_list
 function wp_travel_enquiries_list_columns( $enquiries_column ) {
 
 	$new_columns['cb']            = '<input type="checkbox" />';
-	$new_columns['title']         = _x( 'Title', 'column name', 'wp-travel' );
-	$new_columns['contact_name']  = __( 'Contact Name', 'wp-travel' );
-	$new_columns['contact_email'] = __( 'Contact Email', 'wp-travel' );
-	$new_columns['date']          = __( 'Enquiry Date', 'wp-travel' );
+	$new_columns['title']         = _x( 'Title', 'column name', 'text-domain' );
+	$new_columns['contact_name']  = __( 'Contact Name', 'text-domain' );
+	$new_columns['contact_email'] = __( 'Contact Email', 'text-domain' );
+	$new_columns['date']          = __( 'Enquiry Date', 'text-domain' );
 	return $new_columns;
 }
 
@@ -330,7 +330,7 @@ function wp_travel_save_user_enquiry() {
 
 	if ( ! wp_verify_nonce( $_POST['nonce'], 'wp_travel_frontend_security' ) ) {
 
-		$errors['message'] = __( 'Nonce Verification Failed !!', 'wp-travel' );
+		$errors['message'] = __( 'Nonce Verification Failed !!', 'text-domain' );
 
 		wp_send_json_error( $errors );
 
@@ -355,7 +355,7 @@ function wp_travel_save_user_enquiry() {
 	// If this isn't a 'itineraries' post, don't update it.
 	if ( WP_TRAVEL_POST_TYPE !== $post_type ) {
 
-		$errors['message'] = __( 'Invalid Post Type', 'wp-travel' );
+		$errors['message'] = __( 'Invalid Post Type', 'text-domain' );
 
 		wp_send_json_error( $errors );
 
@@ -452,7 +452,7 @@ function wp_travel_save_user_enquiry() {
 
 		$errors = array(
 			'result'  => 0,
-			'message' => __( 'Your Enquiery has been added but the email could not be sent.', 'wp-travel' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function.', 'wp-travel' ),
+			'message' => __( 'Your Enquiery has been added but the email could not be sent.', 'text-domain' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function.', 'text-domain' ),
 		);
 
 		wp_send_json_error( $errors );
@@ -462,7 +462,7 @@ function wp_travel_save_user_enquiry() {
 	// If we reach here, Send Success message !!
 	$trip_name = get_the_title( $post_id );
 	$success   = array(
-		'message' => __( 'Enquiry sent succesfully !!', 'wp-travel' ),
+		'message' => __( 'Enquiry sent succesfully !!', 'text-domain' ),
 	);
 
 	// Send Success Message.
@@ -476,7 +476,7 @@ add_action( 'wp_ajax_nopriv_wp_travel_save_user_enquiry', 'wp_travel_save_user_e
 function wp_travel_enquiry_form_header() {
 	?>
 		<div class="wp-travel-inquiry__form-header">
-			<h3><?php echo sprintf( esc_html_x( 'Enquiry: %s', 'Trip Enquiry Form Title', 'wp-travel' ), get_the_title() ); ?></h3>
+			<h3><?php echo sprintf( esc_html_x( 'Enquiry: %s', 'Trip Enquiry Form Title', 'text-domain' ), get_the_title() ); ?></h3>
 		</div>
 	<?php
 }

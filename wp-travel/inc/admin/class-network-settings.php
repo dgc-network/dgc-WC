@@ -64,23 +64,23 @@ class WP_Travel_Network_Settings {
 		$sysinfo_url            = add_query_arg( array( 'page' => 'sysinfo' ), $url );
 
 		echo '<div class="wrap wp-trave-settings-warp">';
-			echo '<h1>' . __( 'WP Travel Settings', 'wp-travel' ) . '</h1>';
+			echo '<h1>' . __( 'WP Travel Settings', 'text-domain' ) . '</h1>';
 			echo '<div class="wp-trave-settings-form-warp">';
 			do_action( 'wp_travel_before_admin_setting_form' );
 			echo '<form method="post" action="' . esc_url( $url ) . '">';
 				echo '<div class="wp-travel-setting-buttons">';
-				submit_button( __( 'Save Settings', 'wp-travel' ), 'primary', 'save_settings_button', false, array( 'id' => 'save_settings_button_top' ) );
+				submit_button( __( 'Save Settings', 'text-domain' ), 'primary', 'save_settings_button', false, array( 'id' => 'save_settings_button_top' ) );
 				echo '</div>';
 				WP_Travel()->tabs->load( self::$collection, $args );
 				echo '<div class="wp-travel-setting-buttons">';
 				echo '<div class="wp-travel-setting-system-info">';
-					echo '<a href="' . esc_url( $sysinfo_url ) . '" title="' . __( 'View system information', 'wp-travel' ) . '"><span class="dashicons dashicons-info"></span>';
-						esc_html_e( 'System Information', 'wp-travel' );
+					echo '<a href="' . esc_url( $sysinfo_url ) . '" title="' . __( 'View system information', 'text-domain' ) . '"><span class="dashicons dashicons-info"></span>';
+						esc_html_e( 'System Information', 'text-domain' );
 					echo '</a>';
 				echo '</div>';
 				echo '<input type="hidden" name="current_tab" id="wp-travel-settings-current-tab">';
 				wp_nonce_field( 'wp_travel_settings_page_nonce' );
-				submit_button( __( 'Save Settings', 'wp-travel' ), 'primary', 'save_settings_button', false );
+				submit_button( __( 'Save Settings', 'text-domain' ), 'primary', 'save_settings_button', false );
 				echo '</div>';
 			echo '</form>';
 			do_action( 'wp_travel_after_admin_setting_form' );
@@ -96,8 +96,8 @@ class WP_Travel_Network_Settings {
 	public function add_tabs( $tabs ) {
 		
 		$settings_fields['license']                       = array(
-			'tab_label'     => __( 'License', 'wp-travel' ),
-			'content_title' => __( 'License Details', 'wp-travel' ),
+			'tab_label'     => __( 'License', 'text-domain' ),
+			'content_title' => __( 'License Details', 'text-domain' ),
 			'priority'      => 10,
 			'callback'      => 'wp_travel_settings_callback_license',
 			'icon'          => 'fa-id-badge',

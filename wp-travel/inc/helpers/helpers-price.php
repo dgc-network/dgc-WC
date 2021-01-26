@@ -15,8 +15,8 @@
  */
 function wp_travel_get_price_per_fields() {
 	$price_per = array(
-		'person' => __( 'Person', 'wp-travel' ),
-		'group'  => __( 'Group', 'wp-travel' ),
+		'person' => __( 'Person', 'text-domain' ),
+		'group'  => __( 'Group', 'text-domain' ),
 	);
 
 	return apply_filters( 'wp_travel_price_per_fields', $price_per );
@@ -750,7 +750,7 @@ function wp_travel_get_cart_attrs( $trip_id, $pax = 0, $price_key = '', $pricing
 	$group_size             = get_post_meta( $trip_id, 'wp_travel_group_size', true );
 	$group_size             = ! empty( $group_size ) ? $group_size : 999;
 
-	// $pax_label = ! empty( $per_person_text ) ? $per_person_text : __( 'Person', 'wp-travel' );
+	// $pax_label = ! empty( $per_person_text ) ? $per_person_text : __( 'Person', 'text-domain' );
 	if ( ! empty( $price_key ) && $enable_pricing_options ) {
 		$valid_price_key = wp_travel_is_price_key_valid( $trip_id, $price_key );
 
@@ -1102,8 +1102,8 @@ function wp_travel_get_pricing_option_type( $post_id = null ) {
 
 function wp_travel_get_payment_modes() {
 	$modes = array(
-		'partial' => esc_html__( 'Partial Payment', 'wp-travel' ),
-		'full'    => esc_html__( 'Full Payment', 'wp-travel' ),
+		'partial' => esc_html__( 'Partial Payment', 'text-domain' ),
+		'full'    => esc_html__( 'Full Payment', 'text-domain' ),
 	);
 	return apply_filters( 'wp_travel_payment_modes', $modes );
 }

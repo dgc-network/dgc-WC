@@ -29,31 +29,31 @@ class Wp_Travel_User_Account {
 	private static function dashboard_menus() {
 		$dashboard_menus = array(
 			'dashboard' => array(
-				'menu_title' => __( 'Dashboard', 'wp-travel' ),
+				'menu_title' => __( 'Dashboard', 'text-domain' ),
 				'menu_icon' => 'wt-icon wt-icon-tachometer',
 				'menu_content_cb' => array( __CLASS__, 'dashboard_menu_dashboard_tab' ),
 				'priority' => 10,
 			),
 			'bookings' => array(
-				'menu_title' => __( 'Bookings', 'wp-travel' ),
+				'menu_title' => __( 'Bookings', 'text-domain' ),
 				'menu_icon' => 'wt-icon wt-icon-th-list',
 				'menu_content_cb' => array( __CLASS__, 'dashboard_menu_bookings_tab' ),
 				'priority' => 20,
 			),
 			'address' => array(
-				'menu_title' => __( 'Address', 'wp-travel' ),
+				'menu_title' => __( 'Address', 'text-domain' ),
 				'menu_icon' => 'wt-icon-regular wt-icon-address-book',
 				'menu_content_cb' => array( __CLASS__, 'dashboard_menu_address_tab' ),
 				'priority' => 30,
 			),
 			'account' => array(
-				'menu_title' => __( 'Account', 'wp-travel' ),
+				'menu_title' => __( 'Account', 'text-domain' ),
 				'menu_icon' => 'wt-icon wt-icon-user',
 				'menu_content_cb' => array( __CLASS__, 'dashboard_menu_account_tab' ),
 				'priority' => 40,
 			),
 			'logout' => array(
-				'menu_title' => __( 'Logout', 'wp-travel' ),
+				'menu_title' => __( 'Logout', 'text-domain' ),
 				'menu_icon' => 'wt-icon wt-icon-power-off',
 				'menu_content_cb' => array( __CLASS__, 'dashboard_menu_logout_tab' ),
 				'priority' => 50,
@@ -96,7 +96,7 @@ class Wp_Travel_User_Account {
 			// After password reset, add confirmation message.
 			if ( ! empty( $_GET['password-reset'] ) ) { ?>
 
-				<p class="col-xs-12 wp-travel-notice-success wp-travel-notice"><?php esc_html_e( 'Your Password has been updated successfully. Please Log in to continue.', 'wp-travel' ); ?></p>
+				<p class="col-xs-12 wp-travel-notice-success wp-travel-notice"><?php esc_html_e( 'Your Password has been updated successfully. Please Log in to continue.', 'text-domain' ); ?></p>
 
 			<?php
 
@@ -168,7 +168,7 @@ class Wp_Travel_User_Account {
 		$user = check_password_reset_key( $key, $login );
 
 		if ( is_wp_error( $user ) ) {
-			WP_Travel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . __( 'This key is invalid or has already been used. Please reset your password again if needed.', 'wp-travel' ), 'error' );
+			WP_Travel()->notices->add( '<strong>' . __( 'Error:', 'text-domain' ) . '</strong> ' . __( 'This key is invalid or has already been used. Please reset your password again if needed.', 'text-domain' ), 'error' );
 			return false;
 		}
 
@@ -188,7 +188,7 @@ class Wp_Travel_User_Account {
 
 		if ( empty( $login ) ) {
 
-			WP_Travel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . __( 'Enter an email or username.', 'wp-travel' ), 'error' );
+			WP_Travel()->notices->add( '<strong>' . __( 'Error:', 'text-domain' ) . '</strong> ' . __( 'Enter an email or username.', 'text-domain' ), 'error' );
 
 			return false;
 
@@ -208,20 +208,20 @@ class Wp_Travel_User_Account {
 
 		if ( $errors->get_error_code() ) {
 
-			WP_Travel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . $errors->get_error_message(), 'error' );
+			WP_Travel()->notices->add( '<strong>' . __( 'Error:', 'text-domain' ) . '</strong> ' . $errors->get_error_message(), 'error' );
 
 			return false;
 		}
 
 		if ( ! $user_data ) {
 
-			WP_Travel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . __( 'Invalid username or email.', 'wp-travel' ), 'error' );
+			WP_Travel()->notices->add( '<strong>' . __( 'Error:', 'text-domain' ) . '</strong> ' . __( 'Invalid username or email.', 'text-domain' ), 'error' );
 
 			return false;
 		}
 
 		if ( is_multisite() && ! is_user_member_of_blog( $user_data->ID, get_current_blog_id() ) ) {
-			WP_Travel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . __( 'Invalid username or email.', 'wp-travel' ), 'error' );
+			WP_Travel()->notices->add( '<strong>' . __( 'Error:', 'text-domain' ) . '</strong> ' . __( 'Invalid username or email.', 'text-domain' ), 'error' );
 
 			return false;
 		}
@@ -235,13 +235,13 @@ class Wp_Travel_User_Account {
 
 		if ( ! $allow ) {
 
-			WP_Travel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . __( 'Password reset is not allowed for this user.', 'wp-travel' ), 'error' );
+			WP_Travel()->notices->add( '<strong>' . __( 'Error:', 'text-domain' ) . '</strong> ' . __( 'Password reset is not allowed for this user.', 'text-domain' ), 'error' );
 
 			return false;
 
 		} elseif ( is_wp_error( $allow ) ) {
 
-			WP_Travel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . $allow->get_error_message(), 'error' );
+			WP_Travel()->notices->add( '<strong>' . __( 'Error:', 'text-domain' ) . '</strong> ' . $allow->get_error_message(), 'error' );
 
 			return false;
 		}
@@ -269,7 +269,7 @@ class Wp_Travel_User_Account {
 			$user_reset_key  = $key;
 			$user_user_email = stripslashes( $user_object->user_email );
 			$user_recipient  = $user_user_email;
-			$user_subject    = __( 'Password Reset Request', 'wp-travel' );
+			$user_subject    = __( 'Password Reset Request', 'text-domain' );
 
 			if ( ! wp_mail( $user_recipient, $user_subject, $email_content, $headers ) ) {
 

@@ -46,11 +46,11 @@ class Wp_Travel_Form_Handler {
 				$validation_error = apply_filters( 'wp_travel_process_login_errors', $validation_error, $_POST['username'], $_POST['password'] );
 
 				if ( $validation_error->get_error_code() ) {
-					throw new Exception( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . $validation_error->get_error_message() );
+					throw new Exception( '<strong>' . __( 'Error:', 'text-domain' ) . '</strong> ' . $validation_error->get_error_message() );
 				}
 
 				if ( empty( $creds['user_login'] ) ) {
-					throw new Exception( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . __( 'Username is required.', 'wp-travel' ) );
+					throw new Exception( '<strong>' . __( 'Error:', 'text-domain' ) . '</strong> ' . __( 'Username is required.', 'text-domain' ) );
 				}
 
 				// On multisite, ensure user exists on current site, if not add them before allowing login.
@@ -85,12 +85,12 @@ class Wp_Travel_Form_Handler {
 				}
 			} catch ( Exception $e ) {
 
-				WP_Travel()->notices->add( apply_filters( 'wp_travel_login_errors', __( '<strong>Error :</strong>Invalid Username or Password', 'wp-travel' ) ), 'error' );
+				WP_Travel()->notices->add( apply_filters( 'wp_travel_login_errors', __( '<strong>Error :</strong>Invalid Username or Password', 'text-domain' ) ), 'error' );
 
 			}
 		} elseif ( isset( $_POST['username'] ) && empty( $_POST['username'] ) && wp_verify_nonce( $nonce_value, 'wp-travel-login' ) ) {
 
-			WP_Travel()->notices->add( apply_filters( 'wp_travel_login_errors', __( '<strong>Error :</strong>Username can not be empty', 'wp-travel' ) ), 'error' );
+			WP_Travel()->notices->add( apply_filters( 'wp_travel_login_errors', __( '<strong>Error :</strong>Username can not be empty', 'text-domain' ) ), 'error' );
 
 		}
 	}
@@ -142,7 +142,7 @@ class Wp_Travel_Form_Handler {
 				exit;
 
 			} catch ( Exception $e ) {
-				WP_Travel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . $e->getMessage(), 'error' );
+				WP_Travel()->notices->add( '<strong>' . __( 'Error:', 'text-domain' ) . '</strong> ' . $e->getMessage(), 'error' );
 			}
 		}
 	}
@@ -183,11 +183,11 @@ class Wp_Travel_Form_Handler {
 
 		if ( $user instanceof WP_User ) {
 			if ( empty( $posted_fields['password_1'] ) ) {
-				WP_Travel()->notices->add( __( '<strong>Error :</strong>Please enter your password.', 'wp-travel' ), 'error' );
+				WP_Travel()->notices->add( __( '<strong>Error :</strong>Please enter your password.', 'text-domain' ), 'error' );
 			}
 
 			if ( $posted_fields['password_1'] !== $posted_fields['password_2'] ) {
-				WP_Travel()->notices->add( __( '<strong>Error :</strong>Passwords do not match', 'wp-travel' ), 'error' );
+				WP_Travel()->notices->add( __( '<strong>Error :</strong>Passwords do not match', 'text-domain' ), 'error' );
 			}
 
 			$errors = new WP_Error();
@@ -259,14 +259,14 @@ class Wp_Travel_Form_Handler {
 
 		// Handle required fields.
 		$required_fields = apply_filters( 'wp_travel_save_customer_billing_details_required_fields', array(
-			'customer_billing_address' => __( 'Billing Address', 'wp-travel' ),
-			'customer_billing_city'  => __( 'Billing City', 'wp-travel' ),
-			'customer_zip_code'      => __( 'ZIP Code', 'wp-travel' ),
+			'customer_billing_address' => __( 'Billing Address', 'text-domain' ),
+			'customer_billing_city'  => __( 'Billing City', 'text-domain' ),
+			'customer_zip_code'      => __( 'ZIP Code', 'text-domain' ),
 		) );
 
 		foreach ( $required_fields as $field_key => $field_name ) {
 			if ( empty( $_POST[ $field_key ] ) ) {
-				WP_Travel()->notices->add( sprintf( __( '<strong>Error:</strong> %s is a required field.', 'wp-travel' ), esc_html( $field_name ) ), 'error' );
+				WP_Travel()->notices->add( sprintf( __( '<strong>Error:</strong> %s is a required field.', 'text-domain' ), esc_html( $field_name ) ), 'error' );
 			}
 		}
 
@@ -283,7 +283,7 @@ class Wp_Travel_Form_Handler {
 
 			update_user_meta( $user_id, 'wp_travel_customer_billing_details', $data_array );
 
-			WP_Travel()->notices->add( __( 'Billing Details Updated Successfully', 'wp-travel' ), 'success' );
+			WP_Travel()->notices->add( __( 'Billing Details Updated Successfully', 'text-domain' ), 'success' );
 
 			do_action( 'wp_travel_save_billing_details', $user_id );
 
@@ -336,41 +336,41 @@ class Wp_Travel_Form_Handler {
 
 		// Handle required fields.
 		$required_fields = apply_filters( 'wp_travel_save_account_details_required_fields', array(
-			'account_first_name' => __( 'First name', 'wp-travel' ),
-			'account_last_name'  => __( 'Last name', 'wp-travel' ),
-			'account_email'      => __( 'Email address', 'wp-travel' ),
+			'account_first_name' => __( 'First name', 'text-domain' ),
+			'account_last_name'  => __( 'Last name', 'text-domain' ),
+			'account_email'      => __( 'Email address', 'text-domain' ),
 		) );
 
 		foreach ( $required_fields as $field_key => $field_name ) {
 			if ( empty( $_POST[ $field_key ] ) ) {
-				WP_Travel()->notices->add( sprintf( __( '<strong>Error:</strong> %s is a required field.', 'wp-travel' ), esc_html( $field_name ) ), 'error' );
+				WP_Travel()->notices->add( sprintf( __( '<strong>Error:</strong> %s is a required field.', 'text-domain' ), esc_html( $field_name ) ), 'error' );
 			}
 		}
 
 		if ( $account_email ) {
 			$account_email = sanitize_email( $account_email );
 			if ( ! is_email( $account_email ) ) {
-				WP_Travel()->notices->add( __( 'Please Provide a valid email address', 'wp-travel' ), 'error' );
+				WP_Travel()->notices->add( __( 'Please Provide a valid email address', 'text-domain' ), 'error' );
 			} elseif ( email_exists( $account_email ) && $account_email !== $current_user->user_email ) {
-				WP_Travel()->notices->add( __( 'The email address is already registered', 'wp-travel' ), 'error' );
+				WP_Travel()->notices->add( __( 'The email address is already registered', 'text-domain' ), 'error' );
 			}
 			$user->user_email = $account_email;
 		}
 
 		if ( ! empty( $pass_cur ) && empty( $pass1 ) && empty( $pass2 ) ) {
-			WP_Travel()->notices->add( __( 'Please Fill Out All Password Fields.', 'wp-travel' ), 'error' );
+			WP_Travel()->notices->add( __( 'Please Fill Out All Password Fields.', 'text-domain' ), 'error' );
 			$save_pass = false;
 		} elseif ( ! empty( $pass1 ) && empty( $pass_cur ) ) {
-			WP_Travel()->notices->add( __( 'Please Enter Your Current Password', 'wp-travel' ), 'error' );
+			WP_Travel()->notices->add( __( 'Please Enter Your Current Password', 'text-domain' ), 'error' );
 			$save_pass = false;
 		} elseif ( ! empty( $pass1 ) && empty( $pass2 ) ) {
-			WP_Travel()->notices->add( __( 'Please re-enter your password', 'wp-travel' ), 'error' );
+			WP_Travel()->notices->add( __( 'Please re-enter your password', 'text-domain' ), 'error' );
 			$save_pass = false;
 		} elseif ( ( ! empty( $pass1 ) || ! empty( $pass2 ) ) && $pass1 !== $pass2 ) {
-			WP_Travel()->notices->add( __( 'New Passwords do not match', 'wp-travel' ), 'error' );
+			WP_Travel()->notices->add( __( 'New Passwords do not match', 'text-domain' ), 'error' );
 			$save_pass = false;
 		} elseif ( ! empty( $pass1 ) && ! wp_check_password( $pass_cur, $current_user->user_pass, $current_user->ID ) ) {
-			WP_Travel()->notices->add( __( 'Your current password is incorrect', 'wp-travel' ), 'error' );
+			WP_Travel()->notices->add( __( 'Your current password is incorrect', 'text-domain' ), 'error' );
 			$save_pass = false;
 		}
 
@@ -391,7 +391,7 @@ class Wp_Travel_Form_Handler {
 		if ( wp_travel_get_notice_count( 'error' ) === 0 ) {
 			wp_update_user( $user );
 
-			WP_Travel()->notices->add( __( 'Account Details Updated Successfully', 'wp-travel' ), 'success' );
+			WP_Travel()->notices->add( __( 'Account Details Updated Successfully', 'text-domain' ), 'success' );
 
 			do_action( 'wp_travel__save_account_details', $user->ID );
 

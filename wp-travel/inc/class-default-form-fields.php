@@ -10,22 +10,22 @@ class WP_Travel_Default_Form_Fields {
 		$fields = array(
 			'full_name' => array(
 				'type'        => 'text',
-				'label'       => __( 'Full Name', 'wp-travel' ),
+				'label'       => __( 'Full Name', 'text-domain' ),
 				'name'        => 'wp_travel_enquiry_name',
 				'id'          => 'wp-travel-enquiry-name',
-				'placeholder' => __( 'Enter your name', 'wp-travel' ),
+				'placeholder' => __( 'Enter your name', 'text-domain' ),
 				'validations' => array(
 					'required'  => true,
 					'maxlength' => '80',
 				),
 				'attributes'  => array(
-					'placeholder' => __( 'Enter your full name', 'wp-travel' ),
+					'placeholder' => __( 'Enter your full name', 'text-domain' ),
 				),
 				'priority'    => 10,
 			),
 			'email'     => array(
 				'type'        => 'email',
-				'label'       => __( 'Email', 'wp-travel' ),
+				'label'       => __( 'Email', 'text-domain' ),
 				'name'        => 'wp_travel_enquiry_email',
 				'id'          => 'wp-travel-enquiry-email',
 				'validations' => array(
@@ -33,17 +33,17 @@ class WP_Travel_Default_Form_Fields {
 					'maxlength' => '60',
 				),
 				'attributes'  => array(
-					'placeholder' => __( 'Enter your email', 'wp-travel' ),
+					'placeholder' => __( 'Enter your email', 'text-domain' ),
 				),
 				'priority'    => 60,
 			),
 			'note'      => array(
 				'type'          => 'textarea',
-				'label'         => __( 'Enquiry Message', 'wp-travel' ),
+				'label'         => __( 'Enquiry Message', 'text-domain' ),
 				'name'          => 'wp_travel_enquiry_query',
 				'id'            => 'wp-travel-enquiry-query',
 				'attributes'    => array(
-					'placeholder' => __( 'Enter your enquiry...', 'wp-travel' ),
+					'placeholder' => __( 'Enter your enquiry...', 'text-domain' ),
 					'rows'        => 6,
 					'cols'        => 150,
 				),
@@ -63,7 +63,7 @@ class WP_Travel_Default_Form_Fields {
 		$fields = array(
 			'wp_travel_billing_address_heading' => array(
 				'type'        => 'heading',
-				'label'       => __( 'Billing Address', 'wp-travel' ),
+				'label'       => __( 'Billing Address', 'text-domain' ),
 				'name'        => 'wp_travel_billing_address_heading',
 				'id'          => 'wp-travel-billing-address-heading',
 				'class'       => 'panel-title',
@@ -72,7 +72,7 @@ class WP_Travel_Default_Form_Fields {
 			),
 			'address'                           => array(
 				'type'        => 'text',
-				'label'       => __( 'Address', 'wp-travel' ),
+				'label'       => __( 'Address', 'text-domain' ),
 				'name'        => 'wp_travel_address',
 				'id'          => 'wp-travel-address',
 				'validations' => array(
@@ -83,7 +83,7 @@ class WP_Travel_Default_Form_Fields {
 			),
 			'billing_city'                      => array(
 				'type'        => 'text',
-				'label'       => __( 'City', 'wp-travel' ),
+				'label'       => __( 'City', 'text-domain' ),
 				'name'        => 'billing_city',
 				'id'          => 'wp-travel-billing-city',
 				'validations' => array(
@@ -93,7 +93,7 @@ class WP_Travel_Default_Form_Fields {
 			),
 			'billing_postal'                    => array(
 				'type'        => 'text',
-				'label'       => __( 'Postal', 'wp-travel' ),
+				'label'       => __( 'Postal', 'text-domain' ),
 				'name'        => 'billing_postal',
 				'id'          => 'wp-travel-billing-postal',
 				'validations' => array(
@@ -103,7 +103,7 @@ class WP_Travel_Default_Form_Fields {
 			),
 			'country'                           => array(
 				'type'        => 'country_dropdown',
-				'label'       => __( 'Country', 'wp-travel' ),
+				'label'       => __( 'Country', 'text-domain' ),
 				'name'        => 'wp_travel_country',
 				'id'          => 'wp-travel-country',
 				'validations' => array(
@@ -113,10 +113,10 @@ class WP_Travel_Default_Form_Fields {
 			),
 			'note'                              => array(
 				'type'          => 'textarea',
-				'label'         => __( 'Note', 'wp-travel' ),
+				'label'         => __( 'Note', 'text-domain' ),
 				'name'          => 'wp_travel_note',
 				'id'            => 'wp-travel-note',
-				'placeholder'   => __( 'Enter some notes...', 'wp-travel' ),
+				'placeholder'   => __( 'Enter some notes...', 'text-domain' ),
 				'rows'          => 6,
 				'cols'          => 150,
 				'priority'      => 90,
@@ -166,7 +166,7 @@ class WP_Travel_Default_Form_Fields {
 		$booking_fileds = array(
 			'pax'            => array(
 				'type'        => 'hidden',
-				'label'       => __( 'Pax', 'wp-travel' ),
+				'label'       => __( 'Pax', 'text-domain' ),
 				'name'        => 'wp_travel_pax',
 				'id'          => 'wp-travel-pax',
 				'default'     => $pax_size,
@@ -207,7 +207,7 @@ class WP_Travel_Default_Form_Fields {
 		$fields = array(
 			'first_name'   => array(
 				'type'        => 'text',
-				'label'       => __( 'First Name', 'wp-travel' ),
+				'label'       => __( 'First Name', 'text-domain' ),
 				'name'        => 'wp_travel_fname_traveller',
 				'id'          => 'wp-travel-fname',
 				'validations' => array(
@@ -219,7 +219,7 @@ class WP_Travel_Default_Form_Fields {
 			),
 			'last_name'    => array(
 				'type'        => 'text',
-				'label'       => __( 'Last Name', 'wp-travel' ),
+				'label'       => __( 'Last Name', 'text-domain' ),
 				'name'        => 'wp_travel_lname_traveller',
 				'id'          => 'wp-travel-lname',
 				'validations' => array(
@@ -232,7 +232,7 @@ class WP_Travel_Default_Form_Fields {
 			),
 			'country'      => array(
 				'type'        => 'country_dropdown',
-				'label'       => __( 'Country', 'wp-travel' ),
+				'label'       => __( 'Country', 'text-domain' ),
 				'name'        => 'wp_travel_country_traveller',
 				'id'          => 'wp-travel-country',
 				'validations' => array(
@@ -243,7 +243,7 @@ class WP_Travel_Default_Form_Fields {
 			),
 			'phone_number' => array(
 				'type'        => 'text',
-				'label'       => __( 'Phone Number', 'wp-travel' ),
+				'label'       => __( 'Phone Number', 'text-domain' ),
 				'name'        => 'wp_travel_phone_traveller',
 				'id'          => 'wp-travel-phone',
 				'validations' => array(
@@ -256,7 +256,7 @@ class WP_Travel_Default_Form_Fields {
 			),
 			'email'        => array(
 				'type'        => 'email',
-				'label'       => __( 'Email', 'wp-travel' ),
+				'label'       => __( 'Email', 'text-domain' ),
 				'name'        => 'wp_travel_email_traveller',
 				'id'          => 'wp-travel-email',
 				'validations' => array(
@@ -268,7 +268,7 @@ class WP_Travel_Default_Form_Fields {
 			),
 			'dob'          => array(
 				'type'         => 'date',
-				'label'        => __( 'Date of Birth', 'wp-travel' ),
+				'label'        => __( 'Date of Birth', 'text-domain' ),
 				'name'         => 'wp_travel_date_of_birth_traveller',
 				'id'           => 'wp-travel-date-of-birth',
 				'class'        => 'wp-travel-datepicker',
@@ -282,14 +282,14 @@ class WP_Travel_Default_Form_Fields {
 			),
 			'gender'       => array(
 				'type'          => 'radio',
-				'label'         => __( 'Gender', 'wp-travel' ),
+				'label'         => __( 'Gender', 'text-domain' ),
 				'name'          => 'wp_travel_gender_traveller',
 				'id'            => 'wp-travel-gender',
 				'wrapper_class' => 'wp-travel-radio-group ',
 
 				'options'       => array(
-					'male'   => __( 'Male', 'wp-travel' ),
-					'female' => __( 'Female', 'wp-travel' ),
+					'male'   => __( 'Male', 'text-domain' ),
+					'female' => __( 'Female', 'text-domain' ),
 				),
 				'default'       => 'male',
 				'priority'      => 100,

@@ -42,28 +42,28 @@ class WP_Travel_Admin_Permalink_Settings {
 		// Add our settings
 		add_settings_field(
 			'wp_travel_trip_slug',            // id
-			__( 'Trip base', 'wp-travel' ),   // setting title
+			__( 'Trip base', 'text-domain' ),   // setting title
 			array( $this, 'trip_slug_input' ),  // display callback
 			'permalink',                        // settings page
 			'optional'                          // settings section
 		);
 		add_settings_field(
 			'wp_travel_trip_type_slug',            // id
-			__( 'Trip Type base', 'wp-travel' ),   // setting title
+			__( 'Trip Type base', 'text-domain' ),   // setting title
 			array( $this, 'trip_type_slug_input' ),  // display callback
 			'permalink',                        // settings page
 			'optional'                          // settings section
 		);
 		add_settings_field(
 			'wp_travel_destination_slug',            // id
-			__( 'Trip Destination base', 'wp-travel' ),   // setting title
+			__( 'Trip Destination base', 'text-domain' ),   // setting title
 			array( $this, 'destination_slug_input' ),  // display callback
 			'permalink',                        // settings page
 			'optional'                          // settings section
 		);
 		add_settings_field(
 			'wp_travel_activity_slug',            // id
-			__( 'Trip Activity base', 'wp-travel' ),   // setting title
+			__( 'Trip Activity base', 'text-domain' ),   // setting title
 			array( $this, 'activity_slug_input' ),  // display callback
 			'permalink',                        // settings page
 			'optional'                          // settings section
@@ -77,7 +77,7 @@ class WP_Travel_Admin_Permalink_Settings {
 	public function trip_slug_input() {
 		
 		?>
-		<input name="wp_travel_trip_base" type="text" class="regular-text code" value="<?php echo esc_attr( $this->permalinks['wp_travel_trip_base'] ); ?>" placeholder="<?php echo esc_attr_x( 'trip', 'slug', 'wp-travel' ) ?>" />
+		<input name="wp_travel_trip_base" type="text" class="regular-text code" value="<?php echo esc_attr( $this->permalinks['wp_travel_trip_base'] ); ?>" placeholder="<?php echo esc_attr_x( 'trip', 'slug', 'text-domain' ) ?>" />
 		<?php
 	}
 
@@ -87,7 +87,7 @@ class WP_Travel_Admin_Permalink_Settings {
 	public function trip_type_slug_input() {
 		
 		?>
-		<input name="wp_travel_trip_type_base" type="text" class="regular-text code" value="<?php echo esc_attr( $this->permalinks['wp_travel_trip_type_base'] ); ?>" placeholder="<?php echo esc_attr_x( 'trip-type', 'slug', 'wp-travel' ) ?>" />
+		<input name="wp_travel_trip_type_base" type="text" class="regular-text code" value="<?php echo esc_attr( $this->permalinks['wp_travel_trip_type_base'] ); ?>" placeholder="<?php echo esc_attr_x( 'trip-type', 'slug', 'text-domain' ) ?>" />
 		<?php
 	}
 
@@ -97,7 +97,7 @@ class WP_Travel_Admin_Permalink_Settings {
 	public function destination_slug_input() {
 		
 		?>
-		<input name="wp_travel_destination_base" type="text" class="regular-text code" value="<?php echo esc_attr( $this->permalinks['wp_travel_destination_base'] ); ?>" placeholder="<?php echo esc_attr_x( 'travel-locations', 'slug', 'wp-travel' ) ?>" />
+		<input name="wp_travel_destination_base" type="text" class="regular-text code" value="<?php echo esc_attr( $this->permalinks['wp_travel_destination_base'] ); ?>" placeholder="<?php echo esc_attr_x( 'travel-locations', 'slug', 'text-domain' ) ?>" />
 		<?php
 	}
 
@@ -107,7 +107,7 @@ class WP_Travel_Admin_Permalink_Settings {
 	public function activity_slug_input() {
 		
 		?>
-		<input name="wp_travel_activity_base" type="text" class="regular-text code" value="<?php echo esc_attr( $this->permalinks['wp_travel_activity_base'] ); ?>" placeholder="<?php echo esc_attr_x( 'travel-locations', 'slug', 'wp-travel' ) ?>" />
+		<input name="wp_travel_activity_base" type="text" class="regular-text code" value="<?php echo esc_attr( $this->permalinks['wp_travel_activity_base'] ); ?>" placeholder="<?php echo esc_attr_x( 'travel-locations', 'slug', 'text-domain' ) ?>" />
 		<?php
 	}
 

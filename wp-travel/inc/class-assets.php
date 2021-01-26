@@ -244,7 +244,7 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 				$max_pax       = isset( $booking_data['max_pax'] ) ? $booking_data['max_pax'] : 0;
 				$top_countries = ( isset( $booking_data['top_countries'] ) && count( $booking_data['top_countries'] ) > 0 ) ? $booking_data['top_countries'] : array( 'N/A' );
 				$top_itinerary = ( isset( $booking_data['top_itinerary'] ) && count( $booking_data['top_itinerary'] ) > 0 ) ? $booking_data['top_itinerary'] : array(
-					'name' => esc_html__( 'N/A', 'wp-travel' ),
+					'name' => esc_html__( 'N/A', 'text-domain' ),
 					'url'  => '',
 				);
 
@@ -263,7 +263,7 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 				}
 				$wp_travel_chart_data = array(
 					'ajax_url'          => 'admin-ajax.php',
-					'chart_title'       => esc_html__( 'Chart Stat', 'wp-travel' ),
+					'chart_title'       => esc_html__( 'Chart Stat', 'text-domain' ),
 					'labels'            => json_encode( $labels ),
 					'datasets'          => json_encode( $wp_travel_stat_data ),
 					'max_bookings'      => $max_bookings,
@@ -271,8 +271,8 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 					'top_countries'     => implode( ', ', $top_countries ),
 					'top_itinerary'     => $top_itinerary,
 					// Show more / less top countries.
-					'show_more_text'    => __( 'More', 'wp-travel' ),
-					'show_less_text'    => __( 'Less', 'wp-travel' ),
+					'show_more_text'    => __( 'More', 'text-domain' ),
+					'show_less_text'    => __( 'Less', 'text-domain' ),
 					'show_char'         => 18,
 
 					'booking_stat_from' => $booking_stat_from,
@@ -287,7 +287,7 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 					$compare_max_pax       = isset( $booking_data['compare_max_pax'] ) ? $booking_data['compare_max_pax'] : 0;
 					$compare_top_countries = ( isset( $booking_data['compare_top_countries'] ) && count( $booking_data['compare_top_countries'] ) > 0 ) ? $booking_data['compare_top_countries'] : array( 'N/A' );
 					$compare_top_itinerary = ( isset( $booking_data['compare_top_itinerary'] ) && count( $booking_data['compare_top_itinerary'] ) > 0 ) ? $booking_data['compare_top_itinerary'] : array(
-						'name' => esc_html__( 'N/A', 'wp-travel' ),
+						'name' => esc_html__( 'N/A', 'text-domain' ),
 						'url'  => '',
 					);
 
@@ -347,7 +347,7 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 					'lng'             => $map_data['lng'],
 					'loc'             => $map_data['loc'],
 					'labels'          => array(
-						'uploader_files_computer' => __( 'Select Files from Your Computer', 'wp-travel' ),
+						'uploader_files_computer' => __( 'Select Files from Your Computer', 'text-domain' ),
 					),
 					'drag_drop_nonce' => wp_create_nonce( 'wp-travel-drag-drop-nonce' ),
 				);

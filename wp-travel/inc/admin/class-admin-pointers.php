@@ -127,7 +127,7 @@ class WP_Travel_Admin_Info_Pointers {
 		$q['wp_travel_post_type_chges'] = array(
 			'target'  => '#menu-posts-' . WP_TRAVEL_POST_TYPE,
 			'options' => array(
-				'content'  => sprintf( '<h3 class="update-notice"> %s </h3> <p> %s </p>', __( 'New in WP Travel v.1.1.0', 'wp-travel' ), $pointer_1_content ),
+				'content'  => sprintf( '<h3 class="update-notice"> %s </h3> <p> %s </p>', __( 'New in WP Travel v.1.1.0', 'text-domain' ), $pointer_1_content ),
 				'position' => array(
 					'edge'  => 'left',
 					'align' => 'center',
@@ -149,8 +149,8 @@ class WP_Travel_Admin_Info_Pointers {
 			'options' => array(
 				'content'  => sprintf(
 					'<h3 class="update-notice"> %s </h3> <p> %s </p>',
-					__( 'New in WP Travel v.1.1.0', 'wp-travel' ),
-					__( '"Trip Code" has been moved to sidebar "Trip Info" metabox. ', 'wp-travel' )
+					__( 'New in WP Travel v.1.1.0', 'text-domain' ),
+					__( '"Trip Code" has been moved to sidebar "Trip Info" metabox. ', 'text-domain' )
 				),
 				'position' => array(
 					'edge'  => 'right',
@@ -172,7 +172,7 @@ class WP_Travel_Admin_Info_Pointers {
 			'options' => array(
 				'content'  => sprintf(
 					'<h3 class="update-notice"> %s </h3> <p> %s </p>',
-					__( 'New in WP Travel v.1.1.0', 'wp-travel' ),
+					__( 'New in WP Travel v.1.1.0', 'text-domain' ),
 					$content
 				),
 				'position' => array(
@@ -197,7 +197,7 @@ class WP_Travel_Admin_Info_Pointers {
 		$q['wp_travel_post_type_chges'] = array(
 			'target'  => '#menu-settings',
 			'options' => array(
-				'content'  => sprintf( '<h3 class="update-notice"> %s </h3> <p> %s </p>', __( 'WP Travel permalink options', 'wp-travel' ), $pointer_content ),
+				'content'  => sprintf( '<h3 class="update-notice"> %s </h3> <p> %s </p>', __( 'WP Travel permalink options', 'text-domain' ), $pointer_content ),
 				'position' => array(
 					'edge'  => 'left',
 					'align' => 'center',
@@ -215,7 +215,7 @@ class WP_Travel_Admin_Info_Pointers {
 		$q['wp_travel_menu_order_changes'] = array(
 			'target'  => '#menu-posts-itinerary-booking',
 			'options' => array(
-				'content'  => sprintf( '<h3 class="update-notice"> %s </h3> <p> %s </p>', __( 'WP Travel Menu Changed', 'wp-travel' ), $pointer_content ),
+				'content'  => sprintf( '<h3 class="update-notice"> %s </h3> <p> %s </p>', __( 'WP Travel Menu Changed', 'text-domain' ), $pointer_content ),
 				'position' => array(
 					'edge'  => 'left',
 					'align' => 'center',
@@ -232,7 +232,7 @@ class WP_Travel_Admin_Info_Pointers {
 		$q['wp_travel_new_trips_menu'] = array(
 			'target'  => '#menu-posts-itineraries',
 			'options' => array(
-				'content'  => sprintf( '<h3 class = "update-notice"> %s </h3> <p> %s </p>', __( 'WP Travel New Trips Menu', 'wp-travel' ), $pointer_content ),
+				'content'  => sprintf( '<h3 class = "update-notice"> %s </h3> <p> %s </p>', __( 'WP Travel New Trips Menu', 'text-domain' ), $pointer_content ),
 				'position' => array(
 					'edge'  => 'left',
 					'align' => 'center',
@@ -248,7 +248,7 @@ class WP_Travel_Admin_Info_Pointers {
 		$q['wp_travel_enable_v4_pointer'] = array(
 			'target'  => '#menu-posts-itinerary-booking',
 			'options' => array(
-				'content'  => sprintf( '<h3 class = "update-notice"> %s </h3> <p> %s </p>', __( 'Enable WP Travel Version 4.0.0', 'wp-travel' ), $pointer_content ),
+				'content'  => sprintf( '<h3 class = "update-notice"> %s </h3> <p> %s </p>', __( 'Enable WP Travel Version 4.0.0', 'text-domain' ), $pointer_content ),
 				'position' => array(
 					'edge'  => 'left',
 					'align' => 'center',
@@ -269,7 +269,7 @@ class WP_Travel_Admin_Info_Pointers {
 
 			<div class="<?php echo esc_attr( $class ); ?>">
 			<p>
-			<strong><?php printf( __( 'Want to add payment gateway in WP Travel booking? %1$1sDownload "Standard PayPal"%2$2s addon for free!!', 'wp-travel' ), '<a target="_blank" href="http://wptravel.io/downloads/standard-paypal/">', '</a>' ); ?></strong>
+			<strong><?php printf( __( 'Want to add payment gateway in WP Travel booking? %1$1sDownload "Standard PayPal"%2$2s addon for free!!', 'text-domain' ), '<a target="_blank" href="http://wptravel.io/downloads/standard-paypal/">', '</a>' ); ?></strong>
 			</p>
 			</div>
 			<?php
@@ -282,10 +282,10 @@ class WP_Travel_Admin_Info_Pointers {
 					?>
 					<div class="notice notice-warning">
 						<p>
-						<strong><?php printf( __( 'You are using older version of WP Travel Standard paypal. Please %1$1sDownload version 1.0.1 Now %2$3s.', 'wp-travel' ), '<a target="_blank" href="http://wptravel.io/downloads/standard-paypal/">', '</a>' ); ?></strong>
+						<strong><?php printf( __( 'You are using older version of WP Travel Standard paypal. Please %1$1sDownload version 1.0.1 Now %2$3s.', 'text-domain' ), '<a target="_blank" href="http://wptravel.io/downloads/standard-paypal/">', '</a>' ); ?></strong>
 						</p>
 						<p>
-						<strong><?php printf( __( 'Need help With the update ? %1$1sClick here%2$2s for detailed instructions on updating the plugin.', 'wp-travel' ), '<a target="_blank" href="http://wptravel.io/documentations/standard-paypal/updating-wp-travel-standard-paypal/">', '</a>' ); ?></strong>
+						<strong><?php printf( __( 'Need help With the update ? %1$1sClick here%2$2s for detailed instructions on updating the plugin.', 'text-domain' ), '<a target="_blank" href="http://wptravel.io/documentations/standard-paypal/updating-wp-travel-standard-paypal/">', '</a>' ); ?></strong>
 						</p>
 					</div>
 
@@ -311,7 +311,7 @@ class WP_Travel_Admin_Info_Pointers {
 				?>
 				<div class="notice notice-info is-dismissible">
 					<p>
-					<strong><?php printf( __( 'WP Travel Standard Paypal plugin will be merged to WP Travel in the next update of WP Travel Plugin( v.1.2.1 ). Please make sure to deactivate the WP Travel Standard Paypal plugin before updating to next WP Travel Release.  %1$1sDismiss this Message%2$2s', 'wp-travel' ), '<a href="?wp-travel-dismissed-nag">', '</a>' ); ?></strong>
+					<strong><?php printf( __( 'WP Travel Standard Paypal plugin will be merged to WP Travel in the next update of WP Travel Plugin( v.1.2.1 ). Please make sure to deactivate the WP Travel Standard Paypal plugin before updating to next WP Travel Release.  %1$1sDismiss this Message%2$2s', 'text-domain' ), '<a href="?wp-travel-dismissed-nag">', '</a>' ); ?></strong>
 					</p>
 				</div>
 				<?php
@@ -342,7 +342,7 @@ class WP_Travel_Admin_Info_Pointers {
 					?>
 						<div class="notice notice-warning">
 							<p>
-							<strong><?php printf( __( 'With the update to WP Travel version 1.4.0 <strong>%1$1s addon </strong> needs to be updated to work, for more information, %2$2sClick Here%3$3s', 'wp-travel' ), $addon_data['Name'], '<a target="_blank" href="http://wptravel.io/category/release-notes/">', '</a>' ); ?></strong>
+							<strong><?php printf( __( 'With the update to WP Travel version 1.4.0 <strong>%1$1s addon </strong> needs to be updated to work, for more information, %2$2sClick Here%3$3s', 'text-domain' ), $addon_data['Name'], '<a target="_blank" href="http://wptravel.io/category/release-notes/">', '</a>' ); ?></strong>
 							</p>
 						</div>
 					<?php
@@ -376,12 +376,12 @@ class WP_Travel_Admin_Info_Pointers {
 			<div style="margin:34px 20px 10px 10px">
 				<?php
 					$args = array(
-						'title'      => __( 'WP Travel Importer', 'wp-travel' ),
-						'content'    => __( 'Import and Export Trips, Bookings, Enquiries, Coupons, Trip Extras and Payments data with portable CSV file.', 'wp-travel' ),
+						'title'      => __( 'WP Travel Importer', 'text-domain' ),
+						'content'    => __( 'Import and Export Trips, Bookings, Enquiries, Coupons, Trip Extras and Payments data with portable CSV file.', 'text-domain' ),
 						'link'       => 'https://wptravel.io/wp-travel-pro/',
-        				'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
+        				'link_label' => __( 'Get WP Travel Pro', 'text-domain' ),
 						'link2'       => 'https://wptravel.io/downloads/wp-travel-import-export/',
-						'link2_label' => __( 'Get WP Travel Import/Export Addon', 'wp-travel' ),
+						'link2_label' => __( 'Get WP Travel Import/Export Addon', 'text-domain' ),
 					);
 					wp_travel_upsell_message( $args );
 				?>
@@ -414,7 +414,7 @@ class WP_Travel_Admin_Info_Pointers {
 		if ( version_compare( $wp_version, '4.9.6', '>' ) && ! get_user_meta( $user_id, 'wp_travel_dismissied_nag_messages' ) ) {
 			?>
 			<div>
-				<p><strong><?php printf( __( 'WP Travel is %1$s GDPR %2$scompatible now. Please go to %3$s Settings > Privacy %4$s to select Privacy Policy page. %5$sDismiss this Message%6$s', 'wp-travel' ), '<b>', '</b>', '<a href="' . admin_url( 'privacy.php' ) . '">', '</a>', '<a href="?wp-travel-dismissed-nag">', '</a>' ); ?></strong></p>
+				<p><strong><?php printf( __( 'WP Travel is %1$s GDPR %2$scompatible now. Please go to %3$s Settings > Privacy %4$s to select Privacy Policy page. %5$sDismiss this Message%6$s', 'text-domain' ), '<b>', '</b>', '<a href="' . admin_url( 'privacy.php' ) . '">', '</a>', '<a href="?wp-travel-dismissed-nag">', '</a>' ); ?></strong></p>
 			</div>
 			<?php
 		}
@@ -423,7 +423,7 @@ class WP_Travel_Admin_Info_Pointers {
 		if ( wp_travel_test_mode() ) {
 			?>
 			<div>
-				<p><strong><?php printf( __( '"WP Travel" plugin is currently in test mode. <a href="%1$s">Click here</a> to disable test mode.', 'wp-travel' ), esc_url( admin_url( 'edit.php?post_type=itinerary-booking&page=settings2#wp-travel-tab-content-debug' ) ) ); ?></strong></p>
+				<p><strong><?php printf( __( '"WP Travel" plugin is currently in test mode. <a href="%1$s">Click here</a> to disable test mode.', 'text-domain' ), esc_url( admin_url( 'edit.php?post_type=itinerary-booking&page=settings2#wp-travel-tab-content-debug' ) ) ); ?></strong></p>
 			</div>
 			<?php
 		}

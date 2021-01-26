@@ -84,7 +84,7 @@ class Wp_Travel_Shortcodes {
 		$function,
 		$atts = array(),
 		$wrapper = array(
-			'class'  => 'wp-travel',
+			'class'  => 'wp_travel',
 			'before' => null,
 			'after'  => null,
 		)
@@ -340,7 +340,7 @@ class Wp_Travel_Shortcodes {
 									foreach ( $trip_fact['value'] as $key => $val ) {
 										echo esc_html( $val );
 										if ( $count > 1 && $i !== $count ) {
-											echo esc_html( ',', 'wp-travel' );
+											echo esc_html( ',', 'text-domain' );
 										}
 										$i++;
 									}

@@ -27,7 +27,7 @@ function wp_travel_get_booking_form() {
 		'submit_button' => array(
 			'name'  => 'wp_travel_book_now',
 			'id'    => 'wp-travel-book-now',
-			'value' => __( 'Book Now', 'wp-travel' ),
+			'value' => __( 'Book Now', 'text-domain' ),
 		),
 		'nonce'         => array(
 			'action' => 'wp_travel_security_action',
@@ -40,7 +40,7 @@ function wp_travel_get_booking_form() {
 	// GDPR Support
 	$settings = wp_travel_get_settings();
 
-	$gdpr_msg = isset( $settings['wp_travel_gdpr_message'] ) ? esc_html( $settings['wp_travel_gdpr_message'] ) : __( 'By contacting us, you agree to our ', 'wp-travel' );
+	$gdpr_msg = isset( $settings['wp_travel_gdpr_message'] ) ? esc_html( $settings['wp_travel_gdpr_message'] ) : __( 'By contacting us, you agree to our ', 'text-domain' );
 
 	$policy_link = wp_travel_privacy_link();
 	if ( ! empty( $gdpr_msg ) && $policy_link ) {
@@ -48,7 +48,7 @@ function wp_travel_get_booking_form() {
 		// GDPR Compatibility for enquiry.
 		$fields['wp_travel_booking_gdpr'] = array(
 			'type'              => 'checkbox',
-			'label'             => __( 'Privacy Policy', 'wp-travel' ),
+			'label'             => __( 'Privacy Policy', 'text-domain' ),
 			'options'           => array( 'gdpr_agree' => sprintf( '%1s %2s', $gdpr_msg, $policy_link ) ),
 			'name'              => 'wp_travel_booking_gdpr_msg',
 			'id'                => 'wp-travel-enquiry-gdpr-msg',
@@ -123,7 +123,7 @@ function wp_travel_register_booking_metaboxes( $a ) {
 
 	$wp_travel_post_id = get_post_meta( $post->ID, 'wp_travel_post_id', true );
 	// $trip_code = $wp_travel_itinerary->get_trip_code( $wp_travel_post_id );
-	add_meta_box( 'wp-travel-booking-info', __( 'Booking Detail <span class="wp-travel-view-bookings"><a href="edit.php?post_type=itinerary-booking&wp_travel_post_id=' . $wp_travel_post_id . '">View All ' . get_the_title( $wp_travel_post_id ) . ' Bookings</a></span>', 'wp-travel' ), 'wp_travel_booking_info', 'itinerary-booking', 'normal', 'default' );
+	add_meta_box( 'wp-travel-booking-info', __( 'Booking Detail <span class="wp-travel-view-bookings"><a href="edit.php?post_type=itinerary-booking&wp_travel_post_id=' . $wp_travel_post_id . '">View All ' . get_the_title( $wp_travel_post_id ) . ' Bookings</a></span>', 'text-domain' ), 'wp_travel_booking_info', 'itinerary-booking', 'normal', 'default' );
 
 	add_action( 'admin_head', 'wp_travel_admin_head_meta' );
 }
@@ -234,11 +234,11 @@ function wp_travel_booking_info( $post ) {
 							<?php
 							if ( 0 === $i ) {
 								?>
-								<h3><?php esc_html_e( 'Lead Traveler', 'wp-travel' ); ?></h3>
+								<h3><?php esc_html_e( 'Lead Traveler', 'text-domain' ); ?></h3>
 								<?php
 							} else {
 								?>
-								<h3><?php printf( __( 'Traveler %d', 'wp-travel' ), ( $i + 1 ) ); ?></h3>
+								<h3><?php printf( __( 'Traveler %d', 'text-domain' ), ( $i + 1 ) ); ?></h3>
 								<?php
 							}
 
@@ -387,7 +387,7 @@ function wp_travel_booking_info( $post ) {
 				<div class="view-order">
 					<div class="order-list">
 						<div class="order-wrapper">
-							<h3><?php esc_html_e( 'Your Booking Details', 'wp-travel' ); ?> <a href="<?php echo esc_url( $edit_link ); ?>"><?php esc_html_e( 'Edit', 'wp-travel' ); ?></a></h3>
+							<h3><?php esc_html_e( 'Your Booking Details', 'text-domain' ); ?> <a href="<?php echo esc_url( $edit_link ); ?>"><?php esc_html_e( 'Edit', 'text-domain' ); ?></a></h3>
 							<?php do_action( 'wp_travel_booking_metabox_after_title', $booking_id ); // @since 3.0.6 ?>
 							<?php wp_travel_view_booking_details_table( $booking_id, true ); ?>
 						</div>
@@ -513,11 +513,11 @@ add_filter( 'manage_edit-itinerary-booking_columns', 'wp_travel_booking_columns'
 function wp_travel_booking_columns( $booking_columns ) {
 
 	$new_columns['cb']             = '<input type="checkbox" />';
-	$new_columns['title']          = _x( 'Title', 'column name', 'wp-travel' );
-	$new_columns['trip_code']      = __( 'Trip Code', 'wp-travel' );
-	$new_columns['contact_name']   = __( 'Contact Name', 'wp-travel' );
-	$new_columns['booking_status'] = __( 'Booking Status', 'wp-travel' );
-	$new_columns['date']           = __( 'Booking Date', 'wp-travel' );
+	$new_columns['title']          = _x( 'Title', 'column name', 'text-domain' );
+	$new_columns['trip_code']      = __( 'Trip Code', 'text-domain' );
+	$new_columns['contact_name']   = __( 'Contact Name', 'text-domain' );
+	$new_columns['booking_status'] = __( 'Booking Status', 'text-domain' );
+	$new_columns['date']           = __( 'Booking Date', 'text-domain' );
 	return $new_columns;
 }
 
@@ -887,7 +887,7 @@ function wp_travel_book_now() {
 		$itinerary_title = get_the_title( $itinerary_id );
 
 		$booking_no_of_pax      = $pax;
-		$booking_scheduled_date = esc_html__( 'N/A', 'wp-travel' );
+		$booking_scheduled_date = esc_html__( 'N/A', 'text-domain' );
 		$date_format            = get_option( 'date_format' );
 		$booking_arrival_date   = ( '' !== $booking_arrival_date ) ? wp_travel_format_date( $booking_arrival_date, true, 'Y-m-d' ) : '';
 		$booking_departure_date = ( '' !== $booking_departure_date ) ? wp_travel_format_date( $booking_departure_date, true, 'Y-m-d' ) : '';
@@ -961,7 +961,7 @@ function wp_travel_book_now() {
 			$headers = $email->email_headers( $reply_to_email, $client_email );
 
 			if ( ! wp_mail( $admin_email, $admin_subject, $admin_message, $headers ) ) {
-				WP_Travel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . __( 'Your Item has been added but the email could not be sent.Possible reason: your host may have disabled the mail() function.', 'wp-travel' ), 'error' );
+				WP_Travel()->notices->add( '<strong>' . __( 'Error:', 'text-domain' ) . '</strong> ' . __( 'Your Item has been added but the email could not be sent.Possible reason: your host may have disabled the mail() function.', 'text-domain' ), 'error' );
 			}
 		}
 
@@ -970,7 +970,7 @@ function wp_travel_book_now() {
 		$headers = $email->email_headers( $reply_to_email, $reply_to_email );
 
 		if ( ! wp_mail( $client_email, $client_subject, $client_message, $headers ) ) {
-			WP_Travel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . __( 'Your Item has been added but the email could not be sent.Possible reason: your host may have disabled the mail() function.', 'wp-travel' ), 'error' );
+			WP_Travel()->notices->add( '<strong>' . __( 'Error:', 'text-domain' ) . '</strong> ' . __( 'Your Item has been added but the email could not be sent.Possible reason: your host may have disabled the mail() function.', 'text-domain' ), 'error' );
 		}
 	} else {
 
@@ -1109,16 +1109,16 @@ function get_booking_chart() {
 	$chart_type                = isset( $_REQUEST['chart_type'] ) ? $_REQUEST['chart_type'] : '';
 	?>
 	<div class="wrap">
-		<h2><?php esc_html_e( 'Statistics', 'wp-travel' ); ?></h2>
+		<h2><?php esc_html_e( 'Statistics', 'text-domain' ); ?></h2>
 		<div class="stat-toolbar">
 				<form name="stat_toolbar" class="stat-toolbar-form" action="" method="get" >
 					<input type="hidden" name="post_type" value="itinerary-booking" >
 					<input type="hidden" name="page" value="booking_chart">
 					<p class="field-group full-width">
-						<span class="field-label"><?php esc_html_e( 'Display Chart', 'wp-travel' ); ?>:</span>
+						<span class="field-label"><?php esc_html_e( 'Display Chart', 'text-domain' ); ?>:</span>
 						<select name="chart_type" >
-							<option value="booking" <?php selected( 'booking', $chart_type ); ?> ><?php esc_html_e( 'Booking', 'wp-travel' ); ?></option>
-							<option value="payment" <?php selected( 'payment', $chart_type ); ?> ><?php esc_html_e( 'Payment', 'wp-travel' ); ?></option>
+							<option value="booking" <?php selected( 'booking', $chart_type ); ?> ><?php esc_html_e( 'Booking', 'text-domain' ); ?></option>
+							<option value="payment" <?php selected( 'payment', $chart_type ); ?> ><?php esc_html_e( 'Payment', 'text-domain' ); ?></option>
 						</select>
 					</p>
 					<?php
@@ -1128,7 +1128,7 @@ function get_booking_chart() {
 					<div class="show-all compare">
 						<p class="show-compare-stat">
 						<span class="checkbox-default-design">
-							<span class="field-label"><?php esc_html_e( 'Compare Stat', 'wp-travel' ); ?>:</span>
+							<span class="field-label"><?php esc_html_e( 'Compare Stat', 'text-domain' ); ?>:</span>
 							<label data-on="ON" data-off="OFF">
 								<input id="compare-stat" type="checkbox" name="compare_stat" value="yes" <?php checked( 'yes', $compare_stat ); ?>>
 								<span class="switch">
@@ -1141,25 +1141,25 @@ function get_booking_chart() {
 					<div class="form-compare-stat clearfix">
 						<!-- Field groups -->
 						<p class="field-group field-group-stat">
-							<span class="field-label"><?php esc_html_e( 'From', 'wp-travel' ); ?>:</span>
+							<span class="field-label"><?php esc_html_e( 'From', 'text-domain' ); ?>:</span>
 							<input type="text" name="booking_stat_from" class="datepicker-from" class="form-control" value="<?php echo esc_attr( $from_date ); ?>" id="fromdate1" />
 							<label class="input-group-addon btn" for="fromdate1">
 							<span class="dashicons dashicons-calendar-alt"></span>
 							</label>
 						</p>
 						<p class="field-group field-group-stat">
-							<span class="field-label"><?php esc_html_e( 'To', 'wp-travel' ); ?>:</span>
+							<span class="field-label"><?php esc_html_e( 'To', 'text-domain' ); ?>:</span>
 							<input type="text" name="booking_stat_to" class="datepicker-to" class="form-control" value="<?php echo esc_attr( $to_date ); ?>" id="fromdate2" />
 							<label class="input-group-addon btn" for="fromdate2">
 							<span class="dashicons dashicons-calendar-alt"></span>
 							</label>
 						</p>
 						<p class="field-group field-group-stat">
-							<span class="field-label"><?php esc_html_e( 'Country', 'wp-travel' ); ?>:</span>
+							<span class="field-label"><?php esc_html_e( 'Country', 'text-domain' ); ?>:</span>
 
 							<select class="selectpicker form-control" name="booking_country">
 
-								<option value=""><?php esc_html_e( 'All Country', 'wp-travel' ); ?></option>
+								<option value=""><?php esc_html_e( 'All Country', 'text-domain' ); ?></option>
 
 								<?php foreach ( $country_list as $key => $value ) : ?>
 									<option value="<?php echo esc_html( $key ); ?>" <?php selected( $key, $selected_country ); ?>>
@@ -1174,7 +1174,7 @@ function get_booking_chart() {
 							<select class="selectpicker form-control" name="booking_itinerary">
 								<option value="">
 								<?php
-								esc_html_e( 'All ', 'wp-travel' );
+								esc_html_e( 'All ', 'text-domain' );
 								echo esc_html( WP_TRAVEL_POST_TITLE_SINGULAR );
 								?>
 								</option>
@@ -1191,7 +1191,7 @@ function get_booking_chart() {
 						do_action( 'wp_travel_after_stat_toolbar_fields' );
 						?>
 						<div class="show-all btn-show-all" style="display:<?php echo esc_attr( 'yes' === $compare_stat ? 'none' : 'block' ); ?>" >
-							<?php submit_button( esc_attr__( 'Show All', 'wp-travel' ), 'primary', 'submit' ); ?>
+							<?php submit_button( esc_attr__( 'Show All', 'text-domain' ), 'primary', 'submit' ); ?>
 						</div>
 
 					</div>
@@ -1200,25 +1200,25 @@ function get_booking_chart() {
 					<div class="additional-compare-stat clearfix">
 					<!-- Field groups to compare -->
 					<p class="field-group field-group-compare" style="display:<?php echo esc_attr( $field_group_display ); ?>" >
-						<span class="field-label"><?php esc_html_e( 'From', 'wp-travel' ); ?>:</span>
+						<span class="field-label"><?php esc_html_e( 'From', 'text-domain' ); ?>:</span>
 						<input type="text" name="compare_stat_from" class="datepicker-from" class="form-control" value="<?php echo esc_attr( $compare_from_date ); ?>" id="fromdate3" />
 						<label class="input-group-addon btn" for="fromdate3">
 						<span class="dashicons dashicons-calendar-alt"></span>
 						</label>
 					</p>
 					<p class="field-group field-group-compare"  style="display:<?php echo esc_attr( $field_group_display ); ?>" >
-						<span class="field-label"><?php esc_html_e( 'To', 'wp-travel' ); ?>:</span>
+						<span class="field-label"><?php esc_html_e( 'To', 'text-domain' ); ?>:</span>
 						<input type="text" name="compare_stat_to" class="datepicker-to" class="form-control" value="<?php echo esc_attr( $compare_to_date ); ?>" id="fromdate4" />
 						<label class="input-group-addon btn" for="fromdate4">
 						<span class="dashicons dashicons-calendar-alt"></span>
 						</label>
 					</p>
 					<p class="field-group field-group-compare"  style="display:<?php echo esc_attr( $field_group_display ); ?>" >
-						<span class="field-label"><?php esc_html_e( 'Country', 'wp-travel' ); ?>:</span>
+						<span class="field-label"><?php esc_html_e( 'Country', 'text-domain' ); ?>:</span>
 
 						<select class="selectpicker form-control" name="compare_country">
 
-							<option value=""><?php esc_html_e( 'All Country', 'wp-travel' ); ?></option>
+							<option value=""><?php esc_html_e( 'All Country', 'text-domain' ); ?></option>
 
 							<?php foreach ( $country_list as $key => $value ) : ?>
 								<option value="<?php echo esc_html( $key ); ?>" <?php selected( $key, $compare_selected_country ); ?>>
@@ -1233,7 +1233,7 @@ function get_booking_chart() {
 						<select class="selectpicker form-control" name="compare_itinerary">
 							<option value="">
 							<?php
-							esc_html_e( 'All ', 'wp-travel' );
+							esc_html_e( 'All ', 'text-domain' );
 							echo esc_html( WP_TRAVEL_POST_TITLE_SINGULAR );
 							?>
 							</option>
@@ -1245,7 +1245,7 @@ function get_booking_chart() {
 						</select>
 					</p>
 					<div class="compare-all field-group-compare" style="display:<?php echo esc_attr( $field_group_display ); ?>">
-						<?php submit_button( esc_attr__( 'Compare', 'wp-travel' ), 'primary', 'submit' ); ?>
+						<?php submit_button( esc_attr__( 'Compare', 'text-domain' ), 'primary', 'submit' ); ?>
 					</div>
 					</div>
 
@@ -1263,59 +1263,59 @@ function get_booking_chart() {
 			<div class="wp-travel-stat-info">
 				<?php if ( isset( $_REQUEST['compare_stat'] ) && 'yes' == $_REQUEST['compare_stat'] ) : ?>
 				<div class="right-block-single for-compare">
-					<h3><?php esc_html_e( 'Compare 1', 'wp-travel' ); ?></h3>
+					<h3><?php esc_html_e( 'Compare 1', 'text-domain' ); ?></h3>
 				</div>
 				<?php endif; ?>
 
 				<div class="right-block-single">
 					<strong><big><?php echo esc_attr( wp_travel_get_currency_symbol() ); ?></big><big class="wp-travel-total-sales">0</big></strong><br />
-					<p><?php esc_html_e( 'Total Sales', 'wp-travel' ); ?></p>
+					<p><?php esc_html_e( 'Total Sales', 'text-domain' ); ?></p>
 				</div>
 
 				<div class="right-block-single">
 					<strong><big class="wp-travel-max-bookings">0</big></strong><br />
-					<p><?php esc_html_e( 'Bookings', 'wp-travel' ); ?></p>
+					<p><?php esc_html_e( 'Bookings', 'text-domain' ); ?></p>
 
 				</div>
 				<div class="right-block-single">
 					<strong><big  class="wp-travel-max-pax">0</big></strong><br />
-					<p><?php esc_html_e( 'Pax', 'wp-travel' ); ?></p>
+					<p><?php esc_html_e( 'Pax', 'text-domain' ); ?></p>
 				</div>
 				<div class="right-block-single">
-					<strong class="wp-travel-top-countries wp-travel-more"><?php esc_html_e( 'N/A', 'wp-travel' ); ?></strong>
-					<p><?php esc_html_e( 'Countries', 'wp-travel' ); ?></p>
+					<strong class="wp-travel-top-countries wp-travel-more"><?php esc_html_e( 'N/A', 'text-domain' ); ?></strong>
+					<p><?php esc_html_e( 'Countries', 'text-domain' ); ?></p>
 				</div>
 				<div class="right-block-single">
-					<strong><a href="#" class="wp-travel-top-itineraries" target="_blank"><?php esc_html_e( 'N/A', 'wp-travel' ); ?></a></strong>
-					<p><?php esc_html_e( 'Top itinerary', 'wp-travel' ); ?></p>
+					<strong><a href="#" class="wp-travel-top-itineraries" target="_blank"><?php esc_html_e( 'N/A', 'text-domain' ); ?></a></strong>
+					<p><?php esc_html_e( 'Top itinerary', 'text-domain' ); ?></p>
 				</div>
 			</div>
 			<?php if ( isset( $_REQUEST['compare_stat'] ) && 'yes' == $_REQUEST['compare_stat'] ) : ?>
 
 				<div class="wp-travel-stat-info">
 					<div class="right-block-single for-compare">
-						<h3><?php esc_html_e( 'Compare 2', 'wp-travel' ); ?></h3>
+						<h3><?php esc_html_e( 'Compare 2', 'text-domain' ); ?></h3>
 					</div>
 					<div class="right-block-single">
 						<strong><big><?php echo esc_attr( wp_travel_get_currency_symbol() ); ?></big><big class="wp-travel-total-sales-compare">0</big></strong><br />
-						<p><?php esc_html_e( 'Total Sales', 'wp-travel' ); ?></p>
+						<p><?php esc_html_e( 'Total Sales', 'text-domain' ); ?></p>
 					</div>
 					<div class="right-block-single">
 						<strong><big class="wp-travel-max-bookings-compare">0</big></strong><br />
-						<p><?php esc_html_e( 'Bookings', 'wp-travel' ); ?></p>
+						<p><?php esc_html_e( 'Bookings', 'text-domain' ); ?></p>
 
 					</div>
 					<div class="right-block-single">
 						<strong><big  class="wp-travel-max-pax-compare">0</big></strong><br />
-						<p><?php esc_html_e( 'Pax', 'wp-travel' ); ?></p>
+						<p><?php esc_html_e( 'Pax', 'text-domain' ); ?></p>
 					</div>
 					<div class="right-block-single">
-						<strong class="wp-travel-top-countries-compare wp-travel-more"><?php esc_html_e( 'N/A', 'wp-travel' ); ?></strong>
-						<p><?php esc_html_e( 'Countries', 'wp-travel' ); ?></p>
+						<strong class="wp-travel-top-countries-compare wp-travel-more"><?php esc_html_e( 'N/A', 'text-domain' ); ?></strong>
+						<p><?php esc_html_e( 'Countries', 'text-domain' ); ?></p>
 					</div>
 					<div class="right-block-single">
-						<strong><a href="#" class="wp-travel-top-itineraries-compare" target="_blank"><?php esc_html_e( 'N/A', 'wp-travel' ); ?></a></strong>
-						<p><?php esc_html_e( 'Top itinerary', 'wp-travel' ); ?></p>
+						<strong><a href="#" class="wp-travel-top-itineraries-compare" target="_blank"><?php esc_html_e( 'N/A', 'text-domain' ); ?></a></strong>
+						<p><?php esc_html_e( 'Top itinerary', 'text-domain' ); ?></p>
 					</div>
 				</div>
 			<?php endif; ?>
@@ -1358,7 +1358,7 @@ function wp_travel_post_duplicator_action_row_link( $post ) {
 	}
 
 	// Set the button label
-	$label = sprintf( __( 'Clone %s', 'wp-travel' ), $post_type->labels->singular_name );
+	$label = sprintf( __( 'Clone %s', 'text-domain' ), $post_type->labels->singular_name );
 
 	// Create a nonce & add an action
 	$nonce = wp_create_nonce( 'wp_travel_clone_post_nonce' );

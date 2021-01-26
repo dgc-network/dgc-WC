@@ -92,8 +92,8 @@ class Trip_Options_Edit {
 		$options['itinerary'] = array(
 			'id'            => '_itinerary',
 			'wrapper_class' => 'show_if_simple show_if_variable',
-			'label'         => __( 'Itinerary', 'dgc-domain' ),
-			'description'   => __( 'Itinerary allow users to put in personalised messages.', 'dgc-domain' ),
+			'label'         => __( 'Itinerary', 'text-domain' ),
+			'description'   => __( 'Itinerary allow users to put in personalised messages.', 'text-domain' ),
 			'default'       => 'no'
 		);
 
@@ -118,7 +118,7 @@ class Trip_Options_Edit {
 
 		// add "Itinerary" tab
     	$tabs['itinerary'] = array(
-        	'label'   =>  __( 'Itinerary', 'dgc-domain' ),
+        	'label'   =>  __( 'Itinerary', 'text-domain' ),
         	'target'  =>  'itinerary_panel',
         	'priority' => 60,
         	'class'   => array( 'show_if_itinerary')
@@ -126,7 +126,7 @@ class Trip_Options_Edit {
 
 		// add "Includes/Excludes" tab
 		$tabs['include_exclude'] = array(
-        	'label'   =>  __( 'Includes/Excludes', 'dgc-domain' ),
+        	'label'   =>  __( 'Includes/Excludes', 'text-domain' ),
         	'target'  =>  'include_exclude_panel',
         	'priority' => 60,
         	'class'   => array( 'show_if_itinerary')
@@ -134,7 +134,7 @@ class Trip_Options_Edit {
 
 		// add "FAQs" tab
 		$tabs['faq'] = array(
-        	'label'   =>  __( 'FAQs', 'dgc-domain' ),
+        	'label'   =>  __( 'FAQs', 'text-domain' ),
         	'target'  =>  'faq_panel',
         	'priority' => 60,
         	'class'   => array( 'show_if_itinerary')
@@ -710,7 +710,7 @@ wp_enqueue_script( 'some_handle' );
 		<div id='itinerary_panel' class='panel woocommerce_options_panel'>
 		<table style="width:100%; padding:1em">
 			<tr>
-				<td><h3><?php esc_html_e( 'Trip Code : ', 'wp-travel' ); ?></h3></td>
+				<td><h3><?php esc_html_e( 'Trip Code : ', 'text-domain' ); ?></h3></td>
 				<td><input type="text" disabled="disabled" value="<?php echo esc_attr( $trip_code ); ?>" /></td>
 			</tr>
 
@@ -718,8 +718,8 @@ wp_enqueue_script( 'some_handle' );
 		$x = 0;
 		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) {?>
 			<tr class="itinerary-header">
-				<td><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></td>
-				<td style="text-align:right"><button class="add-itinerary" type="button"><?php esc_html_e( '+ Add Itinerary', 'wp-travel' ); ?></button></td>
+				<td><h3><?php esc_html_e( 'Itinerary', 'text-domain' ); ?></h3></td>
+				<td style="text-align:right"><button class="add-itinerary" type="button"><?php esc_html_e( '+ Add Itinerary', 'text-domain' ); ?></button></td>
 			</tr>
 			<tr class="itinerary-rows"><td colspan="2">
 				<ul id="itineraries-ul">
@@ -733,19 +733,19 @@ wp_enqueue_script( 'some_handle' );
 				echo '<span class="span-title">' . $itinerary_title . '</span>';
 				echo '<table>					
 						<tr>
-							<th>' . __( 'Itinerary label', 'wp-travel' ) .'</th>
+							<th>' . __( 'Itinerary label', 'text-domain' ) .'</th>
 							<td><input type="text" class="item_label" name="itinerary_item_label-' . $x . '" value="' . $itinerary_label . '"></td>
 						</tr>
 						<tr>
-							<th>' . __( 'Itinerary title', 'wp-travel' ) .'</th>
+							<th>' . __( 'Itinerary title', 'text-domain' ) .'</th>
 							<td><input type="text" class="item_title" name="itinerary_item_title-' . $x . '" value="' . $itinerary_title . '"></td>
 						</tr>
 						<tr>
-							<th>' . __( 'Itinerary date', 'wp-travel' ) .'</th>
+							<th>' . __( 'Itinerary date', 'text-domain' ) .'</th>
 							<td><input type="text" class="item_date" name="itinerary_item_date-' . $x . '" value="' . esc_attr( $itineraries[$x]['date'] ) . '"></td>
 						</tr>
 						<tr>
-							<td colspan="2"><b>' . __( 'Description', 'wp-travel' ) .'</b><br>
+							<td colspan="2"><b>' . __( 'Description', 'text-domain' ) .'</b><br>
 							<textarea rows="5" name="itinerary_item_desc-' . $x . '">' . esc_attr( $itineraries[$x]['desc'] ) . '</textarea></td>
 						</tr>
 						<tr>
@@ -754,8 +754,8 @@ wp_enqueue_script( 'some_handle' );
 							echo '<table style="width:100%;margin-left:0">';
 							if (isset($itineraries[$x]['assignment'])) {
 								echo '<tr class="assignment-header">';
-								echo '<th class="assignment-row-head">' . __( 'Resources Assignment', 'wp-travel' ) . '</th>';
-								echo '<td style="text-align:right"><button class="add-assignment" type="button">' . __( '+ Add Assignment', 'wp-travel' ) .'</button></td>';
+								echo '<th class="assignment-row-head">' . __( 'Resources Assignment', 'text-domain' ) . '</th>';
+								echo '<td style="text-align:right"><button class="add-assignment" type="button">' . __( '+ Add Assignment', 'text-domain' ) .'</button></td>';
 								echo '</tr>';
 								foreach ( $itineraries[$x]['assignment'] as $assignment ) {
 									echo '<tr class="assignment-rows" id="assignment-row-' . $x . '-' . $y . '">
@@ -774,12 +774,12 @@ wp_enqueue_script( 'some_handle' );
 								}															
 							} else {
 								echo '<tr style="display:none" class="assignment-header">';
-									echo '<th class="assignment-row-head">' . __( 'Resources Assignment', 'wp-travel' ) . '</th>';
-									echo '<td style="text-align:right"><button class="add-assignment" type="button">' . __( '+ Add Assignment', 'wp-travel' ) .'</button></td>';
+									echo '<th class="assignment-row-head">' . __( 'Resources Assignment', 'text-domain' ) . '</th>';
+									echo '<td style="text-align:right"><button class="add-assignment" type="button">' . __( '+ Add Assignment', 'text-domain' ) .'</button></td>';
 								echo '</tr>';
 								echo '<tr class="no-assignments"><td colspan="2">';
-									esc_html_e( 'No Assignments found. ', 'wp-travel' );
-									echo '<button class="add-assignment" id="first-assignment" type="button">' . __( 'Add Assignment', 'wp-travel' ) . '</button>';
+									esc_html_e( 'No Assignments found. ', 'text-domain' );
+									echo '<button class="add-assignment" id="first-assignment" type="button">' . __( 'Add Assignment', 'text-domain' ) . '</button>';
 								echo '</td></tr>';
 							}
 
@@ -805,13 +805,13 @@ wp_enqueue_script( 'some_handle' );
 			<?php
 		} else {?>
 			<tr style="display:none" class="itinerary-header">
-				<td><h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3></td>
-				<td style="text-align:right"><button class="add-itinerary" type="button"><?php esc_html_e( '+ Add Itinerary', 'wp-travel' ); ?></button></td>
+				<td><h3><?php esc_html_e( 'Itinerary', 'text-domain' ); ?></h3></td>
+				<td style="text-align:right"><button class="add-itinerary" type="button"><?php esc_html_e( '+ Add Itinerary', 'text-domain' ); ?></button></td>
 			</tr>
 			<tr class="no-itineraries"><td colspan="2">
-				<h3><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3><br>
-				<span><?php esc_html_e( 'No Itineraries found.', 'wp-travel' ); ?></span>
-				<button class="add-itinerary" id="first-itinerary" type="button"><?php esc_html_e( 'Add Itinerary', 'wp-travel' ); ?></span>
+				<h3><?php esc_html_e( 'Itinerary', 'text-domain' ); ?></h3><br>
+				<span><?php esc_html_e( 'No Itineraries found.', 'text-domain' ); ?></span>
+				<button class="add-itinerary" id="first-itinerary" type="button"><?php esc_html_e( 'Add Itinerary', 'text-domain' ); ?></span>
 			</td></tr>
 			<tr style="display:none" class="itinerary-rows"><td colspan="2">
 				<ul id="itineraries-ul">
@@ -844,10 +844,10 @@ wp_enqueue_script( 'some_handle' );
 		);
 		?>
 		<div id='include_exclude_panel' class='panel woocommerce_options_panel'>
-			<h3><?php esc_html_e( 'Trip Includes', 'wp-travel' );?></h3>
+			<h3><?php esc_html_e( 'Trip Includes', 'text-domain' );?></h3>
 			<?php wp_editor ( $trip_include , 'wp_travel_trip_include', $settings );?>
 			<br><br>
-			<h3><?php esc_html_e( 'Trip Excludes', 'wp-travel' );?></h3>
+			<h3><?php esc_html_e( 'Trip Excludes', 'text-domain' );?></h3>
 			<?php wp_editor ( $trip_exclude , 'wp_travel_trip_exclude', array ( "media_buttons" => true ) );?>
 			<br><br>
 		</div>
@@ -872,8 +872,8 @@ wp_enqueue_script( 'some_handle' );
 		$x = 0;
 		if ( is_array( $faqs ) && count( $faqs ) > 0 ) {?>
 			<tr class="faq-header">
-				<td><h3><?php esc_html_e( 'FAQ', 'wp-travel' ); ?></h3></td>
-				<td style="text-align:right"><button class="add-faq" type="button"><?php esc_html_e( '+ Add FAQ', 'wp-travel' ); ?></button></td>
+				<td><h3><?php esc_html_e( 'FAQ', 'text-domain' ); ?></h3></td>
+				<td style="text-align:right"><button class="add-faq" type="button"><?php esc_html_e( '+ Add FAQ', 'text-domain' ); ?></button></td>
 			</tr>
 			<tr class="faq-rows"><td colspan="2">
 			<ul id="faqs-ul"><?php		
@@ -885,11 +885,11 @@ wp_enqueue_script( 'some_handle' );
 				echo '
 				<table>
 					<tr>
-						<th>' . __( 'Your question', 'wp-travel' ) . '</th>
+						<th>' . __( 'Your question', 'text-domain' ) . '</th>
 						<td><input type="text" width="100%" class="item_title" name="faq_item_question-' . $x . '" value="' . $faq_question . '" class="regular-text"></td>
 					</tr>
 					<tr>
-						<th>' . __( 'Your answer', 'wp-travel' ) . '</th>
+						<th>' . __( 'Your answer', 'text-domain' ) . '</th>
 						<td><textarea rows="5" name="faq_item_answer-' . $x . '" class="regular-text">' . esc_attr( $faqs[$x]['answer'] ) . '</textarea></td>
 					</tr>
 					<tr>
@@ -908,13 +908,13 @@ wp_enqueue_script( 'some_handle' );
 			</tr><?php
 		} else {?>
 			<tr style="display:none" class="faq-header">
-				<td><h3><?php esc_html_e( 'FAQ', 'wp-travel' ); ?></h3></td>
-				<td style="text-align:right"><button class="add-faq" type="button"><?php esc_html_e( '+ Add FAQ', 'wp-travel' ); ?></button></td>
+				<td><h3><?php esc_html_e( 'FAQ', 'text-domain' ); ?></h3></td>
+				<td style="text-align:right"><button class="add-faq" type="button"><?php esc_html_e( '+ Add FAQ', 'text-domain' ); ?></button></td>
 			</tr>
 			<tr class="no-faqs"><td colspan="2">
-				<span><h3><?php esc_html_e( 'FAQ', 'wp-travel' ); ?></h3></span><br>
-				<span><?php esc_html_e( 'Please add new FAQ here.', 'wp-travel' ); ?></span>
-				<button class="add-faq" type="button" id="first-faq"><?php esc_html_e( 'Add FAQ', 'wp-travel' ); ?></button>
+				<span><h3><?php esc_html_e( 'FAQ', 'text-domain' ); ?></h3></span><br>
+				<span><?php esc_html_e( 'Please add new FAQ here.', 'text-domain' ); ?></span>
+				<button class="add-faq" type="button" id="first-faq"><?php esc_html_e( 'Add FAQ', 'text-domain' ); ?></button>
 			</td></tr>
 			<tr style="display:none" class="faq-rows"><td colspan="2">
 				<ul id="faqs-ul">

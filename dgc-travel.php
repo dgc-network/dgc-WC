@@ -31,8 +31,8 @@ $dir = dirname( __FILE__ ); //dirname( __FILE__ )
 define( "BASE_DIR", str_replace( '\\', '/', $dir . '/' ) );
 //define( 'WP_TRAVEL_POST_TYPE', 'itineraries' );
 define( 'WP_TRAVEL_POST_TYPE', 'product' );
-define( 'WP_TRAVEL_POST_TITLE', __( 'trips', 'wp-travel' ) );
-define( 'WP_TRAVEL_POST_TITLE_SINGULAR', __( 'trip', 'wp-travel' ) );
+define( 'WP_TRAVEL_POST_TITLE', __( 'trips', 'text-domain' ) );
+define( 'WP_TRAVEL_POST_TITLE_SINGULAR', __( 'trip', 'text-domain' ) );
 define( 'WP_TRAVEL_PLUGIN_FILE', __FILE__ );
 //define( 'WP_TRAVEL_ABSPATH', dirname( __FILE__ ) . '/' );
 define( 'WP_TRAVEL_ABSPATH', dirname( __FILE__ ) . '/wp-travel' . '/' );
@@ -44,10 +44,10 @@ define( 'WP_TRAVEL_VERSION', '1.0.0' );
 define( 'WP_TRAVEL_MINIMUM_PARTIAL_PAYOUT', array( 10 ) ); // In percent.
 define( 'WP_TRAVEL_SLIP_UPLOAD_DIR', 'wp-travel-slip' ); // In percent.
 
-define( 'DEFAULT_ITINERARY_LABEL', __( 'Day X', 'wp-travel' ) );
-define( 'DEFAULT_ITINERARY_TITLE', __( 'My plan', 'wp-travel' ) );
-define( 'DEFAULT_PRICING', __( 'Pricing Name', 'wp-travel' ) );
-define( 'DEFAULT_FAQ_QUESTION', __( 'FAQ Questions', 'wp-travel' ) );
+define( 'DEFAULT_ITINERARY_LABEL', __( 'Day X', 'text-domain' ) );
+define( 'DEFAULT_ITINERARY_TITLE', __( 'My plan', 'text-domain' ) );
+define( 'DEFAULT_PRICING', __( 'Pricing Name', 'text-domain' ) );
+define( 'DEFAULT_FAQ_QUESTION', __( 'FAQ Questions', 'text-domain' ) );
 
 
 /**

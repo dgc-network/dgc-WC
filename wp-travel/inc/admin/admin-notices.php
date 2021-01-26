@@ -16,7 +16,7 @@ function wp_travel_display_critical_admin_notices() {
 	?>
 	<div class="wp-travel-notification notification-warning notice notice-error"> 
 		<div class="notification-title">
-			<h3><?php echo esc_html__( 'WP Travel Alert', 'wp-travel' ); ?></h3>
+			<h3><?php echo esc_html__( 'WP Travel Alert', 'text-domain' ); ?></h3>
 		</div>
 		<div class="notification-content">
 			<ul>
@@ -74,7 +74,7 @@ function wp_travel_display_general_admin_notices() {
 	?>
 	<div class="wp-travel-notification notification-warning notice notice-info is-dismissible"> 
 		<div class="notification-title">
-			<h3><?php echo esc_html__( 'WP Travel Notifications', 'wp-travel' ); ?></h3>
+			<h3><?php echo esc_html__( 'WP Travel Notifications', 'text-domain' ); ?></h3>
 		</div>
 		<div class="notification-content">
 			<ul>
@@ -97,7 +97,7 @@ function wp_travel_display_deprecated_notice() {
 	?>
 	<div class="wp-travel-notification notification-warning notice notice-error"> 
 		<div class="notification-title">
-			<h3><?php echo esc_html__( 'WP Travel Deprecated Notices.', 'wp-travel' ); ?></h3>
+			<h3><?php echo esc_html__( 'WP Travel Deprecated Notices.', 'text-domain' ); ?></h3>
 		</div>
 		<div class="notification-content">
 			<ul>
@@ -123,7 +123,7 @@ function wp_travel_display_single_pricing_deprecated_notice( $notices ) {
 		if ( $post_id ) {
 			$pricing_option_type = wp_travel_get_pricing_option_type( $post_id );
 			if ( 'single-price' === $pricing_option_type ) {
-				$notices[] = __( 'Single Pricing is deprecated and will be removed in future version of WP Travel. Please update your pricing to multiple pricing.', 'wp-travel' );
+				$notices[] = __( 'Single Pricing is deprecated and will be removed in future version of WP Travel. Please update your pricing to multiple pricing.', 'text-domain' );
 			}
 		}
 	}
@@ -170,7 +170,7 @@ function wp_travel_pricing_table_created_notice() {
 		<div class="wp-travel-notification notification-warning notice notice-info is-dismissible"> 
 			<div class="notification-content">
 				<ul>
-					<div><p><strong><span style="color:#f00">Note : </span> <?php esc_html_e( 'WP Travel database needs an update. Please deactivate and activate your WP Travel once to update your database.', 'wp-travel' ); ?></strong></p></div>
+					<div><p><strong><span style="color:#f00">Note : </span> <?php esc_html_e( 'WP Travel database needs an update. Please deactivate and activate your WP Travel once to update your database.', 'text-domain' ); ?></strong></p></div>
 				</ul>
 			</div>
 		</div>

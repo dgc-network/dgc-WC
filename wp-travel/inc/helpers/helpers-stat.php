@@ -101,12 +101,12 @@ function wp_travel_get_booking_data() {
 			}
 		}
 
-		$temp_stat_data['data_label'] = __( 'Bookings', 'wp-travel' );
+		$temp_stat_data['data_label'] = __( 'Bookings', 'text-domain' );
 		if ( isset( $_REQUEST['compare_stat'] ) && 'yes' === $_REQUEST['compare_stat'] ) {
-			$temp_stat_data['data_label'] = __( 'Booking 1', 'wp-travel' );
+			$temp_stat_data['data_label'] = __( 'Booking 1', 'text-domain' );
 		}
-		$temp_stat_data['data_bg_color']     = __( '#00f', 'wp-travel' );
-		$temp_stat_data['data_border_color'] = __( '#00f', 'wp-travel' );
+		$temp_stat_data['data_bg_color']     = __( '#00f', 'text-domain' );
+		$temp_stat_data['data_border_color'] = __( '#00f', 'text-domain' );
 	} else {
 		// Payment Data Default Query.
 		$query = "Select count( BOOKING.ID ) as wt_total, YEAR( payment_date ) as wt_year, Month( payment_date ) as wt_month, DAY( payment_date ) as wt_day, sum( AMT.payment_amount ) as payment_amount from {$wpdb->posts} BOOKING
@@ -125,12 +125,12 @@ function wp_travel_get_booking_data() {
 
 		$results = $wpdb->get_results( $query );
 
-		$temp_stat_data['data_label'] = __( 'Payment', 'wp-travel' );
+		$temp_stat_data['data_label'] = __( 'Payment', 'text-domain' );
 		if ( isset( $_REQUEST['compare_stat'] ) && 'yes' === $_REQUEST['compare_stat'] ) {
-			$temp_stat_data['data_label'] = __( 'Payment 1', 'wp-travel' );
+			$temp_stat_data['data_label'] = __( 'Payment 1', 'text-domain' );
 		}
-		$temp_stat_data['data_bg_color']     = __( '#1DFE0E', 'wp-travel' );
-		$temp_stat_data['data_border_color'] = __( '#1DFE0E', 'wp-travel' );
+		$temp_stat_data['data_bg_color']     = __( '#1DFE0E', 'text-domain' );
+		$temp_stat_data['data_border_color'] = __( '#1DFE0E', 'text-domain' );
 	}
 
 	if ( is_array( $results ) && count( $results ) > 0 ) {
@@ -208,7 +208,7 @@ function wp_travel_get_booking_data() {
 		}
 	}
 	$top_itinerary = array(
-		'name' => esc_html__( 'N/A', 'wp-travel' ),
+		'name' => esc_html__( 'N/A', 'text-domain' ),
 		'url'  => '',
 	);
 	if ( is_array( $results ) && count( $results ) > 0 ) {
@@ -301,9 +301,9 @@ function wp_travel_get_booking_data() {
 			where post_type='itinerary-booking' AND post_status='publish' {$where} group by {$groupby} YEAR(post_date), MONTH(post_date), DAY(post_date) {$limit}";
 			$results = $wpdb->get_results( $query );
 
-			$temp_compare_data['data_label']        = __( 'Booking 2', 'wp-travel' );
-			$temp_compare_data['data_bg_color']     = __( '#3c0', 'wp-travel' );
-			$temp_compare_data['data_border_color'] = __( '#3c0', 'wp-travel' );
+			$temp_compare_data['data_label']        = __( 'Booking 2', 'text-domain' );
+			$temp_compare_data['data_bg_color']     = __( '#3c0', 'text-domain' );
+			$temp_compare_data['data_border_color'] = __( '#3c0', 'text-domain' );
 		} else {
 			// Payment Data Default Query.
 			$query = "Select count( BOOKING.ID ) as wt_total, YEAR( payment_date ) as wt_year, Month( payment_date ) as wt_month, DAY( payment_date ) as wt_day, sum( AMT.payment_amount ) as payment_amount from {$wpdb->posts} BOOKING
@@ -322,12 +322,12 @@ function wp_travel_get_booking_data() {
 
 			$results = $wpdb->get_results( $query );
 
-			$temp_compare_data['data_label'] = __( 'Payment', 'wp-travel' );
+			$temp_compare_data['data_label'] = __( 'Payment', 'text-domain' );
 			if ( isset( $_REQUEST['compare_stat'] ) && 'yes' === $_REQUEST['compare_stat'] ) {
-				$temp_compare_data['data_label'] = __( 'Payment 2', 'wp-travel' );
+				$temp_compare_data['data_label'] = __( 'Payment 2', 'text-domain' );
 			}
-			$temp_compare_data['data_bg_color']     = __( '#000', 'wp-travel' );
-			$temp_compare_data['data_border_color'] = __( '#000', 'wp-travel' );
+			$temp_compare_data['data_bg_color']     = __( '#000', 'text-domain' );
+			$temp_compare_data['data_border_color'] = __( '#000', 'text-domain' );
 		}
 
 		$date_format = 'm/d/Y';
@@ -380,7 +380,7 @@ function wp_travel_get_booking_data() {
 			set_site_transient( '_transient_wt_booking_top_itinerary', $results );
 		}
 		$top_itinerary = array(
-			'name' => esc_html__( 'N/A', 'wp-travel' ),
+			'name' => esc_html__( 'N/A', 'text-domain' ),
 			'url'  => '',
 		);
 		if ( is_array( $results ) && count( $results ) > 0 ) {
@@ -471,19 +471,19 @@ function wp_travel_get_booking_status() {
 	$status = array(
 		'pending'  => array(
 			'color' => '#FF9800',
-			'text'  => __( 'Pending', 'wp-travel' ),
+			'text'  => __( 'Pending', 'text-domain' ),
 		),
 		'booked'   => array(
 			'color' => '#008600',
-			'text'  => __( 'Booked', 'wp-travel' ),
+			'text'  => __( 'Booked', 'text-domain' ),
 		),
 		'canceled' => array(
 			'color' => '#FE450E',
-			'text'  => __( 'Canceled', 'wp-travel' ),
+			'text'  => __( 'Canceled', 'text-domain' ),
 		),
 		'N/A'      => array(
 			'color' => '#892E2C',
-			'text'  => __( 'N/A', 'wp-travel' ),
+			'text'  => __( 'N/A', 'text-domain' ),
 		),
 	);
 
