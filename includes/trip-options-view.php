@@ -41,13 +41,11 @@ class Trip_Options_View {
 		?>
 		<script>
 			jQuery(document).ready(function($) {
+
 				/*
 				 * AJAX for Woocommerce Add To Cart button
 				 */
-
 				$( '.single_add_to_cart_button' ).on( 'click', function(e) {
-				//$( '.single_add_to_cart_button' ).on( 'click', function() {
-					//alert('I am here');
 					e.preventDefault();
 
 					var $thisbutton = $(this),
@@ -59,9 +57,8 @@ class Trip_Options_View {
 
 					var itinerary_date_array = [];
 					$( '.itinerary-li' ).each( function( index, element ) {
-						var temp = $( '#itinerary-date-'+index ).val();
-						itinerary_date_array.push( temp );
-						//alert(temp);
+						var itinerary_date = $( '#itinerary-date-'+index ).val();
+						itinerary_date_array.push( itinerary_date );
 					})
 
         			var data = {
@@ -77,7 +74,6 @@ class Trip_Options_View {
 
         			$.ajax({
             			type: 'post',
-            			//url: wc_add_to_cart_params.ajax_url,
 						url: '/wp-admin/admin-ajax.php',
             			data: data,
             			beforeSend: function (response) {
@@ -87,8 +83,6 @@ class Trip_Options_View {
                 			$thisbutton.addClass('added').removeClass('loading');
             			},
             			success: function (response) {
-							//alert(response);
-
                 			if (response.error && response.product_url) {
                     			window.location = response.product_url;
                     			return;
@@ -111,14 +105,8 @@ class Trip_Options_View {
 		global $post;
 		$post_id = $post->ID;
 		$is_itinerary = get_post_meta( $post_id, '_itinerary', true );
-/*		
-		$myvals = get_post_meta($post_id);
-		foreach($myvals as $key=>$val) {
-    		echo $key . ' : ' . $val[0] . '<br/>';
-		}
-*/
+
 		if ($is_itinerary=='yes') {
-			//$trip_code = wp_travel_get_trip_code( $post_id );
 			$trip_code = get_trip_code( $post->ID );
 			echo '<div align="left"><h4>';
 			echo __( 'Trip Code : ', 'text-domain' ) . $trip_code;
@@ -128,17 +116,17 @@ class Trip_Options_View {
 		}
 	}
 	
-	// define the woocommerce_before_add_to_cart_button callback 
 	function action_woocommerce_before_add_to_cart_button() {
+
 		global $post;
 		$post_id = $post->ID;
 		$itineraries = get_post_meta( $post_id, 'wp_travel_trip_itinerary_data', true );
 
-		$is_itinerary_date = false;
+		//$is_itinerary_date = false;
 		$itinerary_date_array = array();
 		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) {
 			foreach ( $itineraries as $x=>$itinerary ) {
-				$is_itinerary_date = true;
+				//$is_itinerary_date = true;
 				array_push( $itinerary_date_array, $itineraries[$x]['date'] );
 			}
 		}
@@ -184,8 +172,9 @@ class Trip_Options_View {
 		<?php
 	}
          
-	//add_action('wp_ajax_woocommerce_ajax_add_to_cart', 'woocommerce_ajax_add_to_cart');
-	//add_action('wp_ajax_nopriv_woocommerce_ajax_add_to_cart', 'woocommerce_ajax_add_to_cart');			
+	/*
+	 * Clicked the Add-to-Card button
+	 */
 	function woocommerce_ajax_add_to_cart() {
 	
 		$product_id = apply_filters('woocommerce_add_to_cart_product_id', absint($_POST['product_id']));
@@ -195,14 +184,23 @@ class Trip_Options_View {
 		$product_status = get_post_status($product_id);
 
 		$post_id = $product_id;
+		$is_itinerary = get_post_meta( $post_id, '_itinerary', true );
 		$itineraries = get_post_meta( $post_id, 'wp_travel_trip_itinerary_data', true );
 
-    	if( isset( $_POST['itinerary_date_array'] ) )
+    	if( isset( $_POST['itinerary_date_array'] ) ) {
 			foreach( $_POST['itinerary_date_array'] as $x => $itinerary_date ) {
 				$itineraries[$x]['itinerary_date'] = $itinerary_date;
 			}
+		} else {
+			if( isset( $_POST['start_date_input'] ) ) {
+				$itineraries[0]['itinerary_date'] = $_POST['start_date_input'];
+			} else {
+				foreach( $itineraries as $x => $itinerary ) {
+					$itineraries[$x]['itinerary_date'] = $itineraries[$x]['date'];
+				}
+			} 
+		}
 		update_post_meta( $post_id, 'wp_travel_trip_itinerary_data', $itineraries );
-
 
 		if ($passed_validation && WC()->cart->add_to_cart($product_id, $quantity, $variation_id) && 'publish' === $product_status) {
 	
@@ -213,6 +211,7 @@ class Trip_Options_View {
 			}
 	
 			WC_AJAX :: get_refreshed_fragments();
+
 		} else {
 	
 			$data = array(
@@ -239,7 +238,7 @@ class Trip_Options_View {
     	$data = array() ;
 		$cart_item_data['custom_data']['_itinerary'] = $data['_itinerary'] = $is_itinerary;
 		$cart_item_data['custom_data']['itineraries'] = $data['itineraries'] = $itineraries;
-		$cart_item_data['custom_data']['itinerary_date'] = $data['itinerary_date'] = $_POST['start_date_input'];
+		//$cart_item_data['custom_data']['itinerary_date'] = $data['itinerary_date'] = $_POST['start_date_input'];
 
 		// Add the data to session and generate a unique ID
     	if( count( $data > 0 ) ){
