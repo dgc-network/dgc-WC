@@ -106,6 +106,84 @@ class Trip_Options_View {
 		<?php
 	}
 
+	function custom_action_after_single_product_title() { 
+
+		global $post;
+		$post_id = $post->ID;
+		$is_itinerary = get_post_meta( $post_id, '_itinerary', true );
+/*		
+		$myvals = get_post_meta($post_id);
+		foreach($myvals as $key=>$val) {
+    		echo $key . ' : ' . $val[0] . '<br/>';
+		}
+*/
+		if ($is_itinerary=='yes') {
+			//$trip_code = wp_travel_get_trip_code( $post_id );
+			$trip_code = get_trip_code( $post->ID );
+			echo '<div align="left"><h4>';
+			echo __( 'Trip Code : ', 'text-domain' ) . $trip_code;
+			//esc_html_e( 'Trip Code : ', 'text-domain' );
+			//echo esc_attr( $trip_code );
+			echo '</h4></div>';	
+		}
+	}
+	
+	// define the woocommerce_before_add_to_cart_button callback 
+	function action_woocommerce_before_add_to_cart_button() {
+		global $post;
+		$post_id = $post->ID;
+		$itineraries = get_post_meta( $post_id, 'wp_travel_trip_itinerary_data', true );
+
+		$is_itinerary_date = false;
+		$itinerary_date_array = array();
+		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) {
+			foreach ( $itineraries as $x=>$itinerary ) {
+				$is_itinerary_date = true;
+				array_push( $itinerary_date_array, $itineraries[$x]['date'] );
+			}
+		}
+		if ( is_array( $itinerary_date_array ) && count( $itinerary_date_array ) > 0 ) {
+		//if ($is_itinerary_date) {
+			echo __( 'Itinerary Date : ', 'text-domain' );
+			foreach ( $itinerary_date_array as $itinerary_date ) {
+				echo $itinerary_date;
+				echo ', ';
+			}
+		} else {
+			//echo esc_html_e( 'Start Date : ', 'text-domain' );
+			echo __( 'Start Date : ', 'text-domain' );
+			echo '<div class="start_date"></div>';
+			echo '<input style="display:none" type="text" id="start_date_input" name="start_date_input" />';
+		}
+		?>
+		<script>
+			jQuery(document).ready(function($) {
+				$( '.start_date' ).datepicker();
+				$( '.start_date' ).on( 'change', function() {
+					var start_date = new Date(this.value);
+					var updated_start_date = new Date(this.value);
+					$( '#start_date_input' ).val(updated_start_date.toLocaleDateString());
+					$( '.itinerary-li' ).each( function( index, element ) {
+						updated_start_date.setDate(start_date.getDate() + index);
+						$( 'input', element ).val(updated_start_date.toLocaleDateString());
+						$( '#itinerary-date-'+index ).datepicker();
+						$( '#itinerary-date-'+index ).on( 'change', function() {
+							var trip_date = new Date(this.value);
+							var updated_trip_date = new Date(this.value);
+							$( '.itinerary-li' ).each( function( index2, element2 ) {
+								if (index2 > index) {
+									updated_trip_date.setDate(trip_date.getDate() + index2 - index);
+									$( 'input', element2 ).val(updated_trip_date.toLocaleDateString());
+								}
+							});
+						});
+					});
+				});
+			});
+		</script>
+		<?php
+	}
+         
 	//add_action('wp_ajax_woocommerce_ajax_add_to_cart', 'woocommerce_ajax_add_to_cart');
 	//add_action('wp_ajax_nopriv_woocommerce_ajax_add_to_cart', 'woocommerce_ajax_add_to_cart');			
 	function woocommerce_ajax_add_to_cart() {
@@ -148,84 +226,175 @@ class Trip_Options_View {
 		wp_die();
 	}
 	
-	function custom_action_after_single_product_title() { 
-
-		global $post;
-		$post_id = $post->ID;
+	/*
+	 * Add data to cart item
+	 */
+	//add_filter( 'woocommerce_add_cart_item_data', 'add_cart_item_data', 25, 2 );
+	function add_cart_item_data( $cart_item_data, $product_id ) {
+		$post_id = $product_id;
 		$is_itinerary = get_post_meta( $post_id, '_itinerary', true );
-/*		
-		$myvals = get_post_meta($post_id);
-		foreach($myvals as $key=>$val) {
-    		echo $key . ' : ' . $val[0] . '<br/>';
-		}
-*/
-		if ($is_itinerary=='yes') {
-			//$trip_code = wp_travel_get_trip_code( $post_id );
-			$trip_code = get_trip_code( $post->ID );
-			echo '<div align="left"><h4>';
-			esc_html_e( 'Trip Code : ', 'text-domain' );
-			echo esc_attr( $trip_code );
-			echo '</h4></div>';	
-		}
-	}
-	
-	// define the woocommerce_before_add_to_cart_button callback 
-	function action_woocommerce_before_add_to_cart_button() {
-		global $post;
-		$post_id = $post->ID;
 		$itineraries = get_post_meta( $post_id, 'wp_travel_trip_itinerary_data', true );
 
-		$is_itinerary_date = false;
-		$itinerary_date_array = array();
-		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) {
-			foreach ( $itineraries as $x=>$itinerary ) {
-				$is_itinerary_date = true;
-				array_push( $itinerary_date_array, $itineraries[$x]['date'] );
-			}
-		}
-		if ($is_itinerary_date) {
-			echo __( 'Itinerary Date : ', 'text-domain' );
-			foreach ( $itinerary_date_array as $itinerary_date ) {
-				echo $itinerary_date;
-				echo ', ';
-			}
-		} else {
-			//echo esc_html_e( 'Start Date : ', 'text-domain' );
-			echo __( 'Start Date : ', 'text-domain' );
-			echo '<div class="start_date"></div>';
-		}
-		?>
-		<script>
-			jQuery(document).ready(function($) {
-				$( '.start_date' ).datepicker();
-				$( '.start_date' ).on( 'change', function() {
-					var start_date = new Date(this.value);
-					var updated_start_date = new Date(this.value);
-					$( '.itinerary-li' ).each( function( index, element ) {
-						updated_start_date.setDate(start_date.getDate() + index);
-						$( 'input', element ).val(updated_start_date.toLocaleDateString());
-						$( '#itinerary-date-'+index ).datepicker();
-						$( '#itinerary-date-'+index ).on( 'change', function() {
-							var trip_date = new Date(this.value);
-							var updated_trip_date = new Date(this.value);
-							$( '.itinerary-li' ).each( function( index2, element2 ) {
-								if (index2 > index) {
-									updated_trip_date.setDate(trip_date.getDate() + index2 - index);
-									$( 'input', element2 ).val(updated_trip_date.toLocaleDateString());
-								}
-							});
-						});
-					});
-				});
-			});
-		</script>
-		<?php
+    	// Set the data for the cart item in cart object
+    	$data = array() ;
+		$cart_item_data['custom_data']['_itinerary'] = $data['_itinerary'] = $is_itinerary;
+		$cart_item_data['custom_data']['itineraries'] = $data['itineraries'] = $itineraries;
+		$cart_item_data['custom_data']['itinerary_date'] = $data['itinerary_date'] = $_POST['start_date_input'];
+
+		// Add the data to session and generate a unique ID
+    	if( count( $data > 0 ) ){
+        	$cart_item_data['custom_data']['unique_key'] = md5( microtime().rand() );
+        	WC()->session->set( 'custom_data', $data );
+    	}
+    	return $cart_item_data;
 	}
-         
+
+	/*
+	 * Display custom data on cart and checkout page.
+	 */
+	//add_filter( 'woocommerce_get_item_data', 'get_item_data' , 25, 2 );
+	function get_item_data ( $cart_data, $cart_item ) {
+
+		//if( ! empty( $cart_item['custom_data'] ) && ($cart_item['custom_data']['_itinerary']=='yes') ){
+		if( ! empty( $cart_item['custom_data'] ) ){
+			$values = '<span>';
+        	foreach( $cart_item['custom_data']['itineraries'] as $x => $itinerary ) {
+				$itinerary_date = $cart_item['custom_data']['itineraries'][$x]['itinerary_date'];
+				$values .= $itinerary_date.', ';
+			}
+			$values .= '</span>';
+			if( $cart_item['custom_data']['_itinerary']=='yes' ){
+				$values .= '<ul>';
+	        	foreach( $cart_item['custom_data']['itineraries'] as $x => $itinerary ) {
+					$label = $cart_item['custom_data']['itineraries'][$x]['label'];
+					$title = $cart_item['custom_data']['itineraries'][$x]['title'];
+					$assignments = $cart_item['custom_data']['itineraries'][$x]['assignment'];
+					$itinerary_date = $cart_item['custom_data']['itineraries'][$x]['itinerary_date'];
+					if( ! empty( $assignments ) ){
+						foreach( $assignments as $y => $assignment ) {
+							$category = $assignments[$y]['category'];
+							$product_id = $assignments[$y]['resource'];
+							$product_title = get_the_title( $assignments[$y]['resource'] );
+							$values .= '<li>'.$itinerary_date.', '.$category.', '.$product_title.'</li>';
+						}
+					}
+				}
+				$values .= '</ul>';
+			}
+
+			$cart_data[] = array(
+				'name'    => __( 'Date', 'text-domain' ),
+				'display' => $values				
+			);
+    	}
+
+    	return $cart_data;
+	}
+
+	// Add order item meta.
+	//add_action( 'woocommerce_add_order_item_meta', 'add_order_item_meta' , 10, 3 );
+	function add_order_item_meta ( $item_id, $cart_item, $cart_item_key ) {
+
+		if( ! empty( $cart_item['custom_data'] ) ){
+			$values = '<span>';
+			foreach( $cart_item['custom_data']['itineraries'] as $x => $itinerary ) {
+				$itinerary_date = $cart_item['custom_data']['itineraries'][$x]['itinerary_date'];
+				$values .= $itinerary_date.', ';
+			}
+			$values .= '</span>';
+			if( $cart_item['custom_data']['_itinerary']=='yes' ) {
+				$values .= '<ul>';
+				foreach( $cart_item['custom_data']['itineraries'] as $x => $itinerary ) {
+					$label = $cart_item['custom_data']['itineraries'][$x]['label'];
+					$title = $cart_item['custom_data']['itineraries'][$x]['title'];
+					$assignments = $cart_item['custom_data']['itineraries'][$x]['assignment'];
+					$itinerary_date = $cart_item['custom_data']['itineraries'][$x]['itinerary_date'];
+					if( ! empty( $assignments ) ){
+						foreach( $assignments as $y => $assignment ) {
+							$category = $assignments[$y]['category'];
+							$product_id = $assignments[$y]['resource'];
+							$product_title = get_the_title( $assignments[$y]['resource'] );
+							$values .= '<li>'.$itinerary_date.', '.$category.', '.$product_title.'</li>';
+							self::create_purchase_order($product_id, $itinerary_date);
+						}
+					}
+				}
+				$values .= '</ul>';
+			}	
+        	wc_add_order_item_meta( $item_id, __( "Date", 'text-domain' ), $values );
+		}	
+	}
+
+	//add_action('woocommerce_checkout_process', 'create_purchase_order');
+	function create_purchase_order( $product_id, $itinerary_date ) {
+	
+	  	global $woocommerce;
+	
+		$vendor_id = get_post_field( 'post_author', $product_id );
+		$vendor = get_userdata( $vendor_id );
+		$email = $vendor->user_email;
+		//echo 'customer_id: '.$customer_id;
+
+		// Get an instance of the WC_Customer Object
+		$customer_id = get_post_field( 'post_author', $product_id );
+		$customer = new WC_Customer( $customer_id );
+
+	  	// Now we create the order
+	  	//$order = wc_create_order();
+
+		// The add_product() function below is located in /plugins/woocommerce/includes/abstracts/abstract_wc_order.php
+		//$product_id = 132;
+		$quantity = 1;
+		
+		$args = array( 
+			'variation' => array( 'itinerary_date' => $itinerary_date ),
+		); 
+		
+		$order = wc_create_order();
+		$order->add_product( get_product( $product_id ), $quantity, $args );
+		//$order->set_total( 15.50 ); // set total amount for paid order including tax, fees etc. 
+
+	  	//$order->add_product( get_product($product_id), 1); // This is an existing SIMPLE product
+	  	$order->set_address( $customer->get_billing(), 'billing' );
+	  	//
+	  	$order->calculate_totals();
+	  	$order->update_status("Completed", 'Imported order', TRUE);  
+	}
+	
+	//add_filter( 'woocommerce_email_recipient_new_booking', 'additional_customer_email_recipient', 10, 2 ); 
+	//add_filter( 'woocommerce_email_recipient_new_order', 'additional_customer_email_recipient', 10, 2 ); // Optional (testing)
+function additional_customer_email_recipient( $recipient, $order ) {
+    if ( ! is_a( $order, 'WC_Order' ) ) return $recipient;
+
+    $additional_recipients = array(); // Initializing…
+
+    // Iterating though each order item
+    foreach( $order->get_items() as $item_id => $line_item ){
+        // Get the vendor ID
+        $vendor_id = get_post_field( 'post_author', $line_item->get_product_id());
+        $vendor = get_userdata( $vendor_id );
+        $email = $vendor->user_email;
+
+        // Avoiding duplicates (if many items with many emails)
+        // or an existing email in the recipient
+        if( ! in_array( $email, $additional_recipients ) && strpos( $recipient, $email ) === false )
+            $additional_recipients[] = $email;
+    }
+
+    // Convert the array in a coma separated string
+    $additional_recipients = implode( ',', $additional_recipients);
+
+    // If an additional recipient exist, we add it
+    if( count($additional_recipients) > 0 )
+        $recipient .= ','.$additional_recipients;
+
+    return $recipient;
+}
+
 	/**
  	* Add a custom product data tab
  	*/
-	function woo_new_product_tab() {
+	 function woo_new_product_tab() {
 
 		global $post;
 		$post_id = $post->ID;
@@ -324,160 +493,6 @@ class Trip_Options_View {
 			<span><?php esc_html_e( 'No FAQs found.', 'text-domain' ); ?></span><?php
 		}
 	}
-
-	/*
-	 * Add data to cart item
-	 */
-	//add_filter( 'woocommerce_add_cart_item_data', 'add_cart_item_data', 25, 2 );
-	function add_cart_item_data( $cart_item_data, $product_id ) {
-		$post_id = $product_id;
-		$is_itinerary = get_post_meta( $post_id, '_itinerary', true );
-		$itineraries = get_post_meta( $post_id, 'wp_travel_trip_itinerary_data', true );
-
-    	// Set the data for the cart item in cart object
-    	$data = array() ;
-		$cart_item_data['custom_data']['_itinerary'] = $data['_itinerary'] = $is_itinerary;
-		$cart_item_data['custom_data']['itineraries'] = $data['itineraries'] = $itineraries;
-
-		// Add the data to session and generate a unique ID
-    	if( count($data > 0 ) ){
-        	$cart_item_data['custom_data']['unique_key'] = md5( microtime().rand() );
-        	WC()->session->set( 'custom_data', $data );
-    	}
-    	return $cart_item_data;
-	}
-
-	/*
-	 * Display custom data on cart and checkout page.
-	 */
-	//add_filter( 'woocommerce_get_item_data', 'get_item_data' , 25, 2 );
-	function get_item_data ( $cart_data, $cart_item ) {
-
-		//if( ! empty( $cart_item['custom_data'] ) && ($cart_item['custom_data']['_itinerary']=='yes') ){
-		if( ! empty( $cart_item['custom_data'] ) ){
-			$values = '<span>';
-        	foreach( $cart_item['custom_data']['itineraries'] as $x => $itinerary ) {
-				$itinerary_date = $cart_item['custom_data']['itineraries'][$x]['itinerary_date'];
-				$values .= $itinerary_date.', ';
-			}
-			$values .= '</span>';
-			if( $cart_item['custom_data']['_itinerary']=='yes' ){
-				$values .= '<ul>';
-	        	foreach( $cart_item['custom_data']['itineraries'] as $x => $itinerary ) {
-					$label = $cart_item['custom_data']['itineraries'][$x]['label'];
-					$title = $cart_item['custom_data']['itineraries'][$x]['title'];
-					$assignments = $cart_item['custom_data']['itineraries'][$x]['assignment'];
-					$itinerary_date = $cart_item['custom_data']['itineraries'][$x]['itinerary_date'];
-					if( ! empty( $assignments ) ){
-						foreach( $assignments as $y => $assignment ) {
-							$category = $assignments[$y]['category'];
-							$product_id = $assignments[$y]['resource'];
-							$product_title = get_the_title( $assignments[$y]['resource'] );
-							$values .= '<li>'.$itinerary_date.', '.$category.', '.$product_title.'</li>';
-						}
-					}
-				}
-			}
-			$values .= '</ul>';
-
-			$cart_data[] = array(
-				'name'    => __( 'Date', 'text-domain' ),
-				'display' => $values				
-			);
-    	}
-
-    	return $cart_data;
-	}
-
-	// Add order item meta.
-	//add_action( 'woocommerce_add_order_item_meta', 'add_order_item_meta' , 10, 3 );
-	function add_order_item_meta ( $item_id, $cart_item, $cart_item_key ) {
-
-		if( ! empty( $cart_item['custom_data'] ) ){
-			$values = '<span>';
-			foreach( $cart_item['custom_data']['itineraries'] as $x => $itinerary ) {
-				$itinerary_date = $cart_item['custom_data']['itineraries'][$x]['itinerary_date'];
-				$values .= $itinerary_date.', ';
-			}
-			$values .= '</span>';
-			if( $cart_item['custom_data']['_itinerary']=='yes' ){
-				$values .= '<ul>';
-				foreach( $cart_item['custom_data']['itineraries'] as $x => $itinerary ) {
-					$label = $cart_item['custom_data']['itineraries'][$x]['label'];
-					$title = $cart_item['custom_data']['itineraries'][$x]['title'];
-					$assignments = $cart_item['custom_data']['itineraries'][$x]['assignment'];
-					$itinerary_date = $cart_item['custom_data']['itineraries'][$x]['itinerary_date'];
-					if( ! empty( $assignments ) ){
-						foreach( $assignments as $y => $assignment ) {
-							$category = $assignments[$y]['category'];
-							$product_id = $assignments[$y]['resource'];
-							$product_title = get_the_title( $assignments[$y]['resource'] );
-							$values .= '<li>'.$itinerary_date.', '.$category.', '.$product_title.'</li>';
-							self::create_purchase_order($product_id);
-						}
-					}
-				}
-				$values .= '</ul>';
-			}
-	
-        	wc_add_order_item_meta( $item_id, __( "Date", 'text-domain' ), $values );
-		}	
-	}
-
-	//add_action('woocommerce_checkout_process', 'create_purchase_order');
-	function create_purchase_order( $product_id ) {
-	
-	  	global $woocommerce;
-	
-	  	// Now we create the order
-	  	$order = wc_create_order();
-
-		$customer_id = get_post_field( 'post_author', $product_id );
-		$vendor_id = get_post_field( 'post_author', $product_id );
-		$vendor = get_userdata( $vendor_id );
-		$email = $vendor->user_email;
-		//echo 'customer_id: '.$customer_id;
-
-		// Get an instance of the WC_Customer Object
-		$customer = new WC_Customer( $customer_id );
-
-		// The add_product() function below is located in /plugins/woocommerce/includes/abstracts/abstract_wc_order.php
-	  	$order->add_product( get_product($product_id), 1); // This is an existing SIMPLE product
-	  	$order->set_address( $customer->get_billing(), 'billing' );
-	  	//
-	  	$order->calculate_totals();
-	  	$order->update_status("Completed", 'Imported order', TRUE);  
-	}
-	
-	//add_filter( 'woocommerce_email_recipient_new_booking', 'additional_customer_email_recipient', 10, 2 ); 
-	//add_filter( 'woocommerce_email_recipient_new_order', 'additional_customer_email_recipient', 10, 2 ); // Optional (testing)
-function additional_customer_email_recipient( $recipient, $order ) {
-    if ( ! is_a( $order, 'WC_Order' ) ) return $recipient;
-
-    $additional_recipients = array(); // Initializing…
-
-    // Iterating though each order item
-    foreach( $order->get_items() as $item_id => $line_item ){
-        // Get the vendor ID
-        $vendor_id = get_post_field( 'post_author', $line_item->get_product_id());
-        $vendor = get_userdata( $vendor_id );
-        $email = $vendor->user_email;
-
-        // Avoiding duplicates (if many items with many emails)
-        // or an existing email in the recipient
-        if( ! in_array( $email, $additional_recipients ) && strpos( $recipient, $email ) === false )
-            $additional_recipients[] = $email;
-    }
-
-    // Convert the array in a coma separated string
-    $additional_recipients = implode( ',', $additional_recipients);
-
-    // If an additional recipient exist, we add it
-    if( count($additional_recipients) > 0 )
-        $recipient .= ','.$additional_recipients;
-
-    return $recipient;
-}
 
 
 }
