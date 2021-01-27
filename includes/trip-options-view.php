@@ -100,6 +100,9 @@ class Trip_Options_View {
 		<?php
 	}
 
+	/*
+	 * Added Custom fields on product view page
+	 */
 	function custom_action_after_single_product_title() { 
 
 		global $post;
@@ -110,8 +113,6 @@ class Trip_Options_View {
 			$trip_code = get_trip_code( $post->ID );
 			echo '<div align="left"><h4>';
 			echo __( 'Trip Code : ', 'text-domain' ) . $trip_code;
-			//esc_html_e( 'Trip Code : ', 'text-domain' );
-			//echo esc_attr( $trip_code );
 			echo '</h4></div>';	
 		}
 	}
@@ -127,7 +128,9 @@ class Trip_Options_View {
 		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) {
 			foreach ( $itineraries as $x=>$itinerary ) {
 				//$is_itinerary_date = true;
-				array_push( $itinerary_date_array, $itineraries[$x]['date'] );
+				if( isset( $itineraries[$x]['date'] ) ) {
+					array_push( $itinerary_date_array, $itineraries[$x]['date'] );
+				}
 			}
 		}
 		if ( is_array( $itinerary_date_array ) && count( $itinerary_date_array ) > 0 ) {
