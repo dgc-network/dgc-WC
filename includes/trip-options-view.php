@@ -123,25 +123,21 @@ class Trip_Options_View {
 		$post_id = $post->ID;
 		$itineraries = get_post_meta( $post_id, 'wp_travel_trip_itinerary_data', true );
 
-		//$is_itinerary_date = false;
 		$itinerary_date_array = array();
 		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) {
 			foreach ( $itineraries as $x=>$itinerary ) {
-				//$is_itinerary_date = true;
 				if( !empty( $itineraries[$x]['date'] ) ) {
 					array_push( $itinerary_date_array, $itineraries[$x]['date'] );
 				}
 			}
 		}
 		if ( is_array( $itinerary_date_array ) && count( $itinerary_date_array ) > 0 ) {
-		//if ($is_itinerary_date) {
 			echo __( 'Itinerary Date : ', 'text-domain' );
 			foreach ( $itinerary_date_array as $itinerary_date ) {
 				echo $itinerary_date;
 				echo ', ';
 			}
 		} else {
-			//echo esc_html_e( 'Start Date : ', 'text-domain' );
 			echo __( 'Start Date : ', 'text-domain' );
 			echo '<div class="start_date"></div>';
 			echo '<input style="display:none" type="text" id="start_date_input" name="start_date_input" />';
@@ -190,12 +186,12 @@ class Trip_Options_View {
 		$is_itinerary = get_post_meta( $post_id, '_itinerary', true );
 		$itineraries = get_post_meta( $post_id, 'wp_travel_trip_itinerary_data', true );
 
-    	if( isset( $_POST['itinerary_date_array'] ) ) {
+    	if( !empty( $_POST['itinerary_date_array'] ) ) {
 			foreach( $_POST['itinerary_date_array'] as $x => $itinerary_date ) {
 				$itineraries[$x]['itinerary_date'] = $itinerary_date;
 			}
 		} else {
-			if( isset( $_POST['start_date_input'] ) ) {
+			if( !empty( $_POST['start_date_input'] ) ) {
 				$itineraries[0]['itinerary_date'] = $_POST['start_date_input'];
 			} else {
 				foreach( $itineraries as $x => $itinerary ) {
