@@ -97,7 +97,28 @@ class Trip_Options_View {
         			return false;
 				});
 		
-			})
+				$( '.start_date' ).datepicker();
+				$( '.start_date' ).on( 'change', function() {
+					var start_date = new Date(this.value);
+					var updated_start_date = new Date(this.value);
+					$( '#start_date_input' ).val(updated_start_date.toLocaleDateString());
+					$( '.itinerary-li' ).each( function( index, element ) {
+						updated_start_date.setDate(start_date.getDate() + index);
+						$( 'input', element ).val(updated_start_date.toLocaleDateString());
+						$( '#itinerary-date-'+index ).datepicker();
+						$( '#itinerary-date-'+index ).on( 'change', function() {
+							var trip_date = new Date(this.value);
+							var updated_trip_date = new Date(this.value);
+							$( '.itinerary-li' ).each( function( index2, element2 ) {
+								if (index2 > index) {
+									updated_trip_date.setDate(trip_date.getDate() + index2 - index);
+									$( 'input', element2 ).val(updated_trip_date.toLocaleDateString());
+								}
+							});
+						});
+					});
+				});
+			});
 		</script>
 		<?php
 	}
@@ -147,6 +168,7 @@ class Trip_Options_View {
 		?>
 		<script>
 			jQuery(document).ready(function($) {
+/*				
 				$( '.start_date' ).datepicker();
 				$( '.start_date' ).on( 'change', function() {
 					var start_date = new Date(this.value);
@@ -168,6 +190,7 @@ class Trip_Options_View {
 						});
 					});
 				});
+*/				
 			});
 		</script>
 		<?php
