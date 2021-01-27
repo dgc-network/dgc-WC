@@ -128,7 +128,7 @@ class Trip_Options_View {
 		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) {
 			foreach ( $itineraries as $x=>$itinerary ) {
 				//$is_itinerary_date = true;
-				if( isset( $itineraries[$x]['date'] ) ) {
+				if( !empty( $itineraries[$x]['date'] ) ) {
 					array_push( $itinerary_date_array, $itineraries[$x]['date'] );
 				}
 			}
