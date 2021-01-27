@@ -60,6 +60,7 @@ class Trip_Options_View {
 						var itinerary_date = $( '#itinerary-date-'+index ).val();
 						itinerary_date_array.push( itinerary_date );
 					})
+					var start_date_input = $( '#start_date_input' ).val();
 
         			var data = {
             			action: 'woocommerce_ajax_add_to_cart',
@@ -68,6 +69,7 @@ class Trip_Options_View {
             			quantity: product_qty,
 						variation_id: variation_id,
 						itinerary_date_array: itinerary_date_array,
+						start_date_input: start_date_input,
         			};
 
         			$(document.body).trigger('adding_to_cart', [$thisbutton, data]);
