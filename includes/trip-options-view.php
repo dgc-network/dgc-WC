@@ -18,7 +18,7 @@ class Trip_Options_View {
 		add_filter( 'woocommerce_add_cart_item_data', array( __CLASS__, 'add_cart_item_data' ), 25, 2 );
 		add_filter( 'woocommerce_get_item_data', array( __CLASS__, 'get_item_data' ), 25, 2 );
 		add_action( 'woocommerce_add_order_item_meta', array( __CLASS__, 'add_order_item_meta' ), 10, 3 );
-		add_action( 'woocommerce_checkout_process', array( __CLASS__, 'create_vip_order' ) );
+		add_action( 'woocommerce_checkout_process', array( __CLASS__, 'create_purchase_order' ) );
 		add_filter( 'woocommerce_email_recipient_new_booking', array( __CLASS__, 'additional_customer_email_recipient' ), 10, 2 ); 
 		add_filter( 'woocommerce_email_recipient_new_order', array( __CLASS__, 'additional_customer_email_recipient' ), 10, 2 ); // Optional (testing)
 		}
@@ -171,8 +171,29 @@ class Trip_Options_View {
 	
 	// define the woocommerce_before_add_to_cart_button callback 
 	function action_woocommerce_before_add_to_cart_button() {
-		echo esc_html_e( 'Start Date : ', 'text-domain' );
-		echo '<div class="start_date"></div>';
+		global $post;
+		$post_id = $post->ID;
+		$itineraries = get_post_meta( $post_id, 'wp_travel_trip_itinerary_data', true );
+
+		$is_itinerary_date = false;
+		$itinerary_date_array = array();
+		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) {
+			foreach ( $itineraries as $x=>$itinerary ) {
+				$is_itinerary_date = true;
+				array_push( $itinerary_date_array, $itineraries[$x]['date'] );
+			}
+		}
+		if ($is_itinerary_date) {
+			echo __( 'Itinerary Date : ', 'text-domain' );
+			foreach ( $itinerary_date_array as $itinerary_date ) {
+				echo $itinerary_date;
+				echo ', ';
+			}
+		} else {
+			//echo esc_html_e( 'Start Date : ', 'text-domain' );
+			echo __( 'Start Date : ', 'text-domain' );
+			echo '<div class="start_date"></div>';
+		}
 		?>
 		<script>
 			jQuery(document).ready(function($) {
@@ -332,36 +353,35 @@ class Trip_Options_View {
 	//add_filter( 'woocommerce_get_item_data', 'get_item_data' , 25, 2 );
 	function get_item_data ( $cart_data, $cart_item ) {
 
-		if( ! empty( $cart_item['custom_data'] ) && ($cart_item['custom_data']['_itinerary']=='yes') ){
+		//if( ! empty( $cart_item['custom_data'] ) && ($cart_item['custom_data']['_itinerary']=='yes') ){
+		if( ! empty( $cart_item['custom_data'] ) ){
 			$values = '<span>';
         	foreach( $cart_item['custom_data']['itineraries'] as $x => $itinerary ) {
 				$itinerary_date = $cart_item['custom_data']['itineraries'][$x]['itinerary_date'];
 				$values .= $itinerary_date.', ';
 			}
 			$values .= '</span>';
-			$values .= '<ul>';
-        	foreach( $cart_item['custom_data']['itineraries'] as $x => $itinerary ) {
-				$label = $cart_item['custom_data']['itineraries'][$x]['label'];
-				$title = $cart_item['custom_data']['itineraries'][$x]['title'];
-				$assignments = $cart_item['custom_data']['itineraries'][$x]['assignment'];
-				$itinerary_date = $cart_item['custom_data']['itineraries'][$x]['itinerary_date'];
-				//$values .= '<li>'.$label.', '.$title.'</li>';
-				if( ! empty( $assignments ) ){
-					//$values .= '<ul>';
-					foreach( $assignments as $y => $assignment ) {
-						$category = $assignments[$y]['category'];
-						$product_id = $assignments[$y]['resource'];
-						$product_title = get_the_title( $assignments[$y]['resource'] );
-						//$values .= '<li>'.$itinerary_date.', '.$category.', '.$resource.'</li>';
-						$values .= '<li>'.$itinerary_date.', '.$category.', '.$product_title.'</li>';
+			if( $cart_item['custom_data']['_itinerary']=='yes' ){
+				$values .= '<ul>';
+	        	foreach( $cart_item['custom_data']['itineraries'] as $x => $itinerary ) {
+					$label = $cart_item['custom_data']['itineraries'][$x]['label'];
+					$title = $cart_item['custom_data']['itineraries'][$x]['title'];
+					$assignments = $cart_item['custom_data']['itineraries'][$x]['assignment'];
+					$itinerary_date = $cart_item['custom_data']['itineraries'][$x]['itinerary_date'];
+					if( ! empty( $assignments ) ){
+						foreach( $assignments as $y => $assignment ) {
+							$category = $assignments[$y]['category'];
+							$product_id = $assignments[$y]['resource'];
+							$product_title = get_the_title( $assignments[$y]['resource'] );
+							$values .= '<li>'.$itinerary_date.', '.$category.', '.$product_title.'</li>';
+						}
 					}
-					//$values .= '</ul>';
 				}
 			}
 			$values .= '</ul>';
 
 			$cart_data[] = array(
-				'name'    => __( "Date", "dgc-domain" ),
+				'name'    => __( 'Date', 'text-domain' ),
 				'display' => $values				
 			);
     	}
@@ -373,40 +393,39 @@ class Trip_Options_View {
 	//add_action( 'woocommerce_add_order_item_meta', 'add_order_item_meta' , 10, 3 );
 	function add_order_item_meta ( $item_id, $cart_item, $cart_item_key ) {
 
-		if( ! empty( $cart_item['custom_data'] ) && ($cart_item['custom_data']['_itinerary']=='yes') ){
+		if( ! empty( $cart_item['custom_data'] ) ){
 			$values = '<span>';
 			foreach( $cart_item['custom_data']['itineraries'] as $x => $itinerary ) {
 				$itinerary_date = $cart_item['custom_data']['itineraries'][$x]['itinerary_date'];
 				$values .= $itinerary_date.', ';
 			}
 			$values .= '</span>';
-			$values .= '<ul>';
-			foreach( $cart_item['custom_data']['itineraries'] as $x => $itinerary ) {
-				$label = $cart_item['custom_data']['itineraries'][$x]['label'];
-				$title = $cart_item['custom_data']['itineraries'][$x]['title'];
-				$assignments = $cart_item['custom_data']['itineraries'][$x]['assignment'];
-				$itinerary_date = $cart_item['custom_data']['itineraries'][$x]['itinerary_date'];
-				//$values .= '<li>'.$label.', '.$title.'</li>';
-				if( ! empty( $assignments ) ){
-					//$values .= '<ul>';
-					foreach( $assignments as $y => $assignment ) {
-						$category = $assignments[$y]['category'];
-						$product_id = $assignments[$y]['resource'];
-						$product_title = get_the_title( $assignments[$y]['resource'] );
-						$values .= '<li>'.$itinerary_date.', '.$category.', '.$product_title.'</li>';
-						self::create_vip_order($product_id);
+			if( $cart_item['custom_data']['_itinerary']=='yes' ){
+				$values .= '<ul>';
+				foreach( $cart_item['custom_data']['itineraries'] as $x => $itinerary ) {
+					$label = $cart_item['custom_data']['itineraries'][$x]['label'];
+					$title = $cart_item['custom_data']['itineraries'][$x]['title'];
+					$assignments = $cart_item['custom_data']['itineraries'][$x]['assignment'];
+					$itinerary_date = $cart_item['custom_data']['itineraries'][$x]['itinerary_date'];
+					if( ! empty( $assignments ) ){
+						foreach( $assignments as $y => $assignment ) {
+							$category = $assignments[$y]['category'];
+							$product_id = $assignments[$y]['resource'];
+							$product_title = get_the_title( $assignments[$y]['resource'] );
+							$values .= '<li>'.$itinerary_date.', '.$category.', '.$product_title.'</li>';
+							self::create_purchase_order($product_id);
+						}
 					}
-					//$values .= '</ul>';
 				}
+				$values .= '</ul>';
 			}
-			$values .= '</ul>';
-
-        	wc_add_order_item_meta( $item_id, __( "Date", "dgc-domain" ), $values );
+	
+        	wc_add_order_item_meta( $item_id, __( "Date", 'text-domain' ), $values );
 		}	
 	}
 
-	//add_action('woocommerce_checkout_process', 'create_vip_order');
-	function create_vip_order( $product_id ) {
+	//add_action('woocommerce_checkout_process', 'create_purchase_order');
+	function create_purchase_order( $product_id ) {
 	
 	  	global $woocommerce;
 	
@@ -424,7 +443,6 @@ class Trip_Options_View {
 
 		// The add_product() function below is located in /plugins/woocommerce/includes/abstracts/abstract_wc_order.php
 	  	$order->add_product( get_product($product_id), 1); // This is an existing SIMPLE product
-	  	//$order->set_address( $address, 'billing' );
 	  	$order->set_address( $customer->get_billing(), 'billing' );
 	  	//
 	  	$order->calculate_totals();
