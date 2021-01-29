@@ -173,35 +173,6 @@ class Trip_Options_View {
 				echo '<input type="text" class="start_date" id="start_date_input" name="start_date_input" />';
 			}
 		}
-		?>
-		<script>
-			jQuery(document).ready(function($) {
-/*				
-				$( '.start_date' ).datepicker();
-				$( '.start_date' ).on( 'change', function() {
-					var start_date = new Date(this.value);
-					var updated_start_date = new Date(this.value);
-					$( '#start_date_input' ).val(updated_start_date.toLocaleDateString());
-					$( '.itinerary-li' ).each( function( index, element ) {
-						updated_start_date.setDate(start_date.getDate() + index);
-						$( 'input', element ).val(updated_start_date.toLocaleDateString());
-						$( '#itinerary-date-'+index ).datepicker();
-						$( '#itinerary-date-'+index ).on( 'change', function() {
-							var trip_date = new Date(this.value);
-							var updated_trip_date = new Date(this.value);
-							$( '.itinerary-li' ).each( function( index2, element2 ) {
-								if (index2 > index) {
-									updated_trip_date.setDate(trip_date.getDate() + index2 - index);
-									$( 'input', element2 ).val(updated_trip_date.toLocaleDateString());
-								}
-							});
-						});
-					});
-				});
-*/				
-			});
-		</script>
-		<?php
 	}
          
 	/*
@@ -461,7 +432,11 @@ function additional_customer_email_recipient( $recipient, $order ) {
 			<ul><?php
 			foreach ( $itineraries as $x=>$itinerary ) {
 				echo '<li class="itinerary-li">';
-				echo '<input type="text" style="color:blue" name="itinerary-date-'.$x.'" id="itinerary-date-'.$x.'">';
+				if ( empty($itineraries[$x]['date']) ) {
+					echo '<input type="text" style="color:blue" name="itinerary-date-'.$x.'" id="itinerary-date-'.$x.'">';
+				} else {
+					echo $itineraries[$x]['date'] . ': ';
+				}
 				echo esc_attr( $itineraries[$x]['label'] ) . ', ' . esc_attr( $itineraries[$x]['title'] );
 				echo esc_attr( $itineraries[$x]['desc'] );
 				echo '</li>';
