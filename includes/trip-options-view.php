@@ -97,11 +97,14 @@ class Trip_Options_View {
         			return false;
 				});
 		
+				/*
+				 * Update the Itinerary Date after the Datepicker value changed
+				 */
 				$( '.start_date' ).datepicker();
 				$( '.start_date' ).on( 'change', function() {
 					var start_date = new Date(this.value);
 					var updated_start_date = new Date(this.value);
-					$( '#start_date_input' ).val(updated_start_date.toLocaleDateString());
+					//$( '#start_date_input' ).val(updated_start_date.toLocaleDateString());
 					$( '.itinerary-li' ).each( function( index, element ) {
 						updated_start_date.setDate(start_date.getDate() + index);
 						$( 'input', element ).val(updated_start_date.toLocaleDateString());
