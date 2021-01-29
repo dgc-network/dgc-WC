@@ -156,10 +156,14 @@ class Trip_Options_View {
 		}
 		if ( is_array( $itinerary_date_array ) && count( $itinerary_date_array ) > 0 ) {
 			echo __( 'Itinerary Date : ', 'text-domain' );
-			foreach ( $itinerary_date_array as $itinerary_date ) {
-				echo $itinerary_date;
-				echo ', ';
+			echo '<ul>';
+			foreach ( $itineraries as $x=>$itinerary ) {
+			//foreach ( $itinerary_date_array as $itinerary_date ) {
+				echo '<li>' . $itineraries[$x]['date'] . ': ' . $itineraries[$x]['title'] . '</li>';
+				//echo $itinerary_date;
+				//echo ', ';
 			}
+			echo '</ul>';
 		} else {
 			echo __( 'Start Date : ', 'text-domain' );
 			echo '<div class="start_date"></div>';
