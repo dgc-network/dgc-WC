@@ -144,6 +144,7 @@ class Trip_Options_View {
 
 		global $post;
 		$post_id = $post->ID;
+		$is_itinerary = get_post_meta( $post_id, '_itinerary', true );
 		$itineraries = get_post_meta( $post_id, 'wp_travel_trip_itinerary_data', true );
 
 		$itinerary_date_array = array();
@@ -155,19 +156,19 @@ class Trip_Options_View {
 			}
 		}
 		if ( is_array( $itinerary_date_array ) && count( $itinerary_date_array ) > 0 ) {
-			echo __( 'Itinerary Date : ', 'text-domain' );
+			echo __( 'Itinerary : ', 'text-domain' );
 			echo '<ul>';
 			foreach ( $itineraries as $x=>$itinerary ) {
-			//foreach ( $itinerary_date_array as $itinerary_date ) {
 				echo '<li>' . $itineraries[$x]['date'] . ': ' . $itineraries[$x]['title'] . '</li>';
-				//echo $itinerary_date;
-				//echo ', ';
 			}
 			echo '</ul>';
 		} else {
 			echo __( 'Start Date : ', 'text-domain' );
-			echo '<div class="start_date"></div>';
-			echo '<input style="display:none" type="text" id="start_date_input" name="start_date_input" />';
+			if ($is_itinerary=='yes') {
+				echo '<div class="start_date"></div>';
+			} else {
+				echo '<input type="text" class="start_date" id="start_date_input" name="start_date_input" />';
+			}
 		}
 		?>
 		<script>
