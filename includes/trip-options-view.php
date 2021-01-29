@@ -353,7 +353,8 @@ class Trip_Options_View {
 		); 
 		
 		$order = wc_create_order();
-		$order->add_product( get_product( $product_id ), $quantity, $args );
+		//$order->add_product( get_product( $product_id ), $quantity, $args );
+		$order->add_product( get_product( $product_id ), $quantity );
 		//$order->set_total( 15.50 ); // set total amount for paid order including tax, fees etc. 
 
 	  	//$order->add_product( get_product($product_id), 1); // This is an existing SIMPLE product
