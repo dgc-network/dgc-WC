@@ -317,7 +317,7 @@ class Trip_Options_View {
 							$product_id = $assignments[$y]['resource'];
 							$product_title = get_the_title( $assignments[$y]['resource'] );
 							$values .= '<li>'.$itinerary_date.', '.$category.', '.$product_title.'</li>';
-							self::create_purchase_order($product_id, $itinerary_date);
+							//self::create_purchase_order($product_id, $itinerary_date);
 						}
 					}
 				}
