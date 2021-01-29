@@ -17,7 +17,8 @@ class Trip_Options_View {
 		add_action( 'woocommerce_before_add_to_cart_button', array( __CLASS__, 'add_fields_before_add_to_cart' ) );
 		add_filter( 'woocommerce_add_cart_item_data', array( __CLASS__, 'add_cart_item_data' ), 25, 2 );
 		add_filter( 'woocommerce_get_item_data', array( __CLASS__, 'get_item_data' ), 25, 2 );
-		add_action( 'woocommerce_add_order_item_meta', array( __CLASS__, 'add_order_item_meta' ), 10, 3 );
+		//add_action( 'woocommerce_add_order_item_meta', array( __CLASS__, 'add_order_item_meta' ), 10, 3 );
+		add_action( 'woocommerce_checkout_create_order_line_item', array( __CLASS__, 'custom_checkout_create_order_line_item' ), 20, 4 );
 		add_action( 'woocommerce_checkout_process', array( __CLASS__, 'create_purchase_order' ) );
 		add_filter( 'woocommerce_email_recipient_new_booking', array( __CLASS__, 'additional_customer_email_recipient' ), 10, 2 ); 
 		add_filter( 'woocommerce_email_recipient_new_order', array( __CLASS__, 'additional_customer_email_recipient' ), 10, 2 ); // Optional (testing)
@@ -293,6 +294,30 @@ class Trip_Options_View {
     	return $cart_data;
 	}
 
+## --- New way --- ##
+//add_action( 'woocommerce_checkout_create_order_line_item', 'custom_checkout_create_order_line_item', 20, 4 );
+function custom_checkout_create_order_line_item( $item, $cart_item_key, $values, $order ) {
+/*
+	// Get a product custom field value
+    $custom_field_value = get_post_meta( $item->get_product_id(), '_meta_key', true );
+    // Update order item meta
+    if ( ! empty( $custom_field_value ) ){
+        $item->update_meta_data( 'meta_key1', $custom_field_value );
+    }
+    // … … Or … …
+
+    // Get cart item custom data and update order item meta
+    if( isset( $values['custom_data'] ) ) {
+        $item->update_meta_data( 'meta_key2', $values['custom_data'] );
+	}
+    // … … Or … …
+*/	
+    $custom_designer = WC()->session->get( $cart_item_key.'_designer' );
+    if( ! empty($custom_designer) ) {
+        $item->update_meta_data( 'custom_designer', $custom_designer );
+    }	
+}
+
 	// Add order item meta.
 	//add_action( 'woocommerce_add_order_item_meta', 'add_order_item_meta' , 10, 3 );
 	function add_order_item_meta ( $item_id, $cart_item, $cart_item_key ) {
@@ -317,7 +342,7 @@ class Trip_Options_View {
 							$product_id = $assignments[$y]['resource'];
 							$product_title = get_the_title( $assignments[$y]['resource'] );
 							$values .= '<li>'.$itinerary_date.', '.$category.', '.$product_title.'</li>';
-							//self::create_purchase_order($product_id, $itinerary_date);
+							self::create_purchase_order($product_id, $itinerary_date);
 						}
 					}
 				}
