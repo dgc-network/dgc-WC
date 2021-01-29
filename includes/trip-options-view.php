@@ -349,7 +349,7 @@ class Trip_Options_View {
 		$quantity = 1;
 		
 		$args = array( 
-			'variation' => array( 'itinerary_date' => $itinerary_date ),
+			//'variation' => array( 'itinerary_date' => $itinerary_date ),
 		); 
 		
 		$order = wc_create_order();
