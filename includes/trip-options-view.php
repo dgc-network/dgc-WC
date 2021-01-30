@@ -320,13 +320,13 @@ class Trip_Options_View {
 				}
 			}
 
-			$display = '<span>';
+			$display_itinerary_date = '<span>';
 			foreach( $values['custom_data']['itineraries'] as $x => $itinerary ) {
 				$itinerary_date = $values['custom_data']['itineraries'][$x]['itinerary_date'];
-				$display .= $itinerary_date.', ';
+				$display_itinerary_date .= $itinerary_date.', ';
 			}
-			$display .= '</span>';
-			$item->update_meta_data( __( 'Date', 'text-domain' ), $display );
+			$display_itinerary_date .= '</span>';
+			$item->update_meta_data( __( 'Date', 'text-domain' ), $display_itinerary_date );
 			
 		}
 	}
@@ -342,17 +342,12 @@ class Trip_Options_View {
 	  	$quantity = 1;
 	  
 	  	$args = array( 
-		  'variation' => array( 'itinerary_date' => $itinerary_date ),
+		  'variation' => array( __( 'Date', 'text-domain' ) => $itinerary_date ),
 	  	); 
 	  
 	  	$order = wc_create_order();
-	  	//$order->add_product( get_product( $product_id ), $quantity, $args );
 	  	$order->add_product( wc_get_product( $product_id ), $quantity, $args );
-	  	//$order->add_product( get_product( $product_id ), $quantity );
-		//$order->add_product( get_product($product_id), 1); // This is an existing SIMPLE product
-
 		$order->set_address( $customer->get_billing(), 'billing' );
-		//
 		$order->calculate_totals();
 		//$order->update_status( 'Completed', 'Imported order', TRUE );
 
