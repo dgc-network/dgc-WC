@@ -314,8 +314,8 @@ class Trip_Options_View {
 						//$category = $assignments[$y]['category'];
 						$product_id = $assignments[$y]['resource'];
 						//$product_title = get_the_title( $assignments[$y]['resource'] );
-						//self::create_purchase_order($product_id, $itinerary_date);
-						self::custom_create_wc_order( $product_id, $customer_id, $itinerary_date );
+						self::create_purchase_order($product_id, $itinerary_date);
+						//self::custom_create_wc_order( $product_id, $customer_id, $itinerary_date );
 					}
 				}
 			}
