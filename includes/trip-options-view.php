@@ -20,7 +20,7 @@ class Trip_Options_View {
 		//add_action( 'woocommerce_add_order_item_meta', array( __CLASS__, 'add_order_item_meta' ), 10, 3 );
 		add_action( 'woocommerce_checkout_create_order_line_item', array( __CLASS__, 'custom_checkout_create_order_line_item' ), 20, 4 );
 		//add_action( 'woocommerce_checkout_process', array( __CLASS__, 'custom_checkout_process' ) );
-		add_action( 'woocommerce_order_details_after_customer_details', array( __CLASS__, 'custom_order_details_after_customer_details' ), 10, 1);
+		//add_action( 'woocommerce_order_details_after_customer_details', array( __CLASS__, 'custom_order_details_after_customer_details' ), 10, 1);
 		add_filter( 'woocommerce_email_recipient_new_booking', array( __CLASS__, 'additional_customer_email_recipient' ), 10, 2 ); 
 		add_filter( 'woocommerce_email_recipient_new_order', array( __CLASS__, 'additional_customer_email_recipient' ), 10, 2 ); // Optional (testing)
 	}
@@ -293,6 +293,13 @@ class Trip_Options_View {
     	return $cart_data;
 	}
 
+	/* 
+	 * woocommerce_checkout_create_order_line_item It has 4 available arguments and available after version WooCommerce 3.3+.
+	 * $item is an instance of WC_Order_Item_Product new introduced Class
+	 * $cart_item_key is the cart item unique hash key
+	 * $values is the cart item
+	 * $order an instance of the WC_Order object (This is a very useful additional argument in some specific cases)
+	 */
 	//add_action( 'woocommerce_checkout_create_order_line_item', 'custom_checkout_create_order_line_item', 20, 4 );
 	function custom_checkout_create_order_line_item( $item, $cart_item_key, $values, $order ) {
 
@@ -312,6 +319,16 @@ class Trip_Options_View {
 					}
 				}
 			}
+        	//$item->update_meta_data( 'custom_data', $values['custom_data'] );
+
+			$display = '<span>';
+			foreach( $values['custom_data']['itineraries'] as $x => $itinerary ) {
+				$itinerary_date = $values['custom_data']['itineraries'][$x]['itinerary_date'];
+				$display .= $itinerary_date.', ';
+			}
+			$display .= '</span>';
+        	wc_add_order_item_meta( $item->get_id(), __( "Date", 'text-domain' ), $values );
+
 		}
 /*
 		// Get a product custom field value
