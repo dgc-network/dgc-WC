@@ -342,18 +342,19 @@ class Trip_Options_View {
 	  	$quantity = 1;
 	  
 	  	$args = array( 
-		  //'variation' => array( 'itinerary_date' => $itinerary_date ),
+		  'variation' => array( 'itinerary_date' => $itinerary_date ),
 	  	); 
 	  
 	  	$order = wc_create_order();
 	  	//$order->add_product( get_product( $product_id ), $quantity, $args );
-	  	$order->add_product( get_product( $product_id ), $quantity );
+	  	$order->add_product( wc_get_product( $product_id ), $quantity, $args );
+	  	//$order->add_product( get_product( $product_id ), $quantity );
 		//$order->add_product( get_product($product_id), 1); // This is an existing SIMPLE product
 
 		$order->set_address( $customer->get_billing(), 'billing' );
 		//
 		$order->calculate_totals();
-		$order->update_status( 'Completed', 'Imported order', TRUE );
+		//$order->update_status( 'Completed', 'Imported order', TRUE );
 
 		$order_id = $order->get_id();
     	return $order_id;
@@ -390,7 +391,7 @@ class Trip_Options_View {
 		//$order->set_total( $total );
 		$order->update_status("Completed", 'Imported order', TRUE);
       	$order_id = $order->get_id();
-
+/*
         if($itinerary_date){
 	    	$item_id = wc_add_order_item($order_id, array(
 				'order_item_name'	=>	__('Date', 'text-domain'), 
@@ -404,7 +405,7 @@ class Trip_Options_View {
 	 			//wc_add_order_item_meta($item_id, '_tax_class', 'zero-rate');
 	 		}
 		}
-/*
+
 		if($processing_fee){
 		    $item_id = wc_add_order_item($order_id, array(
 				'order_item_name'	=>	__('Processing Fee', 'cdashmm'), 
@@ -473,6 +474,24 @@ class Trip_Options_View {
 	  	$order->update_status("Completed", 'Imported order', TRUE);  
 	}
 	
+
+	//add_action( 'woocommerce_thankyou', 'wc_auto_complete_paid_order', 20, 1 );
+	function wc_auto_complete_paid_order( $order_id ) {
+		if ( ! $order_id )
+			return;
+		
+		// Get an instance of the WC_Product object
+		$order = wc_get_order( $order_id );
+		
+		// No updated status for orders delivered with Bank wire, Cash on delivery and Cheque payment methods.
+		if ( in_array( $order->get_payment_method(), array( 'bacs', 'cod', 'cheque', '' ) ) ) {
+			return;
+		} 
+		// For paid Orders with all others payment methods (paid order status "processing")
+		elseif( $order->has_status('processing') ) {
+			$order->update_status( 'completed' );
+		}
+	}		
 
 	//add_filter( 'woocommerce_email_recipient_new_booking', 'additional_customer_email_recipient', 10, 2 ); 
 	//add_filter( 'woocommerce_email_recipient_new_order', 'additional_customer_email_recipient', 10, 2 ); // Optional (testing)
