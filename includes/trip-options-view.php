@@ -17,10 +17,9 @@ class Trip_Options_View {
 		add_action( 'woocommerce_before_add_to_cart_button', array( __CLASS__, 'add_fields_before_add_to_cart' ) );
 		add_filter( 'woocommerce_add_cart_item_data', array( __CLASS__, 'custom_add_cart_item_data' ), 25, 2 );
 		add_filter( 'woocommerce_get_item_data', array( __CLASS__, 'custom_get_item_data' ), 25, 2 );
-		//add_action( 'woocommerce_add_order_item_meta', array( __CLASS__, 'add_order_item_meta' ), 10, 3 );
+		//add_action( 'woocommerce_before_checkout_process', array( __CLASS__, 'custom_before_checkout_process' ) );
 		add_action( 'woocommerce_checkout_create_order_line_item', array( __CLASS__, 'custom_checkout_create_order_line_item' ), 20, 4 );
 		//add_action( 'woocommerce_checkout_process', array( __CLASS__, 'custom_checkout_process' ) );
-		//add_action( 'woocommerce_order_details_after_customer_details', array( __CLASS__, 'custom_order_details_after_customer_details' ), 10, 1);
 		add_filter( 'woocommerce_email_recipient_new_booking', array( __CLASS__, 'additional_customer_email_recipient' ), 10, 2 ); 
 		add_filter( 'woocommerce_email_recipient_new_order', array( __CLASS__, 'additional_customer_email_recipient' ), 10, 2 ); // Optional (testing)
 	}
@@ -304,18 +303,19 @@ class Trip_Options_View {
 	function custom_checkout_create_order_line_item( $item, $cart_item_key, $values, $order ) {
 
     	if( isset( $values['custom_data'] ) ) {
-
+			$customer_id = $order->get_customer_id();
 			foreach( $values['custom_data']['itineraries'] as $x => $itinerary ) {
-				$label = $values['custom_data']['itineraries'][$x]['label'];
-				$title = $values['custom_data']['itineraries'][$x]['title'];
+				//$label = $values['custom_data']['itineraries'][$x]['label'];
+				//$title = $values['custom_data']['itineraries'][$x]['title'];
 				$assignments = $values['custom_data']['itineraries'][$x]['assignment'];
 				$itinerary_date = $values['custom_data']['itineraries'][$x]['itinerary_date'];
 				if( ! empty( $assignments ) ){
 					foreach( $assignments as $y => $assignment ) {
-						$category = $assignments[$y]['category'];
+						//$category = $assignments[$y]['category'];
 						$product_id = $assignments[$y]['resource'];
-						$product_title = get_the_title( $assignments[$y]['resource'] );
-						self::create_purchase_order($product_id, $itinerary_date);
+						//$product_title = get_the_title( $assignments[$y]['resource'] );
+						//self::create_purchase_order($product_id, $itinerary_date);
+						self::custom_create_wc_order( $product_id, $customer_id, $itinerary_date );
 					}
 				}
 			}
@@ -326,30 +326,9 @@ class Trip_Options_View {
 				$display .= $itinerary_date.', ';
 			}
 			$display .= '</span>';
-        	//wc_add_order_item_meta( $item->get_id(), __( "Date", 'text-domain' ), $display );
-        	$item->update_meta_data( 'Date', $display );
-
+			$item->update_meta_data( __( 'Date', 'text-domain' ), $display );
+			
 		}
-/*
-		// Get a product custom field value
-    	$custom_field_value = get_post_meta( $item->get_product_id(), '_meta_key', true );
-    	// Update order item meta
-    	if ( ! empty( $custom_field_value ) ){
-        	$item->update_meta_data( 'meta_key1', $custom_field_value );
-    	}
-    	// … … Or … …
-
-    	// Get cart item custom data and update order item meta
-    	if( isset( $values['custom_data'] ) ) {
-        	$item->update_meta_data( 'meta_key2', $values['custom_data'] );
-		}
-    	// … … Or … …
-
-    	$custom_designer = WC()->session->get( $cart_item_key.'_designer' );
-    	if( ! empty($custom_designer) ) {
-        	$item->update_meta_data( 'custom_designer', $custom_designer );
-		}
-*/		
 	}
 
 	function create_purchase_order( $product_id, $itinerary_date ) {
@@ -378,43 +357,84 @@ class Trip_Options_View {
 
 	}
   
+	//Create a new order in WooCommerce
+	function custom_create_wc_order( $product_id, $customer_id, $itinerary_date ) {
+		global $woocommerce;
 
-	// Add order item meta.
-	//add_action( 'woocommerce_add_order_item_meta', 'add_order_item_meta' , 10, 3 );
-	function add_order_item_meta ( $item_id, $cart_item, $cart_item_key ) {
+	  	// Get an instance of the WC_Customer Object
+		$vender_id = get_post_field( 'post_author', $product_id );
+		  
+	  	$customer = new WC_Customer( $customer_id );
 
-		if( ! empty( $cart_item['custom_data'] ) ){
-			$values = '<span>';
-			foreach( $cart_item['custom_data']['itineraries'] as $x => $itinerary ) {
-				$itinerary_date = $cart_item['custom_data']['itineraries'][$x]['itinerary_date'];
-				$values .= $itinerary_date.', ';
-			}
-			$values .= '</span>';
-			if( $cart_item['custom_data']['_itinerary']=='yes' ) {
-				$values .= '<ul>';
-				foreach( $cart_item['custom_data']['itineraries'] as $x => $itinerary ) {
-					$label = $cart_item['custom_data']['itineraries'][$x]['label'];
-					$title = $cart_item['custom_data']['itineraries'][$x]['title'];
-					$assignments = $cart_item['custom_data']['itineraries'][$x]['assignment'];
-					$itinerary_date = $cart_item['custom_data']['itineraries'][$x]['itinerary_date'];
-					if( ! empty( $assignments ) ){
-						foreach( $assignments as $y => $assignment ) {
-							$category = $assignments[$y]['category'];
-							$product_id = $assignments[$y]['resource'];
-							$product_title = get_the_title( $assignments[$y]['resource'] );
-							$values .= '<li>'.$itinerary_date.', '.$category.', '.$product_title.'</li>';
-							self::custom_checkout_process($product_id, $itinerary_date);
-						}
-					}
-				}
-				$values .= '</ul>';
-			}	
-        	wc_add_order_item_meta( $item_id, __( "Date", 'text-domain' ), $values );
-		}	
+	  	$quantity = 1;
+
+        $args = array(
+            'customer_id'   => $customer_id,
+            'created_via'   => 'dgc-travel',
+            'add_order_note' => 'Created via dgc-travel Purchase Order Manager');
+
+        // Now we create the order
+        $order = wc_create_order($args);
+
+        // The add_product() function below is located in /plugins/woocommerce/includes/abstracts/abstract_wc_order.php
+		$order->add_product( wc_get_product( $product_id ), $quantity );
+        //$order->add_product( wc_get_product($product_id), 1); // This is an existing SIMPLE product
+		$order->set_address( $customer->get_billing(), 'billing' );
+        //$order->set_address( $address, 'billing' );
+        $order->set_created_via(  $args['created_via'] );
+        $order->add_order_note( $args['add_order_note'] );
+		$order->calculate_totals();
+		//$order->set_total( $total );
+		$order->update_status("Completed", 'Imported order', TRUE);
+      	$order_id = $order->get_id();
+
+        if($itinerary_date){
+	    	$item_id = wc_add_order_item($order_id, array(
+				'order_item_name'	=>	__('Date', 'text-domain'), 
+				'order_item_type'	=>	'date'
+			));
+	    	if ($item_id) {
+	 			wc_add_order_item_meta($item_id, '_itinerary_date', $itinerary_date);
+	 			//wc_add_order_item_meta($item_id, '_line_tax', 0);
+	 			//wc_add_order_item_meta($item_id, '_line_subtotal', $donation);
+	 			//wc_add_order_item_meta($item_id, '_line_subtotal_tax', 0);
+	 			//wc_add_order_item_meta($item_id, '_tax_class', 'zero-rate');
+	 		}
+		}
+/*
+		if($processing_fee){
+		    $item_id = wc_add_order_item($order_id, array(
+				'order_item_name'	=>	__('Processing Fee', 'cdashmm'), 
+				'order_item_type'	=>	'fee'
+			));
+			if ($item_id) {
+	 	    	wc_add_order_item_meta($item_id, '_line_total', $processing_fee);
+	 			wc_add_order_item_meta($item_id, '_line_tax', 0);
+	 			wc_add_order_item_meta($item_id, '_line_subtotal', $processing_fee);
+	 			wc_add_order_item_meta($item_id, '_line_subtotal_tax', 0);
+	 			//wc_add_order_item_meta($item_id, '_tax_class', 'zero-rate');
+	 		}
+		}
+
+       	if($tax){
+        	$item_id = wc_add_order_item($order_id, array(
+				'order_item_name' => __('Tax', 'cdashmm'), 
+				'order_item_type' => 'fee'
+			));
+ 			if ($item_id) {
+ 			    wc_add_order_item_meta($item_id, '_line_total', $tax);
+ 				wc_add_order_item_meta($item_id, '_line_tax', 0);
+ 				wc_add_order_item_meta($item_id, '_line_subtotal', $tax);
+ 				wc_add_order_item_meta($item_id, '_line_subtotal_tax', 0);
+ 				//wc_add_order_item_meta($item_id, '_tax_class', 'zero-rate');
+ 			}
+		}
+*/		  
+    	return $order_id;
 	}
 
 	//add_action('woocommerce_checkout_process', 'custom_checkout_process');
-	function custom_checkout_process( $product_id, $itinerary_date ) {
+	function custom_checkout_process() {
 	
 	  	global $woocommerce;
 	
@@ -450,13 +470,6 @@ class Trip_Options_View {
 	  	$order->update_status("Completed", 'Imported order', TRUE);  
 	}
 	
-	//add_action('woocommerce_order_details_after_customer_details', 'custom_order_details_after_customer_details', 10, 1);
-	function custom_order_details_after_customer_details($order) {
-
-		echo get_post_meta( $order->id, 'awb', true );
- 	}
-	 
-
 
 	//add_filter( 'woocommerce_email_recipient_new_booking', 'additional_customer_email_recipient', 10, 2 ); 
 	//add_filter( 'woocommerce_email_recipient_new_order', 'additional_customer_email_recipient', 10, 2 ); // Optional (testing)
