@@ -319,7 +319,6 @@ class Trip_Options_View {
 					}
 				}
 			}
-        	//$item->update_meta_data( 'custom_data', $values['custom_data'] );
 
 			$display = '<span>';
 			foreach( $values['custom_data']['itineraries'] as $x => $itinerary ) {
@@ -327,7 +326,8 @@ class Trip_Options_View {
 				$display .= $itinerary_date.', ';
 			}
 			$display .= '</span>';
-        	wc_add_order_item_meta( $item->get_id(), __( "Date", 'text-domain' ), $display );
+        	//wc_add_order_item_meta( $item->get_id(), __( "Date", 'text-domain' ), $display );
+        	$item->update_meta_data( 'Date', $display );
 
 		}
 /*
