@@ -355,6 +355,9 @@ class Trip_Options_View {
 		$order->calculate_totals();
 		$order->update_status( 'Completed', 'Imported order', TRUE );
 
+		$order_id = $order->get_id();
+    	return $order_id;
+
 	}
   
 	//Create a new order in WooCommerce
