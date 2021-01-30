@@ -327,7 +327,7 @@ class Trip_Options_View {
 				$display .= $itinerary_date.', ';
 			}
 			$display .= '</span>';
-        	wc_add_order_item_meta( $item->get_id(), __( "Date", 'text-domain' ), $values );
+        	wc_add_order_item_meta( $item->get_id(), __( "Date", 'text-domain' ), $display );
 
 		}
 /*
