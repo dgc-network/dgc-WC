@@ -366,7 +366,7 @@ class Trip_Options_View {
 	
 			$result = apply_filters( 'woocommerce_payment_successful_result', $result, $order->id );
 	
-			wp_redirect( $result['redirect'] );
+			//wp_redirect( $result['redirect'] );
 			exit;
 		}
 
