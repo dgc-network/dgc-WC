@@ -19,8 +19,8 @@ class Trip_Options_View {
 		add_filter( 'woocommerce_get_item_data', array( __CLASS__, 'custom_get_item_data' ), 25, 2 );
 		//add_action( 'woocommerce_before_checkout_process', array( __CLASS__, 'custom_before_checkout_process' ) );
 		add_action( 'woocommerce_checkout_create_order_line_item', array( __CLASS__, 'custom_checkout_create_order_line_item' ), 20, 4 );
-		add_action( 'woocommerce_checkout_process', array( __CLASS__, 'custom_checkout_process' ) );
-		add_action( 'woocommerce_thankyou', array( __CLASS__, 'wc_auto_complete_paid_order' ), 20, 1 );
+		//add_action( 'woocommerce_checkout_process', array( __CLASS__, 'custom_checkout_process' ) );
+		//add_action( 'woocommerce_thankyou', array( __CLASS__, 'wc_auto_complete_paid_order' ), 20, 1 );
 		add_filter( 'woocommerce_email_recipient_new_booking', array( __CLASS__, 'additional_customer_email_recipient' ), 10, 2 ); 
 		add_filter( 'woocommerce_email_recipient_new_order', array( __CLASS__, 'additional_customer_email_recipient' ), 10, 2 ); // Optional (testing)
 	}
@@ -353,10 +353,10 @@ class Trip_Options_View {
 
 		update_post_meta( $order->id, '_payment_method', 'dgc-payment' );
 		update_post_meta( $order->id, '_payment_method_title', 'dgc Payment' );
-/*	
+
 		// Store Order ID in session so it can be re-used after payment failure
 		WC()->session->order_awaiting_payment = $order->id;
-	
+/*	
 		// Process Payment
 		$available_gateways = WC()->payment_gateways->get_available_payment_gateways();
 		$result = $available_gateways[ 'dgc-payment' ]->process_payment( $order->id );
