@@ -351,10 +351,10 @@ class Trip_Options_View {
 		$order->set_address( $customer->get_billing(), 'billing' );
 		$order->calculate_totals();
 
-		//update_post_meta( $order->id, '_payment_method', 'dgc-payment' );
-		//update_post_meta( $order->id, '_payment_method_title', 'dgc Payment' );
-		$order->set_payment_method('dgc-payment');
-		
+		update_post_meta( $order->id, '_payment_method', 'dgc-payment' );
+		update_post_meta( $order->id, '_payment_method_title', 'dgcPay' );
+		//$order->set_payment_method('dgc-payment');
+
 		// Store Order ID in session so it can be re-used after payment failure
 		WC()->session->order_awaiting_payment = $order->id;
 	
