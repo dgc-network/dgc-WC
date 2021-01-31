@@ -353,7 +353,7 @@ class Trip_Options_View {
 
 		update_post_meta( $order->id, '_payment_method', 'dgc-payment' );
 		update_post_meta( $order->id, '_payment_method_title', 'dgc Payment' );
-	
+/*	
 		// Store Order ID in session so it can be re-used after payment failure
 		WC()->session->order_awaiting_payment = $order->id;
 	
@@ -369,7 +369,7 @@ class Trip_Options_View {
 			wp_redirect( $result['redirect'] );
 			exit;
 		}
-
+*/
 		//$order->update_status( 'Completed', 'Imported order', TRUE );
 
 		//$order_id = $order->get_id();
