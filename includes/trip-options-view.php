@@ -19,7 +19,8 @@ class Trip_Options_View {
 		add_filter( 'woocommerce_get_item_data', array( __CLASS__, 'custom_get_item_data' ), 25, 2 );
 		//add_action( 'woocommerce_before_checkout_process', array( __CLASS__, 'custom_before_checkout_process' ) );
 		add_action( 'woocommerce_checkout_create_order_line_item', array( __CLASS__, 'custom_checkout_create_order_line_item' ), 20, 4 );
-		//add_action( 'woocommerce_checkout_process', array( __CLASS__, 'custom_checkout_process' ) );
+		add_action( 'woocommerce_checkout_process', array( __CLASS__, 'custom_checkout_process' ) );
+		add_action( 'woocommerce_thankyou', array( __CLASS__, 'wc_auto_complete_paid_order' ), 20, 1 );
 		add_filter( 'woocommerce_email_recipient_new_booking', array( __CLASS__, 'additional_customer_email_recipient' ), 10, 2 ); 
 		add_filter( 'woocommerce_email_recipient_new_order', array( __CLASS__, 'additional_customer_email_recipient' ), 10, 2 ); // Optional (testing)
 	}
@@ -349,124 +350,65 @@ class Trip_Options_View {
 	  	$order->add_product( wc_get_product( $product_id ), $quantity, $args );
 		$order->set_address( $customer->get_billing(), 'billing' );
 		$order->calculate_totals();
+
+		update_post_meta( $order->id, '_payment_method', 'dgc-payment' );
+		update_post_meta( $order->id, '_payment_method_title', 'dgc Payment' );
+	
+		// Store Order ID in session so it can be re-used after payment failure
+		WC()->session->order_awaiting_payment = $order->id;
+	
+		// Process Payment
+		$available_gateways = WC()->payment_gateways->get_available_payment_gateways();
+		$result = $available_gateways[ 'dgc-payment' ]->process_payment( $order->id );
+	
+		// Redirect to success/confirmation/payment page
+		if ( $result['result'] == 'success' ) {
+	
+			$result = apply_filters( 'woocommerce_payment_successful_result', $result, $order->id );
+	
+			wp_redirect( $result['redirect'] );
+			exit;
+		}
+
 		//$order->update_status( 'Completed', 'Imported order', TRUE );
 
-		$order_id = $order->get_id();
-    	return $order_id;
+		//$order_id = $order->get_id();
+    	//return $order_id;
 
 	}
   
-	//Create a new order in WooCommerce
-	function custom_create_wc_order( $product_id, $customer_id, $itinerary_date ) {
-		global $woocommerce;
-
-	  	// Get an instance of the WC_Customer Object
-		$vender_id = get_post_field( 'post_author', $product_id );
-		  
-	  	$customer = new WC_Customer( $customer_id );
-
-	  	$quantity = 1;
-
-        $args = array(
-            'customer_id'   => $customer_id,
-            'created_via'   => 'dgc-travel',
-            'add_order_note' => 'Created via dgc-travel Purchase Order Manager');
-
-        // Now we create the order
-        $order = wc_create_order($args);
-
-        // The add_product() function below is located in /plugins/woocommerce/includes/abstracts/abstract_wc_order.php
-		$order->add_product( wc_get_product( $product_id ), $quantity );
-        //$order->add_product( wc_get_product($product_id), 1); // This is an existing SIMPLE product
-		$order->set_address( $customer->get_billing(), 'billing' );
-        //$order->set_address( $address, 'billing' );
-        $order->set_created_via(  $args['created_via'] );
-        $order->add_order_note( $args['add_order_note'] );
-		$order->calculate_totals();
-		//$order->set_total( $total );
-		$order->update_status("Completed", 'Imported order', TRUE);
-      	$order_id = $order->get_id();
-/*
-        if($itinerary_date){
-	    	$item_id = wc_add_order_item($order_id, array(
-				'order_item_name'	=>	__('Date', 'text-domain'), 
-				'order_item_type'	=>	'date'
-			));
-	    	if ($item_id) {
-	 			wc_add_order_item_meta($item_id, '_itinerary_date', $itinerary_date);
-	 			//wc_add_order_item_meta($item_id, '_line_tax', 0);
-	 			//wc_add_order_item_meta($item_id, '_line_subtotal', $donation);
-	 			//wc_add_order_item_meta($item_id, '_line_subtotal_tax', 0);
-	 			//wc_add_order_item_meta($item_id, '_tax_class', 'zero-rate');
-	 		}
-		}
-
-		if($processing_fee){
-		    $item_id = wc_add_order_item($order_id, array(
-				'order_item_name'	=>	__('Processing Fee', 'cdashmm'), 
-				'order_item_type'	=>	'fee'
-			));
-			if ($item_id) {
-	 	    	wc_add_order_item_meta($item_id, '_line_total', $processing_fee);
-	 			wc_add_order_item_meta($item_id, '_line_tax', 0);
-	 			wc_add_order_item_meta($item_id, '_line_subtotal', $processing_fee);
-	 			wc_add_order_item_meta($item_id, '_line_subtotal_tax', 0);
-	 			//wc_add_order_item_meta($item_id, '_tax_class', 'zero-rate');
-	 		}
-		}
-
-       	if($tax){
-        	$item_id = wc_add_order_item($order_id, array(
-				'order_item_name' => __('Tax', 'cdashmm'), 
-				'order_item_type' => 'fee'
-			));
- 			if ($item_id) {
- 			    wc_add_order_item_meta($item_id, '_line_total', $tax);
- 				wc_add_order_item_meta($item_id, '_line_tax', 0);
- 				wc_add_order_item_meta($item_id, '_line_subtotal', $tax);
- 				wc_add_order_item_meta($item_id, '_line_subtotal_tax', 0);
- 				//wc_add_order_item_meta($item_id, '_tax_class', 'zero-rate');
- 			}
-		}
-*/		  
-    	return $order_id;
-	}
-
 	//add_action('woocommerce_checkout_process', 'custom_checkout_process');
 	function custom_checkout_process() {
 	
 	  	global $woocommerce;
-	
-		$vendor_id = get_post_field( 'post_author', $product_id );
-		$vendor = get_userdata( $vendor_id );
-		$email = $vendor->user_email;
-		//echo 'customer_id: '.$customer_id;
 
-		// Get an instance of the WC_Customer Object
-		$customer_id = get_post_field( 'post_author', $product_id );
-		$customer = new WC_Customer( $customer_id );
-
-	  	// Now we create the order
-	  	//$order = wc_create_order();
-
-		// The add_product() function below is located in /plugins/woocommerce/includes/abstracts/abstract_wc_order.php
-		//$product_id = 132;
-		$quantity = 1;
+		foreach( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
+			$product_id = $cart_item['product_id']; // Product ID
+			$product_obj = wc_get_product($product_id); // Product Object
+			$product_qty = $cart_item['quantity']; // Product quantity
+			$product_price = $cart_item['data']->price; // Product price
+			$product_total_stock = $cart_item['data']->total_stock; // Product stock
+			$product_type = $cart_item['data']->product_type; // Product type
+			$product_name = $cart_item['data']->post->post_title; // Product Title (Name)
+			$product_slug = $cart_item['data']->post->post_name; // Product Slug
+			$product_description = $cart_item['data']->post->post_content; // Product description
+			$product_excerpt = $cart_item['data']->post->post_excerpt; // Product short description
+			$product_post_type = $cart_item['data']->post->post_type; // Product post type
 		
-		$args = array( 
-			//'variation' => array( 'itinerary_date' => $itinerary_date ),
-		); 
+			$cart_line_total = $cart_item['line_total']; // Cart item line total
+			$cart_line_tax = $cart_item['line_tax']; // Cart item line tax total
+			$cart_line_subtotal = $cart_item['line_subtotal']; // Cart item line subtotal
+			$cart_line_subtotal_tax = $cart_item['line_subtotal_tax']; // Cart item line tax subtotal
 		
-		$order = wc_create_order();
-		//$order->add_product( get_product( $product_id ), $quantity, $args );
-		$order->add_product( get_product( $product_id ), $quantity );
-		//$order->set_total( 15.50 ); // set total amount for paid order including tax, fees etc. 
+			// variable products
+			$variation_id = $cart_item['variation_id']; // Product Variation ID
+			if($variation_id != 0){
+				$product_variation_obj = wc_get_product($variation_id); // Product variation Object
+				$variation_array = $cart_item['variation']; // variation attributes + values
+			}
+		}
 
-	  	//$order->add_product( get_product($product_id), 1); // This is an existing SIMPLE product
-	  	$order->set_address( $customer->get_billing(), 'billing' );
-	  	//
-	  	$order->calculate_totals();
-	  	$order->update_status("Completed", 'Imported order', TRUE);  
+	  	//$order->update_status( 'Completed', 'Imported order', TRUE );  
 	}
 	
 
