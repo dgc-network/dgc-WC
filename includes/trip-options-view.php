@@ -346,7 +346,7 @@ class Trip_Options_View {
 		  'variation' => array( __( 'Date', 'text-domain' ) => $itinerary_date ),
 	  	); 
 	  
-	  	$order = wc_create_order();
+	  	$order = wc_create_order(array('customer_id' => $customer_id));
 	  	$order->add_product( wc_get_product( $product_id ), $quantity, $args );
 		$order->set_address( $customer->get_billing(), 'billing' );
 		$order->calculate_totals();
@@ -360,7 +360,7 @@ class Trip_Options_View {
 		// Process Payment
 		$available_gateways = WC()->payment_gateways->get_available_payment_gateways();
 		$result = $available_gateways[ 'dgc-payment' ]->process_payment( $order->id );
-/*	
+	
 		// Redirect to success/confirmation/payment page
 		if ( $result['result'] == 'success' ) {
 	
@@ -369,7 +369,7 @@ class Trip_Options_View {
 			wp_redirect( $result['redirect'] );
 			exit;
 		}
-*/
+
 		//$order->update_status( 'Completed', 'Imported order', TRUE );
 
 		//$order_id = $order->get_id();
