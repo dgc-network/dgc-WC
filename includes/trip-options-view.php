@@ -356,11 +356,11 @@ class Trip_Options_View {
 
 		// Store Order ID in session so it can be re-used after payment failure
 		WC()->session->order_awaiting_payment = $order->id;
-/*	
+	
 		// Process Payment
 		$available_gateways = WC()->payment_gateways->get_available_payment_gateways();
 		$result = $available_gateways[ 'dgc-payment' ]->process_payment( $order->id );
-	
+/*	
 		// Redirect to success/confirmation/payment page
 		if ( $result['result'] == 'success' ) {
 	
