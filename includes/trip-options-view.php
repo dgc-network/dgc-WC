@@ -351,8 +351,8 @@ class Trip_Options_View {
 		$order->set_address( $customer->get_billing(), 'billing' );
 		$order->calculate_totals();
 
-		update_post_meta( $order->id, '_payment_method', 'dgc-payment' );
-		update_post_meta( $order->id, '_payment_method_title', 'dgc Payment' );
+		//update_post_meta( $order->id, '_payment_method', 'dgc-payment' );
+		//update_post_meta( $order->id, '_payment_method_title', 'dgc Payment' );
 
 		// Store Order ID in session so it can be re-used after payment failure
 		WC()->session->order_awaiting_payment = $order->id;
@@ -367,7 +367,7 @@ class Trip_Options_View {
 			$result = apply_filters( 'woocommerce_payment_successful_result', $result, $order->id );
 	
 			//wp_redirect( $result['redirect'] );
-			exit;
+			//exit;
 		}
 
 		//$order->update_status( 'Completed', 'Imported order', TRUE );
