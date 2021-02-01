@@ -1,5 +1,5 @@
 <?php
-class Trip_Options_Edit {
+class Trip_Options_Admin {
 
 	/**
 	 * Constructor.
@@ -1081,5 +1081,5 @@ wp_enqueue_script( 'some_handle' );
 		<?php
 	}
 }
-new Trip_Options_Edit;
+new Trip_Options_Admin;
 
