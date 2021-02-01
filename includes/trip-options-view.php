@@ -306,17 +306,13 @@ class Trip_Options_View {
     	if( isset( $values['custom_data'] ) ) {
 			$customer_id = $order->get_customer_id();
 			foreach( $values['custom_data']['itineraries'] as $x => $itinerary ) {
-				//$label = $values['custom_data']['itineraries'][$x]['label'];
-				//$title = $values['custom_data']['itineraries'][$x]['title'];
+				$product_qty = $values['quantity']; // Product quantity
 				$assignments = $values['custom_data']['itineraries'][$x]['assignment'];
 				$itinerary_date = $values['custom_data']['itineraries'][$x]['itinerary_date'];
 				if( ! empty( $assignments ) ){
 					foreach( $assignments as $y => $assignment ) {
-						//$category = $assignments[$y]['category'];
 						$product_id = $assignments[$y]['resource'];
-						//$product_title = get_the_title( $assignments[$y]['resource'] );
-						self::create_purchase_order($product_id, $itinerary_date);
-						//self::custom_create_wc_order( $product_id, $customer_id, $itinerary_date );
+						self::create_purchase_order($customer_id, $product_id, $product_qty, $itinerary_date);
 					}
 				}
 			}
@@ -332,15 +328,15 @@ class Trip_Options_View {
 		}
 	}
 
-	function create_purchase_order( $product_id, $itinerary_date ) {
+	function create_purchase_order( $customer_id, $product_id, $quantity, $itinerary_date ) {
 	
 		global $woocommerce;
   
 	  	// Get an instance of the WC_Customer Object
-	  	$customer_id = get_post_field( 'post_author', $product_id );
+	  	//$customer_id = get_post_field( 'post_author', $product_id );
 	  	$customer = new WC_Customer( $customer_id );
 
-	  	$quantity = 1;
+	  	//$quantity = 1;
 	  
 	  	$args = array( 
 		  'variation' => array( __( 'Date', 'text-domain' ) => $itinerary_date ),
@@ -353,7 +349,6 @@ class Trip_Options_View {
 
 		update_post_meta( $order->id, '_payment_method', 'dgc-payment' );
 		update_post_meta( $order->id, '_payment_method_title', 'dgcPay' );
-		//$order->set_payment_method('dgc-payment');
 
 		// Store Order ID in session so it can be re-used after payment failure
 		WC()->session->order_awaiting_payment = $order->id;
@@ -361,7 +356,6 @@ class Trip_Options_View {
 		// Process Payment
 		$available_gateways = WC()->payment_gateways->get_available_payment_gateways();
 		$result = $available_gateways[ 'dgc-payment' ]->process_payment( $order->id );
-		//$result = dgc_Payment_Gateway::process_payment( $order->id );
 	
 		// Redirect to success/confirmation/payment page
 		if ( $result['result'] == 'success' ) {
@@ -371,11 +365,6 @@ class Trip_Options_View {
 			//wp_redirect( $result['redirect'] );
 			//exit;
 		}
-
-		//$order->update_status( 'Completed', 'Imported order', TRUE );
-
-		//$order_id = $order->get_id();
-    	//return $order_id;
 
 	}
   
@@ -434,33 +423,33 @@ class Trip_Options_View {
 
 	//add_filter( 'woocommerce_email_recipient_new_booking', 'additional_customer_email_recipient', 10, 2 ); 
 	//add_filter( 'woocommerce_email_recipient_new_order', 'additional_customer_email_recipient', 10, 2 ); // Optional (testing)
-function additional_customer_email_recipient( $recipient, $order ) {
-    if ( ! is_a( $order, 'WC_Order' ) ) return $recipient;
+	function additional_customer_email_recipient( $recipient, $order ) {
+		if ( ! is_a( $order, 'WC_Order' ) ) return $recipient;
 
-    $additional_recipients = array(); // Initializing…
-
-    // Iterating though each order item
-    foreach( $order->get_items() as $item_id => $line_item ){
-        // Get the vendor ID
-        $vendor_id = get_post_field( 'post_author', $line_item->get_product_id());
-        $vendor = get_userdata( $vendor_id );
-        $email = $vendor->user_email;
-
-        // Avoiding duplicates (if many items with many emails)
-        // or an existing email in the recipient
-        if( ! in_array( $email, $additional_recipients ) && strpos( $recipient, $email ) === false )
-            $additional_recipients[] = $email;
-    }
-
-    // Convert the array in a coma separated string
-    $additional_recipients = implode( ',', $additional_recipients);
-
-    // If an additional recipient exist, we add it
-    if( count($additional_recipients) > 0 )
-        $recipient .= ','.$additional_recipients;
-
-    return $recipient;
-}
+		$additional_recipients = array(); // Initializing…
+	
+		// Iterating though each order item
+		foreach( $order->get_items() as $item_id => $line_item ){
+			// Get the vendor ID
+			$vendor_id = get_post_field( 'post_author', $line_item->get_product_id());
+			$vendor = get_userdata( $vendor_id );
+			$email = $vendor->user_email;
+	
+			// Avoiding duplicates (if many items with many emails)
+			// or an existing email in the recipient
+			if( ! in_array( $email, $additional_recipients ) && strpos( $recipient, $email ) === false )
+				$additional_recipients[] = $email;
+		}
+	
+		// Convert the array in a coma separated string
+		$additional_recipients = implode( ',', $additional_recipients);
+	
+		// If an additional recipient exist, we add it
+		if( count($additional_recipients) > 0 )
+			$recipient .= ','.$additional_recipients;
+	
+		return $recipient;
+	}
 
 	/**
  	* Add a custom product data tab
