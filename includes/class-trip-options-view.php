@@ -304,15 +304,19 @@ class Trip_Options_View {
 	function custom_checkout_create_order_line_item( $item, $cart_item_key, $values, $order ) {
 
     	if( isset( $values['custom_data'] ) ) {
-			$customer_id = $order->get_customer_id();
+			
+			//$customer_id = $order->get_customer_id();
+			$product_id = $values['product_id']; // Product ID
+			$product_qty = $values['quantity']; // Product quantity
+			$vendor_id = get_post_field( 'post_author', $product_id );
+			  
 			foreach( $values['custom_data']['itineraries'] as $x => $itinerary ) {
-				$product_qty = $values['quantity']; // Product quantity
 				$assignments = $values['custom_data']['itineraries'][$x]['assignment'];
 				$itinerary_date = $values['custom_data']['itineraries'][$x]['itinerary_date'];
 				if( ! empty( $assignments ) ){
 					foreach( $assignments as $y => $assignment ) {
-						$product_id = $assignments[$y]['resource'];
-						self::create_purchase_order($customer_id, $product_id, $product_qty, $itinerary_date);
+						$product_id_resource = $assignments[$y]['resource'];
+						self::create_purchase_order($vendor_id, $product_id_resource, $product_qty, $itinerary_date);
 					}
 				}
 			}
@@ -333,7 +337,7 @@ class Trip_Options_View {
 		global $woocommerce;
   
 	  	// Get an instance of the WC_Customer Object
-	  	//$customer_id = get_post_field( 'post_author', $product_id );
+	  	//$vendor_id = get_post_field( 'post_author', $product_id );
 	  	$customer = new WC_Customer( $customer_id );
 
 	  	//$quantity = 1;
