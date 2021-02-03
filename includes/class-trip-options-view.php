@@ -23,14 +23,20 @@ class Trip_Options_View {
 		//add_action( 'woocommerce_thankyou', array( __CLASS__, 'wc_auto_complete_paid_order' ), 20, 1 );
 		add_filter( 'woocommerce_email_recipient_new_booking', array( __CLASS__, 'additional_customer_email_recipient' ), 10, 2 ); 
 		add_filter( 'woocommerce_email_recipient_new_order', array( __CLASS__, 'additional_customer_email_recipient' ), 10, 2 ); // Optional (testing)
-		add_action( 'woocommerce_after_shop_loop_item', array( __CLASS__, 'remove_add_to_cart_buttons' ), 1 );
+		//add_action( 'woocommerce_after_shop_loop_item', array( __CLASS__, 'remove_add_to_cart_buttons' ), 1 );
+		remove_action( 'woocommerce_after_shop_loop_item', array( __CLASS__, 'woocommerce_template_loop_add_to_cart' ) );
+		remove_action( 'woocommerce_single_product_summary', array( __CLASS__, 'woocommerce_template_single_add_to_cart' ), 30 );
 	}
-
 
     function remove_add_to_cart_buttons() {
       	if( is_product_category() || is_shop()) { 
         	remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart' );
       	}
+	}
+
+	function woocommerce_template_single_add_to_cart() {
+    	global $product;
+    	do_action( 'woocommerce_' . $product->product_type . '_add_to_cart' );
 	}
 	
 	function custom_datepicker() {
