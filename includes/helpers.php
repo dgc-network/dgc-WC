@@ -119,7 +119,7 @@ function wp_travel_settings_default_fields() {
 		'trip_tax_price_inclusive'                => 'yes',
 		'trip_tax_percentage'                     => 13,
 
-		'sorted_gateways'                         => wp_travel_payment_gateway_lists(),
+		//'sorted_gateways'                         => wp_travel_payment_gateway_lists(),
 
 		// Fact Tab Settings Fields.
 		'wp_travel_trip_facts_enable'             => 'yes',
@@ -2195,7 +2195,7 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 	if ( ! $booking_id ) {
 		return;
 	}
-
+/*
 	$details = wp_travel_booking_data( $booking_id );
 
 	$order_details = get_post_meta( $booking_id, 'order_items_data', true ); // Multiple Trips.
@@ -2547,6 +2547,7 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 		</div>
 		<?php
 	}
+*/	
 }
 
 function wp_travel_view_payment_details_table( $booking_id ) {
