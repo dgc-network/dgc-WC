@@ -31,7 +31,8 @@ class Trip_Options_View {
     function remove_add_to_cart_buttons() {
       	if( is_product_category() || is_shop()) { 
         	remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart' );
-      	}
+			remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30 );
+		}
 	}
 /*
 	function woocommerce_template_single_add_to_cart() {
