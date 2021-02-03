@@ -987,6 +987,7 @@ function wp_travel_get_default_trip_tabs( $is_show_in_menu_query = false, $front
 			'use_global'   => 'yes',
 			'show_in_menu' => 'yes',
 		),
+/*		
 		'trip_outline'  => array(
 			'label'        => __( 'Trip Outline', 'text-domain' ),
 			'label_class'  => '',
@@ -994,6 +995,7 @@ function wp_travel_get_default_trip_tabs( $is_show_in_menu_query = false, $front
 			'use_global'   => 'yes',
 			'show_in_menu' => 'yes',
 		),
+*/		
 		'trip_includes' => array(
 			'label'        => __( 'Trip Includes', 'text-domain' ),
 			'label_class'  => '',
