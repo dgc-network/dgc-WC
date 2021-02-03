@@ -91,7 +91,7 @@ function wp_travel_settings_default_fields() {
 		'enable_multiple_travellers'              => 'no',
 		'enable_multiple_category_on_pricing'     => 'yes', // This settings isn't visible for new user. So, it is always on for new settings. it means only new category layout will show in the admin and frontend.
 		'trip_pricing_options_layout'             => 'by-pricing-option',
-
+/*
 		// Email Settings Fields.
 		'wp_travel_from_email'                    => get_option( 'admin_email' ),
 		'send_booking_email_to_admin'             => 'yes',
@@ -100,7 +100,7 @@ function wp_travel_settings_default_fields() {
 		'payment_admin_template_settings'         => $payment_admin_email_defaults, // _settings appended in legacy version <= 1.8.9 settings.
 		'payment_client_template_settings'        => $payment_client_email_defaults, // _settings appended in legacy version <= 1.8.9 settings.
 		'enquiry_admin_template_settings'         => $enquiry_admin_email_defaults, // _settings appended in legacy version <= 1.8.9 settings.
-
+*/
 		// Account Settings Fields.
 		'enable_checkout_customer_registration'   => 'no',
 		'enable_my_account_customer_registration' => 'yes',
@@ -987,7 +987,7 @@ function wp_travel_get_default_trip_tabs( $is_show_in_menu_query = false, $front
 			'use_global'   => 'yes',
 			'show_in_menu' => 'yes',
 		),
-	
+/*	
 		'trip_outline'  => array(
 			'label'        => __( 'Trip Outline', 'text-domain' ),
 			'label_class'  => '',
@@ -995,7 +995,7 @@ function wp_travel_get_default_trip_tabs( $is_show_in_menu_query = false, $front
 			'use_global'   => 'yes',
 			'show_in_menu' => 'yes',
 		),
-	
+*/	
 		'trip_includes' => array(
 			'label'        => __( 'Trip Includes', 'text-domain' ),
 			'label_class'  => '',
