@@ -977,8 +977,8 @@ function wp_travel_get_default_trip_tabs( $is_show_in_menu_query = false, $front
 		}
 	}
 	$return_tabs = $wp_travel_itinerary_tabs = array(
-		'overview'      => array(
-			'label'        => __( 'Overview', 'text-domain' ),
+		'itinerary'      => array(
+			'label'        => __( 'Itinerary', 'text-domain' ),
 			'label_class'  => '',
 			'content'      => $trip_content,
 			'use_global'   => 'yes',

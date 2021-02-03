@@ -488,7 +488,7 @@ class Trip_Options_View {
 		}
 	}
 	
-	function overview_tab_content() {
+	function itinerary_tab_content() {
 
 		global $post;
 		$post_id = $post->ID;
