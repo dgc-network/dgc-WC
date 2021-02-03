@@ -24,7 +24,7 @@ function wp_travel_get_gallery_ids( $post_id ) {
 
 // @since 1.9.0
 function wp_travel_settings_default_fields() {
-
+/*
 	// Booking Admin Defaults.
 	$booking_admin_email_defaults = array(
 		'admin_subject'      => __( 'New Booking', 'text-domain' ),
@@ -69,7 +69,7 @@ function wp_travel_settings_default_fields() {
 		'email_content'      => wp_travel_enquiries_admin_default_email_content(),
 		'from_email'         => get_option( 'admin_email' ),
 	);
-
+*/
 	$settings_fields = array(
 		// General Settings Fields.
 		'currency'                                => 'USD',
@@ -1593,7 +1593,7 @@ function wp_travel_get_notice_count( $notice_type = '' ) {
  * Send new account notification to users.
  */
 function wp_travel_user_new_account_created( $customer_id, $new_customer_data, $password_generated ) {
-
+/*
 	// Send email notification.
 	$email_content = wp_travel_get_template_html(
 		'emails/customer-new-account.php',
@@ -1640,6 +1640,7 @@ function wp_travel_user_new_account_created( $customer_id, $new_customer_data, $
 
 		}
 	}
+*/	
 }
 
 add_action( 'wp_travel_created_customer', 'wp_travel_user_new_account_created', 20, 3 );
