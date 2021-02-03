@@ -33,12 +33,12 @@ class Trip_Options_View {
         	remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart' );
       	}
 	}
-
+/*
 	function woocommerce_template_single_add_to_cart() {
     	global $product;
     	do_action( 'woocommerce_' . $product->product_type . '_add_to_cart' );
 	}
-	
+*/	
 	function custom_datepicker() {
 
 		// Load the datepicker script (pre-registered in WordPress).

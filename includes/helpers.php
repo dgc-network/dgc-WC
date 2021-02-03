@@ -2553,7 +2553,7 @@ function wp_travel_view_payment_details_table( $booking_id ) {
 	if ( ! $booking_id ) {
 		return;
 	}
-
+/*
 	$payment_data = wp_travel_payment_data( $booking_id );
 	$status_list  = wp_travel_get_payment_status();
 	if ( $payment_data && count( $payment_data ) > 0 ) {
@@ -2641,6 +2641,7 @@ function wp_travel_view_payment_details_table( $booking_id ) {
 		</table>
 		<?php
 	}
+*/	
 }
 
 /**
