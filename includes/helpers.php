@@ -2295,7 +2295,7 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 							 * @since 3.0.4
 							 */
 							do_action( 'wp_travel_after_bookings_travel_date', $booking_id );
-
+/*
 							?>
 						</div>
 						<div class="col-md-6">
@@ -2312,7 +2312,7 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 										 *
 										 * @since v2.1.0
 										 */
-										$billing_data = implode( ', ', $billing_data );
+/*										$billing_data = implode( ', ', $billing_data );
 									}
 
 									if ( 'heading' === $field['type'] ) {
