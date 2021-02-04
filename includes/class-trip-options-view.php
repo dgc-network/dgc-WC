@@ -61,13 +61,13 @@ class Trip_Options_View {
 				 */
 				$( '.single_add_to_cart_button' ).on( 'click', function(e) {
 					e.preventDefault();
-
+/*
 					var myInput = document.getElementById("start_date_input");
 					if !(myInput && myInput.value) {
 						  alert("My input has no value!");
 						  return;
 					}
-					
+*/					
 					var $thisbutton = $(this),
                 	$form = $thisbutton.closest('form.cart'),
 					id = $thisbutton.val(),
