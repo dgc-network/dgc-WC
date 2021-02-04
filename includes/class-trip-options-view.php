@@ -515,7 +515,7 @@ class Trip_Options_View {
 				if ( empty($itineraries[$x]['date']) ) {
 					echo '<input type="text" style="color:blue; width:fit-content" name="itinerary-date-'.$x.'" id="itinerary-date-'.$x.'">';
 				} else {
-					echo $itineraries[$x]['date'] . ': ';
+					echo $itineraries[$x]['date'] . '<br>';
 				}
 				echo esc_attr( $itineraries[$x]['label'] ) . ', ' . esc_attr( $itineraries[$x]['title'] );
 				echo '<br>';
@@ -523,7 +523,9 @@ class Trip_Options_View {
 				echo '</li>';
 			} ?>
 			</ul><?php
-		} else { ?>
+		} else {
+			echo __( 'No Itineraries found.', 'text-domain' );
+			?>
 			<span><?php esc_html_e( 'No Itineraries found.', 'text-domain' ); ?></span><?php
 		}
 	}
