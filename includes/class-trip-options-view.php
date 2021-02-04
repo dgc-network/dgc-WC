@@ -32,7 +32,7 @@ class Trip_Options_View {
 		  	remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart' );
 	  	} ?>
 		<style>
-		.woocommerce ul.products li.product a.button { display: none; }
+			.woocommerce ul.products li.product a.button { display: none; }
 		</style>
 		<?php
 	}
@@ -62,6 +62,12 @@ class Trip_Options_View {
 				$( '.single_add_to_cart_button' ).on( 'click', function(e) {
 					e.preventDefault();
 
+					var myInput = document.getElementById("start_date_input");
+					if (myInput && myInput.value) {
+						  alert("My input has a value!");
+						  return;
+					}
+					
 					var $thisbutton = $(this),
                 	$form = $thisbutton.closest('form.cart'),
 					id = $thisbutton.val(),
