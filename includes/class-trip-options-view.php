@@ -587,35 +587,25 @@ class Trip_Options_View {
 	function booking_tab_content() {
 
 		echo '<h2>' . __( 'Booking : ', 'text-domain' ) . '</h2>';
-		//self::booking_sub_tab();
 ?>
 		<div class="tabs">
 		<ul class="tab-links">
-			<li class="active"><a href="#tab1">Tab #1</a></li>
-			<li><a href="#tab2">Tab #2</a></li>
-			<li><a href="#tab3">Tab #3</a></li>
-			<li><a href="#tab4">Tab #4</a></li>
+			<li class="active"><a href="#tab1"><?php esc_html_e( 'Completed', 'text-domain' ); ?></a></li>
+			<li><a href="#tab2"><?php esc_html_e( 'Processing', 'text-domain' ); ?></a></li>
+			<li><a href="#tab3"><?php esc_html_e( 'On hold', 'text-domain' ); ?></a></li>
 		</ul>
 	
 		<div class="tab-content">
 			<div id="tab1" class="tab active">
-				<p>Tab #1 content goes here!</p>
-				<p>Donec pulvinar neque sed semper lacinia. Curabitur lacinia ullamcorper nibh; quis imperdiet velit eleifend ac. Donec blandit mauris eget aliquet lacinia! Donec pulvinar massa interdum risus ornare mollis.</p>
+				<?php self::completed_tab_content(); ?>
 			</div>
 	
 			<div id="tab2" class="tab">
-				<p>Tab #2 content goes here!</p>
-				<p>Donec pulvinar neque sed semper lacinia. Curabitur lacinia ullamcorper nibh; quis imperdiet velit eleifend ac. Donec blandit mauris eget aliquet lacinia! Donec pulvinar massa interdum risus ornare mollis. In hac habitasse platea dictumst. Ut euismod tempus hendrerit. Morbi ut adipiscing nisi. Etiam rutrum sodales gravida! Aliquam tellus orci, iaculis vel.</p>
+				<?php self::processing_tab_content(); ?>
 			</div>
 	
 			<div id="tab3" class="tab">
-				<p>Tab #3 content goes here!</p>
-				<p>Donec pulvinar neque sed semper lacinia. Curabitur lacinia ullamcorper nibh; quis imperdiet velit eleifend ac. Donec blandit mauris eget aliquet lacinia! Donec pulvinar massa interdum ri.</p>
-			</div>
-	
-			<div id="tab4" class="tab">
-				<p>Tab #4 content goes here!</p>
-				<p>Donec pulvinar neque sed semper lacinia. Curabitur lacinia ullamcorper nibh; quis imperdiet velit eleifend ac. Donec blandit mauris eget aliquet lacinia! Donec pulvinar massa interdum risus ornare mollis. In hac habitasse platea dictumst. Ut euismod tempus hendrerit. Morbi ut adipiscing nisi. Etiam rutrum sodales gravida! Aliquam tellus orci, iaculis vel.</p>
+				<?php self::on_hold_tab_content(); ?>
 			</div>
 		</div>
 	</div>		
