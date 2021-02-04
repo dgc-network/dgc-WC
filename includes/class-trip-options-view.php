@@ -588,7 +588,7 @@ class Trip_Options_View {
 
 		global $post;
 		$post_id = $post->ID;
-		$orders = get_orders_ids_by_product_id( $post_id );
+		$orders = self::get_orders_ids_by_product_id( $post_id );
 		echo '<h2>' . __( 'Booking : ', 'text-domain' ) . '</h2>';
 		if ( is_array( $orders ) && count( $orders ) > 0 ) { 
 			echo '<ul>';
