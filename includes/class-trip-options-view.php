@@ -584,6 +584,50 @@ class Trip_Options_View {
 		}
 	}
 
+	function booking_tab_content() {
+
+		global $post;
+		$post_id = $post->ID;
+		$orders = get_orders_ids_by_product_id( $post_id );
+		echo '<h2>' . __( 'Booking : ', 'text-domain' ) . '</h2>';
+		if ( is_array( $orders ) && count( $orders ) > 0 ) { 
+			echo '<ul>';
+			foreach ( $orders as $key=>$value ) { 
+				echo '<li>';
+				echo esc_attr($value);
+				echo '</li>';
+			}
+			echo '</ul>';
+		} else { 
+			echo __( 'No Orders found.', 'text-domain' );
+		}
+	}
+
+/**
+ * Get All orders IDs for a given product ID.
+ *
+ * @param  integer  $product_id (required)
+ * @param  array    $order_status (optional) Default is 'wc-completed'
+ *
+ * @return array
+ */
+function get_orders_ids_by_product_id( $product_id, $order_status = array( 'wc-completed' ) ){
+    global $wpdb;
+
+    $results = $wpdb->get_col("
+        SELECT order_items.order_id
+        FROM {$wpdb->prefix}woocommerce_order_items as order_items
+        LEFT JOIN {$wpdb->prefix}woocommerce_order_itemmeta as order_item_meta ON order_items.order_item_id = order_item_meta.order_item_id
+        LEFT JOIN {$wpdb->posts} AS posts ON order_items.order_id = posts.ID
+        WHERE posts.post_type = 'shop_order'
+        AND posts.post_status IN ( '" . implode( "','", $order_status ) . "' )
+        AND order_items.order_item_type = 'line_item'
+        AND order_item_meta.meta_key = '_product_id'
+        AND order_item_meta.meta_value = '$product_id'
+    ");
+
+    return $results;
+}
 
 }
 new Trip_Options_View;
