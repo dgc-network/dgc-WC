@@ -25,15 +25,6 @@ class Trip_Options_View {
 		add_filter( 'woocommerce_email_recipient_new_order', array( __CLASS__, 'additional_customer_email_recipient' ), 10, 2 ); // Optional (testing)
 		
 		add_action( 'woocommerce_after_shop_loop_item', array( __CLASS__, 'remove_add_to_cart_buttons' ), 1 );
-		//add_action( 'woocommerce_single_product_summary', array( __CLASS__, 'remove_add_to_cart_buttons_from_related' ), 1 );
-
-		//remove_action( 'woocommerce_after_shop_loop_item', array( __CLASS__, 'woocommerce_template_loop_add_to_cart' ) );
-		//remove_action( 'woocommerce_single_product_summary', array( __CLASS__, 'woocommerce_template_single_add_to_cart' ), 30 );
-
-		//remove_action( 'woocommerce_after_shop_loop_item', array( __CLASS__, 'woocommerce_template_loop_add_to_cart' ) );
-		//remove_action( 'woocommerce_single_product_summary', array( __CLASS__, 'woocommerce_template_single_add_to_cart' ), 30 );
-		
-		//add_filter( 'woocommerce_is_purchasable', '__return_false');
 	}
 
     function remove_add_to_cart_buttons() {
@@ -41,41 +32,9 @@ class Trip_Options_View {
 		  	remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart' );
 	  	} ?>
 		<style>
-		.woocommerce ul.products li.product a.button {
-    		display: none;
-		}
+		.woocommerce ul.products li.product a.button { display: none; }
 		</style>
 		<?php
-	}
-
-    function remove_add_to_cart_buttons_from_related() {
-		remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30 );
-	}
-/*
-	function woocommerce_template_single_add_to_cart() {
-    	global $product;
-    	do_action( 'woocommerce_' . $product->product_type . '_add_to_cart' );
-	}
-*/	
-
-	function woocommerce_template_loop_add_to_cart() {
-		global $product;
-		do_action( 'woocommerce_' . $product->product_type . '_add_to_cart' );
-	}
-
-	function woocommerce_template_single_add_to_cart() {
-    	global $product;
-    	do_action( 'woocommerce_' . $product->product_type . '_add_to_cart' );
-	}
-
-	function WC() {
- 
-		remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart');
-		 
-		remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart');
-		 
-		return WooCommerce::instance();
-		 
 	}
 
 	function custom_datepicker() {
@@ -225,7 +184,7 @@ class Trip_Options_View {
 			if ($is_itinerary=='yes') {
 				echo '<div class="start_date"></div>';
 			} else {
-				echo '<input type="text" class="start_date" id="start_date_input" name="start_date_input" />';
+				echo '<input type="text" style="color:blue; width:fit-content" class="start_date" id="start_date_input" name="start_date_input" />';
 			}
 		}
 	}
@@ -548,7 +507,7 @@ class Trip_Options_View {
 			foreach ( $itineraries as $x=>$itinerary ) {
 				echo '<li class="itinerary-li">';
 				if ( empty($itineraries[$x]['date']) ) {
-					echo '<input type="text" style="color:blue" name="itinerary-date-'.$x.'" id="itinerary-date-'.$x.'">';
+					echo '<input type="text" style="color:blue; width:fit-content" name="itinerary-date-'.$x.'" id="itinerary-date-'.$x.'">';
 				} else {
 					echo $itineraries[$x]['date'] . ': ';
 				}
