@@ -588,7 +588,11 @@ class Trip_Options_View {
 
 		global $post;
 		$post_id = $post->ID;
-		$orders = self::get_orders_ids_by_product_id( $post_id );
+// Set the orders statuses
+$statuses = array( 'wc-completed', 'wc-processing', 'wc-on-hold' );
+
+//$orders_ids = get_orders_ids_by_product_id( 37, $statuses );
+		$orders = self::get_orders_ids_by_product_id( $post_id, $statuses );
 		echo '<h2>' . __( 'Booking : ', 'text-domain' ) . '</h2>';
 		if ( is_array( $orders ) && count( $orders ) > 0 ) { 
 			echo '<ul>';
