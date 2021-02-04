@@ -63,8 +63,8 @@ class Trip_Options_View {
 					e.preventDefault();
 
 					var myInput = document.getElementById("start_date_input");
-					if (myInput && myInput.value) {
-						  alert("My input has a value!");
+					if !(myInput && myInput.value) {
+						  alert("My input has no value!");
 						  return;
 					}
 					
