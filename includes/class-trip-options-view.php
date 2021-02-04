@@ -534,9 +534,11 @@ class Trip_Options_View {
 		$itineraries = get_post_meta( $post_id, 'wp_travel_trip_itinerary_data', true );
 
 		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) {
-			echo '<h4 style="text-align:left">';
+			echo '<h2>';
+			//echo '<h4 style="text-align:left">';
 			esc_html_e( 'Itinerary', 'text-domain' );
-			echo '</h4>';
+			//echo '</h4>';
+			echo '</h2>';
 			?>
 			<ul><?php
 			foreach ( $itineraries as $x=>$itinerary ) {
