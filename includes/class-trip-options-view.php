@@ -532,13 +532,11 @@ class Trip_Options_View {
 		global $post;
 		$post_id = $post->ID;
 		$itineraries = get_post_meta( $post_id, 'wp_travel_trip_itinerary_data', true );
+		echo '<h2>';
+		esc_html_e( 'Itinerary', 'text-domain' );
+		echo '</h2>';
 
 		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) {
-			echo '<h2>';
-			//echo '<h4 style="text-align:left">';
-			esc_html_e( 'Itinerary', 'text-domain' );
-			//echo '</h4>';
-			echo '</h2>';
 			?>
 			<ul><?php
 			foreach ( $itineraries as $x=>$itinerary ) {
@@ -563,16 +561,16 @@ class Trip_Options_View {
 		global $post;
 		$post_id = $post->ID;
 		$trip_include = get_post_meta( $post_id, 'wp_travel_trip_include', true );
-		echo '<h4 style="text-align:left">';
+		echo '<h2>';
 		esc_html_e( 'Trip Includes', 'text-domain' );
-		echo '</h4>';
-		echo '<br>';
+		echo '</h2>';
+		//echo '<br>';
 		if (!empty($trip_include)) {
 			echo esc_attr( $trip_include );
 		} else {
 			esc_html_e( 'No Trip Include found.', 'text-domain' );
 		}
-		echo '<br>';
+		//echo '<br>';
 	}	
 
 	function trip_excludes_tab_content() {
@@ -580,10 +578,10 @@ class Trip_Options_View {
 		global $post;
 		$post_id = $post->ID;
 		$trip_exclude = get_post_meta( $post_id, 'wp_travel_trip_exclude', true );
-		echo '<h4 style="text-align:left">';
+		echo '<h2>';
 		esc_html_e( 'Trip Excludes', 'text-domain' );
-		echo '</h4>';
-		echo '<br>';
+		echo '</h2>';
+		//echo '<br>';
 		if (!empty($trip_exclude)) {
 			echo esc_attr( $trip_exclude );
 		} else {
@@ -597,9 +595,9 @@ class Trip_Options_View {
 		$post_id = $post->ID;
 		$faqs = wp_travel_get_faqs( $post_id );
 		if ( is_array( $faqs ) && count( $faqs ) > 0 ) { 
-			echo '<h4 style="text-align:left">';
+			echo '<h2>';
 			esc_html_e( 'FAQ : ', 'text-domain' );
-			echo '</h4>';
+			echo '</h2>';
 			?>
 			<ul><?php
 			foreach ( $faqs as $key=>$value ) { ?>
