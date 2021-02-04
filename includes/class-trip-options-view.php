@@ -28,8 +28,8 @@ class Trip_Options_View {
 		//remove_action( 'woocommerce_after_shop_loop_item', array( __CLASS__, 'woocommerce_template_loop_add_to_cart' ) );
 		//remove_action( 'woocommerce_single_product_summary', array( __CLASS__, 'woocommerce_template_single_add_to_cart' ), 30 );
 
-		remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart' );
-		remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30 );
+		remove_action( 'woocommerce_after_shop_loop_item', array( __CLASS__, 'woocommerce_template_loop_add_to_cart' ) );
+		remove_action( 'woocommerce_single_product_summary', array( __CLASS__, 'woocommerce_template_single_add_to_cart' ), 30 );
 		
 	}
 
@@ -45,6 +45,17 @@ class Trip_Options_View {
     	do_action( 'woocommerce_' . $product->product_type . '_add_to_cart' );
 	}
 */	
+
+	function woocommerce_template_loop_add_to_cart() {
+		global $product;
+		do_action( 'woocommerce_' . $product->product_type . '_add_to_cart' );
+	}
+
+	function woocommerce_template_single_add_to_cart() {
+    	global $product;
+    	do_action( 'woocommerce_' . $product->product_type . '_add_to_cart' );
+	}
+
 	function custom_datepicker() {
 
 		// Load the datepicker script (pre-registered in WordPress).
