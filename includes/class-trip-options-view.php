@@ -39,7 +39,13 @@ class Trip_Options_View {
     function remove_add_to_cart_buttons() {
 		if( is_product_category() || is_shop()) { 
 		  	remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart' );
-	  	}
+	  	} ?>
+		<style>
+		.woocommerce ul.products li.product a.button {
+    		display: none;
+		}
+		</style>
+		<?php
 	}
 
     function remove_add_to_cart_buttons_from_related() {
@@ -594,16 +600,17 @@ class Trip_Options_View {
 		global $post;
 		$post_id = $post->ID;
 		$faqs = wp_travel_get_faqs( $post_id );
+		echo '<h2>';
+		esc_html_e( 'FAQ : ', 'text-domain' );
+		echo '</h2>';
 		if ( is_array( $faqs ) && count( $faqs ) > 0 ) { 
-			echo '<h2>';
-			esc_html_e( 'FAQ : ', 'text-domain' );
-			echo '</h2>';
 			?>
 			<ul><?php
 			foreach ( $faqs as $key=>$value ) { ?>
 				<li><?php echo esc_attr( $faqs[$key]['question'] ); ?><br><?php
 				echo esc_attr( $faqs[$key]['answer'] ); ?></li><?php
-			} ?></ul><?php
+			} ?>
+			</ul><?php
 		} else { ?>
 			<span><?php esc_html_e( 'No FAQs found.', 'text-domain' ); ?></span><?php
 		}
