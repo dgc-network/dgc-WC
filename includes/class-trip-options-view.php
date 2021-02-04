@@ -586,12 +586,65 @@ class Trip_Options_View {
 
 	function booking_tab_content() {
 
+		echo '<h2>' . __( 'Booking : ', 'text-domain' ) . '</h2>';
+		self::booking_sub_tab();
+
+	}
+
+	function completed_tab_content() {
+
 		global $post;
 		$post_id = $post->ID;
-// Set the orders statuses
-$statuses = array( 'wc-completed', 'wc-processing', 'wc-on-hold' );
+		// Set the orders statuses
+		$statuses = array( 'wc-completed', 'wc-processing', 'wc-on-hold' );
 
-//$orders_ids = get_orders_ids_by_product_id( 37, $statuses );
+		//$orders_ids = get_orders_ids_by_product_id( 37, $statuses );
+		$orders = self::get_orders_ids_by_product_id( $post_id, $statuses );
+		echo '<h2>' . __( 'Booking : ', 'text-domain' ) . '</h2>';
+		if ( is_array( $orders ) && count( $orders ) > 0 ) { 
+			echo '<ul>';
+			foreach ( $orders as $key=>$value ) { 
+				echo '<li>';
+				echo esc_attr($value);
+				echo '</li>';
+			}
+			echo '</ul>';
+		} else { 
+			echo __( 'No Orders found.', 'text-domain' );
+		}
+	}
+
+	function processing_tab_content() {
+
+		global $post;
+		$post_id = $post->ID;
+		// Set the orders statuses
+		$statuses = array( 'wc-processing' );
+
+		//$orders_ids = get_orders_ids_by_product_id( 37, $statuses );
+		$orders = self::get_orders_ids_by_product_id( $post_id, $statuses );
+		echo '<h2>' . __( 'Booking : ', 'text-domain' ) . '</h2>';
+		if ( is_array( $orders ) && count( $orders ) > 0 ) { 
+			echo '<ul>';
+			foreach ( $orders as $key=>$value ) { 
+				echo '<li>';
+				echo esc_attr($value);
+				echo '</li>';
+			}
+			echo '</ul>';
+		} else { 
+			echo __( 'No Orders found.', 'text-domain' );
+		}
+	}
+
+	function on_hold_tab_content() {
+
+		global $post;
+		$post_id = $post->ID;
+		// Set the orders statuses
+		$statuses = array( 'wc-on-hold' );
+
+		//$orders_ids = get_orders_ids_by_product_id( 37, $statuses );
 		$orders = self::get_orders_ids_by_product_id( $post_id, $statuses );
 		echo '<h2>' . __( 'Booking : ', 'text-domain' ) . '</h2>';
 		if ( is_array( $orders ) && count( $orders ) > 0 ) { 
@@ -632,6 +685,25 @@ function get_orders_ids_by_product_id( $product_id, $order_status = array( 'wc-c
 
     return $results;
 }
+
+	/**
+ 	* Add a booking sub_tab
+ 	*/
+	 function booking_sub_tab() {
+
+		// Set the orders statuses
+		$tabs = array();
+		$statuses = array( 'completed', 'processing', 'on_hold' );
+		foreach ( $statuses as $key=>$value ) {
+			$tabs[$key] = array(
+				'title' 	=> __( $value, 'text-domain' ),
+				'priority' 	=> 20,
+				'callback' 	=> array( __CLASS__, $key . '_tab_content' )
+			);		
+		}
+		return $tabs;
+	}
+	
 
 }
 new Trip_Options_View;
