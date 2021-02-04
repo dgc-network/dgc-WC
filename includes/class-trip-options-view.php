@@ -512,6 +512,7 @@ class Trip_Options_View {
 					echo $itineraries[$x]['date'] . ': ';
 				}
 				echo esc_attr( $itineraries[$x]['label'] ) . ', ' . esc_attr( $itineraries[$x]['title'] );
+				echo '<br>';
 				echo esc_attr( $itineraries[$x]['desc'] );
 				echo '</li>';
 			} ?>
