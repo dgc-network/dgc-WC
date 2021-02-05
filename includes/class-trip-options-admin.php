@@ -1176,7 +1176,7 @@ wp_enqueue_script( 'some_handle' );
 		.tab-content {
 			padding:15px;
 			border-radius:3px;
-			box-shadow:-1px 1px 1px rgba(0,0,0,0.15);
+			/*box-shadow:-1px 1px 1px rgba(0,0,0,0.15);*/
 			background:#fff;
 		}
 
@@ -1231,7 +1231,7 @@ wp_enqueue_script( 'some_handle' );
     	");
 	
 		if ( is_array( $order_ids ) && count( $order_ids ) > 0 ) {
-			echo '<table>';
+			echo '<table style="border: 1px solid black">';
 			echo '<tr>';
 			echo '<th>'. __( 'Date', 'text-domain' ) .'</th>';
 			echo '<th>'. __( 'QTY', 'text-domain' ) .'</th>';
@@ -1252,7 +1252,9 @@ wp_enqueue_script( 'some_handle' );
 					if ($order_item->get_product_id()==$product_id) {
 						$order_item_id = $order_item->get_id();
 						$quantity = $order_item->get_quantity();
-						$itinerary_date = $order_item->get_meta( 'itinerary_date', true );
+						//$itinerary_date = $order_item->get_meta( 'itinerary_date', true );
+						$itinerary_date = $order_item->get_meta( __( 'Date', 'text-domain' ), true );
+						
 					}
 				}
 

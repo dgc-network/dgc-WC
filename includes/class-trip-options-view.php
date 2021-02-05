@@ -337,6 +337,7 @@ class Trip_Options_View {
 						self::create_purchase_order($vendor_id, $product_id_resource, $product_qty, $itinerary_date);
 					}
 				}
+				//wc_add_order_item_meta($item->ID,'itinerary_date',$itinerary_date);
 			}
 
 			$display_itinerary_date = '<span>';
@@ -349,7 +350,21 @@ class Trip_Options_View {
 			
 		}
 	}
-
+/*
+	//add_action('woocommerce_add_order_item_meta','wdm_add_values_to_order_item_meta',1,2);
+	if(!function_exists('wdm_add_values_to_order_item_meta'))
+	{
+	  function wdm_add_values_to_order_item_meta($item_id, $values)
+	  {
+			global $woocommerce,$wpdb;
+			$user_custom_values = $values['wdm_user_custom_data_value'];
+			if(!empty($user_custom_values))
+			{
+				wc_add_order_item_meta($item_id,'wdm_user_custom_data',$user_custom_values);  
+			}
+	  }
+	}
+*/
 	function create_purchase_order( $customer_id, $product_id, $quantity, $itinerary_date ) {
 	
 		global $woocommerce;
