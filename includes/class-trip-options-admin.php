@@ -121,7 +121,7 @@ class Trip_Options_Admin {
     	$tabs['itinerary'] = array(
         	'label'   =>  __( 'Itinerary', 'text-domain' ),
         	'target'  =>  'itinerary_panel',
-        	'priority' => 0,
+        	'priority' => 60,
         	'class'   => array( 'show_if_itinerary')
     	);
 
