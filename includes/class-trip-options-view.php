@@ -740,18 +740,13 @@ class Trip_Options_View {
 				$billing_email  = $order->get_billing_email();
 
 				// Iterating though each order item
-				foreach( $order->get_items() as $item_id => $line_item ) {
-					if ($line_item->get_product_id()==$post_id) {
-						$itinerary_date = get_post_meta( 'itinerary_date', $line_item->get_product_id());
-						$quantity = get_post_field( 'quantity', $line_item->get_product_id());
-						// Get the vendor ID
-						$vendor_id = get_post_field( 'post_author', $line_item->get_product_id());
-						$vendor = get_userdata( $vendor_id );
-						$email = $vendor->user_email;	
-						// Avoiding duplicates (if many items with many emails)
-						// or an existing email in the recipient
-						if( ! in_array( $email, $additional_recipients ) && strpos( $recipient, $email ) === false )
-							$additional_recipients[] = $email;
+				foreach( $order->get_items() as $order_item ) {
+					if ($order_item->get_product_id()==$post_id) {
+
+						$order_item_id = $order_item->get_id();
+						$quantity = $order_item->get_quantity();
+						$itinerary_date = $order_item->get_meta( 'itinerary_date', true );
+
 					}
 				}
 	
