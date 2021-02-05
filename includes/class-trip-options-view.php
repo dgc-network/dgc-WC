@@ -697,22 +697,7 @@ class Trip_Options_View {
 		$post_id = $post->ID;
 		$statuses = array( 'wc-completed' );
 		self::get_orders_by_product_id( $post_id, $statuses );
-/*
-		//$orders_ids = get_orders_ids_by_product_id( 37, $statuses );
-		$orders = self::get_orders_ids_by_product_id( $post_id, $statuses );
-		echo '<h2>' . __( 'Booking : ', 'text-domain' ) . '</h2>';
-		if ( is_array( $orders ) && count( $orders ) > 0 ) { 
-			echo '<ul>';
-			foreach ( $orders as $key=>$value ) { 
-				echo '<li>';
-				echo esc_attr($value);
-				echo '</li>';
-			}
-			echo '</ul>';
-		} else { 
-			echo __( 'No Completed Orders found.', 'text-domain' );
-		}
-*/		
+
 	}
 
 	function processing_tab_content() {
@@ -723,48 +708,7 @@ class Trip_Options_View {
 		//$statuses = array( 'wc-completed', 'wc-processing', 'wc-on-hold' );
 		$statuses = array( 'wc-processing' );
 		self::get_orders_by_product_id( $post_id, $statuses );
-/*		
-		if ( is_array( $order_ids ) && count( $order_ids ) > 0 ) {
-			echo '<table>';
-			echo '<tr>';
-			echo '<th>'. __( 'Date', 'text-domain' ) .'</th>';
-			echo '<th>'. __( 'QTY', 'text-domain' ) .'</th>';
-			echo '<th>'. __( 'Order ID', 'text-domain' ) .'</th>';
-			echo '<th>'. __( 'Customer', 'text-domain' ) .'</th>';
-			echo '<th>'. __( 'Email', 'text-domain' ) .'</th>';
-			echo '</tr>';
-			foreach ( $order_ids as $order_id ) {
-				$order = wc_get_order( $order_id );
-				$itinerary_date = '';
-				$quantity = '';
-				$billing_first_name = $order->get_billing_first_name();
-				$billing_last_name  = $order->get_billing_last_name();
-				$billing_email  = $order->get_billing_email();
 
-				// Iterating though each order item
-				foreach( $order->get_items() as $order_item ) {
-					if ($order_item->get_product_id()==$post_id) {
-
-						$order_item_id = $order_item->get_id();
-						$quantity = $order_item->get_quantity();
-						$itinerary_date = $order_item->get_meta( 'itinerary_date', true );
-
-					}
-				}
-	
-				echo '<tr>';
-				echo '<td>'. $itinerary_date .'</td>';
-				echo '<td>'. $quantity .'</td>';
-				echo '<td>'. $order_id .'</td>';
-				echo '<td>'. $billing_first_name . ' ' . $billing_last_name .'</td>';
-				echo '<td>'. $billing_email .'</td>';
-				echo '</tr>';
-			}
-			echo '</table>';
-		} else { 
-			echo __( 'No Processing Orders found.', 'text-domain' );
-		}
-*/		
 	}
 
 	function on_hold_tab_content() {
@@ -773,22 +717,7 @@ class Trip_Options_View {
 		$post_id = $post->ID;
 		$statuses = array( 'wc-on-hold' );
 		self::get_orders_by_product_id( $post_id, $statuses );
-/*
-		//$orders_ids = get_orders_ids_by_product_id( 37, $statuses );
-		$orders = self::get_orders_ids_by_product_id( $post_id, $statuses );
-		echo '<h2>' . __( 'Booking : ', 'text-domain' ) . '</h2>';
-		if ( is_array( $orders ) && count( $orders ) > 0 ) { 
-			echo '<ul>';
-			foreach ( $orders as $key=>$value ) { 
-				echo '<li>';
-				echo esc_attr($value);
-				echo '</li>';
-			}
-			echo '</ul>';
-		} else { 
-			echo __( 'No On Hold Orders found.', 'text-domain' );
-		}
-*/		
+
 	}
 
 /**
