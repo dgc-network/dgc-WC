@@ -1091,7 +1091,7 @@ wp_enqueue_script( 'some_handle' );
 	function trip_orders_add_metabox() {
 		add_meta_box(
 			'trip-orders', // metabox ID
-			esc_html__( 'Trip Orders', 'dgc-domain' ), // title
+			esc_html__( 'Orders', 'dgc-domain' ), // title
 			array( __CLASS__, 'trip_orders_metabox_callback' ), // callback function
 			'product', // post type or post types in array
 			'normal', // position (normal, side, advanced)
@@ -1101,7 +1101,12 @@ wp_enqueue_script( 'some_handle' );
 
 	function trip_orders_metabox_callback( $post ) {
 
-		echo '<h2>' . __( 'Booking : ', 'text-domain' ) . '</h2>';
+		global $post;
+		$post_id = $post->ID;
+		$statuses = array( 'wc-completed' );
+		self::get_orders_by_product_id( $post->ID, array( 'wc-completed' ) );
+
+		echo '<h3>' . __( 'Orders : ', 'text-domain' ) . '</h3>';
 		?>
 		<div class="tabs">
 			<ul class="tab-links">
@@ -1112,15 +1117,15 @@ wp_enqueue_script( 'some_handle' );
 	
 			<div class="tab-content">
 				<div id="tab1" class="tab active">
-					<?php self::completed_tab_content(); ?>
+					<?php self::get_orders_by_product_id( $post->ID, array( 'wc-completed' ) ); ?>
 				</div>
 	
 				<div id="tab2" class="tab">
-					<?php self::processing_tab_content(); ?>
+					<?php self::get_orders_by_product_id( $post->ID, array( 'wc-processing' ) ); ?>
 				</div>
 	
 				<div id="tab3" class="tab">
-					<?php self::on_hold_tab_content(); ?>
+					<?php self::get_orders_by_product_id( $post->ID, array( 'wc-on-hold' ) ); ?>
 				</div>
 			</div>
 		</div>
@@ -1241,7 +1246,6 @@ wp_enqueue_script( 'some_handle' );
 	 * @param  integer  $product_id (required)
 	 * @param  array    $order_status (optional) Default is 'wc-completed'
 	 *
-	 * @return array
 	 */
 	function get_orders_by_product_id( $product_id, $order_status = array( 'wc-completed' ) ) {
 
@@ -1298,102 +1302,6 @@ wp_enqueue_script( 'some_handle' );
 			echo __( 'No Orders found.', 'text-domain' );
 		}
 	}
-
-	function trip_orders_save_metabox( $post_id, $post ) {
-	
-		// nonce check
-		if ( ! isset( $_POST[ '_tripnonce' ] ) || ! wp_verify_nonce( $_POST[ '_tripnonce' ], 'somerandomstr' ) ) {
-			return $post_id;
-		}
-
-		// check current use permissions
-		$post_type = get_post_type_object( $post->post_type );
-
-		if ( ! current_user_can( $post_type->cap->edit_post, $post_id ) ) {
-			return $post_id;
-		}
-
-		// Do not save the data if autosave
-		if ( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE ) {
-			return $post_id;
-		}
-
-		// define your own post type here
-		if( $post->post_type != 'product' ) {
-			return $post_id;
-		}
-
-		// save the checkbox of product data option
-		$is_itinerary = isset( $_POST['_itinerary'] ) ? 'yes' : 'no';
-		update_post_meta( $post_id, '_itinerary', $is_itinerary );
-
-
-		$itineraries = array();
-		$xx = 0;
-		for ($x = 0; $x < 100; $x++) {
-			//if ($_POST['itinerary_item_label-' . $x]!="" && $_POST['itinerary_item_label-' . $x] != DEFAULT_ITINERARY_LABEL && $_POST['itinerary_item_title-' . $x]!="" && $_POST['itinerary_item_title-' . $x] != DEFAULT_ITINERARY_TITLE) {
-			if ($_POST['itinerary_item_label-' . $x]!="" && $_POST['itinerary_item_label-' . $x] != DEFAULT_ITINERARY_LABEL) {
-				$itineraries[$xx]['label'] = sanitize_text_field( $_POST['itinerary_item_label-' . $x] );
-				$itineraries[$xx]['title'] = sanitize_text_field( $_POST['itinerary_item_title-' . $x] );
-				$itineraries[$xx]['date'] = sanitize_text_field( $_POST['itinerary_item_date-' . $x] );
-				$itineraries[$xx]['time'] = sanitize_text_field( $_POST['itinerary_item_time-' . $x] );
-				$itineraries[$xx]['desc'] = sanitize_text_field( $_POST['itinerary_item_desc-' . $x] );
-				$yy = 0;
-				for ($y = 0; $y < 100; $y++) {
-					if ($_POST['itinerary_item_assignment-' . $x . '-category-' . $y]!="") {
-						$itineraries[$xx]['assignment'][$yy]['category'] = sanitize_text_field( $_POST['itinerary_item_assignment-' . $x . '-category-' . $y] );
-					}
-					if ($_POST['itinerary_item_assignment-' . $x . '-resource-' . $y]!="") {
-						$itineraries[$xx]['assignment'][$yy]['resource'] = sanitize_text_field( $_POST['itinerary_item_assignment-' . $x . '-resource-' . $y] );
-					}
-					$yy++;
-				}
-				$xx++;
-			}
-		}
-		//delete_post_meta( $post_id, 'wp_travel_trip_itinerary_data' );
-		update_post_meta( $post_id, 'wp_travel_trip_itinerary_data', $itineraries );
-/*
-		$pricings = array();
-		$xx = 0;
-		for ($x = 0; $x < 100; $x++) {
-			if ($_POST['pricing_item_title-' . $x]!="" && $_POST['pricing_item_title-' . $x] != DEFAULT_PRICING) {
-				$pricings[$xx]['title'] = sanitize_text_field( $_POST['pricing_item_title-' . $x] );
-				$pricings[$xx]['min_pax'] = sanitize_text_field( $_POST['pricing_min_pax-' . $x] );
-				$pricings[$xx]['max_pax'] = sanitize_text_field( $_POST['pricing_max_pax-' . $x] );
-				$xx++;
-			}
-		}
-*/
-		if (!empty($_POST['wp_travel_trip_include'])) {
-			$includes = sanitize_text_field( $_POST['wp_travel_trip_include'] );
-			update_post_meta($post_id, 'wp_travel_trip_include', $includes);
-		}
-
-		if (!empty($_POST['wp_travel_trip_exclude'])) {
-			$excludes = sanitize_text_field( $_POST['wp_travel_trip_exclude'] );
-			update_post_meta($post_id, 'wp_travel_trip_exclude', $excludes);
-		}
-
-		$faqs = array();
-		$xx = 0;
-		for ($x = 0; $x < 100; $x++) {
-			if ($_POST['faq_item_question-' . $x] != "" && $_POST['faq_item_question-' . $x] != DEFAULT_FAQ_QUESTION) {
-				$faqs['question'][$xx] = sanitize_text_field( $_POST['faq_item_question-' . $x] );
-				$faqs['answer'][$xx] = sanitize_text_field( $_POST['faq_item_answer-' . $x] );
-				$xx++;
-			}
-		}
-		$question = isset( $faqs['question'] ) ? $faqs['question'] : array();
-		$answer   = isset( $faqs['answer'] ) ? $faqs['answer'] : array();
-		update_post_meta( $post_id, 'wp_travel_faq_question', $question );
-		update_post_meta( $post_id, 'wp_travel_faq_answer', $answer );
-
-		return $post_id;
-	}
-
-	
-	
 }
 new Trip_Options_Admin;
 
