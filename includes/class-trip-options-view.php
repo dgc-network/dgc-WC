@@ -710,7 +710,7 @@ class Trip_Options_View {
 			}
 			echo '</ul>';
 		} else { 
-			echo __( 'No Orders found.', 'text-domain' );
+			echo __( 'No Completed Orders found.', 'text-domain' );
 		}
 	}
 
@@ -724,12 +724,26 @@ class Trip_Options_View {
 		$order_ids = self::get_orders_ids_by_product_id( $post_id, $statuses );
 		if ( is_array( $order_ids ) && count( $order_ids ) > 0 ) { 
 			echo '<table>';
+			echo '<tr>';
+			echo '<th>'. __( 'Date', 'text-domain' ) .'</th>';
+			echo '<th>'. __( 'QTY', 'text-domain' ) .'</th>';
+			echo '<th>'. __( 'Order ID', 'text-domain' ) .'</th>';
+			echo '<th>'. __( 'Customer', 'text-domain' ) .'</th>';
+			echo '<th>'. __( 'Email', 'text-domain' ) .'</th>';
+			echo '</tr>';
 			foreach ( $order_ids as $order_id ) {
 				$order = wc_get_order( $order_id );
-				$email = '';
+				$itinerary_date = '';
+				$quantity = '';
+				$billing_first_name = $order->get_billing_first_name();
+				$billing_last_name  = $order->get_billing_last_name();
+				$billing_email  = $order->get_billing_email();
+
 				// Iterating though each order item
 				foreach( $order->get_items() as $item_id => $line_item ) {
 					if ($line_item->get_product_id()==$post_id) {
+						$itinerary_date = get_post_meta( 'itinerary_date', $line_item->get_product_id());
+						$quantity = get_post_field( 'quantity', $line_item->get_product_id());
 						// Get the vendor ID
 						$vendor_id = get_post_field( 'post_author', $line_item->get_product_id());
 						$vendor = get_userdata( $vendor_id );
@@ -742,14 +756,16 @@ class Trip_Options_View {
 				}
 	
 				echo '<tr>';
-				echo '<td>'.esc_attr($order_id).'</td>';
-				echo '<td>'.esc_attr($order->get_customer_id()).'</td>';
-				echo '<td>'.$email.'</td>';
+				echo '<td>'. $itinerary_date .'</td>';
+				echo '<td>'. $quantity .'</td>';
+				echo '<td>'. $order_id .'</td>';
+				echo '<td>'. $billing_first_name . ' ' . $billing_last_name .'</td>';
+				echo '<td>'. $billing_email .'</td>';
 				echo '</tr>';
 			}
 			echo '</table>';
 		} else { 
-			echo __( 'No Completed Orders found.', 'text-domain' );
+			echo __( 'No Processing Orders found.', 'text-domain' );
 		}
 	}
 
@@ -772,7 +788,7 @@ class Trip_Options_View {
 			}
 			echo '</ul>';
 		} else { 
-			echo __( 'No Orders found.', 'text-domain' );
+			echo __( 'No On Hold Orders found.', 'text-domain' );
 		}
 	}
 
