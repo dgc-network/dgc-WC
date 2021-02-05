@@ -1102,10 +1102,6 @@ wp_enqueue_script( 'some_handle' );
 	function trip_orders_metabox_callback( $post ) {
 
 		global $post;
-		$post_id = $post->ID;
-		$statuses = array( 'wc-completed' );
-		self::get_orders_by_product_id( $post->ID, array( 'wc-completed' ) );
-
 		echo '<h3>' . __( 'Orders : ', 'text-domain' ) . '</h3>';
 		?>
 		<div class="tabs">
@@ -1211,35 +1207,6 @@ wp_enqueue_script( 'some_handle' );
 		<?php
 	}
 	
-	function completed_tab_content() {
-
-		global $post;
-		$post_id = $post->ID;
-		$statuses = array( 'wc-completed' );
-		self::get_orders_by_product_id( $post_id, $statuses );
-
-	}
-
-	function processing_tab_content() {
-
-		global $post;
-		$post_id = $post->ID;
-		// Set the orders statuses
-		//$statuses = array( 'wc-completed', 'wc-processing', 'wc-on-hold' );
-		$statuses = array( 'wc-processing' );
-		self::get_orders_by_product_id( $post_id, $statuses );
-
-	}
-
-	function on_hold_tab_content() {
-
-		global $post;
-		$post_id = $post->ID;
-		$statuses = array( 'wc-on-hold' );
-		self::get_orders_by_product_id( $post_id, $statuses );
-
-	}
-
 	/**
  	 * Get All orders for a given product ID.
 	 *
