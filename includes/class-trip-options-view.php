@@ -695,9 +695,9 @@ class Trip_Options_View {
 
 		global $post;
 		$post_id = $post->ID;
-		// Set the orders statuses
 		$statuses = array( 'wc-completed' );
-
+		self::get_orders_by_product_id( $post_id, $statuses );
+/*
 		//$orders_ids = get_orders_ids_by_product_id( 37, $statuses );
 		$orders = self::get_orders_ids_by_product_id( $post_id, $statuses );
 		echo '<h2>' . __( 'Booking : ', 'text-domain' ) . '</h2>';
@@ -712,6 +712,7 @@ class Trip_Options_View {
 		} else { 
 			echo __( 'No Completed Orders found.', 'text-domain' );
 		}
+*/		
 	}
 
 	function processing_tab_content() {
@@ -721,8 +722,9 @@ class Trip_Options_View {
 		// Set the orders statuses
 		//$statuses = array( 'wc-completed', 'wc-processing', 'wc-on-hold' );
 		$statuses = array( 'wc-processing' );
-		$order_ids = self::get_orders_ids_by_product_id( $post_id, $statuses );
-		if ( is_array( $order_ids ) && count( $order_ids ) > 0 ) { 
+		self::get_orders_by_product_id( $post_id, $statuses );
+/*		
+		if ( is_array( $order_ids ) && count( $order_ids ) > 0 ) {
 			echo '<table>';
 			echo '<tr>';
 			echo '<th>'. __( 'Date', 'text-domain' ) .'</th>';
@@ -762,15 +764,16 @@ class Trip_Options_View {
 		} else { 
 			echo __( 'No Processing Orders found.', 'text-domain' );
 		}
+*/		
 	}
 
 	function on_hold_tab_content() {
 
 		global $post;
 		$post_id = $post->ID;
-		// Set the orders statuses
 		$statuses = array( 'wc-on-hold' );
-
+		self::get_orders_by_product_id( $post_id, $statuses );
+/*
 		//$orders_ids = get_orders_ids_by_product_id( 37, $statuses );
 		$orders = self::get_orders_ids_by_product_id( $post_id, $statuses );
 		echo '<h2>' . __( 'Booking : ', 'text-domain' ) . '</h2>';
@@ -785,7 +788,78 @@ class Trip_Options_View {
 		} else { 
 			echo __( 'No On Hold Orders found.', 'text-domain' );
 		}
+*/		
 	}
+
+/**
+ * Get All orders for a given product ID.
+ *
+ * @param  integer  $product_id (required)
+ * @param  array    $order_status (optional) Default is 'wc-completed'
+ *
+ * @return array
+ */
+function get_orders_by_product_id( $product_id, $order_status = array( 'wc-completed' ) ) {
+	
+    global $wpdb;
+
+    $$order_ids = $wpdb->get_col("
+        SELECT order_items.order_id
+        FROM {$wpdb->prefix}woocommerce_order_items as order_items
+        LEFT JOIN {$wpdb->prefix}woocommerce_order_itemmeta as order_item_meta ON order_items.order_item_id = order_item_meta.order_item_id
+        LEFT JOIN {$wpdb->posts} AS posts ON order_items.order_id = posts.ID
+        WHERE posts.post_type = 'shop_order'
+        AND posts.post_status IN ( '" . implode( "','", $order_status ) . "' )
+        AND order_items.order_item_type = 'line_item'
+        AND order_item_meta.meta_key = '_product_id'
+        AND order_item_meta.meta_value = '$product_id'
+    ");
+	
+	//return $results;
+	
+	if ( is_array( $order_ids ) && count( $order_ids ) > 0 ) {
+		echo '<table>';
+		echo '<tr>';
+		echo '<th>'. __( 'Date', 'text-domain' ) .'</th>';
+		echo '<th>'. __( 'QTY', 'text-domain' ) .'</th>';
+		echo '<th>'. __( 'Order ID', 'text-domain' ) .'</th>';
+		echo '<th>'. __( 'Customer', 'text-domain' ) .'</th>';
+		echo '<th>'. __( 'Email', 'text-domain' ) .'</th>';
+		echo '</tr>';
+		foreach ( $order_ids as $order_id ) {
+			$order = wc_get_order( $order_id );
+			$itinerary_date = '';
+			$quantity = '';
+			$billing_first_name = $order->get_billing_first_name();
+			$billing_last_name  = $order->get_billing_last_name();
+			$billing_email  = $order->get_billing_email();
+
+			// Iterating though each order item
+			foreach( $order->get_items() as $order_item ) {
+				if ($order_item->get_product_id()==$post_id) {
+
+					$order_item_id = $order_item->get_id();
+					$quantity = $order_item->get_quantity();
+					$itinerary_date = $order_item->get_meta( 'itinerary_date', true );
+
+				}
+			}
+
+			echo '<tr>';
+			echo '<td>'. $itinerary_date .'</td>';
+			echo '<td>'. $quantity .'</td>';
+			echo '<td>'. $order_id .'</td>';
+			echo '<td>'. $billing_first_name . ' ' . $billing_last_name .'</td>';
+			echo '<td>'. $billing_email .'</td>';
+			echo '</tr>';
+		}
+		echo '</table>';
+	} else { 
+		echo __( 'No Orders found.', 'text-domain' );
+	}
+
+
+}
 
 /**
  * Get All orders IDs for a given product ID.
