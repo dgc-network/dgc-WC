@@ -587,107 +587,104 @@ class Trip_Options_View {
 	function booking_tab_content() {
 
 		echo '<h2>' . __( 'Booking : ', 'text-domain' ) . '</h2>';
-?>
+		?>
 		<div class="tabs">
-		<ul class="tab-links">
-			<li class="active"><a href="#tab1"><?php esc_html_e( 'Completed', 'text-domain' ); ?></a></li>
-			<li><a href="#tab2"><?php esc_html_e( 'Processing', 'text-domain' ); ?></a></li>
-			<li><a href="#tab3"><?php esc_html_e( 'On hold', 'text-domain' ); ?></a></li>
-		</ul>
+			<ul class="tab-links">
+				<li class="active"><a href="#tab1"><?php esc_html_e( 'Completed', 'text-domain' ); ?></a></li>
+				<li><a href="#tab2"><?php esc_html_e( 'Processing', 'text-domain' ); ?></a></li>
+				<li><a href="#tab3"><?php esc_html_e( 'On hold', 'text-domain' ); ?></a></li>
+			</ul>
 	
-		<div class="tab-content">
-			<div id="tab1" class="tab active">
-				<?php self::completed_tab_content(); ?>
-			</div>
+			<div class="tab-content">
+				<div id="tab1" class="tab active">
+					<?php self::completed_tab_content(); ?>
+				</div>
 	
-			<div id="tab2" class="tab">
-				<?php self::processing_tab_content(); ?>
-			</div>
+				<div id="tab2" class="tab">
+					<?php self::processing_tab_content(); ?>
+				</div>
 	
-			<div id="tab3" class="tab">
-				<?php self::on_hold_tab_content(); ?>
+				<div id="tab3" class="tab">
+					<?php self::on_hold_tab_content(); ?>
+				</div>
 			</div>
 		</div>
-	</div>		
 
 		<style>
+		/*----- Tabs -----*/
+		.tabs {
+			width:100%;
+			display:inline-block;
+		}
 
-/*----- Tabs -----*/
-.tabs {
-	width:100%;
-	display:inline-block;
-}
+		/*----- Tab Links -----*/
+		/* Clearfix */
+		.tab-links:after {
+			display:block;
+			clear:both;
+			content:'';
+		}
 
-/*----- Tab Links -----*/
-/* Clearfix */
-	.tab-links:after {
-	display:block;
-	clear:both;
-	content:'';
-}
+		.tab-links li {
+			margin:0px 5px;
+			float:left;
+			float:left;
+		}
 
-.tab-links li {
-	margin:0px 5px;
-	float:left;
-	list-style:none;
-}
+		.tab-links a {
+			padding:9px 15px;
+			display:inline-block;
+			border-radius:3px 3px 0px 0px;
+			background:#7FB5DA;
+			font-size:16px;
+			font-weight:600;
+			color:#4c4c4c;
+			transition:all linear 0.15s;
+		}
 
-.tab-links a {
-	padding:9px 15px;
-	display:inline-block;
-	border-radius:3px 3px 0px 0px;
-	background:#7FB5DA;
-	font-size:16px;
-	font-weight:600;
-	color:#4c4c4c;
-	transition:all linear 0.15s;
-}
+		.tab-links a:hover {
+			background:#a7cce5;
+			text-decoration:none;
+		}
 
-.tab-links a:hover {
-	background:#a7cce5;
-	text-decoration:none;
-}
+		li.active a, li.active a:hover {
+			background:#fff;
+			color:#4c4c4c;
+		}
 
-li.active a, li.active a:hover {
-	background:#fff;
-	color:#4c4c4c;
-}
+		/*----- Content of Tabs -----*/
+		.tab-content {
+			padding:15px;
+			border-radius:3px;
+			box-shadow:-1px 1px 1px rgba(0,0,0,0.15);
+			background:#fff;
+		}
 
-/*----- Content of Tabs -----*/
-.tab-content {
-	padding:15px;
-	border-radius:3px;
-	box-shadow:-1px 1px 1px rgba(0,0,0,0.15);
-	background:#fff;
-}
+		.tab {
+			display:none;
+		}
 
-.tab {
-	display:none;
-}
-
-.tab.active {
-	display:block;
-}
+		.tab.active {
+			display:block;
+		}
 		</style>
 
 		<script>
+		jQuery(document).ready(function() {
+			jQuery('.tabs .tab-links a').on('click', function(e) {
+				var currentAttrValue = jQuery(this).attr('href');
 
-jQuery(document).ready(function() {
-	jQuery('.tabs .tab-links a').on('click', function(e) {
-		var currentAttrValue = jQuery(this).attr('href');
+				// Show/Hide Tabs
+				jQuery('.tabs ' + currentAttrValue).show().siblings().hide();
 
-		// Show/Hide Tabs
-		jQuery('.tabs ' + currentAttrValue).show().siblings().hide();
+				// Change/remove current tab to active
+				jQuery(this).parent('li').addClass('active').siblings().removeClass('active');
 
-		// Change/remove current tab to active
-		jQuery(this).parent('li').addClass('active').siblings().removeClass('active');
-
-		e.preventDefault();
-	});
-});
+				e.preventDefault();
+			});
+		});
 		</script>
-
-<?php
+		<?php
 	}
 
 	function completed_tab_content() {
@@ -695,21 +692,37 @@ jQuery(document).ready(function() {
 		global $post;
 		$post_id = $post->ID;
 		// Set the orders statuses
-		$statuses = array( 'wc-completed', 'wc-processing', 'wc-on-hold' );
-
-		//$orders_ids = get_orders_ids_by_product_id( 37, $statuses );
-		$orders = self::get_orders_ids_by_product_id( $post_id, $statuses );
-		echo '<h2>' . __( 'Booking : ', 'text-domain' ) . '</h2>';
-		if ( is_array( $orders ) && count( $orders ) > 0 ) { 
-			echo '<ul>';
-			foreach ( $orders as $key=>$value ) { 
-				echo '<li>';
-				echo esc_attr($value);
-				echo '</li>';
+		//$statuses = array( 'wc-completed', 'wc-processing', 'wc-on-hold' );
+		$statuses = array( 'wc-completed' );
+		$order_ids = self::get_orders_ids_by_product_id( $post_id, $statuses );
+		if ( is_array( $order_ids ) && count( $order_ids ) > 0 ) { 
+			echo '<table>';
+			foreach ( $order_ids as $order_id ) {
+				$order = wc_get_order( $order_id );
+				$email = '';
+				// Iterating though each order item
+				foreach( $order->get_items() as $item_id => $line_item ) {
+					if ($line_item->get_product_id()==$post_id) {
+						// Get the vendor ID
+						$vendor_id = get_post_field( 'post_author', $line_item->get_product_id());
+						$vendor = get_userdata( $vendor_id );
+						$email = $vendor->user_email;	
+						// Avoiding duplicates (if many items with many emails)
+						// or an existing email in the recipient
+						if( ! in_array( $email, $additional_recipients ) && strpos( $recipient, $email ) === false )
+							$additional_recipients[] = $email;
+					}
+				}
+	
+				echo '<tr>';
+				echo '<td>'.esc_attr($order_id).'</td>';
+				echo '<td>'.esc_attr($order->get_customer_id()).'</td>';
+				echo '<td>'.$email.'</td>';
+				echo '</tr>';
 			}
-			echo '</ul>';
+			echo '</table>';
 		} else { 
-			echo __( 'No Orders found.', 'text-domain' );
+			echo __( 'No Completed Orders found.', 'text-domain' );
 		}
 	}
 
@@ -788,7 +801,7 @@ function get_orders_ids_by_product_id( $product_id, $order_status = array( 'wc-c
 	/**
  	* Add a booking sub_tab
  	*/
-	 function booking_sub_tab() {
+	function booking_sub_tab() {
 
 		// Set the orders statuses
 		$tabs = array();
