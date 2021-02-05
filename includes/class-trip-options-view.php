@@ -836,12 +836,10 @@ function get_orders_by_product_id( $product_id, $order_status = array( 'wc-compl
 
 			// Iterating though each order item
 			foreach( $order->get_items() as $order_item ) {
-				if ($order_item->get_product_id()==$post_id) {
-
+				if ($order_item->get_product_id()==$product_id) {
 					$order_item_id = $order_item->get_id();
 					$quantity = $order_item->get_quantity();
 					$itinerary_date = $order_item->get_meta( 'itinerary_date', true );
-
 				}
 			}
 
