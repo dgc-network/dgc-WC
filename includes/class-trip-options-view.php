@@ -619,6 +619,10 @@ class Trip_Options_View {
 
 		/*----- Tab Links -----*/
 		/* Clearfix */
+		.tab-links {
+			list-style-type:none;
+		}
+
 		.tab-links:after {
 			display:block;
 			clear:both;
@@ -692,8 +696,31 @@ class Trip_Options_View {
 		global $post;
 		$post_id = $post->ID;
 		// Set the orders statuses
-		//$statuses = array( 'wc-completed', 'wc-processing', 'wc-on-hold' );
 		$statuses = array( 'wc-completed' );
+
+		//$orders_ids = get_orders_ids_by_product_id( 37, $statuses );
+		$orders = self::get_orders_ids_by_product_id( $post_id, $statuses );
+		echo '<h2>' . __( 'Booking : ', 'text-domain' ) . '</h2>';
+		if ( is_array( $orders ) && count( $orders ) > 0 ) { 
+			echo '<ul>';
+			foreach ( $orders as $key=>$value ) { 
+				echo '<li>';
+				echo esc_attr($value);
+				echo '</li>';
+			}
+			echo '</ul>';
+		} else { 
+			echo __( 'No Orders found.', 'text-domain' );
+		}
+	}
+
+	function processing_tab_content() {
+
+		global $post;
+		$post_id = $post->ID;
+		// Set the orders statuses
+		//$statuses = array( 'wc-completed', 'wc-processing', 'wc-on-hold' );
+		$statuses = array( 'wc-processing' );
 		$order_ids = self::get_orders_ids_by_product_id( $post_id, $statuses );
 		if ( is_array( $order_ids ) && count( $order_ids ) > 0 ) { 
 			echo '<table>';
@@ -723,29 +750,6 @@ class Trip_Options_View {
 			echo '</table>';
 		} else { 
 			echo __( 'No Completed Orders found.', 'text-domain' );
-		}
-	}
-
-	function processing_tab_content() {
-
-		global $post;
-		$post_id = $post->ID;
-		// Set the orders statuses
-		$statuses = array( 'wc-processing' );
-
-		//$orders_ids = get_orders_ids_by_product_id( 37, $statuses );
-		$orders = self::get_orders_ids_by_product_id( $post_id, $statuses );
-		echo '<h2>' . __( 'Booking : ', 'text-domain' ) . '</h2>';
-		if ( is_array( $orders ) && count( $orders ) > 0 ) { 
-			echo '<ul>';
-			foreach ( $orders as $key=>$value ) { 
-				echo '<li>';
-				echo esc_attr($value);
-				echo '</li>';
-			}
-			echo '</ul>';
-		} else { 
-			echo __( 'No Orders found.', 'text-domain' );
 		}
 	}
 
