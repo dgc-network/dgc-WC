@@ -803,7 +803,7 @@ function get_orders_by_product_id( $product_id, $order_status = array( 'wc-compl
 	
     global $wpdb;
 
-    $$order_ids = $wpdb->get_col("
+    $order_ids = $wpdb->get_col("
         SELECT order_items.order_id
         FROM {$wpdb->prefix}woocommerce_order_items as order_items
         LEFT JOIN {$wpdb->prefix}woocommerce_order_itemmeta as order_item_meta ON order_items.order_item_id = order_item_meta.order_item_id
