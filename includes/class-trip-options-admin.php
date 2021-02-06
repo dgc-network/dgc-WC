@@ -5,7 +5,8 @@ class Trip_Options_Admin {
 	 * Constructor.
 	 */
 	function __construct() {
-		add_action( 'woocommerce_process_product_meta', array( __CLASS__, 'save_woocommerce_product_custom_fields' ) );
+		add_action( 'admin_head', array( __CLASS__, 'dgc_custom_script' ) );
+		add_action( 'admin_head', array( __CLASS__, 'dgc_custom_style' ) );
 
 		add_filter( 'product_type_options', array( __CLASS__, 'add_remove_product_options' ) );
 		add_filter( 'woocommerce_product_data_tabs', array( __CLASS__, 'custom_product_data_tabs' ), 10, 1 );
@@ -14,9 +15,9 @@ class Trip_Options_Admin {
 		add_action( 'woocommerce_product_data_panels', array( __CLASS__, 'trip_options_callback_itinerary' ) );
 		add_action( 'woocommerce_product_data_panels', array( __CLASS__, 'trip_options_callback_includes_excludes' ) );
 		add_action( 'woocommerce_product_data_panels', array( __CLASS__, 'trip_options_callback_faqs' ) );
+		add_action( 'woocommerce_product_data_panels', array( __CLASS__, 'trip_options_callback_tabs' ) );
 
-		add_action( 'admin_head', array( __CLASS__, 'dgc_custom_script' ) );
-		add_action( 'admin_head', array( __CLASS__, 'dgc_custom_style' ) );
+		add_action( 'woocommerce_process_product_meta', array( __CLASS__, 'save_woocommerce_product_custom_fields' ) );
 
 		add_action( 'wp_ajax_get_categories', array( __CLASS__, 'get_categories' ) );
 		add_action( 'wp_ajax_nopriv_get_categories', array( __CLASS__, 'get_categories' ) );
@@ -137,6 +138,14 @@ class Trip_Options_Admin {
 		$tabs['faq'] = array(
         	'label'   =>  __( 'FAQs', 'text-domain' ),
         	'target'  =>  'faq_panel',
+        	'priority' => 60,
+        	'class'   => array( 'show_if_itinerary')
+    	);
+
+		// add "TABs" tab
+		$tabs['tab'] = array(
+        	'label'   =>  __( 'TABs', 'text-domain' ),
+        	'target'  =>  'tab_panel',
         	'priority' => 60,
         	'class'   => array( 'show_if_itinerary')
     	);
@@ -570,7 +579,7 @@ class Trip_Options_Admin {
 	}
 
 	/**
-	 * Product Categories List for AJAX
+	 * Product Categories List by AJAX
 	 */
 	function get_categories() {
 		$args = array(
@@ -596,7 +605,7 @@ class Trip_Options_Admin {
 	}
 		
 	/**
-	 * Product List by Category for AJAX
+	 * Product List by Category by AJAX
 	 */
 	function get_product_by_category() {
 
@@ -933,69 +942,6 @@ wp_enqueue_script( 'some_handle' );
 		<?php		
 	}
 
-	/*
-	 * Updates a post meta field based on the given post ID.
-	 */
-	function save_woocommerce_product_custom_fields($post_id) {
-		$product = wc_get_product($post_id);
-		$is_itinerary = isset( $_POST['_itinerary'] ) ? 'yes' : 'no';
-		$product->update_meta_data('_itinerary', sanitize_text_field($is_itinerary));
-
-		$itineraries = array();
-		$xx = 0;
-		for ($x = 0; $x < 100; $x++) {
-			if ($_POST['itinerary_item_label-' . $x]!="" && $_POST['itinerary_item_label-' . $x] != DEFAULT_ITINERARY_LABEL) {
-				$itineraries[$xx]['label'] = sanitize_text_field( $_POST['itinerary_item_label-' . $x] );
-				$itineraries[$xx]['title'] = sanitize_text_field( $_POST['itinerary_item_title-' . $x] );
-				$itineraries[$xx]['date'] = sanitize_text_field( $_POST['itinerary_item_date-' . $x] );
-				//$itineraries[$xx]['time'] = sanitize_text_field( $_POST['itinerary_item_time-' . $x] );
-				$itineraries[$xx]['desc'] = sanitize_text_field( $_POST['itinerary_item_desc-' . $x] );
-				$yy = 0;
-				for ($y = 0; $y < 100; $y++) {
-					if ($_POST['itinerary_item_assignment-' . $x . '-category-' . $y]!="") {
-						$itineraries[$xx]['assignment'][$yy]['category'] = sanitize_text_field( $_POST['itinerary_item_assignment-' . $x . '-category-' . $y] );
-					}
-					if ($_POST['itinerary_item_assignment-' . $x . '-resource-' . $y]!="") {
-						$itineraries[$xx]['assignment'][$yy]['resource'] = sanitize_text_field( $_POST['itinerary_item_assignment-' . $x . '-resource-' . $y] );
-					}
-					$yy++;
-				}
-				$xx++;
-			}
-		}
-		//$product->update_meta_data( 'wp_travel_trip_itinerary_data', $itineraries );
-		update_post_meta( $post_id, 'wp_travel_trip_itinerary_data', $itineraries );
-
-		if (!empty($_POST['wp_travel_trip_include'])) {
-			$includes = sanitize_text_field( $_POST['wp_travel_trip_include'] );
-			$product->update_meta_data( 'wp_travel_trip_include', $includes );
-		}
-
-		if (!empty($_POST['wp_travel_trip_exclude'])) {
-			$excludes = sanitize_text_field( $_POST['wp_travel_trip_exclude'] );
-			$product->update_meta_data( 'wp_travel_trip_exclude', $excludes );
-		}
-
-		$faqs = array();
-		$xx = 0;
-		for ($x = 0; $x < 100; $x++) {
-			if ($_POST['faq_item_question-' . $x] != "" && $_POST['faq_item_question-' . $x] != DEFAULT_FAQ_QUESTION) {
-				$faqs['question'][$xx] = sanitize_text_field( $_POST['faq_item_question-' . $x] );
-				$faqs['answer'][$xx] = sanitize_text_field( $_POST['faq_item_answer-' . $x] );
-				$xx++;
-			}
-		}
-		$question = isset( $faqs['question'] ) ? $faqs['question'] : array();
-		$answer   = isset( $faqs['answer'] ) ? $faqs['answer'] : array();
-		//$product->update_meta_data( 'wp_travel_faq_question', $question );
-		//$product->update_meta_data( 'wp_travel_faq_answer', $answer );
-		update_post_meta( $post_id, 'wp_travel_faq_question', $question );
-		update_post_meta( $post_id, 'wp_travel_faq_answer', $answer );
-
-		$product->save();
-	}		
-	//add_action('woocommerce_process_product_meta', 'save_woocommerce_product_custom_fields');
-
 	/**
 	 * Tabs metabox callback
 	 */
@@ -1081,6 +1027,69 @@ wp_enqueue_script( 'some_handle' );
   		</style>
 		<?php
 	}
+
+	/*
+	 * Updates a post meta field based on the given post ID.
+	 */
+	function save_woocommerce_product_custom_fields($post_id) {
+		$product = wc_get_product($post_id);
+		$is_itinerary = isset( $_POST['_itinerary'] ) ? 'yes' : 'no';
+		$product->update_meta_data('_itinerary', sanitize_text_field($is_itinerary));
+
+		$itineraries = array();
+		$xx = 0;
+		for ($x = 0; $x < 100; $x++) {
+			if ($_POST['itinerary_item_label-' . $x]!="" && $_POST['itinerary_item_label-' . $x] != DEFAULT_ITINERARY_LABEL) {
+				$itineraries[$xx]['label'] = sanitize_text_field( $_POST['itinerary_item_label-' . $x] );
+				$itineraries[$xx]['title'] = sanitize_text_field( $_POST['itinerary_item_title-' . $x] );
+				$itineraries[$xx]['date'] = sanitize_text_field( $_POST['itinerary_item_date-' . $x] );
+				//$itineraries[$xx]['time'] = sanitize_text_field( $_POST['itinerary_item_time-' . $x] );
+				$itineraries[$xx]['desc'] = sanitize_text_field( $_POST['itinerary_item_desc-' . $x] );
+				$yy = 0;
+				for ($y = 0; $y < 100; $y++) {
+					if ($_POST['itinerary_item_assignment-' . $x . '-category-' . $y]!="") {
+						$itineraries[$xx]['assignment'][$yy]['category'] = sanitize_text_field( $_POST['itinerary_item_assignment-' . $x . '-category-' . $y] );
+					}
+					if ($_POST['itinerary_item_assignment-' . $x . '-resource-' . $y]!="") {
+						$itineraries[$xx]['assignment'][$yy]['resource'] = sanitize_text_field( $_POST['itinerary_item_assignment-' . $x . '-resource-' . $y] );
+					}
+					$yy++;
+				}
+				$xx++;
+			}
+		}
+		//$product->update_meta_data( 'wp_travel_trip_itinerary_data', $itineraries );
+		update_post_meta( $post_id, 'wp_travel_trip_itinerary_data', $itineraries );
+
+		if (!empty($_POST['wp_travel_trip_include'])) {
+			$includes = sanitize_text_field( $_POST['wp_travel_trip_include'] );
+			$product->update_meta_data( 'wp_travel_trip_include', $includes );
+		}
+
+		if (!empty($_POST['wp_travel_trip_exclude'])) {
+			$excludes = sanitize_text_field( $_POST['wp_travel_trip_exclude'] );
+			$product->update_meta_data( 'wp_travel_trip_exclude', $excludes );
+		}
+
+		$faqs = array();
+		$xx = 0;
+		for ($x = 0; $x < 100; $x++) {
+			if ($_POST['faq_item_question-' . $x] != "" && $_POST['faq_item_question-' . $x] != DEFAULT_FAQ_QUESTION) {
+				$faqs['question'][$xx] = sanitize_text_field( $_POST['faq_item_question-' . $x] );
+				$faqs['answer'][$xx] = sanitize_text_field( $_POST['faq_item_answer-' . $x] );
+				$xx++;
+			}
+		}
+		$question = isset( $faqs['question'] ) ? $faqs['question'] : array();
+		$answer   = isset( $faqs['answer'] ) ? $faqs['answer'] : array();
+		//$product->update_meta_data( 'wp_travel_faq_question', $question );
+		//$product->update_meta_data( 'wp_travel_faq_answer', $answer );
+		update_post_meta( $post_id, 'wp_travel_faq_question', $question );
+		update_post_meta( $post_id, 'wp_travel_faq_answer', $answer );
+
+		$product->save();
+	}		
+	//add_action('woocommerce_process_product_meta', 'save_woocommerce_product_custom_fields');
 
 	/**
 	 * Add a new meta box for product
