@@ -1024,6 +1024,7 @@ function wp_travel_get_default_trip_tabs( $is_show_in_menu_query = false, $front
 			'use_global'   => 'yes',
 			'show_in_menu' => 'yes',
 		),
+/*		
 		'booking'       => array(
 			'label'        => __( 'Booking', 'text-domain' ),
 			'label_class'  => 'wp-travel-booking-form',
@@ -1031,6 +1032,7 @@ function wp_travel_get_default_trip_tabs( $is_show_in_menu_query = false, $front
 			'use_global'   => 'yes',
 			'show_in_menu' => 'yes',
 		),
+*/		
 		'faq'           => array(
 			'label'        => __( 'FAQ', 'text-domain' ),
 			'label_class'  => '',

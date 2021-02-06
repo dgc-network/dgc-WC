@@ -123,7 +123,7 @@ class Trip_Options_Admin {
         	'label'   =>  __( 'Itinerary', 'text-domain' ),
         	'target'  =>  'itinerary_panel',
         	'priority' => 60,
-        	'class'   => array( 'show_if_itinerary')
+        	'class'   => array( 'show_if_itinerary' )
     	);
 
 		// add "Includes/Excludes" tab
@@ -131,7 +131,7 @@ class Trip_Options_Admin {
         	'label'   =>  __( 'Includes/Excludes', 'text-domain' ),
         	'target'  =>  'include_exclude_panel',
         	'priority' => 60,
-        	'class'   => array( 'show_if_itinerary')
+        	'class'   => array( 'show_if_itinerary' )
     	);
 
 		// add "FAQs" tab
@@ -139,7 +139,7 @@ class Trip_Options_Admin {
         	'label'   =>  __( 'FAQs', 'text-domain' ),
         	'target'  =>  'faq_panel',
         	'priority' => 60,
-        	'class'   => array( 'show_if_itinerary')
+        	'class'   => array( 'show_if_itinerary' )
     	);
 
 		// add "TABs" tab
@@ -147,7 +147,7 @@ class Trip_Options_Admin {
         	'label'   =>  __( 'TABs', 'text-domain' ),
         	'target'  =>  'tab_panel',
         	'priority' => 60,
-        	'class'   => array( 'show_if_itinerary')
+        	'class'   => array( 'show_if_itinerary' )
     	);
 
 		return $tabs;
