@@ -152,8 +152,7 @@ class Trip_Options_View {
 	function custom_after_single_product_title() { 
 
 		global $post;
-		$post_id = $post->ID;
-		$is_itinerary = get_post_meta( $post_id, '_itinerary', true );
+		$is_itinerary = get_post_meta( $post->ID, '_itinerary', true );
 
 		if ($is_itinerary=='yes') {
 			$trip_code = get_trip_code( $post->ID );
@@ -166,9 +165,8 @@ class Trip_Options_View {
 	function custom_before_add_to_cart_button() {
 
 		global $post;
-		$post_id = $post->ID;
-		$is_itinerary = get_post_meta( $post_id, '_itinerary', true );
-		$itineraries = get_post_meta( $post_id, 'wp_travel_trip_itinerary_data', true );
+		$is_itinerary = get_post_meta( $post->ID, '_itinerary', true );
+		$itineraries = get_post_meta( $post->ID, 'wp_travel_trip_itinerary_data', true );
 
 		$itinerary_date_array = array();
 		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) {
@@ -251,7 +249,6 @@ class Trip_Options_View {
 	/*
 	 * Add data to cart item
 	 */
-	//add_filter( 'woocommerce_add_cart_item_data', 'custom_add_cart_item_data', 25, 2 );
 	function custom_add_cart_item_data( $cart_item_data, $product_id ) {
 		$post_id = $product_id;
 		$is_itinerary = get_post_meta( $post_id, '_itinerary', true );
@@ -273,7 +270,6 @@ class Trip_Options_View {
 	/*
 	 * Display custom data on cart and checkout page.
 	 */
-	//add_filter( 'woocommerce_get_item_data', 'custom_get_item_data' , 25, 2 );
 	function custom_get_item_data ( $cart_data, $cart_item ) {
 
 		if( ! empty( $cart_item['custom_data'] ) ){
@@ -352,7 +348,7 @@ class Trip_Options_View {
 
 	function create_purchase_order( $customer_id, $product_id, $quantity, $itinerary_date ) {
 	
-		global $woocommerce;
+		//global $woocommerce;
   
 	  	// Get an instance of the WC_Customer Object
 	  	$customer = new WC_Customer( $customer_id );
@@ -376,17 +372,11 @@ class Trip_Options_View {
 		$available_gateways = WC()->payment_gateways->get_available_payment_gateways();
 		$result = $available_gateways[ 'dgc-payment' ]->process_payment( $order->id );
 	
-		// Redirect to success/confirmation/payment page
-		if ( $result['result'] == 'success' ) {
-	
+		if ( $result['result'] == 'success' ) {	
 			$result = apply_filters( 'woocommerce_payment_successful_result', $result, $order->id );
-	
-			//wp_redirect( $result['redirect'] );
-			//exit;
 		}
-
 	}
-  
+/*  
 	//add_action('woocommerce_checkout_process', 'custom_checkout_process');
 	function custom_checkout_process() {
 	
@@ -417,10 +407,8 @@ class Trip_Options_View {
 				$variation_array = $cart_item['variation']; // variation attributes + values
 			}
 		}
-
-	  	//$order->update_status( 'Completed', 'Imported order', TRUE );  
 	}
-	
+*/	
 
 	//add_action( 'woocommerce_thankyou', 'wc_auto_complete_paid_order', 20, 1 );
 	function wc_auto_complete_paid_order( $order_id ) {
@@ -471,17 +459,15 @@ class Trip_Options_View {
 	}
 
 	/**
- 	* Add a custom product data tab
- 	*/
-	 function custom_product_tab() {
+ 	 * Add a custom product data tab
+ 	 */
+	function custom_product_tab() {
 
 		global $post;
-		$post_id = $post->ID;
-		$is_itinerary = get_post_meta( $post_id, '_itinerary', true );
+		$is_itinerary = get_post_meta( $post->ID, '_itinerary', true );
 		if ($is_itinerary=='yes') {
 			$tabs = array();
-			$post_id = get_the_ID();
-			$trip_tabs = wp_travel_get_admin_trip_tabs( $post_id );
+			$trip_tabs = wp_travel_get_admin_trip_tabs( $post->ID );
 			if ( is_array( $trip_tabs ) && count( $trip_tabs ) > 0 ) {
 				foreach ( $trip_tabs as $key=>$value ) {
 					$tabs[$key] = array(
@@ -498,15 +484,10 @@ class Trip_Options_View {
 	function itinerary_tab_content() {
 
 		global $post;
-		$post_id = $post->ID;
-		$itineraries = get_post_meta( $post_id, 'wp_travel_trip_itinerary_data', true );
-		echo '<h2>';
-		esc_html_e( 'Itinerary', 'text-domain' );
-		echo '</h2>';
-
-		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) {
-			?>
-			<ul><?php
+		$itineraries = get_post_meta( $post->ID, 'wp_travel_trip_itinerary_data', true );
+		echo '<h2>' . __( 'Itinerary', 'text-domain' ) . '</h2>';
+		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) {			
+			echo '<ul>';
 			foreach ( $itineraries as $x=>$itinerary ) {
 				echo '<li class="itinerary-li">';
 				if ( empty($itineraries[$x]['date']) ) {
@@ -515,44 +496,32 @@ class Trip_Options_View {
 					echo $itineraries[$x]['date'] . '<br>';
 				}
 				echo esc_attr( $itineraries[$x]['label'] ) . ', ' . esc_attr( $itineraries[$x]['title'] );
-				echo '<br>';
-				echo esc_attr( $itineraries[$x]['desc'] );
+				echo '<p>' . esc_attr( $itineraries[$x]['desc'] ) . '</p>';
 				echo '</li>';
-			} ?>
-			</ul><?php
+			}
+			echo '</ul>';
 		} else {
 			echo __( 'No Itineraries found.', 'text-domain' );
-			?>
-			<span><?php esc_html_e( 'No Itineraries found.', 'text-domain' ); ?></span><?php
 		}
 	}
 
 	function trip_includes_tab_content() {
 
 		global $post;
-		$post_id = $post->ID;
-		$trip_include = get_post_meta( $post_id, 'wp_travel_trip_include', true );
-		echo '<h2>';
-		esc_html_e( 'Trip Includes', 'text-domain' );
-		echo '</h2>';
-		//echo '<br>';
+		$trip_include = get_post_meta( $post->ID, 'wp_travel_trip_include', true );
+		echo '<h2>' . __( 'Trip Includes', 'text-domain' ) . '</h2>';
 		if (!empty($trip_include)) {
 			echo esc_attr( $trip_include );
 		} else {
 			esc_html_e( 'No Trip Include found.', 'text-domain' );
 		}
-		//echo '<br>';
 	}	
 
 	function trip_excludes_tab_content() {
 
 		global $post;
-		$post_id = $post->ID;
-		$trip_exclude = get_post_meta( $post_id, 'wp_travel_trip_exclude', true );
-		echo '<h2>';
-		esc_html_e( 'Trip Excludes', 'text-domain' );
-		echo '</h2>';
-		//echo '<br>';
+		$trip_exclude = get_post_meta( $post->ID, 'wp_travel_trip_exclude', true );
+		echo '<h2>' . __( 'Trip Excludes', 'text-domain' ) . '</h2>';
 		if (!empty($trip_exclude)) {
 			echo esc_attr( $trip_exclude );
 		} else {
@@ -563,21 +532,20 @@ class Trip_Options_View {
 	function faq_tab_content() {
 
 		global $post;
-		$post_id = $post->ID;
-		$faqs = wp_travel_get_faqs( $post_id );
-		echo '<h2>';
-		esc_html_e( 'FAQ : ', 'text-domain' );
-		echo '</h2>';
+		$faqs = wp_travel_get_faqs( $post->ID );
+		echo '<h2>' . __( 'FAQ', 'text-domain' ) . '</h2>';
 		if ( is_array( $faqs ) && count( $faqs ) > 0 ) { 
-			?>
-			<ul><?php
-			foreach ( $faqs as $key=>$value ) { ?>
-				<li><?php echo esc_attr( $faqs[$key]['question'] ); ?><br><?php
-				echo esc_attr( $faqs[$key]['answer'] ); ?></li><?php
-			} ?>
-			</ul><?php
-		} else { ?>
-			<span><?php esc_html_e( 'No FAQs found.', 'text-domain' ); ?></span><?php
+			echo '<ul>';
+			foreach ( $faqs as $key=>$value ) {
+				echo '<li>';
+				echo esc_attr( $faqs[$key]['question'] );
+				echo '<br>';
+				echo esc_attr( $faqs[$key]['answer'] );
+				echo '</li>';
+			}
+			echo '</ul>';
+		} else { 
+			echo __( 'No FAQs found.', 'text-domain' );
 		}
 	}
 }
