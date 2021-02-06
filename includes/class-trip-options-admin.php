@@ -561,7 +561,6 @@ class Trip_Options_Admin {
 			#itineraries-ul li button#first-assignment { background:#ffffff; color:blue; border: none; cursor:pointer; text-decoration:underline; }
 			#itineraries-ul li button.add-assignment { font-size:0.7em; color:blue; }
 
-			/*#first-faq { color:blue; text-decoration:underline; cursor:pointer; }*/
 			#first-faq { background:#ffffff; color:blue; border: none; cursor:pointer; text-decoration:underline; }
 			#faqs-ul { list-style-type:none; margin:0; padding:0; width:100%; }
   			#faqs-ul li { background:#f2f2f2; border:1px solid #ccc; margin:0 3px 3px 3px; padding:0.4em; padding-left:1.5em; font-size:1.4em; }
@@ -1000,6 +999,7 @@ wp_enqueue_script( 'some_handle' );
 
 		<script>
 			jQuery(document).ready(function($) {
+/*				
     			$( "#tabs-ul" ).sortable();
 				$( "#tabs-ul" ).disableSelection();
 				$( ".tab-li" ).hide();
@@ -1017,6 +1017,7 @@ wp_enqueue_script( 'some_handle' );
 						$( 'span', element ).text($(this).val());
 					});
 				});
+*/				
 			} );
 		</script>
 	
