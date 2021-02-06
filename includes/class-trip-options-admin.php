@@ -952,7 +952,7 @@ wp_enqueue_script( 'some_handle' );
 		$trip_tabs = wp_travel_get_admin_trip_tabs( $post->ID );
 
 		?>
-		<div id='tabs_panel' class='panel woocommerce_options_panel'>
+		<div id='tab_panel' class='panel woocommerce_options_panel'>
 		<ul id="tabs-ul" style="width:100%" >
 		<?php
 		echo '$post->ID = ' . $post->ID;
