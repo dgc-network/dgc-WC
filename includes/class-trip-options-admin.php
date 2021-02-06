@@ -953,7 +953,6 @@ wp_enqueue_script( 'some_handle' );
 
 		?>
 		<div id='tab_panel' class='panel woocommerce_options_panel'>
-		<ul id="tabs-ul" style="width:100%" >
 		<?php
 		echo '$post->ID = ' . $post->ID;
 		echo '{';
@@ -966,6 +965,9 @@ wp_enqueue_script( 'some_handle' );
 			}
 		echo '}';
 
+		?>
+		<ul id="tabs-ul" style="width:100%" >
+		<?php
 		if ( is_array( $trip_tabs ) && count( $trip_tabs ) > 0 ) {
 			foreach ( $trip_tabs as $key=>$value ) {
 				echo '<li class="tab-li" id="tab-li-' . $key . '"><span class="fas fa-bars">';
