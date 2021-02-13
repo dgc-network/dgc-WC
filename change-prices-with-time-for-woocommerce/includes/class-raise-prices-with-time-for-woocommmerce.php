@@ -72,12 +72,12 @@ if ( ! class_exists( 'Raise_Prices_With_Time_For_Woocommmerce' ) ) {
 
 			$this->plugin_name = 'raise-prices-with-time-for-woocommmerce';
 			$this->version     = '1.7.1';
-
+/*
 			$this->load_dependencies();
 			$this->set_locale();
 			$this->define_admin_hooks();
 			$this->define_public_hooks();
-
+*/
 		}
 
 		/**
