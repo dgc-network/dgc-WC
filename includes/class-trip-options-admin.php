@@ -91,10 +91,10 @@ class Trip_Options_Admin {
 			)
   		);
 
-		$options['itinerary'] = array(
-			'id'            => '_itinerary',
+		$options['trip_options'] = array(
+			'id'            => '_trip_options',
 			'wrapper_class' => 'show_if_simple show_if_variable',
-			'label'         => __( 'Itinerary', 'text-domain' ),
+			'label'         => __( 'Trip Options', 'text-domain' ),
 			'description'   => __( 'Itinerary allow users to put in personalised messages.', 'text-domain' ),
 			'default'       => 'no'
 		);
@@ -123,7 +123,7 @@ class Trip_Options_Admin {
         	'label'   =>  __( 'Itinerary', 'text-domain' ),
         	'target'  =>  'itinerary_panel',
         	'priority' => 60,
-        	'class'   => array( 'show_if_itinerary' )
+        	'class'   => array( 'show_if_trip_options' )
     	);
 
 		// add "Includes/Excludes" tab
@@ -131,7 +131,7 @@ class Trip_Options_Admin {
         	'label'   =>  __( 'Includes/Excludes', 'text-domain' ),
         	'target'  =>  'include_exclude_panel',
         	'priority' => 60,
-        	'class'   => array( 'show_if_itinerary' )
+        	'class'   => array( 'show_if_trip_options' )
     	);
 
 		// add "FAQs" tab
@@ -139,7 +139,7 @@ class Trip_Options_Admin {
         	'label'   =>  __( 'FAQs', 'text-domain' ),
         	'target'  =>  'faq_panel',
         	'priority' => 60,
-        	'class'   => array( 'show_if_itinerary' )
+        	'class'   => array( 'show_if_trip_options' )
     	);
 
 		// add "TABs" tab
@@ -147,7 +147,7 @@ class Trip_Options_Admin {
         	'label'   =>  __( 'TABs', 'text-domain' ),
         	'target'  =>  'tab_panel',
         	'priority' => 60,
-        	'class'   => array( 'show_if_itinerary' )
+        	'class'   => array( 'show_if_trip_options' )
     	);
 
 		return $tabs;
@@ -163,19 +163,19 @@ class Trip_Options_Admin {
 				/*
 				 * Woocommerce Product Data Metabox Options
 				 */
-				$( 'input#_itinerary' ).change( function() {
-					var is_itinerary = $( 'input#_itinerary:checked' ).length;
-					$( '.show_if_itinerary' ).hide();
-					$( '.hide_if_itinerary' ).hide();
+				$( 'input#_trip_options' ).change( function() {
+					var is_trip_options = $( 'input#_trip_options:checked' ).length;
+					$( '.show_if_trip_options' ).hide();
+					$( '.hide_if_trip_options' ).hide();
 
-					if ( is_itinerary ) {
-						$( '.hide_if_itinerary' ).hide();
+					if ( is_trip_options ) {
+						$( '.hide_if_trip_options' ).hide();
 					}
-					if ( is_itinerary ) {
-						$( '.show_if_itinerary' ).show();
+					if ( is_trip_options ) {
+						$( '.show_if_trip_options' ).show();
 					}
 				});
-				$( 'input#_itinerary' ).trigger( 'change' );
+				$( 'input#_trip_options' ).trigger( 'change' );
 
 				/*
 				 * FAQs Tab
@@ -247,7 +247,7 @@ class Trip_Options_Admin {
 				 * Itinerary Tab
 				 */
 					// alerts 'Some string to translate'
-					//alert( object_name.remove_itinerary );
+					//alert( object_name.remove_trip_options );
 
 				var categories = '';
 				$.ajax({
@@ -1038,8 +1038,8 @@ wp_enqueue_script( 'some_handle' );
 	 */
 	function save_woocommerce_product_custom_fields($post_id) {
 		$product = wc_get_product($post_id);
-		$is_itinerary = isset( $_POST['_itinerary'] ) ? 'yes' : 'no';
-		$product->update_meta_data('_itinerary', sanitize_text_field($is_itinerary));
+		$is_trip_options = isset( $_POST['_trip_options'] ) ? 'yes' : 'no';
+		$product->update_meta_data('_trip_options', sanitize_text_field($is_trip_options));
 
 		$itineraries = array();
 		$xx = 0;

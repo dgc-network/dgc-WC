@@ -152,9 +152,9 @@ class Trip_Options_View {
 	function custom_after_single_product_title() { 
 
 		global $post;
-		$is_itinerary = get_post_meta( $post->ID, '_itinerary', true );
+		$is_trip_options = get_post_meta( $post->ID, '_trip_options', true );
 
-		if ($is_itinerary=='yes') {
+		if ($is_trip_options=='yes') {
 			$trip_code = get_trip_code( $post->ID );
 			echo '<div align="left"><h4>';
 			echo __( 'Trip Code : ', 'text-domain' ) . $trip_code;
@@ -165,7 +165,7 @@ class Trip_Options_View {
 	function custom_before_add_to_cart_button() {
 
 		global $post;
-		$is_itinerary = get_post_meta( $post->ID, '_itinerary', true );
+		$is_trip_options = get_post_meta( $post->ID, '_trip_options', true );
 		$itineraries = get_post_meta( $post->ID, 'wp_travel_trip_itinerary_data', true );
 
 		$itinerary_date_array = array();
@@ -185,7 +185,7 @@ class Trip_Options_View {
 			echo '</ul>';
 		} else {
 			echo __( 'Start Date : ', 'text-domain' );
-			if ($is_itinerary=='yes') {
+			if ($is_trip_options=='yes') {
 				echo '<div class="start_date"></div>';
 			} else {
 				echo '<input type="text" style="color:blue; width:fit-content" class="start_date" id="start_date_input" name="start_date_input" />';
@@ -205,7 +205,7 @@ class Trip_Options_View {
 		$product_status = get_post_status($product_id);
 
 		$post_id = $product_id;
-		$is_itinerary = get_post_meta( $post_id, '_itinerary', true );
+		$is_trip_options = get_post_meta( $post_id, '_trip_options', true );
 		$itineraries = get_post_meta( $post_id, 'wp_travel_trip_itinerary_data', true );
 
     	if( !empty( $_POST['itinerary_date_array'] ) ) {
@@ -251,12 +251,12 @@ class Trip_Options_View {
 	 */
 	function custom_add_cart_item_data( $cart_item_data, $product_id ) {
 		$post_id = $product_id;
-		$is_itinerary = get_post_meta( $post_id, '_itinerary', true );
+		$is_itinerary = get_post_meta( $post_id, '_trip_options', true );
 		$itineraries = get_post_meta( $post_id, 'wp_travel_trip_itinerary_data', true );
 
     	// Set the data for the cart item in cart object
     	$data = array() ;
-		$cart_item_data['custom_data']['_itinerary'] = $data['_itinerary'] = $is_itinerary;
+		$cart_item_data['custom_data']['_trip_options'] = $data['_trip_options'] = $is_trip_options;
 		$cart_item_data['custom_data']['itineraries'] = $data['itineraries'] = $itineraries;
 
 		// Add the data to session and generate a unique ID
@@ -279,7 +279,7 @@ class Trip_Options_View {
 				$values .= $itinerary_date.', ';
 			}
 			$values .= '</span>';
-			if( $cart_item['custom_data']['_itinerary']=='yes' ){
+			if( $cart_item['custom_data']['_trip_options']=='yes' ){
 				$values .= '<ul>';
 	        	foreach( $cart_item['custom_data']['itineraries'] as $x => $itinerary ) {
 					$label = $cart_item['custom_data']['itineraries'][$x]['label'];
@@ -464,8 +464,8 @@ class Trip_Options_View {
 	function custom_product_tab() {
 
 		global $post;
-		$is_itinerary = get_post_meta( $post->ID, '_itinerary', true );
-		if ($is_itinerary=='yes') {
+		$is_trip_options = get_post_meta( $post->ID, '_trip_options', true );
+		if ($is_trip_options=='yes') {
 			$tabs = array();
 			$trip_tabs = wp_travel_get_admin_trip_tabs( $post->ID );
 			if ( is_array( $trip_tabs ) && count( $trip_tabs ) > 0 ) {
