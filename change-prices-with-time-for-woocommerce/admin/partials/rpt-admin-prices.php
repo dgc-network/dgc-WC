@@ -131,4 +131,5 @@ woocommerce_wp_checkbox(
 	</table>
  
 	<button type="button" id="rpt_add_row" data-formname="<?php echo $rpt_name; ?>" class="button button-default rpt-add-row"><?php _e( 'Add Time Point', 'rpt-wc' ); ?></button>
+	
 </div>

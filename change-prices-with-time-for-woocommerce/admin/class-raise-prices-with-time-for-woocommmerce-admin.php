@@ -124,7 +124,7 @@ class Raise_Prices_With_Time_For_Woocommmerce_Admin {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/rpt-admin.css', array(), $this->version, 'all' );
+		//wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/rpt-admin.css', array(), $this->version, 'all' );
 
 	}
 
@@ -152,9 +152,9 @@ class Raise_Prices_With_Time_For_Woocommmerce_Admin {
 		 */
 		wp_enqueue_script('jquery-ui-datepicker');
 		 
-		wp_register_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/rpt-admin.js', array( 'jquery' ), $this->version, true );
+		//wp_register_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/rpt-admin.js', array( 'jquery' ), $this->version, true );
 		
-		wp_enqueue_script(  $this->plugin_name );
+		//wp_enqueue_script(  $this->plugin_name );
 		//cpwtfw_fs()->get_upgrade_url()
 	}
 
@@ -193,8 +193,8 @@ class Raise_Prices_With_Time_For_Woocommmerce_Admin {
 		$apply_on_sale  = RPT_WC_Meta::get( $product_object->get_id(), 'rpt_apply_sale' );
 		$use_new_layout = RPT_WC_Meta::get( $product_object->get_id(), 'rpt_new_layout' );
 		$rpt_name      = 'rpt_wc';
-		//include 'partials/rpt-admin-prices.php';
-		//include_once 'partials/js-template.php';
+		include 'partials/rpt-admin-prices.php';
+		include_once 'partials/js-template.php';
 	}
 
 	/**
