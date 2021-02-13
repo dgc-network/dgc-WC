@@ -189,7 +189,7 @@ function get_trip_code( $post_id ) {
 */
 
 /**
- * @package     Change Prices with Time for WooCommerce
+ * package     Change Prices with Time for WooCommerce
  */
 if ( !function_exists( 'cpwtfw_fs' ) ) {
     // Create a helper function for easy SDK access.
