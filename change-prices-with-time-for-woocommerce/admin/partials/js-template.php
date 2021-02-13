@@ -3,7 +3,7 @@
  * JS Template to be used for adding new rows.
  */
 ?>
-<script type="text/html" id="tmpl-rpt_table_row_template">
+</script type="text/html" id="tmpl-rpt_table_row_template">
 		
     <tr>
         <?php do_action( 'rpt_wc_table_td_template_start' ); ?>

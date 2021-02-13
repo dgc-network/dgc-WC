@@ -193,7 +193,7 @@ class Raise_Prices_With_Time_For_Woocommmerce_Admin {
 		$apply_on_sale  = RPT_WC_Meta::get( $product_object->get_id(), 'rpt_apply_sale' );
 		$use_new_layout = RPT_WC_Meta::get( $product_object->get_id(), 'rpt_new_layout' );
 		$rpt_name      = 'rpt_wc';
-		include 'partials/rpt-admin-prices.php';
+		//include 'partials/rpt-admin-prices.php';
 		//include_once 'partials/js-template.php';
 	}
 
