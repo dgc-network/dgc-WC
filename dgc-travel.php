@@ -234,7 +234,7 @@ if ( !function_exists( 'activate_raise_prices_with_time_for_woocommmerce' ) ) {
     function activate_raise_prices_with_time_for_woocommmerce()
     {
         //require_once plugin_dir_path( __FILE__ ) . 'includes/class-raise-prices-with-time-for-woocommmerce-activator.php';
-        require_once dirname( __FILE__ ) . '/change-prices-with-time-for-woocommerce/includes/class-raise-prices-with-time-for-woocommmerce-activator.php';
+        require_once 'change-prices-with-time-for-woocommerce/includes/class-raise-prices-with-time-for-woocommmerce-activator.php';
         Raise_Prices_With_Time_For_Woocommmerce_Activator::activate();
     }
     
@@ -250,7 +250,7 @@ if ( !function_exists( 'deactivate_raise_prices_with_time_for_woocommmerce' ) ) 
     function deactivate_raise_prices_with_time_for_woocommmerce()
     {
         //require_once plugin_dir_path( __FILE__ ) . 'includes/class-raise-prices-with-time-for-woocommmerce-deactivator.php';
-        require_once dirname( __FILE__ ) . '/change-prices-with-time-for-woocommerce/includes/class-raise-prices-with-time-for-woocommmerce-deactivator.php';
+        require_once 'change-prices-with-time-for-woocommerce/includes/class-raise-prices-with-time-for-woocommmerce-deactivator.php';
         Raise_Prices_With_Time_For_Woocommmerce_Deactivator::deactivate();
     }
     
@@ -262,7 +262,7 @@ if ( !function_exists( 'deactivate_raise_prices_with_time_for_woocommmerce' ) ) 
  * admin-specific hooks, and public-facing site hooks.
  */
 //require plugin_dir_path( __FILE__ ) . 'includes/class-raise-prices-with-time-for-woocommmerce.php';
-require dirname( __FILE__ ) . '/change-prices-with-time-for-woocommerce/includes/class-raise-prices-with-time-for-woocommmerce.php';
+require 'change-prices-with-time-for-woocommerce/includes/class-raise-prices-with-time-for-woocommmerce.php';
 
 if ( !function_exists( 'rptwc_add_action_links' ) ) {
     add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'rptwc_add_action_links' );
@@ -300,5 +300,5 @@ if ( !function_exists( 'run_raise_prices_with_time_for_woocommmerce' ) ) {
         $plugin->run();
     }
     
-    run_raise_prices_with_time_for_woocommmerce();
+    //run_raise_prices_with_time_for_woocommmerce();
 }
