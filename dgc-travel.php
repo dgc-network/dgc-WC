@@ -237,7 +237,7 @@ if ( !function_exists( 'activate_raise_prices_with_time_for_woocommmerce' ) ) {
         Raise_Prices_With_Time_For_Woocommmerce_Activator::activate();
     }
     
-    register_activation_hook( __FILE__, 'change-prices-with-time-for-woocommerce/activate_raise_prices_with_time_for_woocommmerce' );
+    register_activation_hook( __FILE__, 'activate_raise_prices_with_time_for_woocommmerce' );
 }
 
 
