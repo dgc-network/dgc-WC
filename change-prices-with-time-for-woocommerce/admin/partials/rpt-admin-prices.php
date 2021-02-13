@@ -131,7 +131,4 @@ woocommerce_wp_checkbox(
 	</table>
  
 	<button type="button" id="rpt_add_row" data-formname="<?php echo $rpt_name; ?>" class="button button-default rpt-add-row"><?php _e( 'Add Time Point', 'rpt-wc' ); ?></button>
-    <?php //if ( ! defined( 'RPT_PREMIUM' ) || ! RPT_PREMIUM || cpwtfw_fs()->is_not_paying() ) { ?>
-        <a class="rpt-upgrade-link" target="_blank" href="<?php //echo esc_url( cpwtfw_fs()->get_upgrade_url() ); ?>"><?php esc_html_e( 'Bulk timed prices & Variations? Upgrade.', 'rpt-wc' ); ?></a>
-    <?php //} ?>
 </div>
