@@ -119,14 +119,14 @@ if ( ! class_exists( 'Raise_Prices_With_Time_For_Woocommmerce' ) ) {
 			 * The class responsible for defining all actions that occur in the admin area.
 			 */
 			//require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-raise-prices-with-time-for-woocommmerce-admin.php';
-			require_once dirname( __FILE__ ) . '/admin/class-raise-prices-with-time-for-woocommmerce-admin.php';
+			require_once dirname( __FILE__, 2 ) . '/admin/class-raise-prices-with-time-for-woocommmerce-admin.php';
 
 			/**
 			 * The class responsible for defining all actions that occur in the public-facing
 			 * side of the site.
 			 */
 			//require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-raise-prices-with-time-for-woocommmerce-public.php';
-			require_once dirname( __FILE__ ) . '/public/class-raise-prices-with-time-for-woocommmerce-public.php';
+			require_once dirname( __FILE__, 2 ) . '/public/class-raise-prices-with-time-for-woocommmerce-public.php';
 
 			$this->loader = new Raise_Prices_With_Time_For_Woocommmerce_Loader();
 		}
