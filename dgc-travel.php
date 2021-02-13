@@ -266,7 +266,6 @@ if ( !function_exists( 'deactivate_raise_prices_with_time_for_woocommmerce' ) ) 
 require 'change-prices-with-time-for-woocommerce/includes/class-raise-prices-with-time-for-woocommmerce.php';
 
 if ( !function_exists( 'rptwc_add_action_links' ) ) {
-    add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'rptwc_add_action_links' );
     /**
      * Adding Link for Documentation
      *
@@ -282,6 +281,7 @@ if ( !function_exists( 'rptwc_add_action_links' ) ) {
         //}
         return array_merge( $links, $mylinks );
     }
+    //add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'rptwc_add_action_links' );
 }
 
 if ( !function_exists( 'run_raise_prices_with_time_for_woocommmerce' ) ) {
