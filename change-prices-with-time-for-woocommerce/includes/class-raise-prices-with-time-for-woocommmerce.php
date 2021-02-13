@@ -141,11 +141,11 @@ if ( ! class_exists( 'Raise_Prices_With_Time_For_Woocommmerce' ) ) {
 		 * @access   private
 		 */
 		private function set_locale() {
-
+/*
 			$plugin_i18n = new Raise_Prices_With_Time_For_Woocommmerce_i18n();
 
 			$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
-
+*/
 		}
 
 		/**
@@ -159,13 +159,13 @@ if ( ! class_exists( 'Raise_Prices_With_Time_For_Woocommmerce' ) ) {
 
 			$plugin_admin = new Raise_Prices_With_Time_For_Woocommmerce_Admin( $this->get_plugin_name(), $this->get_version() );
 
-			//$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-			//$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-			//$this->loader->add_action( 'woocommerce_product_options_pricing', $plugin_admin, 'wc_product_prices' );
-			//$this->loader->add_action( 'woocommerce_process_product_meta', $plugin_admin, 'wc_product_save', 99, 2 );
+			$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
+			$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+			$this->loader->add_action( 'woocommerce_product_options_pricing', $plugin_admin, 'wc_product_prices' );
+			$this->loader->add_action( 'woocommerce_process_product_meta', $plugin_admin, 'wc_product_save', 99, 2 );
 
-			//$this->loader->add_filter( 'woocommerce_get_sections_products', $plugin_admin, 'add_settings_section' );
-			//$this->loader->add_filter( 'woocommerce_get_settings_products', $plugin_admin, 'add_settings', 20, 2 );
+			$this->loader->add_filter( 'woocommerce_get_sections_products', $plugin_admin, 'add_settings_section' );
+			$this->loader->add_filter( 'woocommerce_get_settings_products', $plugin_admin, 'add_settings', 20, 2 );
 		}
 
 
