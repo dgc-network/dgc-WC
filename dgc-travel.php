@@ -220,7 +220,7 @@ if ( !function_exists( 'cpwtfw_fs' ) ) {
     }
     
     // Init Freemius.
-    cpwtfw_fs();
+    //cpwtfw_fs();
     // Signal that SDK was initiated.
     do_action( 'cpwtfw_fs_loaded' );
 }
