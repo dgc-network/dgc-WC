@@ -262,7 +262,7 @@ if ( !function_exists( 'deactivate_raise_prices_with_time_for_woocommmerce' ) ) 
  * admin-specific hooks, and public-facing site hooks.
  */
 //require plugin_dir_path( __FILE__ ) . 'includes/class-raise-prices-with-time-for-woocommmerce.php';
-require 'change-prices-with-time-for-woocommerce/includes/class-raise-prices-with-time-for-woocommmerce.php';
+//require 'change-prices-with-time-for-woocommerce/includes/class-raise-prices-with-time-for-woocommmerce.php';
 
 if ( !function_exists( 'rptwc_add_action_links' ) ) {
     add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'rptwc_add_action_links' );
