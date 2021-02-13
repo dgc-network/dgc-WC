@@ -277,9 +277,9 @@ if ( !function_exists( 'rptwc_add_action_links' ) ) {
     function rptwc_add_action_links( $links )
     {
         $mylinks = array( '<a target="_blank" href="https://www.ibenic.com/change-prices-with-time-for-woocommerce">' . __( 'Documentation', 'rpt-wc' ) . '</a>' );
-        if ( !defined( 'RPT_PREMIUM' ) || !RPT_PREMIUM || cpwtfw_fs()->is_not_paying() ) {
+        //if ( !defined( 'RPT_PREMIUM' ) || !RPT_PREMIUM || cpwtfw_fs()->is_not_paying() ) {
             //$mylinks[] = '<a target="_blank" href="' . cpwtfw_fs()->get_upgrade_url() . '">' . __( 'Upgrade', 'rpt-wc' ) . '</a>';
-        }
+        //}
         return array_merge( $links, $mylinks );
     }
 }
