@@ -125,7 +125,7 @@ class Raise_Prices_With_Time_For_Woocommmerce_Admin {
 		 */
 
 		//wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/rpt-admin.css', array(), $this->version, 'all' );
-		wp_enqueue_style( $this->plugin_name, 'css/rpt-admin.css', array(), $this->version, 'all' );
+		//wp_enqueue_style( $this->plugin_name, 'css/rpt-admin.css', array(), $this->version, 'all' );
 
 	}
 
@@ -154,9 +154,9 @@ class Raise_Prices_With_Time_For_Woocommmerce_Admin {
 		wp_enqueue_script('jquery-ui-datepicker');
 		 
 		//wp_register_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/rpt-admin.js', array( 'jquery' ), $this->version, true );
-		wp_register_script( $this->plugin_name, 'js/rpt-admin.js', array( 'jquery' ), $this->version, true );
+		//wp_register_script( $this->plugin_name, 'js/rpt-admin.js', array( 'jquery' ), $this->version, true );
 		
-		wp_enqueue_script(  $this->plugin_name );
+		//wp_enqueue_script(  $this->plugin_name );
 		//cpwtfw_fs()->get_upgrade_url()
 	}
 
