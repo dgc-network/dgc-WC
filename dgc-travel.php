@@ -297,8 +297,8 @@ if ( !function_exists( 'run_raise_prices_with_time_for_woocommmerce' ) ) {
     function run_raise_prices_with_time_for_woocommmerce()
     {
         $plugin = new Raise_Prices_With_Time_For_Woocommmerce();
-        //$plugin->run();
+        $plugin->run();
     }
     
-    run_raise_prices_with_time_for_woocommmerce();
+    //run_raise_prices_with_time_for_woocommmerce();
 }
