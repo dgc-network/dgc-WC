@@ -175,7 +175,7 @@ define( "WPT_PLUGIN_FILE_NAME", __FILE__ ); //aDDED TO NEW VERSION
 register_activation_hook(__FILE__, array( 'WOO_Product_Table','install' ) );
 register_deactivation_hook( __FILE__, array( 'WOO_Product_Table','uninstall' ) );
 
-
+/*
 function get_trip_code( $post_id ) {
     if ( ! $post_id ) {
         global $post;
@@ -186,6 +186,7 @@ function get_trip_code( $post_id ) {
     }
     return apply_filters( 'wp_travel_trip_code', 'WT-CODE ' . $post_id, $post_id );
 }
+*/
 
 /**
  * @package     Change Prices with Time for WooCommerce
@@ -238,7 +239,7 @@ if ( !function_exists( 'activate_raise_prices_with_time_for_woocommmerce' ) ) {
         Raise_Prices_With_Time_For_Woocommmerce_Activator::activate();
     }
     
-    register_activation_hook( __FILE__, 'activate_raise_prices_with_time_for_woocommmerce' );
+    //register_activation_hook( __FILE__, 'activate_raise_prices_with_time_for_woocommmerce' );
 }
 
 
@@ -254,7 +255,7 @@ if ( !function_exists( 'deactivate_raise_prices_with_time_for_woocommmerce' ) ) 
         Raise_Prices_With_Time_For_Woocommmerce_Deactivator::deactivate();
     }
     
-    register_deactivation_hook( __FILE__, 'deactivate_raise_prices_with_time_for_woocommmerce' );
+    //register_deactivation_hook( __FILE__, 'deactivate_raise_prices_with_time_for_woocommmerce' );
 }
 
 /**
@@ -281,7 +282,6 @@ if ( !function_exists( 'rptwc_add_action_links' ) ) {
         }
         return array_merge( $links, $mylinks );
     }
-
 }
 
 if ( !function_exists( 'run_raise_prices_with_time_for_woocommmerce' ) ) {
