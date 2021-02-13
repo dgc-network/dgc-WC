@@ -239,7 +239,7 @@ if ( !function_exists( 'activate_raise_prices_with_time_for_woocommmerce' ) ) {
         Raise_Prices_With_Time_For_Woocommmerce_Activator::activate();
     }
     
-    register_activation_hook( __FILE__, 'activate_raise_prices_with_time_for_woocommmerce' );
+    //register_activation_hook( __FILE__, 'activate_raise_prices_with_time_for_woocommmerce' );
 }
 
 
@@ -255,7 +255,7 @@ if ( !function_exists( 'deactivate_raise_prices_with_time_for_woocommmerce' ) ) 
         Raise_Prices_With_Time_For_Woocommmerce_Deactivator::deactivate();
     }
     
-    register_deactivation_hook( __FILE__, 'deactivate_raise_prices_with_time_for_woocommmerce' );
+    //register_deactivation_hook( __FILE__, 'deactivate_raise_prices_with_time_for_woocommmerce' );
 }
 
 /**
