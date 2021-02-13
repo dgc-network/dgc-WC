@@ -103,30 +103,30 @@ if ( ! class_exists( 'Raise_Prices_With_Time_For_Woocommmerce' ) ) {
 			 * core plugin.
 			 */
 			//require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-raise-prices-with-time-for-woocommmerce-loader.php';
-			require_once 'includes/class-raise-prices-with-time-for-woocommmerce-loader.php';
+			require_once 'class-raise-prices-with-time-for-woocommmerce-loader.php';
 
 			//require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-rpt-meta.php';
-			require_once 'includes/class-rpt-meta.php';
+			require_once 'class-rpt-meta.php';
 
 			/**
 			 * The class responsible for defining internationalization functionality
 			 * of the plugin.
 			 */
 			//require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-raise-prices-with-time-for-woocommmerce-i18n.php';
-			require_once 'includes/class-raise-prices-with-time-for-woocommmerce-i18n.php';
+			require_once 'class-raise-prices-with-time-for-woocommmerce-i18n.php';
 
 			/**
 			 * The class responsible for defining all actions that occur in the admin area.
 			 */
 			//require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-raise-prices-with-time-for-woocommmerce-admin.php';
-			require_once 'admin/class-raise-prices-with-time-for-woocommmerce-admin.php';
+			require_once dirname( __FILE__ ) . '/admin/class-raise-prices-with-time-for-woocommmerce-admin.php';
 
 			/**
 			 * The class responsible for defining all actions that occur in the public-facing
 			 * side of the site.
 			 */
 			//require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-raise-prices-with-time-for-woocommmerce-public.php';
-			require_once 'public/class-raise-prices-with-time-for-woocommmerce-public.php';
+			require_once dirname( __FILE__ ) . '/public/class-raise-prices-with-time-for-woocommmerce-public.php';
 
 			$this->loader = new Raise_Prices_With_Time_For_Woocommmerce_Loader();
 		}
