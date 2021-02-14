@@ -27,6 +27,7 @@ define( 'WP_DEBUG', true );
 /**
  * Defining constant
  */
+/*
 $dir = dirname( __FILE__ ); //dirname( __FILE__ )
 define( "BASE_DIR", str_replace( '\\', '/', $dir . '/' ) );
 //define( 'WP_TRAVEL_POST_TYPE', 'itineraries' );
@@ -43,7 +44,7 @@ define( 'WP_TRAVEL_TEMPLATE_PATH', 'wp-travel/' );
 define( 'WP_TRAVEL_VERSION', '1.0.0' );
 define( 'WP_TRAVEL_MINIMUM_PARTIAL_PAYOUT', array( 10 ) ); // In percent.
 define( 'WP_TRAVEL_SLIP_UPLOAD_DIR', 'wp-travel-slip' ); // In percent.
-
+*/
 define( 'DEFAULT_ITINERARY_LABEL', __( 'Day X', 'text-domain' ) );
 define( 'DEFAULT_ITINERARY_TITLE', __( 'My plan', 'text-domain' ) );
 define( 'DEFAULT_PRICING', __( 'Pricing Name', 'text-domain' ) );
@@ -160,6 +161,7 @@ if ( count( $itineraries ) > 0 ) {
 /**
  * Defining constant
  */
+/*
 define( 'WPT_PLUGIN_BASE_FOLDER', plugin_basename( dirname( __FILE__ ) ) );
 define( 'WPT_PLUGIN_BASE_FILE', plugin_basename( __FILE__ ) );
 define( "WPT_BASE_URL", plugins_url() . '/'. plugin_basename( dirname( __FILE__ ) ) . '/' );
@@ -168,13 +170,14 @@ define( "WPT_BASE_DIR", str_replace( '\\', '/', WPT_DIR_BASE ) );
 
 define( "WPT_PLUGIN_FOLDER_NAME",plugin_basename( dirname( __FILE__ ) ) ); //aDDED TO NEW VERSION
 define( "WPT_PLUGIN_FILE_NAME", __FILE__ ); //aDDED TO NEW VERSION
-
+*/
 /**
 * Plugin Install and Uninstall
 */
+/*
 register_activation_hook(__FILE__, array( 'WOO_Product_Table','install' ) );
 register_deactivation_hook( __FILE__, array( 'WOO_Product_Table','uninstall' ) );
-
+*/
 
 
 /**
@@ -228,7 +231,7 @@ if ( !function_exists( 'activate_raise_prices_with_time_for_woocommmerce' ) ) {
         Raise_Prices_With_Time_For_Woocommmerce_Activator::activate();
     }
     
-    //register_activation_hook( __FILE__, 'activate_raise_prices_with_time_for_woocommmerce' );
+    register_activation_hook( __FILE__, 'activate_raise_prices_with_time_for_woocommmerce' );
 }
 
 
@@ -244,7 +247,7 @@ if ( !function_exists( 'deactivate_raise_prices_with_time_for_woocommmerce' ) ) 
         Raise_Prices_With_Time_For_Woocommmerce_Deactivator::deactivate();
     }
     
-    //register_deactivation_hook( __FILE__, 'deactivate_raise_prices_with_time_for_woocommmerce' );
+    register_deactivation_hook( __FILE__, 'deactivate_raise_prices_with_time_for_woocommmerce' );
 }
 
 /**
@@ -270,7 +273,7 @@ if ( !function_exists( 'rptwc_add_action_links' ) ) {
         //}
         return array_merge( $links, $mylinks );
     }
-    //add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'rptwc_add_action_links' );
+    add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'rptwc_add_action_links' );
 }
 
 if ( !function_exists( 'run_raise_prices_with_time_for_woocommmerce' ) ) {
@@ -289,5 +292,5 @@ if ( !function_exists( 'run_raise_prices_with_time_for_woocommmerce' ) ) {
         $plugin->run();
     }
     
-    //run_raise_prices_with_time_for_woocommmerce();
+    run_raise_prices_with_time_for_woocommmerce();
 }
