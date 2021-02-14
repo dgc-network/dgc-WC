@@ -75,8 +75,8 @@ if ( ! class_exists( 'Raise_Prices_With_Time_For_Woocommmerce' ) ) {
 
 			$this->load_dependencies();
 			//$this->set_locale();
-			//$this->define_admin_hooks();
-			//$this->define_public_hooks();
+			$this->define_admin_hooks();
+			$this->define_public_hooks();
 
 		}
 
@@ -141,11 +141,11 @@ if ( ! class_exists( 'Raise_Prices_With_Time_For_Woocommmerce' ) ) {
 		 * @access   private
 		 */
 		private function set_locale() {
-/*
+
 			$plugin_i18n = new Raise_Prices_With_Time_For_Woocommmerce_i18n();
 
 			$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
-*/
+
 		}
 
 		/**
@@ -190,7 +190,6 @@ if ( ! class_exists( 'Raise_Prices_With_Time_For_Woocommmerce' ) ) {
 			$this->loader->add_filter( 'woocommerce_single_product_summary', $plugin_public, 'show_single_product_countdown', 11 );
 			$this->loader->add_filter( 'woocommerce_add_to_cart', $plugin_public, 'add_cart_item_data', 99 );
 			$this->loader->add_filter( 'woocommerce_get_cart_item_from_session', $plugin_public, 'load_cart_item_data_from_session', 5, 2 );
-
 
 			if ( 'yes' === get_option( 'cpwt_show_countdown_on_shop_pages', 'no' ) ) {
 				$this->loader->add_action( 'woocommerce_after_shop_loop_item', $plugin_public, 'show_product_countdown_loop', 10 );
