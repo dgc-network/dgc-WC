@@ -37,11 +37,6 @@ woocommerce_wp_checkbox(
 );
 */
 ?>
-<style>
-#woocommerce-product-data ._regular_price_field {display:none;}
-#woocommerce-product-data ._sale_price_field {display:none;}
-</style>
-
 
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
 <div class="wc-rpt-metabox">
