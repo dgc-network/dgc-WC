@@ -173,8 +173,8 @@ class Raise_Prices_With_Time_For_Woocommmerce_Public {
 			return;
 		}
 
-		//wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/rpt-wc-public.css', array(), $this->version, 'all' );
-		wp_enqueue_style( $this->plugin_name, 'css/rpt-wc-public.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/rpt-wc-public.css', array(), $this->version, 'all' );
+		//wp_enqueue_style( $this->plugin_name, 'css/rpt-wc-public.css', array(), $this->version, 'all' );
 
 	}
 
@@ -204,8 +204,8 @@ class Raise_Prices_With_Time_For_Woocommmerce_Public {
 			return;
 		}
 
-		//wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/rpt-wc-public.js', array( 'jquery' ), $this->version, false );
-		wp_enqueue_script( $this->plugin_name, 'js/rpt-wc-public.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/rpt-wc-public.js', array( 'jquery' ), $this->version, false );
+		//wp_enqueue_script( $this->plugin_name, 'js/rpt-wc-public.js', array( 'jquery' ), $this->version, false );
 
 	}
 
