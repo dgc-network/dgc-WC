@@ -74,7 +74,7 @@ if ( ! class_exists( 'Trip_Options' ) ) {
 
 			$this->load_dependencies();
 			$this->set_locale();
-			//$this->define_admin_hooks();
+			$this->define_admin_hooks();
 			//$this->define_public_hooks();
 
 		}
@@ -153,7 +153,8 @@ if ( ! class_exists( 'Trip_Options' ) ) {
 		private function define_admin_hooks() {
 
 			$plugin_admin = new Trip_Options_Admin( $this->get_plugin_name(), $this->get_version() );
-
+			$plugin_admin->run();
+/*
 			$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 			$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 			$this->loader->add_action( 'woocommerce_product_options_pricing', $plugin_admin, 'wc_product_prices' );
@@ -161,6 +162,7 @@ if ( ! class_exists( 'Trip_Options' ) ) {
 
 			$this->loader->add_filter( 'woocommerce_get_sections_products', $plugin_admin, 'add_settings_section' );
 			$this->loader->add_filter( 'woocommerce_get_settings_products', $plugin_admin, 'add_settings', 20, 2 );
+*/			
 		}
 
 
@@ -174,7 +176,7 @@ if ( ! class_exists( 'Trip_Options' ) ) {
 		private function define_public_hooks() {
 
 			$plugin_public = new Trip_Options_View( $this->get_plugin_name(), $this->get_version() );
-
+/*
 			$this->loader->add_action( 'init', $plugin_public, 'register_shortcodes' );
 			$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 			$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
@@ -189,6 +191,7 @@ if ( ! class_exists( 'Trip_Options' ) ) {
 			if ( 'yes' === get_option( 'cpwt_show_countdown_on_shop_pages', 'no' ) ) {
 				$this->loader->add_action( 'woocommerce_after_shop_loop_item', $plugin_public, 'show_product_countdown_loop', 10 );
 			}
+*/			
 		}
 
 		/**

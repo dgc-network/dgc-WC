@@ -2,9 +2,45 @@
 class Trip_Options_Admin {
 
 	/**
+	 * The ID of this plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $plugin_name    The ID of this plugin.
+	 */
+	private $plugin_name;
+
+	/**
+	 * The version of this plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $version    The current version of this plugin.
+	 */
+	private $version;
+
+	/**
+	 * Initialize the class and set its properties.
+	 *
+	 * @since    1.0.0
+	 * @param    string    $plugin_name     The name of the plugin.
+	 * @param    string    $version    		The version of this plugin.
+	 */
+	public function __construct( $plugin_name, $version ) {
+
+		$this->plugin_name = $plugin_name;
+		$this->version = $version;
+
+	}
+
+	/**
 	 * Constructor.
 	 */
-	function __construct() {
+	//function __construct() {
+	function run() {
+
+		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'dgc_custom_styles' ) );
+		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'dgc_custom_scripts' ) );
 		add_action( 'admin_head', array( __CLASS__, 'dgc_custom_script' ) );
 		add_action( 'admin_head', array( __CLASS__, 'dgc_custom_style' ) );
 
@@ -156,7 +192,12 @@ class Trip_Options_Admin {
 	/**
 	 * Add a bit of script.
 	 */
-	function dgc_custom_script() {
+	function dgc_custom_scripts() {
+
+		wp_enqueue_script('jquery-ui-datepicker');
+		 
+		wp_register_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/dgc-admin.js', array( 'jquery' ), $this->version, true );
+
 		?>
 		<script>
 			jQuery(document).ready(function($) {
@@ -537,7 +578,10 @@ class Trip_Options_Admin {
 	/**
 	 * Add a bit of style.
 	 */
-	function dgc_custom_style() {
+	function dgc_custom_styles() {
+
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/dgc-admin.css', array(), $this->version, 'all' );
+
 		?>
 		<style>
 			#woocommerce-product-data ul.wc-tabs li.itinerary_tab a:before { font-family: WooCommerce; content: '\e900'; }
@@ -1286,5 +1330,5 @@ wp_enqueue_script( 'some_handle' );
 		}
 	}
 }
-new Trip_Options_Admin;
+//new Trip_Options_Admin;
 
