@@ -41,8 +41,8 @@ class Trip_Options_Admin {
 
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'dgc_custom_styles' ) );
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'dgc_custom_scripts' ) );
-		add_action( 'admin_head', array( __CLASS__, 'dgc_custom_script' ) );
-		add_action( 'admin_head', array( __CLASS__, 'dgc_custom_style' ) );
+		//add_action( 'admin_head', array( __CLASS__, 'dgc_custom_script' ) );
+		//add_action( 'admin_head', array( __CLASS__, 'dgc_custom_style' ) );
 
 		add_filter( 'product_type_options', array( __CLASS__, 'add_remove_product_options' ) );
 		add_filter( 'woocommerce_product_data_tabs', array( __CLASS__, 'custom_product_data_tabs' ), 10, 1 );
