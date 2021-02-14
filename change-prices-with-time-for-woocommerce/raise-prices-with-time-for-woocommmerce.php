@@ -13,7 +13,8 @@
  * @package           Raise_Prices_With_Time_For_Woocommmerce
  *
  * @wordpress-plugin
- * Plugin Name:       Change Prices with Time for WooCommerce
+ * Plugin Name:       
+ * Change Prices with Time for WooCommerce
  * Plugin URI:        https://wordpress.org/plugins/change-prices-with-time-for-woocommerce/
  * Description:       Increase the Product Price with Time and build scarcity
  * Version:           1.7.1
