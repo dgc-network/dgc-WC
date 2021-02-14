@@ -23,7 +23,7 @@
                         }
                     ?>
                 </select>
-            </td>
+        </td>
         <td class="rpt-price-column">
             <input name="{{data.name}}[{{data.length}}][price]" class="widefat">
         </td>

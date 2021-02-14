@@ -15,7 +15,7 @@
 $rpt_name = isset( $rpt_name ) ? $rpt_name : 'rpt_wc';
 $field_name_layout = isset( $field_name_layout ) ? $field_name_layout : 'rpt_new_layout';
 $field_name_sale = isset( $field_name_sale ) ? $field_name_sale : 'rpt_apply_sale';
-
+/*
 woocommerce_wp_checkbox(
 	array(
 		'id'      => $field_name_sale,
@@ -35,7 +35,12 @@ woocommerce_wp_checkbox(
 		'cbvalue' => 'yes',
 	)
 );
+*/
 ?>
+<style>
+.original-computed-price ins:first-of-type{display:none;}
+</style>
+
 
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
 <div class="wc-rpt-metabox">
