@@ -38,7 +38,8 @@ woocommerce_wp_checkbox(
 */
 ?>
 <style>
-.original-computed-price ins:first-of-type{display:none;}
+#woocommerce-product-data ._regular_price_field {display:none;}
+#woocommerce-product-data ._sale_price_field {display:none;}
 </style>
 
 
