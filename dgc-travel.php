@@ -61,9 +61,9 @@ include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
  * Load these bellow file, Only woocommerce installed
  */
 if ( is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
-    require_once BASE_DIR . 'includes/class-trip-options-admin.php';
-    require_once BASE_DIR . 'includes/class-trip-options-view.php';
-    require_once BASE_DIR . 'includes/helpers.php';
+    require_once 'includes/class-trip-options-admin.php';
+    require_once 'includes/class-trip-options-view.php';
+    require_once 'includes/helpers.php';
     //require_once BASE_DIR . 'wp-travel/inc/email-template-functions.php';
     //require_once BASE_DIR . 'wp-travel/inc/payments/wp-travel-payments.php';
 /*
