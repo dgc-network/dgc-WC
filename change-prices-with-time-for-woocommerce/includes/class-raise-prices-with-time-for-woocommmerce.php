@@ -74,7 +74,7 @@ if ( ! class_exists( 'Raise_Prices_With_Time_For_Woocommmerce' ) ) {
 			$this->version     = '1.7.1';
 
 			$this->load_dependencies();
-			//$this->set_locale();
+			$this->set_locale();
 			$this->define_admin_hooks();
 			$this->define_public_hooks();
 
