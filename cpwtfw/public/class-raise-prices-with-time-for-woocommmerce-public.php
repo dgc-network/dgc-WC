@@ -261,7 +261,7 @@ class Raise_Prices_With_Time_For_Woocommmerce_Public {
 	public function show_single_product_countdown() {
 		global $product;
 
-		$this->show_product_countdown( $product );
+		//$this->show_product_countdown( $product );
 	}
 
 

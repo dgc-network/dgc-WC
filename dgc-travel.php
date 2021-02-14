@@ -43,9 +43,65 @@ include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
  * Load these bellow file, Only woocommerce installed
  */
 if ( is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
-    require_once 'includes/class-trip-options-admin.php';
-    require_once 'includes/class-trip-options-view.php';
-    require_once 'includes/helpers.php';
+    //require_once 'includes/class-trip-options-admin.php';
+    //require_once 'includes/class-trip-options-view.php';
+    //require_once 'includes/helpers.php';
+    require_once 'includes/class-trip-options.php';
+    require 'cpwtfw/includes/class-raise-prices-with-time-for-woocommmerce.php';
+}
+
+if ( !function_exists( 'dgc_add_action_links' ) ) {
+    /**
+     * Adding Link for Documentation
+     *
+     * @param [type] $links
+     *
+     * @return array
+     */
+    function dgc_add_action_links( $links )
+    {
+        $mylinks = array( '<a target="_blank" href="https://dgc.network/change-prices-with-time-for-woocommerce">' . __( 'Documentation', 'text-domain' ) . '</a>' );
+        return array_merge( $links, $mylinks );
+    }
+    add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'dgc_add_action_links' );
+}
+
+if ( !function_exists( 'run_trip_options' ) ) {
+    /**
+     * Begins execution of the plugin.
+     *
+     * Since everything within the plugin is registered via hooks,
+     * then kicking off the plugin from this point in the file does
+     * not affect the page life cycle.
+     *
+     * @since    1.0.0
+     */
+    function run_trip_options()
+    {
+        $plugin = new Trip_Options();
+        $plugin->run();
+    }
+    
+    run_trip_options();
+}
+
+if ( !function_exists( 'run_raise_prices_with_time_for_woocommmerce' ) ) {
+    /**
+     * Begins execution of the plugin.
+     *
+     * Since everything within the plugin is registered via hooks,
+     * then kicking off the plugin from this point in the file does
+     * not affect the page life cycle.
+     *
+     * @since    1.0.0
+     */
+    function run_raise_prices_with_time_for_woocommmerce()
+    {
+        $plugin = new Raise_Prices_With_Time_For_Woocommmerce();
+        $plugin->run();
+    }
+    
+    run_raise_prices_with_time_for_woocommmerce();
 }
 
 /**
@@ -95,7 +151,7 @@ if ( !function_exists( 'activate_raise_prices_with_time_for_woocommmerce' ) ) {
     function activate_raise_prices_with_time_for_woocommmerce()
     {
         //require_once plugin_dir_path( __FILE__ ) . 'includes/class-raise-prices-with-time-for-woocommmerce-activator.php';
-        require_once 'change-prices-with-time-for-woocommerce/includes/class-raise-prices-with-time-for-woocommmerce-activator.php';
+        require_once 'cpwtfw/includes/class-raise-prices-with-time-for-woocommmerce-activator.php';
         Raise_Prices_With_Time_For_Woocommmerce_Activator::activate();
     }
     
@@ -111,7 +167,7 @@ if ( !function_exists( 'deactivate_raise_prices_with_time_for_woocommmerce' ) ) 
     function deactivate_raise_prices_with_time_for_woocommmerce()
     {
         //require_once plugin_dir_path( __FILE__ ) . 'includes/class-raise-prices-with-time-for-woocommmerce-deactivator.php';
-        require_once 'change-prices-with-time-for-woocommerce/includes/class-raise-prices-with-time-for-woocommmerce-deactivator.php';
+        require_once 'cpwtfw/includes/class-raise-prices-with-time-for-woocommmerce-deactivator.php';
         Raise_Prices_With_Time_For_Woocommmerce_Deactivator::deactivate();
     }
     
@@ -123,39 +179,4 @@ if ( !function_exists( 'deactivate_raise_prices_with_time_for_woocommmerce' ) ) 
  * admin-specific hooks, and public-facing site hooks.
  */
 //require plugin_dir_path( __FILE__ ) . 'includes/class-raise-prices-with-time-for-woocommmerce.php';
-require 'change-prices-with-time-for-woocommerce/includes/class-raise-prices-with-time-for-woocommmerce.php';
 
-if ( !function_exists( 'rptwc_add_action_links' ) ) {
-    /**
-     * Adding Link for Documentation
-     *
-     * @param [type] $links
-     *
-     * @return array
-     */
-    function rptwc_add_action_links( $links )
-    {
-        $mylinks = array( '<a target="_blank" href="https://dgc.network/change-prices-with-time-for-woocommerce">' . __( 'Documentation', 'text-domain' ) . '</a>' );
-        return array_merge( $links, $mylinks );
-    }
-    add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'rptwc_add_action_links' );
-}
-
-if ( !function_exists( 'run_raise_prices_with_time_for_woocommmerce' ) ) {
-    /**
-     * Begins execution of the plugin.
-     *
-     * Since everything within the plugin is registered via hooks,
-     * then kicking off the plugin from this point in the file does
-     * not affect the page life cycle.
-     *
-     * @since    1.0.0
-     */
-    function run_raise_prices_with_time_for_woocommmerce()
-    {
-        $plugin = new Raise_Prices_With_Time_For_Woocommmerce();
-        $plugin->run();
-    }
-    
-    run_raise_prices_with_time_for_woocommmerce();
-}
