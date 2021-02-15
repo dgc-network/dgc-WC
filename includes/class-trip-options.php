@@ -77,7 +77,7 @@ if ( ! class_exists( 'Trip_Options' ) ) {
 			$this->define_admin_hooks();
 			$this->define_public_hooks();
 			add_filter( 'product_type_options', array( __CLASS__, 'add_remove_product_options' ) );
-
+			add_action( 'create_product_cat', array( __CLASS__, 'sync_product_category' ), 10, 1 );
 		}
 
 		/**
@@ -155,15 +155,7 @@ if ( ! class_exists( 'Trip_Options' ) ) {
 
 			$plugin_admin = new Trip_Options_Admin( $this->get_plugin_name(), $this->get_version() );
 			$plugin_admin->run();
-/*
-			$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-			$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-			$this->loader->add_action( 'woocommerce_product_options_pricing', $plugin_admin, 'wc_product_prices' );
-			$this->loader->add_action( 'woocommerce_process_product_meta', $plugin_admin, 'wc_product_save', 99, 2 );
 
-			$this->loader->add_filter( 'woocommerce_get_sections_products', $plugin_admin, 'add_settings_section' );
-			$this->loader->add_filter( 'woocommerce_get_settings_products', $plugin_admin, 'add_settings', 20, 2 );
-*/			
 		}
 
 
@@ -178,98 +170,89 @@ if ( ! class_exists( 'Trip_Options' ) ) {
 
 			$plugin_public = new Trip_Options_View( $this->get_plugin_name(), $this->get_version() );
 			$plugin_public->run();
-/*
-			$this->loader->add_action( 'init', $plugin_public, 'register_shortcodes' );
-			$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
-			$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
-			$this->loader->add_action( 'rpt_wc_increase_price', $plugin_public, 'rpt_increase_price_cron', 10, 2 );
-			$this->loader->add_action( 'woocommerce_cart_loaded_from_session', $plugin_public, 'apply_prices', 99 );
-			$this->loader->add_action( 'woocommerce_add_to_cart', $plugin_public, 'apply_prices_on_add_to_cart', 19, 6 );
 
-			$this->loader->add_filter( 'woocommerce_single_product_summary', $plugin_public, 'show_single_product_countdown', 11 );
-			$this->loader->add_filter( 'woocommerce_add_to_cart', $plugin_public, 'add_cart_item_data', 99 );
-			$this->loader->add_filter( 'woocommerce_get_cart_item_from_session', $plugin_public, 'load_cart_item_data_from_session', 5, 2 );
+		}
 
-			if ( 'yes' === get_option( 'cpwt_show_countdown_on_shop_pages', 'no' ) ) {
-				$this->loader->add_action( 'woocommerce_after_shop_loop_item', $plugin_public, 'show_product_countdown_loop', 10 );
+		/**
+		 * Remove 'Virtual','Downloadable' product options
+		 * Add 'Itinerary' product options
+		 */
+		function add_remove_product_options( $options ) {
+
+			// remove "Virtual" checkbox
+			if( isset( $options[ 'virtual' ] ) ) {
+				unset( $options[ 'virtual' ] );
 			}
-*/			
+	 
+			// remove "Downloadable" checkbox
+			if( isset( $options[ 'downloadable' ] ) ) {
+				unset( $options[ 'downloadable' ] );
+			}
+	
+			$options['trip_options'] = array(
+				'id'            => '_trip_options',
+				'wrapper_class' => 'show_if_simple show_if_variable',
+				'label'         => __( 'Trip Options', 'text-domain' ),
+				'description'   => __( 'Itinerary allow users to put in personalised messages.', 'text-domain' ),
+				'default'       => 'no'
+			);
+	
+			return $options;
 		}
+	
+		/**
+		 * Create Categories
+		 */
+		function sync_product_category( $options ) {
 
-	/**
-	 * Remove 'Virtual','Downloadable' product options
-	 * Add 'Itinerary' product options
-	 * Create Categories
-	 */
-	function add_remove_product_options( $options ) {
-
-		// remove "Virtual" checkbox
-		if( isset( $options[ 'virtual' ] ) ) {
-			unset( $options[ 'virtual' ] );
+			// Create Categories
+			wp_insert_term(
+				__( "Itinerary", "wp-travel" ), // the term 
+				'product_cat', // the taxonomy
+				array(
+					  'description'=> __( "Category of Itinerary", "wp-travel" ),
+					  'slug' => 'itinerary'
+				)
+			  );
+	
+			wp_insert_term(
+				__( "Stay", "wp-travel" ), // the term 
+				'product_cat', // the taxonomy
+				array(
+					  'description'=> __( "Category of Stay", "wp-travel" ),
+					  'slug' => 'stay'
+				)
+			  );
+	
+			wp_insert_term(
+				__( "Dinner", "wp-travel" ), // the term 
+				'product_cat', // the taxonomy
+				array(
+					  'description'=> __( "Category of Dinner", "wp-travel" ),
+					  'slug' => 'dinner'
+				)
+			  );
+	
+			wp_insert_term(
+				__( "Lunch", "wp-travel" ), // the term 
+				'product_cat', // the taxonomy
+				array(
+					  'description'=> __( "Category of Lunch", "wp-travel" ),
+					  'slug' => 'lunch'
+				)
+			  );
+	
+			  wp_insert_term(
+				__( "Breakfast", "wp-travel" ), // the term 
+				'product_cat', // the taxonomy
+				array(
+					  'description'=> __( "Category of Breakfast", "wp-travel" ),
+					  'slug' => 'breakfast'
+				)
+			  );
+	
 		}
- 
-		// remove "Downloadable" checkbox
-		if( isset( $options[ 'downloadable' ] ) ) {
-			unset( $options[ 'downloadable' ] );
-		}
-
-		// Create Categories
-		wp_insert_term(
-			__( "Itinerary", "wp-travel" ), // the term 
-			'product_cat', // the taxonomy
-			array(
-	  			'description'=> __( "Category of Itinerary", "wp-travel" ),
-	  			'slug' => 'itinerary'
-			)
-  		);
-
-		wp_insert_term(
-			__( "Stay", "wp-travel" ), // the term 
-			'product_cat', // the taxonomy
-			array(
-	  			'description'=> __( "Category of Stay", "wp-travel" ),
-	  			'slug' => 'stay'
-			)
-  		);
-
-		wp_insert_term(
-			__( "Dinner", "wp-travel" ), // the term 
-			'product_cat', // the taxonomy
-			array(
-	  			'description'=> __( "Category of Dinner", "wp-travel" ),
-	  			'slug' => 'dinner'
-			)
-  		);
-
-		wp_insert_term(
-			__( "Lunch", "wp-travel" ), // the term 
-			'product_cat', // the taxonomy
-			array(
-	  			'description'=> __( "Category of Lunch", "wp-travel" ),
-	  			'slug' => 'lunch'
-			)
-  		);
-
-		  wp_insert_term(
-			__( "Breakfast", "wp-travel" ), // the term 
-			'product_cat', // the taxonomy
-			array(
-	  			'description'=> __( "Category of Breakfast", "wp-travel" ),
-	  			'slug' => 'breakfast'
-			)
-  		);
-
-		$options['trip_options'] = array(
-			'id'            => '_trip_options',
-			'wrapper_class' => 'show_if_simple show_if_variable',
-			'label'         => __( 'Trip Options', 'text-domain' ),
-			'description'   => __( 'Itinerary allow users to put in personalised messages.', 'text-domain' ),
-			'default'       => 'no'
-		);
-
-		return $options;
-	}
-
+	
 		/**
 		 * Run the loader to execute all of the hooks with WordPress.
 		 *

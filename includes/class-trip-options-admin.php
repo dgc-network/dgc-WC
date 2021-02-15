@@ -117,7 +117,7 @@ class Trip_Options_Admin {
 
 		//wp_enqueue_script('jquery-ui-datepicker');
 		 
-		//wp_register_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/trip-options-admin.js', array( 'jquery' ), $this->version, true );
+		wp_register_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/trip-options-admin.js', array( 'jquery' ), $this->version, true );
 		wp_enqueue_script( $this->plugin_name );
 
 	}
@@ -129,7 +129,7 @@ class Trip_Options_Admin {
 	 */
 	public function enqueue_styles() {
 
-		//wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/trip-options-admin.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/trip-options-admin.css', array(), $this->version, 'all' );
 
 	}
 
