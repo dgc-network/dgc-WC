@@ -38,13 +38,14 @@ class Trip_Options_View {
 	 */
 	//function __construct() {
 	function run() {
+
+		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'enqueue_scripts' ) );
+
 		add_filter( 'woocommerce_product_tabs', array( __CLASS__, 'custom_product_tab' ) );
 		add_action( 'woocommerce_single_product_summary', array( __CLASS__, 'custom_after_single_product_title' ), 6 );
 		add_action( 'woocommerce_before_add_to_cart_form', array( __CLASS__, 'custom_before_add_to_cart_button' ), 10, 0 );	
-		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'custom_datepicker' ) );
-
 		//add_action( 'wp_enqueue_scripts', array( __CLASS__, 'dgc_custom_script' ) );
-		add_action( 'woocommerce_before_single_product', array( __CLASS__, 'dgc_custom_script' ), 10 );
+		//add_action( 'woocommerce_before_single_product', array( __CLASS__, 'dgc_custom_script' ), 10 );
 		add_action( 'wp_ajax_woocommerce_ajax_add_to_cart', array( __CLASS__, 'woocommerce_ajax_add_to_cart' ) );
 		add_action( 'wp_ajax_nopriv_woocommerce_ajax_add_to_cart', array( __CLASS__, 'woocommerce_ajax_add_to_cart' ) );
 
@@ -71,7 +72,12 @@ class Trip_Options_View {
 		<?php
 	}
 
-	function custom_datepicker() {
+	function enqueue_scripts() {
+		wp_enqueue_script( 'custom-js', plugin_dir_url( __FILE__ ) . 'js/trip-options-view.js', array( 'jquery' ), '', true );
+		wp_enqueue_style( 'style-css', plugin_dir_url( __FILE__ ) . 'css/trip-options-view.css' );
+//	}
+
+//	function custom_datepicker() {
 
 		// Load the datepicker script (pre-registered in WordPress).
 		wp_enqueue_script( 'jquery-ui-datepicker' );

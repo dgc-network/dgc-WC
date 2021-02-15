@@ -35,7 +35,7 @@ class Trip_Options_Admin {
 
 	public function run() {
 
-		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'enqueue_styles' ) );
+		//add_action( 'admin_enqueue_scripts', array( __CLASS__, 'enqueue_styles' ) );
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'enqueue_scripts' ) );
 
 		add_filter( 'woocommerce_product_data_tabs', array( __CLASS__, 'custom_product_data_tabs' ), 10, 1 );
@@ -112,13 +112,6 @@ class Trip_Options_Admin {
 		wp_enqueue_script( 'custom-js', plugin_dir_url( __FILE__ ) . 'js/trip-options-admin.js', array( 'jquery' ), '', true );
 		wp_enqueue_style( 'style-css', plugin_dir_url( __FILE__ ) . 'css/trip-options-admin.css' );
 	}
-	//add_action( 'wp_enqueue_scripts', 'enqueue_scripts');
-	 
-	function admin_enqueue_scripts() {
-		wp_enqueue_script( 'custom-js', plugin_dir_url( __FILE__ ) . 'js/custom.js', array( 'jquery' ), '', true );
-		wp_enqueue_style( 'style-css', plugin_dir_url( __FILE__ ) . 'css/style.css' );
-	}
-	//add_action( 'admin_enqueue_scripts', 'admin_enqueue_scripts');
 
 	/**
 	 * Register the JavaScript for the admin area.

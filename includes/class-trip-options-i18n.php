@@ -13,6 +13,18 @@
  */
 class Trip_Options_i18n {
 
+
+	/**
+	 * Initialize the class and set its properties.
+	 *
+	 * @since    1.0.0
+	 */
+	public function __construct() {
+
+		add_action( 'plugins_loaded', array( __CLASS__, 'load_plugin_textdomain' ), 6 );
+
+	}
+
 	/**
 	 * Load the plugin text domain for translation.
 	 *

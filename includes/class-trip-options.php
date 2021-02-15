@@ -77,7 +77,7 @@ if ( ! class_exists( 'Trip_Options' ) ) {
 			$this->define_admin_hooks();
 			$this->define_public_hooks();
 			add_filter( 'product_type_options', array( __CLASS__, 'add_remove_product_options' ) );
-			add_action( 'create_product_cat', array( __CLASS__, 'sync_product_category' ), 10, 1 );
+			add_action( 'admin_init', array( __CLASS__, 'create_product_category' ), 10, 1 );
 		}
 
 		/**
@@ -139,8 +139,9 @@ if ( ! class_exists( 'Trip_Options' ) ) {
 		private function set_locale() {
 
 			$plugin_i18n = new Trip_Options_i18n();
+			//$plugin_i18n->run();
 
-			$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
+			//$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 
 		}
 
@@ -201,9 +202,9 @@ if ( ! class_exists( 'Trip_Options' ) ) {
 		}
 	
 		/**
-		 * Create Categories
+		 * Create Product Categories
 		 */
-		function sync_product_category( $options ) {
+		function create_product_category() {
 
 			// Create Categories
 			wp_insert_term(
@@ -271,16 +272,6 @@ if ( ! class_exists( 'Trip_Options' ) ) {
 		 */
 		public function get_plugin_name() {
 			return $this->plugin_name;
-		}
-
-		/**
-		 * The reference to the class that orchestrates the hooks with the plugin.
-		 *
-		 * @since     1.0.0
-		 * @return    Trip_Options_Loader    Orchestrates the hooks of the plugin.
-		 */
-		public function get_loader() {
-			return $this->loader;
 		}
 
 		/**
