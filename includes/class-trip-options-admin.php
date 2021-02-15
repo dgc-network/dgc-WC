@@ -63,12 +63,12 @@ class Trip_Options_Admin {
 	//function __construct() {
 	public function run() {
 
-		//add_action( 'admin_enqueue_scripts', array( __CLASS__, 'dgc_custom_styles' ) );
+		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'enqueue_styles' ) );
 		//add_action( 'admin_enqueue_scripts', array( __CLASS__, 'dgc_custom_scripts' ) );
 		//add_action( 'admin_head', array( __CLASS__, 'dgc_custom_script' ) );
 		//add_action( 'admin_head', array( __CLASS__, 'dgc_custom_style' ) );
 
-		add_filter( 'product_type_options', array( __CLASS__, 'add_remove_product_options' ) );
+		//add_filter( 'product_type_options', array( __CLASS__, 'add_remove_product_options' ) );
 		add_filter( 'woocommerce_product_data_tabs', array( __CLASS__, 'custom_product_data_tabs' ), 10, 1 );
 		add_filter( 'woocommerce_allow_marketplace_suggestions', '__return_false' );
 
@@ -86,80 +86,6 @@ class Trip_Options_Admin {
 
 		add_action( 'admin_menu', array( __CLASS__, 'trip_orders_add_metabox' ) );
 		add_action( 'save_post', array( __CLASS__, 'trip_orders_save_metabox' ), 10, 2 );
-	}
-
-	/**
-	 * Remove 'Virtual','Downloadable' product options
-	 * Add 'Itinerary' product options
-	 * Create Categories
-	 */
-	function add_remove_product_options( $options ) {
-
-		// remove "Virtual" checkbox
-		if( isset( $options[ 'virtual' ] ) ) {
-			unset( $options[ 'virtual' ] );
-		}
- 
-		// remove "Downloadable" checkbox
-		if( isset( $options[ 'downloadable' ] ) ) {
-			unset( $options[ 'downloadable' ] );
-		}
-
-		// Create Categories
-		wp_insert_term(
-			__( "Itinerary", "wp-travel" ), // the term 
-			'product_cat', // the taxonomy
-			array(
-	  			'description'=> __( "Category of Itinerary", "wp-travel" ),
-	  			'slug' => 'itinerary'
-			)
-  		);
-
-		wp_insert_term(
-			__( "Stay", "wp-travel" ), // the term 
-			'product_cat', // the taxonomy
-			array(
-	  			'description'=> __( "Category of Stay", "wp-travel" ),
-	  			'slug' => 'stay'
-			)
-  		);
-
-		wp_insert_term(
-			__( "Dinner", "wp-travel" ), // the term 
-			'product_cat', // the taxonomy
-			array(
-	  			'description'=> __( "Category of Dinner", "wp-travel" ),
-	  			'slug' => 'dinner'
-			)
-  		);
-
-		wp_insert_term(
-			__( "Lunch", "wp-travel" ), // the term 
-			'product_cat', // the taxonomy
-			array(
-	  			'description'=> __( "Category of Lunch", "wp-travel" ),
-	  			'slug' => 'lunch'
-			)
-  		);
-
-		  wp_insert_term(
-			__( "Breakfast", "wp-travel" ), // the term 
-			'product_cat', // the taxonomy
-			array(
-	  			'description'=> __( "Category of Breakfast", "wp-travel" ),
-	  			'slug' => 'breakfast'
-			)
-  		);
-
-		$options['trip_options'] = array(
-			'id'            => '_trip_options',
-			'wrapper_class' => 'show_if_simple show_if_variable',
-			'label'         => __( 'Trip Options', 'text-domain' ),
-			'description'   => __( 'Itinerary allow users to put in personalised messages.', 'text-domain' ),
-			'default'       => 'no'
-		);
-
-		return $options;
 	}
 
 	/**
@@ -214,32 +140,27 @@ class Trip_Options_Admin {
 	}
 
 	/**
-	 * Add a bit of script.
+	 * Register the JavaScript for the admin area.
+	 *
+	 * @since    1.0.0
 	 */
-	function dgc_custom_scripts() {
+	public function enqueue_scripts() {
 
-		wp_enqueue_script('jquery-ui-datepicker');
+		//wp_enqueue_script('jquery-ui-datepicker');
 		 
-		wp_register_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/dgc-admin.js', array( 'jquery' ), $this->version, true );
+		wp_register_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/trip-options-admin.js', array( 'jquery' ), $this->version, true );
 
-		?>
-		<script>
-		</script>
-		<?php
 	}
 
 	/**
-	 * Add a bit of style.
+	 * Register the stylesheets for the admin area.
+	 *
+	 * @since    1.0.0
 	 */
-	function dgc_custom_styles() {
+	public function enqueue_styles() {
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/dgc-admin.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/trip-options-admin.css', array(), $this->version, 'all' );
 
-		?>
-		<style>
-
-		</style>
-		<?php
 	}
 
 	/**

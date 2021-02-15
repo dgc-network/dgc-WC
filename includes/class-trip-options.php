@@ -75,7 +75,8 @@ if ( ! class_exists( 'Trip_Options' ) ) {
 			$this->load_dependencies();
 			$this->set_locale();
 			$this->define_admin_hooks();
-			//$this->define_public_hooks();
+			$this->define_public_hooks();
+			add_filter( 'product_type_options', array( __CLASS__, 'add_remove_product_options' ) );
 
 		}
 
@@ -176,6 +177,7 @@ if ( ! class_exists( 'Trip_Options' ) ) {
 		private function define_public_hooks() {
 
 			$plugin_public = new Trip_Options_View( $this->get_plugin_name(), $this->get_version() );
+			$plugin_public->run();
 /*
 			$this->loader->add_action( 'init', $plugin_public, 'register_shortcodes' );
 			$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
@@ -193,6 +195,80 @@ if ( ! class_exists( 'Trip_Options' ) ) {
 			}
 */			
 		}
+
+	/**
+	 * Remove 'Virtual','Downloadable' product options
+	 * Add 'Itinerary' product options
+	 * Create Categories
+	 */
+	function add_remove_product_options( $options ) {
+
+		// remove "Virtual" checkbox
+		if( isset( $options[ 'virtual' ] ) ) {
+			unset( $options[ 'virtual' ] );
+		}
+ 
+		// remove "Downloadable" checkbox
+		if( isset( $options[ 'downloadable' ] ) ) {
+			unset( $options[ 'downloadable' ] );
+		}
+
+		// Create Categories
+		wp_insert_term(
+			__( "Itinerary", "wp-travel" ), // the term 
+			'product_cat', // the taxonomy
+			array(
+	  			'description'=> __( "Category of Itinerary", "wp-travel" ),
+	  			'slug' => 'itinerary'
+			)
+  		);
+
+		wp_insert_term(
+			__( "Stay", "wp-travel" ), // the term 
+			'product_cat', // the taxonomy
+			array(
+	  			'description'=> __( "Category of Stay", "wp-travel" ),
+	  			'slug' => 'stay'
+			)
+  		);
+
+		wp_insert_term(
+			__( "Dinner", "wp-travel" ), // the term 
+			'product_cat', // the taxonomy
+			array(
+	  			'description'=> __( "Category of Dinner", "wp-travel" ),
+	  			'slug' => 'dinner'
+			)
+  		);
+
+		wp_insert_term(
+			__( "Lunch", "wp-travel" ), // the term 
+			'product_cat', // the taxonomy
+			array(
+	  			'description'=> __( "Category of Lunch", "wp-travel" ),
+	  			'slug' => 'lunch'
+			)
+  		);
+
+		  wp_insert_term(
+			__( "Breakfast", "wp-travel" ), // the term 
+			'product_cat', // the taxonomy
+			array(
+	  			'description'=> __( "Category of Breakfast", "wp-travel" ),
+	  			'slug' => 'breakfast'
+			)
+  		);
+
+		$options['trip_options'] = array(
+			'id'            => '_trip_options',
+			'wrapper_class' => 'show_if_simple show_if_variable',
+			'label'         => __( 'Trip Options', 'text-domain' ),
+			'description'   => __( 'Itinerary allow users to put in personalised messages.', 'text-domain' ),
+			'default'       => 'no'
+		);
+
+		return $options;
+	}
 
 		/**
 		 * Run the loader to execute all of the hooks with WordPress.
