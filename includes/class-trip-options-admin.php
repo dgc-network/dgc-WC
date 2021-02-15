@@ -31,6 +31,30 @@ class Trip_Options_Admin {
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 
+		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'dgc_custom_styles' ) );
+		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'dgc_custom_scripts' ) );
+		//add_action( 'admin_head', array( __CLASS__, 'dgc_custom_script' ) );
+		//add_action( 'admin_head', array( __CLASS__, 'dgc_custom_style' ) );
+
+		add_filter( 'product_type_options', array( __CLASS__, 'add_remove_product_options' ) );
+		add_filter( 'woocommerce_product_data_tabs', array( __CLASS__, 'custom_product_data_tabs' ), 10, 1 );
+		add_filter( 'woocommerce_allow_marketplace_suggestions', '__return_false' );
+
+		add_action( 'woocommerce_product_data_panels', array( __CLASS__, 'trip_options_callback_itinerary' ) );
+		add_action( 'woocommerce_product_data_panels', array( __CLASS__, 'trip_options_callback_includes_excludes' ) );
+		add_action( 'woocommerce_product_data_panels', array( __CLASS__, 'trip_options_callback_faqs' ) );
+		add_action( 'woocommerce_product_data_panels', array( __CLASS__, 'trip_options_callback_tabs' ) );
+
+		add_action( 'woocommerce_process_product_meta', array( __CLASS__, 'save_woocommerce_product_custom_fields' ) );
+
+		add_action( 'wp_ajax_get_categories', array( __CLASS__, 'get_categories' ) );
+		add_action( 'wp_ajax_nopriv_get_categories', array( __CLASS__, 'get_categories' ) );
+		add_action( 'wp_ajax_get_product_by_category', array( __CLASS__, 'get_product_by_category' ) );
+		add_action( 'wp_ajax_nopriv_get_product_by_category', array( __CLASS__, 'get_product_by_category' ) );
+
+		add_action( 'admin_menu', array( __CLASS__, 'trip_orders_add_metabox' ) );
+		add_action( 'save_post', array( __CLASS__, 'trip_orders_save_metabox' ), 10, 2 );
+
 	}
 
 	/**
