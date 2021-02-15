@@ -153,7 +153,7 @@ if ( ! class_exists( 'Trip_Options' ) ) {
 		private function define_admin_hooks() {
 
 			$plugin_admin = new Trip_Options_Admin( $this->get_plugin_name(), $this->get_version() );
-			//$plugin_admin->run();
+			$plugin_admin->run();
 /*
 			$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 			$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );

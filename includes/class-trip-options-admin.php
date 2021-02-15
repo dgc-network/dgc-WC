@@ -30,7 +30,7 @@ class Trip_Options_Admin {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
-
+/*
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'dgc_custom_styles' ) );
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'dgc_custom_scripts' ) );
 		//add_action( 'admin_head', array( __CLASS__, 'dgc_custom_script' ) );
@@ -54,7 +54,7 @@ class Trip_Options_Admin {
 
 		add_action( 'admin_menu', array( __CLASS__, 'trip_orders_add_metabox' ) );
 		add_action( 'save_post', array( __CLASS__, 'trip_orders_save_metabox' ), 10, 2 );
-
+*/
 	}
 
 	/**
@@ -63,8 +63,8 @@ class Trip_Options_Admin {
 	//function __construct() {
 	public function run() {
 
-		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'dgc_custom_styles' ) );
-		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'dgc_custom_scripts' ) );
+		//add_action( 'admin_enqueue_scripts', array( __CLASS__, 'dgc_custom_styles' ) );
+		//add_action( 'admin_enqueue_scripts', array( __CLASS__, 'dgc_custom_scripts' ) );
 		//add_action( 'admin_head', array( __CLASS__, 'dgc_custom_script' ) );
 		//add_action( 'admin_head', array( __CLASS__, 'dgc_custom_style' ) );
 
