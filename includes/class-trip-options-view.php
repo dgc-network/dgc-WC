@@ -60,6 +60,14 @@ class Trip_Options_View {
 		add_filter( 'woocommerce_email_recipient_new_order', array( __CLASS__, 'additional_customer_email_recipient' ), 10, 2 ); // Optional (testing)
 		
 		add_action( 'woocommerce_after_shop_loop_item', array( __CLASS__, 'remove_add_to_cart_buttons' ), 1 );
+
+		//$different_template = apply_filters( 'rpt_wc_product_countdown_html', null, $product );
+		add_filter( 'rpt_wc_product_countdown_html', array( __CLASS__, 'custom_wc_product_countdown_html' ), 10, 2 ); // Optional (testing)
+
+	}
+
+	function custom_wc_product_countdown_html() {
+		echo 'I am here!';
 	}
 
     function remove_add_to_cart_buttons() {
