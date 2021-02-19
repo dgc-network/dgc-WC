@@ -38,7 +38,7 @@ if ( ! class_exists( 'Trip_Options' ) ) {
 		 * @access   protected
 		 * @var      Trip_Options_Loader $loader Maintains and registers all hooks for the plugin.
 		 */
-		protected $loader;
+		//protected $loader;
 
 		/**
 		 * The unique identifier of this plugin.
@@ -74,8 +74,17 @@ if ( ! class_exists( 'Trip_Options' ) ) {
 
 			$this->load_dependencies();
 			$this->set_locale();
-			$this->define_admin_hooks();
-			$this->define_public_hooks();
+			$this->run_trip_options_admin();
+			$this->run_trip_options_view();
+		}
+
+		/**
+		 * Run the loader to execute all of the hooks with WordPress.
+		 *
+		 * @since    1.0.0
+		 */
+		public function run() {
+			//$this->loader->run();
 			add_filter( 'product_type_options', array( __CLASS__, 'add_remove_product_options' ) );
 			add_action( 'admin_init', array( __CLASS__, 'create_product_category' ), 10, 1 );
 		}
@@ -98,7 +107,7 @@ if ( ! class_exists( 'Trip_Options' ) ) {
 			 * core plugin.
 			 */
 			//require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-raise-prices-with-time-for-woocommmerce-loader.php';
-			require_once 'class-trip-options-loader.php';
+			//require_once 'class-trip-options-loader.php';
 
 			//require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-rpt-meta.php';
 			//require_once 'class-trip-options-meta.php';
@@ -124,7 +133,7 @@ if ( ! class_exists( 'Trip_Options' ) ) {
 			//require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-raise-prices-with-time-for-woocommmerce-public.php';
 			require_once 'class-trip-options-view.php';
 
-			$this->loader = new Trip_Options_Loader();
+			//$this->loader = new Trip_Options_Loader();
 		}
 
 		/**
@@ -152,7 +161,7 @@ if ( ! class_exists( 'Trip_Options' ) ) {
 		 * @since    1.0.0
 		 * @access   private
 		 */
-		private function define_admin_hooks() {
+		private function run_trip_options_admin() {
 
 			$plugin_admin = new Trip_Options_Admin( $this->get_plugin_name(), $this->get_version() );
 			$plugin_admin->run();
@@ -167,7 +176,7 @@ if ( ! class_exists( 'Trip_Options' ) ) {
 		 * @since    1.0.0
 		 * @access   private
 		 */
-		private function define_public_hooks() {
+		private function run_trip_options_view() {
 
 			$plugin_public = new Trip_Options_View( $this->get_plugin_name(), $this->get_version() );
 			$plugin_public->run();
@@ -252,17 +261,26 @@ if ( ! class_exists( 'Trip_Options' ) ) {
 				)
 			  );
 	
+			  wp_insert_term(
+				__( "Sightsee", "wp-travel" ), // the term 
+				'product_cat', // the taxonomy
+				array(
+					  'description'=> __( "Category of Sightsee", "wp-travel" ),
+					  'slug' => 'sightsee'
+				)
+			  );
+	
+			  wp_insert_term(
+				__( "Gift Shop", "wp-travel" ), // the term 
+				'product_cat', // the taxonomy
+				array(
+					  'description'=> __( "Category of Gift Shop", "wp-travel" ),
+					  'slug' => 'giftshop'
+				)
+			  );
+	
 		}
 	
-		/**
-		 * Run the loader to execute all of the hooks with WordPress.
-		 *
-		 * @since    1.0.0
-		 */
-		public function run() {
-			$this->loader->run();
-		}
-
 		/**
 		 * The name of the plugin used to uniquely identify it within the context of
 		 * WordPress and to define internationalization functionality.
