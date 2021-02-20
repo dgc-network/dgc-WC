@@ -171,11 +171,12 @@ function sillo_remove_that_filter() {
 			} else {
 				?>
 				<label for="from">From</label>
-				<input type="text" id="from" name="from">
+				<input type="text" id="from" name="from" style="color:blue; width:fit-content">
 				<label for="to">to</label>
-				<input type="text" id="to" name="to">
+				<input type="text" id="to" name="to" style="color:blue; width:fit-content">
 				<script>
-  $( function() {
+jQuery(document).ready(function($) {
+  //$( function() {
     var dateFormat = "mm/dd/yy",
       from = $( "#from" )
         .datepicker({
