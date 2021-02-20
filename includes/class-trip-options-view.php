@@ -117,16 +117,16 @@ class Trip_Options_View {
 
 			echo '<div class="rpt-countdown-container ' . ( $new_layout ? 'new-layout' : '' ) . '" data-timestamps="' . esc_attr( wp_json_encode( $timestamps ) ) . '">';
 				$show_only_countdown = apply_filters( 'rpt_wc_show_only_countdown', false );
-				if( ! $show_only_countdown && ! $new_layout ) {
-					echo '<p class="rpt-price-change-text">' . __( 'The price will change in:', 'rpt-wc' ) . '</p>';
-				}
+				//if( ! $show_only_countdown && ! $new_layout ) {
+				//	echo '<p class="rpt-price-change-text">' . __( 'The price will change in:', 'rpt-wc' ) . '</p>';
+				//}
 				echo '<div class="rpt-countdown ' . ( $new_layout ? 'new-layout' : '' ) . '" data-timestamp="' . $timestamp_with_offset . '" data-timezone="' . get_option('gmt_offset') . '"></div>';
-				if ( $new_layout ) {
+				//if ( $new_layout ) {
 					$price = isset( $timestamps[ $found_new_timestamp ] ) ? $timestamps[ $found_new_timestamp ] : '';
 					if ( $price ) {
 						echo '<div class="rpt-countdown-price">' . $price . '</div>';
 					}
-				}
+				//}
 			echo '</div>';
 		}
 
