@@ -192,12 +192,22 @@ class Trip_Options_View {
 		$rps_prices     = RPT_WC_Meta::get( $product->get_id() );
 		$now    = current_time( 'timestamp' );
 		$offset = get_option('gmt_offset') * 3600;
+		$last_price = '';
+		$last_date = '';
 		ksort( $rps_prices );
 		foreach ( $rps_prices as $date => $price ) {
 			$datetime = new DateTime( $date );
-
 			$timestamp = $datetime->getTimestamp();
-
+			$timestamp_offset = $timestamp - $offset;
+			if ( $timestamp_offset < $now ) {
+				$last_date = $date;
+				$last_price = $price;
+			}
+		}
+		echo '<div class="rpt-countdown-price">' . wc_price( $last_price ) . __( ' from : ', 'text-domain' ) .$last_date . '</div>';
+		foreach ( $rps_prices as $date => $price ) {
+			$datetime = new DateTime( $date );
+			$timestamp = $datetime->getTimestamp();
 			$timestamp_offset = $timestamp - $offset;
 			if ( $timestamp_offset < $now ) {
 				continue;
