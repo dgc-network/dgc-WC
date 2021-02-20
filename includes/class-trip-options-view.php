@@ -83,10 +83,13 @@ class Trip_Options_View {
 		$found_new_timestamp = false;
 		foreach ( $rpt_timestamps as $timestamp ) {
 			// We have a timestamp from future
+			/*
 			if( $now < $timestamp ) {
 				$found_new_timestamp = $timestamp - $offset;
 				break;
 			}
+			*/
+
 		}
 
 		$rps_prices = apply_filters( 'rpt_prices_for_countdown', $rps_prices, $product_id );
@@ -108,10 +111,18 @@ class Trip_Options_View {
 				continue;
 			}
 			$timestamps[ $timestamp_offset ] = wc_price( $price );
+
+			echo '<div class="rpt-countdown-container ' . ( $new_layout ? 'new-layout' : '' ) . '" data-timestamps="' . esc_attr( wp_json_encode( $timestamps ) ) . '">';
+					$price = isset( $timestamps[ $timestamp_offset ] ) ? $timestamps[ $timestamp_offset ] : '';
+					if ( $price ) {
+						echo '<div class="rpt-countdown-price">' . $price . '</div>';
+					}
+			echo '</div>';
+						
 		}
 
 		ksort( $timestamps );
-
+/*
 		if( $found_new_timestamp ) {
 			$timestamp_with_offset = $found_new_timestamp;
 
@@ -120,7 +131,7 @@ class Trip_Options_View {
 				//if( ! $show_only_countdown && ! $new_layout ) {
 				//	echo '<p class="rpt-price-change-text">' . __( 'The price will change in:', 'rpt-wc' ) . '</p>';
 				//}
-				echo '<div class="rpt-countdown ' . ( $new_layout ? 'new-layout' : '' ) . '" data-timestamp="' . $timestamp_with_offset . '" data-timezone="' . get_option('gmt_offset') . '"></div>';
+				//echo '<div class="rpt-countdown ' . ( $new_layout ? 'new-layout' : '' ) . '" data-timestamp="' . $timestamp_with_offset . '" data-timezone="' . get_option('gmt_offset') . '"></div>';
 				//if ( $new_layout ) {
 					$price = isset( $timestamps[ $found_new_timestamp ] ) ? $timestamps[ $found_new_timestamp ] : '';
 					if ( $price ) {
@@ -129,7 +140,7 @@ class Trip_Options_View {
 				//}
 			echo '</div>';
 		}
-
+*/
 
 	}
 
