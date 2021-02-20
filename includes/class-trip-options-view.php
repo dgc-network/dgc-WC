@@ -215,7 +215,7 @@ class Trip_Options_View {
 				continue;
 			}
 			//echo '<div class="rpt-countdown-price">' . wc_price( $price ) . __( ' from : ', 'text-domain' ) .$date . '</div>';
-			echo '<div class="rpt-countdown-price">' . wc_price( $price ) . __( ' from : ', 'text-domain' ) .$datetime->format('Y-m-d') . '</div>';
+			echo '<div class="rpt-countdown-price">' . wc_price( $price ) . __( ' after ', 'text-domain' ) . $datetime->format('Y-m-d') . '</div>';
 		}
 	}
 	
