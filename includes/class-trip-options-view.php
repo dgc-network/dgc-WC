@@ -76,7 +76,7 @@ function sillo_remove_that_filter() {
 
 		remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 10 );
 		remove_filter( 'woocommerce_single_product_summary', 'show_single_product_countdown', 11 );
-		remove_filter( 'woocommerce_single_product_summary', array( new Raise_Prices_With_Time_For_Woocommmerce_Public(), 'show_single_product_countdown'));
+		//remove_filter( 'woocommerce_single_product_summary', array( new Raise_Prices_With_Time_For_Woocommmerce_Public(), 'show_single_product_countdown'));
 	}
 
     function remove_add_to_cart_buttons() {
