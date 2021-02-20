@@ -61,12 +61,14 @@ class Trip_Options_View {
 		
 		add_action( 'woocommerce_after_shop_loop_item', array( __CLASS__, 'remove_add_to_cart_buttons' ), 1 );
 
-		//$different_template = apply_filters( 'rpt_wc_product_countdown_html', null, $product );
-		add_filter( 'rpt_wc_product_countdown_html', array( __CLASS__, 'custom_wc_product_countdown_html' ), 10, 2 ); // Optional (testing)
+		add_action( 'init', array( __CLASS__, 'custom_wc_product_countdown_html' ) );
 
 	}
 
 	function custom_wc_product_countdown_html() {
+		remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 10 );
+		remove_action( 'woocommerce_single_product_summary', 'rpt_wc_product_countdown_html', 10 );
+
 /*		
 		echo 'Start from here!';
 		global $product;
@@ -191,7 +193,6 @@ class Trip_Options_View {
 		foreach ( $rps_prices as $date => $price ) {
 			echo '<div class="rpt-countdown-price">' . wc_price( $price ) . ' since: '.$date . '</div>';
 		}
-		remove_action( 'woocommerce_single_product_summary', 'rpt_wc_product_countdown_html', 10 );
 	}
 	
 	function custom_before_add_to_cart_button() {
