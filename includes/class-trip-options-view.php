@@ -189,9 +189,19 @@ class Trip_Options_View {
 		}
 
 		global $product;
-		$product_id     = $product->get_id();
 		$rps_prices     = RPT_WC_Meta::get( $product->get_id() );
+		$now    = current_time( 'timestamp' );
+		$offset = get_option('gmt_offset') * 3600;
+		ksort( $rps_prices );
 		foreach ( $rps_prices as $date => $price ) {
+			$datetime = new DateTime( $date );
+
+			$timestamp = $datetime->getTimestamp();
+
+			$timestamp_offset = $timestamp - $offset;
+			if ( $timestamp_offset < $now ) {
+				continue;
+			}
 			echo '<div class="rpt-countdown-price">' . wc_price( $price ) . __( ' from : ', 'text-domain' ) .$date . '</div>';
 		}
 	}
