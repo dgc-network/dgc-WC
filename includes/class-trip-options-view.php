@@ -75,7 +75,7 @@ function sillo_remove_that_filter() {
 	function custom_wc_product_countdown_html() {
 
 		remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 10 );
-		remove_filter( 'woocommerce_single_product_summary', 'show_single_product_countdown', 10 );
+		remove_filter( 'woocommerce_single_product_summary', 'show_single_product_countdown', 12 );
 
 	}
 
