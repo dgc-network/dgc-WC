@@ -66,8 +66,6 @@ class Trip_Options_View {
 	}
 
 	function custom_wc_product_countdown_html() {
-		remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 10 );
-		remove_action( 'woocommerce_single_product_summary', 'show_single_product_countdown', 10 );
 
 /*		
 		echo 'Start from here!';
@@ -176,6 +174,9 @@ class Trip_Options_View {
 	 * Added Custom fields on product view page
 	 */
 	function custom_after_single_product_title() { 
+
+		remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 10 );
+		remove_action( 'woocommerce_single_product_summary', 'show_single_product_countdown', 10 );
 
 		global $post;
 		$is_trip_options = get_post_meta( $post->ID, '_trip_options', true );
