@@ -205,7 +205,8 @@ class Trip_Options_View {
 				$last_price = $price;
 			}
 		}
-		echo '<div class="rpt-countdown-price">' . wc_price( $last_price ) . __( ' from : ', 'text-domain' ) .$last_date . '</div>';
+		//echo '<div class="rpt-countdown-price">' . wc_price( $last_price ) . __( ' from : ', 'text-domain' ) .$last_date . '</div>';
+		echo '<div class="rpt-countdown-price">' . wc_price( $last_price ) . __( ' current price', 'text-domain' ) . '</div>';
 		foreach ( $rps_prices as $date => $price ) {
 			$datetime = new DateTime( $date );
 			$timestamp = $datetime->getTimestamp();
