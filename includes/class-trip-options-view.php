@@ -200,7 +200,8 @@ class Trip_Options_View {
 			$timestamp = $datetime->getTimestamp();
 			$timestamp_offset = $timestamp - $offset;
 			if ( $timestamp_offset < $now ) {
-				$last_date = $date;
+				//$last_date = $date;
+				$last_date = $datetime->format('Y-m-d');
 				$last_price = $price;
 			}
 		}
@@ -212,7 +213,8 @@ class Trip_Options_View {
 			if ( $timestamp_offset < $now ) {
 				continue;
 			}
-			echo '<div class="rpt-countdown-price">' . wc_price( $price ) . __( ' from : ', 'text-domain' ) .$date . '</div>';
+			//echo '<div class="rpt-countdown-price">' . wc_price( $price ) . __( ' from : ', 'text-domain' ) .$date . '</div>';
+			echo '<div class="rpt-countdown-price">' . wc_price( $price ) . __( ' from : ', 'text-domain' ) .$datetime->format('Y-m-d') . '</div>';
 		}
 	}
 	
