@@ -102,6 +102,10 @@ class Trip_Options_View {
 
 		$now = time();
 		foreach ( $rps_prices as $date => $price ) {
+			echo '<div class="rpt-countdown-price">' . $price . ' since: '.$date . '</div>';
+
+
+
 			$datetime = new DateTime( $date );
 
 			$timestamp = $datetime->getTimestamp();
