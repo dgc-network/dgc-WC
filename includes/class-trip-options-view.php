@@ -67,7 +67,7 @@ class Trip_Options_View {
 
 	function custom_wc_product_countdown_html() {
 		remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 10 );
-		remove_action( 'woocommerce_single_product_summary', 'rpt_wc_product_countdown_html', 10 );
+		remove_action( 'woocommerce_single_product_summary', 'show_single_product_countdown', 10 );
 
 /*		
 		echo 'Start from here!';
@@ -191,7 +191,7 @@ class Trip_Options_View {
 		$product_id     = $product->get_id();
 		$rps_prices     = RPT_WC_Meta::get( $product->get_id() );
 		foreach ( $rps_prices as $date => $price ) {
-			echo '<div class="rpt-countdown-price">' . wc_price( $price ) . ' since: '.$date . '</div>';
+			echo '<div class="rpt-countdown-price">' . wc_price( $price ) . __( 'from : ', 'text-domain' ) .$date . '</div>';
 		}
 	}
 	
