@@ -67,6 +67,7 @@ class Trip_Options_View {
 	}
 
 	function custom_wc_product_countdown_html() {
+/*		
 		echo 'Start from here!';
 		global $product;
 
@@ -83,12 +84,10 @@ class Trip_Options_View {
 		$found_new_timestamp = false;
 		foreach ( $rpt_timestamps as $timestamp ) {
 			// We have a timestamp from future
-			/*
 			if( $now < $timestamp ) {
 				$found_new_timestamp = $timestamp - $offset;
 				break;
 			}
-			*/
 
 		}
 
@@ -102,7 +101,7 @@ class Trip_Options_View {
 
 		$now = time();
 		foreach ( $rps_prices as $date => $price ) {
-			echo '<div class="rpt-countdown-price">' . $price . ' since: '.$date . '</div>';
+			echo '<div class="rpt-countdown-price">' . wc_price( $price ) . ' since: '.$date . '</div>';
 
 
 
@@ -126,7 +125,7 @@ class Trip_Options_View {
 		}
 
 		ksort( $timestamps );
-/*
+
 		if( $found_new_timestamp ) {
 			$timestamp_with_offset = $found_new_timestamp;
 
@@ -161,9 +160,6 @@ class Trip_Options_View {
 	function enqueue_scripts() {
 		wp_enqueue_script( 'custom-js', plugin_dir_url( __FILE__ ) . 'js/trip-options-view.js', array( 'jquery' ), '', true );
 		wp_enqueue_style( 'style-css', plugin_dir_url( __FILE__ ) . 'css/trip-options-view.css' );
-//	}
-
-//	function custom_datepicker() {
 
 		// Load the datepicker script (pre-registered in WordPress).
 		wp_enqueue_script( 'jquery-ui-datepicker' );
@@ -172,16 +168,6 @@ class Trip_Options_View {
 		wp_register_style( 'jquery-ui', 'https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css' );
 		wp_enqueue_style( 'jquery-ui' );  
 		
-	}
-
-	/**
-	 * Add a bit of script.
-	 */
-	function dgc_custom_script() {
-		?>
-		<script>
-		</script>
-		<?php
 	}
 
 	/*
@@ -198,6 +184,14 @@ class Trip_Options_View {
 			echo __( 'Trip Code : ', 'text-domain' ) . $trip_code;
 			echo '</h4></div>';	
 		}
+
+		global $product;
+		$product_id     = $product->get_id();
+		$rps_prices     = RPT_WC_Meta::get( $product->get_id() );
+		foreach ( $rps_prices as $date => $price ) {
+			echo '<div class="rpt-countdown-price">' . wc_price( $price ) . ' since: '.$date . '</div>';
+		}
+		remove_action( 'woocommerce_single_product_summary', 'rpt_wc_product_countdown_html', 10 );
 	}
 	
 	function custom_before_add_to_cart_button() {
