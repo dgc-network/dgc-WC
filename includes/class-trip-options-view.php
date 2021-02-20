@@ -146,10 +146,48 @@ function sillo_remove_that_filter() {
 			//echo '<div class="rpt-countdown-price">' . wc_price( $price ) . __( ' from : ', 'text-domain' ) .$date . '</div>';
 			echo '<div class="rpt-countdown-price">' . wc_price( $price ) . __( ' after ', 'text-domain' ) . $datetime->format('Y-m-d') . '</div>';
 		}
+
+		$itineraries = get_post_meta( $post->ID, 'wp_travel_trip_itinerary_data', true );
+
+		$itinerary_date_array = array();
+		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) {
+			foreach ( $itineraries as $x=>$itinerary ) {
+				if( !empty( $itineraries[$x]['date'] ) ) {
+					array_push( $itinerary_date_array, $itineraries[$x]['date'] );
+				}
+			}
+		}
+		if ( is_array( $itinerary_date_array ) && count( $itinerary_date_array ) > 0 ) {
+			echo __( 'Itinerary : ', 'text-domain' );
+			echo '<ul>';
+			foreach ( $itineraries as $x=>$itinerary ) {
+				echo '<li>' . $itineraries[$x]['date'] . ': ' . $itineraries[$x]['title'] . '</li>';
+			}
+			echo '</ul>';
+		} else {
+			if ($is_trip_options=='yes') {
+				echo __( 'Start Date : ', 'text-domain' );
+				echo '<div class="start_date"></div>';
+			} else {
+				echo '<table>';
+				echo '<tr>';
+				echo '<td>';
+				echo __( 'From Date : ', 'text-domain' );
+				echo '<input type="text" style="color:blue; width:fit-content" class="start_date" id="start_date_input" name="start_date_input" />';
+				echo '</td>';
+				echo '<td>';
+				echo __( 'To Date : ', 'text-domain' );
+				echo '<input type="text" style="color:blue; width:fit-content" class="start_date" id="to_date_input" name="to_date_input" />';
+				echo '</td>';
+				echo '</tr>';
+				echo '</table>';
+			}
+		}
+
 	}
 	
 	function custom_before_add_to_cart_button() {
-
+/*
 		global $post;
 		$is_trip_options = get_post_meta( $post->ID, '_trip_options', true );
 		$itineraries = get_post_meta( $post->ID, 'wp_travel_trip_itinerary_data', true );
@@ -177,6 +215,7 @@ function sillo_remove_that_filter() {
 				echo '<input type="text" style="color:blue; width:fit-content" class="start_date" id="start_date_input" name="start_date_input" />';
 			}
 		}
+*/		
 	}
          
 	/*
