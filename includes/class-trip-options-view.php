@@ -175,7 +175,7 @@ class Trip_Options_View {
 			<label for="to">to</label>
 			</td>
 			<td>
-			<input type="text" id="to" name="to" style="color:blue; width:fit-content">
+			<input type="text" id="to" name="end_date_input" style="color:blue; width:fit-content">
 			</td>
 			</tr>
 			</table>
@@ -233,6 +233,8 @@ class Trip_Options_View {
 	}
 	
 	function custom_before_add_to_cart_button() {
+		echo __( ' people ', 'text-domain' );
+
 /*
 		global $post;
 		$is_trip_options = get_post_meta( $post->ID, '_trip_options', true );
@@ -341,6 +343,29 @@ class Trip_Options_View {
     	return $cart_item_data;
 	}
 
+	function get_date_price( $product_id, $input_date ) {
+		$offset = get_option('gmt_offset') * 3600;
+		$input_datetime = new DateTime( $input_date );
+		$input_timestamp = $input_datetime->getTimestamp();
+		$input_timestamp_offset = $input_timestamp - $offset;
+		$rps_prices     = RPT_WC_Meta::get( $product_id );
+		//$now    = current_time( 'timestamp' );
+		$last_price = '';
+		//$last_date = '';
+		ksort( $rps_prices );
+		foreach ( $rps_prices as $date => $price ) {
+			$datetime = new DateTime( $date );
+			$timestamp = $datetime->getTimestamp();
+			$timestamp_offset = $timestamp - $offset;
+			if ( $timestamp_offset < $input_timestamp_offset ) {
+				//$last_date = $date;
+				//$last_date = $datetime->format('Y-m-d');
+				$last_price = $price;
+			}
+		}
+		return $last_price;
+	}
+
 	function add_custom_price( $cart ) {
 
 		// This is necessary for WC 3.0+
@@ -360,7 +385,9 @@ class Trip_Options_View {
 			if ( 'yes' === $is_trip_options ) {
 				$cart_item['data']->set_price( 40 );
 			} else {
-				$cart_item['data']->set_price( 50 );
+				$input_date = $itineraries[0]['itinerary_date'];
+				$last_price = get_date_price( $product_id, $input_date );
+				$cart_item['data']->set_price( $last_price );
 			}
 		}
 	}
