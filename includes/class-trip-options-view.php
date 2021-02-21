@@ -154,6 +154,7 @@ function sillo_remove_that_filter() {
 				}
 			}
 		}
+
 		if ( is_array( $itinerary_date_array ) && count( $itinerary_date_array ) > 0 ) {
 			echo __( 'Itinerary : ', 'text-domain' );
 			echo '<ul>';
@@ -322,9 +323,6 @@ jQuery(document).ready(function($) {
     	$data = array() ;
 		$cart_item_data['custom_data']['_trip_options'] = $data['_trip_options'] = $is_trip_options;
 		$cart_item_data['custom_data']['itineraries'] = $data['itineraries'] = $itineraries;
-		$custom_price = 10; // This will be your custome price  
-		$cart_item_data['data']->price = $data['price'] = $custom_price;
-		//$cart_item_data['data']->set_price( $custom_price );
 
 		// Add the data to session and generate a unique ID
     	if( count( $data > 0 ) ){
@@ -334,16 +332,6 @@ jQuery(document).ready(function($) {
     	return $cart_item_data;
 	}
 
-	//add_action( 'woocommerce_before_calculate_totals', 'add_custom_price' );
-
-	function add_custom_price_backup( $cart_object ) {
-		$custom_price = 10; // This will be your custome price  
-		foreach ( $cart_object->cart_contents as $key => $value ) {
-			$value['data']->price = $custom_price;
-		}
-	}
-
-	//add_action( 'woocommerce_before_calculate_totals', 'add_custom_price', 9999, 1);
 	function add_custom_price( $cart ) {
 
 		// This is necessary for WC 3.0+
@@ -355,8 +343,8 @@ jQuery(document).ready(function($) {
 			return;
 	
 		// Loop through cart items
-		foreach ( $cart->get_cart() as $item ) {
-			$item['data']->set_price( 40 );
+		foreach ( $cart->get_cart() as $cart_item ) {
+			$cart_item['data']->set_price( 40 );
 		}
 	}
 	
