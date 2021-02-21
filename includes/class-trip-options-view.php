@@ -127,7 +127,7 @@ class Trip_Options_View {
 		}
 		//echo '<div class="rpt-countdown-price">' . wc_price( $last_price ) . __( ' from : ', 'text-domain' ) .$last_date . '</div>';
 		echo '<div class="rpt-countdown-price">' . wc_price( $last_price ) . '</div>';
-		echo '<div class="rpt-countdown-price">'  . __( 'The price will be changed to ', 'text-domain' );
+		echo '<div class="rpt-countdown-price">'  . __( 'The price will be changed to ', 'text-domain' ) . '</div>';
 		foreach ( $rps_prices as $date => $price ) {
 			$datetime = new DateTime( $date );
 			$timestamp = $datetime->getTimestamp();
@@ -136,9 +136,8 @@ class Trip_Options_View {
 				continue;
 			}
 			//echo '<div class="rpt-countdown-price">' . wc_price( $price ) . __( ' from : ', 'text-domain' ) .$date . '</div>';
-			echo wc_price( $price ) . __( ' on ', 'text-domain' ) . $datetime->format('Y-m-d');
+			echo '<div class="rpt-countdown-price">' . wc_price( $price ) . __( ' on ', 'text-domain' ) . $datetime->format('Y-m-d') . '</div>';
 		}
-		echo '</div>';
 
 		if ( 'yes' === $is_trip_options ) {
 			$itinerary_date_array = array();
@@ -351,17 +350,13 @@ class Trip_Options_View {
 		$input_timestamp = $input_datetime->getTimestamp();
 		$input_timestamp_offset = $input_timestamp - $offset;
 		$rps_prices     = RPT_WC_Meta::get( $product_id );
-		//$now    = current_time( 'timestamp' );
 		$last_price = '';
-		//$last_date = '';
 		ksort( $rps_prices );
 		foreach ( $rps_prices as $date => $price ) {
 			$datetime = new DateTime( $date );
 			$timestamp = $datetime->getTimestamp();
 			$timestamp_offset = $timestamp - $offset;
 			if ( $timestamp_offset < $input_timestamp_offset ) {
-				//$last_date = $date;
-				//$last_date = $datetime->format('Y-m-d');
 				$last_price = $price;
 			}
 		}
@@ -388,7 +383,8 @@ class Trip_Options_View {
 				$cart_item['data']->set_price( 40 );
 			} else {
 				$input_date = $itineraries[0]['itinerary_date'];
-				$last_price = $this->get_date_price( $product_id, $input_date );
+				//$last_price = $this->get_date_price( $product_id, $input_date );
+				$last_price = 50;
 				$cart_item['data']->set_price( $last_price );
 			}
 		}
