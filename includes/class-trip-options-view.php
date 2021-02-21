@@ -313,6 +313,16 @@ jQuery(document).ready(function($) {
 		wp_die();
 	}
 	
+	//add_action( 'woocommerce_before_calculate_totals', 'add_custom_price' );
+
+	function add_custom_price( $cart_object ) {
+		$custom_price = 10; // This will be your custome price  
+		foreach ( $cart_object->cart_contents as $key => $value ) {
+			$value['data']->price = $custom_price;
+		}
+	}
+
+
 	/*
 	 * Add data to cart item
 	 */
@@ -325,6 +335,8 @@ jQuery(document).ready(function($) {
     	$data = array() ;
 		$cart_item_data['custom_data']['_trip_options'] = $data['_trip_options'] = $is_trip_options;
 		$cart_item_data['custom_data']['itineraries'] = $data['itineraries'] = $itineraries;
+		$custom_price = 10; // This will be your custome price  
+		$cart_item_data['data']->price = $custom_price;
 
 		// Add the data to session and generate a unique ID
     	if( count( $data > 0 ) ){
