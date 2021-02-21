@@ -62,13 +62,6 @@ class Trip_Options_View {
 
 	}
 
-// when the init hook fires
-//add_action( 'init', 'sillo_remove_that_filter' );
-
-function sillo_remove_that_filter() {
-    // remove the filter
-    remove_filter( 'the_content', 'first_paragraph' );
-}
 	function custom_wc_product_countdown_html() {
 
 		remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 10 );
@@ -102,10 +95,11 @@ function sillo_remove_that_filter() {
 	/*
 	 * Added Custom fields on product view page
 	 */
-	function custom_after_single_product_title() { 
+	function custom_after_single_product_title() {
 
 		global $post;
 		$is_trip_options = get_post_meta( $post->ID, '_trip_options', true );
+		$itineraries = get_post_meta( $post->ID, 'wp_travel_trip_itinerary_data', true );
 
 		if ($is_trip_options=='yes') {
 			$trip_code = get_trip_code( $post->ID );
@@ -132,7 +126,7 @@ function sillo_remove_that_filter() {
 			}
 		}
 		//echo '<div class="rpt-countdown-price">' . wc_price( $last_price ) . __( ' from : ', 'text-domain' ) .$last_date . '</div>';
-		echo '<div class="rpt-countdown-price">' . wc_price( $last_price ) . __( ' current price', 'text-domain' ) . '</div>';
+		echo '<div class="rpt-countdown-price">' . wc_price( $last_price ) . '</div>';
 		foreach ( $rps_prices as $date => $price ) {
 			$datetime = new DateTime( $date );
 			$timestamp = $datetime->getTimestamp();
@@ -141,72 +135,84 @@ function sillo_remove_that_filter() {
 				continue;
 			}
 			//echo '<div class="rpt-countdown-price">' . wc_price( $price ) . __( ' from : ', 'text-domain' ) .$date . '</div>';
-			echo '<div class="rpt-countdown-price">' . wc_price( $price ) . __( ' after ', 'text-domain' ) . $datetime->format('Y-m-d') . '</div>';
+			echo '<div class="rpt-countdown-price">'  . __( 'The price will be changed to ', 'text-domain' ) . wc_price( $price ) . __( ' on ', 'text-domain' ) . $datetime->format('Y-m-d') . '</div>';
 		}
 
-		$itineraries = get_post_meta( $post->ID, 'wp_travel_trip_itinerary_data', true );
-
-		$itinerary_date_array = array();
-		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) {
-			foreach ( $itineraries as $x=>$itinerary ) {
-				if( !empty( $itineraries[$x]['date'] ) ) {
-					array_push( $itinerary_date_array, $itineraries[$x]['date'] );
+		if ( 'yes' === $is_trip_options ) {
+			$itinerary_date_array = array();
+			if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) {
+				foreach ( $itineraries as $x=>$itinerary ) {
+					if( !empty( $itineraries[$x]['date'] ) ) {
+						array_push( $itinerary_date_array, $itineraries[$x]['date'] );
+					}
 				}
 			}
-		}
 
-		if ( is_array( $itinerary_date_array ) && count( $itinerary_date_array ) > 0 ) {
-			echo __( 'Itinerary : ', 'text-domain' );
-			echo '<ul>';
-			foreach ( $itineraries as $x=>$itinerary ) {
-				echo '<li>' . $itineraries[$x]['date'] . ': ' . $itineraries[$x]['title'] . '</li>';
-			}
-			echo '</ul>';
-		} else {
-			if ($is_trip_options=='yes') {
+			if ( is_array( $itinerary_date_array ) && count( $itinerary_date_array ) > 0 ) {
+				echo __( 'Itinerary : ', 'text-domain' );
+				echo '<ul>';
+				foreach ( $itineraries as $x=>$itinerary ) {
+					echo '<li>' . $itineraries[$x]['date'] . ': ' . $itineraries[$x]['title'] . '</li>';
+				}
+				echo '</ul>';
+			} else {
 				echo __( 'Start Date : ', 'text-domain' );
 				echo '<div class="start_date"></div>';
-			} else {
-				?>
-				<label for="from">From</label>
-				<input type="text" id="from" name="from" style="color:blue; width:fit-content">
-				<label for="to">to</label>
-				<input type="text" id="to" name="to" style="color:blue; width:fit-content">
-				<script>
-jQuery(document).ready(function($) {
-  //$( function() {
-    var dateFormat = "mm/dd/yy",
-      from = $( "#from" )
-        .datepicker({
-          defaultDate: "+1w",
-          changeMonth: true,
-          //numberOfMonths: 3
-        })
-        .on( "change", function() {
-          to.datepicker( "option", "minDate", getDate( this ) );
-        }),
-      to = $( "#to" ).datepicker({
-        defaultDate: "+1w",
-        changeMonth: true,
-        //numberOfMonths: 3
-      })
-      .on( "change", function() {
-        from.datepicker( "option", "maxDate", getDate( this ) );
-      });
+			}	
+		} else {
+			?>
+			<table>
+			<tr>
+			<td>
+			<label for="from">From</label>
+			</td>
+			<td>
+			<input type="text" id="from" name="start_date_input" style="color:blue; width:fit-content">
+			</td>
+			</tr>
+			<tr>
+			<td>
+			<label for="to">to</label>
+			</td>
+			<td>
+			<input type="text" id="to" name="to" style="color:blue; width:fit-content">
+			</td>
+			</tr>
+			</table>
+			<script>
+			jQuery(document).ready(function($) {
+    			var dateFormat = "mm/dd/yy",
+      			from = $( "#from" )
+        		.datepicker({
+          			defaultDate: "+1w",
+          			changeMonth: true,
+          			//numberOfMonths: 3
+        		})
+        		.on( "change", function() {
+          			to.datepicker( "option", "minDate", getDate( this ) );
+        		}),
+      			to = $( "#to" ).datepicker({
+        			defaultDate: "+1w",
+        			changeMonth: true,
+        			//numberOfMonths: 3
+      			})
+      			.on( "change", function() {
+        			from.datepicker( "option", "maxDate", getDate( this ) );
+      			});
  
-    function getDate( element ) {
-      var date;
-      try {
-        date = $.datepicker.parseDate( dateFormat, element.value );
-      } catch( error ) {
-        date = null;
-      }
+    			function getDate( element ) {
+      				var date;
+      				try {
+        				date = $.datepicker.parseDate( dateFormat, element.value );
+      				} catch( error ) {
+        				date = null;
+      				}
  
-      return date;
-    }
-  } );
-  </script>
-				<?php
+      				return date;
+    			}
+  			} );
+  			</script>
+			<?php
 /*
 				echo '<table>';
 				echo '<tr>';
@@ -221,7 +227,7 @@ jQuery(document).ready(function($) {
 				echo '</tr>';
 				echo '</table>';
 */				
-			}
+			
 		}
 
 	}
@@ -278,13 +284,16 @@ jQuery(document).ready(function($) {
 				$itineraries[$x]['itinerary_date'] = $itinerary_date;
 			}
 		} else {
-			if( !empty( $_POST['start_date_input'] ) ) {
-				$itineraries[0]['itinerary_date'] = $_POST['start_date_input'];
-			} else {
-				foreach( $itineraries as $x => $itinerary ) {
-					$itineraries[$x]['itinerary_date'] = $itineraries[$x]['date'];
-				}
-			} 
+			foreach( $itineraries as $x => $itinerary ) {
+				$itineraries[$x]['itinerary_date'] = $itineraries[$x]['date'];
+			}
+		} 
+		
+		if( !empty( $_POST['start_date_input'] ) ) {
+			$itineraries[0]['itinerary_date'] = $_POST['start_date_input'];
+		}
+		if( !empty( $_POST['end_date_input'] ) ) {
+			$itineraries[1]['itinerary_date'] = $_POST['end_date_input'];
 		}
 		update_post_meta( $post_id, 'wp_travel_trip_itinerary_data', $itineraries );
 
@@ -316,7 +325,7 @@ jQuery(document).ready(function($) {
 	 */
 	function add_custom_cart_item_data( $cart_item_data, $product_id ) {
 		$post_id = $product_id;
-		$is_itinerary = get_post_meta( $post_id, '_trip_options', true );
+		$is_trip_options = get_post_meta( $post_id, '_trip_options', true );
 		$itineraries = get_post_meta( $post_id, 'wp_travel_trip_itinerary_data', true );
 
     	// Set the data for the cart item in cart object
@@ -344,7 +353,15 @@ jQuery(document).ready(function($) {
 	
 		// Loop through cart items
 		foreach ( $cart->get_cart() as $cart_item ) {
-			$cart_item['data']->set_price( 40 );
+			$product_id = $cart_item['product_id'];
+			$post_id = $product_id;
+			$is_trip_options = get_post_meta( $post_id, '_trip_options', true );
+			$itineraries = get_post_meta( $post_id, 'wp_travel_trip_itinerary_data', true );
+			if ( 'yes' === $is_trip_options ) {
+				$cart_item['data']->set_price( 40 );
+			} else {
+				$cart_item['data']->set_price( 50 );
+			}
 		}
 	}
 	
@@ -507,7 +524,7 @@ jQuery(document).ready(function($) {
 		elseif( $order->has_status('processing') ) {
 			$order->update_status( 'completed' );
 		}
-	}		
+	}	
 
 	//add_filter( 'woocommerce_email_recipient_new_booking', 'additional_customer_email_recipient', 10, 2 ); 
 	//add_filter( 'woocommerce_email_recipient_new_order', 'additional_customer_email_recipient', 10, 2 ); // Optional (testing)
