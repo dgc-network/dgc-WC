@@ -336,8 +336,8 @@ jQuery(document).ready(function($) {
 		$cart_item_data['custom_data']['_trip_options'] = $data['_trip_options'] = $is_trip_options;
 		$cart_item_data['custom_data']['itineraries'] = $data['itineraries'] = $itineraries;
 		$custom_price = 10; // This will be your custome price  
-		//$cart_item_data['data']->price = $custom_price;
-		$cart_item_data['data']->set_price( $custom_price );
+		$cart_item_data['data']->price = $data['price'] = $custom_price;
+		//$cart_item_data['data']->set_price( $custom_price );
 
 		// Add the data to session and generate a unique ID
     	if( count( $data > 0 ) ){
