@@ -49,6 +49,7 @@ class Trip_Options_View {
 		add_action( 'wp_ajax_nopriv_woocommerce_ajax_add_to_cart', array( __CLASS__, 'woocommerce_ajax_add_to_cart' ) );
 
 		add_filter( 'woocommerce_add_cart_item_data', array( __CLASS__, 'add_custom_cart_item_data' ), 25, 2 );
+		add_action( 'woocommerce_before_calculate_totals', array( __CLASS__, 'add_custom_price' ), 9999, 1);
 		add_filter( 'woocommerce_get_item_data', array( __CLASS__, 'get_custom_cart_item_data' ), 25, 2 );
 		add_action( 'woocommerce_checkout_create_order_line_item', array( __CLASS__, 'custom_checkout_create_order_line_item' ), 20, 4 );
 
@@ -309,16 +310,6 @@ jQuery(document).ready(function($) {
 		wp_die();
 	}
 	
-	//add_action( 'woocommerce_before_calculate_totals', 'add_custom_price' );
-
-	function add_custom_price( $cart_object ) {
-		$custom_price = 10; // This will be your custome price  
-		foreach ( $cart_object->cart_contents as $key => $value ) {
-			$value['data']->price = $custom_price;
-		}
-	}
-
-
 	/*
 	 * Add data to cart item
 	 */
@@ -343,6 +334,32 @@ jQuery(document).ready(function($) {
     	return $cart_item_data;
 	}
 
+	//add_action( 'woocommerce_before_calculate_totals', 'add_custom_price' );
+
+	function add_custom_price_backup( $cart_object ) {
+		$custom_price = 10; // This will be your custome price  
+		foreach ( $cart_object->cart_contents as $key => $value ) {
+			$value['data']->price = $custom_price;
+		}
+	}
+
+	//add_action( 'woocommerce_before_calculate_totals', 'add_custom_price', 9999, 1);
+	function add_custom_price( $cart ) {
+
+		// This is necessary for WC 3.0+
+		if ( is_admin() && ! defined( 'DOING_AJAX' ) )
+			return;
+	
+		// Avoiding hook repetition (when using price calculations for example)
+		if ( did_action( 'woocommerce_before_calculate_totals' ) >= 2 )
+			return;
+	
+		// Loop through cart items
+		foreach ( $cart->get_cart() as $item ) {
+			$item['data']->set_price( 40 );
+		}
+	}
+	
 	/*
 	 * Display custom data on cart and checkout page.
 	 */
