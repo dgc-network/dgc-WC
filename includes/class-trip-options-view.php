@@ -345,6 +345,7 @@ class Trip_Options_View {
 	}
 
 	function get_date_price( $product_id, $input_date ) {
+/*		
 		$offset = get_option('gmt_offset') * 3600;
 		$input_datetime = new DateTime( $input_date );
 		$input_timestamp = $input_datetime->getTimestamp();
@@ -361,6 +362,8 @@ class Trip_Options_View {
 			}
 		}
 		return $last_price;
+*/
+		return 50;		
 	}
 
 	function add_custom_price( $cart ) {
@@ -383,8 +386,8 @@ class Trip_Options_View {
 				$cart_item['data']->set_price( 40 );
 			} else {
 				$input_date = $itineraries[0]['itinerary_date'];
-				//$last_price = $this->get_date_price( $product_id, $input_date );
-				$last_price = 50;
+				$last_price = $this->get_date_price( $product_id, $input_date );
+				//$last_price = 50;
 				$cart_item['data']->set_price( $last_price );
 			}
 		}
