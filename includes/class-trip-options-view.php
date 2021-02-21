@@ -127,6 +127,7 @@ class Trip_Options_View {
 		}
 		//echo '<div class="rpt-countdown-price">' . wc_price( $last_price ) . __( ' from : ', 'text-domain' ) .$last_date . '</div>';
 		echo '<div class="rpt-countdown-price">' . wc_price( $last_price ) . '</div>';
+		echo '<div class="rpt-countdown-price">'  . __( 'The price will be changed to ', 'text-domain' );
 		foreach ( $rps_prices as $date => $price ) {
 			$datetime = new DateTime( $date );
 			$timestamp = $datetime->getTimestamp();
@@ -135,8 +136,9 @@ class Trip_Options_View {
 				continue;
 			}
 			//echo '<div class="rpt-countdown-price">' . wc_price( $price ) . __( ' from : ', 'text-domain' ) .$date . '</div>';
-			echo '<div class="rpt-countdown-price">'  . __( 'The price will be changed to ', 'text-domain' ) . wc_price( $price ) . __( ' on ', 'text-domain' ) . $datetime->format('Y-m-d') . '</div>';
+			echo wc_price( $price ) . __( ' on ', 'text-domain' ) . $datetime->format('Y-m-d');
 		}
+		echo '</div>';
 
 		if ( 'yes' === $is_trip_options ) {
 			$itinerary_date_array = array();
@@ -386,7 +388,7 @@ class Trip_Options_View {
 				$cart_item['data']->set_price( 40 );
 			} else {
 				$input_date = $itineraries[0]['itinerary_date'];
-				$last_price = get_date_price( $product_id, $input_date );
+				$last_price = $this->get_date_price( $product_id, $input_date );
 				$cart_item['data']->set_price( $last_price );
 			}
 		}
