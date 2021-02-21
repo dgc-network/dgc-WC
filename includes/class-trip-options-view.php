@@ -391,18 +391,18 @@ jQuery(document).ready(function($) {
 	 * $order an instance of the WC_Order object (This is a very useful additional argument in some specific cases)
 	 */
 	//add_action( 'woocommerce_checkout_create_order_line_item', 'custom_checkout_create_order_line_item', 20, 4 );
-	function custom_checkout_create_order_line_item( $item, $cart_item_key, $values, $order ) {
+	function custom_checkout_create_order_line_item( $item, $cart_item_key, $cart_item, $order ) {
 
-    	if( isset( $values['custom_data'] ) ) {
+    	if( isset( $cart_item['custom_data'] ) ) {
 			
 			//$customer_id = $order->get_customer_id();
-			$product_id = $values['product_id']; // Product ID
-			$product_qty = $values['quantity']; // Product quantity
+			$product_id = $cart_item['product_id']; // Product ID
+			$product_qty = $cart_item['quantity']; // Product quantity
 			$vendor_id = get_post_field( 'post_author', $product_id );
 			  
-			foreach( $values['custom_data']['itineraries'] as $x => $itinerary ) {
-				$assignments = $values['custom_data']['itineraries'][$x]['assignment'];
-				$itinerary_date = $values['custom_data']['itineraries'][$x]['itinerary_date'];
+			foreach( $cart_item['custom_data']['itineraries'] as $x => $itinerary ) {
+				$assignments = $cart_item['custom_data']['itineraries'][$x]['assignment'];
+				$itinerary_date = $cart_item['custom_data']['itineraries'][$x]['itinerary_date'];
 				if( ! empty( $assignments ) ){
 					foreach( $assignments as $y => $assignment ) {
 						$product_id_resource = $assignments[$y]['resource'];
@@ -412,8 +412,8 @@ jQuery(document).ready(function($) {
 			}
 
 			$display_itinerary_date = '<span>';
-			foreach( $values['custom_data']['itineraries'] as $x => $itinerary ) {
-				$itinerary_date = $values['custom_data']['itineraries'][$x]['itinerary_date'];
+			foreach( $cart_item['custom_data']['itineraries'] as $x => $itinerary ) {
+				$itinerary_date = $cart_item['custom_data']['itineraries'][$x]['itinerary_date'];
 				$display_itinerary_date .= $itinerary_date.', ';
 			}
 			$display_itinerary_date .= '</span>';

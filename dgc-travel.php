@@ -47,7 +47,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
     //require_once 'includes/class-trip-options-view.php';
     //require_once 'includes/helpers.php';
     require_once 'includes/class-trip-options.php';
-    require 'cpwtfw/includes/class-raise-prices-with-time-for-woocommmerce.php';
+    require_once 'cpwtfw/includes/class-raise-prices-with-time-for-woocommmerce.php';
 }
 
 if ( !function_exists( 'dgc_add_action_links' ) ) {
