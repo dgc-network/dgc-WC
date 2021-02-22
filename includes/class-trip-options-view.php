@@ -348,6 +348,9 @@ class Trip_Options_View {
 				$start_datetime = new DateTime( $start_date );
 				$start_timestamp = $start_datetime->getTimestamp();
 				$end_date = $itineraries[1]['itinerary_date'];
+				$end_datetime = new DateTime( $end_date );
+				$end_timestamp = $end_datetime->getTimestamp();
+				
 				$last_price = self::get_date_price( $product_id, $start_date );
 				$cart_item['data']->set_price( $last_price );
 				//$cart_item['data']->set_price( $start_timestamp );
