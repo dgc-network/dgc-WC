@@ -168,7 +168,7 @@ class Trip_Options_View {
 			<label for="start_date_input">From</label>
 			</td>
 			<td>
-			<input type="text" id="start_date_input" name="start_date_input" style="color:blue; width:fit-content">
+			<input type="text" id="from" name="start_date_input" style="color:blue; width:fit-content">
 			</td>
 			</tr>
 			<tr>
@@ -176,7 +176,7 @@ class Trip_Options_View {
 			<label for="end_date_input">To</label>
 			</td>
 			<td>
-			<input type="text" id="end_date_input" name="end_date_input" style="color:blue; width:fit-content">
+			<input type="text" id="to" name="end_date_input" style="color:blue; width:fit-content">
 			</td>
 			</tr>
 			</table>
@@ -184,7 +184,7 @@ class Trip_Options_View {
 			jQuery(document).ready(function($) {
     			//var dateFormat = "mm/dd/yy",
     			var dateFormat = "Y-m-d",
-      			from = $( "#start_date_input" )
+      			from = $( "#from" )
         		.datepicker({
           			defaultDate: "+1w",
           			changeMonth: true,
@@ -193,7 +193,7 @@ class Trip_Options_View {
         		.on( "change", function() {
           			to.datepicker( "option", "minDate", getDate( this ) );
         		}),
-      			to = $( "#end_date_input" ).datepicker({
+      			to = $( "#to" ).datepicker({
         			defaultDate: "+1w",
         			changeMonth: true,
         			//numberOfMonths: 3

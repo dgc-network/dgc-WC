@@ -24,8 +24,8 @@ jQuery(document).ready(function($) {
             var itinerary_date = $( '#itinerary-date-'+index ).val();
             itinerary_date_array.push( itinerary_date );
         })
-        var start_date_input = $( '#start_date_input' ).val();
-        var end_date_input = $( '#end_date_input' ).val();
+        var start_date_input = $( '#from' ).val();
+        var end_date_input = $( '#to' ).val();
 
         var data = {
             action: 'woocommerce_ajax_add_to_cart',
