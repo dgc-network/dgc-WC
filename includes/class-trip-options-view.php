@@ -355,9 +355,11 @@ class Trip_Options_View {
    
 				$result = $interval->format('%a');
 
-				$last_price = self::get_date_price( $product_id, $start_date );
-				//$cart_item['data']->set_price( $last_price );
-				$cart_item['data']->set_price( $result );
+				//$last_price = self::get_date_price( $product_id, $start_date );
+				$last_price = self::get_date_price( $product_id, $end_date );
+				$cart_item['data']->set_price( $last_price );
+				//$cart_item['data']->set_price( $end_price );
+				//$cart_item['data']->set_price( $result );
 			}
 		}
 	}
@@ -374,7 +376,7 @@ class Trip_Options_View {
 				$values .= $itinerary_date.', ';
 			}
 			$values .= '</span>';
-			if( $cart_item['custom_data']['_trip_options']=='yes' ){
+			if( 'yes' === $cart_item['custom_data']['_trip_options'] ){
 				$values .= '<ul>';
 	        	foreach( $cart_item['custom_data']['itineraries'] as $x => $itinerary ) {
 					$label = $cart_item['custom_data']['itineraries'][$x]['label'];
