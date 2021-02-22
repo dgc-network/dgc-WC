@@ -386,7 +386,7 @@ class Trip_Options_View {
 				$cart_item['data']->set_price( 40 );
 			} else {
 				$input_date = $itineraries[0]['itinerary_date'];
-				$last_price = $this->get_date_price( $product_id, $input_date );
+				$last_price = self::get_date_price( $product_id, $input_date );
 				//$last_price = 50;
 				$cart_item['data']->set_price( $last_price );
 			}
