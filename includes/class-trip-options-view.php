@@ -173,7 +173,7 @@ class Trip_Options_View {
 			</tr>
 			<tr>
 			<td>
-			<label for="to">to</label>
+			<label for="to">To</label>
 			</td>
 			<td>
 			<input type="text" id="to" name="end_date_input" style="color:blue; width:fit-content">
@@ -214,57 +214,11 @@ class Trip_Options_View {
   			} );
   			</script>
 			<?php
-/*
-				echo '<table>';
-				echo '<tr>';
-				echo '<td>';
-				echo __( 'From Date : ', 'text-domain' );
-				echo '<input type="text" style="color:blue; width:fit-content" class="start_date" id="start_date_input" name="start_date_input" />';
-				echo '</td>';
-				echo '<td>';
-				echo __( 'To Date : ', 'text-domain' );
-				echo '<input type="text" style="color:blue; width:fit-content" class="start_date" id="to_date_input" name="to_date_input" />';
-				echo '</td>';
-				echo '</tr>';
-				echo '</table>';
-*/				
-			
 		}
-
 	}
 	
 	function custom_before_add_to_cart_button() {
-		echo __( ' people ', 'text-domain' );
 
-/*
-		global $post;
-		$is_trip_options = get_post_meta( $post->ID, '_trip_options', true );
-		$itineraries = get_post_meta( $post->ID, 'wp_travel_trip_itinerary_data', true );
-
-		$itinerary_date_array = array();
-		if ( is_array( $itineraries ) && count( $itineraries ) > 0 ) {
-			foreach ( $itineraries as $x=>$itinerary ) {
-				if( !empty( $itineraries[$x]['date'] ) ) {
-					array_push( $itinerary_date_array, $itineraries[$x]['date'] );
-				}
-			}
-		}
-		if ( is_array( $itinerary_date_array ) && count( $itinerary_date_array ) > 0 ) {
-			echo __( 'Itinerary : ', 'text-domain' );
-			echo '<ul>';
-			foreach ( $itineraries as $x=>$itinerary ) {
-				echo '<li>' . $itineraries[$x]['date'] . ': ' . $itineraries[$x]['title'] . '</li>';
-			}
-			echo '</ul>';
-		} else {
-			echo __( 'Start Date : ', 'text-domain' );
-			if ($is_trip_options=='yes') {
-				echo '<div class="start_date"></div>';
-			} else {
-				echo '<input type="text" style="color:blue; width:fit-content" class="start_date" id="start_date_input" name="start_date_input" />';
-			}
-		}
-*/		
 	}
          
 	/*
@@ -282,22 +236,25 @@ class Trip_Options_View {
 		$is_trip_options = get_post_meta( $post_id, '_trip_options', true );
 		$itineraries = get_post_meta( $post_id, 'wp_travel_trip_itinerary_data', true );
 
-    	if( !empty( $_POST['itinerary_date_array'] ) ) {
-			foreach( $_POST['itinerary_date_array'] as $x => $itinerary_date ) {
-				$itineraries[$x]['itinerary_date'] = $itinerary_date;
-			}
+		if ( 'yes' === $is_trip_options ) {
+			if( !empty( $_POST['itinerary_date_array'] ) ) {
+				foreach( $_POST['itinerary_date_array'] as $x => $itinerary_date ) {
+					$itineraries[$x]['itinerary_date'] = $itinerary_date;
+				}
+			} else {
+				foreach( $itineraries as $x => $itinerary ) {
+					$itineraries[$x]['itinerary_date'] = $itineraries[$x]['date'];
+				}
+			} 
 		} else {
-			foreach( $itineraries as $x => $itinerary ) {
-				$itineraries[$x]['itinerary_date'] = $itineraries[$x]['date'];
+			if( !empty( $_POST['start_date_input'] ) ) {
+				$itineraries[0]['itinerary_date'] = $_POST['start_date_input'];
 			}
-		} 
+			if( !empty( $_POST['end_date_input'] ) ) {
+				$itineraries[1]['itinerary_date'] = $_POST['end_date_input'];
+			}	
+		}
 		
-		if( !empty( $_POST['start_date_input'] ) ) {
-			$itineraries[0]['itinerary_date'] = $_POST['start_date_input'];
-		}
-		if( !empty( $_POST['end_date_input'] ) ) {
-			$itineraries[1]['itinerary_date'] = $_POST['end_date_input'];
-		}
 		update_post_meta( $post_id, 'wp_travel_trip_itinerary_data', $itineraries );
 
 		if ($passed_validation && WC()->cart->add_to_cart($product_id, $quantity, $variation_id) && 'publish' === $product_status) {
@@ -381,12 +338,18 @@ class Trip_Options_View {
 			$is_trip_options = get_post_meta( $post_id, '_trip_options', true );
 			$itineraries = get_post_meta( $post_id, 'wp_travel_trip_itinerary_data', true );
 			if ( 'yes' === $is_trip_options ) {
-				$cart_item['data']->set_price( 40 );
-			} else {
-				$input_date = $itineraries[0]['itinerary_date'];
-				$last_price = self::get_date_price( $product_id, $input_date );
-				//$last_price = 50;
+				//$cart_item['data']->set_price( 40 );
+				$start_date = $itineraries[0]['itinerary_date'];
+				$last_price = self::get_date_price( $product_id, $start_date );
 				$cart_item['data']->set_price( $last_price );
+			} else {
+				$start_date = $itineraries[0]['itinerary_date'];
+				$start_datetime = new DateTime( $start_date );
+				$start_timestamp = $start_datetime->getTimestamp();
+				$end_date = $itineraries[1]['itinerary_date'];
+				$last_price = self::get_date_price( $product_id, $start_date );
+				//$cart_item['data']->set_price( $last_price );
+				$cart_item['data']->set_price( $start_timestamp );
 			}
 		}
 	}
