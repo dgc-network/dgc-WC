@@ -165,25 +165,26 @@ class Trip_Options_View {
 			<table>
 			<tr>
 			<td>
-			<label for="from">From</label>
+			<label for="start_date_input">From</label>
 			</td>
 			<td>
-			<input type="text" id="from" name="start_date_input" style="color:blue; width:fit-content">
+			<input type="text" id="start_date_input" name="start_date_input" style="color:blue; width:fit-content">
 			</td>
 			</tr>
 			<tr>
 			<td>
-			<label for="to">To</label>
+			<label for="end_date_input">To</label>
 			</td>
 			<td>
-			<input type="text" id="to" name="end_date_input" style="color:blue; width:fit-content">
+			<input type="text" id="end_date_input" name="end_date_input" style="color:blue; width:fit-content">
 			</td>
 			</tr>
 			</table>
 			<script>
 			jQuery(document).ready(function($) {
-    			var dateFormat = "mm/dd/yy",
-      			from = $( "#from" )
+    			//var dateFormat = "mm/dd/yy",
+    			var dateFormat = "Y-m-d",
+      			from = $( "#start_date_input" )
         		.datepicker({
           			defaultDate: "+1w",
           			changeMonth: true,
@@ -192,7 +193,7 @@ class Trip_Options_View {
         		.on( "change", function() {
           			to.datepicker( "option", "minDate", getDate( this ) );
         		}),
-      			to = $( "#to" ).datepicker({
+      			to = $( "#end_date_input" ).datepicker({
         			defaultDate: "+1w",
         			changeMonth: true,
         			//numberOfMonths: 3
@@ -348,8 +349,8 @@ class Trip_Options_View {
 				$start_timestamp = $start_datetime->getTimestamp();
 				$end_date = $itineraries[1]['itinerary_date'];
 				$last_price = self::get_date_price( $product_id, $start_date );
-				//$cart_item['data']->set_price( $last_price );
-				$cart_item['data']->set_price( $start_timestamp );
+				$cart_item['data']->set_price( $last_price );
+				//$cart_item['data']->set_price( $start_timestamp );
 			}
 		}
 	}
