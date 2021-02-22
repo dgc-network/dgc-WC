@@ -351,9 +351,13 @@ class Trip_Options_View {
 				$end_datetime = new DateTime( $end_date );
 				$end_timestamp = $end_datetime->getTimestamp();
 				
+				$interval = date_diff($start_datetime, $end_datetime);
+   
+				$result = $interval->format('%a');
+
 				$last_price = self::get_date_price( $product_id, $start_date );
-				$cart_item['data']->set_price( $last_price );
-				//$cart_item['data']->set_price( $start_timestamp );
+				//$cart_item['data']->set_price( $last_price );
+				$cart_item['data']->set_price( $result );
 			}
 		}
 	}
