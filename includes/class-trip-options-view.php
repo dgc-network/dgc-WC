@@ -357,9 +357,9 @@ class Trip_Options_View {
 
 				//$last_price = self::get_date_price( $product_id, $start_date );
 				$last_price = self::get_date_price( $product_id, $end_date );
-				$cart_item['data']->set_price( $last_price );
+				//$cart_item['data']->set_price( $last_price );
 				//$cart_item['data']->set_price( $end_price );
-				//$cart_item['data']->set_price( $result );
+				$cart_item['data']->set_price( $result );
 			}
 		}
 	}
