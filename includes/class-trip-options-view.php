@@ -315,7 +315,8 @@ class Trip_Options_View {
 			$datetime = new DateTime( $date );
 			$timestamp = $datetime->getTimestamp();
 			$timestamp_offset = $timestamp - $offset;
-			if ( $timestamp_offset < $input_timestamp_offset ) {
+			//if ( $timestamp_offset < $input_timestamp_offset ) {
+			if ( $timestamp < $input_timestamp ) {
 				$last_price = $price;
 			}
 		}
