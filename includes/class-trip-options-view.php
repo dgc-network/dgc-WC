@@ -307,7 +307,7 @@ class Trip_Options_View {
 		$offset = get_option('gmt_offset') * 3600;
 		//$input_datetime = new DateTime( $input_date );
 		$input_timestamp = $input_datetime->getTimestamp();
-		$input_timestamp_offset = $input_timestamp - $offset;
+		//$input_timestamp_offset = $input_timestamp - $offset;
 		$rps_prices     = RPT_WC_Meta::get( $product_id );
 		$last_price = '';
 		ksort( $rps_prices );
@@ -315,8 +315,6 @@ class Trip_Options_View {
 			$datetime = new DateTime( $date );
 			$timestamp = $datetime->getTimestamp();
 			$timestamp_offset = $timestamp - $offset;
-			//if ( $timestamp_offset < $input_timestamp_offset ) {
-			//if ( $timestamp < $input_timestamp ) {
 			if ( $timestamp_offset < $input_timestamp ) {
 				$last_price = $price;
 			}
@@ -355,13 +353,19 @@ class Trip_Options_View {
 				$interval_days = $interval->format('%a');
 				$one_day = new DateInterval('P1D');
 				$sub_total_price = 0;
-
+/*
 				$x = 0;
 				while($x < $interval_days) {
 					$date_price = self::get_date_price( $product_id, $start_datetime );
 					$sub_total_price += $date_price;
 					$start_datetime->add($one_day);
   					$x++;
+				}
+*/				
+				for ($x = 0; $x < $interval_days; $x++) {
+					$date_price = self::get_date_price( $product_id, $start_datetime );
+					$sub_total_price += $date_price;
+					$start_datetime->add($one_day);
 				}
 				$cart_item['data']->set_price( $sub_total_price );
 			}
@@ -377,7 +381,7 @@ class Trip_Options_View {
 			$values = '<span>';
         	foreach( $cart_item['custom_data']['itineraries'] as $x => $itinerary ) {
 				$itinerary_date = $cart_item['custom_data']['itineraries'][$x]['itinerary_date'];
-				$values .= $itinerary_date.', ';
+				$values .= $itinerary_date.'~';
 			}
 			$values .= '</span>';
 			if( 'yes' === $cart_item['custom_data']['_trip_options'] ){
