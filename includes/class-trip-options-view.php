@@ -346,20 +346,26 @@ class Trip_Options_View {
 			} else {
 				$start_date = $itineraries[0]['itinerary_date'];
 				$start_datetime = new DateTime( $start_date );
-				$start_timestamp = $start_datetime->getTimestamp();
+				//$start_timestamp = $start_datetime->getTimestamp();
 				$end_date = $itineraries[1]['itinerary_date'];
 				$end_datetime = new DateTime( $end_date );
-				$end_timestamp = $end_datetime->getTimestamp();
+				//$end_timestamp = $end_datetime->getTimestamp();
 				
-				$interval = date_diff($start_datetime, $end_datetime);
-   
-				$result = $interval->format('%a');
+				$interval = date_diff($start_datetime, $end_datetime);   
+				$interval_days = $interval->format('%a');
+				$sub_total_price = 0;
+				for ($i=0;$i<$interval_days;$i++) {
+					//$date = new DateTime('2000-01-01');
+					$start_date->add(new DateInterval('P'.$i.'D'));
+					$date_price = self::get_date_price( $product_id, $start_date );
+					$sub_total_price += $date_price;
+				}
 
 				//$last_price = self::get_date_price( $product_id, $start_date );
-				$last_price = self::get_date_price( $product_id, $end_date );
+				//$last_price = self::get_date_price( $product_id, $end_date );
 				//$cart_item['data']->set_price( $last_price );
 				//$cart_item['data']->set_price( $end_price );
-				$cart_item['data']->set_price( $result );
+				$cart_item['data']->set_price( $sub_total_price );
 			}
 		}
 	}
