@@ -120,14 +120,12 @@ class Trip_Options_View {
 			$timestamp = $datetime->getTimestamp();
 			$timestamp_offset = $timestamp - $offset;
 			if ( $timestamp_offset < $now ) {
-				//$last_date = $date;
 				$last_date = $datetime->format('Y-m-d');
 				$last_price = $price;
 			}
 		}
-		//echo '<div class="rpt-countdown-price">' . wc_price( $last_price ) . __( ' from : ', 'text-domain' ) .$last_date . '</div>';
 		echo '<div class="rpt-countdown-price">' . wc_price( $last_price ) . '</div>';
-		echo '<div class="rpt-countdown-price">'  . __( 'The price will be changed to ', 'text-domain' ) . '</div>';
+
 		foreach ( $rps_prices as $date => $price ) {
 			$datetime = new DateTime( $date );
 			$timestamp = $datetime->getTimestamp();
@@ -135,7 +133,8 @@ class Trip_Options_View {
 			if ( $timestamp_offset < $now ) {
 				continue;
 			}
-			//echo '<div class="rpt-countdown-price">' . wc_price( $price ) . __( ' from : ', 'text-domain' ) .$date . '</div>';
+			if ($date === array_key_first($rps_prices))
+			echo '<div class="rpt-countdown-price">'  . __( 'The price will be changed to ', 'text-domain' ) . '</div>';
 			echo '<div class="rpt-countdown-price">' . wc_price( $price ) . __( ' on ', 'text-domain' ) . $datetime->format('Y-m-d') . '</div>';
 		}
 
@@ -183,8 +182,8 @@ class Trip_Options_View {
 			<script>
 			jQuery(document).ready(function($) {
     			//var dateFormat = "mm/dd/yy",
-    			var dateFormat = "Y-m-d",
-      			from = $( "#from" )
+    			//var dateFormat = "Y-m-d",
+      			var from = $( "#from" )
         		.datepicker({
           			defaultDate: "+1w",
           			changeMonth: true,
@@ -353,15 +352,7 @@ class Trip_Options_View {
 				$interval_days = $interval->format('%a');
 				$one_day = new DateInterval('P1D');
 				$sub_total_price = 0;
-/*
-				$x = 0;
-				while($x < $interval_days) {
-					$date_price = self::get_date_price( $product_id, $start_datetime );
-					$sub_total_price += $date_price;
-					$start_datetime->add($one_day);
-  					$x++;
-				}
-*/				
+
 				for ($x = 0; $x < $interval_days; $x++) {
 					$date_price = self::get_date_price( $product_id, $start_datetime );
 					$sub_total_price += $date_price;
@@ -379,9 +370,13 @@ class Trip_Options_View {
 
 		if( ! empty( $cart_item['custom_data'] ) ){
 			$values = '<span>';
-        	foreach( $cart_item['custom_data']['itineraries'] as $x => $itinerary ) {
+			$itineraries = $cart_item['custom_data']['itineraries'];
+        	foreach( $itineraries as $x => $itinerary ) {
 				$itinerary_date = $cart_item['custom_data']['itineraries'][$x]['itinerary_date'];
-				$values .= $itinerary_date.'~';
+				if ($x === array_key_first($itineraries))
+				$values .= 'from:'.$itinerary_date;
+				if ($x === array_key_last($itineraries))
+				$values .= ' to:'.$itinerary_date;
 			}
 			$values .= '</span>';
 			if( 'yes' === $cart_item['custom_data']['_trip_options'] ){
