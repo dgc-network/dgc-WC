@@ -133,7 +133,9 @@ class Trip_Options_View {
 			if ( $timestamp_offset < $now ) {
 				continue;
 			}
-			if ($date === array_key_first($rps_prices))
+			reset($rps_prices);
+			if ($date === key($rps_prices))
+			//if ($date === array_key_first($rps_prices))
 			echo '<div class="rpt-countdown-price">'  . __( 'The price will be changed to ', 'text-domain' ) . '</div>';
 			echo '<div class="rpt-countdown-price">' . wc_price( $price ) . __( ' on ', 'text-domain' ) . $datetime->format('Y-m-d') . '</div>';
 		}
@@ -373,9 +375,13 @@ class Trip_Options_View {
 			$itineraries = $cart_item['custom_data']['itineraries'];
         	foreach( $itineraries as $x => $itinerary ) {
 				$itinerary_date = $cart_item['custom_data']['itineraries'][$x]['itinerary_date'];
-				if ($x === array_key_first($itineraries))
+				reset($itineraries);
+    			if ($x === key($itineraries))
+				//if ($x === array_key_first($itineraries))
 				$values .= 'from:'.$itinerary_date;
-				if ($x === array_key_last($itineraries))
+				end($itineraries);
+    			if ($x === key($itineraries))
+				//if ($x === array_key_last($itineraries))
 				$values .= ' to:'.$itinerary_date;
 			}
 			$values .= '</span>';
