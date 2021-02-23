@@ -354,17 +354,14 @@ class Trip_Options_View {
 				$interval = date_diff($start_datetime, $end_datetime);   
 				$interval_days = $interval->format('%a');
 				$sub_total_price = 0;
-				for ($i=0;$i<$interval_days;$i++) {
-					//$date = new DateTime('2000-01-01');
-					//$start_date->add(new DateInterval('P'.$i.'D'));
+
+				$x = 0;
+				while($x < $interval_days) {
+					$start_date->add(new DateInterval('P'.$x.'D'));
 					$date_price = self::get_date_price( $product_id, $start_date );
 					$sub_total_price += $date_price;
+  					$x++;
 				}
-
-				//$last_price = self::get_date_price( $product_id, $start_date );
-				//$last_price = self::get_date_price( $product_id, $end_date );
-				//$cart_item['data']->set_price( $last_price );
-				//$cart_item['data']->set_price( $end_price );
 				$cart_item['data']->set_price( $sub_total_price );
 			}
 		}
