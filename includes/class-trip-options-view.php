@@ -356,7 +356,7 @@ class Trip_Options_View {
 				$sub_total_price = 0;
 				for ($i=0;$i<$interval_days;$i++) {
 					//$date = new DateTime('2000-01-01');
-					$start_date->add(new DateInterval('P'.$i.'D'));
+					//$start_date->add(new DateInterval('P'.$i.'D'));
 					$date_price = self::get_date_price( $product_id, $start_date );
 					$sub_total_price += $date_price;
 				}
