@@ -302,10 +302,10 @@ class Trip_Options_View {
     	return $cart_item_data;
 	}
 
-	function get_date_price( $product_id, $input_date ) {
+	function get_date_price( $product_id, $input_datetime ) {
 		
 		$offset = get_option('gmt_offset') * 3600;
-		$input_datetime = new DateTime( $input_date );
+		//$input_datetime = new DateTime( $input_date );
 		$input_timestamp = $input_datetime->getTimestamp();
 		$input_timestamp_offset = $input_timestamp - $offset;
 		$rps_prices     = RPT_WC_Meta::get( $product_id );
@@ -339,17 +339,15 @@ class Trip_Options_View {
 			$is_trip_options = get_post_meta( $post_id, '_trip_options', true );
 			$itineraries = get_post_meta( $post_id, 'wp_travel_trip_itinerary_data', true );
 			if ( 'yes' === $is_trip_options ) {
-				//$cart_item['data']->set_price( 40 );
 				$start_date = $itineraries[0]['itinerary_date'];
-				$last_price = self::get_date_price( $product_id, $start_date );
+				$start_datetime = new DateTime( $start_date );
+				$last_price = self::get_date_price( $product_id, $start_datetime );
 				$cart_item['data']->set_price( $last_price );
 			} else {
 				$start_date = $itineraries[0]['itinerary_date'];
 				$start_datetime = new DateTime( $start_date );
-				//$start_timestamp = $start_datetime->getTimestamp();
 				$end_date = $itineraries[1]['itinerary_date'];
 				$end_datetime = new DateTime( $end_date );
-				//$end_timestamp = $end_datetime->getTimestamp();
 				
 				$interval = date_diff($start_datetime, $end_datetime);   
 				$interval_days = $interval->format('%a');
@@ -358,8 +356,8 @@ class Trip_Options_View {
 				$x = 0;
 				while($x < $interval_days) {
 					$DateInterval = 'P'.$x.'D';
-					$start_date->add(new DateInterval($DateInterval));
-					$date_price = self::get_date_price( $product_id, $start_date );
+					$start_datetime->add(new DateInterval($DateInterval));
+					$date_price = self::get_date_price( $product_id, $start_datetime );
 					$sub_total_price += $date_price;
   					$x++;
 				}
