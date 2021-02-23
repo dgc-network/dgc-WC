@@ -351,6 +351,7 @@ class Trip_Options_View {
 				
 				$interval = date_diff($start_datetime, $end_datetime);   
 				$interval_days = $interval->format('%a');
+				$one_day = new DateInterval('P1D');
 				$sub_total_price = 0;
 
 				$x = 0;
