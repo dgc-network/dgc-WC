@@ -126,6 +126,7 @@ class Trip_Options_View {
 		}
 		echo '<div class="rpt-countdown-price">' . wc_price( $last_price ) . '</div>';
 
+		$counter = 0;
 		foreach ( $rps_prices as $date => $price ) {
 			$datetime = new DateTime( $date );
 			$timestamp = $datetime->getTimestamp();
@@ -136,9 +137,11 @@ class Trip_Options_View {
 			//reset($rps_prices);
 			//if ($date === key($rps_prices))
 			//if ($date === array_key_first($rps_prices))
-			if ( $price === reset( $rps_prices ) )
+			//if ( $price === reset( $rps_prices ) )
+			if ( $counter == 0 )
 			echo '<div class="rpt-countdown-price">'  . __( 'The price will be changed to ', 'text-domain' ) . '</div>';
 			echo '<div class="rpt-countdown-price">' . wc_price( $price ) . __( ' on ', 'text-domain' ) . $datetime->format('Y-m-d') . '</div>';
+			$counter = $counter + 1;
 		}
 
 		if ( 'yes' === $is_trip_options ) {
@@ -373,19 +376,23 @@ class Trip_Options_View {
 
 		if( ! empty( $cart_item['custom_data'] ) ){
 			$values = '<span>';
+			$counter = 0; 
 			$itineraries = $cart_item['custom_data']['itineraries'];
         	foreach( $itineraries as $x => $itinerary ) {
 				$itinerary_date = $cart_item['custom_data']['itineraries'][$x]['itinerary_date'];
 				//reset($itineraries);
     			//if ($x === key($itineraries))
 				//if ($x === array_key_first($itineraries))
-				if ( $itinerary === reset( $itineraries ) )
+				//if ( $itinerary === reset( $itineraries ) )
+				if( $counter == 0 )
 				$values .= 'from:'.$itinerary_date;
 				//end($itineraries);
     			//if ($x === key($itineraries))
 				//if ($x === array_key_last($itineraries))
-				if ( $itinerary === end( $itineraries ) )
+				//if ( $itinerary === end( $itineraries ) )
+				if( $counter == count( $itineraries ) - 1)
 				$values .= ' to:'.$itinerary_date;
+				$counter = $counter + 1;
 			}
 			$values .= '</span>';
 			if( 'yes' === $cart_item['custom_data']['_trip_options'] ){
