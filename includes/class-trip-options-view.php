@@ -139,8 +139,10 @@ class Trip_Options_View {
 			//if ($date === array_key_first($rps_prices))
 			//if ( $price === reset( $rps_prices ) )
 			if ( $counter == 0 )
-			echo '<div class="rpt-countdown-price">'  . __( 'The price will be changed to ', 'text-domain' ) . '</div>';
-			echo '<div class="rpt-countdown-price">' . wc_price( $price ) . __( ' on ', 'text-domain' ) . $datetime->format('Y-m-d') . '</div>';
+			//echo '<div class="rpt-countdown-price">'  . __( 'The price will be changed to ', 'text-domain' ) . '</div>';
+			//echo '<div class="rpt-countdown-price">' . wc_price( $price ) . __( ' on ', 'text-domain' ) . $datetime->format('Y-m-d') . '</div>';
+			echo __( 'The price will be changed to ', 'text-domain' );
+			echo '<div class="rpt-countdown-price">' . wc_price( $price ) . '</div>' . __( ' on ', 'text-domain' ) . $datetime->format('Y-m-d');
 			$counter = $counter + 1;
 		}
 
@@ -310,9 +312,8 @@ class Trip_Options_View {
 	function get_date_price( $product_id, $input_datetime ) {
 		
 		$offset = get_option('gmt_offset') * 3600;
-		//$input_datetime = new DateTime( $input_date );
 		$input_timestamp = $input_datetime->getTimestamp();
-		//$input_timestamp_offset = $input_timestamp - $offset;
+
 		$rps_prices     = RPT_WC_Meta::get( $product_id );
 		$last_price = '';
 		ksort( $rps_prices );
@@ -380,18 +381,10 @@ class Trip_Options_View {
 			$itineraries = $cart_item['custom_data']['itineraries'];
         	foreach( $itineraries as $x => $itinerary ) {
 				$itinerary_date = $cart_item['custom_data']['itineraries'][$x]['itinerary_date'];
-				//reset($itineraries);
-    			//if ($x === key($itineraries))
-				//if ($x === array_key_first($itineraries))
-				//if ( $itinerary === reset( $itineraries ) )
 				if( $counter == 0 )
-				$values .= 'from:'.$itinerary_date;
-				//end($itineraries);
-    			//if ($x === key($itineraries))
-				//if ($x === array_key_last($itineraries))
-				//if ( $itinerary === end( $itineraries ) )
+				$values .= $itinerary_date;
 				if( $counter == count( $itineraries ) - 1)
-				$values .= ' to:'.$itinerary_date;
+				$values .= ' To: '.$itinerary_date;
 				$counter = $counter + 1;
 			}
 			$values .= '</span>';
