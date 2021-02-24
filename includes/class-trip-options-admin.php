@@ -253,6 +253,7 @@ class Trip_Options_Admin {
 		echo '}';
 */
 		?>
+		<h3><?php esc_html_e( 'Tab', 'text-domain' ); ?></h3>
 		<ul id="tabs-ul" style="width:100%" >
 		<?php
 		if ( is_array( $trip_tabs ) && count( $trip_tabs ) > 0 ) {
@@ -266,7 +267,7 @@ class Trip_Options_Admin {
 					<tbody>
 					<tr>
 						<th>Default Trip Title</th>
-						<td><input type="text" name="tab_item_default-' . $key . '" value="' . esc_attr( $trip_tabs[$key]['label'] ) . '"></td>
+						<td><input type="text" name="tab_item_default-' . $key . '" value="' . esc_attr( $trip_tabs[$key]['label'] ) . ' disabled"></td>
 					</tr>
 					<tr>
 						<th>Custom Trip Title</th>
@@ -643,6 +644,13 @@ wp_enqueue_script( 'some_handle' );
 		//$product->update_meta_data( 'wp_travel_faq_answer', $answer );
 		update_post_meta( $post_id, 'wp_travel_faq_question', $question );
 		update_post_meta( $post_id, 'wp_travel_faq_answer', $answer );
+
+		$trip_tabs = wp_travel_get_admin_trip_tabs( $trip_id);
+		foreach ($trip_tabs as $key=>$trip_tab) {
+			$trip_tabs[$key]['label'] = sanitize_text_field( $_POST['tab_item_custom-' . $key] );
+			$trip_tabs[$key]['show_in_menu'] = sanitize_text_field( $_POST['tab_item_show_in_menu-' . $key] );
+		}
+		update_post_meta( $post_id, 'wp_travel_tabs', $trip_tabs );
 
 		$product->save();
 	}		
