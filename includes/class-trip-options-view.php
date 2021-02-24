@@ -187,6 +187,33 @@ class Trip_Options_View {
 			jQuery(document).ready(function($) {
     			//var dateFormat = "mm/dd/yy",
     			//var dateFormat = "Y-m-d",
+				var from = $( "#from" )
+    .datepicker({
+          defaultDate: "+1w",
+          changeMonth: true,
+    })
+    .on( "change", function() {
+          to.datepicker( "option", "minDate", getDate( this ) );
+    });
+
+    var to = $( "#to" ).datepicker({
+        defaultDate: "+1w",
+        changeMonth: true,
+    })
+    .on( "change", function() {
+        from.datepicker( "option", "maxDate", getDate( this ) );
+    });
+
+    function getDate( element ) {
+        var date;
+        try {
+            date = $.datepicker.parseDate( dateFormat, element.value );
+        } catch( error ) {
+            date = null;
+        }
+        return date;
+    }
+
   			} );
   			</script>
 			<?php
