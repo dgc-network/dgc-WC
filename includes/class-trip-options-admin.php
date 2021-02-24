@@ -329,6 +329,13 @@ class Trip_Options_Admin {
 		</script>
 	
 		<style>
+#tabs-ul { list-style-type:none; margin:0; padding:0; width:100%; }
+#tabs-ul li { background:#f2f2f2; border:1px solid #ccc; margin:0 3px 3px 3px; padding:0.4em; padding-left:1.5em; font-size:1.4em; }
+#tabs-ul li span { cursor:pointer; }
+#tabs-ul li span.fas.fa-bars { margin-left:-1.3em; }
+#tabs-ul li table { display:none; background:#ffffff; border:1px solid #ccc; margin-left:-1.3em;  margin-top:0.3em; padding:0.5em; font-size:1.0em; }
+#tabs-ul li .toggle-access { display:block; }
+
 /*
   			#tabs-ul { list-style-type:none; margin:0; padding:0; width:100%; }
   			#tabs-ul li { background:#f2f2f2; border:1px solid #ccc; margin:0 3px 3px 3px; padding:0.4em; padding-left:1.5em; font-size:1.4em; }
