@@ -253,7 +253,7 @@ class Trip_Options_Admin {
 	 */
 	function trip_options_callback_tabs( $post ) {
 		if ( ! $post ) {
-			return;
+			global $post;
 		}
 		$trip_tabs = wp_travel_get_admin_trip_tabs( $post->ID );
 
