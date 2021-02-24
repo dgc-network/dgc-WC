@@ -95,8 +95,8 @@ class Trip_Options_View {
 	function custom_after_single_product_title() {
 
 		remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 10 );
-		//remove_filter( 'woocommerce_single_product_summary', 'show_single_product_countdown', 11 );
-		remove_filter( 'woocommerce_single_product_summary', 'Raise_Prices_With_Time_For_Woocommmerce_Public::show_single_product_countdown', 11 );
+		remove_filter( 'woocommerce_single_product_summary', 'show_single_product_countdown', 11 );
+		//remove_filter( 'woocommerce_single_product_summary', 'Raise_Prices_With_Time_For_Woocommmerce_Public::show_single_product_countdown', 11 );
 
 		global $post;
 		$is_trip_options = get_post_meta( $post->ID, '_trip_options', true );
@@ -167,6 +167,7 @@ class Trip_Options_View {
 			}
 			echo '</div>';
 		} else {
+			echo '<div class="rpt-countdown-price">';
 			?>
 			<table>
 			<tr>
@@ -220,6 +221,7 @@ class Trip_Options_View {
   			} );
   			</script>
 			<?php
+			echo '</div>';
 		}
 	}
 	
