@@ -77,8 +77,8 @@ class Trip_Options_View {
 	}
 
 	function enqueue_scripts() {
-		wp_enqueue_script( 'custom-js', plugin_dir_url( __FILE__ ) . 'js/trip-options-view.js', array( 'jquery' ), '', true );
-		wp_enqueue_style( 'style-css', plugin_dir_url( __FILE__ ) . 'css/trip-options-view.css' );
+		wp_enqueue_script( 'custom-js', plugin_dir_url( __FILE__ ) . 'js/trip-options-view.js', array( 'jquery' ), time(), true );
+		wp_enqueue_style( 'style-css', plugin_dir_url( __FILE__ ) . 'css/trip-options-view.css', '', time() );
 
 		// Load the datepicker script (pre-registered in WordPress).
 		wp_enqueue_script( 'jquery-ui-datepicker' );
