@@ -63,7 +63,8 @@ class Trip_Options_Admin {
 	 * @since    1.0.0
 	 */
 	function enqueue_scripts() {
-		wp_enqueue_script( 'custom-js', plugin_dir_url( __FILE__ ) . 'js/trip-options-admin.js', array( 'jquery' ), $this->version, true );
+		//wp_enqueue_script( 'custom-js', plugin_dir_url( __FILE__ ) . 'js/trip-options-admin.js', array( 'jquery' ), $this->version, true );
+		wp_enqueue_script( 'custom-js', plugin_dir_url( __FILE__ ) . 'js/trip-options-admin.js', array( 'jquery' ), $this->version );
 		wp_enqueue_style( 'style-css', plugin_dir_url( __FILE__ ) . 'css/trip-options-admin.css', '', $this->version );
 	}
 
