@@ -57,6 +57,11 @@ class Trip_Options_Admin {
 		add_action( 'save_post', array( __CLASS__, 'trip_orders_save_metabox' ), 10, 2 );
 	}
 
+	function enqueue_scripts() {
+		wp_enqueue_script( 'custom-js', plugin_dir_url( __FILE__ ) . 'js/trip-options-admin.js', array( 'jquery' ), '', true );
+		wp_enqueue_style( 'style-css', plugin_dir_url( __FILE__ ) . 'css/trip-options-admin.css' );
+	}
+
 	/**
 	 * Remove "Shipping","Attributes" Product Data tabs
 	 * Add "Itinerary","Includes/Excludes","FAQs" Product Data tabs
@@ -106,11 +111,6 @@ class Trip_Options_Admin {
     	);
 
 		return $tabs;
-	}
-
-	function enqueue_scripts() {
-		wp_enqueue_script( 'custom-js', plugin_dir_url( __FILE__ ) . 'js/trip-options-admin.js', array( 'jquery' ), '', true );
-		wp_enqueue_style( 'style-css', plugin_dir_url( __FILE__ ) . 'css/trip-options-admin.css' );
 	}
 
 	/**
@@ -246,6 +246,98 @@ class Trip_Options_Admin {
 				echo '<option value="' . $product_id . '">' . $product_title . '</option>';
 			}
 		}		
+	}
+
+	/**
+	 * Tabs metabox callback
+	 */
+	function trip_options_callback_tabs( $post ) {
+		if ( ! $post ) {
+			return;
+		}
+		$trip_tabs = wp_travel_get_admin_trip_tabs( $post->ID );
+
+		?>
+		<div id='trip_tab_panel' class='panel woocommerce_options_panel'>
+		<?php
+		echo '$post->ID = ' . $post->ID;
+		echo '{';
+			foreach ( $trip_tabs as $key=>$values ) {
+				echo $key.':{';
+				foreach ( $values as $key=>$value ) {
+					echo '{'.$key.':'.$value.'},';
+				}
+				echo '},';
+			}
+		echo '}';
+
+		?>
+		<ul id="tabs-ul" style="width:100%" >
+		<?php
+		if ( is_array( $trip_tabs ) && count( $trip_tabs ) > 0 ) {
+			foreach ( $trip_tabs as $key=>$value ) {
+				echo '<li class="tab-li" id="tab-li-' . $key . '"><span class="fas fa-bars">';
+				$tab_label = esc_attr( $trip_tabs[$key]['label'] );
+				echo $tab_label . '</span><p style="display:none">' . $key . '</p>';
+
+				echo '
+				<table class="update-tab" style="width:100%">
+					<tbody>
+					<tr>
+						<th>Default Trip Title</th>
+						<td><input type="text" name="tab_item_default-' . $key . '" value="' . esc_attr( $trip_tabs[$key]['label'] ) . '"></td>
+					</tr>
+					<tr>
+						<th>Custom Trip Title</th>
+						<td><input type="text" class="item_title" name="tab_item_custom-' . $key . '" value="' . $tab_label . '"></td>
+					</tr>
+					<tr>
+						<th>Display</th>
+						<td><input type="checkbox" checked name="tab_item_show_in_menu-' . $key . '" value="' . esc_attr( $trip_tabs[$key]['show_in_menu'] ) . '"></td>
+					</tr>
+					</tbody>
+				</table>
+				</li>';
+
+			}
+		}?>			
+		</ul>
+		</div>
+
+		<script>
+			jQuery(document).ready(function($) {
+				
+    			$( "#tabs-ul" ).sortable();
+				$( "#tabs-ul" ).disableSelection();
+				$( ".tab-li" ).hide();
+
+				$( ".tab-li" ).each( function( index, element ) {
+					if ( !$( 'p', element ).is(":empty") ) {
+						$( ".itinerary-rows" ).show();
+						$( element ).show();
+						$( element ).delegate("span", "click", function(){
+							$( 'table', element ).toggleClass('toggle-access');
+						});
+					};
+
+					$( element ).delegate(".item_title", "keyup", function(){
+						$( 'span', element ).text($(this).val());
+					});
+				});
+			
+			} );
+		</script>
+	
+		<style>
+  			#tabs-ul { list-style-type:none; margin:0; padding:0; width:100%; }
+  			#tabs-ul li { background:#f2f2f2; border:1px solid #ccc; margin:0 3px 3px 3px; padding:0.4em; padding-left:1.5em; font-size:1.4em; }
+			#tabs-ul li span { margin-left:-1.3em; cursor:pointer; }
+			#tabs-ul li table { background:#ffffff; border:1px solid #ccc; width:100%; display:none; margin-left:-1.2em; padding-left:1.5em; }
+			#tabs-ul li .toggle-access { display:block; }
+			/*#first-tab { color:blue; text-decoration:underline; cursor:pointer;}*/
+			/*.fa-bars:before { content: "\f0c9"; }*/
+  		</style>
+		<?php
 	}
 
 	/**
@@ -500,98 +592,6 @@ wp_enqueue_script( 'some_handle' );
 		</table>
 		</div>
 		<?php		
-	}
-
-	/**
-	 * Tabs metabox callback
-	 */
-	function trip_options_callback_tabs( $post ) {
-		if ( ! $post ) {
-			return;
-		}
-		$trip_tabs = wp_travel_get_admin_trip_tabs( $post->ID );
-
-		?>
-		<div id='trip_tab_panel' class='panel woocommerce_options_panel'>
-		<?php
-		echo '$post->ID = ' . $post->ID;
-		echo '{';
-			foreach ( $trip_tabs as $key=>$values ) {
-				echo $key.':{';
-				foreach ( $values as $key=>$value ) {
-					echo '{'.$key.':'.$value.'},';
-				}
-				echo '},';
-			}
-		echo '}';
-
-		?>
-		<ul id="tabs-ul" style="width:100%" >
-		<?php
-		if ( is_array( $trip_tabs ) && count( $trip_tabs ) > 0 ) {
-			foreach ( $trip_tabs as $key=>$value ) {
-				echo '<li class="tab-li" id="tab-li-' . $key . '"><span class="fas fa-bars">';
-				$tab_label = esc_attr( $trip_tabs[$key]['label'] );
-				echo $tab_label . '</span><p style="display:none">' . $key . '</p>';
-
-				echo '
-				<table class="update-tab" style="width:100%">
-					<tbody>
-					<tr>
-						<th>Default Trip Title</th>
-						<td><input type="text" name="tab_item_default-' . $key . '" value="' . esc_attr( $trip_tabs[$key]['label'] ) . '"></td>
-					</tr>
-					<tr>
-						<th>Custom Trip Title</th>
-						<td><input type="text" class="item_title" name="tab_item_custom-' . $key . '" value="' . $tab_label . '"></td>
-					</tr>
-					<tr>
-						<th>Display</th>
-						<td><input type="checkbox" checked name="tab_item_show_in_menu-' . $key . '" value="' . esc_attr( $trip_tabs[$key]['show_in_menu'] ) . '"></td>
-					</tr>
-					</tbody>
-				</table>
-				</li>';
-
-			}
-		}?>			
-		</ul>
-		</div>
-
-		<script>
-			jQuery(document).ready(function($) {
-/*				
-    			$( "#tabs-ul" ).sortable();
-				$( "#tabs-ul" ).disableSelection();
-				$( ".tab-li" ).hide();
-
-				$( ".tab-li" ).each( function( index, element ) {
-					if ( !$( 'p', element ).is(":empty") ) {
-						$( ".itinerary-rows" ).show();
-						$( element ).show();
-						$( element ).delegate("span", "click", function(){
-							$( 'table', element ).toggleClass('toggle-access');
-						});
-					};
-
-					$( element ).delegate(".item_title", "keyup", function(){
-						$( 'span', element ).text($(this).val());
-					});
-				});
-*/				
-			} );
-		</script>
-	
-		<style>
-  			#tabs-ul { list-style-type:none; margin:0; padding:0; width:100%; }
-  			#tabs-ul li { background:#f2f2f2; border:1px solid #ccc; margin:0 3px 3px 3px; padding:0.4em; padding-left:1.5em; font-size:1.4em; }
-			#tabs-ul li span { margin-left:-1.3em; cursor:pointer; }
-			#tabs-ul li table { background:#ffffff; border:1px solid #ccc; width:100%; display:none; margin-left:-1.2em; padding-left:1.5em; }
-			#tabs-ul li .toggle-access { display:block; }
-			/*#first-tab { color:blue; text-decoration:underline; cursor:pointer;}*/
-			/*.fa-bars:before { content: "\f0c9"; }*/
-  		</style>
-		<?php
 	}
 
 	/*

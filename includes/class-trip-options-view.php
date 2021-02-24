@@ -64,9 +64,6 @@ class Trip_Options_View {
 
 	function custom_wc_product_countdown_html() {
 
-		remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 10 );
-		//remove_filter( 'woocommerce_single_product_summary', 'show_single_product_countdown', 11 );
-		remove_filter( 'woocommerce_single_product_summary', 'Raise_Prices_With_Time_For_Woocommmerce_Public::show_single_product_countdown', 11 );
 	}
 
     function remove_add_to_cart_buttons() {
@@ -74,7 +71,7 @@ class Trip_Options_View {
 		  	//remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart' );
 	  	} ?>
 		<style>
-			.woocommerce ul.products li.product a.button { display: none; }
+			/*.woocommerce ul.products li.product a.button { display: none; }*/
 		</style>
 		<?php
 	}
@@ -96,6 +93,10 @@ class Trip_Options_View {
 	 * Added Custom fields on product view page
 	 */
 	function custom_after_single_product_title() {
+
+		remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 10 );
+		//remove_filter( 'woocommerce_single_product_summary', 'show_single_product_countdown', 11 );
+		remove_filter( 'woocommerce_single_product_summary', 'Raise_Prices_With_Time_For_Woocommmerce_Public::show_single_product_countdown', 11 );
 
 		global $post;
 		$is_trip_options = get_post_meta( $post->ID, '_trip_options', true );
@@ -152,6 +153,7 @@ class Trip_Options_View {
 				}
 			}
 
+			echo '<div class="rpt-countdown-price">';
 			if ( is_array( $itinerary_date_array ) && count( $itinerary_date_array ) > 0 ) {
 				echo __( 'Itinerary : ', 'text-domain' );
 				echo '<ul>';
@@ -162,7 +164,8 @@ class Trip_Options_View {
 			} else {
 				echo __( 'Start Date : ', 'text-domain' );
 				echo '<div class="start_date"></div>';
-			}	
+			}
+			echo '</div>';
 		} else {
 			?>
 			<table>
@@ -383,6 +386,7 @@ class Trip_Options_View {
 				$counter = $counter + 1;
 			}
 			$values .= '</span>';
+
 			if( 'yes' === $cart_item['custom_data']['_trip_options'] ){
 				$values .= '<ul>';
 	        	foreach( $cart_item['custom_data']['itineraries'] as $x => $itinerary ) {
@@ -439,13 +443,27 @@ class Trip_Options_View {
 				}
 			}
 
-			$display_itinerary_date = '<span>';
+			$values = '<span>';
+			$counter = 0; 
+			$itineraries = $cart_item['custom_data']['itineraries'];
+        	foreach( $itineraries as $x => $itinerary ) {
+				$itinerary_date = $cart_item['custom_data']['itineraries'][$x]['itinerary_date'];
+				if( $counter == 0 )
+				$values .= $itinerary_date;
+				if( $counter == count( $itineraries ) - 1)
+				$values .= ' ~ ' . $itinerary_date;
+				$counter = $counter + 1;
+			}
+			$values .= '</span>';
+/*
 			foreach( $cart_item['custom_data']['itineraries'] as $x => $itinerary ) {
 				$itinerary_date = $cart_item['custom_data']['itineraries'][$x]['itinerary_date'];
 				$display_itinerary_date .= $itinerary_date.', ';
 			}
-			$display_itinerary_date .= '</span>';
+			$display_itinerary_date .= '</span>';			
 			$item->update_meta_data( __( 'Date', 'text-domain' ), $display_itinerary_date );
+*/
+			$item->update_meta_data( __( 'Date', 'text-domain' ), $values );
 			
 		}
 	}
@@ -653,4 +671,3 @@ class Trip_Options_View {
 		}
 	}
 }
-//new Trip_Options_View;
