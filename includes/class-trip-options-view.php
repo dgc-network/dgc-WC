@@ -134,15 +134,11 @@ class Trip_Options_View {
 			if ( $timestamp_offset < $now ) {
 				continue;
 			}
-			//reset($rps_prices);
-			//if ($date === key($rps_prices))
-			//if ($date === array_key_first($rps_prices))
-			//if ( $price === reset( $rps_prices ) )
 			if ( $counter == 0 )
-			//echo '<div class="rpt-countdown-price">'  . __( 'The price will be changed to ', 'text-domain' ) . '</div>';
-			//echo '<div class="rpt-countdown-price">' . wc_price( $price ) . __( ' on ', 'text-domain' ) . $datetime->format('Y-m-d') . '</div>';
-			echo __( 'The price will be changed to ', 'text-domain' );
-			echo '<div class="rpt-countdown-price">' . wc_price( $price ) . '</div>' . __( ' on ', 'text-domain' ) . $datetime->format('Y-m-d');
+			echo '<div class="rpt-countdown-price">'  . __( 'The price will be changed to ', 'text-domain' ) . '</div>';
+			echo '<div class="rpt-countdown-price">' . wc_price( $price ) . __( ' on ', 'text-domain' ) . $datetime->format('Y-m-d') . '</div>';
+			//echo __( 'The price will be changed to ', 'text-domain' );
+			//echo '<div class="rpt-countdown-price">' . wc_price( $price ) . '</div>' . __( ' on ', 'text-domain' ) . $datetime->format('Y-m-d');
 			$counter = $counter + 1;
 		}
 
@@ -191,34 +187,6 @@ class Trip_Options_View {
 			jQuery(document).ready(function($) {
     			//var dateFormat = "mm/dd/yy",
     			//var dateFormat = "Y-m-d",
-      			var from = $( "#from" )
-        		.datepicker({
-          			defaultDate: "+1w",
-          			changeMonth: true,
-          			//numberOfMonths: 3
-        		})
-        		.on( "change", function() {
-          			to.datepicker( "option", "minDate", getDate( this ) );
-        		}),
-      			to = $( "#to" ).datepicker({
-        			defaultDate: "+1w",
-        			changeMonth: true,
-        			//numberOfMonths: 3
-      			})
-      			.on( "change", function() {
-        			from.datepicker( "option", "maxDate", getDate( this ) );
-      			});
- 
-    			function getDate( element ) {
-      				var date;
-      				try {
-        				date = $.datepicker.parseDate( dateFormat, element.value );
-      				} catch( error ) {
-        				date = null;
-      				}
- 
-      				return date;
-    			}
   			} );
   			</script>
 			<?php
@@ -384,7 +352,7 @@ class Trip_Options_View {
 				if( $counter == 0 )
 				$values .= $itinerary_date;
 				if( $counter == count( $itineraries ) - 1)
-				$values .= ' To: '.$itinerary_date;
+				$values .= ' ~ ' . $itinerary_date;
 				$counter = $counter + 1;
 			}
 			$values .= '</span>';

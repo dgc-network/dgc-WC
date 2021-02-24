@@ -60,7 +60,9 @@ if ( !function_exists( 'dgc_add_action_links' ) ) {
      */
     function dgc_add_action_links( $links )
     {
-        $mylinks = array( '<a target="_blank" href="https://dgc.network/change-prices-with-time-for-woocommerce">' . __( 'Documentation', 'text-domain' ) . '</a>' );
+        //$mylinks = array( '<a target="_blank" href="https://dgc.network/change-prices-with-time-for-woocommerce">' . __( 'Documentation', 'text-domain' ) . '</a>' );
+        $mylinks = array( '<a target="_blank" href="https://docs.google.com/document/d/151Ci9M-0nF8KixbErfqwkzFahhzv9Ra9S4v2L120bRM/edit">' . __( 'Documentation', 'text-domain' ) . '</a>' );
+		
         return array_merge( $links, $mylinks );
     }
     add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'dgc_add_action_links' );
