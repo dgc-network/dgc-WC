@@ -196,7 +196,7 @@ class Trip_Options_View {
           changeMonth: true,
     })
     .on( "change", function() {
-          to.datepicker( "option", "minDate", getDate( this ) );
+          to.datepicker( "option", "minDate", getDateElement( this ) );
     });
 
     var to = $( "#to" ).datepicker({
@@ -204,10 +204,10 @@ class Trip_Options_View {
         changeMonth: true,
     })
     .on( "change", function() {
-        from.datepicker( "option", "maxDate", getDate( this ) );
+        from.datepicker( "option", "maxDate", getDateElement( this ) );
     });
 
-    function getDate( element ) {
+    function getDateElement( element ) {
         var date;
         try {
             date = $.datepicker.parseDate( dateFormat, element.value );
