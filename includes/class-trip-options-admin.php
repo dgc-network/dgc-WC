@@ -57,9 +57,14 @@ class Trip_Options_Admin {
 		add_action( 'save_post', array( __CLASS__, 'trip_orders_save_metabox' ), 10, 2 );
 	}
 
+	/**
+	 * Register the JavaScript and stylesheets for the admin area.
+	 *
+	 * @since    1.0.0
+	 */
 	function enqueue_scripts() {
-		wp_enqueue_script( 'custom-js', plugin_dir_url( __FILE__ ) . 'js/trip-options-admin.js', array( 'jquery' ), '', true );
-		wp_enqueue_style( 'style-css', plugin_dir_url( __FILE__ ) . 'css/trip-options-admin.css' );
+		wp_enqueue_script( 'custom-js', plugin_dir_url( __FILE__ ) . 'js/trip-options-admin.js', array( 'jquery' ), $this->version, true );
+		wp_enqueue_style( 'style-css', plugin_dir_url( __FILE__ ) . 'css/trip-options-admin.css', '', $this->version );
 	}
 
 	/**
@@ -111,31 +116,6 @@ class Trip_Options_Admin {
     	);
 
 		return $tabs;
-	}
-
-	/**
-	 * Register the JavaScript for the admin area.
-	 *
-	 * @since    1.0.0
-	 */
-	public function enqueue_scripts_backup() {
-
-		//wp_enqueue_script('jquery-ui-datepicker');
-		 
-		wp_register_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/trip-options-admin.js', array( 'jquery' ), $this->version, true );
-		wp_enqueue_script( $this->plugin_name );
-
-	}
-
-	/**
-	 * Register the stylesheets for the admin area.
-	 *
-	 * @since    1.0.0
-	 */
-	public function enqueue_styles_backup() {
-
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/trip-options-admin.css', array(), $this->version, 'all' );
-
 	}
 
 	/**
