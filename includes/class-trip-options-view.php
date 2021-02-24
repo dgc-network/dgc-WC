@@ -564,7 +564,8 @@ class Trip_Options_View {
 		$is_trip_options = get_post_meta( $post->ID, '_trip_options', true );
 		if ($is_trip_options=='yes') {
 			$tabs = array();
-			$trip_tabs = wp_travel_get_admin_trip_tabs( $post->ID );
+			//$trip_tabs = wp_travel_get_admin_trip_tabs( $post->ID );
+			$trip_tabs = wp_travel_get_frontend_tabs( $post->ID );
 			if ( is_array( $trip_tabs ) && count( $trip_tabs ) > 0 ) {
 				foreach ( $trip_tabs as $key=>$value ) {
 					$tabs[$key] = array(

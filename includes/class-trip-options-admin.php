@@ -260,6 +260,7 @@ class Trip_Options_Admin {
 		?>
 		<div id='trip_tab_panel' class='panel woocommerce_options_panel'>
 		<?php
+/*		
 		echo '$post->ID = ' . $post->ID;
 		echo '{';
 			foreach ( $trip_tabs as $key=>$values ) {
@@ -270,7 +271,7 @@ class Trip_Options_Admin {
 				echo '},';
 			}
 		echo '}';
-
+*/
 		?>
 		<ul id="tabs-ul" style="width:100%" >
 		<?php
@@ -306,7 +307,7 @@ class Trip_Options_Admin {
 
 		<script>
 			jQuery(document).ready(function($) {
-				
+/*				
     			$( "#tabs-ul" ).sortable();
 				$( "#tabs-ul" ).disableSelection();
 				$( ".tab-li" ).hide();
@@ -324,18 +325,19 @@ class Trip_Options_Admin {
 						$( 'span', element ).text($(this).val());
 					});
 				});
-			
+*/			
 			} );
 		</script>
 	
 		<style>
+/*			
 #tabs-ul { list-style-type:none; margin:0; padding:0; width:100%; }
 #tabs-ul li { background:#f2f2f2; border:1px solid #ccc; margin:0 3px 3px 3px; padding:0.4em; padding-left:1.5em; font-size:1.4em; }
 #tabs-ul li span { cursor:pointer; }
 #tabs-ul li span.fas.fa-bars { margin-left:-1.3em; }
 #tabs-ul li table { display:none; background:#ffffff; border:1px solid #ccc; margin-left:-1.3em;  margin-top:0.3em; padding:0.5em; font-size:1.0em; }
 #tabs-ul li .toggle-access { display:block; }
-
+*/
 /*
   			#tabs-ul { list-style-type:none; margin:0; padding:0; width:100%; }
   			#tabs-ul li { background:#f2f2f2; border:1px solid #ccc; margin:0 3px 3px 3px; padding:0.4em; padding-left:1.5em; font-size:1.4em; }

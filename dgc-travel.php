@@ -43,9 +43,6 @@ include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
  * Load these bellow file, Only woocommerce installed
  */
 if ( is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
-    //require_once 'includes/class-trip-options-admin.php';
-    //require_once 'includes/class-trip-options-view.php';
-    //require_once 'includes/helpers.php';
     require_once 'includes/class-trip-options.php';
     require_once 'cpwtfw/includes/class-raise-prices-with-time-for-woocommmerce.php';
 }
@@ -105,80 +102,3 @@ if ( !function_exists( 'run_raise_prices_with_time_for_woocommmerce' ) ) {
     
     run_raise_prices_with_time_for_woocommmerce();
 }
-
-/**
- * @package     Change Prices with Time for WooCommerce
- */
-if ( !function_exists( 'cpwtfw_fs' ) ) {
-    // Create a helper function for easy SDK access.
-    function cpwtfw_fs()
-    {
-        global  $cpwtfw_fs ;
-        
-        if ( !isset( $cpwtfw_fs ) ) {
-            // Include Freemius SDK.
-            require_once dirname( __FILE__ ) . '/freemius/start.php';
-            $cpwtfw_fs = fs_dynamic_init( array(
-                'id'             => '3310',
-                'slug'           => 'change-prices-with-time-for-woocommerce',
-                'type'           => 'plugin',
-                'public_key'     => 'pk_7831b7db8cfba74a8d836b255fb22',
-                'is_premium'     => false,
-                'premium_suffix' => 'Professional',
-                'has_addons'     => false,
-                'has_paid_plans' => true,
-                'menu'           => array(
-                'first-path' => 'plugins.php',
-                'support'    => false,
-            ),
-                'is_live'        => true,
-            ) );
-        }
-        
-        return $cpwtfw_fs;
-    }
-    
-    // Init Freemius.
-    //cpwtfw_fs();
-    // Signal that SDK was initiated.
-    //do_action( 'cpwtfw_fs_loaded' );
-}
-
-
-if ( !function_exists( 'activate_raise_prices_with_time_for_woocommmerce' ) ) {
-    /**
-     * The code that runs during plugin activation.
-     * This action is documented in includes/class-raise-prices-with-time-for-woocommmerce-activator.php
-     */
-    function activate_raise_prices_with_time_for_woocommmerce()
-    {
-        //require_once plugin_dir_path( __FILE__ ) . 'includes/class-raise-prices-with-time-for-woocommmerce-activator.php';
-        require_once 'cpwtfw/includes/class-raise-prices-with-time-for-woocommmerce-activator.php';
-        Raise_Prices_With_Time_For_Woocommmerce_Activator::activate();
-    }
-    
-    register_activation_hook( __FILE__, 'activate_raise_prices_with_time_for_woocommmerce' );
-}
-
-
-if ( !function_exists( 'deactivate_raise_prices_with_time_for_woocommmerce' ) ) {
-    /**
-     * The code that runs during plugin deactivation.
-     * This action is documented in includes/class-raise-prices-with-time-for-woocommmerce-deactivator.php
-     */
-    function deactivate_raise_prices_with_time_for_woocommmerce()
-    {
-        //require_once plugin_dir_path( __FILE__ ) . 'includes/class-raise-prices-with-time-for-woocommmerce-deactivator.php';
-        require_once 'cpwtfw/includes/class-raise-prices-with-time-for-woocommmerce-deactivator.php';
-        Raise_Prices_With_Time_For_Woocommmerce_Deactivator::deactivate();
-    }
-    
-    register_deactivation_hook( __FILE__, 'deactivate_raise_prices_with_time_for_woocommmerce' );
-}
-
-/**
- * The core plugin class that is used to define internationalization,
- * admin-specific hooks, and public-facing site hooks.
- */
-//require plugin_dir_path( __FILE__ ) . 'includes/class-raise-prices-with-time-for-woocommmerce.php';
-

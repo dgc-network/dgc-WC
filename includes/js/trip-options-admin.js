@@ -17,6 +17,27 @@ jQuery(document).ready(function($) {
     $( 'input#_trip_options' ).trigger( 'change' );
 
     /*
+     * TABs Tab
+     */
+    $( "#tabs-ul" ).sortable();
+    $( "#tabs-ul" ).disableSelection();
+    $( ".tab-li" ).hide();
+
+    $( ".tab-li" ).each( function( index, element ) {
+        if ( !$( 'p', element ).is(":empty") ) {
+            $( ".itinerary-rows" ).show();
+            $( element ).show();
+            $( element ).delegate("span", "click", function(){
+                $( 'table', element ).toggleClass('toggle-access');
+            });
+        };
+
+        $( element ).delegate(".item_title", "keyup", function(){
+            $( 'span', element ).text($(this).val());
+        });
+    });
+
+    /*
      * FAQs Tab
      */
     var faq_x = 0;
