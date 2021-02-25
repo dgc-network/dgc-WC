@@ -235,13 +235,14 @@ class Trip_Options_Admin {
 		if ( ! $post ) {
 			global $post;
 		}
-		$trip_tabs = wp_travel_get_default_trip_tabs();
+		//$trip_tabs = wp_travel_get_default_trip_tabs();
 		//$trip_tabs = wp_travel_get_admin_trip_tabs( $post->ID );
+		$trip_tabs = get_post_meta( $post->ID, 'wp_travel_tabs', true );
 
 		?>
 		<div id='trip_tab_panel' class='panel woocommerce_options_panel'>
 		<?php
-	
+/*	
 		echo '$post->ID = ' . $post->ID;
 		echo '{';
 			foreach ( $trip_tabs as $key=>$values ) {
@@ -252,7 +253,7 @@ class Trip_Options_Admin {
 				echo '},';
 			}
 		echo '}';
-
+*/
 		?>
 		<h3><?php esc_html_e( 'Tab', 'text-domain' ); ?></h3>
 		<ul id="tabs-ul" style="width:100%" >
