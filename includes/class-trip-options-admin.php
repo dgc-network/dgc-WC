@@ -528,7 +528,7 @@ wp_enqueue_script( 'some_handle' );
 					</tr>
 					<tr>
 						<th>Custom Trip Title</th>
-						<td><input type="text" class="item_title" name="tab_item_custom-' . $key . '" value="' . $tab_label . '"></td>
+						<td><input type="text" class="item_title" name="tab_item_custom-' . $key . '" value= "' . $tab_label . '"></td>
 					</tr>
 					<tr>
 						<th>Display</th>

@@ -33,10 +33,6 @@ class Trip_Options_View {
 
 	}
 
-	/**
-	 * Constructor.
-	 */
-	//function __construct() {
 	function run() {
 
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'enqueue_scripts' ) );
@@ -60,20 +56,6 @@ class Trip_Options_View {
 
 		add_action( 'init', array( __CLASS__, 'custom_wc_product_countdown_html' ) );
 
-	}
-
-	function custom_wc_product_countdown_html() {
-
-	}
-
-    function remove_add_to_cart_buttons() {
-		if( is_product_category() || is_shop()) { 
-		  	//remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart' );
-	  	} ?>
-		<style>
-			/*.woocommerce ul.products li.product a.button { display: none; }*/
-		</style>
-		<?php
 	}
 
 	function enqueue_scripts() {
@@ -562,17 +544,19 @@ class Trip_Options_View {
 
 		global $post;
 		$is_trip_options = get_post_meta( $post->ID, '_trip_options', true );
-		if ($is_trip_options=='yes') {
+		if ( 'yes' == $is_trip_options ) {
 			$tabs = array();
 			//$trip_tabs = wp_travel_get_admin_trip_tabs( $post->ID );
 			$trip_tabs = wp_travel_get_frontend_tabs( $post->ID );
 			if ( is_array( $trip_tabs ) && count( $trip_tabs ) > 0 ) {
 				foreach ( $trip_tabs as $key=>$value ) {
-					$tabs[$key] = array(
-						'title' 	=> __( $trip_tabs[$key]['label'], 'text-domain' ),
-						'priority' 	=> 20,
-						'callback' 	=> array( __CLASS__, $key . '_tab_content' )
-					);		
+					if ( 'yes' == $trip_tabs[$key]['show_in_menu'] ) {
+						$tabs[$key] = array(
+							'title' 	=> __( $trip_tabs[$key]['label'], 'text-domain' ),
+							'priority' 	=> 20,
+							'callback' 	=> array( __CLASS__, $key . '_tab_content' )
+						);		
+					}
 				}
 			}
 			return $tabs;

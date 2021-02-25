@@ -1,3 +1,8 @@
+.woocommerce_options_panel input[type=email], 
+.woocommerce_options_panel input[type=number], 
+.woocommerce_options_panel input[type=password], 
+.woocommerce_options_panel input[type=text] { width:100% }
+
 #woocommerce-product-data ul.wc-tabs li.itinerary_tab a:before { font-family: WooCommerce; content: '\e900'; }
 #woocommerce-product-data ul.wc-tabs li.include_exclude_tab a:before { font-family: WooCommerce; content: '\e604'; }
 #woocommerce-product-data ul.wc-tabs li.faq_tab a:before { font-family: WooCommerce; content: '\e000'; }
