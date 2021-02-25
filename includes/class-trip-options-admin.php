@@ -240,7 +240,7 @@ class Trip_Options_Admin {
 		?>
 		<div id='trip_tab_panel' class='panel woocommerce_options_panel'>
 		<?php
-/*		
+	
 		echo '$post->ID = ' . $post->ID;
 		echo '{';
 			foreach ( $trip_tabs as $key=>$values ) {
@@ -251,23 +251,24 @@ class Trip_Options_Admin {
 				echo '},';
 			}
 		echo '}';
-*/
+
 		?>
 		<h3><?php esc_html_e( 'Tab', 'text-domain' ); ?></h3>
 		<ul id="tabs-ul" style="width:100%" >
 		<?php
 		if ( is_array( $trip_tabs ) && count( $trip_tabs ) > 0 ) {
 			foreach ( $trip_tabs as $key=>$value ) {
-				echo '<li class="tab-li" id="tab-li-' . $key . '"><span class="fas fa-bars">';
 				$tab_label = esc_attr( $trip_tabs[$key]['label'] );
-				echo $tab_label . '</span><p style="display:none">' . $key . '</p>';
+				echo '<li class="tab-li" id="tab-li-' . $key . '">';
+				echo '<span class="fas fa-bars"> ' . $tab_label . '</span>';
+				echo '<p style="display:none">' . $key . '</p>';
 
 				echo '
 				<table class="update-tab" style="width:100%">
 					<tbody>
 					<tr>
 						<th>Default Trip Title</th>
-						<td><input type="text" name="tab_item_default-' . $key . '" value="' . esc_attr( $trip_tabs[$key]['label'] ) . ' disabled"></td>
+						<td><input type="text" name="tab_item_default-' . $key . '" value="' . esc_attr( $trip_tabs[$key]['label'] ) . '" disabled></td>
 					</tr>
 					<tr>
 						<th>Custom Trip Title</th>
