@@ -532,11 +532,11 @@ wp_enqueue_script( 'some_handle' );
 					</tr>
 					<tr>
 						<th>Display</th>
-						<td><input type="checkbox" name="tab_item_show_in_menu-' . $key . '" value=yes"';
+						<td><input type="checkbox" name="tab_item_show_in_menu-' . $key . '" value="yes"';
 						if ( 'yes' == $trip_tabs[$key]['show_in_menu'] ) {
 							echo ' checked ';
 						}
-						echo '"></td>
+						echo '></td>
 					</tr>
 					</tbody>
 				</table>
