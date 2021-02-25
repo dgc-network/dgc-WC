@@ -235,7 +235,8 @@ class Trip_Options_Admin {
 		if ( ! $post ) {
 			global $post;
 		}
-		$trip_tabs = wp_travel_get_admin_trip_tabs( $post->ID );
+		$trip_tabs = wp_travel_get_default_trip_tabs();
+		//$trip_tabs = wp_travel_get_admin_trip_tabs( $post->ID );
 
 		?>
 		<div id='trip_tab_panel' class='panel woocommerce_options_panel'>
