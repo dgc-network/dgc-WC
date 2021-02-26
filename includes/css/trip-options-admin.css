@@ -1,7 +1,3 @@
-.woocommerce_options_panel input[type=email], 
-.woocommerce_options_panel input[type=number], 
-.woocommerce_options_panel input[type=password], 
-.woocommerce_options_panel input[type=text] { width:100% }
 
 #woocommerce-product-data ul.wc-tabs li.itinerary_tab a:before { font-family: WooCommerce; content: '\e900'; }
 #woocommerce-product-data ul.wc-tabs li.include_exclude_tab a:before { font-family: WooCommerce; content: '\e604'; }
@@ -41,6 +37,5 @@
 #tabs-ul li span { cursor:pointer; }
 #tabs-ul li span.fas.fa-bars { margin-left:-1.3em; }
 #tabs-ul li table { display:none; background:#ffffff; border:1px solid #ccc; margin-left:-1.3em;  margin-top:0.3em; padding:0.5em; font-size:1.0em; }
-/*#tabs-ul li span { margin-left:-1.3em; cursor:pointer; }
-#tabs-ul li table { background:#ffffff; border:1px solid #ccc; width:100%; display:none; margin-left:-1.2em; padding-left:1.5em; }*/
 #tabs-ul li .toggle-access { display:block; }
+#tabs-ul li input { width:100%; }
