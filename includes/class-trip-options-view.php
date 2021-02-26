@@ -420,14 +420,12 @@ class Trip_Options_View {
 				$counter = $counter + 1;
 			}
 			$values .= '</span>';
-/*
-			foreach( $cart_item['custom_data']['itineraries'] as $x => $itinerary ) {
-				$itinerary_date = $cart_item['custom_data']['itineraries'][$x]['itinerary_date'];
-				$display_itinerary_date .= $itinerary_date.', ';
+
+			$product_id = $cart_item['product_id'];
+			if ($product_id == get_payment_rechargeable_product()->get_id()) {
+				return;
 			}
-			$display_itinerary_date .= '</span>';			
-			$item->update_meta_data( __( 'Date', 'text-domain' ), $display_itinerary_date );
-*/
+
 			$item->update_meta_data( __( 'Date', 'text-domain' ), $values );
 			
 		}
