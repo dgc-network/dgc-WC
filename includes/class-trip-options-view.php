@@ -296,6 +296,9 @@ class Trip_Options_View {
 		// Loop through cart items
 		foreach ( $cart->get_cart() as $cart_item ) {
 			$product_id = $cart_item['product_id'];
+			if ($product_id == get_payment_rechargeable_product()->get_id()) {
+				return;
+			}
 			$post_id = $product_id;
 			$is_trip_options = get_post_meta( $post_id, '_trip_options', true );
 			$itineraries = get_post_meta( $post_id, 'wp_travel_trip_itinerary_data', true );
