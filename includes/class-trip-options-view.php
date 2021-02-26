@@ -366,6 +366,11 @@ class Trip_Options_View {
 				$values .= '</ul>';
 			}
 
+			$product_id = $cart_item['product_id'];
+			if ($product_id == get_payment_rechargeable_product()->get_id()) {
+				return;
+			}
+
 			$cart_data[] = array(
 				'name'    => __( 'Date', 'text-domain' ),
 				'display' => $values				
